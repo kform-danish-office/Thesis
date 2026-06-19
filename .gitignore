@@ -1,6 +1,7 @@
 # Arduino / STM32 build output
 arduino-build*/
 arduino-cli-local/
+build-sketch/
 pwr*_sketch/
 release-assets/
 **/build/

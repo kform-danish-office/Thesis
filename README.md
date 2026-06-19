@@ -1,31 +1,23 @@
 # Thesis Power Controller
 
-STM32G071 Arduino firmware for the thesis isolated converter controller.
+STM32G071 Arduino firmware for an isolated converter controller.
 
-Latest firmware: `PWR-1.9.9`
+## Current Firmware
 
-## What This Firmware Does
+| Item | Value |
+|---|---|
+| Firmware | `PWR-1.9.9` |
+| MCU target | STM32G071 Nucleo-64 style board |
+| Gate carrier | PA8 / PA9, fixed 1 MHz |
+| Power throttle | PA10 EN burst control |
+| Feedback | DMA ADC on PA0, PA1, PA2 |
+| Active control | PA1 secondary-voltage bang-bang |
+| Optional high-line aid | PA0 primary-voltage feed-forward duty cap |
+| Command UART | PC5 RX, PC4 TX, 115200 baud |
 
-- Drives PA8 / PA9 as the fixed 1 MHz half-bridge gate carrier.
-- Uses PA10 as the EN burst throttle.
-- Uses DMA-only ADC feedback on PA0, PA1, and PA2.
-- Controls from PA1 secondary voltage in voltage bang-bang mode.
-- Optionally caps bang-bang high duty from PA0 primary voltage feed-forward for high-line use.
-- Keeps low-load/high-impedance operation in a softer 23 V to 28 V window by default.
-- Uses calibrated load slots as reference points, not rigid modes.
-- Lets lower-resistance loads demand full `DMAX` instead of getting stuck at the no-load cap.
+`PWR-1.9.9` keeps the control loop bang-bang only. PA1 secondary voltage decides when EN goes high or low. Optional `LINEFF` uses PA0 only to reduce the high EN duty as primary voltage rises, so a tune made near 110 Vac can be used more safely at 220 Vac.
 
-## Current Build
-
-`PWR-1.9.9` adds optional PA0 line feed-forward while keeping bang-bang control:
-
-- PA1 secondary voltage still decides high/low.
-- `LINEFF` uses PA0 only to cap the high EN duty as primary voltage rises.
-- `LFFCAL` stores the current PA0 reading as the tuned low-line reference.
-- `VSBONLY` disables PA0 influence and returns to secondary-only bang-bang.
-- `MAXRATE` requests the fastest supported 20 us control loop preset.
-
-## Quick Bench Commands
+## Quick Bench Setup
 
 ```text
 VER
@@ -42,7 +34,7 @@ SAVE
 STATUS
 ```
 
-Optional 110 Vac to 220 Vac high-line feed-forward:
+Optional high-line feed-forward after tuning at low line:
 
 ```text
 LINEFF
@@ -50,34 +42,42 @@ LFFCAL
 SAVE
 ```
 
-## Documentation
+Return to secondary-voltage-only bang-bang:
 
-- [Power controller README](POWER_CONTROL_README.md)
-- [UART command README](UART_COMMANDS_README.md)
-
-## Firmware Releases
-
-Compiled firmware artifacts are attached to GitHub releases.
-
-Latest release: `pwr-1.9.8`
-
-Older quick-switch firmware builds are available on the [Releases page](https://github.com/kform-danish-office/Thesis/releases), including `pwr-1.4.0` through `pwr-1.9.8` where compiled local artifacts exist.
-
-Expected release assets:
-
-- `pwr-1.9.8-stm32g071-nucleo64.hex`
-- `pwr-1.9.8-stm32g071-nucleo64.bin`
-- `pwr-1.9.8-stm32g071-nucleo64.elf`
-- `pwr-1.9.8-sha256.txt`
-
-Flash with STM32CubeProgrammer over ST-Link:
-
-```powershell
-STM32_Programmer_CLI.exe -c port=SWD -w pwr-1.9.8-stm32g071-nucleo64.hex -v -rst
+```text
+VSBONLY
 ```
 
-## Main Source Files
+## Repository Layout
 
-- `thesi_power_control.ino` is the current working firmware source.
-- `thesi_closed_loop_PWR_1_9_9.ino` is the archived source snapshot for `PWR-1.9.9`.
-- Older `thesi_closed_loop_PWR_*` files are historical firmware snapshots.
+| Path | Purpose |
+|---|---|
+| [thesi_power_control.ino](thesi_power_control.ino) | Current working firmware source |
+| [docs/power-control.md](docs/power-control.md) | Full firmware manual, version notes, limits, and tuning commands |
+| [docs/uart-commands.md](docs/uart-commands.md) | Compact UART command reference |
+| [firmware/archive/snapshots](firmware/archive/snapshots) | Historical source snapshots |
+| [firmware/compile-sketches](firmware/compile-sketches) | Older Arduino wrapper sketches kept for reference |
+
+## Build
+
+Build with Arduino CLI and the STM32 core. Arduino expects the `.ino` file to live in a sketch folder with the same name, so create a temporary wrapper folder first:
+
+```powershell
+New-Item -ItemType Directory -Path .\build-sketch\thesi_power_control -Force
+Copy-Item .\thesi_power_control.ino .\build-sketch\thesi_power_control\thesi_power_control.ino -Force
+arduino-cli compile --clean --fqbn "STMicroelectronics:stm32:Nucleo_64:pnum=NUCLEO_G071RB" .\build-sketch\thesi_power_control
+```
+
+Compiled `.hex`, `.bin`, and `.elf` files are intentionally not committed to the repo. Published binary builds live on the [GitHub Releases page](https://github.com/kform-danish-office/Thesis/releases).
+
+Flash a release or local build with STM32CubeProgrammer:
+
+```powershell
+STM32_Programmer_CLI.exe -c port=SWD -w firmware.hex -v -rst
+```
+
+## Notes
+
+- ADC feedback is DMA-only; the control loop does not call blocking `analogRead()`.
+- EEPROM writes are deferred while the output is active so UART setting changes do not stall live control.
+- Current/power readings are diagnostic in the active firmware; voltage bang-bang control is the only closed-loop control path.
