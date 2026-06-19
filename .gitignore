@@ -2,6 +2,7 @@
 arduino-build*/
 arduino-cli-local/
 pwr198_sketch/
+release-assets/
 **/build/
 
 # Compiled firmware artifacts
