@@ -51,6 +51,8 @@ Compiled firmware artifacts are attached to GitHub releases.
 
 Latest release: `pwr-1.9.8`
 
+Older quick-switch firmware builds are available on the [Releases page](https://github.com/kform-danish-office/Thesis/releases), including `pwr-1.4.0` through `pwr-1.9.8` where compiled local artifacts exist.
+
 Expected release assets:
 
 - `pwr-1.9.8-stm32g071-nucleo64.hex`
