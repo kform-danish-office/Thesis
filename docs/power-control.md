@@ -1,9 +1,10 @@
 # Bang-Bang Converter Controller Quick README
 
-Current firmware version: `PWR-1.9.9`
+Current firmware version: `PWR-1.9.10`
 
 Version notes:
 
+- `PWR-1.9.10`: adds `EXPORT` / `COMPS` / `DUMPCAL`, which prints paste-ready `SET ...` commands for sensor compensation, line feed-forward, voltage/no-load settings, EN timing, and load-slot reference calibrations. Exported comment lines are ignored by the command parser, hidden `L1...`/`L2...`/`L3...` load-slot calibration import fields are now SET-able, and `BEGINCFG`/`ENDCFG` defer EEPROM writes during a pasted block so it saves once at the end.
 - `PWR-1.9.9`: adds optional PA0 primary-voltage feed-forward for bang-bang only. PA1 secondary voltage still decides high/low. When enabled with `LINEFF`, PA0 only scales/caps the high EN duty by `LFFREF / Vpri`, so a no-load or low-line tune at about 110 Vac can be carried to 220 Vac with less OVP risk. `VSBONLY` disables PA0 influence. `MAXRATE` requests the fastest supported 20 us control loop preset. EEPROM magic is now `PWR19`.
 - `PWR-1.9.8`: calibrated load slots are now live reference points. When the no-load/high-impedance guard is active, the firmware estimates apparent load resistance from PA1/PA2 and interpolates between tuned `CALLOAD 1..3` duties. Lower resistance than the lowest tuned reference extrapolates to `DMAX`, so lower-resistance loads are no longer trapped at the no-load cap. Live status prints `AREF` when the adaptive reference is active. EEPROM magic is now `PWR18`.
 - `PWR-1.9.7`: `AUTOBANG` now tunes the no-load soft-switch cap `NLDUTY`, not loaded full-power `BHIGH`. Loaded sag demand uses `DMAX` directly, so if Vsec is below `VON` or the no-load sag escape trips, the firmware commands true full EN even if a previous no-load calibration found 26-32 percent. Live status prints `FDEM` when full-power demand is active. EEPROM magic is now `PWR17`.
@@ -38,6 +39,7 @@ Version notes:
 - Type `?` or `STATUS` for live settings, ADC readings, loop timing, and load-slot status.
 - Type `VER` or `VERSION` for the firmware version.
 - Type `PARAMS` for the firmware's SET-able parameter list.
+- Type `EXPORT` or `COMPS` to print paste-ready calibration and compensation settings for another board.
 
 ## Control Mode
 
@@ -186,6 +188,8 @@ SET FEN 10000
 | `OPEN` | Open-loop EN duty mode |
 | `BANG` / `VSB` / `VOLT` | Closed voltage bang-bang mode |
 | `POWER` | Legacy alias for `BANG` |
+| `EXPORT` / `COMPS` / `DUMPCAL` | Print paste-ready calibration and compensation settings |
+| `BEGINCFG` / `ENDCFG` | Defer EEPROM writes during a pasted config block, then save once |
 | `VSBONLY` | Closed voltage bang-bang from PA1 only; disables PA0 feed-forward |
 | `LINEFF` | Closed voltage bang-bang from PA1 with PA0 primary-voltage high-duty cap |
 | `LFFCAL` | Store the current PA0 primary voltage as `LFFREF` and enable `LINEFF` |
@@ -225,6 +229,20 @@ SET FEN 10000
 `CALLOAD 1..3` stores reference resistance and tuned duty points. Live control treats them as a curve, not rigid modes: if PA1/PA2 indicate a load between two references, the no-load cap is interpolated; if the load is lower resistance than the lowest tuned point, the cap rises to `DMAX`.
 
 During bang-bang calibration, if PA1 exceeds `VMAX`, EN is turned off for that point and the firmware stops trying higher duty. OVP still latches if PA1 exceeds `OVP`.
+
+## Copying Compensation To Another Board
+
+On a board with a good calibration:
+
+```text
+EXPORT
+```
+
+Copy the whole output block into the other board. The block starts with `OFF` and `BEGINCFG`, includes `SET ...` lines for ADC/sensor scaling, PA0 line feed-forward, EN timing, voltage/no-load settings, startup precharge, and load-slot reference data, then ends with `ENDCFG`.
+
+`BEGINCFG` keeps the imported settings in RAM and marks EEPROM dirty; `ENDCFG` saves once. This avoids one flash write per pasted `SET` line.
+
+The command parser ignores lines starting with `#`, `;`, or `//`, so the exported comments can stay in the paste.
 
 ## Min / Max Settings
 
@@ -307,6 +325,10 @@ During bang-bang calibration, if PA1 exceeds `VMAX`, EN is turned off for that p
 | `AUTOMEAS` | 20 to 2000 | ms |
 | `AUTOTEST` | 0.5 to 15 | percent |
 | `LOAD1`, `LOAD2`, `LOAD3` | 0 to 100000 | ohm; `LOAD1` default is 50 ohm |
+| `ACTIVELOAD` / `LOADSLOT` | 1 to 3 | active saved load reference slot |
+| `L1FEN`, `L2FEN`, `L3FEN` | 1000 to 50000 | Hz, hidden load-slot import fields printed by `EXPORT` |
+| `L1DUTY`, `L2DUTY`, `L3DUTY` | 0 to 100 | percent, hidden load-slot tuned duty import fields |
+| `L1KP/L1KI/...` | see firmware | hidden load-slot calibration import fields printed by `EXPORT` |
 
 ## Loop-Speed Notes
 

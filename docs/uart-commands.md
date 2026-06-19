@@ -1,6 +1,6 @@
 # UART Command Quick Reference
 
-Firmware: `PWR-1.9.9`
+Firmware: `PWR-1.9.10`
 
 UART is hardware serial on PC5 RX and PC4 TX at 115200 baud. Commands accept CR, LF, or CRLF line endings.
 
@@ -26,6 +26,8 @@ Use `SET NAME VALUE` for parameters. If the output is OFF, settings save immedia
 | `STATUS` / `?` | Print measured values, mode, timing, faults, and settings |
 | `VER` | Print firmware version |
 | `PARAMS` | Print supported `SET` names |
+| `EXPORT` / `COMPS` | Print paste-ready calibration and compensation settings |
+| `BEGINCFG` / `ENDCFG` | Defer EEPROM writes during a pasted config block, then save once |
 | `OPEN` | Open-loop EN duty from `OD` |
 | `VSB` / `BANG` / `VOLT` | PA1 secondary-voltage bang-bang mode |
 | `VSBONLY` | PA1 secondary-voltage bang-bang only; disables PA0 feed-forward |
@@ -46,6 +48,18 @@ Use `SET NAME VALUE` for parameters. If the output is OFF, settings save immedia
 | `SAVE` | Save if output is OFF; otherwise leave save pending |
 | `DEFAULTS` | Restore defaults and save |
 | `DIVIDER` | Print PA0 divider suggestions |
+
+## Copy Calibration Between Boards
+
+On the board with the good tune:
+
+```text
+EXPORT
+```
+
+Copy the whole block into the other board's UART terminal. The export starts with `OFF` and `BEGINCFG`, prints `SET ...` commands for sensor scaling, line feed-forward, EN timing, voltage/no-load settings, and load-slot reference calibrations, then ends with `ENDCFG`. EEPROM writes are deferred during the block and saved once at the end.
+
+This firmware ignores exported `#` comment lines, so the whole block can be pasted as-is.
 
 ## Common Settings
 
@@ -73,6 +87,8 @@ Use `SET NAME VALUE` for parameters. If the output is OFF, settings save immedia
 | `LFFMAXS` | Maximum PA0 duty scale, default 1.0 |
 | `CPER` | Control period, 20 to 20000 us |
 | `STATUSMS` | Live status print interval |
+| `ACTIVELOAD` | Active saved load reference slot, 1 to 3 |
+| `L1FEN`, `L1DUTY`, etc. | Internal load-slot calibration import fields printed by `EXPORT` |
 
 Full parameter ranges are in [power-control.md](power-control.md).
 

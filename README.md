@@ -6,7 +6,7 @@ STM32G071 Arduino firmware for an isolated converter controller.
 
 | Item | Value |
 |---|---|
-| Firmware | `PWR-1.9.9` |
+| Firmware | `PWR-1.9.10` |
 | MCU target | STM32G071 Nucleo-64 style board |
 | Gate carrier | PA8 / PA9, fixed 1 MHz |
 | Power throttle | PA10 EN burst control |
@@ -15,7 +15,7 @@ STM32G071 Arduino firmware for an isolated converter controller.
 | Optional high-line aid | PA0 primary-voltage feed-forward duty cap |
 | Command UART | PC5 RX, PC4 TX, 115200 baud |
 
-`PWR-1.9.9` keeps the control loop bang-bang only. PA1 secondary voltage decides when EN goes high or low. Optional `LINEFF` uses PA0 only to reduce the high EN duty as primary voltage rises, so a tune made near 110 Vac can be used more safely at 220 Vac.
+`PWR-1.9.10` keeps the control loop bang-bang only. PA1 secondary voltage decides when EN goes high or low. Optional `LINEFF` uses PA0 only to reduce the high EN duty as primary voltage rises, so a tune made near 110 Vac can be used more safely at 220 Vac. `EXPORT` prints paste-ready calibration and compensation settings for trying a known-good tune on another board; the exported block saves EEPROM once at the end.
 
 ## Quick Bench Setup
 
@@ -46,6 +46,12 @@ Return to secondary-voltage-only bang-bang:
 
 ```text
 VSBONLY
+```
+
+Copy a known-good calibration to another board:
+
+```text
+EXPORT
 ```
 
 ## Repository Layout
