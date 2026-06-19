@@ -1,9 +1,10 @@
 # Bang-Bang Converter Controller Quick README
 
-Current firmware version: `PWR-1.9.8`
+Current firmware version: `PWR-1.9.9`
 
 Version notes:
 
+- `PWR-1.9.9`: adds optional PA0 primary-voltage feed-forward for bang-bang only. PA1 secondary voltage still decides high/low. When enabled with `LINEFF`, PA0 only scales/caps the high EN duty by `LFFREF / Vpri`, so a no-load or low-line tune at about 110 Vac can be carried to 220 Vac with less OVP risk. `VSBONLY` disables PA0 influence. `MAXRATE` requests the fastest supported 20 us control loop preset. EEPROM magic is now `PWR19`.
 - `PWR-1.9.8`: calibrated load slots are now live reference points. When the no-load/high-impedance guard is active, the firmware estimates apparent load resistance from PA1/PA2 and interpolates between tuned `CALLOAD 1..3` duties. Lower resistance than the lowest tuned reference extrapolates to `DMAX`, so lower-resistance loads are no longer trapped at the no-load cap. Live status prints `AREF` when the adaptive reference is active. EEPROM magic is now `PWR18`.
 - `PWR-1.9.7`: `AUTOBANG` now tunes the no-load soft-switch cap `NLDUTY`, not loaded full-power `BHIGH`. Loaded sag demand uses `DMAX` directly, so if Vsec is below `VON` or the no-load sag escape trips, the firmware commands true full EN even if a previous no-load calibration found 26-32 percent. Live status prints `FDEM` when full-power demand is active. EEPROM magic is now `PWR17`.
 - `PWR-1.9.6`: loaded operation now turns on at `VON`, default 28 V, instead of waiting for `VMIN=10 V`. This lets real loads demand full `BHIGH=100` whenever Vsec is below setpoint. Load profiles no longer reduce `BHIGH` below the current value, so `LOAD n` cannot silently cap full power. High-impedance load slots can still enable the no-load soft-switch guard through `NLSLOT=1`, but only when measured current is consistent with that slot. EEPROM magic is now `PWR16`.
@@ -45,7 +46,8 @@ Version notes:
 - PA10 EN is driven directly by TIM3 update/compare interrupts in this recovery build. Any nonzero PA10 pulse is still forced to at least the `GATECYC` minimum width.
 - ADC feedback is DMA-only. PA0, PA1, and PA2 are continuously sampled by ADC1 DMA; the loop never calls blocking `analogRead()`.
 - Default EN frequency is 10 kHz. `AUTOBANG` does not sweep frequency; set `FEN` first if you want a different fixed EN rate.
-- Active feedback is PA1 secondary voltage only. PA0/PA2 and `Pdiag` are displayed for diagnostics, but they do not limit the closed loop by default.
+- Active feedback is PA1 secondary voltage only by default. PA0/PA2 and `Pdiag` are displayed for diagnostics, and PA0 only affects control if you enable `LINEFF`.
+- `LINEFF` keeps pure voltage bang-bang decisions from PA1, but caps the high duty as primary voltage rises above the calibrated `LFFREF`. Use `LFFCAL` at the tuned/110 Vac condition, then test high-line. Use `VSBONLY` to return to PA1-only control.
 - PA1 secondary voltage band defaults to 10 V to 32 V, with OVP at 36 V.
 - Loaded voltage bang-bang turns high when `Vsec <= VON`, default 28 V, and returns low when `Vsec >= VMAX`, default 32 V.
 - No-load guard is on by default. When active, it caps high EN duty to `NLDUTY` and uses the smaller no-load window from `VSET - NLDROP` to `VSET`. With defaults, that is 23 V to 28 V.
@@ -154,6 +156,22 @@ VSB
 ON
 ```
 
+Optional high-line protection after tuning at 110 Vac:
+
+```text
+OFF
+LINEFF
+LFFCAL
+SAVE
+ON
+```
+
+If PA0 should not affect the loop:
+
+```text
+VSBONLY
+```
+
 To set the fixed EN frequency:
 
 ```text
@@ -168,6 +186,9 @@ SET FEN 10000
 | `OPEN` | Open-loop EN duty mode |
 | `BANG` / `VSB` / `VOLT` | Closed voltage bang-bang mode |
 | `POWER` | Legacy alias for `BANG` |
+| `VSBONLY` | Closed voltage bang-bang from PA1 only; disables PA0 feed-forward |
+| `LINEFF` | Closed voltage bang-bang from PA1 with PA0 primary-voltage high-duty cap |
+| `LFFCAL` | Store the current PA0 primary voltage as `LFFREF` and enable `LINEFF` |
 | `PFBPRI` | Select diagnostic PA0*PA2 power display source; not used for control |
 | `PFBSEC` | Select diagnostic PA1*PA2 power display source; not used for control |
 | `VER` | Print firmware version |
@@ -183,6 +204,7 @@ SET FEN 10000
 | `FAST` | Sets `CPER=100`; ADC remains DMA-only |
 | `TURBO` | Sets `CPER=50`, faster filters, and slower serial status; ADC remains DMA-only |
 | `ULTRA` | Sets `CPER=25`, fastest filters, and slower serial status; ADC remains DMA-only |
+| `MAXRATE` / `FASTEST` | Sets `CPER=20`, one-sample DMA snapshots, tight filters, slower status, and zero bang-bang dwell |
 | `FULL` | Sets `BHIGH=100`, `DMAX=100`, `STATIC=1`, `VON=VSET`, and zero bang-bang dwell |
 | `SAFE` | Sets conservative duty/current safety defaults |
 | `DIVIDER` | Prints PA0 ladder options |
@@ -215,6 +237,11 @@ During bang-bang calibration, if PA1 exceeds `VMAX`, EN is turned off for that p
 | `VPRIBOT` | 0.1 to 1000 | kohm |
 | `VPRIGAIN` | 0.1 to 10 | multiplier |
 | `VPRIOFF` | -100 to 100 | V |
+| `LFFEN` | 0 or 1 | PA0 line feed-forward enable; `LINEFF` sets this to 1, `VSBONLY` sets it to 0 |
+| `LFFREF` | 1 to 1000 | V primary reading used as the low-line/tuned reference; `LFFCAL` sets this from PA0 |
+| `LFFMINV` | 0 to 1000 | V; PA0 feed-forward is ignored below this primary reading |
+| `LFFMINS` | 0.05 to 1.0 | minimum duty scale at high line; lower values reduce no-load OVP risk more |
+| `LFFMAXS` | 0.05 to 1.0 | maximum duty scale; default 1.0 prevents feed-forward from boosting above `DMAX` |
 | `AMCREF` | 1.0 to 5.0 | V |
 | `AMCVCLIP` | 0.5 to 3.0 | V |
 | `VSECTOP` | 1 to 10000 | kohm, default 390 |
@@ -286,7 +313,7 @@ During bang-bang calibration, if PA1 exceeds `VMAX`, EN is turned off for that p
 - `CPER` min is 20 us, which requests a 50 kHz control loop.
 - Default is 25 us, or 40 kHz requested.
 - `FAST` sets 100 us, or 10 kHz, and reduces ADC averaging.
-- `TURBO` sets 50 us, or 20 kHz requested. `ULTRA` sets 25 us, or 40 kHz requested. Use `STATUS` and watch `Control period last/max/overruns`; if overruns climb, back off to `TURBO`, `FAST`, or raise `CPER`.
+- `TURBO` sets 50 us, or 20 kHz requested. `ULTRA` sets 25 us, or 40 kHz requested. `MAXRATE` sets 20 us, or 50 kHz requested, with one-sample DMA snapshots and slower serial status. Use `STATUS` and watch `Control period last/max/overruns`; if overruns climb, back off to `ULTRA`, `TURBO`, `FAST`, or raise `CPER`.
 - Actual speed depends mostly on loop work and serial activity. ADC is DMA-only, so `ADC block last/max` should reflect a fast DMA snapshot instead of blocking conversion time.
 - PA10 EN scheduling uses TIM3, but the actual burst edge/drive sequence is aligned by the TIM1 carrier update interrupt. The TIM1 ISR only runs during a burst.
 - UART input is bounded to 96 characters and limited to 32 bytes per loop while the system is active so pasted commands cannot starve the control loop.
