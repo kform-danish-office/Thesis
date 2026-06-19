@@ -1,0 +1,22 @@
+# Arduino / STM32 build output
+arduino-build*/
+arduino-cli-local/
+pwr198_sketch/
+**/build/
+
+# Compiled firmware artifacts
+*.bin
+*.elf
+*.eep
+*.hex
+*.lst
+*.map
+*.o
+*.a
+*.d
+*.su
+*.sym
+
+# Local/editor noise
+.DS_Store
+Thumbs.db
