@@ -8,7 +8,6 @@
 // STM32G071 LLC / GaN primary-power controller
 //
 // Firmware version:
-//   PWR-1.9.13 = PA10 EN non-static bursts use TIM1 carrier-synchronized edges; adds bang/sync counters.
 //   PWR-1.9.12 = TIM1 PA8/PA9 carrier uses center-aligned timing for dead gaps at both transitions.
 //   PWR-1.9.11 = no-load soft OVP holdoff prevents high-line light-load hard OVP chatter.
 //   PWR-1.9.10 = EXPORT/COMPS prints paste-ready calibration and compensation settings.
@@ -75,8 +74,8 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 // -------------------- Firmware version --------------------
 #define FW_VERSION_MAJOR 1
 #define FW_VERSION_MINOR 9
-#define FW_VERSION_PATCH 13
-#define FW_VERSION_STRING "PWR-1.9.13"
+#define FW_VERSION_PATCH 12
+#define FW_VERSION_STRING "PWR-1.9.12"
 
 // -------------------- Fixed gate settings --------------------
 #define GATE_FREQ_HZ       1000000UL
@@ -514,10 +513,6 @@ float powerIntegratorPct = 0.0f;
 uint32_t maxDutyStartMs = 0;
 bool bangBangHigh = false;
 uint32_t bangBangLastSwitchMs = 0;
-uint32_t bangBangTransitionCount = 0;
-uint32_t bangBangTransitionWindowCount = 0;
-uint32_t bangBangTransitionRatePerSec = 0;
-uint32_t bangBangTransitionRateMs = 0;
 uint8_t noLoadBelowMinCycles = 0;
 bool noLoadForceFull = false;
 bool noLoadSoftOvpActive = false;
@@ -1112,14 +1107,6 @@ void requestCarrierSyncedBurst(uint16_t driveCycles) {
   setTim1CarrierSyncIrq(true);
 }
 
-void requestCarrierSyncedLow() {
-  if (enPwmStateHigh || enSyncBurstPending) {
-    setTim1CarrierSyncIrq(true);
-  } else {
-    forceEnSyncLowNow();
-  }
-}
-
 uint32_t clampEnFreq(uint32_t hz) {
   return clampU32(hz, cfg.enFreqMinHz, cfg.enFreqMaxHz);
 }
@@ -1195,24 +1182,9 @@ void applyEnableTimerNoInterruptLock(bool periodChanged) {
 }
 
 void enPeriodISR() {
-  if (!systemEnabled || faultLatched) {
-    forceEnSyncLowNow();
-    return;
-  }
-
-  if (enHighUs == 0 || enDutyEffX10 == 0) {
-    requestCarrierSyncedLow();
-    return;
-  }
-
-  if (enHighUs >= enPeriodUs) {
-    enSyncBurstPending = false;
-    enSyncLeadCyclesLeft = 0;
-    enSyncDriveCyclesLeft = 0;
-    enSyncTailCyclesLeft = 0;
-    setTim1CarrierSyncIrq(false);
-    setPA10High();
-    enPwmStateHigh = true;
+  if (!systemEnabled || faultLatched || enHighUs == 0 || enDutyEffX10 == 0) {
+    setPA10Low();
+    enPwmStateHigh = false;
     return;
   }
 
@@ -1221,37 +1193,31 @@ void enPeriodISR() {
       enPulseSkipCountdown = enPulseSkipN - 1;
     } else {
       enPulseSkipCountdown--;
-      requestCarrierSyncedLow();
+      setPA10Low();
+      enPwmStateHigh = false;
       return;
     }
   }
 
-  requestCarrierSyncedBurst(enHighGateCycles);
+  setPA10High();
+  enPwmStateHigh = true;
 }
 
 void enCompareISR() {
-  if (!systemEnabled || faultLatched) {
-    forceEnSyncLowNow();
-    return;
-  }
-  if (enHighUs == 0 || enDutyEffX10 == 0) {
-    requestCarrierSyncedLow();
+  if (!systemEnabled || faultLatched || enHighUs == 0 || enDutyEffX10 == 0) {
+    setPA10Low();
+    enPwmStateHigh = false;
     return;
   }
   if (!enPwmStateHigh) return;
   if (enHighUs >= enPeriodUs) return;
-  // Non-static burst falling edges are handled by TIM1 update IRQs.
+  setPA10Low();
+  enPwmStateHigh = false;
 }
 
 void handleTim1CarrierSyncUpdate() {
-  if (!systemEnabled || faultLatched) {
+  if (!systemEnabled || faultLatched || enHighUs == 0 || enDutyEffX10 == 0) {
     if (enPwmStateHigh || enSyncBurstPending || enSyncCarrierActive) enSyncAbortCount++;
-    forceEnSyncLowNow();
-    return;
-  }
-
-  if (enHighUs == 0 || enDutyEffX10 == 0) {
-    if (enPwmStateHigh) enSyncFallCount++;
     forceEnSyncLowNow();
     return;
   }
@@ -1352,16 +1318,9 @@ void applyEnDutyCommand(uint16_t dutyX10, bool bypassLimits) {
   updateEnableTimingNoInterruptLock();
   if (oldDuty != enDutyCmdX10 || oldBypass != enDutyLimitBypass) enPulseSkipCountdown = 0;
   if (enHighUs != enTimerAppliedHighUs || enPulseSkipN != enTimerAppliedPulseSkipN) applyEnableTimerNoInterruptLock(false);
-  if (!systemEnabled || faultLatched) {
+  if (enHighUs == 0 || !systemEnabled || faultLatched) {
     forceEnSyncLowNow();
-  } else if (enHighUs == 0 || enDutyEffX10 == 0) {
-    requestCarrierSyncedLow();
   } else if (enHighUs >= enPeriodUs && enDutyEffX10 > 0) {
-    enSyncBurstPending = false;
-    enSyncLeadCyclesLeft = 0;
-    enSyncDriveCyclesLeft = 0;
-    enSyncTailCyclesLeft = 0;
-    setTim1CarrierSyncIrq(false);
     setPA10High();
     enPwmStateHigh = true;
   }
@@ -2351,25 +2310,6 @@ void handleMaxDutyProtection(float errW) {
   }
 }
 
-void recordBangBangTransition() {
-  bangBangTransitionCount++;
-  bangBangTransitionWindowCount++;
-}
-
-void serviceBangBangTransitionRate() {
-  uint32_t nowMs = millis();
-  if (bangBangTransitionRateMs == 0) {
-    bangBangTransitionRateMs = nowMs;
-    return;
-  }
-
-  uint32_t elapsedMs = nowMs - bangBangTransitionRateMs;
-  if (elapsedMs < 1000UL) return;
-  bangBangTransitionRatePerSec = (uint32_t)(((uint64_t)bangBangTransitionWindowCount * 1000ULL + elapsedMs / 2UL) / elapsedMs);
-  bangBangTransitionWindowCount = 0;
-  bangBangTransitionRateMs = nowMs;
-}
-
 void handlePowerLoop() {
   static uint32_t lastControlUs = 0;
 
@@ -2432,7 +2372,6 @@ void handlePowerLoop() {
   if (bangBangHigh) {
     if (overRelease && dwellMs >= cfg.bangMinOnMs) {
       bangBangHigh = false;
-      recordBangBangTransition();
       bangBangLastSwitchMs = nowMs;
       if (noLoadForceFull) {
         noLoadBelowMinCycles = 0;
@@ -2442,7 +2381,6 @@ void handlePowerLoop() {
   } else {
     if (fullPowerDemand || (belowTurnOn && dwellMs >= cfg.bangMinOffMs)) {
       bangBangHigh = true;
-      recordBangBangTransition();
       bangBangLastSwitchMs = nowMs;
     }
   }
@@ -2907,7 +2845,6 @@ const char *modeName() {
 }
 
 void printLiveStatusLine() {
-  serviceBangBangTransitionRate();
   CmdSerial.print("\rVsb="); CmdSerial.print(filteredVsec, 2);
   CmdSerial.print("V D="); CmdSerial.print(getEffDutyPercent(), 1);
   CmdSerial.print("% FEN="); CmdSerial.print(enFreqRuntimeHz);
@@ -2919,7 +2856,6 @@ void printLiveStatusLine() {
   if (noLoadForceFull) CmdSerial.print(" NLFULL");
   if (fullPowerDemandState) CmdSerial.print(" FDEM");
   if (adaptiveNoLoadReferenceState) CmdSerial.print(" AREF");
-  CmdSerial.print(" BTPS="); CmdSerial.print(bangBangTransitionRatePerSec);
   if (cfg.lineFfEnable) {
     CmdSerial.print(" LFF=");
     CmdSerial.print(lineFfScaleState, 2);
@@ -3126,7 +3062,6 @@ void printDividerAdvice() {
 
 void printStatus() {
   updateAnalogFilters(true);
-  serviceBangBangTransitionRate();
 
   CmdSerial.println();
   CmdSerial.println("========== VSB VOLTAGE CONTROL STATUS ==========");
@@ -3210,18 +3145,13 @@ void printStatus() {
   CmdSerial.print(cfg.enMinGateCycles); CmdSerial.print("/");
   CmdSerial.print(cfg.enGateLeadCycles); CmdSerial.print("/");
   CmdSerial.print(minCompleteGateBurstUs()); CmdSerial.print(" us / "); CmdSerial.println(cfg.allowStatic100 ? "YES" : "NO");
-  CmdSerial.println("PA10 EN path: TIM3 period scheduler, TIM1 carrier-synced non-static edges");
+  CmdSerial.println("PA10 EN path: TIM3 direct update/compare");
   CmdSerial.print("PA10 low-duty pulse skip: every ");
   CmdSerial.print(enPulseSkipN);
   CmdSerial.print(" periods, avg duty ");
   CmdSerial.print(getEffDutyPercent(), 2);
   CmdSerial.print(" %, limit bypass ");
   CmdSerial.println(enDutyLimitBypass ? "YES" : "NO");
-  CmdSerial.print("PA10 EN sync rise/drive/fall/abort: ");
-  CmdSerial.print(enSyncRiseCount); CmdSerial.print(" / ");
-  CmdSerial.print(enSyncDriveStartCount); CmdSerial.print(" / ");
-  CmdSerial.print(enSyncFallCount); CmdSerial.print(" / ");
-  CmdSerial.println(enSyncAbortCount);
   CmdSerial.print("Startup precharge en/duty/burst/settle/max/ready: ");
   CmdSerial.print(cfg.prechargeEnable ? "YES" : "NO"); CmdSerial.print(" / ");
   CmdSerial.print(dutyX10ToPercent(cfg.prechargeDutyX10), 2); CmdSerial.print(" % / ");
@@ -3237,9 +3167,6 @@ void printStatus() {
   CmdSerial.print(dutyX10ToPercent(cfg.bangLowDutyX10), 2); CmdSerial.print(" / ");
   CmdSerial.print(dutyX10ToPercent(cfg.bangHighDutyX10), 2); CmdSerial.print(" % / ");
   CmdSerial.println(bangBangHigh ? "HIGH" : "LOW");
-  CmdSerial.print("Bang transitions total/rate: ");
-  CmdSerial.print(bangBangTransitionCount); CmdSerial.print(" / ");
-  CmdSerial.print(bangBangTransitionRatePerSec); CmdSerial.println(" per sec");
   CmdSerial.print("Bang min on/off: ");
   CmdSerial.print(cfg.bangMinOnMs); CmdSerial.print(" / ");
   CmdSerial.print(cfg.bangMinOffMs); CmdSerial.println(" ms");
@@ -3898,7 +3825,6 @@ void loop() {
       handlePowerLoop();
     }
   }
-  serviceBangBangTransitionRate();
 
   handleSerial();
 

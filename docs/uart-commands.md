@@ -1,6 +1,6 @@
 # UART Command Quick Reference
 
-Firmware: `PWR-1.9.10`
+Firmware: `PWR-1.9.13`
 
 UART is hardware serial on PC5 RX and PC4 TX at 115200 baud. Commands accept CR, LF, or CRLF line endings.
 
@@ -23,7 +23,7 @@ Use `SET NAME VALUE` for parameters. If the output is OFF, settings save immedia
 | Command | Meaning |
 |---|---|
 | `ON` / `OFF` | Enable or disable PA10 EN power transfer |
-| `STATUS` / `?` | Print measured values, mode, timing, faults, and settings |
+| `STATUS` / `?` | Print measured values, mode, timing, faults, PA10 sync counters, and settings |
 | `VER` | Print firmware version |
 | `PARAMS` | Print supported `SET` names |
 | `EXPORT` / `COMPS` | Print paste-ready calibration and compensation settings |
@@ -80,6 +80,9 @@ This firmware ignores exported `#` comment lines, so the whole block can be past
 | `NLDROP` | Low end of no-load window is `VSET - NLDROP` |
 | `NLFULL` | Cycles below no-load floor before full-demand escape |
 | `NLI` / `NLR` | No-load current / apparent-resistance thresholds |
+| `NLSOVPEN` | Enable soft no-load OVP holdoff, default 1 |
+| `NLSOVP` | Soft no-load OVP trip voltage, default 33.5 V |
+| `NLSOVPR` | Soft no-load OVP rearm/reset voltage, default 23 V |
 | `LFFEN` | PA0 line feed-forward enable |
 | `LFFREF` | PA0 primary voltage reference captured by `LFFCAL` |
 | `LFFMINV` | PA0 voltage below which feed-forward is ignored |
@@ -104,7 +107,7 @@ SAVE
 ON
 ```
 
-When `LINEFF` is active, live status shows `mode=VSB+VIN` and `LFF=<scale>`. If the primary bus doubles, the high duty is roughly halved unless limited by `LFFMINS`.
+When `LINEFF` is active, live status shows `mode=VSB+VIN` and `LFF=<scale>`. If the primary bus doubles, the high duty is roughly halved unless limited by `LFFMINS`. At high-line no/light load, `NLSOVP` may also show in live status while EN is held low until `NLSOVPR`.
 
 ## Fastest Loop
 
@@ -114,3 +117,5 @@ STATUS
 ```
 
 Watch `Control period last/max/overruns`. If overruns climb, use `ULTRA`, `TURBO`, `FAST`, or set a larger `CPER`.
+
+Live status includes `BTPS=<n>` for bang-bang transitions per second. Full `STATUS` also prints PA10 EN sync rise/drive/fall/abort counts.

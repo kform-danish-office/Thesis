@@ -1,9 +1,12 @@
 # Bang-Bang Converter Controller Quick README
 
-Current firmware version: `PWR-1.9.10`
+Current firmware version: `PWR-1.9.13`
 
 Version notes:
 
+- `PWR-1.9.13`: routes PA10 non-static EN burst rising/falling edges through the TIM1 carrier-update sync path instead of direct TIM3 update/compare edge writes. Static 100 percent EN still drives PA10 high continuously. `STATUS` now reports bang-bang transitions per second plus EN sync rise/drive/fall/abort counts for checking hot mid-load operating points.
+- `PWR-1.9.12`: fixes TIM1 PA8/PA9 carrier dead-time generation by using center-aligned carrier timing, giving the configured dead gap on both half-bridge transitions.
+- `PWR-1.9.11`: adds a soft no-load OVP holdoff for high-line light-load operation. When PA1 exceeds `NLSOVP` while the no-load detector is active, PA10 EN is forced low without latching the hard OVP. Normal bang-bang resumes only after PA1 falls to `NLSOVPR`; hard `OVP` still latches for gross overshoot or non-light-load cases. EEPROM magic is now `PWR20`.
 - `PWR-1.9.10`: adds `EXPORT` / `COMPS` / `DUMPCAL`, which prints paste-ready `SET ...` commands for sensor compensation, line feed-forward, voltage/no-load settings, EN timing, and load-slot reference calibrations. Exported comment lines are ignored by the command parser, hidden `L1...`/`L2...`/`L3...` load-slot calibration import fields are now SET-able, and `BEGINCFG`/`ENDCFG` defer EEPROM writes during a pasted block so it saves once at the end.
 - `PWR-1.9.9`: adds optional PA0 primary-voltage feed-forward for bang-bang only. PA1 secondary voltage still decides high/low. When enabled with `LINEFF`, PA0 only scales/caps the high EN duty by `LFFREF / Vpri`, so a no-load or low-line tune at about 110 Vac can be carried to 220 Vac with less OVP risk. `VSBONLY` disables PA0 influence. `MAXRATE` requests the fastest supported 20 us control loop preset. EEPROM magic is now `PWR19`.
 - `PWR-1.9.8`: calibrated load slots are now live reference points. When the no-load/high-impedance guard is active, the firmware estimates apparent load resistance from PA1/PA2 and interpolates between tuned `CALLOAD 1..3` duties. Lower resistance than the lowest tuned reference extrapolates to `DMAX`, so lower-resistance loads are no longer trapped at the no-load cap. Live status prints `AREF` when the adaptive reference is active. EEPROM magic is now `PWR18`.
@@ -45,7 +48,7 @@ Version notes:
 
 - PA8 / PA9 stay as the fixed 1 MHz gate carrier.
 - PA10 EN is a fixed-frequency bang-bang throttle. The firmware switches EN between `BLOW` and `BHIGH`.
-- PA10 EN is driven directly by TIM3 update/compare interrupts in this recovery build. Any nonzero PA10 pulse is still forced to at least the `GATECYC` minimum width.
+- TIM3 schedules PA10 EN burst periods, but non-static EN rising/falling edges are driven on TIM1 carrier-update boundaries. Static 100 percent EN remains continuously high. Any nonzero PA10 pulse is still forced to at least the `GATECYC` minimum width.
 - ADC feedback is DMA-only. PA0, PA1, and PA2 are continuously sampled by ADC1 DMA; the loop never calls blocking `analogRead()`.
 - Default EN frequency is 10 kHz. `AUTOBANG` does not sweep frequency; set `FEN` first if you want a different fixed EN rate.
 - Active feedback is PA1 secondary voltage only by default. PA0/PA2 and `Pdiag` are displayed for diagnostics, and PA0 only affects control if you enable `LINEFF`.
@@ -55,7 +58,9 @@ Version notes:
 - No-load guard is on by default. When active, it caps high EN duty to `NLDUTY` and uses the smaller no-load window from `VSET - NLDROP` to `VSET`. With defaults, that is 23 V to 28 V.
 - If Vsec drops below `VMIN`, or stays below `VSET - NLDROP` for `NLFULL` loop cycles, no-load guard is bypassed and the loop uses full `BHIGH` until `VMAX`.
 - `BONMS` and `BOFFMS` set minimum high/low dwell time in milliseconds.
-- Above `OVP`, EN shuts off and latches a fault. Current trip/foldback are off by default in `PWR-1.9.0`.
+- At light/no load, `NLSOVP` default 33.5 V forces EN low before hard OVP, then rearms at `NLSOVPR` default 23 V. Live status prints `NLSOVP` while this holdoff is active.
+- Above `OVP`, EN shuts off and latches a fault unless the no-load soft OVP holdoff is active and voltage remains below the hard margin. Current trip/foldback are off by default in this voltage-only loop.
+- Live status includes `BTPS=<n>` for bang-bang transitions per second. Full `STATUS` prints PA10 EN sync rise/drive/fall/abort counters.
 - On `ON`, boot, and `AUTOBANG`, the firmware first gives PA10 a tiny startup precharge burst so the secondary-side isolated feedback device has enough power to wake up before PA1 is trusted.
 
 ## Startup Precharge
@@ -146,6 +151,9 @@ SET NLDUTY 5
 SET NLDROP 5
 SET NLFULL 3
 SET NLSLOT 1
+SET NLSOVPEN 1
+SET NLSOVP 33.5
+SET NLSOVPR 23
 SET NLI 0.35
 SET NLR 30
 SET GATECYC 8
@@ -228,7 +236,7 @@ SET FEN 10000
 
 `CALLOAD 1..3` stores reference resistance and tuned duty points. Live control treats them as a curve, not rigid modes: if PA1/PA2 indicate a load between two references, the no-load cap is interpolated; if the load is lower resistance than the lowest tuned point, the cap rises to `DMAX`.
 
-During bang-bang calibration, if PA1 exceeds `VMAX`, EN is turned off for that point and the firmware stops trying higher duty. OVP still latches if PA1 exceeds `OVP`.
+During bang-bang calibration, if PA1 exceeds `VMAX`, EN is turned off for that point and the firmware stops trying higher duty. Hard OVP still latches if PA1 exceeds `OVP`; the no-load soft OVP holdoff is for live high-line light-load operation.
 
 ## Copying Compensation To Another Board
 
@@ -314,6 +322,9 @@ The command parser ignores lines starting with `#`, `;`, or `//`, so the exporte
 | `NLSLOT` | 0 or 1 | let high-impedance active load slots use no-load guard; default 1 |
 | `NLI` | 0 to 10 | A threshold for no-load detection; default 0.35 |
 | `NLR` | 1 to 100000 | ohm apparent-load threshold for no-load detection; default 30 |
+| `NLSOVPEN` | 0 or 1 | soft no-load OVP holdoff enable; default 1 |
+| `NLSOVP` | `VMAX` to `OVP` | V soft no-load trip threshold; default 33.5 |
+| `NLSOVPR` | `VMIN` to `NLSOVP - 0.2` | V soft no-load rearm/reset threshold; default 23 |
 | `VBOOST`, `VFOLD` | 0 to 100 | legacy power-loop fields, not used by voltage-only loop |
 | `MAXFAULTEN` | 0 or 1 | legacy max-duty power fault; not called by voltage-only loop |
 | `MAXFAULTMS` | 50 to 10000 | ms |
