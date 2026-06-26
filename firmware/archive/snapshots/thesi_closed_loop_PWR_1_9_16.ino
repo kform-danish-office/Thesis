@@ -8,10 +8,6 @@
 // STM32G071 LLC / GaN primary-power controller
 //
 // Firmware version:
-//   PWR-1.9.20 = loaded steady uses VON as the loaded floor; droop below VON boosts averaged duty without 0/100 mode switching.
-//   PWR-1.9.19 = OFF-state boot-default ON/OFF setting; ON/OFF runtime commands no longer overwrite boot default.
-//   PWR-1.9.18 = loaded-current mode holds a bounded averaged duty above 0.15 A; removes loaded jump-to-100 and adds fast high-voltage cutback.
-//   PWR-1.9.17 = loaded current overrides no-load guard; loaded steady duty trims slowly instead of 0/100 chopping.
 //   PWR-1.9.16 = loaded mode uses slow steady-duty memory; PA2 only classifies light/load state.
 //   PWR-1.9.15 = loaded hold duty keeps mid-load bang-bang low state from dropping EN fully off.
 //   PWR-1.9.14 = restores PA10 switching with bounded polled TIM1 carrier sync for non-static EN edges.
@@ -82,8 +78,8 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 // -------------------- Firmware version --------------------
 #define FW_VERSION_MAJOR 1
 #define FW_VERSION_MINOR 9
-#define FW_VERSION_PATCH 20
-#define FW_VERSION_STRING "PWR-1.9.20"
+#define FW_VERSION_PATCH 16
+#define FW_VERSION_STRING "PWR-1.9.16"
 
 // -------------------- Fixed gate settings --------------------
 #define GATE_FREQ_HZ       1000000UL
@@ -117,8 +113,8 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 #define CONTROL_PERIOD_MIN_US    20UL
 #define CONTROL_PERIOD_MAX_US 20000UL
 
-#define EEPROM_MAGIC       0x5057524FUL  // "PWRO"
-#define EEPROM_MAGIC_NAME  "PWR24"
+#define EEPROM_MAGIC       0x5057524DUL  // "PWRM"
+#define EEPROM_MAGIC_NAME  "PWR22"
 #define EEPROM_SLOT_COUNT  4
 #define EEPROM_BASE_ADDR   0
 
@@ -194,7 +190,7 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 #define DEFAULT_KP_X1000            250L  // 0.250 %/W
 #define DEFAULT_KI_X1000           1500L  // 1.500 %/(W*s)
 #define DEFAULT_DEADBAND_MW       2000L   // 2.000 W; bang-bang hysteresis fallback
-#define DEFAULT_SLEW_X10_PER_SEC    80L   // 8.0 %/s loaded steady-duty trim
+#define DEFAULT_SLEW_X10_PER_SEC  3000L   // 300.0 %/s
 #define DEFAULT_INT_MIN_X10       -600L
 #define DEFAULT_INT_MAX_X10        600L
 
@@ -237,9 +233,8 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 #define DEFAULT_BANG_MIN_OFF_MS        0UL
 #define DEFAULT_LOADED_HOLD_ENABLE       1
 #define DEFAULT_LOADED_HOLD_DUTY_X10   120   // 12% minimum loaded proportional duty floor
-#define DEFAULT_LOADED_HOLD_CURRENT_A  0.15f
+#define DEFAULT_LOADED_HOLD_CURRENT_A  0.80f
 #define DEFAULT_LOADED_HOLD_OHMS      25.0f
-#define LOADED_CURRENT_HOLD_MS        500UL
 
 #define CAL_LOAD_SLOT_COUNT              3
 #define DEFAULT_CAL_LOAD1_OHMS          50.0f
@@ -464,10 +459,8 @@ void setEnDutyX10BypassLimits(uint16_t dutyX10);
 float fastSecondaryVoltage();
 float noLoadLowVoltage();
 float noLoadReleaseVoltage();
-bool loadedCurrentDetected();
 bool noLoadSlotActive();
 bool noLoadSoftOvpLightLoadEligible();
-void serviceLoadedCurrentState();
 float noLoadSoftOvpTripVoltage();
 float noLoadSoftOvpResetVoltage();
 void serviceNoLoadSoftOvp();
@@ -542,11 +535,7 @@ bool noLoadForceFull = false;
 bool noLoadSoftOvpActive = false;
 uint32_t noLoadSoftOvpCount = 0;
 bool fullPowerDemandState = false;
-bool loadedCurrentActiveState = false;
-bool loadedCurrentInstantState = false;
-uint32_t loadedCurrentLastMs = 0;
 bool loadedHoldActiveState = false;
-bool loadedDroopBoostState = false;
 float loadedSteadyDutyX10State = DEFAULT_LOADED_HOLD_DUTY_X10;
 bool adaptiveNoLoadReferenceState = false;
 float adaptiveLoadOhmsState = 0.0f;
@@ -963,6 +952,7 @@ void validateSettings() {
   if (!isfinite(cfg.tunedTargetW) || cfg.tunedTargetW < 0.0f || cfg.tunedTargetW > POWER_TARGET_MAX_W) cfg.tunedTargetW = 0.0f;
 
   controlMode = (ControlMode)cfg.controlMode;
+  systemEnabled = cfg.systemEnabled ? true : false;
 }
 
 uint32_t checksumSettings(const SettingsSlot &s) {
@@ -1020,7 +1010,6 @@ void loadSettings() {
     activeSlotIndex = -1;
   }
   validateSettings();
-  systemEnabled = cfg.systemEnabled ? true : false;
 }
 
 bool safeToWriteEepromNow() {
@@ -1034,13 +1023,13 @@ void markSettingsDirty() {
 
 void saveSettingsNow() {
   cfg.magic = EEPROM_MAGIC;
-  cfg.systemEnabled = cfg.systemEnabled ? 1 : 0;
+  cfg.systemEnabled = systemEnabled ? 1 : 0;
   cfg.controlMode = (uint8_t)controlMode;
   validateSettings();
 
   cfg.magic = EEPROM_MAGIC;
   cfg.sequence = settingsSequence + 1;
-  cfg.systemEnabled = cfg.systemEnabled ? 1 : 0;
+  cfg.systemEnabled = systemEnabled ? 1 : 0;
   cfg.controlMode = (uint8_t)controlMode;
   cfg.checksum = checksumSettings(cfg);
 
@@ -1811,7 +1800,6 @@ bool noLoadSoftOvpLightLoadEligible() {
   if (!cfg.noLoadSoftOvpEnable || !systemEnabled || controlMode != MODE_POWER_LOOP) return false;
   float fastVsec = fastSecondaryVoltage();
   if (fastVsec < cfg.prechargeReadyV) return false;
-  if (loadedCurrentDetected()) return false;
   if (noLoadSlotActive()) return true;
   if (filteredCurrent >= 0.0f && filteredCurrent <= cfg.noLoadCurrentA) return true;
   if (filteredCurrent > 0.02f && filteredVsec > 1.0f) {
@@ -1829,11 +1817,7 @@ void enterNoLoadSoftOvpHoldoff() {
   noLoadBelowMinCycles = 0;
   noLoadForceFull = false;
   fullPowerDemandState = false;
-  loadedCurrentActiveState = false;
-  loadedCurrentInstantState = false;
-  loadedCurrentLastMs = 0;
   loadedHoldActiveState = false;
-  loadedDroopBoostState = false;
   loadedSteadyDutyX10State = (float)cfg.loadedHoldDutyX10;
   adaptiveNoLoadReferenceState = false;
   adaptiveLoadOhmsState = 0.0f;
@@ -2066,6 +2050,7 @@ void savePrechargeTuneResult(uint16_t dutyX10, uint8_t bursts, float vAfter) {
   cfg.prechargeMaxBursts = bursts;
   validateSettings();
   systemEnabled = false;
+  cfg.systemEnabled = 0;
   setEnDutyX10(0);
   saveSettings();
 
@@ -2143,6 +2128,7 @@ void autoTunePrecharge() {
         CmdSerial.println("AUTOPRE FAILED: fault during precharge tune.");
         setEnDutyX10(0);
         systemEnabled = false;
+        cfg.systemEnabled = 0;
         finishAutotuneStopped();
         CmdSerial.print("> ");
         return;
@@ -2152,6 +2138,7 @@ void autoTunePrecharge() {
         CmdSerial.println("AUTOPRE STOPPED: secondary voltage exceeded VMAX before a safe result was saved.");
         setEnDutyX10(0);
         systemEnabled = false;
+        cfg.systemEnabled = 0;
         saveSettings();
         finishAutotuneStopped();
         CmdSerial.print("> ");
@@ -2177,6 +2164,7 @@ void autoTunePrecharge() {
     CmdSerial.println("AUTOPRE did not reach PREV within PREAUTOMAX/PRETRIES. Settings not changed.");
     setEnDutyX10(0);
     systemEnabled = false;
+    cfg.systemEnabled = 0;
     saveSettings();
   }
 
@@ -2186,6 +2174,7 @@ void autoTunePrecharge() {
 
 void setSystemEnabled(bool enable, bool save) {
   systemEnabled = enable;
+  cfg.systemEnabled = enable ? 1 : 0;
   if (!enable) {
     startupPhase = STARTUP_IDLE;
     startupPhaseStartMs = 0;
@@ -2198,11 +2187,7 @@ void setSystemEnabled(bool enable, bool save) {
     noLoadForceFull = false;
     noLoadSoftOvpActive = false;
     fullPowerDemandState = false;
-    loadedCurrentActiveState = false;
-    loadedCurrentInstantState = false;
-    loadedCurrentLastMs = 0;
     loadedHoldActiveState = false;
-    loadedDroopBoostState = false;
     loadedSteadyDutyX10State = (float)cfg.loadedHoldDutyX10;
     adaptiveNoLoadReferenceState = false;
     adaptiveLoadOhmsState = 0.0f;
@@ -2219,11 +2204,7 @@ void setSystemEnabled(bool enable, bool save) {
     noLoadForceFull = false;
     noLoadSoftOvpActive = false;
     fullPowerDemandState = false;
-    loadedCurrentActiveState = false;
-    loadedCurrentInstantState = false;
-    loadedCurrentLastMs = 0;
     loadedHoldActiveState = false;
-    loadedDroopBoostState = false;
     loadedSteadyDutyX10State = (float)cfg.loadedHoldDutyX10;
     adaptiveNoLoadReferenceState = false;
     adaptiveLoadOhmsState = 0.0f;
@@ -2247,11 +2228,7 @@ void setMode(ControlMode mode, bool save) {
   noLoadForceFull = false;
   noLoadSoftOvpActive = false;
   fullPowerDemandState = false;
-  loadedCurrentActiveState = false;
-  loadedCurrentInstantState = false;
-  loadedCurrentLastMs = 0;
   loadedHoldActiveState = false;
-  loadedDroopBoostState = false;
   loadedSteadyDutyX10State = (float)cfg.loadedHoldDutyX10;
   adaptiveNoLoadReferenceState = false;
   adaptiveLoadOhmsState = 0.0f;
@@ -2329,7 +2306,6 @@ float loadedTurnOnVoltage() {
 
 bool noLoadSlotActive() {
   if (!cfg.noLoadSlotEnable) return false;
-  if (loadedCurrentDetected()) return false;
   float slotR = calLoadOhms(cfg.activeCalLoadSlot);
   if (slotR <= 0.0f || slotR < cfg.noLoadOhms) return false;
   float expectedI = cfg.voltageSetV / slotR;
@@ -2344,53 +2320,6 @@ bool measuredLoadResistance(float &rOhms) {
   if (!isfinite(r) || r <= 0.0f || r > 100000.0f) return false;
   rOhms = r;
   return true;
-}
-
-float loadedCurrentDetectThresholdA() {
-  float threshold = cfg.loadedHoldCurrentA;
-  if (!isfinite(threshold) || threshold < 0.005f) threshold = DEFAULT_LOADED_HOLD_CURRENT_A;
-  if (threshold < 0.005f) threshold = 0.005f;
-  return threshold;
-}
-
-bool loadedCurrentInstantDetected() {
-  float fastVsec = fastSecondaryVoltage();
-  if (fastVsec < cfg.prechargeReadyV) return false;
-  if (filteredCurrent >= loadedCurrentDetectThresholdA()) return true;
-
-  float rLive = 0.0f;
-  if (measuredLoadResistance(rLive) && rLive < cfg.noLoadOhms) return true;
-  return false;
-}
-
-void serviceLoadedCurrentState() {
-  loadedCurrentInstantState = loadedCurrentInstantDetected();
-  uint32_t nowMs = millis();
-
-  if (loadedCurrentInstantState) {
-    if (!loadedCurrentActiveState) {
-      uint16_t seedDuty = cfg.loadedHoldDutyX10;
-      uint16_t presentDuty = enDutyEffX10;
-      if (presentDuty > seedDuty && presentDuty < cfg.dutyMaxX10 - 5) seedDuty = presentDuty;
-      loadedSteadyDutyX10State = (float)seedDuty;
-    }
-    loadedCurrentActiveState = true;
-    loadedCurrentLastMs = nowMs;
-    return;
-  }
-
-  if (!loadedCurrentActiveState) return;
-
-  float releaseI = loadedCurrentDetectThresholdA() * 0.5f;
-  if (releaseI < 0.005f) releaseI = 0.005f;
-  bool quietHighVoltage = (fastSecondaryVoltage() >= noLoadReleaseVoltage()) && (filteredCurrent <= releaseI);
-  if (quietHighVoltage && (nowMs - loadedCurrentLastMs >= LOADED_CURRENT_HOLD_MS)) {
-    loadedCurrentActiveState = false;
-  }
-}
-
-bool loadedCurrentDetected() {
-  return loadedCurrentActiveState || loadedCurrentInstantDetected();
 }
 
 uint16_t adaptiveNoLoadDutyX10(bool &usedReference, float &estimatedOhms) {
@@ -2468,7 +2397,6 @@ bool noLoadGuardActive() {
   float fastVsec = fastSecondaryVoltage();
   if (fastVsec < cfg.prechargeReadyV) return false;
   if (fastVsec <= cfg.secMinV) return false;
-  if (loadedCurrentDetected()) return false;
   if (noLoadSlotActive()) return true;
   if (filteredCurrent >= 0.0f && filteredCurrent <= cfg.noLoadCurrentA) return true;
   if (filteredCurrent > 0.02f && filteredVsec > 1.0f) {
@@ -2479,9 +2407,7 @@ bool noLoadGuardActive() {
 }
 
 bool loadedSteadyEligible(bool noLoadGuard) {
-  if (!cfg.loadedHoldEnable || noLoadGuard) return false;
-  if (loadedCurrentDetected()) return true;
-  if (noLoadForceFull) return false;
+  if (!cfg.loadedHoldEnable || noLoadGuard || noLoadForceFull) return false;
   if (filteredCurrent >= cfg.noLoadCurrentA) return true;
   if (filteredCurrent >= cfg.loadedHoldCurrentA) return true;
   if (filteredCurrent > 0.02f && filteredVsec > 1.0f) {
@@ -2493,16 +2419,8 @@ bool loadedSteadyEligible(bool noLoadGuard) {
 }
 
 uint16_t loadedSteadyDutyX10(float fastVsec, uint32_t elapsedUs) {
-  loadedDroopBoostState = false;
-
   float setV = cfg.voltageSetV;
   if (!isfinite(setV) || setV < cfg.secMinV || setV > cfg.secMaxV) setV = loadedTurnOnVoltage();
-  float loadedFloorV = loadedTurnOnVoltage();
-  if (!isfinite(loadedFloorV) || loadedFloorV < cfg.secMinV) loadedFloorV = cfg.secMinV;
-  float maxFloorV = cfg.secMaxV - 0.2f;
-  if (maxFloorV < cfg.secMinV) maxFloorV = cfg.secMinV;
-  if (loadedFloorV > maxFloorV) loadedFloorV = maxFloorV;
-  if (setV < loadedFloorV) setV = loadedFloorV;
 
   if (!isfinite(loadedSteadyDutyX10State) || loadedSteadyDutyX10State < 0.0f || loadedSteadyDutyX10State > 1000.0f) {
     loadedSteadyDutyX10State = (float)cfg.loadedHoldDutyX10;
@@ -2513,40 +2431,26 @@ uint16_t loadedSteadyDutyX10(float fastVsec, uint32_t elapsedUs) {
   float dt = (float)elapsedUs / 1000000.0f;
   if (!isfinite(dt) || dt <= 0.0f || dt > 0.1f) dt = (float)cfg.controlPeriodUs / 1000000.0f;
   float baseStep = (float)cfg.slewX10PerSec * dt;
-  if (baseStep < 0.001f) baseStep = 0.001f;
+  if (baseStep < 0.02f) baseStep = 0.02f;
   if (baseStep > 20.0f) baseStep = 20.0f;
 
   float trimV = filteredVsec;
   if (!isfinite(trimV) || trimV < 0.05f) trimV = fastVsec;
-
-  if (fastVsec >= cfg.secMaxV || latestVsecRaw >= cfg.secMaxV || filteredVsec >= cfg.secMaxV) {
-    float cutStep = 50.0f;
-    if (loadedSteadyDutyX10State > (float)cfg.loadedHoldDutyX10 + cutStep) loadedSteadyDutyX10State -= cutStep;
-    else loadedSteadyDutyX10State = (float)cfg.loadedHoldDutyX10;
-    return cfg.bangLowDutyX10;
-  }
-
-  bool strongCurrent = filteredCurrent >= loadedCurrentDetectThresholdA();
+  float lowErrV = setV - trimV;
   float highErrV = trimV - setV;
-  if (highErrV > 0.40f) {
-    float gain = clampFloat(highErrV / 2.0f, 0.20f, 4.0f);
-    float step = baseStep * gain * 2.0f;
-    if (step < 0.003f) step = 0.003f;
-    if (step > 2.0f) step = 2.0f;
-    loadedSteadyDutyX10State -= step;
-  } else if (trimV < loadedFloorV || fastVsec < loadedFloorV) {
-    float lowErrV = loadedFloorV - trimV;
-    if (fastVsec < trimV) lowErrV = loadedFloorV - fastVsec;
-    if (lowErrV < 0.05f) lowErrV = 0.05f;
-    float gain = clampFloat(lowErrV / 1.5f, 0.5f, 8.0f);
-    float step = baseStep * gain * 8.0f;
-    if (lowErrV > 2.0f && step < 0.030f) step = 0.030f;
-    if (lowErrV > 6.0f && step < 0.060f) step = 0.060f;
-    if (step > 2.0f) step = 2.0f;
-    loadedSteadyDutyX10State += step;
-    loadedDroopBoostState = true;
-  } else if (strongCurrent) {
-    return clampDutyX10((int32_t)(loadedSteadyDutyX10State + 0.5f));
+
+  if (fastVsec <= cfg.secMinV) {
+    loadedSteadyDutyX10State = (float)cfg.dutyMaxX10;
+  } else if (lowErrV > 0.25f) {
+    float gain = clampFloat(lowErrV / 2.0f, 0.25f, 4.0f);
+    if (trimV <= loadedTurnOnVoltage()) gain *= 1.5f;
+    loadedSteadyDutyX10State += baseStep * gain;
+  } else if (fastVsec >= cfg.secMaxV || latestVsecRaw >= cfg.secMaxV) {
+    float gain = clampFloat((fastVsec - cfg.secMaxV) + 1.0f, 1.0f, 6.0f);
+    loadedSteadyDutyX10State -= baseStep * gain * 2.0f;
+  } else if (highErrV > 0.40f) {
+    float gain = clampFloat(highErrV / 2.0f, 0.20f, 3.0f);
+    loadedSteadyDutyX10State -= baseStep * gain;
   }
 
   if (loadedSteadyDutyX10State < (float)cfg.loadedHoldDutyX10) loadedSteadyDutyX10State = (float)cfg.loadedHoldDutyX10;
@@ -2593,15 +2497,10 @@ void handlePowerLoop() {
 
   if (!systemEnabled || controlMode != MODE_POWER_LOOP) {
     loadedHoldActiveState = false;
-    loadedDroopBoostState = false;
     return;
   }
   if (faultLatched) {
-    loadedCurrentActiveState = false;
-    loadedCurrentInstantState = false;
-    loadedCurrentLastMs = 0;
     loadedHoldActiveState = false;
-    loadedDroopBoostState = false;
     setEnDutyX10(0);
     return;
   }
@@ -2620,12 +2519,10 @@ void handlePowerLoop() {
   if (elapsedUs > maxControlDtUs) maxControlDtUs = elapsedUs;
 
   updateAnalogFilters(true);
-  serviceLoadedCurrentState();
   serviceNoLoadSoftOvp();
   if (checkFaults()) return;
   if (noLoadSoftOvpActive) {
     loadedHoldActiveState = false;
-    loadedDroopBoostState = false;
     return;
   }
 
@@ -2634,9 +2531,8 @@ void handlePowerLoop() {
   float fastVsec = fastSecondaryVoltage();
   float noLoadLowV = noLoadLowVoltage();
   bool fullEscapeRelease = (filteredVsec >= cfg.secMaxV) || (fastVsec >= cfg.secMaxV);
-  bool loadedCurrent = loadedCurrentDetected();
 
-  if (!cfg.noLoadGuardEnable || cfg.noLoadFullCycles == 0 || loadedCurrent) {
+  if (!cfg.noLoadGuardEnable || cfg.noLoadFullCycles == 0) {
     noLoadBelowMinCycles = 0;
     noLoadForceFull = false;
   } else if (noLoadForceFull) {
@@ -2661,7 +2557,7 @@ void handlePowerLoop() {
   bool belowTurnOn = (filteredVsec <= turnOnV) || (fastVsec <= turnOnV);
   bool overRelease = (filteredVsec >= releaseV) || (latestVsecRaw >= releaseV);
   bool fullPowerDemand = underVoltage || noLoadForceFull;
-  fullPowerDemandState = fullPowerDemand && !loadedSteady;
+  fullPowerDemandState = fullPowerDemand;
 
   if (!loadedSteady) {
     if (bangBangHigh) {
@@ -2685,10 +2581,9 @@ void handlePowerLoop() {
 
   uint16_t desiredDuty;
   loadedHoldActiveState = false;
-  loadedDroopBoostState = false;
   if (loadedSteady) {
-    desiredDuty = loadedSteadyDutyX10(fastVsec, elapsedUs);
-    loadedHoldActiveState = true;
+    desiredDuty = fullPowerDemand ? cfg.dutyMaxX10 : loadedSteadyDutyX10(fastVsec, elapsedUs);
+    loadedHoldActiveState = !fullPowerDemand;
     bangBangHigh = desiredDuty > cfg.bangLowDutyX10;
   } else {
     desiredDuty = bangBangHigh ? cfg.bangHighDutyX10 : cfg.bangLowDutyX10;
@@ -3163,9 +3058,7 @@ void printLiveStatusLine() {
   if (noLoadSoftOvpActive) CmdSerial.print(" NLSOVP");
   if (noLoadForceFull) CmdSerial.print(" NLFULL");
   if (fullPowerDemandState) CmdSerial.print(" FDEM");
-  if (loadedCurrentDetected()) CmdSerial.print(" LDET");
   if (loadedHoldActiveState) CmdSerial.print(" LSTEADY");
-  if (loadedDroopBoostState) CmdSerial.print(" LBOOST");
   if (adaptiveNoLoadReferenceState) CmdSerial.print(" AREF");
   CmdSerial.print(" BTPS="); CmdSerial.print(bangBangTransitionRatePerSec);
   if (cfg.lineFfEnable) {
@@ -3191,7 +3084,7 @@ void printParams() {
   CmdSerial.println("CSRES, CSGAIN, CSOFF, IABS, ITRIP, ITRIPEN, ISOFT, IFOLDEN, IFOLD");
   CmdSerial.println("PRECHEN, PREDUTY, PREMS, PRESETTLE, PREMAX, PREV, PREAUTOMAX, PRETRIES");
   CmdSerial.println("FEN, FMIN, FMAX, FPREF, FPEN, MINEDGE, GATECYC, GATELEAD, STATIC, DMIN, DMAX, OD, BIAS, PWRDUTY");
-  CmdSerial.println("BOOTON/BOOTEN, BLOW, BHIGH, BHYST, BONMS, BOFFMS, LSTEADYEN/LHOLDEN, LDUTY/LHOLDDUTY, LHI, LHR");
+  CmdSerial.println("BLOW, BHIGH, BHYST, BONMS, BOFFMS, LSTEADYEN/LHOLDEN, LDUTY/LHOLDDUTY, LHI, LHR");
   CmdSerial.println("CPER, STATUSMS, PTAU, VPTAU, VSTAU, ITAU");
   CmdSerial.println("KP, KI, DB, SLEW, IMIN, IMAX");
   CmdSerial.println("VMIN, VMAX, VSET, VON, OVP, OVPEN, NLGUARD, NLDUTY, NLDROP/NLBAND, NLFULL, NLSLOT, NLI, NLR, NLSOVPEN, NLSOVP, NLSOVPR");
@@ -3199,7 +3092,7 @@ void printParams() {
   CmdSerial.println("AUTOMAX, AUTOSTEP, AUTOFINE, AUTOSETTLE, AUTOMEAS");
   CmdSerial.println("LOAD1, LOAD2, LOAD3, ACTIVELOAD");
   CmdSerial.println("L1FEN/L1DUTY/L1KP/L1KI/L1GAIN/L1TAU/L1TGT/L1PMEAS/L1VMEAS/L1IMEAS, same for L2/L3");
-  CmdSerial.println("Commands: ON, OFF, BOOTON, BOOTOFF, OPEN, BANG/POWER, VSBONLY, LINEFF, LFFCAL, EXPORT/COMPS, BEGINCFG/ENDCFG, PFBPRI, PFBSEC, AUTOPRE, AUTOBANG/CAL, CALLOAD n, CAL3, LOAD n, ZEROI, FAST, TURBO, ULTRA, MAXRATE, FULL, CLR, SAVE, DEFAULTS");
+  CmdSerial.println("Commands: ON, OFF, OPEN, BANG/POWER, VSBONLY, LINEFF, LFFCAL, EXPORT/COMPS, BEGINCFG/ENDCFG, PFBPRI, PFBSEC, AUTOPRE, AUTOBANG/CAL, CALLOAD n, CAL3, LOAD n, ZEROI, FAST, TURBO, ULTRA, MAXRATE, FULL, CLR, SAVE, DEFAULTS");
 }
 
 void printSetFloat(const char *name, float value, uint8_t digits) {
@@ -3301,7 +3194,6 @@ void printCompensationValues() {
   printSetDuty("OD", cfg.openLoopDutyX10);
   printSetDuty("BIAS", cfg.biasDutyX10);
   printSetDuty("PWRDUTY", cfg.powerupDutyX10);
-  printSetUInt("BOOTON", cfg.systemEnabled);
   printSetDuty("BLOW", cfg.bangLowDutyX10);
   printSetDuty("BHIGH", cfg.bangHighDutyX10);
   printSetUInt("LSTEADYEN", cfg.loadedHoldEnable);
@@ -3386,7 +3278,6 @@ void printStatus() {
   CmdSerial.print("Firmware: "); CmdSerial.print(FW_VERSION_STRING);
   CmdSerial.print(" EEPROM magic "); CmdSerial.println(EEPROM_MAGIC_NAME);
   CmdSerial.print("System: "); CmdSerial.println(systemEnabled ? "ON" : "OFF");
-  CmdSerial.print("Boot default: "); CmdSerial.println(cfg.systemEnabled ? "ON" : "OFF");
   CmdSerial.print("Mode: "); CmdSerial.println(modeName());
   CmdSerial.print("Startup state: "); CmdSerial.print(startupPhaseName());
   CmdSerial.print(" bursts "); CmdSerial.print(startupBurstCount);
@@ -3430,11 +3321,6 @@ void printStatus() {
   CmdSerial.print(filteredVpri, 3); CmdSerial.print(" V / ");
   CmdSerial.print(filteredCurrent, 4); CmdSerial.print(" A / ");
   CmdSerial.print(filteredPower, 3); CmdSerial.println(" W");
-  CmdSerial.print("Loaded detector instant/latch/threshold/hold: ");
-  CmdSerial.print(loadedCurrentInstantState ? "YES" : "NO"); CmdSerial.print(" / ");
-  CmdSerial.print(loadedCurrentActiveState ? "YES" : "NO"); CmdSerial.print(" / ");
-  CmdSerial.print(loadedCurrentDetectThresholdA(), 4); CmdSerial.print(" A / ");
-  CmdSerial.print(LOADED_CURRENT_HOLD_MS); CmdSerial.println(" ms");
   CmdSerial.print("Raw PA0/PA1/PA2 ADC,V: ");
   CmdSerial.print(rawPa0Adc); CmdSerial.print(","); CmdSerial.print(rawPa0Voltage, 5); CmdSerial.print(" / ");
   CmdSerial.print(rawPa1Adc); CmdSerial.print(","); CmdSerial.print(rawPa1Voltage, 5); CmdSerial.print(" / ");
@@ -3643,7 +3529,6 @@ bool parseSetParam(String name, float value) {
     cfg.bangHighDutyX10 = cfg.biasDutyX10;
   }
   else if (name == "PWRDUTY") cfg.powerupDutyX10 = dutyPercentToX10(value);
-  else if (name == "BOOTON" || name == "BOOTEN" || name == "BOOT" || name == "STARTON" || name == "POWERON") cfg.systemEnabled = (value >= 0.5f) ? 1 : 0;
   else if (name == "BLOW") cfg.bangLowDutyX10 = dutyPercentToX10(value);
   else if (name == "BHIGH") {
     cfg.bangHighDutyX10 = dutyPercentToX10(value);
@@ -3851,18 +3736,6 @@ void processCommand(String cmd) {
   }
   if (up == "DIVIDER" || up == "LADDER") { printDividerAdvice(); return; }
   if (up == "AUTOPRE" || up == "PREAUTO" || up == "CALPRE") { autoTunePrecharge(); return; }
-  if (up == "BOOTON" || up == "BOOT ON" || up == "BOOTEN" || up == "AUTOSTART") {
-    if (parseSetParam("BOOTON", 1.0f)) printSaveStateMessage("Boot default ON saved.");
-    return;
-  }
-  if (up == "BOOTOFF" || up == "BOOT OFF" || up == "BOOTDIS" || up == "NOAUTOSTART") {
-    if (parseSetParam("BOOTON", 0.0f)) printSaveStateMessage("Boot default OFF saved.");
-    return;
-  }
-  if (up.startsWith("BOOT ")) {
-    if (parseSetParam("BOOTON", cmd.substring(5).toFloat())) printSaveStateMessage("Boot default saved.");
-    return;
-  }
   if (up == "ON") { setSystemEnabled(true, false); CmdSerial.println("System ON"); return; }
   if (up == "OFF") { setSystemEnabled(false, true); CmdSerial.println("System OFF"); return; }
   if (up == "OPEN" || up == "MO") { setMode(MODE_OPEN_LOOP, true); CmdSerial.println("OPEN LOOP"); return; }
@@ -4145,6 +4018,7 @@ void setup() {
     faultLatched = true;
     faultCode = FAULT_SENSOR;
     systemEnabled = false;
+    cfg.systemEnabled = 0;
     CmdSerial.println("ERROR: ADC1 DMA setup failed. Analog feedback disabled; output held off.");
   }
 
