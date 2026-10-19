@@ -1,8 +1,11 @@
 # UART Command Quick Reference
 
-Firmware: `PWR-1.9.13`
+Firmware: `PWR-2.0.0`
 
-UART is hardware serial on PC5 RX and PC4 TX at 115200 baud. Commands accept CR, LF, or CRLF line endings.
+Hardware UART is PA10 RX / PA9 TX (USART1) on the F410 schematic-12 board,
+or PC5 RX / PC4 TX on the original G071 board, at 115200 baud, 8N1, no flow control.
+Commands accept CR, LF, or CRLF line endings. EN is PA11 on F410, PA10 on G071.
+See [F410 port notes](stm32f410-port.md) for the changed wiring and build.
 
 ## Basic Flow
 
@@ -22,8 +25,8 @@ Use `SET NAME VALUE` for parameters. If the output is OFF, settings save immedia
 
 | Command | Meaning |
 |---|---|
-| `ON` / `OFF` | Enable or disable PA10 EN power transfer |
-| `STATUS` / `?` | Print measured values, mode, timing, faults, PA10 sync counters, and settings |
+| `ON` / `OFF` | Enable or disable EN power transfer |
+| `STATUS` / `?` | Print measured values, mode, timing, faults, EN sync counters, and settings |
 | `VER` | Print firmware version |
 | `PARAMS` | Print supported `SET` names |
 | `EXPORT` / `COMPS` | Print paste-ready calibration and compensation settings |
@@ -46,6 +49,7 @@ Use `SET NAME VALUE` for parameters. If the output is OFF, settings save immedia
 | `ZEROI` | Store current-sensor zero offset |
 | `CLR` | Clear latched fault |
 | `SAVE` | Save if output is OFF; otherwise leave save pending |
+| `BOOTON` / `BOOTOFF` | While OFF, save the desired enabled/disabled state for the next boot |
 | `DEFAULTS` | Restore defaults and save |
 | `DIVIDER` | Print PA0 divider suggestions |
 

@@ -1,13 +1,16 @@
 #include <Arduino.h>
+#if !defined(STM32F410Cx)
 #include <EEPROM.h>
+#endif
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
 
 // ============================================================
-// STM32G071 LLC / GaN primary-power controller
+// STM32G071 / STM32F410CBU6 LLC / GaN converter controller
 //
 // Firmware version:
+//   PWR-2.0.0 = F410CBU6 schematic-12 port: PA8/PB13 complementary TIM1, PA11 EN, PA9/PA10 UART, ADC1 DMA2, flash journal.
 //   PWR-1.9.20 = loaded steady uses VON as the loaded floor; droop below VON boosts averaged duty without 0/100 mode switching.
 //   PWR-1.9.19 = OFF-state boot-default ON/OFF setting; ON/OFF runtime commands no longer overwrite boot default.
 //   PWR-1.9.18 = loaded-current mode holds a bounded averaged duty above 0.15 A; removes loaded jump-to-100 and adds fast high-voltage cutback.
@@ -44,11 +47,11 @@
 //   PWR-1.4.0 = defers EEPROM writes while output is active to avoid UART SET freezes.
 //
 // Fixed carrier:
-//   PA8 / PA9 = 1 MHz complementary-ish gate carrier from TIM1.
+//   G071: PA8 / PA9. F410: PA8 / PB13 (TIM1 CH1 / CH1N).
 //
 // Power throttle:
-//   PA10 = EN burst throttle. Default EN frequency is 10 kHz.
-//   Control changes PA10 high time / duty, not the 1 MHz carrier.
+//   G071: PA10. F410: PA11. Default EN frequency is 10 kHz.
+//   Control changes EN high time / duty, not the 1 MHz carrier.
 //
 // Feedback:
 //   PA0 = primary voltage divider into MCU ADC, diagnostic / optional mode
@@ -63,27 +66,51 @@
 
 // -------------------- Pins --------------------
 #define HIGH_GATE_PIN PA8
+#if defined(STM32F410Cx)
+#define LOW_GATE_PIN  PB13
+#define EN_PIN        PA11
+#define EN_GPIO_MASK  GPIO_PIN_11
+#define EN_TIMER      TIM5
+#define EN_TIMER_NAME "TIM5"
+#define EN_PIN_NAME   "PA11"
+#define GATE_PIN_NAMES "PA8/PB13"
+#define MCU_NAME      "STM32F410CBU6"
+#define LED_OPEN_PIN   PA3
+#define CMD_UART_EXTERNAL_RX_PIN PA10
+#define CMD_UART_EXTERNAL_TX_PIN PA9
+#define SETTINGS_FLASH_BASE  0x08004000UL
+#define SETTINGS_FLASH_BYTES 0x00004000UL
+#elif defined(STM32G071xx)
 #define LOW_GATE_PIN  PA9
 #define EN_PIN        PA10
+#define EN_GPIO_MASK  GPIO_PIN_10
+#define EN_TIMER      TIM3
+#define EN_TIMER_NAME "TIM3"
+#define EN_PIN_NAME   "PA10"
+#define GATE_PIN_NAMES "PA8/PA9"
+#define MCU_NAME      "STM32G071"
+#define LED_OPEN_PIN   PB13
+#define CMD_UART_EXTERNAL_RX_PIN PC5
+#define CMD_UART_EXTERNAL_TX_PIN PC4
+#else
+#error "Select STM32F410CBUx or NUCLEO_G071RB; this board pinout is not supported."
+#endif
 
 #define SENSE_VPRI_PIN    PA0
 #define SENSE_VOUT_PIN    PA1
 #define SENSE_CURRENT_PIN PA2
 
-#define LED_OPEN_PIN   PB13
 #define LED_CLOSED_PIN PB14
 #define LED_SYS_PIN    PB15
 
 #define CMD_UART_BAUD            115200UL
-#define CMD_UART_EXTERNAL_RX_PIN PC5
-#define CMD_UART_EXTERNAL_TX_PIN PC4
 HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); // RX, TX
 
 // -------------------- Firmware version --------------------
-#define FW_VERSION_MAJOR 1
-#define FW_VERSION_MINOR 9
-#define FW_VERSION_PATCH 20
-#define FW_VERSION_STRING "PWR-1.9.20"
+#define FW_VERSION_MAJOR 2
+#define FW_VERSION_MINOR 0
+#define FW_VERSION_PATCH 0
+#define FW_VERSION_STRING "PWR-2.0.0"
 
 // -------------------- Fixed gate settings --------------------
 #define GATE_FREQ_HZ       1000000UL
@@ -119,7 +146,12 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 
 #define EEPROM_MAGIC       0x5057524FUL  // "PWRO"
 #define EEPROM_MAGIC_NAME  "PWR24"
+#if defined(STM32F410Cx)
+#define SETTINGS_RECORD_BYTES ((sizeof(SettingsSlot) + 3UL) & ~3UL)
+#define EEPROM_SLOT_COUNT  ((int)(SETTINGS_FLASH_BYTES / SETTINGS_RECORD_BYTES))
+#else
 #define EEPROM_SLOT_COUNT  4
+#endif
 #define EEPROM_BASE_ADDR   0
 
 #define UART_INPUT_MAX_CHARS 96
@@ -150,7 +182,7 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 #define DEFAULT_VSEC_BOTTOM_K       10.0f
 
 // PA2 current sense. 820 ohm is the added pull/load value on the sensor output.
-// Scale CSGAIN so PA2 reports equivalent secondary output amps.
+// CSGAIN scales half-bridge current, not secondary output current.
 #define DEFAULT_CS_RES_OHMS        820.0f
 #define DEFAULT_CS_GAIN_A_PER_A      0.000901f
 
@@ -472,7 +504,16 @@ float noLoadSoftOvpTripVoltage();
 float noLoadSoftOvpResetVoltage();
 void serviceNoLoadSoftOvp();
 
-HardwareTimer *EnTimer = new HardwareTimer(TIM3);
+HardwareTimer *EnTimer = new HardwareTimer(EN_TIMER);
+bool gatePwmReady = false;
+#if defined(STM32F410Cx)
+bool settingsStorageReady = false;
+extern "C" {
+  extern uint8_t _sidata, _sdata, _edata;
+  extern uint8_t __settings_start__, __settings_end__, __app_flash_start__, __vector_end__;
+}
+static_assert(SETTINGS_RECORD_BYTES <= SETTINGS_FLASH_BYTES, "Settings do not fit in the journal");
+#endif
 
 volatile uint16_t enDutyCmdX10 = DEFAULT_OPEN_DUTY_X10;
 volatile uint16_t enDutyEffX10 = DEFAULT_OPEN_DUTY_X10;
@@ -976,15 +1017,68 @@ uint32_t checksumSettings(const SettingsSlot &s) {
 }
 
 void eepromReadBytes(int addr, uint8_t *dst, size_t len) {
+#if defined(STM32F410Cx)
+  if (!settingsStorageReady || addr < 0 || (size_t)addr + len > SETTINGS_FLASH_BYTES) {
+    memset(dst, 0xFF, len);
+    return;
+  }
+  memcpy(dst, (const void *)(SETTINGS_FLASH_BASE + (uint32_t)addr), len);
+#else
   for (size_t i = 0; i < len; i++) dst[i] = EEPROM.read(addr + (int)i);
+#endif
 }
 
-void eepromWriteBytes(int addr, const uint8_t *src, size_t len) {
+bool eepromWriteBytes(int addr, const uint8_t *src, size_t len) {
+#if defined(STM32F410Cx)
+  if (!settingsStorageReady || addr < 0 || (size_t)addr + len > SETTINGS_FLASH_BYTES ||
+      ((uint32_t)addr % 4UL) != 0 || !safeToWriteEepromNow()) return false;
+  if (HAL_FLASH_Unlock() != HAL_OK) return false;
+  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR |
+                        FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR);
+  bool ok = true;
+  if (addr == 0) {
+    FLASH_EraseInitTypeDef erase = {};
+    erase.TypeErase = FLASH_TYPEERASE_SECTORS;
+    erase.Sector = FLASH_SECTOR_1;
+    erase.NbSectors = 1;
+    erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
+    uint32_t errorSector = 0;
+    ok = HAL_FLASHEx_Erase(&erase, &errorSector) == HAL_OK;
+  }
+  if (ok && addr != 0) {
+    for (size_t i = 0; i < SETTINGS_RECORD_BYTES; i += sizeof(uint32_t)) {
+      if (*(const volatile uint32_t *)(SETTINGS_FLASH_BASE + (uint32_t)addr + i) != 0xFFFFFFFFUL) {
+        ok = false;
+        break;
+      }
+    }
+  }
+  for (size_t i = 0; ok && i < len; i += sizeof(uint32_t)) {
+    uint32_t word = 0xFFFFFFFFUL;
+    size_t remaining = len - i;
+    memcpy(&word, src + i, remaining < sizeof(word) ? remaining : sizeof(word));
+    ok = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,
+                          SETTINGS_FLASH_BASE + (uint32_t)addr + i, word) == HAL_OK;
+  }
+  HAL_FLASH_Lock();
+  if (FLASH->ACR & FLASH_ACR_DCEN) {
+    __HAL_FLASH_DATA_CACHE_DISABLE();
+    __HAL_FLASH_DATA_CACHE_RESET();
+    __HAL_FLASH_DATA_CACHE_ENABLE();
+  }
+  return ok && memcmp((const void *)(SETTINGS_FLASH_BASE + (uint32_t)addr), src, len) == 0;
+#else
   for (size_t i = 0; i < len; i++) EEPROM.update(addr + (int)i, src[i]);
+  return true;
+#endif
 }
 
 int slotAddress(int slot) {
+#if defined(STM32F410Cx)
+  return EEPROM_BASE_ADDR + slot * (int)SETTINGS_RECORD_BYTES;
+#else
   return EEPROM_BASE_ADDR + slot * (int)sizeof(SettingsSlot);
+#endif
 }
 
 bool readSlot(int slot, SettingsSlot &s) {
@@ -1009,6 +1103,12 @@ void loadSettings() {
         activeSlotIndex = i;
       }
     }
+#if defined(STM32F410Cx)
+    // A torn record is occupied too; do not program over it after a power loss.
+    uint32_t firstWord = 0xFFFFFFFFUL;
+    eepromReadBytes(slotAddress(i), (uint8_t *)&firstWord, sizeof(firstWord));
+    if (firstWord != 0xFFFFFFFFUL) activeSlotIndex = i;
+#endif
   }
 
   if (found) {
@@ -1046,7 +1146,15 @@ void saveSettingsNow() {
 
   int nextSlot = (activeSlotIndex + 1) % EEPROM_SLOT_COUNT;
   if (activeSlotIndex < 0) nextSlot = 0;
-  eepromWriteBytes(slotAddress(nextSlot), (const uint8_t *)&cfg, sizeof(SettingsSlot));
+  if (!eepromWriteBytes(slotAddress(nextSlot), (const uint8_t *)&cfg, sizeof(SettingsSlot))) {
+#if defined(STM32F410Cx)
+    activeSlotIndex = nextSlot;
+#endif
+    settingsDirty = true;
+    settingsDirtyMs = millis();
+    CmdSerial.println("ERROR: settings write failed; changes remain in RAM.");
+    return;
+  }
   settingsSequence = cfg.sequence;
   activeSlotIndex = nextSlot;
   settingsDirty = false;
@@ -1061,7 +1169,7 @@ bool requestSettingsSave(const char *reason) {
   }
   if (safeToWriteEepromNow()) {
     saveSettingsNow();
-    return true;
+    return !settingsDirty;
   }
   markSettingsDirty();
   return false;
@@ -1076,19 +1184,26 @@ bool flushPendingSettingsSave(bool quiet) {
   if (!safeToWriteEepromNow()) return false;
   if (!quiet) CmdSerial.println("Saving pending settings to EEPROM...");
   saveSettingsNow();
+  if (settingsDirty) return false;
   if (!quiet) CmdSerial.println("Saved.");
   return true;
 }
 
 // ============================================================
-// PA10 EN timing using TIM3 fixed-period update/compare
+// EN timing using the board's fixed-period update/compare timer
 // ============================================================
 
-void setPA10High() { GPIOA->BSRR = (1UL << 10); }
-void setPA10Low()  { GPIOA->BSRR = (1UL << (10 + 16)); }
+void setEnHigh() {
+#if defined(STM32F410Cx)
+  if (!settingsStorageReady || !gatePwmReady || !adcDmaRunning) return;
+#endif
+  GPIOA->BSRR = EN_GPIO_MASK;
+}
+void setEnLow()  { GPIOA->BSRR = ((uint32_t)EN_GPIO_MASK << 16); }
 
 void setGateCarrierDrive(bool enable) {
   (void)enable;
+  if (!gatePwmReady) return;
   TIM1->BDTR |= (1UL << 15);
   enSyncCarrierActive = true;
 }
@@ -1141,30 +1256,30 @@ bool waitForCarrierBoundaryPolled() {
   return false;
 }
 
-void setPA10HighCarrierSynced() {
+void setEnHighCarrierSynced() {
   if (enPwmStateHigh) return;
   setGateCarrierDrive(true);
   if (!waitForCarrierBoundaryPolled()) enSyncAbortCount++;
-  setPA10High();
+  setEnHigh();
   enPwmStateHigh = true;
   enSyncRiseCount++;
   enSyncDriveStartCount++;
 }
 
-void setPA10LowCarrierSynced() {
+void setEnLowCarrierSynced() {
   if (!enPwmStateHigh) {
-    setPA10Low();
+    setEnLow();
     return;
   }
   if (!waitForCarrierBoundaryPolled()) enSyncAbortCount++;
-  setPA10Low();
+  setEnLow();
   enPwmStateHigh = false;
   enSyncFallCount++;
 }
 
 void forceEnSyncLowNow() {
   setGateCarrierDrive(true);
-  setPA10Low();
+  setEnLow();
   enSyncBurstPending = false;
   enSyncLeadCyclesLeft = 0;
   enSyncDriveCyclesLeft = 0;
@@ -1181,7 +1296,7 @@ void requestCarrierSyncedBurst(uint16_t driveCycles) {
   enSyncDriveCyclesLeft = driveCycles;
   enSyncTailCyclesLeft = 0;
   setTim1CarrierSyncIrq(false);
-  setPA10HighCarrierSynced();
+  setEnHighCarrierSynced();
 }
 
 void requestCarrierSyncedLow() {
@@ -1190,7 +1305,7 @@ void requestCarrierSyncedLow() {
   enSyncDriveCyclesLeft = 0;
   enSyncTailCyclesLeft = 0;
   setTim1CarrierSyncIrq(false);
-  setPA10LowCarrierSynced();
+  setEnLowCarrierSynced();
 }
 
 uint32_t clampEnFreq(uint32_t hz) {
@@ -1284,7 +1399,7 @@ void enPeriodISR() {
     enSyncDriveCyclesLeft = 0;
     enSyncTailCyclesLeft = 0;
     setTim1CarrierSyncIrq(false);
-    setPA10High();
+    setEnHigh();
     enPwmStateHigh = true;
     return;
   }
@@ -1335,7 +1450,7 @@ void handleTim1CarrierSyncUpdate() {
     enSyncDriveCyclesLeft = enSyncRequestedDriveCycles;
     enSyncTailCyclesLeft = (uint16_t)EN_GATE_TAIL_CYCLES;
     setGateCarrierDrive(true);
-    setPA10High();
+    setEnHigh();
     enPwmStateHigh = true;
     enSyncRiseCount++;
     if (enSyncLeadCyclesLeft == 0) enSyncDriveStartCount++;
@@ -1370,7 +1485,7 @@ void handleTim1CarrierSyncUpdate() {
     if (enSyncTailCyclesLeft > 0) return;
   }
 
-  setPA10Low();
+  setEnLow();
   enPwmStateHigh = false;
   enSyncFallCount++;
   if (!enSyncBurstPending) setTim1CarrierSyncIrq(false);
@@ -1387,10 +1502,14 @@ extern "C" void TIM1_BRK_UP_TRG_COM_IRQHandler(void) {
 
 void setupEnablePWM() {
   pinMode(EN_PIN, OUTPUT);
-  setPA10Low();
+  setEnLow();
   noInterrupts();
   enFreqRuntimeHz = cfg.enFreqHz;
+#if defined(STM32F410Cx)
+  enDutyCmdX10 = 0; // Saved OD must not bypass startup precharge on a BOOTON reset.
+#else
   enDutyCmdX10 = cfg.openLoopDutyX10;
+#endif
   updateEnableTimingNoInterruptLock();
   interrupts();
 
@@ -1435,7 +1554,7 @@ void applyEnDutyCommand(uint16_t dutyX10, bool bypassLimits) {
     enSyncDriveCyclesLeft = 0;
     enSyncTailCyclesLeft = 0;
     setTim1CarrierSyncIrq(false);
-    setPA10High();
+    setEnHigh();
     enPwmStateHigh = true;
   }
   interrupts();
@@ -1453,11 +1572,23 @@ float getCmdDutyPercent() { return dutyX10ToPercent(enDutyCmdX10); }
 float getEffDutyPercent() { return dutyX10ToPercent(enDutyEffX10); }
 
 // ============================================================
-// TIM1 PA8 / PA9 fixed carrier
+// TIM1 fixed carrier (board-specific pin pair)
 // ============================================================
 
-void setupPA8PA9_TIM1_AF2() {
-#if defined(GPIO_MODER_MODE8_Msk)
+void setupGateTimerPins() {
+#if defined(STM32F410Cx)
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  GPIO_InitTypeDef pins = {};
+  pins.Mode = GPIO_MODE_AF_PP;
+  pins.Pull = GPIO_PULLDOWN;
+  pins.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  pins.Alternate = GPIO_AF1_TIM1;
+  pins.Pin = GPIO_PIN_8;
+  HAL_GPIO_Init(GPIOA, &pins);
+  pins.Pin = GPIO_PIN_13;
+  HAL_GPIO_Init(GPIOB, &pins);
+#else
   GPIOA->MODER &= ~((3UL << (8 * 2)) | (3UL << (9 * 2)));
   GPIOA->MODER |=  ((2UL << (8 * 2)) | (2UL << (9 * 2)));
   GPIOA->AFR[1] &= ~((0xFUL << ((8 - 8) * 4)) | (0xFUL << ((9 - 8) * 4)));
@@ -1467,6 +1598,26 @@ void setupPA8PA9_TIM1_AF2() {
 
 bool calculateGateTiming(uint32_t &arr, uint32_t &ccr1, uint32_t &ccr2,
                          uint32_t &deadTicks, uint32_t &actualDeadNs) {
+#if defined(STM32F410Cx)
+  uint32_t timClk = HAL_RCC_GetPCLK2Freq();
+  uint32_t ppre = (RCC->CFGR & RCC_CFGR_PPRE2) >> RCC_CFGR_PPRE2_Pos;
+  if (RCC->DCKCFGR & RCC_DCKCFGR_TIMPRE) {
+    timClk = (ppre <= 5UL) ? HAL_RCC_GetHCLKFreq() : timClk * 4UL;
+  } else if (ppre >= 4UL) {
+    timClk *= 2UL;
+  }
+  // Center-aligned period is 2 * ARR ticks. CH1N uses the hardware dead-time unit.
+  uint32_t halfTicks = (timClk + GATE_FREQ_HZ) / (2UL * GATE_FREQ_HZ);
+  if (halfTicks < 8UL || halfTicks > 65535UL) return false;
+  arr = halfTicks;
+  ccr1 = halfTicks / 2UL;
+  ccr2 = 0; // CH2 belongs to PA9 UART and must remain disabled.
+  deadTicks = (uint32_t)(((uint64_t)GATE_DEADTIME_NS * timClk + 999999999ULL) / 1000000000ULL);
+  if (deadTicks < 1UL) deadTicks = 1UL;
+  if (deadTicks > 127UL || deadTicks >= ccr1) return false;
+  actualDeadNs = (uint32_t)(((uint64_t)deadTicks * 1000000000ULL) / timClk);
+  return true;
+#else
   uint32_t timClk = HAL_RCC_GetPCLK1Freq();
 #if defined(RCC_CFGR_PPRE_Msk)
   if ((RCC->CFGR & RCC_CFGR_PPRE_Msk) != 0) timClk *= 2UL;
@@ -1492,15 +1643,18 @@ bool calculateGateTiming(uint32_t &arr, uint32_t &ccr1, uint32_t &ccr2,
 
   actualDeadNs = (uint32_t)(((uint64_t)(ccr2 - ccr1) * 1000000000ULL) / timClk);
   return true;
+#endif
 }
 
 void setupGatePWM() {
-  setupPA8PA9_TIM1_AF2();
+  gatePwmReady = false;
 #if defined(RCC_APBENR2_TIM1EN)
   RCC->APBENR2 |= RCC_APBENR2_TIM1EN;
 #elif defined(RCC_APB2ENR_TIM1EN)
   RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
 #endif
+  TIM1->BDTR = 0;
+  setupGateTimerPins();
 
   TIM1->CR1 = 0;
   TIM1->CR2 = 0;
@@ -1508,16 +1662,24 @@ void setupGatePWM() {
   TIM1->DIER = 0;
   TIM1->PSC = 0;
   TIM1->CNT = 0;
+  TIM1->RCR = 0;
 
   TIM1->CCMR1 = 0;
   TIM1->CCMR1 |= (6UL << 4);   // CH1 PWM mode 1
   TIM1->CCMR1 |= (1UL << 3);   // CH1 preload
+#if !defined(STM32F410Cx)
   TIM1->CCMR1 |= (7UL << 12);  // CH2 PWM mode 2
   TIM1->CCMR1 |= (1UL << 11);  // CH2 preload
+#endif
 
   TIM1->CCER = 0;
   TIM1->CCER |= (1UL << 0); // CH1 enable
+#if defined(STM32F410Cx)
+  TIM1->CCER |= TIM_CCER_CC1NE; // PB13 complementary CH1N, active high
+  TIM1->RCR = 1; // One update boundary per complete up/down carrier cycle.
+#else
   TIM1->CCER |= (1UL << 4); // CH2 enable
+#endif
   TIM1->BDTR = 0;
   TIM1->BDTR |= (1UL << 10); // OSSI: keep outputs in idle state when MOE is off
   TIM1->BDTR |= (1UL << 11); // OSSR: keep outputs in idle state during run-mode off state
@@ -1525,16 +1687,23 @@ void setupGatePWM() {
   uint32_t arr, ccr1, ccr2, deadTicks, actualDeadNs;
   if (!calculateGateTiming(arr, ccr1, ccr2, deadTicks, actualDeadNs)) {
     CmdSerial.println("ERROR: TIM1 fixed gate timing invalid.");
+    faultLatched = true;
+    faultCode = FAULT_SENSOR;
+    systemEnabled = false;
     return;
   }
 
   TIM1->ARR = arr;
   TIM1->CCR1 = ccr1;
   TIM1->CCR2 = ccr2;
+#if defined(STM32F410Cx)
+  TIM1->BDTR |= deadTicks; // DTG[7:0], linear range, CKD=0.
+#endif
+  TIM1->CR1 = TIM_CR1_CMS_0 | TIM_CR1_ARPE;
   TIM1->EGR = 1;
-  TIM1->CR1 |= (1UL << 5);   // CMS=01, center-aligned mode 1
-  TIM1->CR1 |= (1UL << 7);   // ARPE
+  TIM1->SR = 0;
   TIM1->CR1 |= 1UL;          // CEN
+  gatePwmReady = true;
   setGateCarrierDrive(true);
   setTim1CarrierSyncIrq(false);
 #if defined(TIM1_BRK_UP_TRG_COM_IRQn)
@@ -1542,7 +1711,7 @@ void setupGatePWM() {
   NVIC_EnableIRQ(TIM1_BRK_UP_TRG_COM_IRQn);
 #endif
 
-  CmdSerial.print("TIM1 PA8/PA9 fixed ");
+  CmdSerial.print("TIM1 " GATE_PIN_NAMES " fixed ");
   CmdSerial.print(GATE_FREQ_HZ);
   CmdSerial.print(" Hz, dead-time approx ");
   CmdSerial.print(actualDeadNs);
@@ -1576,18 +1745,27 @@ bool configAdcDmaChannel(uint32_t channel, uint32_t rank) {
   memset(&sConfig, 0, sizeof(sConfig));
   sConfig.Channel = channel;
   sConfig.Rank = rank;
+#if defined(STM32F410Cx)
+  sConfig.SamplingTime = ADC_SAMPLETIME_84CYCLES;
+#else
   sConfig.SamplingTime = ADC_SAMPLINGTIME_COMMON_1;
+#endif
   return HAL_ADC_ConfigChannel(&adcDmaHandle, &sConfig) == HAL_OK;
 }
 
 bool setupAdcDma() {
   adcDmaRunning = false;
 
+#if defined(STM32F410Cx)
+  __HAL_RCC_ADC1_CLK_ENABLE();
+  __HAL_RCC_DMA2_CLK_ENABLE();
+#else
 #if defined(__HAL_RCC_ADC_CLK_ENABLE)
   __HAL_RCC_ADC_CLK_ENABLE();
 #endif
 #if defined(__HAL_RCC_DMA1_CLK_ENABLE)
   __HAL_RCC_DMA1_CLK_ENABLE();
+#endif
 #endif
 
   memset((void *)&adcDmaHandle, 0, sizeof(adcDmaHandle));
@@ -1597,23 +1775,37 @@ bool setupAdcDma() {
   adcDmaHandle.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
   adcDmaHandle.Init.Resolution = ADC_RESOLUTION_12B;
   adcDmaHandle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+#if defined(STM32F410Cx)
+  adcDmaHandle.Init.ScanConvMode = ENABLE;
+#else
   adcDmaHandle.Init.ScanConvMode = ADC_SCAN_ENABLE;
+#endif
   adcDmaHandle.Init.EOCSelection = ADC_EOC_SEQ_CONV;
+#if !defined(STM32F410Cx)
   adcDmaHandle.Init.LowPowerAutoWait = DISABLE;
   adcDmaHandle.Init.LowPowerAutoPowerOff = DISABLE;
+#endif
   adcDmaHandle.Init.ContinuousConvMode = ENABLE;
   adcDmaHandle.Init.NbrOfConversion = ADC_DMA_CHANNEL_COUNT;
   adcDmaHandle.Init.DiscontinuousConvMode = DISABLE;
   adcDmaHandle.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   adcDmaHandle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   adcDmaHandle.Init.DMAContinuousRequests = ENABLE;
+#if !defined(STM32F410Cx)
   adcDmaHandle.Init.Overrun = ADC_OVR_DATA_OVERWRITTEN;
   adcDmaHandle.Init.SamplingTimeCommon1 = ADC_SAMPLETIME_39CYCLES_5;
   adcDmaHandle.Init.SamplingTimeCommon2 = ADC_SAMPLETIME_39CYCLES_5;
   adcDmaHandle.Init.OversamplingMode = DISABLE;
+#endif
 
+#if defined(STM32F410Cx)
+  adcDmaHandleDma.Instance = DMA2_Stream0;
+  adcDmaHandleDma.Init.Channel = DMA_CHANNEL_0;
+  adcDmaHandleDma.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+#else
   adcDmaHandleDma.Instance = DMA1_Channel1;
   adcDmaHandleDma.Init.Request = DMA_REQUEST_ADC1;
+#endif
   adcDmaHandleDma.Init.Direction = DMA_PERIPH_TO_MEMORY;
   adcDmaHandleDma.Init.PeriphInc = DMA_PINC_DISABLE;
   adcDmaHandleDma.Init.MemInc = DMA_MINC_ENABLE;
@@ -1632,16 +1824,27 @@ bool setupAdcDma() {
     adcDmaStartErrors++;
     return false;
   }
+#if defined(STM32F410Cx)
+  if (!configAdcDmaChannel(ADC_CHANNEL_0, 1UL)) { adcDmaStartErrors++; return false; }
+  if (!configAdcDmaChannel(ADC_CHANNEL_1, 2UL)) { adcDmaStartErrors++; return false; }
+  if (!configAdcDmaChannel(ADC_CHANNEL_2, 3UL)) { adcDmaStartErrors++; return false; }
+#else
   if (!configAdcDmaChannel(ADC_CHANNEL_0, ADC_REGULAR_RANK_1)) { adcDmaStartErrors++; return false; }
   if (!configAdcDmaChannel(ADC_CHANNEL_1, ADC_REGULAR_RANK_2)) { adcDmaStartErrors++; return false; }
   if (!configAdcDmaChannel(ADC_CHANNEL_2, ADC_REGULAR_RANK_3)) { adcDmaStartErrors++; return false; }
 
   (void)HAL_ADCEx_Calibration_Start(&adcDmaHandle);
+#endif
 
   if (HAL_ADC_Start_DMA(&adcDmaHandle, (uint32_t *)adcDmaBuffer, ADC_DMA_CHANNEL_COUNT) != HAL_OK) {
     adcDmaStartErrors++;
     return false;
   }
+#if defined(STM32F410Cx)
+  // Circular transfers need no per-sample CPU interrupt; errors are checked in the loop.
+  __HAL_DMA_DISABLE_IT(&adcDmaHandleDma, DMA_IT_HT | DMA_IT_TC | DMA_IT_TE | DMA_IT_DME | DMA_IT_FE);
+  __HAL_ADC_DISABLE_IT(&adcDmaHandle, ADC_IT_OVR);
+#endif
 
   adcDmaRunning = true;
   return true;
@@ -1714,6 +1917,14 @@ bool feedbackMeasurementValid(float vpri, float vsec, float amps, float powerW) 
 }
 
 void updateAnalogFilters(bool readAll) {
+#if defined(STM32F410Cx)
+  if (adcDmaRunning && ((ADC1->SR & ADC_SR_OVR) ||
+      (DMA2->LISR & (DMA_LISR_TEIF0 | DMA_LISR_DMEIF0 | DMA_LISR_FEIF0)) ||
+      !(DMA2_Stream0->CR & DMA_SxCR_EN))) {
+    adcDmaRunning = false;
+    adcDmaStartErrors++;
+  }
+#endif
   uint32_t blockStartUs = micros();
   float vpri = latestVpriRaw;
   float vsec = latestVsecRaw;
@@ -3055,7 +3266,7 @@ void autoTunePower(bool fullScan, int8_t loadSlot) {
 
   CmdSerial.println();
   CmdSerial.println("================================================");
-  CmdSerial.println("AUTOBANG START: fixed-frequency PA10 EN duty calibration");
+  CmdSerial.println("AUTOBANG START: fixed-frequency " EN_PIN_NAME " EN duty calibration");
   CmdSerial.println("================================================");
 
   systemEnabled = true;
@@ -3455,28 +3666,28 @@ void printStatus() {
   CmdSerial.print(lineFfScaleState, 2); CmdSerial.print(" / ");
   CmdSerial.print(dutyX10ToPercent(lineFfCapStateX10), 2); CmdSerial.println(" %");
 
-  CmdSerial.print("PA10 EN freq/min/max/pref: ");
+  CmdSerial.print(EN_PIN_NAME " EN freq/min/max/pref: ");
   CmdSerial.print(enFreqRuntimeHz); CmdSerial.print(" / "); CmdSerial.print(cfg.enFreqMinHz);
   CmdSerial.print(" / "); CmdSerial.print(cfg.enFreqMaxHz); CmdSerial.print(" / "); CmdSerial.println(cfg.enFreqPrefHz);
-  CmdSerial.print("PA10 duty cmd/effective/min/max: ");
+  CmdSerial.print(EN_PIN_NAME " duty cmd/effective/min/max: ");
   CmdSerial.print(getCmdDutyPercent(), 2); CmdSerial.print(" / "); CmdSerial.print(getEffDutyPercent(), 2);
   CmdSerial.print(" / "); CmdSerial.print(dutyX10ToPercent(cfg.dutyMinX10), 1);
   CmdSerial.print(" / "); CmdSerial.print(dutyX10ToPercent(cfg.dutyMaxX10), 1); CmdSerial.println(" %");
-  CmdSerial.print("PA10 period/drive-us/drive-cyc/minedge/gatecyc/gatelead/gatemin/static100: ");
+  CmdSerial.print(EN_PIN_NAME " period/drive-us/drive-cyc/minedge/gatecyc/gatelead/gatemin/static100: ");
   CmdSerial.print(enPeriodUs); CmdSerial.print("/"); CmdSerial.print(enHighUs); CmdSerial.print("/");
   CmdSerial.print(enHighGateCycles); CmdSerial.print("/");
   CmdSerial.print(cfg.enMinEdgeUs); CmdSerial.print("/");
   CmdSerial.print(cfg.enMinGateCycles); CmdSerial.print("/");
   CmdSerial.print(cfg.enGateLeadCycles); CmdSerial.print("/");
   CmdSerial.print(minCompleteGateBurstUs()); CmdSerial.print(" us / "); CmdSerial.println(cfg.allowStatic100 ? "YES" : "NO");
-  CmdSerial.println("PA10 EN path: TIM3 update/compare, bounded TIM1 carrier-poll sync on non-static edges");
-  CmdSerial.print("PA10 low-duty pulse skip: every ");
+  CmdSerial.println(EN_PIN_NAME " EN path: " EN_TIMER_NAME " update/compare, bounded TIM1 carrier-poll sync on non-static edges");
+  CmdSerial.print(EN_PIN_NAME " low-duty pulse skip: every ");
   CmdSerial.print(enPulseSkipN);
   CmdSerial.print(" periods, avg duty ");
   CmdSerial.print(getEffDutyPercent(), 2);
   CmdSerial.print(" %, limit bypass ");
   CmdSerial.println(enDutyLimitBypass ? "YES" : "NO");
-  CmdSerial.print("PA10 EN sync rise/drive/fall/abort: ");
+  CmdSerial.print(EN_PIN_NAME " EN sync rise/drive/fall/abort: ");
   CmdSerial.print(enSyncRiseCount); CmdSerial.print(" / ");
   CmdSerial.print(enSyncDriveStartCount); CmdSerial.print(" / ");
   CmdSerial.print(enSyncFallCount); CmdSerial.print(" / ");
@@ -3540,6 +3751,13 @@ void printStatus() {
 
   CmdSerial.print("EEPROM slot/seq: "); CmdSerial.print(activeSlotIndex); CmdSerial.print(" / "); CmdSerial.println(settingsSequence);
   CmdSerial.print("EEPROM pending save: "); CmdSerial.println(settingsDirty ? "YES" : "NO");
+  CmdSerial.println("Board: " MCU_NAME "; carrier " GATE_PIN_NAMES "; EN " EN_PIN_NAME);
+#if defined(STM32F410Cx)
+  CmdSerial.println("UART: USART1, PA9 TX / PA10 RX, 115200 8N1");
+  CmdSerial.println("ADC: ADC1 PA0/1/2, DMA2 Stream0 Channel0 circular");
+  CmdSerial.print("Flash journal ready/slots: ");
+  CmdSerial.print(settingsStorageReady ? "YES" : "NO"); CmdSerial.print(" / "); CmdSerial.println(EEPROM_SLOT_COUNT);
+#endif
   printParams();
   CmdSerial.println("========================================");
 }
@@ -4122,6 +4340,12 @@ void handleSerial() {
 // ============================================================
 
 void setup() {
+  digitalWrite(EN_PIN, LOW);
+  pinMode(EN_PIN, OUTPUT);
+  digitalWrite(HIGH_GATE_PIN, LOW);
+  pinMode(HIGH_GATE_PIN, OUTPUT);
+  digitalWrite(LOW_GATE_PIN, LOW);
+  pinMode(LOW_GATE_PIN, OUTPUT);
   CmdSerial.begin(CMD_UART_BAUD);
   delay(250);
 
@@ -4138,8 +4362,25 @@ void setup() {
 
   analogWriteResolution(12);
 
+#if defined(STM32F410Cx)
+  uintptr_t imageEnd = (uintptr_t)&_sidata + ((uintptr_t)&_edata - (uintptr_t)&_sdata);
+  settingsStorageReady = (uintptr_t)&__settings_start__ == SETTINGS_FLASH_BASE &&
+                         (uintptr_t)&__settings_end__ == SETTINGS_FLASH_BASE + SETTINGS_FLASH_BYTES &&
+                         (uintptr_t)&__vector_end__ <= SETTINGS_FLASH_BASE &&
+                         (uintptr_t)&__app_flash_start__ >= SETTINGS_FLASH_BASE + SETTINGS_FLASH_BYTES &&
+                         imageEnd <= FLASH_END + 1UL;
+#else
   EEPROM.begin();
+#endif
   loadSettings();
+#if defined(STM32F410Cx)
+  if (!settingsStorageReady) {
+    faultLatched = true;
+    faultCode = FAULT_SENSOR;
+    systemEnabled = false;
+    CmdSerial.println("ERROR: program overlaps settings sector. Build with firmware/build.ps1 -Target F410.");
+  }
+#endif
 
   if (!setupAdcDma()) {
     faultLatched = true;
@@ -4162,10 +4403,10 @@ void setup() {
   }
 
   CmdSerial.println();
-  CmdSerial.println("STM32G071 primary-power controller loaded");
+  CmdSerial.println(MCU_NAME " converter controller loaded");
   CmdSerial.print("Firmware "); CmdSerial.println(FW_VERSION_STRING);
-  CmdSerial.println("PA8/PA9 fixed 1 MHz. PA10 EN uses fixed-frequency voltage bang-bang throttle.");
-  CmdSerial.println("Control feedback: PA1 secondary Vsb/Vsec only. PA0/PA2 are diagnostic unless explicitly enabled as faults.");
+  CmdSerial.println(GATE_PIN_NAMES " fixed 1 MHz. " EN_PIN_NAME " EN uses fixed-frequency voltage bang-bang throttle.");
+  CmdSerial.println("PA1 closes the voltage loop; PA2 selects load state; PA0 provides optional LINEFF.");
   CmdSerial.println("Type ? for status, VER for version.");
   printDividerAdvice();
   printStatus();

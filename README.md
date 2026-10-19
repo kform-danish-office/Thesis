@@ -1,21 +1,23 @@
 # Thesis Power Controller
 
-STM32G071 Arduino firmware for an isolated converter controller.
+STM32F410CBU6 and STM32G071 Arduino firmware for an isolated converter controller.
 
 ## Current Firmware
 
 | Item | Value |
 |---|---|
-| Firmware | `PWR-1.9.13` |
-| MCU target | STM32G071 Nucleo-64 style board |
-| Gate carrier | PA8 / PA9, fixed 1 MHz |
-| Power throttle | PA10 EN burst control |
+| Firmware | `PWR-2.0.0` |
+| MCU targets | STM32F410CBU6 (schematic 12) and original STM32G071 |
+| Gate carrier | F410: PA8 / PB13, complementary TIM1 CH1/CH1N; G071: PA8 / PA9; fixed 1 MHz |
+| Power throttle | F410: PA11 EN; G071: PA10 EN |
 | Feedback | DMA ADC on PA0, PA1, PA2 |
 | Active control | PA1 secondary-voltage bang-bang |
 | Optional high-line aid | PA0 primary-voltage feed-forward duty cap |
-| Command UART | PC5 RX, PC4 TX, 115200 baud |
+| Command UART | F410: PA10 RX, PA9 TX; G071: PC5 RX, PC4 TX; 115200 baud |
 
-`PWR-1.9.13` keeps the control loop bang-bang only. PA1 secondary voltage decides when EN requests low or high power, while PA10 non-static EN burst edges are synchronized to the 1 MHz TIM1 carrier so mid-load chopping does not land asynchronously against PA8/PA9. At light/no load, soft OVP catches high-line overshoot before the hard latch: `NLSOVP` forces EN low, then `NLSOVPR` rearms the normal no-load window. Optional `LINEFF` uses PA0 only to reduce the high EN duty as primary voltage rises, and `EXPORT` prints paste-ready calibration and compensation settings for another board.
+`PWR-2.0.0` ports the existing controller to the new schematic. PA1 remains the closed-loop signal. At light load it uses voltage bang-bang with the no-load guard; once PA2 classifies a real load, `LSTEADY` retains and slowly trims an averaged EN duty instead of chopping between 0 and 100 percent. Droop below `VON` activates `LBOOST`, while high voltage still cuts EN immediately. Non-static EN edges use bounded polling of the 1 MHz TIM1 carrier. Optional `LINEFF` uses PA0 as a high-line duty cap.
+
+See [STM32F410 port and pinout](docs/stm32f410-port.md) before using the new board. The PDF contains unresolved sense-divider population values; the port retains the earlier calibrated divider assumptions.
 
 ## Quick Bench Setup
 
@@ -62,6 +64,7 @@ EXPORT
 | Path | Purpose |
 |---|---|
 | [thesi_power_control.ino](thesi_power_control.ino) | Current working firmware source |
+| [docs/firmware-flow.md](docs/firmware-flow.md) | Mermaid diagrams of firmware startup, control, safety, and EN timing |
 | [docs/power-control.md](docs/power-control.md) | Full firmware manual, version notes, limits, and tuning commands |
 | [docs/uart-commands.md](docs/uart-commands.md) | Compact UART command reference |
 | [firmware/archive/snapshots](firmware/archive/snapshots) | Historical source snapshots |
@@ -69,13 +72,14 @@ EXPORT
 
 ## Build
 
-Build with Arduino CLI and the STM32 core. Arduino expects the `.ino` file to live in a sketch folder with the same name, so create a temporary wrapper folder first:
+Build with Arduino CLI and STM32 core 2.8.1. The script creates the matching sketch folder and applies the F410 linker layout that protects saved settings:
 
 ```powershell
-New-Item -ItemType Directory -Path .\build-sketch\thesi_power_control -Force
-Copy-Item .\thesi_power_control.ino .\build-sketch\thesi_power_control\thesi_power_control.ino -Force
-arduino-cli compile --clean --fqbn "STMicroelectronics:stm32:Nucleo_64:pnum=NUCLEO_G071RB" .\build-sketch\thesi_power_control
+.\firmware\build.ps1 -Target F410
+.\firmware\build.ps1 -Target G071
 ```
+
+Outputs are in `arduino-build-f410/` or `arduino-build-g071/`. For F410, use the `.hex` file: it includes both reset vectors and application code while leaving the settings sector out of its address records. A raw `.bin` spans the settings gap and can erase saved settings. Do not build the F410 using the stock linker script.
 
 Compiled `.hex`, `.bin`, and `.elf` files are intentionally not committed to the repo. Published binary builds live on the [GitHub Releases page](https://github.com/kform-danish-office/Thesis/releases).
 
@@ -90,5 +94,5 @@ STM32_Programmer_CLI.exe -c port=SWD -w firmware.hex -v -rst
 - ADC feedback is DMA-only; the control loop does not call blocking `analogRead()`.
 - EEPROM writes are deferred while the output is active so UART setting changes do not stall live control.
 - Current/power readings are diagnostic in the active firmware; voltage bang-bang control is the only closed-loop control path.
-- PA10 non-static EN burst edges are synchronized to TIM1 carrier updates; static 100 percent EN remains continuously high.
+- Non-static EN burst edges use TIM1 carrier-update polling; static 100 percent EN remains continuously high.
 - At high-line light load, `NLSOVP` is a soft holdoff. Hard `OVP` still latches if voltage rises past the hard margin or the load is not light/no-load.

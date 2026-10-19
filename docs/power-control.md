@@ -1,9 +1,15 @@
 # Bang-Bang Converter Controller Quick README
 
-Current firmware version: `PWR-1.9.13`
+Current firmware version: `PWR-2.0.0`
+
+The [F410 port notes](stm32f410-port.md) document schematic-12 pin changes and
+the required linker layout. In historical notes below, PA10 EN / PA8-PA9 carrier
+refer to the G071 board; the F410 uses PA11 EN / PA8-PB13 carrier.
 
 Version notes:
 
+- `PWR-2.0.0`: adds STM32F410CBU6 support with complementary TIM1 CH1/CH1N on PA8/PB13, 40 ns hardware dead time, PA11 EN scheduled by TIM5, USART1 on PA9/PA10, ADC1 circular DMA2 Stream0 Channel0, and an OFF-state flash settings journal in reserved sector 1. The G071 profile remains supported.
+- `PWR-1.9.20`: loaded steady mode uses VON as its voltage floor and boosts the retained duty on droop. Versions 1.9.14-1.9.19 added bounded carrier polling, loaded duty memory, current-based load detection, and explicit boot-default commands.
 - `PWR-1.9.13`: routes PA10 non-static EN burst rising/falling edges through the TIM1 carrier-update sync path instead of direct TIM3 update/compare edge writes. Static 100 percent EN still drives PA10 high continuously. `STATUS` now reports bang-bang transitions per second plus EN sync rise/drive/fall/abort counts for checking hot mid-load operating points.
 - `PWR-1.9.12`: fixes TIM1 PA8/PA9 carrier dead-time generation by using center-aligned carrier timing, giving the configured dead gap on both half-bridge transitions.
 - `PWR-1.9.11`: adds a soft no-load OVP holdoff for high-line light-load operation. When PA1 exceeds `NLSOVP` while the no-load detector is active, PA10 EN is forced low without latching the hard OVP. Normal bang-bang resumes only after PA1 falls to `NLSOVPR`; hard `OVP` still latches for gross overshoot or non-light-load cases. EEPROM magic is now `PWR20`.
@@ -36,7 +42,7 @@ Version notes:
 
 ## Serial
 
-- UART is hardware serial on PC5 RX and PC4 TX at 115200 baud.
+- UART is PA10 RX / PA9 TX on F410, or PC5 RX / PC4 TX on G071, at 115200 baud.
 - Command entry accepts Enter as CR, LF, or CRLF, so Tera Term's default transmit newline works.
 - `SET NAME VALUE` applies immediately. If output is OFF, it saves immediately; if output is ON, EEPROM save is deferred until `OFF` or `SAVE` while output is OFF.
 - Type `?` or `STATUS` for live settings, ADC readings, loop timing, and load-slot status.
