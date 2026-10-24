@@ -2,6 +2,7 @@ param(
     [ValidateSet('F410', 'G071')]
     [string]$Target = 'F410',
     [string]$ArduinoCli = '',
+    [string]$BuildDirectory = '',
     [switch]$Clean
 )
 
@@ -20,7 +21,7 @@ if (!(Test-Path -LiteralPath $ArduinoCli)) {
 }
 
 $sketchDir = Join-Path $repoRoot "build-sketch\$Target\thesi_power_control"
-$buildDir = Join-Path $repoRoot "arduino-build-$($Target.ToLowerInvariant())"
+$buildDir = if ($BuildDirectory) { [IO.Path]::GetFullPath($BuildDirectory) } else { Join-Path $repoRoot "arduino-build-$($Target.ToLowerInvariant())" }
 New-Item -ItemType Directory -Path $sketchDir, $buildDir -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $repoRoot 'thesi_power_control.ino') -Destination $sketchDir -Force
 

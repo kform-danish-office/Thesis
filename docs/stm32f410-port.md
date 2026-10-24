@@ -1,7 +1,10 @@
 # STM32F410CBU6 Port
 
-Firmware: `PWR-2.0.0`, based on the existing `PWR-1.9.20` control behavior and
-the supplied `Schematic PDF_[No Variations] (12).pdf`, MCU sheet 4 and power sheet 3.
+Firmware: `PWR-2.0.1`, retaining the `PWR-2.0.0` F410 port based on the existing
+`PWR-1.9.20` control behavior and the supplied
+`Schematic PDF_[No Variations] (12).pdf`, MCU sheet 4 and power sheet 3.
+See the [browser protocol](web-protocol.md) for the added JSON telemetry,
+correlated commands, and explicit communication lease.
 
 ## Schematic Pin Map
 
@@ -21,9 +24,13 @@ the supplied `Schematic PDF_[No Variations] (12).pdf`, MCU sheet 4 and power she
 | SWDIO / SWCLK | PA13 / PA14 | J3 pins 2 / 12 |
 | NRST | package pin 7 | J3 pin 3 |
 
-Connect adapter RX to board TX, adapter TX to board RX, and adapter ground to
-J3 ground. Use 3.3 V UART, 115200 baud, 8N1, no flow control. PA9/PA10 belong
-to USART1 and are never configured as gate or EN outputs on this board.
+Connect adapter RX to board TX and adapter TX to board RX. The UART is on the
+primary MCU domain: use a suitably rated isolated USB-to-3.3 V UART interface
+and connect its isolated board-side reference to J3 ground according to the
+bench isolation procedure. Do not connect computer ground directly to an
+energized, nonisolated mains-referenced primary. Use 115200 baud, 8N1, no flow
+control. PA9/PA10 belong to USART1 and are never configured as gate or EN
+outputs on this board.
 
 ## Carrier, ADC, and Control
 
@@ -95,10 +102,17 @@ the firmware requires the custom linker's storage-layout symbols.
 
 Artifacts: `arduino-build-f410/thesi_power_control.ino.hex`, `.bin`, `.elf`, `.map`.
 
-The verified build uses 79,044 bytes of program storage and 2,684 bytes of
-static RAM. Both F410 and G071 targets compile successfully. The HEX verifier
-checks record checksums, initial stack/reset vectors, and exclusion of the
-settings sector:
+Fresh `PWR-2.0.1` builds completed successfully for both targets:
+
+| Target | Program storage | Static RAM | RAM remaining after static allocation |
+|---|---|---|---|
+| F410 | 85,184 / 98,304 bytes | 6,820 / 32,768 bytes | 25,948 bytes |
+| G071 | 127,340 / 131,072 bytes | 9,524 / 32,768 bytes | 23,244 bytes |
+
+The G071 build has 3,732 bytes of program storage remaining. These are compiler
+size reports, not measurements of runtime control timing or validation of stack
+and heap use. The HEX verifier checks record checksums, initial stack/reset
+vectors, and exclusion of the settings sector:
 
 ```powershell
 python firmware/verify_f410_hex.py arduino-build-f410/thesi_power_control.ino.hex

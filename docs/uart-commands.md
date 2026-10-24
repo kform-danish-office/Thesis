@@ -1,6 +1,11 @@
 # UART Command Quick Reference
 
-Firmware: `PWR-2.0.0`
+Firmware: `PWR-2.0.1`
+
+The opt-in [browser protocol](web-protocol.md) adds JSON telemetry and correlated
+commands. `WEB HELLO` enters a quiet session until reset; use the web dispatcher
+afterward. The existing terminal commands below remain available before that
+session. Plain `OFF` also remains available during a web session.
 
 Hardware UART is PA10 RX / PA9 TX (USART1) on the F410 schematic-12 board,
 or PC5 RX / PC4 TX on the original G071 board, at 115200 baud, 8N1, no flow control.

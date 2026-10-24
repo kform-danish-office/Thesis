@@ -4,12 +4,14 @@
 #endif
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 // ============================================================
 // STM32G071 / STM32F410CBU6 LLC / GaN converter controller
 //
 // Firmware version:
+//   PWR-2.0.1 = opt-in browser JSON UART protocol, bounded TX and link-lease shutdown.
 //   PWR-2.0.0 = F410CBU6 schematic-12 port: PA8/PB13 complementary TIM1, PA11 EN, PA9/PA10 UART, ADC1 DMA2, flash journal.
 //   PWR-1.9.20 = loaded steady uses VON as the loaded floor; droop below VON boosts averaged duty without 0/100 mode switching.
 //   PWR-1.9.19 = OFF-state boot-default ON/OFF setting; ON/OFF runtime commands no longer overwrite boot default.
@@ -109,8 +111,8 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 // -------------------- Firmware version --------------------
 #define FW_VERSION_MAJOR 2
 #define FW_VERSION_MINOR 0
-#define FW_VERSION_PATCH 0
-#define FW_VERSION_STRING "PWR-2.0.0"
+#define FW_VERSION_PATCH 1
+#define FW_VERSION_STRING "PWR-2.0.1"
 
 // -------------------- Fixed gate settings --------------------
 #define GATE_FREQ_HZ       1000000UL
@@ -550,7 +552,31 @@ char inputLine[UART_INPUT_MAX_CHARS + 1];
 uint8_t inputLen = 0;
 bool uartInputActive = false;
 bool lastSerialWasCr = false;
+bool inputOverflow = false;
 uint32_t lastUartCharMs = 0;
+
+// The web session is opt-in and never persisted. Four bounded frames allow a
+// response and an event to wait behind telemetry without blocking the loop.
+#define WEB_FRAME_BYTES 1024
+#define WEB_TX_FRAME_COUNT 4
+#define WEB_TX_BYTES_PER_LOOP 16
+bool webSessionActive = false;
+char webTxFrames[WEB_TX_FRAME_COUNT][WEB_FRAME_BYTES];
+uint16_t webTxLengths[WEB_TX_FRAME_COUNT] = {0};
+uint16_t webTxOffset = 0;
+uint8_t webTxHead = 0;
+uint8_t webTxCount = 0;
+uint32_t webStreamMs = 0;
+uint32_t webLastStreamMs = 0;
+uint32_t webLeaseDurationMs = 0;
+uint32_t webLastPingMs = 0;
+bool webLeaseExpiredEvent = false;
+bool webFaultEventPending = false;
+
+void serviceWebLease();
+void serviceWebTx();
+void serviceWebTelemetry();
+void processWebCommand(String cmd);
 
 uint16_t rawPa0Adc = 0;
 uint16_t rawPa1Adc = 0;
@@ -1152,7 +1178,7 @@ void saveSettingsNow() {
 #endif
     settingsDirty = true;
     settingsDirtyMs = millis();
-    CmdSerial.println("ERROR: settings write failed; changes remain in RAM.");
+    if (!webSessionActive) CmdSerial.println("ERROR: settings write failed; changes remain in RAM.");
     return;
   }
   settingsSequence = cfg.sequence;
@@ -1994,6 +2020,10 @@ void latchFault(FaultCode code, const char *msg) {
   setEnDutyX10(0);
   setGateOutputsEnabled(false);
   updateModeLEDs();
+  if (webSessionActive) {
+    webFaultEventPending = true;
+    return;
+  }
   CmdSerial.println();
   CmdSerial.print("FAULT: ");
   CmdSerial.println(msg);
@@ -4052,6 +4082,354 @@ void autoTuneThreeLoads() {
   CmdSerial.print("> ");
 }
 
+// ============================================================
+// Browser protocol. The original terminal commands remain available after a
+// reset; WEB HELLO enters a quiet session until reset, without changing output.
+// ============================================================
+
+char *webNewFrame() {
+  if (webTxCount >= WEB_TX_FRAME_COUNT) return nullptr;
+  char *frame = webTxFrames[(webTxHead + webTxCount) % WEB_TX_FRAME_COUNT];
+  frame[0] = '\0';
+  return frame;
+}
+
+void webAppendText(char *frame, const char *text) {
+  size_t used = strlen(frame);
+  size_t count = strlen(text);
+  if (used + count + 2 >= WEB_FRAME_BYTES) return;
+  memcpy(frame + used, text, count + 1);
+}
+
+void webAppendUInt(char *frame, uint32_t value) {
+  char number[16];
+  snprintf(number, sizeof(number), "%lu", (unsigned long)value);
+  webAppendText(frame, number);
+}
+
+void webAppendNumber(char *frame, float value) {
+  // Avoid unbounded/non-JSON NaN/Inf and newlib float printf requirements.
+  if (!isfinite(value) || fabsf(value) > 2000000.0f) {
+    webAppendText(frame, "null");
+    return;
+  }
+  bool negative = value < 0.0f;
+  uint32_t milli = (uint32_t)(fabsf(value) * 1000.0f + 0.5f);
+  char number[32];
+  snprintf(number, sizeof(number), "%s%lu.%03lu", negative ? "-" : "",
+           (unsigned long)(milli / 1000UL), (unsigned long)(milli % 1000UL));
+  webAppendText(frame, number);
+}
+
+void webCommitFrame(char *frame) {
+  size_t len = strlen(frame);
+  if (len + 1 >= WEB_FRAME_BYTES) return;
+  frame[len++] = '\n';
+  frame[len] = '\0';
+  webTxLengths[(webTxHead + webTxCount) % WEB_TX_FRAME_COUNT] = (uint16_t)len;
+  webTxCount++;
+}
+
+void webAck(const String &id, bool ok, const char *code) {
+  char *frame = webNewFrame();
+  if (frame == nullptr) return;
+  // IDs are restricted to letters, digits, hyphen and underscore before here.
+  snprintf(frame, WEB_FRAME_BYTES,
+           "{\"type\":\"ack\",\"protocol\":1,\"id\":\"%s\",\"ok\":%s,\"code\":\"%s\",\"settings_pending\":%s}",
+           id.c_str(), ok ? "true" : "false", code, settingsDirty ? "true" : "false");
+  webCommitFrame(frame);
+}
+
+uint32_t webLeaseRemainingMs() {
+  if (webLeaseDurationMs == 0) return 0;
+  uint32_t elapsed = millis() - webLastPingMs;
+  return elapsed >= webLeaseDurationMs ? 0 : webLeaseDurationMs - elapsed;
+}
+
+bool webQueueTelemetry() {
+  char *frame = webNewFrame();
+  if (frame == nullptr) return false;
+  bool valid = adcDmaRunning && filtersPrimed;
+  webAppendText(frame, "{\"type\":\"telemetry\",\"protocol\":1,\"ms\":");
+  webAppendUInt(frame, millis());
+  webAppendText(frame, ",\"enabled\":");
+  webAppendText(frame, systemEnabled ? "true" : "false");
+  webAppendText(frame, ",\"mode\":\"");
+  webAppendText(frame, modeName());
+  webAppendText(frame, "\",\"fault\":\"");
+  webAppendText(frame, faultName());
+  webAppendText(frame, "\",\"feedback_valid\":");
+  webAppendText(frame, valid ? "true" : "false");
+  webAppendText(frame, ",\"vpri\":"); webAppendNumber(frame, valid ? filteredVpri : NAN);
+  webAppendText(frame, ",\"vsec\":"); webAppendNumber(frame, valid ? filteredVsec : NAN);
+  webAppendText(frame, ",\"current\":"); webAppendNumber(frame, valid ? filteredCurrent : NAN);
+  webAppendText(frame, ",\"power\":"); webAppendNumber(frame, valid ? filteredPower : NAN);
+  webAppendText(frame, ",\"duty\":"); webAppendNumber(frame, getEffDutyPercent());
+  webAppendText(frame, ",\"adc\":[");
+  if (adcDmaRunning) {
+    webAppendUInt(frame, rawPa0Adc); webAppendText(frame, ",");
+    webAppendUInt(frame, rawPa1Adc); webAppendText(frame, ",");
+    webAppendUInt(frame, rawPa2Adc);
+  } else webAppendText(frame, "null,null,null");
+  webAppendText(frame, "],\"settings\":{\"VSET\":"); webAppendNumber(frame, cfg.voltageSetV);
+  webAppendText(frame, ",\"VON\":"); webAppendNumber(frame, cfg.loadedTurnOnV);
+  webAppendText(frame, ",\"VMIN\":"); webAppendNumber(frame, cfg.secMinV);
+  webAppendText(frame, ",\"VMAX\":"); webAppendNumber(frame, cfg.secMaxV);
+  webAppendText(frame, ",\"OVP\":"); webAppendNumber(frame, cfg.secOvpV);
+  webAppendText(frame, ",\"OVPEN\":"); webAppendUInt(frame, cfg.secOvpEnable);
+  webAppendText(frame, ",\"DMAX\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.dutyMaxX10));
+  webAppendText(frame, ",\"OD\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.openLoopDutyX10));
+  webAppendText(frame, ",\"BHIGH\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.bangHighDutyX10));
+  webAppendText(frame, ",\"STATIC\":"); webAppendUInt(frame, cfg.allowStatic100);
+  webAppendText(frame, ",\"FEN\":"); webAppendUInt(frame, cfg.enFreqHz);
+  webAppendText(frame, "},\"lease_ms\":"); webAppendUInt(frame, webLeaseRemainingMs());
+  webAppendText(frame, ",\"lease_duration_ms\":"); webAppendUInt(frame, webLeaseDurationMs);
+  webAppendText(frame, ",\"stream_ms\":"); webAppendUInt(frame, webStreamMs);
+  webAppendText(frame, ",\"settings_pending\":"); webAppendText(frame, settingsDirty ? "true" : "false");
+  webAppendText(frame, ",\"control_dt_us\":"); webAppendUInt(frame, lastControlDtUs);
+  webAppendText(frame, ",\"control_max_us\":"); webAppendUInt(frame, maxControlDtUs);
+  webAppendText(frame, ",\"control_overruns\":"); webAppendUInt(frame, controlOverrunCount);
+  webAppendText(frame, "}");
+  webCommitFrame(frame);
+  return true;
+}
+
+void serviceWebTx() {
+  if (webTxCount == 0) return;
+  int available = CmdSerial.availableForWrite();
+  if (available <= 0) return;
+  uint16_t remaining = webTxLengths[webTxHead] - webTxOffset;
+  uint16_t count = remaining < WEB_TX_BYTES_PER_LOOP ? remaining : WEB_TX_BYTES_PER_LOOP;
+  if (count > (uint16_t)available) count = (uint16_t)available;
+  size_t sent = CmdSerial.write((const uint8_t *)webTxFrames[webTxHead] + webTxOffset, count);
+  webTxOffset += (uint16_t)sent;
+  if (webTxOffset >= webTxLengths[webTxHead]) {
+    webTxOffset = 0;
+    webTxHead = (webTxHead + 1) % WEB_TX_FRAME_COUNT;
+    webTxCount--;
+  }
+}
+
+void serviceWebLease() {
+  if (webLeaseDurationMs != 0 && millis() - webLastPingMs >= webLeaseDurationMs) {
+    // Disable before formatting/sending anything; never save flash on this path.
+    setSystemEnabled(false, false);
+    setGateOutputsEnabled(false);
+    webLeaseDurationMs = 0;
+    webStreamMs = 0;
+    webLeaseExpiredEvent = true;
+  }
+}
+
+void serviceWebTelemetry() {
+  if (!webSessionActive) return;
+  if (webLeaseExpiredEvent && webTxCount < WEB_TX_FRAME_COUNT) {
+    char *frame = webNewFrame();
+    snprintf(frame, WEB_FRAME_BYTES,
+             "{\"type\":\"event\",\"protocol\":1,\"event\":\"lease_expired\",\"ms\":%lu,\"enabled\":false}",
+             (unsigned long)millis());
+    webCommitFrame(frame);
+    webLeaseExpiredEvent = false;
+  }
+  if (webFaultEventPending && webTxCount < WEB_TX_FRAME_COUNT) {
+    char *frame = webNewFrame();
+    snprintf(frame, WEB_FRAME_BYTES,
+             "{\"type\":\"event\",\"protocol\":1,\"event\":\"fault\",\"ms\":%lu,\"fault\":\"%s\"}",
+             (unsigned long)millis(), faultName());
+    webCommitFrame(frame);
+    webFaultEventPending = false;
+  }
+  // Reserve two frame slots for command replies/events. Congested periodic
+  // samples are dropped, never accumulated into a stale telemetry backlog.
+  if (webStreamMs != 0 && millis() - webLastStreamMs >= webStreamMs) {
+    webLastStreamMs = millis();
+    if (webTxCount < 2) webQueueTelemetry();
+  }
+}
+
+bool webParseUInt(String value, uint32_t &result) {
+  value.trim();
+  if (value.length() == 0) return false;
+  result = 0;
+  for (unsigned int i = 0; i < value.length(); i++) {
+    char c = value.charAt(i);
+    if (c < '0' || c > '9' || result > (0xFFFFFFFFUL - (uint32_t)(c - '0')) / 10UL) return false;
+    result = result * 10UL + (uint32_t)(c - '0');
+  }
+  return true;
+}
+
+bool webValidId(const String &id) {
+  if (id.length() == 0 || id.length() > 24) return false;
+  for (unsigned int i = 0; i < id.length(); i++) {
+    char c = id.charAt(i);
+    if (!((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') ||
+          (c >= 'a' && c <= 'z') || c == '-' || c == '_')) return false;
+  }
+  return true;
+}
+
+void processWebCommand(String cmd) {
+  serviceWebLease();
+  // Never execute a mutation if its acknowledgement cannot be queued. The
+  // serialized browser client times out and resynchronizes after congestion.
+  if (webTxCount > WEB_TX_FRAME_COUNT - 2) return;
+  String body = cmd.substring(3);
+  body.trim();
+  String up = body;
+  up.toUpperCase();
+  String id;
+  bool bareControl = up == "HELLO" || up == "SNAPSHOT" || up == "PING" ||
+                     up.startsWith("STREAM ") || up.startsWith("LEASE ");
+  if (!bareControl) {
+    int space = body.indexOf(' ');
+    if (space < 1) { webAck(id, false, "use_web_id_command"); return; }
+    id = body.substring(0, space);
+    if (!webValidId(id)) { webAck(String(), false, "invalid_id"); return; }
+    body = body.substring(space + 1);
+    body.trim();
+    up = body;
+    up.toUpperCase();
+  }
+  if (up == "HELLO") {
+    webSessionActive = true;
+    char *frame = webNewFrame();
+    snprintf(frame, WEB_FRAME_BYTES,
+             "{\"type\":\"hello\",\"protocol\":1,\"fw\":\"" FW_VERSION_STRING "\",\"board\":\"" MCU_NAME "\",\"baud\":115200,\"max_line\":96,\"lease_required\":true}");
+    webCommitFrame(frame);
+    if (id.length()) webAck(id, true, "hello");
+    return;
+  }
+  if (!webSessionActive) { webAck(id, false, "hello_required"); return; }
+  if (up == "SNAPSHOT") {
+    webAck(id, true, "snapshot");
+    webQueueTelemetry();
+    return;
+  }
+  if (up == "PING") {
+    if (webLeaseDurationMs == 0) { webAck(id, false, "lease_not_armed"); return; }
+    webLastPingMs = millis();
+    webAck(id, true, "pong");
+    return;
+  }
+  if (up.startsWith("LEASE ")) {
+    uint32_t ms;
+    if (!webParseUInt(body.substring(6), ms) || (ms != 0 && (ms < 1000 || ms > 10000))) {
+      webAck(id, false, "lease_range_1000_10000_or_0"); return;
+    }
+    if (ms == 0 && systemEnabled) { webAck(id, false, "output_active"); return; }
+    webLeaseDurationMs = ms;
+    webLastPingMs = millis();
+    webAck(id, true, ms ? "lease_armed" : "lease_disabled");
+    return;
+  }
+  if (up.startsWith("STREAM ")) {
+    uint32_t ms;
+    if (!webParseUInt(body.substring(7), ms) || (ms != 0 && (ms < 250 || ms > 5000))) {
+      webAck(id, false, "stream_range_250_5000_or_0"); return;
+    }
+    webStreamMs = ms;
+    webLastStreamMs = millis();
+    webAck(id, true, ms ? "stream_enabled" : "stream_disabled");
+    return;
+  }
+  if (up == "ON") {
+    if (webLeaseRemainingMs() == 0) { webAck(id, false, "lease_required"); return; }
+    if (faultLatched) { webAck(id, false, "fault_latched"); return; }
+    if (!adcDmaRunning || !gatePwmReady) { webAck(id, false, "hardware_not_ready"); return; }
+#if defined(STM32F410Cx)
+    if (!settingsStorageReady) { webAck(id, false, "storage_not_ready"); return; }
+#endif
+    setSystemEnabled(true, false);
+    webAck(id, systemEnabled && !faultLatched, faultLatched ? "startup_fault" : "enabled");
+    return;
+  }
+  if (up == "OFF") {
+    setSystemEnabled(false, false);
+    setGateOutputsEnabled(false);
+    webAck(id, true, "disabled");
+    return;
+  }
+  if (up == "CLR") {
+    if (systemEnabled) { webAck(id, false, "turn_off_first"); return; }
+    if (!adcDmaRunning || !gatePwmReady) { webAck(id, false, "hardware_not_ready"); return; }
+#if defined(STM32F410Cx)
+    if (!settingsStorageReady) { webAck(id, false, "storage_not_ready"); return; }
+#endif
+    faultLatched = false;
+    faultCode = FAULT_NONE;
+    setGateOutputsEnabled(false);
+    updateModeLEDs();
+    webAck(id, true, "fault_cleared");
+    return;
+  }
+  if (up == "OPEN" || up == "VSB" || up == "BANG" || up == "VSBONLY" || up == "LINEFF") {
+    if (up == "VSBONLY") cfg.lineFfEnable = 0;
+    if (up == "LINEFF") cfg.lineFfEnable = 1;
+    setMode(up == "OPEN" ? MODE_OPEN_LOOP : MODE_POWER_LOOP, false);
+    markSettingsDirty();
+    webAck(id, true, "applied_pending");
+    return;
+  }
+  if (up.startsWith("LOAD ")) {
+    uint32_t slot;
+    if (!webParseUInt(body.substring(5), slot) || slot < 1 || slot > CAL_LOAD_SLOT_COUNT) {
+      webAck(id, false, "load_range_1_3"); return;
+    }
+    applyLoadProfile((uint8_t)(slot - 1), false);
+    markSettingsDirty();
+    webAck(id, true, "applied_pending");
+    return;
+  }
+  if (up == "BEGINCFG") {
+    configImportActive = true;
+    webAck(id, true, "import_started");
+    return;
+  }
+  if (up == "SAVE" || up == "ENDCFG") {
+    if (systemEnabled) { webAck(id, false, "turn_off_first"); return; }
+    if (up == "ENDCFG") configImportActive = false;
+    if (configImportActive) { webAck(id, false, "end_config_first"); return; }
+    bool saved = requestSettingsSave("web");
+    webAck(id, saved, saved ? "saved" : "save_failed");
+    return;
+  }
+  if (up.startsWith("SET ")) {
+    String rest = body.substring(4);
+    rest.trim();
+    int space = rest.indexOf(' ');
+    if (space < 1) { webAck(id, false, "use_set_name_number"); return; }
+    String name = rest.substring(0, space);
+    name.toUpperCase();
+    String value = rest.substring(space + 1);
+    value.trim();
+    char *end = nullptr;
+    float number = strtof(value.c_str(), &end);
+    if (value.length() == 0 || end == value.c_str() || *end != '\0' || !isfinite(number) || fabsf(number) > 100000000.0f) {
+      webAck(id, false, "invalid_number"); return;
+    }
+    bool signedParameter = name == "VPRIOFF" || name == "VSECOFF" || name == "CSOFF" ||
+                           name == "IMIN" || name == "IMAX" || name.endsWith("VMEAS") || name.endsWith("VSEC");
+    if (number < 0.0f && !signedParameter) {
+      // Existing terminal parsers cast some values to uint32_t before clamp;
+      // reject negatives here rather than relying on an out-of-range cast.
+      webAck(id, false, "negative_value_not_allowed"); return;
+    }
+    if (name == "BOOTON" || name == "BOOTEN" || name == "BOOT" || name == "STARTON" || name == "POWERON") {
+      webAck(id, false, "boot_setting_terminal_only"); return;
+    }
+    // Browser changes are explicit RAM changes; flash writes require SAVE or
+    // ENDCFG with output OFF. Existing validation/clamping remains authoritative.
+    bool wasImportActive = configImportActive;
+    configImportActive = true;
+    bool applied = parseSetParam(name, number);
+    configImportActive = wasImportActive;
+    webAck(id, applied, applied ? "applied_pending" : "unknown_parameter");
+    return;
+  }
+  webAck(id, false, "unsupported_web_command");
+}
+
 void processCommand(String cmd) {
   cmd.trim();
   if (cmd.length() == 0) return;
@@ -4059,6 +4437,18 @@ void processCommand(String cmd) {
 
   String up = cmd;
   up.toUpperCase();
+
+  if (up == "WEB" || up.startsWith("WEB ")) { processWebCommand(cmd); return; }
+  if (webSessionActive) {
+    // A plain emergency OFF remains available; other terminal commands could
+    // enter blocking calibration loops and must wait until the board is reset.
+    if (up == "OFF") {
+      setSystemEnabled(false, false);
+      setGateOutputsEnabled(false);
+      webAck(String(), true, "disabled");
+    } else webAck(String(), false, "web_session_requires_envelope");
+    return;
+  }
 
   if (up == "?" || up == "STATUS") { printStatus(); return; }
   if (up == "VER" || up == "VERSION") { CmdSerial.println(FW_VERSION_STRING); return; }
@@ -4310,27 +4700,33 @@ void handleSerial() {
         continue;
       }
       lastSerialWasCr = (c == '\r');
-      CmdSerial.println();
+      if (!webSessionActive) CmdSerial.println();
       inputLine[inputLen] = '\0';
       String cmd(inputLine);
       inputLen = 0;
       inputLine[0] = '\0';
-      if (cmd.length()) processCommand(cmd);
-      CmdSerial.print("> ");
+      if (inputOverflow) {
+        if (webSessionActive) webAck(String(), false, "line_too_long_or_invalid");
+        else CmdSerial.println("Command rejected: line too long or invalid.");
+      } else if (cmd.length()) processCommand(cmd);
+      inputOverflow = false;
+      if (!webSessionActive) CmdSerial.print("> ");
     } else if (c == 8 || c == 127) {
       lastSerialWasCr = false;
       if (inputLen > 0) {
         inputLen--;
         inputLine[inputLen] = '\0';
-        CmdSerial.print("\b \b");
+        if (!webSessionActive) CmdSerial.print("\b \b");
       }
     } else {
       lastSerialWasCr = false;
-      if (inputLen < UART_INPUT_MAX_CHARS) {
+      if (c < 32 || c > 126) {
+        inputOverflow = true;
+      } else if (inputLen < UART_INPUT_MAX_CHARS) {
         inputLine[inputLen++] = c;
         inputLine[inputLen] = '\0';
-        CmdSerial.write(c);
-      }
+        if (!webSessionActive) CmdSerial.write(c);
+      } else inputOverflow = true;
     }
   }
 }
@@ -4414,6 +4810,7 @@ void setup() {
 }
 
 void loop() {
+  serviceWebLease();
   handleSerial();
 
   if (systemEnabled && !autoTuneRunning) {
@@ -4436,13 +4833,16 @@ void loop() {
   }
 
   static uint32_t lastStatus = 0;
-  if (!uartInputActive && CmdSerial.available() == 0 && !autoTuneRunning && millis() - lastStatus >= cfg.statusMs) {
+  if (!webSessionActive && !uartInputActive && CmdSerial.available() == 0 && !autoTuneRunning && millis() - lastStatus >= cfg.statusMs) {
     lastStatus = millis();
     printLiveStatusLine();
   }
 
-  if (settingsDirty && !configImportActive && !uartInputActive && !systemEnabled && !autoTuneRunning &&
+  if (!webSessionActive && settingsDirty && !configImportActive && !uartInputActive && !systemEnabled && !autoTuneRunning &&
       !startupPrechargeActive() && millis() - settingsDirtyMs >= EEPROM_DEFER_QUIET_MS) {
     flushPendingSettingsSave(true);
   }
+  serviceWebLease();
+  serviceWebTelemetry();
+  serviceWebTx();
 }

@@ -6,7 +6,7 @@ STM32F410CBU6 and STM32G071 Arduino firmware for an isolated converter controlle
 
 | Item | Value |
 |---|---|
-| Firmware | `PWR-2.0.0` |
+| Firmware | `PWR-2.0.1` |
 | MCU targets | STM32F410CBU6 (schematic 12) and original STM32G071 |
 | Gate carrier | F410: PA8 / PB13, complementary TIM1 CH1/CH1N; G071: PA8 / PA9; fixed 1 MHz |
 | Power throttle | F410: PA11 EN; G071: PA10 EN |
@@ -18,6 +18,18 @@ STM32F410CBU6 and STM32G071 Arduino firmware for an isolated converter controlle
 `PWR-2.0.0` ports the existing controller to the new schematic. PA1 remains the closed-loop signal. At light load it uses voltage bang-bang with the no-load guard; once PA2 classifies a real load, `LSTEADY` retains and slowly trims an averaged EN duty instead of chopping between 0 and 100 percent. Droop below `VON` activates `LBOOST`, while high voltage still cuts EN immediately. Non-static EN edges use bounded polling of the 1 MHz TIM1 carrier. Optional `LINEFF` uses PA0 as a high-line duty cap.
 
 See [STM32F410 port and pinout](docs/stm32f410-port.md) before using the new board. The PDF contains unresolved sense-divider population values; the port retains the earlier calibrated divider assumptions.
+
+## Browser Control and Experiment Logging
+
+The [Power Lab app](https://thesis-power-lab.vercel.app) provides live USB-UART
+telemetry, converter controls, local experiment sessions, and CSV/JSON downloads.
+Open it in desktop Chrome or Edge. USB connects through an isolated 3.3 V UART
+interface to the existing command pins; it does not require a cloud USB bridge.
+
+`PWR-2.0.1` adds structured telemetry, command acknowledgements, and an explicit
+communication lease that disables output when renewals stop. Flash the new
+firmware for your board before connecting. Read the [web protocol and wiring
+notes](docs/web-protocol.md) before connecting the app.
 
 ## Quick Bench Setup
 
