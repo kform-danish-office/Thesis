@@ -7,7 +7,7 @@
 - [Build source](Defense_Supervisor_Flow_Source.zip)
 - [Checksums](DEFENSE_SUPERVISOR_FLOW_SHA256SUMS.txt)
 
-The main presentation has 16 slides with an estimated 25-minute speaking allocation, followed by four supporting slides. Its storyline follows compact USB-C adapter demand, the high-frequency switching challenge, the chosen charge-pump resonant circuit, the control contribution, and measured V1 and V2 results.
+The main presentation has 16 slides with an estimated 25-minute speaking allocation, followed by four supporting slides. Its storyline follows compact USB-C adapter demand, the high-frequency switching challenge, the chosen charge-pump resonant circuit, the control contribution, and measured V1 and V2 results. The V2 secondary-load response is described as the expected PWM power-control behaviour.
 
 The switching waveforms are in the main talk beside the control explanation. The circuit slides use the original digest schematic directly, with enlarged detail crops. Charts, text and tables remain editable. Equations use native Office Math. The title includes the V2 board photograph. The V2 thermal slide pairs the 70.75 W and 137.08 W secondary-load images with the temperature plot. A V1 thermal image showing the 102.9 C surface maximum precedes the V2 tank-change slide. The supplied DTU Blue template is retained.
 
