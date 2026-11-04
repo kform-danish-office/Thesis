@@ -9,6 +9,6 @@
 
 The main presentation has 15 slides with an estimated 25-minute speaking allocation, followed by four supporting slides. Its storyline follows compact USB-C adapter demand, the high-frequency switching challenge, the chosen charge-pump resonant circuit, the control contribution, and measured V1 and V2 results.
 
-The switching waveforms are in the main talk beside the control explanation. The circuit drawings, charts, text and tables are editable. The supplied DTU Blue template is retained.
+The switching waveforms are in the main talk beside the control explanation. The circuit slides use the original digest schematic directly, with enlarged detail crops. Charts, text and tables remain editable. The supplied DTU Blue template is retained.
 
 On a GitHub file page, use **Download raw file** to save a binary file. Previous presentation versions remain available in this directory.
