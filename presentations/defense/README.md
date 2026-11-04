@@ -1,14 +1,14 @@
 # Thesis defense presentation
 
-[Download the revised presentation and notes](Defense_Revised.zip)
+[Download the current presentation, PDF and notes](Defense_Supervisor_Flow.zip)
 
-- [Editable PowerPoint](Defense_Revised.pptx)
-- [PDF preview](Defense_Revised.pdf)
-- [Build source and review records](Defense_Revised_Source.zip)
-- [Checksums](DEFENSE_REVISED_SHA256SUMS.txt)
+- [Editable PowerPoint](Defense_Supervisor_Flow.pptx)
+- [PDF preview](Defense_Supervisor_Flow.pdf)
+- [Build source](Defense_Supervisor_Flow_Source.zip)
+- [Checksums](DEFENSE_SUPERVISOR_FLOW_SHA256SUMS.txt)
 
-The revised deck has 13 main slides for an approximately 25-minute talk and four backup slides. It follows one story: the USB-C load problem, shared circuit, burst control, V1 connector results, V2 tank change, and the remaining droop and heating.
+The main presentation has 15 slides with an estimated 25-minute speaking allocation, followed by four supporting slides. Its storyline follows compact USB-C adapter demand, the high-frequency switching challenge, the chosen charge-pump resonant circuit, the control contribution, and measured V1 and V2 results.
 
-The same circuit drawing is reused through the operation explanation. The measured burst is beside its control explanation; detailed switching and tank calculations are in backup slides.
+The switching waveforms are in the main talk beside the control explanation. The circuit drawings, charts, text and tables are editable. The supplied DTU Blue template is retained.
 
-The ZIP contains the PowerPoint, PDF, speaker notes and build-source ZIP. On a GitHub file page, use **Download raw file** to save a binary file. Earlier presentation downloads remain available in this directory.
+On a GitHub file page, use **Download raw file** to save a binary file. Previous presentation versions remain available in this directory.
