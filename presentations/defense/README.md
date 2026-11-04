@@ -1,12 +1,14 @@
 # Thesis defense presentation
 
-[Download all presentation files](Defense_Story.zip)
+[Download the revised presentation and notes](Defense_Revised.zip)
 
-- [Editable PowerPoint with speaker notes](Defense_Story.pptx)
-- [PDF preview](Defense_Story.pdf)
-- [Build source, assets and review records](Defense_Story_Source.zip)
-- [SHA-256 checksums](DEFENSE_SHA256SUMS.txt)
+- [Editable PowerPoint](Defense_Revised.pptx)
+- [PDF preview](Defense_Revised.pdf)
+- [Build source and review records](Defense_Revised_Source.zip)
+- [Checksums](DEFENSE_REVISED_SHA256SUMS.txt)
 
-The DTU presentation has 17 main slides for an approximately 25-minute talk, followed by five backup slides for questions. It covers the circuit, MCU burst control, existing V1 switching captures, efficiency and input quality, and V2 secondary-load and thermal results.
+The revised deck has 13 main slides for an approximately 25-minute talk and four backup slides. It follows one story: the USB-C load problem, shared circuit, burst control, V1 connector results, V2 tank change, and the remaining droop and heating.
 
-The complete ZIP contains the PowerPoint, PDF, speaker notes and build-source ZIP. On a GitHub file page, use **Download raw file** to save a binary file.
+The same circuit drawing is reused through the operation explanation. The measured burst is beside its control explanation; detailed switching and tank calculations are in backup slides.
+
+The ZIP contains the PowerPoint, PDF, speaker notes and build-source ZIP. On a GitHub file page, use **Download raw file** to save a binary file. Earlier presentation downloads remain available in this directory.
