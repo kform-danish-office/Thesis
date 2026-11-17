@@ -1,0 +1,130 @@
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2026.10.15)  25 OCT 2026 03:20
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**/workspace/tooling/v2-photo-results-review/documentary-crop.tex
+(/workspace/tooling/v2-photo-results-review/documentary-crop.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/share/texlive/texmf-dist/tex/latex/standalone/standalone.cls
+Document Class: standalone 2025/02/22 v1.5a Class to compile TeX sub-files stan
+dalone
+(/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
+Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
+Package shellesc Info: Restricted shell escape enabled on input line 77.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks17
+\XKV@tempa@toks=\toks18
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex))
+\XKV@depth=\count192
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+\sa@internal=\count193
+\c@sapage=\count194
+
+(/usr/share/texlive/texmf-dist/tex/latex/standalone/standalone.cfg
+File: standalone.cfg 2025/02/22 v1.5a Default configuration file for 'standalon
+e' class
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count195
+\c@section=\count196
+\c@subsection=\count197
+\c@subsubsection=\count198
+\c@paragraph=\count199
+\c@subparagraph=\count266
+\c@figure=\count267
+\c@table=\count268
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+)
+\sa@box=\box52
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 106.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
+))
+\Gin@req@height=\dimen142
+\Gin@req@width=\dimen143
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2024-05-08 L3 backend support: XeTeX
+\g__graphics_track_int=\count269
+\l__pdf_internal_box=\box53
+\g__pdf_backend_annotation_int=\count270
+\g__pdf_backend_link_int=\count271
+)
+No file documentary-crop.aux.
+\openout1 = `documentary-crop.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+File: /workspace/thesis/Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_orig
+inal.jpg Graphic file (type bmp)
+</workspace/thesis/Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_original.
+jpg>
+
+
+[1
+
+] (/workspace/tooling/v2-photo-results-review/documentary-crop.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 1495 strings out of 475852
+ 27540 string characters out of 5775422
+ 401199 words of memory out of 5000000
+ 24457 multiletter control sequences out of 15000+600000
+ 558845 words of font info for 37 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 57i,5n,71p,293b,179s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on /workspace/tooling/v2-photo-results-review/documentary-crop.p
+df (1 page).

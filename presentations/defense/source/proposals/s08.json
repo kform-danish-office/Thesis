@@ -1,0 +1,107 @@
+{
+  "slide_id": "s08",
+  "section": "main",
+  "position": 8,
+  "purpose": "Show the measured V1 carrier waveform following the burst-control capture.",
+  "title": "V1 switching near 1 MHz",
+  "takeaway": "Approximately ten switch-node cycles are visible in ten microseconds, giving a carrier frequency of approximately 1 MHz. Planning only; not a separate visible block.",
+  "visible_content": {
+    "body_1": "About 10 cycles in 10 µs → approximately 1 MHz",
+    "condition": "V1 · 20 V USB-C setting · 4.7 A load setting",
+    "legend_1": "Yellow: switch node · DC-coupled · 100 V/div",
+    "legend_2": "Green: secondary bulk · AC-coupled · 5 V/div",
+    "legend_3": "Blue: USB-C VBUS · AC-coupled · 5 V/div",
+    "time_scale": "Time: 1 µs/div",
+    "scope_header_labels": [
+      "1",
+      "100 V/",
+      "236 V",
+      "2",
+      "5.00 V/",
+      "200 mV",
+      "3",
+      "5.00 V/",
+      "1.40 V"
+    ],
+    "scope_axis_labels": [
+      "−5.00 µs",
+      "−4.00 µs",
+      "−3.00 µs",
+      "−2.00 µs",
+      "−1.00 µs",
+      "0.0 s",
+      "1.00 µs",
+      "2.00 µs",
+      "3.00 µs",
+      "4.00 µs",
+      "5.00 µs",
+      "636 V",
+      "236 V",
+      "−164 V",
+      "20.2 V",
+      "200 mV",
+      "−19.8 V",
+      "21.4 V",
+      "1.40 V",
+      "−18.6 V"
+    ],
+    "scope_time_control": [
+      "H",
+      "1.00 µs/",
+      "0.0 s"
+    ],
+    "phase_label": "Results"
+  },
+  "visual": {
+    "layout": "Figure-led main slide: retain a large true crop of the three-channel capture with its grid, time axes, channel status and horizontal scale control; place the editable condition, legend and result alongside.",
+    "asset": "/workspace/presentations/defense/dtu-focused-story/assets/v1_scope_20v_4p7a.png",
+    "crop_pixels_xyxy": [
+      100,
+      150,
+      1028,
+      640
+    ],
+    "crop_note": "Crop only the original image; retain all three grids and trace edges, full time axes, vertical scale/status header, and 1.00 µs/div control. Remove application chrome and measurement table. The axis and scope status text are baked into the image; native time marks repeat for each trace.",
+    "conditions": "20 V selected USB-C output and 4.7 A electronic-load setting. CH1 yellow switch node is DC-coupled at 100 V/div; CH2 green secondary bulk and CH3 blue USB-C VBUS are AC-coupled at 5 V/div each. The horizontal scale is 1 µs/div.",
+    "interpretation": "Approximately ten carrier cycles occur over the displayed 10 µs. The acquisition shows cycles, not expanded turn-on detail or a packet boundary. Do not crop further to suggest a measured zoom, interpolate traces, relabel the AC-coupled positions as DC levels, or add arrows implying resolved turn-on ringing."
+  },
+  "speaker_notes": "The previous capture showed how switching is grouped into bursts to regulate the secondary supply. This view looks at the faster switching cycles during an active interval. The USB-C voltage was set to 20 volts and the electronic load to 4.7 amps. Yellow is the half-bridge switch node, which drives both the charge-pump and isolated resonant branches. Across the ten-microsecond window, about ten cycles are visible, giving a switching frequency close to one megahertz. The switch-node waveform alternates between its high and low levels on each cycle. Green is the secondary bulk voltage and blue is USB-C VBUS. Both output channels are AC-coupled, so their displayed positions should not be read as DC output levels. The capture shows the switching waveform at the carrier timescale. Gate timing is not shown, so the voltage at turn-on cannot be read from this view.",
+  "transition": "Connector-voltage measurements then show how the supply delivered power across the USB-C settings.",
+  "duration_seconds": 95,
+  "sources": [
+    {
+      "type": "measured capture",
+      "reference": "/workspace/thesis/Data/measurements/evidence/PDO20_94W_47A_AC/keysight_20v_4p7a_ac_coupled_secondary_vbus.png",
+      "supports": "Displayed waveform, approximately 10 cycles in 10 µs; CH1 100 V/div, CH2 and CH3 5 V/div, 1 µs/div. Current frequency readout 1.0327892 MHz, cropped from the proposed figure."
+    },
+    {
+      "type": "test identification",
+      "reference": "/workspace/thesis/Data/measurements/processed_rewrite/ac_detail_statistics.csv",
+      "supports": "PDO20-94W-47A-AC-001: selected 20 V, 4.7 A load; yellow CH1 DC-coupled and green CH2/blue CH3 AC-coupled. No matching DC output measurement."
+    },
+    {
+      "type": "interpretation",
+      "reference": "/workspace/thesis/Chapters/10_Results/06_ZVS.tex",
+      "supports": "Carrier activity and requirement for gate-referenced device-voltage measurement to determine residual turn-on voltage."
+    },
+    {
+      "type": "measurement context",
+      "reference": "/workspace/thesis/Chapters/10_Results/03_Steady_State.tex",
+      "supports": "AC-coupled output captures; the 4.7 A entry has no matching DC output voltage for calculating delivered power."
+    }
+  ],
+  "checks": {
+    "verified": [
+      "Inspected the actual assigned screenshot. The screenshot spans −5 to +5 µs and the yellow waveform contains about ten complete periods. The native frequency current readout is 1.0327892 MHz.",
+      "CH1 scale is 100 V/div, CH2 and CH3 are 5 V/div, and horizontal scale is 1 µs/div. The source record identifies CH1 as DC-coupled and CH2/CH3 as AC-coupled.",
+      "The 20 V is a selected output and 4.7 A is the load condition. No DC output voltage or delivered-power value is inferred from the AC-coupled traces.",
+      "The image shows switching cycles over the window; it does not show packet boundaries or resolved expanded turn-on detail. No turn-on-ringing or ZVS conclusion is made."
+    ],
+    "assembly": "Main slide, position 8, estimated 95 seconds including pointing to the waveform and transition. Preserve the true crop, scale bar, original time axes and 1 µs/div control; the axis labels listed once recur on each of the three grids. Channel/scale status indicators are embedded in the crop.",
+    "local_measurement_limitation": [
+      "Gate timing is not shown, so the voltage at turn-on cannot be read from this view."
+    ],
+    "timing_reallocation": "Astra reassigned 95 seconds to accommodate the 45-second V1 thermal slide while preserving the 25-minute talk. Spoken notes, measurements and visible content are unchanged."
+  },
+  "revision": 3
+}

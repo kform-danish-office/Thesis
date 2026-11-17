@@ -1,0 +1,189 @@
+{
+  "baseline_files": 486,
+  "current_files": 486,
+  "edited_files": 36,
+  "unchanged_files": 450,
+  "changes": [
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "before_sha256": "6ece69d5fd4951204c81ab6f8f6b9de3eebb67b0c72e932abb6c69facb311721",
+      "sha256": "7c6b46184d17ff9c6da3cadfe8752c1dae86e74508621d19908f2842ffffb151"
+    },
+    {
+      "path": "Chapters/02_Background/08_Research_Gap.tex",
+      "before_sha256": "40a0714bfee0fe6f665779fb7afd9cb378c9b93f8de69952ffb400b5e38319a8",
+      "sha256": "3b3a71cf1fb2dc9d3e9ff3d670cacd6b4512d37783b038cde6d40fd87d699a59"
+    },
+    {
+      "path": "Chapters/10_Results/12_Compliance_Table.tex",
+      "before_sha256": "7d05f3019912fe6448603e367975d13c90f6f5e073efbb4ba709568a47732964",
+      "sha256": "202c396c8157bc193b0bdeb6326836f27bcca2adbe28b8e6d2fd2aa51a4ecf00"
+    },
+    {
+      "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+      "before_sha256": "6162045597f62376ee49209b3dd5f8aba2fef432c9e5c6b3097938549444fa32",
+      "sha256": "d362aab1558e52f7ac24468b07e319edfd3a8c00791097aceafaba513982dc69"
+    },
+    {
+      "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+      "before_sha256": "9360135949a69c29986d45e296c5515759846450118eec03cdd3424f34a9c213",
+      "sha256": "4d35faeb27cb8a94660c78048a41c8e6308e1f39eba21800977a466b7034b4e5"
+    },
+    {
+      "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+      "before_sha256": "721700e4d681fb5b1c93fe498c32be76eb1e7eab13d951726e169d3f6c60ecad",
+      "sha256": "657e5888f4ce57fb044eb2ee6c04c46a9e9fdda366e64c9860d659f228ec824c"
+    },
+    {
+      "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+      "before_sha256": "809b43b80feb61faa1fda5f1ccfa142180d6112ab69e1377491f839de841da14",
+      "sha256": "d024acc52874d11f159224af1e85920d5b7d04affcf3b7d8f02b33dc964665d2"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+      "before_sha256": "654fde845e7c932d7c525b53ddc2e97dcf41bc28f229cedfc205b3033446d08c",
+      "sha256": "237fc6b672322b1849349655ec8a235222a397983666753b0196669b54ca5f02"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/08_Control_Law.tex",
+      "before_sha256": "15e82b40c0d1582dd5be34bad4deb83d469a321227edf4dc7f0240303b3e09ed",
+      "sha256": "9e2392bc813c6186a578425049a678f7d616cbf61dd3b6832ceb10aba99554ca"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+      "before_sha256": "82a1fa65b22ef096c988808b734716928df00327decaa359d7851c134ca710f0",
+      "sha256": "168c8c5b3b9a4db3f3ae27d5429d52f0c059819b31f0c537622287eaa87000af"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+      "before_sha256": "ac9708e8b8058828a9dfef4155c9b17e3a241e2535d0973958e550d58cdafe64",
+      "sha256": "48323fcbbb19985c72bf807e3e11799b5f39668c6c698508deec46ecd81cee63"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/chapter.tex",
+      "before_sha256": "2ee989e52878e80dd5ee93723f89c64b8ef75702f3026343c7f136ad2288c825",
+      "sha256": "0b2d72b121d324a43708efd33fcb976127eaa161c0519f884ddf51f064fcf60c"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+      "before_sha256": "78b698b114a6e9aae888796f2cd8e7dbc22676fcaaec635e2ebcc7816ecd22a1",
+      "sha256": "e6ec3a915a06b04d4fc2dbf9ac1216b4da5c40b5651a38dae6ef564e7bbae0e5"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+      "before_sha256": "49b62042aa27ee1f8a8407eb7d19dc173b638d0b390f6916a449ab6d8dbd7184",
+      "sha256": "1bd15932b79aeeaf1c6f3a317bc1855e935cf49e23efd15dfa355728cb485bd2"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/01_Control_Objectives.tex",
+      "before_sha256": "89ed1ae2ef9de3a2941bf2931a3cb1081f42bc2394309836537cbdd759aa2105",
+      "sha256": "9168b47788b41b695d2e03d8d8f329f2d8c3de42985f2296e4ccc427b5f65004"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+      "before_sha256": "15f7bc53b7f3cf9b20a617d2bc6c63473dfca630de7e274443b5c1ba36b058de",
+      "sha256": "762a2715c225c9acaad77ce551f972888c6d9dfa84a0cd3ac963c6d68390c72a"
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+      "before_sha256": "6c7d64c3dd3f0d7104a2b13d236614d6a3285a9812b938c7f99db6fb11218384",
+      "sha256": "d16371e840cca4b99e4b7cb4b8a0209bbfe8bbd6d1ccd42d886acea8dc892151"
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/07_Control_Tests.tex",
+      "before_sha256": "b4825d28f17de2858a4d3d2352a13357a7036e263ae3732ac8fa234fc97a0091",
+      "sha256": "a981adc8b2428ccf15be5dc419279ed12cacc31c9bf60e833960ce7f96252488"
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/01_Objectives.tex",
+      "before_sha256": "44e4cd4c89566e6dcc4498b20b543f46e81bbb7982da78bd265a26739b9603d5",
+      "sha256": "da3b61ac88db0bbb4141501ba695947f83b26ad246da00ac9b6f08818775caf1"
+    },
+    {
+      "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+      "before_sha256": "cfe2229371d6d8b78390db60f9de461b5654145db8cc8e8d71c5f3c9e5ff8e45",
+      "sha256": "eaf6c8e0d29b5c5d1c3079838fe3d4f59e6acb71e81c9e907c7f2146a333fb58"
+    },
+    {
+      "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+      "before_sha256": "6a69b3f8ec87edba670f5fb70eb1ff92faacafbc0a80ca83ccf465c9f23e551a",
+      "sha256": "cd37eb968bf97acf6c77a3bfa6c457c78db5f2f13821aed53ef426cfc810f249"
+    },
+    {
+      "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+      "before_sha256": "524d81c803960b1afe45d81af461cd73cbaacfe3fc3f31efab4cbcb6717ebd74",
+      "sha256": "6bba48337c5cfee8e6e552e8784f934a04d50e8fcbf3205412d9304c3ad7ed36"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+      "before_sha256": "24fcced954b139adf9653aff8e66822d0b83cd62b87d799d3d32f1720259f7c0",
+      "sha256": "58b19e155f6e9ddbb71b0428df9a58445bf1bd30e3990cdfb750a05c15b8a43f"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+      "before_sha256": "f94f3363fc21664a56c354bc959fe757eb1da06e5023c42695546edcbd81f83c",
+      "sha256": "bc181c82b9ce4a3f17adb19246f01b732cc41856680040208782098e10f0e76f"
+    },
+    {
+      "path": "Chapters/12_Conclusion/03_Contributions.tex",
+      "before_sha256": "3a981bb5c0208b15a18e37f301325b024b81b58a820716cda7b3b2388069cc81",
+      "sha256": "373985d84d93995bdaae22046c1a9430af02dba599abf2c3be870f76921aabe6"
+    },
+    {
+      "path": "Chapters/07_Hardware/16_V2_F410.tex",
+      "before_sha256": "2b5a96665464fb445d099c2e90e7396c5e5756e22a67d4e5f9a2102e7fe3c053",
+      "sha256": "690193a6aaa20353a4d4cd6266c560429e6b9e52702bdf94dbf079edca6d1e9b"
+    },
+    {
+      "path": "Chapters/07_Hardware/08_Sensing.tex",
+      "before_sha256": "398b48e2129da6ac996cf6d205725b6428df76e045de474e62b24e7e8cb36b17",
+      "sha256": "e319e55fc220d6756977290d8fa5668fbb2b45ada7dd8a5f563607f173018b90"
+    },
+    {
+      "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+      "before_sha256": "3322bef23d503e9363ecd25e339d76f1c47ace0fe4c4351857f1464633311840",
+      "sha256": "77cd51aef340278d1d81b26735f602f401736a6b3ddc7a183d72d78bb8e440b4"
+    },
+    {
+      "path": "Chapters/11_Discussion/03_Control_Contribution.tex",
+      "before_sha256": "622c1d5008a4617caf01d6a55da48914f9becac91990f391c7fd46dfbe8c2643",
+      "sha256": "cb92583e5432322c8516ddd57bb2611faa4cc6833b3b4eddcd7328ffc3cccd02"
+    },
+    {
+      "path": "Backmatter/Appendices/G_Software_Tools.tex",
+      "before_sha256": "8115544d72fc41196d8196e391280fd36cdab058ef78fe123e4d46535d9e8874",
+      "sha256": "7381ddbd1035981fd4aaf8a5bc53fc726ed0f17e97247fd0a0dca76b4adb3967"
+    },
+    {
+      "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+      "before_sha256": "201571302d0d9b11bb0c6f7c2f17be233204b775b50c6eef11cd637892845a7d",
+      "sha256": "d892ce7c6462401ee422e028612ce6d394b2a8b60ca61bcd9675395e27c28b87"
+    },
+    {
+      "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+      "before_sha256": "10c4c062f7a3e20760b34e2a430dcb1036f27a8020159244d2a8729ac3a9bd9c",
+      "sha256": "f38da1b61a9a09c3c759d7632b39e3d1dffa0b32aa1fa050e118e24833172b21"
+    },
+    {
+      "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+      "before_sha256": "7505b8f06d3f6faac3f8a0393aa9173f51071270b3f01c16a506e4477321c7da",
+      "sha256": "8f56a00ab118a715600918e7cf45886ad18b8322240ab72aae8b330b1ad28c82"
+    },
+    {
+      "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+      "before_sha256": "3e4ca8478d5aba1a226177938f0bc4be8d4a69539df531db574c82f48e318ffc",
+      "sha256": "1f9bdece8df41166089b956d917f9a623139f4e9033dea55e8654970759b2997"
+    },
+    {
+      "path": "Backmatter/Appendices/F_Contribution_Provenance.tex",
+      "before_sha256": "3a4c0cd2d5210a59b98cbfb99db3e4e1824ff6a0cfc9bae6cd658e51a4bc04eb",
+      "sha256": "2f59015ef2f385c3efd1d89d7c74403c1fbeafcb62e818f31083f318eae5d91f"
+    },
+    {
+      "path": "Backmatter/Appendices/A_Analytical_Equations.tex",
+      "before_sha256": "184bb055fe10586d6f16e8c4975f170ff835b289efb81a76d32065a461c58492",
+      "sha256": "8506bba7a0e9c54e8749a347d92c421e397b1daa4f678cd2d8c343a98dfa7837"
+    }
+  ],
+  "checks": "All evidence assets, raw measurements, code, mathematical expressions, numerical quantities, source paths, graphics and original labels retained. No early unexplained PWR revisions; exact measured-record firmware identities preserved."
+}

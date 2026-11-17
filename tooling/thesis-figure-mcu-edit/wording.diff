@@ -1,0 +1,915 @@
+--- before/Frontmatter/Approval.tex
++++ revised/Frontmatter/Approval.tex
+@@ -3,13 +3,13 @@
+ 
+ This thesis was prepared at \department, Technical University of Denmark, for the \degreeprogramme. A USB-C laboratory power supply was built around a charge-pump PFC resonant converter. Its controller was developed for operation with a detachable load.
+ 
+-The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the STM32 firmware was developed. The first prototype was brought up and tested on the manufactured V1.0 PCB with rework. Its later drawing corrections were documented in V1.1. Development then continued with the integrated V2 F410 board. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
++The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the MCU firmware was developed. The first prototype was brought up and tested on the manufactured V1.0 PCB with rework. Its later drawing corrections were documented in V1.1. Development then continued with the integrated V2 board. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
+ 
+ The isolated secondary bulk bus is regulated by the controller, while the downstream USB-C stage sets the connector voltage. The feedback and connector voltages therefore refer to different circuit nodes. They are kept separate when describing the hardware, firmware, and measurements.
+ 
+-In V2, the controller was moved onto a four-layer converter PCB. The F410 control connections, power circuit, isolated sensing, and downstream USB-C stage are described in \cref{sec:hw-v2}. The schematic and PCB print set are included in \cref{sec:app-v2-oct27}. Browser logging and software tools were developed alongside the controller, with the full source in the appendices. The matched measurements from the first prototype, software checks, and preliminary V2 bench observations are reported with their own configurations.
++In V2, the controller was moved onto a four-layer converter PCB. The MCU control connections, power circuit, isolated sensing, and downstream USB-C stage are described in \cref{sec:hw-v2}. The schematic and PCB print set are included in \cref{sec:app-v2-oct27}. Browser logging and software tools were developed alongside the controller, with the full source in the appendices. The matched measurements from the first prototype, software checks, and preliminary V2 bench observations are reported with their own configurations.
+ 
+-The work progressed from converter bring-up and G071 control to the integrated F410 V2 board and a reduced V3 edge-card layout. Secondary-winding heating and the later input-bridge hotspot guided the remaining magnetic and layout work. The V3 USB-PD section was removed to reduce volume, but new magnetics were not installed within the project time. Appendix~\ref{app:revised-plan} links the original milestones to the design, test results, and work still needed.
++The work progressed from converter bring-up and initial MCU control to the integrated V2 board and a reduced V3 edge-card layout. Secondary-winding heating and the later input-bridge hotspot guided the remaining magnetic and layout work. The V3 USB-PD section was removed to reduce volume, but new magnetics were not installed within the project time. Appendix~\ref{app:revised-plan} links the original milestones to the design, test results, and work still needed.
+ 
+ \vfill
+ \begin{center}
+--- before/Frontmatter/Nomenclature.tex
++++ revised/Frontmatter/Nomenclature.tex
+@@ -35,8 +35,8 @@
+ PDO & Power Data Object; also used in the laboratory test identifiers\\
+ PF / PFC & Power factor / power-factor correction\\
+ PWM & Pulse-width modulation; control through pulse on-time\\
+-PAx / PBx / PCx & STM32 port A / B / C signal names; x identifies a line, not a package terminal\\
+-TIMx & STM32 timer hardware block; x identifies the timer\\
++PAx / PBx / PCx & MCU port A / B / C signal names; x identifies a line, not a package terminal\\
++TIMx & MCU timer hardware block; x identifies the timer\\
+ THD\(_I\) & Input-current total harmonic distortion\\
+ UART & Universal asynchronous receiver-transmitter; serial command/data link\\
+ TX / RX & Transmit / receive directions of a communication signal\\
+--- before/Frontmatter/Abstract.tex
++++ revised/Frontmatter/Abstract.tex
+@@ -3,11 +3,11 @@
+ 
+ A USB-C laboratory power supply based on an earlier DTU charge-pump power-factor-correction (PFC) resonant converter was built and tested using the supplied planar magnetics. The controller was developed to handle a detachable load. Secondary voltage had to be regulated under load, while further charging had to be limited after disconnection because energy remained in the resonant tank and capacitors.
+ 
+-The switching frequency was kept fixed at a nominal \SI{1}{\mega\hertz}, and energy transfer was adjusted by changing the duration of gallium-nitride (GaN) half-bridge bursts with the STM32G071 microcontroller. Voltage feedback was converted into digital readings and transferred automatically to memory using direct memory access (DMA), avoiding repeated processor waits for individual measurements. The isolated secondary bulk bus was regulated using the final PWR-1.9.20 controller. Limited precharge was applied until feedback became available. Separate duty limits were used under load and at no load. The tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings are provided by a downstream output stage.
++The switching frequency was kept fixed at a nominal \SI{1}{\mega\hertz}, and energy transfer was adjusted by changing the duration of gallium-nitride (GaN) half-bridge bursts with the microcontroller (MCU). Voltage feedback was converted into digital readings and transferred automatically to memory using direct memory access (DMA), avoiding repeated processor waits for individual measurements. The isolated secondary bulk bus was regulated using the final PWR-1.9.20 controller. Limited precharge was applied until feedback became available. Separate duty limits were used under load and at no load. The tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings are provided by a downstream output stage.
+ 
+ With an AC input recorded as \SI{240}{\volt}, \SI{50}{\hertz}, matched voltage and current readings at the \SI{20}{\volt} setting gave output powers of \SIrange{73.97}{79.89}{\watt} at the load. Average output voltage was \SIrange{19.973}{19.991}{\volt}, with recorded peak-to-peak ripple of \SIrange{0.416}{0.452}{\volt}. Logged power factor was 0.97--0.99 and current total harmonic distortion was \SIrange{2.23}{3.98}{\percent}. An initial efficiency estimate of \SIrange{76.5}{77.1}{\percent} was calculated from the paired input and output measurements. Uncertainty in their timing and calibration limits the accuracy of this estimate. Controller operation was recorded during the tested no-load and load-removal events. A thermal image labeled \SI{20}{\volt}, \SI{4}{\ampere} showed a maximum surface temperature of \SI{90.4}{\celsius}. Further loss measurements, improved heat removal, and protection-timing tests are still needed.
+ 
+-Development continued with an F410-based V2 board integrating the controller, GaN stage, isolated feedback, and USB-C circuit on a four-layer PCB. Lower half-bridge heating was observed after the tank and timing changes, but input-bridge heating remained unresolved (\cref{sec:res-v2-testing}). Bench performance was broadly comparable to the first prototype. Secondary-winding loss and a restricted input current path were suspected limitations, but neither was isolated quantitatively.
++Development continued with a V2 board integrating the controller, GaN stage, isolated feedback, and USB-C circuit on a four-layer PCB. Lower half-bridge heating was observed after the tank and timing changes, but input-bridge heating remained unresolved (\cref{sec:res-v2-testing}). Bench performance was broadly comparable to the first prototype. Secondary-winding loss and a restricted input current path were suspected limitations, but neither was isolated quantitatively.
+ 
+ A slimmer V3 edge-card design was prepared without the USB-PD output section, leaving secondary rectification. Its estimated net volume reduction was about \SI{8}{\percent}. New planar magnetics were not installed within the available time, so higher sustained power was not demonstrated. A complete USB-C supply would also require an external regulated USB-PD stage.
+ 
+--- before/Chapters/02_Background/07_USBC_Context.tex
++++ revised/Chapters/02_Background/07_USBC_Context.tex
+@@ -3,7 +3,7 @@
+ 
+ The USB-C output adds a second regulation stage. The interface and configuration determine the voltage offered to the connected device, called the sink, and how that voltage is negotiated. Enough energy must be supplied by the upstream converter to support the selected output. A load change therefore reaches the resonant converter through the output stage and secondary storage.
+ 
+-The isolated resonant stage in the prototype feeds the secondary bulk bus: the rectified transformer-output supply before the USB-C regulator. The MPQ4242-based output section then supplies VBUS from that bus, and fixed settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} were tested. The bulk-voltage sensing input, identified as PA1 on the STM32 microcontroller, provides the feedback used to control this upstream supply. The connector-voltage measurement in the results tables is downstream of that control loop.
++The isolated resonant stage in the prototype feeds the secondary bulk bus: the rectified transformer-output supply before the USB-C regulator. The MPQ4242-based output section then supplies VBUS from that bus, and fixed settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} were tested. The bulk-voltage sensing input, identified as PA1 on the MCU, provides the feedback used to control this upstream supply. The connector-voltage measurement in the results tables is downstream of that control loop.
+ 
+ On attachment, the load can draw down secondary storage before the burst controller increases transfer. On removal, energy already in the tank can continue charging the bulk capacitor. At no load, even small repeated bursts can raise the voltage if they deliver more energy than the auxiliary circuits and leakage consume. The startup, no-load, and overvoltage states were developed to handle these conditions.
+ 
+--- before/Chapters/10_Results/05_Open_Circuit.tex
++++ revised/Chapters/10_Results/05_Open_Circuit.tex
+@@ -32,25 +32,9 @@
+ input power. At \SI{20}{\volt}, AC-coupled output channels also leave the
+ absolute output level unknown.
+ 
+-\begin{figure}[htbp]
+-\centering
+-\begin{subfigure}[t]{0.48\textwidth}
+-\centering
+-\includegraphics[width=\linewidth]{Pictures/Thesis/10_Results/partial_switching_removed_scope_crop.png}
+-\caption{Development capture with irregular partial switching.}
+-\end{subfigure}\hfill
+-\begin{subfigure}[t]{0.48\textwidth}
+-\centering
+-\includegraphics[width=\linewidth]{Pictures/Thesis/10_Results/no_load_clean_switching_scope_crop.png}
+-\caption{Clean carrier burst after no-load tuning.}
+-\end{subfigure}
+-\caption{Qualitative record of no-load switching development. The photographs show the change in pulse structure; no matched raw export or firmware-state log was retained.}
+-\label{fig:no-load-switching-quality-photos}
+-\end{figure}
+ 
+-The development photographs show cleaner pulses after minimum-cycle handling
+-and no-load duty control were revised in this work. The means above and the
+-load-removal captures in Section~\ref{sec:res-transient} show unloaded
+-operation at the tested points. The next capture needs absolute peak voltage,
++
++The no-load voltage measurements above and the load-removal captures in
++Section~\ref{sec:res-transient} show unloaded operation at the tested points. The next capture needs absolute peak voltage,
+ the active OVP threshold, and firmware state from the same event to assess
+ the protection margin.
+--- before/Chapters/10_Results/10_Firmware_Comparison.tex
++++ revised/Chapters/10_Results/10_Firmware_Comparison.tex
+@@ -33,9 +33,7 @@
+ and diagnostics. Optional PA0 feed-forward can further cap the allowed PA10
+ duty.
+ 
+-Figure~\ref{fig:no-load-switching-quality-photos} shows cleaner no-load pulses
+-after tuning, and the loaded and load-removal tests show the combined
+-controller operating. Several features were changed together, and not all
++The loaded and load-removal tests show the combined controller operating. Several features were changed together, and not all
+ revisions were tested with identical loads, probes, complete exports, and
+ timing logs. The contribution of each change has not been measured separately.
+ For example, \texttt{MAXRATE} requests a \SI{20}{\micro\second} control
+--- before/Chapters/10_Results/06_ZVS.tex
++++ revised/Chapters/10_Results/06_ZVS.tex
+@@ -1,7 +1,7 @@
+ \section{Switching Waveforms and ZVS}
+ \label{sec:res-zvs}
+ 
+-The switching captures show how the G071 burst-enable signal at PA10 selects
++The switching captures show how the MCU burst-enable signal at PA10 selects
+ groups of the nominal
+ \SI{1}{\mega\hertz} carrier into bursts. Figure~\ref{fig:pdo20-high-power-scope}
+ shows the switch node and both output-side voltages at the main high-power
+@@ -46,7 +46,6 @@
+ \midrule
+ Main DC-coupled screenshots & Switching and output-bus behavior at identified loads\\
+ Raw overview and detail records & Burst structure and approximately \SI{1.03}{\mega\hertz} carrier activity in the exported records\\
+-No-load development photographs & Qualitative removal of irregular partial-pulse behavior\\
+ Missing gate-source/deskew data & Residual turn-on voltage and actual dead time cannot be quantified\\
+ \bottomrule
+ \end{tabularx}
+--- before/Chapters/10_Results/14_Revised_Plan_Status.tex
++++ revised/Chapters/10_Results/14_Revised_Plan_Status.tex
+@@ -11,10 +11,10 @@
+ 
+ The starting point matters. Here, \sourcefile{PDO20-80W-40A-001}, row 27,
+ gives \SI{19.9732}{\volt} at \SI{4}{\ampere}, or
+-\SI{79.8928}{\watt}, on the V1.0/G071 assembly with PWR-1.9.20. The
++\SI{79.8928}{\watt}, on the V1.0 assembly with PWR-1.9.20. The
+ reported \SI{85}{\watt} V2 point needs its own board, firmware, settings,
+ and measurement files. The V2 name alone does not establish that the earlier result came from this
+-assembly or the later F410/PWR-2.0.1 implementation. The earlier
++assembly or the later integrated V2 implementation with PWR-2.0.1. The earlier
+ setup must be reconstructed before the reported \SI{85}{\watt}
+ value can be used as a baseline for changes.
+ 
+--- before/Chapters/08_Control_Firmware/12_Fault_Handling.tex
++++ revised/Chapters/08_Control_Firmware/12_Fault_Handling.tex
+@@ -1,7 +1,7 @@
+ \section{Fault Detection and Recovery}
+ \label{sec:ctrl-faults}
+ 
+-Acquisition health and the optional current trip are checked before normal voltage-control decisions. If the firmware marks ADC/DMA acquisition as not running, \texttt{SENSOR} is latched. This check does not establish detection of every possible conversion or transfer error. The primary-current reading from PA2 above the configured threshold latches \texttt{CURRENT} when current trip is enabled. Both faults drive the G071 burst-enable output PA10 to logic low, inhibiting further switching. Current trip is disabled by default. The active voltage loop does not call the legacy current-foldback helper, even with \texttt{IFOLDEN} enabled.
++Acquisition health and the optional current trip are checked before normal voltage-control decisions. If the firmware marks ADC/DMA acquisition as not running, \texttt{SENSOR} is latched. This check does not establish detection of every possible conversion or transfer error. The primary-current reading from PA2 above the configured threshold latches \texttt{CURRENT} when current trip is enabled. Both faults drive the MCU burst-enable output PA10 on the original prototype to logic low, inhibiting further switching. Current trip is disabled by default. The active voltage loop does not call the legacy current-foldback helper, even with \texttt{IFOLDEN} enabled.
+ 
+ With \texttt{OVPEN} enabled, a filtered or latest raw secondary-voltage reading from PA1 above \texttt{OVP} normally latches an \texttt{OVP} fault. Eligible light/no-load operation has a recoverable exception when soft protection is enabled. The low-duty request can be held without latching only while every relevant voltage estimate stays at or below
+ \begin{equation}
+--- before/Chapters/08_Control_Firmware/02_Architecture_Timing.tex
++++ revised/Chapters/08_Control_Firmware/02_Architecture_Timing.tex
+@@ -1,7 +1,7 @@
+ \section{ADC Sampling and Burst Timing}
+ \label{sec:ctrl-architecture}
+ 
+-The Arduino STM32 software framework was used with direct configuration of the STM32G071 peripherals. A peripheral is a hardware block inside the MCU, such as a timer, converter, or serial interface. Timer TIM1 was configured to generate the paired carrier commands on outputs PA8/PA9 in center-aligned mode, where the counter runs up and down. The resulting carrier is \SI{1}{\mega\hertz}, with a nominal \SI{40}{\nano\second} interval at both transitions. A second hardware timer, TIM3, schedules the slower burst-enable envelope on output PA10. The software checks for TIM1 counter-update events for a limited interval before changing enable. This bounded polling attempts to align burst transitions with the carrier; the wait can end before an update is observed. An allowed static \SI{100}{\percent} command holds the enable output PA10 at logic high, the voltage state that permits switching, without repeated short gaps. Logic low inhibits switching; it does not mean that the power-circuit capacitors have discharged.
++The Arduino STM32 software framework was used with direct configuration of the MCU peripherals. A peripheral is a hardware block inside the MCU, such as a timer, converter, or serial interface. Timer TIM1 was configured to generate the paired carrier commands on outputs PA8/PA9 in center-aligned mode, where the counter runs up and down. The resulting carrier is \SI{1}{\mega\hertz}, with a nominal \SI{40}{\nano\second} interval at both transitions. A second hardware timer, TIM3, schedules the slower burst-enable envelope on output PA10. The software checks for TIM1 counter-update events for a limited interval before changing enable. This bounded polling attempts to align burst transitions with the carrier; the wait can end before an update is observed. An allowed static \SI{100}{\percent} command holds the enable output PA10 at logic high, the voltage state that permits switching, without repeated short gaps. Logic low inhibits switching; it does not mean that the power-circuit capacitors have discharged.
+ 
+ Analog-to-digital converter (ADC) acquisition runs independently of the foreground control loop, the processor's repeated sequence of sensing and control decisions. ADC1 samples the primary-voltage input PA0, secondary-voltage input PA1, and current-related input PA2 in sequence. DMA transfers these readings into a circular buffer, a memory area reused from its beginning when the end is reached. General-purpose input/output (GPIO) refers to the digital pin hardware used to drive an output such as enable. The universal asynchronous receiver-transmitter (UART) is the serial interface used for commands and status messages. The latest values are read, converted, and filtered on each control pass. The operating state and faults are then checked before a duty request is sent to the scheduler. The scan is free-running: the channels are sampled sequentially, without locking their phase to the carrier.
+ 
+--- before/Chapters/08_Control_Firmware/chapter.tex
++++ revised/Chapters/08_Control_Firmware/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Digital Control and Firmware}
+ \label{ch:control}
+ 
+-Firmware is the program run by the microcontroller (MCU). It reads the sensing inputs, decides how much switching is needed, and commands the driver through output pins. The labels PA0, PA1, and PA2 identify the sensing connections for primary voltage, secondary-bulk voltage, and primary half-bridge current. On the G071, PA8 and PA9 carry the switching commands and PA10 enables their bursts. These names identify MCU connections; they are not measured voltages or currents by themselves. The basic pin naming and signal paths are introduced in \cref{sec:intro-controller-basics}.
++Firmware is the program run by the microcontroller (MCU). It reads the sensing inputs, decides how much switching is needed, and commands the driver through output pins. The labels PA0, PA1, and PA2 identify the sensing connections for primary voltage, secondary-bulk voltage, and primary half-bridge current. On the original prototype, PA8 and PA9 carry the switching commands and PA10 enables their bursts. These names identify MCU connections; they are not measured voltages or currents by themselves. The basic pin naming and signal paths are introduced in \cref{sec:intro-controller-basics}.
+ 
+ The hardware could transfer power, but a detachable load required more than a fixed switching command. At startup, the secondary supply must first be charged before valid feedback is available. Transfer must then be increased under load and reduced after load removal. The carrier was kept fixed, and enable bursts were used to meet these requirements. This chapter covers the PWR-1.9.20 controller used for the final measurements, followed by the PWR-2.0.1 port for V2 hardware and browser logging. Both complete sources are included in Appendix~\ref{app:full-embedded-source}.
+ 
+--- before/Chapters/08_Control_Firmware/09_Limits_Antiwindup.tex
++++ revised/Chapters/08_Control_Firmware/09_Limits_Antiwindup.tex
+@@ -1,7 +1,7 @@
+ \section{Burst Timing and Duty Limits}
+ \label{sec:ctrl-limits}
+ 
+-Requested average duty is converted into bursts with a minimum duration. The G071 burst-enable output PA10 is scheduled with an envelope frequency, edge margin, and minimum number of \SI{1}{\mega\hertz} cycles. At the default \SI{10}{\kilo\hertz} envelope, the period is \SI{100}{\micro\second}. A literal \SI{0.1}{\percent} command would be only \SI{0.1}{\micro\second} long, shorter than a complete carrier cycle.
++Requested average duty is converted into bursts with a minimum duration. The MCU burst-enable output PA10 on the original prototype is scheduled with an envelope frequency, edge margin, and minimum number of \SI{1}{\mega\hertz} cycles. At the default \SI{10}{\kilo\hertz} envelope, the period is \SI{100}{\micro\second}. A literal \SI{0.1}{\percent} command would be only \SI{0.1}{\micro\second} long, shorter than a complete carrier cycle.
+ 
+ Low duty was handled with a minimum enabled interval followed by skipped envelope periods. \texttt{GATECYC} sets the minimum count, with eight cycles as the source default. The scheduler also accounts for carrier-update synchronization requests and low-time margin. The period can be extended if these timing requirements cannot be met. Static \SI{100}{\percent} enable is handled separately from an almost full-width burst.
+ 
+--- before/Chapters/08_Control_Firmware/01_Control_Objectives.tex
++++ revised/Chapters/08_Control_Firmware/01_Control_Objectives.tex
+@@ -5,4 +5,4 @@
+ 
+ In PWR-1.9.20, the secondary-bulk voltage \(V_{\mathrm{sb}}\) is regulated using its sensing input, PA1. The MPQ4242 sets connector VBUS downstream. The primary-voltage reading at PA0 can limit duty through feed-forward: the allowed command is reduced as the sensed primary voltage rises. The half-bridge-current reading at PA2 is used to classify loaded and unloaded operation and, when enabled, apply current protection. It is a primary-side signal and cannot serve as direct USB-C output-current feedback.
+ 
+-Energy transfer is controlled through the average duty of the G071 burst-enable output PA10, \(d_{\mathrm{EN}}\). Duty is the fraction of an enable period during which switching is permitted. The two carrier-command outputs PA8 and PA9 carry the fixed \SI{1}{\mega\hertz} carrier. Average energy transfer is adjusted by changing the enabled groups of cycles, with the carrier frequency fixed.
++Energy transfer is controlled through the average duty of the MCU burst-enable output PA10 on the original prototype, \(d_{\mathrm{EN}}\). Duty is the fraction of an enable period during which switching is permitted. The two carrier-command outputs PA8 and PA9 carry the fixed \SI{1}{\mega\hertz} carrier. Average energy transfer is adjusted by changing the enabled groups of cycles, with the carrier frequency fixed.
+--- before/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
++++ revised/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
+@@ -3,11 +3,11 @@
+ 
+ The V2 prototype uses an STM32F410CBU6 controller on the converter board in place of the STM32G071 Nucleo arrangement. The port was implemented in PWR-2.0.0, and browser UART control was added in PWR-2.0.1. This V2 is the project prototype. The V2 label in Section~\ref{sec:ctrl-v2} refers to the earlier DMA-control stage used in its software development.
+ 
+-The PWR-1.9.20 voltage-control structure was kept, with conditional definitions for board-dependent functions. The same PWR-2.0.1 sketch can target either MCU. For the F410, the complementary carrier, enable timer, ADC/DMA setup, and saved settings were changed. The control law was not changed. Appendix~\ref{app:firmware} maps the functions and commands. The complete PWR-1.9.20 and PWR-2.0.1 sources are included in Appendix~\ref{app:full-embedded-source}.
++The PWR-1.9.20 voltage-control structure was kept, with conditional definitions for board-dependent functions. The same PWR-2.0.1 sketch can target either MCU. For V2, the complementary carrier, enable timer, ADC/DMA setup, and saved settings were changed. The control law was not changed. Appendix~\ref{app:firmware} maps the functions and commands. The complete PWR-1.9.20 and PWR-2.0.1 sources are included in Appendix~\ref{app:full-embedded-source}.
+ 
+ \subsection{Peripheral Changes}
+ 
+-On the F410, the serial-data transmit output (UART TX) is assigned to PA9, which was used for the low carrier command on the G071. The low-side carrier command was moved to output PB13, connected internally to TIM1\_CH1N, while the paired high-side command uses PA8/TIM1\_CH1. CH1 names a timer output channel; CH1N is its complementary partner. The enable signal moved to PA11, allowing PA10 to become the serial-data receive input (UART RX). Thus PA10 is an enable output on the G071, but a receive input on the F410. On the F410, TIM1 provides programmed dead time through its complementary-output hardware. The target remains \SI{1}{\mega\hertz} with a nominal \SI{40}{\nano\second} interval. Timer control registers store the hardware settings. The auto-reload register ARR sets the count limit, the compare register CCR1 sets the output-transition threshold, and the dead-time field DTG sets the programmed dead interval. At a \SI{100}{\mega\hertz} TIM1 clock, the code sets ARR \(=50\), CCR1 \(=25\), and DTG \(=4\). The resulting timing still needs to be checked at the driver inputs and switch node on V2. The peripheral assignments follow the F410 device and timer documentation \cite{ststm32f410ds,ststm32f410rm}.
++On the F410, the serial-data transmit output (UART TX) is assigned to PA9, which was used for the low carrier command on the G071. The low-side carrier command was moved to output PB13, connected internally to TIM1\_CH1N, while the paired high-side command uses PA8/TIM1\_CH1. CH1 names a timer output channel; CH1N is its complementary partner. The enable signal moved to PA11, allowing PA10 to become the serial-data receive input (UART RX). Thus PA10 is an enable output on the G071, but a receive input on the F410. On V2, TIM1 provides programmed dead time through its complementary-output hardware. The target remains \SI{1}{\mega\hertz} with a nominal \SI{40}{\nano\second} interval. Timer control registers store the hardware settings. The auto-reload register ARR sets the count limit, the compare register CCR1 sets the output-transition threshold, and the dead-time field DTG sets the programmed dead interval. At a \SI{100}{\mega\hertz} TIM1 clock, the code sets ARR \(=50\), CCR1 \(=25\), and DTG \(=4\). The resulting timing still needs to be checked at the driver inputs and switch node on V2. The peripheral assignments follow the MCU device and timer documentation \cite{ststm32f410ds,ststm32f410rm}.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -28,13 +28,13 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The F410 analog-to-digital converter uses the same free-running scan of primary voltage, secondary-bulk voltage, and primary current. Here, a scan means sampling each sensing input in sequence; an ADC channel is the selected input, while DMA stream/channel labels identify the route used to copy the result into memory. At the selected \SI{25}{\mega\hertz} clock, 84 sampling plus 12 conversion cycles give \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per scan, about 86.8 thousand scans per second. Channels are read sequentially, independently of carrier phase. ADC overrun and DMA errors are polled during the filter update so failed acquisition can enter the sensor-fault path.
++The MCU analog-to-digital converter uses the same free-running scan of primary voltage, secondary-bulk voltage, and primary current. Here, a scan means sampling each sensing input in sequence; an ADC channel is the selected input, while DMA stream/channel labels identify the route used to copy the result into memory. At the selected \SI{25}{\mega\hertz} clock, 84 sampling plus 12 conversion cycles give \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per scan, about 86.8 thousand scans per second. Channels are read sequentially, independently of carrier phase. ADC overrun and DMA errors are polled during the filter update so failed acquisition can enter the sensor-fault path.
+ 
+ The port uses the earlier default conversion scales. Before displayed voltage or current is used on V2, the fitted resistors must be identified and the gains measured. The drawing's repeated \SI{6.2}{\mega\ohm} labels do not establish the assumed dividers. Compiling the firmware does not confirm that its sensing scales match the V2 hardware.
+ 
+-\subsection{Saving Settings on the F410}
++\subsection{Saving MCU Settings}
+ 
+-The F410 has no dedicated EEPROM. Sector 1 at \texttt{0x08004000} was reserved for settings. Application code was placed at \texttt{0x08008000}, with vectors at the normal flash base. The linker script and startup layout check keep program data outside the settings sector.
++The V2 MCU has no dedicated EEPROM. Sector 1 at \texttt{0x08004000} was reserved for settings. Application code was placed at \texttt{0x08008000}, with vectors at the normal flash base. The linker script and startup layout check keep program data outside the settings sector.
+ 
+ Each save appends a sequence-numbered, checksummed entry and verifies it by reading it back. Occupied entries are skipped after interrupted programming. Successive saves use different entries across the sector. The sector is erased when the journal wraps. An interruption during erase can still remove the saved configuration. Defaults then load with output OFF if no valid entry remains. Writes wait until output, startup, and autotuning are inactive so flash work does not interrupt live conversion.
+ 
+--- before/Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex
++++ revised/Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex
+@@ -18,4 +18,4 @@
+ \end{equation}
+ This relationship explains why even a small energy packet can raise the voltage after the load disappears. More secondary capacitance reduces the voltage rise per packet. Calculating the actual overshoot still requires the delivered energy, effective capacitance, and timing, including any excitation that continues before the controller reacts.
+ 
+-When the G071 burst-enable output PA10 is held low, no further excitation is commanded, but stored energy continues to circulate. Repeated packets are reduced by the no-load guard. Further excitation is blocked by soft holdoff or a latched hard fault. These actions are checked against the controller implementation and waveforms. Calculating a margin would require a switched model of the same circuit and timing.
++When the MCU burst-enable output PA10 on the original prototype is held low, no further excitation is commanded, but stored energy continues to circulate. Repeated packets are reduced by the no-load guard. Further excitation is blocked by soft holdoff or a latched hard fault. These actions are checked against the controller implementation and waveforms. Calculating a margin would require a switched model of the same circuit and timing.
+--- before/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex
++++ revised/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex
+@@ -1,7 +1,7 @@
+ \section{Inherited LTspice Circuits}
+ \label{sec:sim-files}
+ 
+-The main inherited circuits are \sourcefile{Simplified_for_journal_revision.asc} and \sourcefile{Simplified_for_journal_revision_2.asc}. They contain the earlier high-voltage PFC rectifier: a sinusoidal source, input bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. For the prototype, an isolated transformer, a separate modified-pump inductor, the USB-C stage, and the STM32 burst controller were added. These additions change the model structure as well as its values.
++The main inherited circuits are \sourcefile{Simplified_for_journal_revision.asc} and \sourcefile{Simplified_for_journal_revision_2.asc}. They contain the earlier high-voltage PFC rectifier: a sinusoidal source, input bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. For the prototype, an isolated transformer, a separate modified-pump inductor, the USB-C stage, and the MCU burst controller were added. These additions change the model structure as well as its values.
+ 
+ \begin{table}[H]
+ \centering
+--- before/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
++++ revised/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
+@@ -11,7 +11,7 @@
+ 
+ The two branch currents add with their instantaneous signs at the half bridge. Device-current and commutation checks must therefore include both branches, even though their resonant components are separate. Over longer intervals, the DC link couples the input power collected by the pump to the power demanded by the secondary.
+ 
+-The carrier remains at \SI{1}{\mega\hertz} during enabled operation. The controller changes the switching-burst duration through its enable output, PA10 on the G071. The conditioned secondary-bulk voltage \(V_{\mathrm{sec}}\) is read at input PA1. The conditioned primary-voltage signal at PA0 provides optional feed-forward, while the primary-current signal at PA2 is used to distinguish loaded from no-load operation. The burst command changes average energy transfer at the selected carrier operating point and sets how often the pump transfers charge.
++The carrier remains at \SI{1}{\mega\hertz} during enabled operation. The controller changes the switching-burst duration through its enable output, PA10 on the original prototype. The conditioned secondary-bulk voltage \(V_{\mathrm{sec}}\) is read at input PA1. The conditioned primary-voltage signal at PA0 provides optional feed-forward, while the primary-current signal at PA2 is used to distinguish loaded from no-load operation. The burst command changes average energy transfer at the selected carrier operating point and sets how often the pump transfers charge.
+ 
+ \begin{landscape}
+ \begin{figure}[H]
+--- before/Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex
++++ revised/Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex
+@@ -1,7 +1,7 @@
+ \section{How the USB-C Load Changes Operation}
+ \label{sec:analysis-usbc}
+ 
+-The resonant converter supplies the downstream stage rather than the connector load directly. More connector current at the same VBUS setting increases secondary bulk demand, and changing the VBUS setting changes that relationship. The STM32 therefore responds to bulk voltage while the output section regulates the connector.
++The resonant converter supplies the downstream stage rather than the connector load directly. More connector current at the same VBUS setting increases secondary bulk demand, and changing the VBUS setting changes that relationship. The MCU therefore responds to bulk voltage while the output section regulates the connector.
+ 
+ Burst enable changes the number and spacing of active intervals while keeping the carrier and tank components fixed. Output power is controlled in this way, but every omitted cycle also removes a pump charge-transfer interval. The same command that regulates the secondary can therefore alter the input-current envelope.
+ 
+--- before/Chapters/04_Topology_Analysis/09_Device_Stress.tex
++++ revised/Chapters/04_Topology_Analysis/09_Device_Stress.tex
+@@ -15,6 +15,6 @@
+ 
+ The same current pulses load the pump capacitor, inductor, and steering diodes. Their peaks depend on line phase, link voltage, and whether the capacitor completes its excursion. The isolated branch adds circulating current that can heat the windings and resonant capacitor beyond what connector power alone suggests. Secondary rectifier stress likewise depends on its conduction intervals and storage voltage.
+ 
+-A command change does not instantly stop energy transfer. Holding the G071 burst-enable output PA10 low ends further commanded excitation, but energy already stored in the inductors and capacitors can still reach the secondary. The hard OVP threshold therefore has to allow for sensing delay, actuation delay, and the residual transfer after inhibition.
++A command change does not instantly stop energy transfer. Holding the MCU burst-enable output PA10 on the original prototype low ends further commanded excitation, but energy already stored in the inductors and capacitors can still reach the secondary. The hard OVP threshold therefore has to allow for sensing delay, actuation delay, and the residual transfer after inhibition.
+ 
+ Measured bus maxima, overshoot, current peaks, and temperature are compared with the \SI{450}{\volt} capacitor rating and the semiconductor ratings. Nominal passive values and supplied magnetic measurements establish the starting design; the waveforms determine the stresses reached in the tested circuit.
+--- before/Chapters/09_Experimental_Methods/05_Probing.tex
++++ revised/Chapters/09_Experimental_Methods/05_Probing.tex
+@@ -22,7 +22,7 @@
+  -V_{\mathrm{rail,target}}\right|.
+  \label{eq:zvs-residual-method}
+ \end{equation}
+-The G071 burst-enable output PA10 marks the interval in which switching
++The MCU burst-enable output PA10 on the original prototype marks the interval in which switching
+ cycles are allowed. An individual transistor turns on within
+ that envelope, so the enable or switch-node trace alone cannot locate the ZVS
+ measurement instant.
+--- before/Chapters/01_Introduction/02_Problem_Statement.tex
++++ revised/Chapters/01_Introduction/02_Problem_Statement.tex
+@@ -5,7 +5,7 @@
+ 
+ The difficulty is that the charge-pump and isolated resonant paths share one half bridge. Changing its excitation changes both input-current shaping and power transfer to the secondary. The DC link must buffer the pulsating mains power while the controller supplies the load and reduces excitation when demand falls. Startup, light load, and load removal each place different demands on this energy balance.
+ 
+-The isolated secondary bulk node is regulated by the STM32. The MPQ4242 output section then converts that bulk voltage to the USB-C connector voltage. Both nodes are examined because a steady connector voltage can coexist with substantial ripple upstream.
++The isolated secondary bulk node is regulated by the MCU. The MPQ4242 output section then converts that bulk voltage to the USB-C connector voltage. Both nodes are examined because a steady connector voltage can coexist with substantial ripple upstream.
+ 
+ The main question is:
+ \begin{quote}
+--- before/Chapters/01_Introduction/05_Contributions_Attribution.tex
++++ revised/Chapters/01_Introduction/05_Contributions_Attribution.tex
+@@ -3,9 +3,9 @@
+ 
+ The starting point is the charge-pump conversion principle and analytical design method developed by Ammar et al. \cite{ammar2020chargepump,ammar2021led}. The LTspice files and planar-magnetics designs also came from that work. The operating prototypes were developed from these supplied designs. Their conversion principle and fitted magnetic assemblies came from the earlier work; a replacement planar-magnetic set was not installed.
+ 
+-The PCB was designed and assembled for this project. The supplied inductor and transformer were integrated, and the power, auxiliary, sensing, and output-interface circuits were implemented. The STM32G071 firmware was developed in stages, from open-loop bring-up to the DMA-based PWR-1.9.20 controller, with startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition.
++The PCB was designed and assembled for this project. The supplied inductor and transformer were integrated, and the power, auxiliary, sensing, and output-interface circuits were implemented. The MCU firmware was developed in stages, from open-loop bring-up to the DMA-based PWR-1.9.20 controller, with startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition.
+ 
+-The controller was then ported to the STM32F410CBU6 on V2. The revised board integrates the control, isolated feedback, local supplies, and USB-C output with the power stage. Browser control and logging were added, and the resonant tank was modified during powered testing. The schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
++The firmware was then adapted for the MCU on V2. The revised board integrates the control, isolated feedback, local supplies, and USB-C output with the power stage. Browser control and logging were added, and the resonant tank was modified during powered testing. The schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
+ 
+ The assembled supply was tested to check its behavior in practice. Output voltage, load response, input power quality, conversion loss, and surface temperature were assessed from the measurements at the stated operating points. The schematics, measurement tables, and waveform plots show the circuit and conditions used for those comparisons.
+ 
+--- before/Chapters/01_Introduction/07_Thesis_Structure.tex
++++ revised/Chapters/01_Introduction/07_Thesis_Structure.tex
+@@ -3,6 +3,6 @@
+ 
+ The thesis follows the path from the inherited circuit to the tested supply. Chapter~\ref{ch:background} explains the conversion principle and what changes with a USB-C load. Chapter~\ref{ch:requirements} turns that application into targets, operating states, and an architecture. Chapter~\ref{ch:analysis} gives the component calculations and explains the interactions between the input and output paths. Chapter~\ref{ch:simulation} then identifies what the inherited models can explain and where a model of the final prototype is still needed.
+ 
+-Chapters~\ref{ch:magnetics} and \ref{ch:hardware} show how the supplied magnetic components were integrated and how the hardware developed from the first prototype through V2 and the reduced V3 layout. Chapter~\ref{ch:control} follows the G071 controller development, the F410 port, and the operating states used in testing. Chapter~\ref{ch:methods} defines the test setup and measurement methods.
++Chapters~\ref{ch:magnetics} and \ref{ch:hardware} show how the supplied magnetic components were integrated and how the hardware developed from the first prototype through V2 and the reduced V3 layout. Chapter~\ref{ch:control} follows the MCU firmware development, its adaptation for V2, and the operating states used in testing. Chapter~\ref{ch:methods} defines the test setup and measurement methods.
+ 
+ Chapter~\ref{ch:results} brings the implementation and measurements together. Chapter~\ref{ch:discussion} examines the performance limits and the next development steps, and Chapter~\ref{ch:conclusion} answers the research questions. The appendices provide the equations, complete schematics, V2 PCB prints, firmware documentation, and measurement tables needed to follow the work.--- before/Chapters/01_Introduction/chapter.tex
++++ revised/Chapters/01_Introduction/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Introduction}
+ \label{ch:introduction}
+ 
+-The starting point was a DTU charge-pump converter and supplied planar magnetics. The hardware and controller were developed around those parts for a USB-C laboratory supply. The first prototype, V1, was used for bring-up and firmware development on the STM32G071 microcontroller, a programmable chip that reads signals and issues switching commands. The control and interface functions were then integrated into the F410-based V2 board. Tank and timing changes reduced some local heating, but did not establish a higher sustained power capability. Those findings led to a slimmer V3 edge-card design and further work on the magnetic and thermal limits.
++The starting point was a DTU charge-pump converter and supplied planar magnetics. The hardware and controller were developed around those parts for a USB-C laboratory supply. The first prototype, V1, was used for bring-up and firmware development on the microcontroller (MCU), a programmable chip that reads signals and issues switching commands. The control and interface functions were then integrated into the V2 board. Tank and timing changes reduced some local heating, but did not establish a higher sustained power capability. Those findings led to a slimmer V3 edge-card design and further work on the magnetic and thermal limits.
+ 
+ \input{Chapters/01_Introduction/10_Controller_Basics}
+ \input{Chapters/01_Introduction/01_Motivation}
+--- before/Chapters/01_Introduction/06_Scope_Limitations.tex
++++ revised/Chapters/01_Introduction/06_Scope_Limitations.tex
+@@ -1,9 +1,9 @@
+ \section{What This Thesis Covers}
+ \label{sec:intro-scope}
+ 
+-The thesis covers development from the first open-frame laboratory prototype through the integrated V2 board and the reduced V3 edge-card design. The manufactured V1.0 board was tested after bring-up modifications, and later corrections were recorded in schematic V1.1. The F410-based V2 design and its preliminary powered tests form the next stage. The hardware chapter identifies the drawing and fitted configuration used at each stage.
++The thesis covers development from the first open-frame laboratory prototype through the integrated V2 board and the reduced V3 edge-card design. The manufactured V1.0 board was tested after bring-up modifications, and later corrections were recorded in schematic V1.1. The V2 design and its preliminary powered tests form the next stage. The hardware chapter identifies the drawing and fitted configuration used at each stage.
+ 
+-The revised plan identifies the F410 controller and PWR-2 firmware as the V2 development described here. It reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. That measured result is kept separate from the reported V2 point and the later tank and thermal observations. Section~\ref{sec:revised-plan-criteria} also tracks the V3 layout work, its remaining release checks, and the matched V2--V3 comparison.
++The revised plan identifies the integrated controller and PWR-2 firmware as the V2 development described here. It reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. That measured result is kept separate from the reported V2 point and the later tank and thermal observations. Section~\ref{sec:revised-plan-criteria} also tracks the V3 layout work, its remaining release checks, and the matched V2--V3 comparison.
+ 
+ The output section was tested electrically at fixed settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}. PPS characterization remains part of the revised plan. USB-IF protocol and interoperability tests, product-safety qualification, surge and ESD qualification, conducted and radiated emissions tests, and long-duration reliability tests remain outside the completed test set.
+ 
+--- before/Chapters/01_Introduction/01_Motivation.tex
++++ revised/Chapters/01_Introduction/01_Motivation.tex
+@@ -9,4 +9,4 @@
+ 
+ The supplied planar inductor and transformer set the starting point. Their PCB windings provide a low profile. The board had to accommodate their footprint, winding connections, insulation spacing, and mounting, while the resonant operating point had to match their electrical parameters.
+ 
+-An LMG2652 GaN half bridge, an STM32G071 controller, and the USB-C output section were added around these parts in the first prototype. Average power was controlled by enabling groups of fixed-frequency switching cycles. The same approach was carried into V2, with the controller integrated onto the converter PCB. This allowed the inherited conversion principle to be tested with a detachable, variable load and then developed into a more integrated assembly.+An LMG2652 GaN half bridge, an MCU, and the USB-C output section were added around these parts in the first prototype. Average power was controlled by enabling groups of fixed-frequency switching cycles. The same approach was carried into V2, with the controller integrated onto the converter PCB. This allowed the inherited conversion principle to be tested with a detachable, variable load and then developed into a more integrated assembly.--- before/Chapters/01_Introduction/08_V2_Prototype.tex
++++ revised/Chapters/01_Introduction/08_V2_Prototype.tex
+@@ -2,8 +2,8 @@
+ \label{sec:intro-v2}
+ 
+ The first prototype was used to develop the power circuit and burst
+-controller. V2 was then designed with the STM32F410CBU6 controller on the
+-converter board in place of the separate G071 platform. The charge-pump
++controller. V2 was then designed with the MCU on the converter board in place of
++the separate controller platform. The charge-pump
+ PFC and isolated resonant paths were retained, together with the supplied
+ planar magnetics and downstream USB-C output stage.
+ 
+@@ -32,7 +32,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The controller connections were changed for the F410. The two fast
++The MCU connections were changed for V2. The two fast
+ switching-command outputs use PA8 and PB13. A separate enable output, PA11,
+ allows or blocks bursts. The UART serial link sends status and readings
+ through PA9 and receives commands through PA10. These roles are introduced in
+--- before/Chapters/03_Requirements_Architecture/07_Operating_Modes.tex
++++ revised/Chapters/03_Requirements_Architecture/07_Operating_Modes.tex
+@@ -1,7 +1,7 @@
+ \section{Operating States}
+ \label{sec:req-modes}
+ 
+-One burst limit cannot cover every load condition. Feedback must be established during startup. Under load, the converter must meet demand; at no load, added energy must be limited. The digital enable output is the controller's permission for the power stage to switch: logic high permits a burst and logic low inhibits it. In the G071 implementation, this output is PA10. The table also names general-purpose input/output (GPIO), which is the configurable pin interface; UART, which exchanges serial commands; and the analog-to-digital converter (ADC), whose readings are transferred by DMA.
++One burst limit cannot cover every load condition. Feedback must be established during startup. Under load, the converter must meet demand; at no load, added energy must be limited. The digital enable output is the controller's permission for the power stage to switch: logic high permits a burst and logic low inhibits it. On the original prototype, this output is PA10. The table also names general-purpose input/output (GPIO), which is the configurable pin interface; UART, which exchanges serial commands; and the analog-to-digital converter (ADC), whose readings are transferred by DMA.
+ 
+ Table~\ref{tab:req-states} shows how the final firmware separates those tasks. Chapter~\ref{ch:control} gives the thresholds and timing behind the state changes.
+ 
+--- before/Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex
++++ revised/Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex
+@@ -3,7 +3,7 @@
+ 
+ The functional requirements define controller behavior. The performance requirements define what must be measured to assess that behavior. The identifiers link each requirement to its assessment in the results summary.
+ 
+-The pin notation and controller functions are introduced in \cref{sec:intro-controller-basics}. In the G071 implementation below, the power-stage enable output (PA10) permits or stops bursts, while the secondary-voltage input (PA1) supplies the main feedback reading. The other two sensor inputs measure primary voltage (PA0) and primary half-bridge current (PA2). Direct memory access (DMA) transfers the converted readings into memory without a separate software copy for each sample. The universal asynchronous receiver-transmitter (UART) provides the serial connection used to exchange commands and status with a computer.
++The pin notation and controller functions are introduced in \cref{sec:intro-controller-basics}. In the original prototype below, the power-stage enable output (PA10) permits or stops bursts, while the secondary-voltage input (PA1) supplies the main feedback reading. The other two sensor inputs measure primary voltage (PA0) and primary half-bridge current (PA2). Direct memory access (DMA) transfers the converted readings into memory without a separate software copy for each sample. The universal asynchronous receiver-transmitter (UART) provides the serial connection used to exchange commands and status with a computer.
+ 
+ \begin{table}[H]
+ \centering
+--- before/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
++++ revised/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
+@@ -8,7 +8,7 @@
+ 
+ The revised plan sets \SI{65}{\watt} continuous output as the minimum and \SI{100}{\watt} continuous output as the target. The earlier plan schedules \SI{75}{\watt} continuous validation \cite{projectEarlierPlan}. The \SI{75}{\watt} level remains the intermediate test milestone. The \SI{65}{\watt} minimum and \SI{100}{\watt} target remain unchanged. Each continuous level requires a defined run time, stated ambient and cooling conditions, stable electrical operation, and a temperature record over the run.
+ 
+-The plan starts from a reported V2 maximum near \SI{85}{\watt} and calls for repeating that point under defined conditions or explaining the difference. The F410/PWR-2 circuit and firmware are part of this V2 development. An output of \SI{79.89}{\watt} was reached on the modified V1.0 assembly in the matched measurements analyzed here. Those measurements form a separate dataset. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} identify the later circuit and firmware needed for a matched V2 test.
++The plan starts from a reported V2 maximum near \SI{85}{\watt} and calls for repeating that point under defined conditions or explaining the difference. The integrated MCU and PWR-2 firmware are part of this V2 development. An output of \SI{79.89}{\watt} was reached on the modified V1.0 assembly in the matched measurements analyzed here. Those measurements form a separate dataset. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} identify the later circuit and firmware needed for a matched V2 test.
+ 
+ \subsection{Design and Test Requirements}
+ 
+--- before/Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex
++++ revised/Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex
+@@ -1,7 +1,7 @@
+ \section{Targets and Prototype Values}
+ \label{sec:req-electrical}
+ 
+-Table~\ref{tab:req-design-specifications} separates the power criteria from the baseline G071 timing and feedback parameters. The carrier is the repeating command that times the power switches. Bursts are groups of these switching cycles, separated by intervals when further switching is inhibited. The burst frequency sets how often a group can be enabled, while the control period sets how often the sensor readings are evaluated and the command updated. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} describe the V2 F410 port, whose power-stage enable output is assigned to pin PA11.
++Table~\ref{tab:req-design-specifications} separates the power criteria from the original prototype's MCU timing and feedback parameters. The carrier is the repeating command that times the power switches. Bursts are groups of these switching cycles, separated by intervals when further switching is inhibited. The burst frequency sets how often a group can be enabled, while the control period sets how often the sensor readings are evaluated and the command updated. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} describe the V2 MCU implementation, whose power-stage enable output is assigned to pin PA11.
+ 
+ \begin{table}[H]
+ \centering
+--- before/Chapters/03_Requirements_Architecture/04_USBC_Interface.tex
++++ revised/Chapters/03_Requirements_Architecture/04_USBC_Interface.tex
+@@ -3,8 +3,8 @@
+ 
+ The V1.1 schematic shows an MPQ4242GVE-0000-AEC1-P output section supplied from the isolated bulk node \texttt{V\_PW\_OUTPUT\_BULK}. Its output feeds \texttt{USB\_PD\_OUT} and VBUS at the USB-C socket, J1. CC1 and CC2 are the connector's configuration-channel lines, used by the interface controller to detect attachment and support power negotiation. They are distinct from the connector's power contacts and data lines.
+ 
+-The output section has local input and output capacitance, current sensing, and VBUS and signal protection. An Inter-Integrated Circuit (I2C) service header provides a two-wire communication connection: \texttt{PD\_SCL} carries the clock and \texttt{PD\_SDA} carries data. The STM32 controls the upstream converter; its firmware does not actively configure the MPQ4242 over I2C. The fitted output-controller configuration and the sink or trigger arrangement therefore determine the connector setting used in a test.
++The output section has local input and output capacitance, current sensing, and VBUS and signal protection. An Inter-Integrated Circuit (I2C) service header provides a two-wire communication connection: \texttt{PD\_SCL} carries the clock and \texttt{PD\_SDA} carries data. The MCU controls the upstream converter; its firmware does not actively configure the MPQ4242 over I2C. The fitted output-controller configuration and the sink or trigger arrangement therefore determine the connector setting used in a test.
+ 
+-In this thesis, secondary bulk voltage refers to the resonant-stage output, and VBUS to the connector output. The secondary bulk voltage is regulated using the STM32's secondary-voltage sensing input, PA1. VBUS is measured in the load tests. The downstream converter changes both the mean voltage and the ripple, so the two voltages must be measured and reported separately.
++In this thesis, secondary bulk voltage refers to the resonant-stage output, and VBUS to the connector output. The secondary bulk voltage is regulated using the MCU's secondary-voltage sensing input, PA1. VBUS is measured in the load tests. The downstream converter changes both the mean voltage and the ripple, so the two voltages must be measured and reported separately.
+ 
+ The VBUS settings were tested under load and during changes in demand. Those tests do not cover the full negotiation sequence, policy engine, cable-current advertisement, or interoperability. Chapter~\ref{ch:hardware} describes the circuit that was fitted, and Chapter~\ref{ch:results} shows its measured output behavior.
+--- before/Chapters/03_Requirements_Architecture/06_System_Architecture.tex
++++ revised/Chapters/03_Requirements_Architecture/06_System_Architecture.tex
+@@ -5,9 +5,9 @@
+ 
+ 
+ 
+-The transformer transfers power across the isolation barrier. The secondary rectifier and capacitor supply the bulk node, from which the MPQ4242 section supplies VBUS. The AMC0330 returns bulk-voltage feedback to the primary-referenced STM32 across a separate sensing barrier. The power and sensing barriers serve different functions.
++The transformer transfers power across the isolation barrier. The secondary rectifier and capacitor supply the bulk node, from which the MPQ4242 section supplies VBUS. The AMC0330 returns bulk-voltage feedback to the primary-referenced MCU across a separate sensing barrier. The power and sensing barriers serve different functions.
+ 
+-The STM32G071 produces the complementary switching commands at the carrier outputs, PA8 and PA9. Average transfer is controlled through a separate burst-enable output, PA10. These pins carry low-voltage commands to the gate driver; they do not carry the load power. The sensor inputs provide primary-voltage information (PA0), secondary-voltage feedback (PA1), and primary half-bridge-current information (PA2). Their voltages are converted into numerical readings by the analog-to-digital converter. DMA transfers those readings into memory while the scan continues, without blocking the control loop. Sampling is not synchronized to each carrier cycle.
++The MCU on the original prototype produces the complementary switching commands at the carrier outputs, PA8 and PA9. Average transfer is controlled through a separate burst-enable output, PA10. These pins carry low-voltage commands to the gate driver; they do not carry the load power. The sensor inputs provide primary-voltage information (PA0), secondary-voltage feedback (PA1), and primary half-bridge-current information (PA2). Their voltages are converted into numerical readings by the analog-to-digital converter. DMA transfers those readings into memory while the scan continues, without blocking the control loop. Sampling is not synchronized to each carrier cycle.
+ 
+ The auxiliary rails power the gate drive, controller, sensing, and output interface. Secondary feedback is useful only after its supply is established. During bring-up, the rails and inhibited carrier must be checked first. Feedback must then be calibrated and low-power transfer established before closed-loop operation is enabled.
+ 
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ revised/Chapters/12_Conclusion/03_Contributions.tex
+@@ -13,7 +13,7 @@
+ interpretation was corrected so that the control law matched the installed
+ hardware.
+ 
+-For V2, the F410 controller was integrated into the converter-board
++For V2, the MCU was integrated into the converter-board
+ design. Its timer and ADC assignments were adapted, and the flash
+ settings journal and PWR-2.0.1 browser commands and logging were
+ implemented. The four-layer PCB and circuit are documented in the
+--- before/Chapters/12_Conclusion/02_Research_Questions.tex
++++ revised/Chapters/12_Conclusion/02_Research_Questions.tex
+@@ -7,7 +7,7 @@
+ isolated resonant path, supplied planar magnetics, downstream output stage,
+ sensing, and digital control. V1.1 is the later corrected schematic
+ revision. No separate board was manufactured and tested for that revision.
+-The later V2 design integrates the F410 controller, GaN stage, sensing,
++The later V2 design integrates the MCU, GaN stage, sensing,
+ auxiliaries, and USB-C circuit on a four-layer PCB. A V2 prototype was
+ also operated with the modified leakage-only tank. Its preliminary bench
+ observations are reported separately in \cref{sec:res-v2-testing}.
+@@ -19,14 +19,14 @@
+ at startup before the isolated sensing supply is powered. Under load, energy transfer
+ is adjusted through duty. Further charging
+ after removal is reduced by no-load limits and soft overvoltage holdoff.
+-Loaded, no-load, and load-removal behavior was captured on the G071
+-assembly. The control law was retained in the F410 port, with the carrier,
++Loaded, no-load, and load-removal behavior was captured on the V1.0
++assembly. The control law was retained in the V2 MCU port, with the carrier,
+ enable, ADC/DMA, and UART assignments adapted to the new MCU. V2 still
+ needs its own matched transient records. Startup timing and the full
+ worst-case transient range still need synchronized event tests.
+ 
+ \paragraph{RQ3: Measured performance.}
+-For the V1.0/G071 prototype, at \SI{20}{\volt}, output powers of \SIrange{73.97}{79.89}{\watt} were
++For the V1.0 prototype, at \SI{20}{\volt}, output powers of \SIrange{73.97}{79.89}{\watt} were
+ calculated from matched measurements, including operating points at and above
+ \SI{75}{\watt}. Average VBUS remains within about
+ \SI{0.14}{\percent} of \SI{20}{\volt}; logged ripple is
+--- before/Chapters/12_Conclusion/chapter.tex
++++ revised/Chapters/12_Conclusion/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Conclusion}
+ \label{ch:conclusion}
+ 
+-The inherited converter was built into a working laboratory supply with a detachable output. Development progressed from G071 control and V1 testing to the integrated F410 V2 board, then to a slimmed V3 edge-card layout. The revisions established operation and reduced the occupied design volume, but secondary-winding heating and the later input hotspot remained unresolved. The conclusions distinguish those completed design and test steps from the sustained-power and magnetic improvements still needed.
++The inherited converter was built into a working laboratory supply with a detachable output. Development progressed from MCU control and V1 testing to the integrated V2 board, then to a slimmed V3 edge-card layout. The revisions established operation and reduced the occupied design volume, but secondary-winding heating and the later input hotspot remained unresolved. The conclusions distinguish those completed design and test steps from the sustained-power and magnetic improvements still needed.
+ 
+ \input{Chapters/12_Conclusion/01_Project_Summary}
+ \input{Chapters/12_Conclusion/02_Research_Questions}
+--- before/Chapters/12_Conclusion/01_Project_Summary.tex
++++ revised/Chapters/12_Conclusion/01_Project_Summary.tex
+@@ -4,10 +4,10 @@
+ A digitally controlled USB-C laboratory supply was built and bench-tested
+ using the earlier DTU charge-pump PFC resonant topology and supplied planar
+ magnetics \cite{ammar2020chargepump,ammar2021led}. The power hardware,
+-sensing, auxiliaries, downstream output stage, and STM32 controller were
++sensing, auxiliaries, downstream output stage, and MCU were
+ integrated for operation with a detachable load.
+ 
+-For the measured G071 prototype, the \SI{1}{\mega\hertz} carrier was
++For the measured V1.0 prototype, the \SI{1}{\mega\hertz} carrier was
+ kept fixed, and average transfer was adjusted through burst enable.
+ Voltage samples acquired through DMA were used to regulate the secondary
+ bus under load. Precharge was used at startup while feedback became
+@@ -22,7 +22,7 @@
+ measurements and sustained-operation tests. Ripple and protection timing
+ also need to be checked.
+ 
+-V2 moved the STM32F410 controller onto a four-layer PCB with the
++In V2, the MCU was integrated onto a four-layer PCB with the
+ LMG2652 power stage, isolated sensing, and downstream MPQ4242 USB-C
+ circuit. Its schematic and PCB print set are included in
+ \cref{sec:app-v2-oct27}. In the later bench tests, the external series
+@@ -31,7 +31,7 @@
+ was reported after the tank and timing changes, but the input bridge
+ continued to heat up. The thermal image was identified as a
+ \SI{95}{\watt} run; it does not establish a continuous rating. These
+-observations describe a separate V2 configuration, not the matched G071
++observations describe a separate V2 configuration, not the matched V1.0
+ measurements above.
+ 
+ The revised plan keeps \SI{100}{\watt} continuous as the target and
+--- before/Chapters/07_Hardware/chapter.tex
++++ revised/Chapters/07_Hardware/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Hardware Design and Implementation}
+ \label{ch:hardware}
+ 
+-The circuit contains a power path and a control path. The power path carries energy from the AC input to the load. The control path measures the circuit and sends low-voltage commands to the switching stage. A microcontroller (MCU), the programmable control chip, connects to those signals through its electrical terminals, called pins. Pin labels and their roles are introduced in \cref{sec:intro-controller-basics}. The sensing inputs are the scaled primary-voltage input PA0, isolated secondary-bulk-voltage input PA1, and half-bridge-current input PA2. On the G071, PA8 and PA9 provide the carrier commands and PA10 is the burst-enable output. Their F410 counterparts are described in \cref{sec:hw-v2}.
++The circuit contains a power path and a control path. The power path carries energy from the AC input to the load. The control path measures the circuit and sends low-voltage commands to the switching stage. A microcontroller (MCU), the programmable control chip, connects to those signals through its electrical terminals, called pins. Pin labels and their roles are introduced in \cref{sec:intro-controller-basics}. The sensing inputs are the scaled primary-voltage input PA0, isolated secondary-bulk-voltage input PA1, and half-bridge-current input PA2. On the original prototype, PA8 and PA9 provide the carrier commands and PA10 is the burst-enable output. The corresponding V2 connections are described in \cref{sec:hw-v2}.
+ 
+ The power PCB was built around the inherited charge-pump resonant circuit and supplied planar magnetics. The input and auxiliary circuits, sensing, USB-C output stage, and digital control were added in this project to operate with a detachable load. The timer connections and resonant branch were changed during bring-up. This chapter covers the tested assembly, later drawings, and planned board work.
+ 
+--- before/Chapters/07_Hardware/09_Protection.tex
++++ revised/Chapters/07_Hardware/09_Protection.tex
+@@ -1,7 +1,7 @@
+ \section{Protection Layers}
+ \label{sec:hw-protection}
+ 
+-The hardware and firmware handle different faults. The input fuse and varistor act at the AC connection. The discharge circuit and output TVS devices address stored voltage and output transients. The LMG2652 includes undervoltage, cycle-by-cycle overcurrent, and overtemperature functions \cite{tiLMG2652}. Startup control, bounded burst-enable commands on the G071 output PA10, no-load energy limits, and latched overvoltage or optional current faults were added in firmware.
++The hardware and firmware handle different faults. The input fuse and varistor act at the AC connection. The discharge circuit and output TVS devices address stored voltage and output transients. The LMG2652 includes undervoltage, cycle-by-cycle overcurrent, and overtemperature functions \cite{tiLMG2652}. Startup control, bounded burst-enable commands on the original prototype's MCU output PA10, no-load energy limits, and latched overvoltage or optional current faults were added in firmware.
+ 
+ Each layer has a separate role. A fuse cannot regulate a switching transient, and the internal current limit does not measure connector output current. Valid feedback is needed for the MCU to inhibit transfer correctly. The firmware current trip based on the PA2 sensing input is off by default, and the active voltage loop does not call the legacy current-foldback helper. These functions and the soft and hard overvoltage decisions are described in \Cref{sec:ctrl-faults}.
+ 
+--- before/Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex
++++ revised/Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex
+@@ -33,7 +33,7 @@
+ signal reference, voltage/current requirement, and startup state. Primary
+ and isolated secondary connections must remain distinct. The secondary-
+ bulk feedback input remains PA1, and the primary half-bridge-current
+-sensing input remains PA2. The F410 assignments do not by themselves define an edge-connector
++sensing input remains PA2. The existing MCU assignments do not by themselves define an edge-connector
+ pinout.
+ 
+ Removing the USB-PD section changes the system interface as well as its
+--- before/Chapters/07_Hardware/05_Gate_Drive.tex
++++ revised/Chapters/07_Hardware/05_Gate_Drive.tex
+@@ -1,6 +1,6 @@
+ \subsection{Logic Commands and Dead Time}
+ \label{sec:hw-gatedrive}
+ 
+-Logic commands are low-voltage signals sent from the STM32 controller to the integrated driver. On the G071 test platform, the two carrier-command outputs, PA8 and PA9, carry the fixed \SI{1}{\mega\hertz} pulse pattern. A separate enable output, PA10, drives the driver's EN input to permit or inhibit groups of switching cycles. This adjusts energy transfer without changing the carrier frequency. TIM1 is the internal hardware timer used to generate the carrier. Its center-aligned counter runs up and down; the output timing provides the programmed dead interval at both transitions. Dead time is the gap intended to keep both power switches off while the command changes between them.
++Logic commands are low-voltage signals sent from the MCU to the integrated driver. On the original prototype, the two carrier-command outputs, PA8 and PA9, carry the fixed \SI{1}{\mega\hertz} pulse pattern. A separate enable output, PA10, drives the driver's EN input to permit or inhibit groups of switching cycles. This adjusts energy transfer without changing the carrier frequency. TIM1 is the internal hardware timer used to generate the carrier. Its center-aligned counter runs up and down; the output timing provides the programmed dead interval at both transitions. Dead time is the gap intended to keep both power switches off while the command changes between them.
+ 
+ The original V1.0 pin assignment did not provide the intended carrier-output pair. The implementation was corrected to PA8/PA9/PA10, and the correction was included in V1.1. A nominal \SI{40}{\nano\second} interval was used during development. Switching behavior is shown in the available switch-node traces. A matched gate-timing capture is still needed to measure the effective interval after driver and routing delays. Commutation current must also be captured to assess ZVS over the full input and load range.
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ revised/Chapters/07_Hardware/16_V2_F410.tex
+@@ -1,9 +1,9 @@
+-\section{V2 Hardware and the F410 Controller}
++\section{V2 Hardware and MCU Integration}
+ \label{sec:hw-v2}
+ 
+-The V2 power board was developed with an STM32F410CBU6 controller \cite{ststm32f410ds}. The power stage, sensing, local supplies, and USB-C output were integrated on a four-layer PCB. The circuit and PCB design are documented in Section~\ref{sec:app-v2-oct27}. This V2 hardware is separate from the earlier controller stage called V2 in \cref{ch:control}, which marked the move to DMA acquisition.
++The V2 power board was developed with the MCU on the converter PCB \cite{ststm32f410ds}. The power stage, sensing, local supplies, and USB-C output were integrated on a four-layer PCB. The circuit and PCB design are documented in Section~\ref{sec:app-v2-oct27}. This V2 hardware is separate from the earlier controller stage called V2 in \cref{ch:control}, which marked the move to DMA acquisition.
+ 
+-The F410 port uses the G071's fixed \SI{1}{\mega\hertz} carrier and enable-based control. In PWR-2.0.0, the peripherals were changed to match the MCU and drawing. In PWR-2.0.1, browser telemetry and commands were added. The same software can be compiled for either MCU. The selected target, assembly, and firmware version must be stated for each test.
++The V2 MCU retains the original prototype's fixed \SI{1}{\mega\hertz} carrier and enable-based control. In PWR-2.0.0, the peripherals were changed to match the MCU and drawing. In PWR-2.0.1, browser telemetry and commands were added. The same software can be compiled for either MCU. The selected target, assembly, and firmware version must be stated for each test.
+ 
+ \subsection{V2 PCB and Physical Integration}
+ 
+@@ -59,9 +59,9 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The following timing settings are those in the archived PWR-2.0.1 source. Timer settings are stored in hardware control locations called registers. The auto-reload register (ARR) sets the counter limit, the channel compare register CCR1 sets the threshold that determines output transitions, and the dead-time generator field DTG programs the gap between complementary commands. These names refer to timer settings, not electrical pins. At the nominal \SI{100}{\mega\hertz} timer clock, the F410 code configures center-aligned TIM1 with ARR = 50, CCR1 = 25, and DTG = 4. These settings define a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time, using the timer functions in the F410 reference manual \cite{ststm32f410rm}. TIM5 schedules the enable envelope. For non-static transitions, the carrier update is polled for a bounded time, so software latency still affects the edge. The later powered trial used a reported \SI{60}{\nano\second} software dead-time setting (\cref{sec:res-v2-testing}); its firmware version was not recorded. Driver-input and switch-node captures are still needed to measure the effective dead time at the transistors and check enable alignment.
++The following timing settings are those in the archived PWR-2.0.1 source. Timer settings are stored in hardware control locations called registers. The auto-reload register (ARR) sets the counter limit, the channel compare register CCR1 sets the threshold that determines output transitions, and the dead-time generator field DTG programs the gap between complementary commands. These names refer to timer settings, not electrical pins. At the nominal \SI{100}{\mega\hertz} timer clock, the MCU code configures center-aligned TIM1 with ARR = 50, CCR1 = 25, and DTG = 4. These settings define a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time, using the timer functions in the MCU reference manual \cite{ststm32f410rm}. TIM5 schedules the enable envelope. For non-static transitions, the carrier update is polled for a bounded time, so software latency still affects the edge. The later powered trial used a reported \SI{60}{\nano\second} software dead-time setting (\cref{sec:res-v2-testing}); its firmware version was not recorded. Driver-input and switch-node captures are still needed to measure the effective dead time at the transistors and check enable alignment.
+ 
+-ADC1 is the internal analog-to-digital converter that turns each input voltage into a numerical reading. It scans the scaled primary-voltage input PA0, secondary-bulk-voltage input PA1, and half-bridge-current input PA2 continuously. Direct memory access (DMA) copies the results into memory without requiring the processor to move each reading. On the F410, DMA2 Stream0 Channel0 identifies the internal transfer route; it is separate from the ADC input-channel numbers in the pin table. Acquisition runs independently of the carrier. At the \SI{25}{\mega\hertz} ADC clock, 84 acquisition and 12 conversion cycles give calculated intervals of \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per frame. The reading at PA1 remains the secondary-bulk voltage feedback. The reading at PA2 remains the primary half-bridge-current signal for load classification and optional protection. The MCU change does not change these signal meanings or make either channel a connector output-current measurement on V2.
++ADC1 is the internal analog-to-digital converter that turns each input voltage into a numerical reading. It scans the scaled primary-voltage input PA0, secondary-bulk-voltage input PA1, and half-bridge-current input PA2 continuously. Direct memory access (DMA) copies the results into memory without requiring the processor to move each reading. On V2, DMA2 Stream0 Channel0 identifies the internal transfer route; it is separate from the ADC input-channel numbers in the pin table. Acquisition runs independently of the carrier. At the \SI{25}{\mega\hertz} ADC clock, 84 acquisition and 12 conversion cycles give calculated intervals of \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per frame. The reading at PA1 remains the secondary-bulk voltage feedback. The reading at PA2 remains the primary half-bridge-current signal for load classification and optional protection. The MCU change does not change these signal meanings or make either channel a connector output-current measurement on V2.
+ 
+ \subsection{Power Circuit, Sensing, and Local Supplies}
+ 
+@@ -80,4 +80,4 @@
+ 
+ The October plan starts from a reported V2 point near \SI{85}{\watt} toward a \SI{100}{\watt} target \cite{projectOctoberPlan}. Repeating that point requires the V2 assembly, input power, output voltage/current, temperature, duration, and firmware settings together. A complete test record linking these conditions is not available. The reported \SI{85}{\watt} remains a point to reconstruct and is not included in the measured curves.
+ 
+-The matched tests in \cref{ch:results} reached \SI{79.89}{\watt} on the modified V1.0 assembly. These provide the earlier converter baseline. Preliminary powered V2 observations from the F410 design are reported in \cref{sec:res-v2-testing}; matched input--output measurements and thermal-endurance testing are still needed. The V1.0 photographs and \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} outline cannot be used as V2 dimensions. The V2 circuit and four-layer PCB layout describe the hardware design; the controller port describes its software. The fitted configuration and assembly dimensions still need to be recorded before power density can be calculated. Both the reported \SI{85}{\watt} and matched \SI{79.89}{\watt} still need defined-duration tests before the \SI{100}{\watt} continuous target can be assessed.
++The matched tests in \cref{ch:results} reached \SI{79.89}{\watt} on the modified V1.0 assembly. These provide the earlier converter baseline. Preliminary powered V2 observations from the V2 design are reported in \cref{sec:res-v2-testing}; matched input--output measurements and thermal-endurance testing are still needed. The V1.0 photographs and \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} outline cannot be used as V2 dimensions. The V2 circuit and four-layer PCB layout describe the hardware design; the controller port describes its software. The fitted configuration and assembly dimensions still need to be recorded before power density can be calculated. Both the reported \SI{85}{\watt} and matched \SI{79.89}{\watt} still need defined-duration tests before the \SI{100}{\watt} continuous target can be assessed.
+--- before/Chapters/07_Hardware/08_Sensing.tex
++++ revised/Chapters/07_Hardware/08_Sensing.tex
+@@ -1,7 +1,7 @@
+ \section{Analog Feedback and Measurement Nodes}
+ \label{sec:hw-sensing}
+ 
+-The controller measures three analog signals, meaning voltages that vary with the physical quantities being sensed. They pass through TLV9064 buffer circuits before reaching the tested controller; the buffers reduce the effect of MCU input loading on the sensing circuits. The scaled primary-voltage signal enters input PA0, the isolated secondary-bulk-voltage signal enters PA1, and a voltage representing LMG2652 half-bridge current enters PA2. These are sensing inputs, not connections that carry the load current or the full bulk voltage. The AMC0330 transfers the secondary-voltage information across the isolation barrier to the primary-side STM32.
++The controller measures three analog signals, meaning voltages that vary with the physical quantities being sensed. They pass through TLV9064 buffer circuits before reaching the tested controller; the buffers reduce the effect of MCU input loading on the sensing circuits. The scaled primary-voltage signal enters input PA0, the isolated secondary-bulk-voltage signal enters PA1, and a voltage representing LMG2652 half-bridge current enters PA2. These are sensing inputs, not connections that carry the load current or the full bulk voltage. The AMC0330 transfers the secondary-voltage information across the isolation barrier to the primary-side MCU.
+ 
+ \begin{figure}[htbp]
+ \centering
+--- before/Chapters/07_Hardware/01_Prototype_Overview.tex
++++ revised/Chapters/07_Hardware/01_Prototype_Overview.tex
+@@ -20,7 +20,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-V2 continued this work with the F410 controller integrated on the converter board. The schematic and four-layer PCB layout are described in \cref{sec:hw-v2}. Preliminary powered V2 tests, including the leakage-only tank change and remaining input-bridge heating, are described in \cref{sec:res-v2-testing}. The earlier matched measurements remain associated with the modified V1.0 board.
++V2 continued this work with the MCU integrated on the converter board. The schematic and four-layer PCB layout are described in \cref{sec:hw-v2}. Preliminary powered V2 tests, including the leakage-only tank change and remaining input-bridge heating, are described in \cref{sec:res-v2-testing}. The earlier matched measurements remain associated with the modified V1.0 board.
+ 
+ Before fabrication, the board passed the configured Altium design-rule check. During bring-up, insulation was checked at \SI{1000}{\volt} for \SI{30}{\second} with the available handheld tester. This was a laboratory check; standardized safety qualification requires a defined test procedure and conditions.
+ 
+--- before/Chapters/07_Hardware/12_EMI.tex
++++ revised/Chapters/07_Hardware/12_EMI.tex
+@@ -1,6 +1,6 @@
+ \subsection{Electromagnetic Coupling}
+ \label{sec:hw-emi}
+ 
+-The high-frequency stage has several coupling paths. VSW transitions, pump current, tank current, and secondary rectifier commutation generate noise, while the G071 enable output PA10 adds the slower burst envelope. The burst pattern and control state change the resulting frequency content.
++The high-frequency stage has several coupling paths. VSW transitions, pump current, tank current, and secondary rectifier commutation generate noise, while the MCU enable output PA10 on the original prototype adds the slower burst envelope. The burst pattern and control state change the resulting frequency content.
+ 
+ The resulting noise current can return through the input filter, pass through transformer capacitance, or couple into the output cable and bench wiring. Cable placement, grounding, source impedance, load, and duty must therefore be defined for an emissions test. Conducted or radiated emissions were not measured with a line-impedance stabilization network and calibrated receiver. That test is needed to measure the margin to an emissions limit.
+--- before/Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex
++++ revised/Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex
+@@ -32,7 +32,7 @@
+ 
+ The original \SI{85}{\watt} files should first be recovered, and the
+ test repeated with the identified board and firmware. The
+-\SI{79.8928}{\watt} result belongs to the older assembly. An F410 port,
++\SI{79.8928}{\watt} result belongs to the older assembly. An MCU port,
+ component change, or board revision needs a new baseline and test IDs so
+ that an apparent improvement can be separated from a changed measurement
+ setup.
+--- before/Backmatter/Appendices/G_Software_Tools.tex
++++ revised/Backmatter/Appendices/G_Software_Tools.tex
+@@ -4,7 +4,7 @@
+ The software is used to build the controller, run the later browser interface,
+ and reproduce the result figures. Chapter~\ref{ch:results}
+ uses measurements from the earlier assembly. The PWR-2.0.1 tools
+-support the F410 and browser connection; powered V2 validation of these tools is still
++support the V2 MCU and browser connection; powered V2 validation of these tools is still
+ needed. Their use is explained here, with complete source in
+ Appendix~\ref{app:full-supporting-source}. The frozen PWR-2.0.1
+ files are under \sourcefile{Code/PWR_2_0_1}, and the
+@@ -206,12 +206,12 @@
+ \texttt{-BuildDirectory}, and \texttt{-Clean} arguments allow an
+ explicit tool path and a fresh build without editing the source.
+ 
+-For F410, \sourcefile{firmware/stm32f410.ld} places vectors in flash
++For V2, \sourcefile{firmware/stm32f410.ld} places vectors in flash
+ sector 0, reserves sector 1 for settings, and starts application
+ code at \texttt{0x08008000}. \texttt{build.ps1} supplies this
+ linker script and the application-size limit. This keeps ordinary
+ application sections out of the settings sector. The layout is
+-required for the F410 build; the stock linker layout is different.
++required for the V2 build; the stock linker layout is different.
+ 
+ In \sourcefile{firmware/verify_f410_hex.py}, \texttt{load\_hex} checks
+ Intel HEX record lengths, checksums, address records, and EOF. \texttt{verify}
+@@ -221,7 +221,7 @@
+ checks do not test flash persistence or electrical pin behavior. Build
+ and image checks can be run from \sourcefile{Code/PWR_2_0_1} with:
+ 
+-\begin{lstlisting}[caption={Build and F410 image-check commands for the frozen firmware source.},label={lst:app-firmware-reproduce}]
++\begin{lstlisting}[caption={Build and MCU image-check commands for the frozen firmware source.},label={lst:app-firmware-reproduce}]
+ .\firmware\build.ps1 -Target F410
+ .\firmware\build.ps1 -Target G071
+ python firmware/verify_f410_hex.py arduino-build-f410/thesi_power_control.ino.hex
+--- before/Backmatter/Appendices/C_Firmware_Documentation.tex
++++ revised/Backmatter/Appendices/C_Firmware_Documentation.tex
+@@ -21,12 +21,12 @@
+ PWR-1.9.0--1.9.10 & PA1 voltage feedback, no-load guard and recovery, optional line feed-forward, configuration export\\
+ PWR-1.9.11--1.9.18 & Soft OVP holdoff, carrier timing correction, enable-edge timing, loaded detection, averaged duty\\
+ PWR-1.9.19--1.9.20 & Separate stored boot state and final loaded steady/boost behavior\\
+-PWR-2.0.0 & Port to the V2 F410 controller: pin map, complementary carrier, TIM5 enable scheduler, ADC/DMA, and flash journal\\
++PWR-2.0.0 & Port to the V2 MCU: pin map, complementary carrier, TIM5 enable scheduler, ADC/DMA, and flash journal\\
+ PWR-2.0.1 & Opt-in JSON UART, bounded transmit work, link lease, and browser diagnostics\\
+ \bottomrule
+ \end{longtable}
+ 
+-The plan's V2 prototype and the F410/PWR-2 implementation are part of the same development. Earlier in the controller history, the name V2 was also used for the move to DMA acquisition. The MCU and firmware names distinguish these stages here. Approximately \SI{80}{\watt} was measured on the earlier assembly. The plan's reported point at \SI{85}{\watt} for V2 still needs a matched repeat, and \SI{100}{\watt} remains the target.
++The plan's V2 prototype and the PWR-2 MCU implementation are part of the same development. Earlier in the controller history, the name V2 was also used for the move to DMA acquisition. The board and firmware identities distinguish these stages here. Approximately \SI{80}{\watt} was measured on the earlier assembly. The plan's reported point at \SI{85}{\watt} for V2 still needs a matched repeat, and \SI{100}{\watt} remains the target.
+ 
+ \section{MCU Targets and Peripheral Assignments}
+ \label{sec:app-fw-hardware}
+@@ -65,14 +65,14 @@
+ \bottomrule
+ \end{longtable}
+ 
+-PA1 senses the isolated secondary bulk before the MPQ4242 output stage. PA2 senses primary half-bridge current. Neither pin measures USB-C connector output current. PA0 provides the primary-voltage indication for optional duty limiting. The F410 assignments and peripheral choices follow the device documentation \cite{ststm32f410ds,ststm32f410rm}.
++PA1 senses the isolated secondary bulk before the MPQ4242 output stage. PA2 senses primary half-bridge current. Neither pin measures USB-C connector output current. PA0 provides the primary-voltage indication for optional duty limiting. The V2 MCU assignments and peripheral choices follow the device documentation \cite{ststm32f410ds,ststm32f410rm}.
+ 
+ \subsection{Carrier and Burst Timing}
+ 
+ Both targets are configured for a fixed \SI{1}{\mega\hertz} carrier and nominal \SI{40}{\nano\second} dead interval. The G071 uses center-aligned TIM1 CH1/CH2 compare spacing. The F410 uses CH1/CH1N with the TIM1 dead-time unit, leaving PA9 free for USART1. The timer settings are held in registers, which are named hardware
+ configuration locations written by the firmware. ARR sets the counter
+ range, CCR1 sets the output comparison point, and DTG sets the programmed
+-dead time. With a \SI{100}{\mega\hertz} timer clock, the F410 values are ARR \(=50\), CCR1 \(=25\), DTG \(=4\), and repetition count \(=1\). CH2 is disabled. The stated dead time is calculated from registers; gate-driver propagation and transistor switching still need measurement.
++dead time. With a \SI{100}{\mega\hertz} timer clock, the V2 settings are ARR \(=50\), CCR1 \(=25\), DTG \(=4\), and repetition count \(=1\). CH2 is disabled. The stated dead time is calculated from registers; gate-driver propagation and transistor switching still need measurement.
+ 
+ In the enable scheduler, \texttt{FEN} and requested duty are converted to a period, enabled interval, and pulse-skip count. The period is rounded to microseconds. A complete minimum burst and minimum low interval are enforced, with a longer period if both cannot fit. Below the minimum burst energy, periods are skipped; bursts are not shortened. With a permitted static \SI{100}{\percent} command, enable stays high.
+ 
+@@ -117,7 +117,7 @@
+ \section{Execution Order, Startup, and Protection}
+ \label{sec:app-fw-execution}
+ 
+-In \texttt{setup()}, enable and gate pins are first driven low. UART is started, LEDs and analog pins are configured, and validated settings are loaded. On the F410, linker symbols and image extent are checked against the reserved flash sector. If the layout is invalid or ADC initialization fails, a sensor fault is set and the system stays disabled. Carrier and burst timing are then configured, the selected load profile and stored boot preference are applied, the filters are initialized, and identity and status are printed.
++In \texttt{setup()}, enable and gate pins are first driven low. UART is started, LEDs and analog pins are configured, and validated settings are loaded. On V2, linker symbols and image extent are checked against the reserved flash sector. If the layout is invalid or ADC initialization fails, a sensor fault is set and the system stays disabled. Carrier and burst timing are then configured, the selected load profile and stored boot preference are applied, the filters are initialized, and identity and status are printed.
+ 
+ In \texttt{loop()}, the web lease is checked before commands are read. Bounded UART input is read, enabled startup or closed control is run, transition-rate diagnostics are updated, and UART input is checked again. While OFF or in open loop, analog and fault checks run at a requested \SI{2}{\milli\second} interval. Terminal status and deferred saves follow, then a second lease check, telemetry scheduling, and bounded transmission.
+ 
+@@ -165,12 +165,12 @@
+ 
+ PI identification, foldback helpers, and \sourcefile{handleMaxDutyProtection()} remain in the source but are not called by the active voltage loop. Their settings remain for compatibility. Setting \texttt{MAXFAULTEN} does not add the missing call.
+ 
+-\section{Saved Settings and the F410 Flash Journal}
++\section{Saved Settings and the MCU Flash Journal}
+ \label{sec:app-fw-persistence}
+ 
+ \texttt{SettingsSlot} contains configuration, three load profiles, tuning metadata, magic value, sequence, and checksum. Fields and their relationships are checked against bounds. For the checksum, record bytes are folded with a rotating XOR and seed \texttt{0xA5A55A5A}, excluding the checksum field. Damaged or incomplete records can be detected, but some errors can pass the check.
+ 
+-The G071 cycles through four EEPROM-emulation slots. The F410 uses reserved sector 1. In the custom linker file, vectors are placed at \texttt{0x08000000} in 16 KiB, settings at \texttt{0x08004000} in 16 KiB, application at \texttt{0x08008000} in 96 KiB, and SRAM at \texttt{0x20000000} in 32 KiB. The default F410 linker layout is different.
++The G071 cycles through four EEPROM-emulation slots. The F410 uses reserved sector 1. In the custom linker file, vectors are placed at \texttt{0x08000000} in 16 KiB, settings at \texttt{0x08004000} in 16 KiB, application at \texttt{0x08008000} in 96 KiB, and SRAM at \texttt{0x20000000} in 32 KiB. The default MCU linker layout is different.
+ 
+ The aligned record is 472 bytes, so 34 records fit in the reserved sector. The valid record with the highest sequence is selected at startup. A partially written record is not reused if its first word was programmed; the next write can skip it. Saves are appended until the next slot wraps to zero. The sector is erased when slot zero is written. Programming is word-aligned, and saved bytes are compared with RAM afterward.
+ 
+@@ -350,7 +350,7 @@
+ \texttt{HELLO}; \texttt{SNAPSHOT} & Enter quiet JSON mode; or acknowledge and queue one telemetry frame.\\
+ \texttt{STREAM ms} & Periodic telemetry at 250--5000 ms; zero disables it.\\
+ \texttt{LEASE ms}; \texttt{PING} & Arm a 1000--10000 ms lease, or renew an armed lease. Zero disarms only while OFF. PING cannot rearm an expired lease.\\
+-\texttt{ON} & Require a live lease, no latched fault, working ADC and gate initialization, and valid F410 storage layout. Begin startup without waiting for the full sequence.\\
++\texttt{ON} & Require a live lease, no latched fault, working ADC and gate initialization, and valid V2 storage layout. Begin startup without waiting for the full sequence.\\
+ \texttt{OFF} & Inhibit enable through the OFF path, without saving. Plain OFF remains available after HELLO as an emergency terminal form.\\
+ \texttt{CLR} & Require OFF and healthy initialization, then clear the latch without enabling output.\\
+ \texttt{OPEN}, \texttt{VSB}, \texttt{BANG}, \texttt{VSBONLY}, \texttt{LINEFF} & Change mode/feed-forward in RAM and report pending settings.\\
+@@ -416,7 +416,7 @@
+ \end{longtable}
+ \endgroup
+ 
+-The sketch is built with the STM32 Arduino core. With \sourcefile{Code/PWR_2_0_1/firmware/build.ps1}, the source is copied into a correctly named Arduino directory and F410 or Nucleo G071 is selected. F410 also requires the included \sourcefile{firmware/stm32f410.ld} and 96 KiB application limit. The selected core uses the internal-HSI PLL clock setup; the port does not assume an external HSE crystal.
++The sketch is built with the STM32 Arduino core. With \sourcefile{Code/PWR_2_0_1/firmware/build.ps1}, the source is copied into a correctly named Arduino directory and F410 or Nucleo G071 is selected. The V2 build also requires the included \sourcefile{firmware/stm32f410.ld} and 96 KiB application limit. The selected core uses the internal-HSI PLL clock setup; the port does not assume an external HSE crystal.
+ 
+ \sourcefile{firmware/verify_f410_hex.py} checks the HEX image addresses against the reserved sector and intended flash regions. \sourcefile{firmware/test_web_protocol.py} tests the production dispatcher with mocked UART, control, and storage behavior. The browser source and tests are included with these files. HEX can preserve the reserved address gap during programming. A flat binary spans that gap; an unchecked binary write or full-chip erase can remove settings. The build script does not flash the board automatically.
+ 
+--- before/Backmatter/Appendices/J_Revised_Plan_Integration.tex
++++ revised/Backmatter/Appendices/J_Revised_Plan_Integration.tex
+@@ -7,7 +7,7 @@
+ 
+ The revised source and its 14-page PDF are \sourcefile{Data/project_records/V2_October_2026_Project_Definition.tex} and \sourcefile{Data/project_records/V2_October_2026_Project_Definition.pdf}. The earlier draft, \sourcefile{Data/project_records/Original_Project_Definition.tex}, includes the \SI{75}{\watt} continuous-validation milestone \cite{projectEarlierPlan}.
+ 
+-The revised plan sets a \SI{65}{\watt} continuous minimum and keeps the \SI{100}{\watt} continuous target. The reported point at approximately \SI{85}{\watt} for V2 still needs to be repeated or explained. V2 includes the STM32F410/PWR-2 development; the modified V1.0 data are from the earlier assembly. The board, controller, settings, and raw files must be recorded together when the V2 test is repeated.
++The revised plan sets a \SI{65}{\watt} continuous minimum and keeps the \SI{100}{\watt} continuous target. The reported point at approximately \SI{85}{\watt} for V2 still needs to be repeated or explained. V2 includes the MCU/PWR-2 development; the modified V1.0 data are from the earlier assembly. The board, controller, settings, and raw files must be recorded together when the V2 test is repeated.
+ 
+ Section~\ref{sec:disc-plan-gap} explains the \SI{15}{\watt} and \SI{20.11}{\watt} output shortfalls and the \SI{24.53}{\watt} screening input--output difference. The sustained-output limit needs to be identified in the next tests.
+ 
+@@ -24,7 +24,7 @@
+ \endhead
+ Objectives and acceptance & Chapter~\ref{ch:introduction} sets the revised scope. Section~\ref{sec:revised-plan-criteria} defines AP-01--AP-08, including the power levels and required completion records.\\
+ Repeat V2 and diagnose the gap & Section~\ref{sec:method-plan-validation} defines the baseline repeat, measurement boundaries, staged loading, and controlled-change method. Section~\ref{sec:disc-plan-gap} ranks the questions the missing tests need to resolve.\\
+-V2 circuit and software & Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} document the F410 hardware and controller. Appendices~\ref{app:firmware} and \ref{app:software-tools} explain the software; the complete source follows in Appendices~\ref{app:full-embedded-source} and \ref{app:full-supporting-source}.\\
++V2 circuit and software & Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} document the V2 circuit and MCU firmware. Appendices~\ref{app:firmware} and \ref{app:software-tools} explain the software; the complete source follows in Appendices~\ref{app:full-embedded-source} and \ref{app:full-supporting-source}.\\
+ V3 edge-card implementation & Section~\ref{sec:hw-v3-plan} describes the reduced edge-card layout, removal of the USB-PD section, and the replacement magnetics and hardware checks still needed. Section~\ref{sec:res-v3-design} reports the design outcome.\\
+ PDO/PPS, thermal, and stability tests & Section~\ref{sec:method-plan-validation} identifies the required protocol, dynamic, protection, and defined-duration tests. Section~\ref{sec:res-revised-plan} states which records are available.\\
+ Power density and fallback & Section~\ref{sec:method-density} defines a common assembly-volume and continuous-power basis. Section~\ref{sec:res-revised-plan} distinguishes the V3 design-volume estimate from the outstanding complete-system power-density comparison and readiness decision.\\
+--- before/Backmatter/Appendices/B_Hardware_Documentation.tex
++++ revised/Backmatter/Appendices/B_Hardware_Documentation.tex
+@@ -16,7 +16,7 @@
+ Manufactured V1.0 PCB & Board used for prototype bring-up and final tests\\
+ Schematic V1.0 & Original design reference reproduced below\\
+ Schematic V1.1 & Later corrections and part changes; these were not all confirmed on the tested board\\
+-Earlier V2 F410 schematic & Initial circuit reference for the F410 design\\
++Earlier V2 schematic & Initial circuit reference for the V2 design\\
+ V2 schematic and PCB & Four-sheet schematic and 31-page PCB print set; reproduced in Section~\ref{sec:app-v2-oct27}\\
+ Final resonant inductors & Two Wurth 7443640470B \SI{4.7}{\micro\henry} inductors in series\\
+ Controller & STM32G071RBT6 and the final PWR-1.9.20 firmware family\\
+@@ -84,7 +84,7 @@
+ \FloatBarrier
+ 
+ \section{Complete Schematics}
+-The schematic sets below cover V1.0, V1.1, and an earlier V2 F410 circuit drawing. The complete V2 schematic and PCB design follow in Section~\ref{sec:app-v2-oct27} and support the hardware description in \cref{sec:hw-v2}. The vector pages keep component labels readable when enlarged. V1.0 was used for the manufactured test board; V1.1 contains the later corrections listed above. Each set contains the project hierarchy, USB-C output, power and sensing circuits, and STM32 controller.
++The schematic sets below cover V1.0, V1.1, and an earlier V2 circuit drawing. The complete V2 schematic and PCB design follow in Section~\ref{sec:app-v2-oct27} and support the hardware description in \cref{sec:hw-v2}. The vector pages keep component labels readable when enlarged. V1.0 was used for the manufactured test board; V1.1 contains the later corrections listed above. Each set contains the project hierarchy, USB-C output, power and sensing circuits, and MCU.
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V1_0.pdf}
+@@ -103,7 +103,7 @@
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V1_0.pdf}
+-\caption{Schematic V1.0, sheet 4: STM32 controller.}\label{fig:app-schematic-v10-sheet4}
++\caption{Schematic V1.0, sheet 4: MCU.}\label{fig:app-schematic-v10-sheet4}
+ \end{figure}\end{landscape}
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+@@ -123,28 +123,28 @@
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V1_1.pdf}
+-\caption{Schematic V1.1, sheet 4: STM32 controller.}\label{fig:app-schematic-v11-sheet4}
++\caption{Schematic V1.1, sheet 4: MCU.}\label{fig:app-schematic-v11-sheet4}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+-\caption{Earlier V2 F410 schematic, sheet 1: Project hierarchy.}\label{fig:app-schematic-v2-sheet1}
++\caption{Earlier V2 schematic, sheet 1: Project hierarchy.}\label{fig:app-schematic-v2-sheet1}
+ \end{figure}\end{landscape}
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=2,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+-\caption{Earlier V2 F410 schematic, sheet 2: USB-C output stage. Values are those in the drawing.}\label{fig:app-schematic-v2-sheet2}
++\caption{Earlier V2 schematic, sheet 2: USB-C output stage. Values are those in the drawing.}\label{fig:app-schematic-v2-sheet2}
+ \end{figure}\end{landscape}
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=3,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+-\caption{Earlier V2 F410 schematic, sheet 3: Power stage, local supplies, and sensing. Unspecified resonant parts and divider labels require confirmation as explained in \cref{sec:hw-v2}.}\label{fig:app-schematic-v2-sheet3}
++\caption{Earlier V2 schematic, sheet 3: Power stage, local supplies, and sensing. Unspecified resonant parts and divider labels require confirmation as explained in \cref{sec:hw-v2}.}\label{fig:app-schematic-v2-sheet3}
+ \end{figure}\end{landscape}
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+-\caption{Earlier V2 F410 schematic, sheet 4: STM32F410CBU6 and direct PA0--PA2 feedback connections.}\label{fig:app-schematic-v2-sheet4}
++\caption{Earlier V2 schematic, sheet 4: MCU and direct PA0--PA2 feedback connections.}\label{fig:app-schematic-v2-sheet4}
+ \end{figure}\end{landscape}
+ 
+ 
+@@ -185,7 +185,7 @@
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
+-\caption{V2 schematic, sheet 4: STM32F410 controller and service connections.}\label{fig:app-v2-oct27-schematic-4}
++\caption{V2 schematic, sheet 4: MCU and service connections.}\label{fig:app-v2-oct27-schematic-4}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+--- before/Backmatter/Appendices/H_Full_Embedded_Source.tex
++++ revised/Backmatter/Appendices/H_Full_Embedded_Source.tex
+@@ -2,7 +2,7 @@
+ \label{app:full-embedded-source}
+ 
+ Both complete controller files are included here. PWR-1.9.20 is the
+-archived G071 version used to explain the measurements. PWR-2.0.1 is
++archived version used to explain the V1.0 measurements. PWR-2.0.1 is
+ the later V2 controller source for F410 and G071 targets, including
+ the browser protocol. The changes can be traced through the two files, while
+ the earlier measurements remain associated with their original code.
+--- before/Backmatter/Appendices/F_Contribution_Provenance.tex
++++ revised/Backmatter/Appendices/F_Contribution_Provenance.tex
+@@ -2,7 +2,7 @@
+ \label{app:provenance}
+ 
+ The project began with a charge-pump topology and planar magnetics from earlier
+-work. The converter hardware was built around those designs, and the STM32 controller
++work. The converter hardware was built around those designs, and the MCU firmware
+ was developed for this thesis. The assembly was brought up and tested. The table
+ below credits the original designs and identifies the thesis contributions.
+ 
+@@ -15,8 +15,8 @@
+ Charge-pump PFC and resonant principle & Ammar et al. \cite{ammar2020chargepump,ammar2021led} & Adaptation to the present hardware and detachable-output application\\
+ Planar inductor and transformer & Earlier DTU magnetic-design package; component measurements attributed to M\'ani Gautason & Electrical, mechanical, PCB, and thermal integration\\
+ V1.0/V1.1 schematics and PCB & Project schematics and PCB files & Circuit implementation, prototype bring-up, and documented revisions\\
+-STM32 firmware & Project source and archived revisions & DMA acquisition, burst regulation, loaded/no-load control, supervision, diagnostics\\
+-V2 F410 hardware and PWR-2.0.1 software & Later project schematic and frozen source snapshot & MCU port, peripheral mapping, flash settings journal, browser protocol, and documented software checks; no transferred V1.0 performance claim\\
++MCU firmware & Project source and archived revisions & DMA acquisition, burst regulation, loaded/no-load control, supervision, diagnostics\\
++V2 MCU hardware and PWR-2.0.1 software & Later project schematic and frozen source snapshot & MCU port, peripheral mapping, flash settings journal, browser protocol, and documented software checks; no transferred V1.0 performance claim\\
+ Browser and analysis tools & Project application, tests, and measurement-processing scripts & Command handling, local experiment logs, exports, software verification, and reproducible thesis figures\\
+ Experimental measurements & Test workbooks, raw scope exports, instrument screens, thermal images & Characterization and interpretation of the assembled prototype\\
+ Device descriptions & Manufacturer documentation cited in the references & Component selection and operating context\\
+--- before/Backmatter/Appendices/A_Analytical_Equations.tex
++++ revised/Backmatter/Appendices/A_Analytical_Equations.tex
+@@ -49,7 +49,7 @@
+ 
+ \section{Burst Timing and Protection}
+ 
+-For the measured G071 controller, the enable fraction \(d_{\mathrm{EN}}\) applies to PA10, while \(f_s=\SI{1}{\mega\hertz}\) is the PA8/PA9 carrier frequency. The basic voltage-window rule is
++For the MCU on the measured V1.0 prototype, the enable fraction \(d_{\mathrm{EN}}\) applies to PA10, while \(f_s=\SI{1}{\mega\hertz}\) is the PA8/PA9 carrier frequency. The basic voltage-window rule is
+ \begin{equation}
+ d_{\mathrm{EN}}=\begin{cases}
+ d_{\mathrm{high}},&V_{\mathrm{sec}}\leq V_{\mathrm{low}},\\
+--- before/Backmatter/Appendices/I_Full_Supporting_Source.tex
++++ revised/Backmatter/Appendices/I_Full_Supporting_Source.tex
+@@ -21,16 +21,16 @@
+ \lstinputlisting[language={},style=fullsource,caption={Firmware build script: complete source.},label={lst:full-support-1}]{Code/PWR_2_0_1/firmware/build.ps1}
+ 
+ \Needspace{10\baselineskip}
+-\section{F410 linker layout}
++\section{MCU linker layout}
+ \noindent\sourcefile{Code/PWR_2_0_1/firmware/stm32f410.ld}; 121 physical lines.
+ 
+-\lstinputlisting[language={},style=fullsource,caption={F410 linker layout: complete source.},label={lst:full-support-2}]{Code/PWR_2_0_1/firmware/stm32f410.ld}
++\lstinputlisting[language={},style=fullsource,caption={MCU linker layout: complete source.},label={lst:full-support-2}]{Code/PWR_2_0_1/firmware/stm32f410.ld}
+ 
+ \Needspace{10\baselineskip}
+-\section{F410 HEX verifier}
++\section{MCU HEX verifier}
+ \noindent\sourcefile{Code/PWR_2_0_1/firmware/verify_f410_hex.py}; 76 physical lines.
+ 
+-\lstinputlisting[language={},style=fullsource,caption={F410 HEX verifier: complete source.},label={lst:full-support-3}]{Code/PWR_2_0_1/firmware/verify_f410_hex.py}
++\lstinputlisting[language={},style=fullsource,caption={MCU HEX verifier: complete source.},label={lst:full-support-3}]{Code/PWR_2_0_1/firmware/verify_f410_hex.py}
+ 
+ \Needspace{10\baselineskip}
+ \section{Firmware protocol host tests}

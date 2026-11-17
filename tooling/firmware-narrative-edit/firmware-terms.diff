@@ -1,0 +1,570 @@
+--- before/Frontmatter/Abstract.tex
++++ descriptive/Frontmatter/Abstract.tex
+@@ -3,7 +3,7 @@
+ 
+ A USB-C laboratory power supply based on an earlier DTU charge-pump power-factor-correction (PFC) resonant converter was built and tested using the supplied planar magnetics. The controller was developed to handle a detachable load. Secondary voltage had to be regulated under load, while further charging had to be limited after disconnection because energy remained in the resonant tank and capacitors.
+ 
+-The switching frequency was kept fixed at a nominal \SI{1}{\mega\hertz}, and energy transfer was adjusted by changing the duration of gallium-nitride (GaN) half-bridge bursts with the microcontroller (MCU). Voltage feedback was converted into digital readings and transferred automatically to memory using direct memory access (DMA), avoiding repeated processor waits for individual measurements. The isolated secondary bulk bus was regulated using the final PWR-1.9.20 controller. Limited precharge was applied until feedback became available. Separate duty limits were used under load and at no load. The tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings are provided by a downstream output stage.
++The switching frequency was kept fixed at a nominal \SI{1}{\mega\hertz}, and energy transfer was adjusted by changing the duration of gallium-nitride (GaN) half-bridge bursts with the microcontroller (MCU). Voltage feedback was converted into digital readings and transferred automatically to memory using direct memory access (DMA), avoiding repeated processor waits for individual measurements. The isolated secondary bulk bus was regulated using the voltage-control firmware. Limited precharge was applied until feedback became available. Separate duty limits were used under load and at no load. The tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings are provided by a downstream output stage.
+ 
+ With an AC input recorded as \SI{240}{\volt}, \SI{50}{\hertz}, matched voltage and current readings at the \SI{20}{\volt} setting gave output powers of \SIrange{73.97}{79.89}{\watt} at the load. Average output voltage was \SIrange{19.973}{19.991}{\volt}, with recorded peak-to-peak ripple of \SIrange{0.416}{0.452}{\volt}. Logged power factor was 0.97--0.99 and current total harmonic distortion was \SIrange{2.23}{3.98}{\percent}. An initial efficiency estimate of \SIrange{76.5}{77.1}{\percent} was calculated from the paired input and output measurements. Uncertainty in their timing and calibration limits the accuracy of this estimate. Controller operation was recorded during the tested no-load and load-removal events. A thermal image labeled \SI{20}{\volt}, \SI{4}{\ampere} showed a maximum surface temperature of \SI{90.4}{\celsius}. Further loss measurements, improved heat removal, and protection-timing tests are still needed.
+ 
+--- before/Chapters/02_Background/08_Research_Gap.tex
++++ descriptive/Chapters/02_Background/08_Research_Gap.tex
+@@ -5,4 +5,4 @@
+ 
+ The selected semiconductors, supplied magnetics, auxiliary rails, sensing, and output interface were integrated. The controller had to start before isolated feedback was ready. Further energy transfer had to be limited at no load. The connector voltage, upstream bulk voltage, input current, and temperature were measured separately to check the combined behavior of the hardware and control.
+ 
+-The assembled prototype was tested with the PWR-1.9.20 controller. Later circuit corrections appear in schematic V1.1. The next chapter turns these application demands into targets and operating states for evaluating the supply.
++The assembled prototype was tested with the developed voltage-control firmware. Later circuit corrections appear in schematic V1.1. The next chapter turns these application demands into targets and operating states for evaluating the supply.
+--- before/Chapters/10_Results/12_Compliance_Table.tex
++++ descriptive/Chapters/10_Results/12_Compliance_Table.tex
+@@ -26,7 +26,7 @@
+ FR-04 & Reduced no-load energy & No-load means and development burst photographs & Partly assessed\\
+ FR-05 & Recovery after load changes & Retained load-removal screenshots; recovery band and timing absent & Qualitative evidence\\
+ FR-06 & Latched secondary OVP & Function present in source; controlled trip event absent & Not experimentally verified\\
+-FR-07 & ADC DMA acquisition & Circular ADC DMA in PWR-1.9.20; live timing logs incomplete & Implemented\\
++FR-07 & ADC DMA acquisition & Circular ADC DMA in the baseline firmware; live timing logs incomplete & Implemented\\
+ FR-08 & UART configuration and diagnostics & Commands present in source; complete run logs absent & Implemented\\
+ \midrule
+ PR-01 & \SI{100}{\watt} continuous target; revised \SI{65}{\watt} minimum; earlier \SI{75}{\watt} validation criterion & \SI{79.89}{\watt} maximum DC-derived point; thermal images without stabilization record & Continuous criteria unverified; \SI{100}{\watt} not demonstrated\\
+--- before/Chapters/10_Results/01_Prototype_Verification.tex
++++ descriptive/Chapters/10_Results/01_Prototype_Verification.tex
+@@ -7,6 +7,12 @@
+ fixed settings with a \SI{240}{\volt}, \SI{50}{\hertz} input. The selected output voltage was obtained at the tested loads. The voltage, switching,
+ power-quality, and temperature results below show how the supply operated
+ and what still needs to be checked before a continuous rating can be assigned.
++
++The identified final records used the baseline voltage-control firmware.
++The high-load record used an earlier revision, while several intermediate-
++voltage records do not identify a revision. The configurations are listed
++in Table~\ref{tab:prototype-identity}; the software stages are explained in
++\cref{sec:ctrl-firmware-identities}.
+ 
+ \begin{table}[htbp]
+ \centering
+--- before/Chapters/10_Results/10_Firmware_Comparison.tex
++++ descriptive/Chapters/10_Results/10_Firmware_Comparison.tex
+@@ -21,7 +21,7 @@
+ Manual bring-up & Open-loop or manually commanded PA10 with fixed carrier & Established switching for low-energy hardware checks\\
+ Early closed loop & Blocking acquisition and voltage/current-product experiments & Exposed unsuitable acquisition timing and incorrect interpretation of PA2 as output current\\
+ DMA voltage control & Circular PA0/PA1/PA2 acquisition and PA1 bang-bang regulation & Removed blocking conversion from the active loop and selected secondary voltage as the feedback variable\\
+-PWR-1.9.20 & Loaded averaged duty, \texttt{LBOOST}, no-load guarding, and optional PA0 duty cap & Final documented control family used in the identified main \SI{5}{\volt} and \SI{20}{\volt} rows\\
++Final voltage control & Loaded averaged duty, \texttt{LBOOST}, no-load guarding, and optional PA0 duty cap & Final documented control family used in the identified main \SI{5}{\volt} and \SI{20}{\volt} rows\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/10_Results/14_Revised_Plan_Status.tex
++++ descriptive/Chapters/10_Results/14_Revised_Plan_Status.tex
+@@ -11,10 +11,10 @@
+ 
+ The starting point matters. Here, \sourcefile{PDO20-80W-40A-001}, row 27,
+ gives \SI{19.9732}{\volt} at \SI{4}{\ampere}, or
+-\SI{79.8928}{\watt}, on the V1.0 assembly with PWR-1.9.20. The
++\SI{79.8928}{\watt}, on the V1.0 assembly with the baseline voltage-control firmware. The
+ reported \SI{85}{\watt} V2 point needs its own board, firmware, settings,
+ and measurement files. The V2 name alone does not establish that the earlier result came from this
+-assembly or the later integrated V2 implementation with PWR-2.0.1. The earlier
++assembly or the later integrated V2 design and its controller port. The earlier
+ setup must be reconstructed before the reported \SI{85}{\watt}
+ value can be used as a baseline for changes.
+ 
+--- before/Chapters/10_Results/07_Input_Power_Quality.tex
++++ descriptive/Chapters/10_Results/07_Input_Power_Quality.tex
+@@ -36,7 +36,7 @@
+ the trend because its power-quality entries repeat an associated measurement
+ set.
+ The \SI{4.7}{\ampere} capture gives Siglent PF 0.894 and ITECH THD
+-\SI{32.42}{\percent}, with PWR-1.9.10 listed as the firmware. The
++\SI{32.42}{\percent}, with an earlier firmware revision identified in Table~\ref{tab:prototype-identity}. The
+ difference includes changed firmware and measurement conditions as well as
+ load; it cannot be attributed to load alone.
+ 
+--- before/Chapters/08_Control_Firmware/11_State_Machine.tex
++++ descriptive/Chapters/08_Control_Firmware/11_State_Machine.tex
+@@ -59,7 +59,7 @@
+     {Rearm} (7.5,-5.7);
+ \end{tikzpicture}
+ \endgroup
+-\caption{Operating flow in PWR-1.9.20. Mode commands select OPEN manual duty or voltage control, whose branches include loaded/no-load operation and eligible soft holdoff at \texttt{BLOW} (default zero). OFF and latched faults inhibit PA10 globally.}
++\caption{Operating flow in the baseline firmware. Mode commands select OPEN manual duty or voltage control, whose branches include loaded/no-load operation and eligible soft holdoff at \texttt{BLOW} (default zero). OFF and latched faults inhibit PA10 globally.}
+ \label{fig:ctrl-state-diagram}
+ \end{figure}
+ 
+--- before/Chapters/08_Control_Firmware/08_Control_Law.tex
++++ descriptive/Chapters/08_Control_Firmware/08_Control_Law.tex
+@@ -28,7 +28,7 @@
+ Optional \texttt{LINEFF} adds a duty cap as primary voltage rises. The ratio \(V_{\mathrm{pri,ref}}/\widehat V_{\mathrm{pri}}\) is used within the configured scale bounds. The primary-voltage reading from PA0 therefore limits the high command, while the secondary-voltage reading from PA1 determines the voltage state and error.
+ 
+ \begin{minipage}{\linewidth}
+-\begin{lstlisting}[language=C,basicstyle=\ttfamily\small,caption={Functional summary of the active PWR-1.9.20 control path. Protection details are specified separately in Section~\ref{sec:ctrl-faults}.},label={lst:ctrl-pwr1920-summary}]
++\begin{lstlisting}[language=C,basicstyle=\ttfamily\small,caption={Functional summary of the baseline voltage-control path. Protection details are specified separately in Section~\ref{sec:ctrl-faults}.},label={lst:ctrl-pwr1920-summary}]
+ read and filter PA0, PA1, PA2 from the circular DMA buffer;
+ update loaded-state classification;
+ service soft no-load overvoltage holdoff;
+--- before/Chapters/08_Control_Firmware/02_Architecture_Timing.tex
++++ descriptive/Chapters/08_Control_Firmware/02_Architecture_Timing.tex
+@@ -54,13 +54,13 @@
+     (-2.65,-4.65) -- (-2.65,0) -- (sense.west);
+ \end{tikzpicture}
+ \endgroup
+-\caption{Control and timing paths in PWR-1.9.20. The controller uses secondary-bulk voltage feedback at PA1 for regulation and the primary-current signal at PA2 for load classification. PA10 enables power-stage bursts while PA8/PA9 retain the fixed carrier. OFF/fault forces PA10 low; soft holdoff requests \texttt{BLOW}, default zero.}
++\caption{Control and timing paths in the baseline firmware. The controller uses secondary-bulk voltage feedback at PA1 for regulation and the primary-current signal at PA2 for load classification. PA10 enables power-stage bursts while PA8/PA9 retain the fixed carrier. OFF/fault forces PA10 low; soft holdoff requests \texttt{BLOW}, default zero.}
+ \label{fig:ctrl-software-architecture}
+ \end{figure}
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Hardware resources in PWR-1.9.20.}
++\caption{Hardware resources used by the baseline firmware.}
+ \label{tab:fw-identity-timing-record}
+ \begin{tabularx}{\textwidth}{@{}p{0.22\textwidth}p{0.27\textwidth}X@{}}
+ \toprule
+--- before/Chapters/08_Control_Firmware/07_V2_DMA.tex
++++ descriptive/Chapters/08_Control_Firmware/07_V2_DMA.tex
+@@ -1,8 +1,8 @@
+ \subsection{Moving to DMA and Voltage Feedback}
+ \label{sec:ctrl-v2}
+ 
+-In PWR-1.7.0, continuous ADC1 acquisition through DMA was introduced. In PWR-1.9.20, the three-channel scan uses \texttt{ADC\_SAMPLETIME\_39CYCLES\_5} and circular transfers to memory. The foreground loop reads the buffer without waiting in \texttt{analogRead()}, leaving acquisition running during command handling and control decisions.
++Blocking reads were replaced with continuous ADC1 acquisition through DMA. In the baseline firmware, the three-channel scan uses \texttt{ADC\_SAMPLETIME\_39CYCLES\_5} and circular transfers to memory. The foreground loop reads the buffer without waiting in \texttt{analogRead()}, leaving acquisition running during command handling and control decisions.
+ 
+-The quantity used for feedback also had to be corrected. In early tests, voltage was multiplied by the current-related input, but PA2 carries half-bridge-current information rather than connector output current. That product was removed from active regulation, and the loop was closed on secondary voltage. The \texttt{POWER} command, \texttt{KP}, \texttt{KI}, and earlier power-feedback fields remain for compatibility or diagnostics. They do not select an active PI output-power controller in PWR-1.9.20.
++The quantity used for feedback also had to be corrected. In early tests, voltage was multiplied by the current-related input, but PA2 carries half-bridge-current information rather than connector output current. That product was removed from active regulation, and the loop was closed on secondary voltage. The \texttt{POWER} command, \texttt{KP}, \texttt{KI}, and earlier power-feedback fields remain for compatibility or diagnostics. They do not select an active PI output-power controller in the baseline firmware.
+ 
+ ADC acquisition and the interpretation of the sensing signals were changed at separate stages. These changes, together with the later state and burst changes, led to the final controller. The measurements do not isolate a performance gain from DMA alone.
+--- before/Chapters/08_Control_Firmware/chapter.tex
++++ descriptive/Chapters/08_Control_Firmware/chapter.tex
+@@ -3,7 +3,44 @@
+ 
+ Firmware is the program run by the microcontroller (MCU). It reads the sensing inputs, decides how much switching is needed, and commands the driver through output pins. The labels PA0, PA1, and PA2 identify the sensing connections for primary voltage, secondary-bulk voltage, and primary half-bridge current. On the original prototype, PA8 and PA9 carry the switching commands and PA10 enables their bursts. These names identify MCU connections; they are not measured voltages or currents by themselves. The basic pin naming and signal paths are introduced in \cref{sec:intro-controller-basics}.
+ 
+-The hardware could transfer power, but a detachable load required more than a fixed switching command. At startup, the secondary supply must first be charged before valid feedback is available. Transfer must then be increased under load and reduced after load removal. The carrier was kept fixed, and enable bursts were used to meet these requirements. This chapter covers the PWR-1.9.20 controller used for the final measurements, followed by the PWR-2.0.1 port for V2 hardware and browser logging. Both complete sources are included in Appendix~\ref{app:full-embedded-source}.
++The hardware could transfer power, but a detachable load required more than a fixed switching command. At startup, the secondary supply must first be charged before valid feedback is available. Transfer must then be increased under load and reduced after load removal. The carrier was kept fixed, and enable bursts were used to meet these requirements. This chapter follows the controller from initial switching tests to continuous measurement, voltage regulation, and the later V2 hardware port. Browser commands and logging were then added. Both complete controller sources are included in Appendix~\ref{app:full-embedded-source}.
++
++\section{Development Stages and Software Identification}
++\label{sec:ctrl-firmware-identities}
++
++The first control programs were used to bring up the converter with
++manually selected switching commands. Voltage feedback was then added.
++The measurement process was moved to DMA so that it could run while the
++MCU handled control decisions. The resulting voltage-control firmware
++became the baseline for the final identified tests. Its control structure
++was retained when the program was adapted to the integrated V2 board.
++
++The project software was assigned revision identifiers beginning with
++\texttt{PWR}, followed by version numbers. These identify saved programs;
++they are separate from the V1, V2, and V3 hardware names. The two archived
++controller files are identified in Table~\ref{tab:ctrl-software-identities}.
++Earlier test records can refer to earlier software revisions, so a
++recorded identifier remains relevant when reproducing a particular test.
++
++\begin{table}[htbp]
++\centering
++\small
++\caption{Names used for the two archived controller programs.}
++\label{tab:ctrl-software-identities}
++\begin{tabularx}{\textwidth}{@{}L{0.22\textwidth}L{0.19\textwidth}Y@{}}
++\toprule
++Development stage & Software identifier & Role in this thesis\\
++\midrule
++Baseline voltage-control firmware & PWR-1.9.20 & Controller associated with the identified final V1.0 test records\\
++Archived V2 firmware & PWR-2.0.1 & Hardware port with browser commands and logging; not an identification of the later bench-run firmware\\
++\bottomrule
++\end{tabularx}
++\end{table}
++\FloatBarrier
++
++The control behavior is described below using these development stages.
++The full software history and source-file details are given in
++Appendix~\ref{app:firmware}.
+ 
+ \input{Chapters/08_Control_Firmware/01_Control_Objectives}
+ \input{Chapters/08_Control_Firmware/02_Architecture_Timing}
+--- before/Chapters/08_Control_Firmware/13_Timing_Resources.tex
++++ descriptive/Chapters/08_Control_Firmware/13_Timing_Resources.tex
+@@ -5,4 +5,4 @@
+ 
+ \texttt{STATUS} was used to inspect the last/maximum interval, overruns, ADC snapshot time, DMA state, requested/effective duty, envelope timing, skipped periods, and carrier-sync counts. These fields show where software delay occurs. An external capture is needed to measure the jitter distribution and its relationship to the switching waveform.
+ 
+-The source used for the measured baseline reports PWR-1.9.20. Older supporting text also carries PWR-1.9.13, so each test is identified by its source and runtime \texttt{VER}, together with its \texttt{EXPORT}. Calibration, thresholds, loaded/no-load settings, and timing are saved in the export for each run. Appendix~\ref{app:firmware} gives the command reference. The available waveforms and logs are discussed in Chapter~\ref{ch:results}.
++Older supporting notes name a different revision from the archived baseline. Each test therefore needs its source and runtime \texttt{VER} response recorded together with its \texttt{EXPORT}. Calibration, thresholds, loaded/no-load settings, and timing are saved in the export for each run. Appendix~\ref{app:firmware} gives the command reference. The available waveforms and logs are discussed in Chapter~\ref{ch:results}.
+--- before/Chapters/08_Control_Firmware/14_Version_Comparison.tex
++++ descriptive/Chapters/08_Control_Firmware/14_Version_Comparison.tex
+@@ -1,7 +1,7 @@
+ \section{How the Controller Changed}
+ \label{sec:ctrl-comparison}
+ 
+-ADC acquisition, feedback interpretation, and burst behavior were revised as their limitations became clear during bring-up. \Cref{tab:ctrl-version-identity} lists V0, V1, V2, and the final controller in that order. These labels mark development stages and explain the design choices. A matched comparison would be needed to assign a performance gain to any one change.
++ADC acquisition, feedback interpretation, and burst behavior were revised as their limitations became clear during bring-up. \Cref{tab:ctrl-version-identity} follows the progression from open-loop commands through blocking and DMA-based feedback to the final baseline. The stages are named by their control behavior so they remain distinct from the V1, V2, and V3 hardware revisions. A matched comparison would be needed to assign a performance gain to any one change.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -11,10 +11,10 @@
+ \toprule
+ Stage & Implementation & Purpose\\
+ \midrule
+-V0 & Open-loop carrier and enable commands & Verify timing and basic energy transfer\\
+-V1 & Voltage feedback with blocking acquisition & Establish initial closed-loop behavior\\
+-V2 & Continuous ADC DMA and revised feedback interpretation & Remove blocking reads and regulate PA1 voltage\\
+-PWR-1.9.20 & Burst-edge alignment requests, no-load guard, and loaded duty trim & Final control used with the documented prototype\\
++Open loop & Open-loop carrier and enable commands & Verify timing and basic energy transfer\\
++Blocking feedback & Voltage feedback with blocking acquisition & Establish initial closed-loop behavior\\
++DMA feedback & Continuous ADC DMA and revised feedback interpretation & Remove blocking reads and regulate PA1 voltage\\
++Final baseline & Burst-edge alignment requests, no-load guard, and loaded duty trim & Final control used with the documented prototype\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/08_Control_Firmware/01_Control_Objectives.tex
++++ descriptive/Chapters/08_Control_Firmware/01_Control_Objectives.tex
+@@ -3,6 +3,6 @@
+ 
+ The secondary supply had to be brought up at startup and its bulk voltage maintained under load. Transfer had to be reduced after load removal and inhibited on a fault. The enable envelope was used to meet these requirements without changing the resonant circuit's carrier timing.
+ 
+-In PWR-1.9.20, the secondary-bulk voltage \(V_{\mathrm{sb}}\) is regulated using its sensing input, PA1. The MPQ4242 sets connector VBUS downstream. The primary-voltage reading at PA0 can limit duty through feed-forward: the allowed command is reduced as the sensed primary voltage rises. The half-bridge-current reading at PA2 is used to classify loaded and unloaded operation and, when enabled, apply current protection. It is a primary-side signal and cannot serve as direct USB-C output-current feedback.
++In the baseline firmware, the secondary-bulk voltage \(V_{\mathrm{sb}}\) is regulated using its sensing input, PA1. The MPQ4242 sets connector VBUS downstream. The primary-voltage reading at PA0 can limit duty through feed-forward: the allowed command is reduced as the sensed primary voltage rises. The half-bridge-current reading at PA2 is used to classify loaded and unloaded operation and, when enabled, apply current protection. It is a primary-side signal and cannot serve as direct USB-C output-current feedback.
+ 
+ Energy transfer is controlled through the average duty of the MCU burst-enable output PA10 on the original prototype, \(d_{\mathrm{EN}}\). Duty is the fraction of an enable period during which switching is permitted. The two carrier-command outputs PA8 and PA9 carry the fixed \SI{1}{\mega\hertz} carrier. Average energy transfer is adjusted by changing the enabled groups of cycles, with the carrier frequency fixed.
+--- before/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
++++ descriptive/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
+@@ -1,9 +1,9 @@
+ \section{V2 Controller Port and Browser Interface}
+ \label{sec:ctrl-pwr2-port}
+ 
+-The V2 prototype uses an STM32F410CBU6 controller on the converter board in place of the STM32G071 Nucleo arrangement. The port was implemented in PWR-2.0.0, and browser UART control was added in PWR-2.0.1. This V2 is the project prototype. The V2 label in Section~\ref{sec:ctrl-v2} refers to the earlier DMA-control stage used in its software development.
++The V2 prototype uses an STM32F410CBU6 controller on the converter board in place of the STM32G071 Nucleo arrangement. The hardware port was implemented first, followed by browser control and logging over the UART. These changes belong to the V2 hardware development; the earlier DMA-based feedback work is described in Section~\ref{sec:ctrl-v2}.
+ 
+-The PWR-1.9.20 voltage-control structure was kept, with conditional definitions for board-dependent functions. The same PWR-2.0.1 sketch can target either MCU. For V2, the complementary carrier, enable timer, ADC/DMA setup, and saved settings were changed. The control law was not changed. Appendix~\ref{app:firmware} maps the functions and commands. The complete PWR-1.9.20 and PWR-2.0.1 sources are included in Appendix~\ref{app:full-embedded-source}.
++The baseline voltage-control structure was kept, with conditional definitions for board-dependent functions. The same archived V2 firmware can target either MCU. For V2, the complementary carrier, enable timer, ADC/DMA setup, and saved settings were changed. The control law was not changed. Appendix~\ref{app:firmware} maps the functions and commands. The complete baseline and V2 firmware sources are included in Appendix~\ref{app:full-embedded-source}; their software identifiers are given in \cref{sec:ctrl-firmware-identities}.
+ 
+ \subsection{Peripheral Changes}
+ 
+@@ -11,7 +11,7 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Changes from the measured-baseline controller to the F410 target in PWR-2.0.1.}
++\caption{Changes from the measured-baseline controller to the V2 controller port.}
+ \label{tab:ctrl-pwr2-port}
+ \small
+ \begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.31\textwidth}Y@{}}
+@@ -42,7 +42,7 @@
+ 
+ \subsection{Browser Commands Without Blocking Control}
+ 
+-In PWR-2.0.1, an opt-in protocol was added over the existing \SI{115200}{baud} UART. \texttt{WEB HELLO} selects JSON replies without enabling output. Command IDs and acknowledgments distinguish requested changes from accepted ones. On the MCU, input is limited to 96 characters, the transmit queue has four fixed-size frames, and each loop pass sends at most 16 bytes when the UART has space. Periodic samples are dropped when the queue is congested so old telemetry does not delay the controller.
++An opt-in browser protocol was added to the V2 firmware over the existing \SI{115200}{baud} UART. \texttt{WEB HELLO} selects JSON replies without enabling output. Command IDs and acknowledgments distinguish requested changes from accepted ones. On the MCU, input is limited to 96 characters, the transmit queue has four fixed-size frames, and each loop pass sends at most 16 bytes when the UART has space. Periodic samples are dropped when the queue is congested so old telemetry does not delay the controller.
+ 
+ Browser \texttt{ON} also requires an active communication lease. The host renews it with \texttt{PING}. Expiry requests enable inhibition before an event is formatted. This check runs in the background loop and depends on execution continuing. Blocking autotuning is excluded from the web interface, and a browser settings save requires OFF. Pending RAM changes and completed flash saves are reported separately.
+ 
+--- before/Chapters/05_Modeling_Simulation/01_Objectives.tex
++++ descriptive/Chapters/05_Modeling_Simulation/01_Objectives.tex
+@@ -5,4 +5,4 @@
+ 
+ The supplied LTspice circuits describe the predecessor rectifier and its passive values. The inductor and transformer parameters in Chapter~\ref{ch:analysis} come from the supplied magnetic measurements. These sources are used for an initial check of the prototype, with the differences between the earlier circuit and the final board taken into account.
+ 
+-For the final USB-C circuit and PWR-1.9.20 controller, the analytical expectations are compared with measurements. The comparison focuses on bus ripple, turn-on current, energy added by a burst, and the effect of component or command changes on these quantities.
++For the final USB-C circuit and voltage-control firmware, the analytical expectations are compared with measurements. The comparison focuses on bus ripple, turn-on current, energy added by a burst, and the effect of component or command changes on these quantities.
+--- before/Chapters/09_Experimental_Methods/07_Control_Tests.tex
++++ descriptive/Chapters/09_Experimental_Methods/07_Control_Tests.tex
+@@ -1,7 +1,7 @@
+ \subsection{Control, No-Load, and Load-Removal Tests}
+ \label{sec:method-control}
+ 
+-For the final PWR-1.9.20 tests, the conditioned secondary-bulk-voltage signal
++During the final baseline-control tests, the conditioned secondary-bulk-voltage signal
+ at input PA1 was read continuously by the analog-to-digital converter
+ (ADC). Direct memory access (DMA) copied those readings to memory without
+ making the controller wait for each conversion. The burst-enable output
+--- before/Chapters/09_Experimental_Methods/01_Objectives.tex
++++ descriptive/Chapters/09_Experimental_Methods/01_Objectives.tex
+@@ -9,7 +9,7 @@
+ losses and guide further design changes.
+ 
+ The V1.0 PCB was tested with two series resonant inductors. V1.1 is the corrected
+-schematic reference, and PWR-1.9.20 was the final controller. Where available,
++schematic reference. The baseline firmware used for the identified final runs is described in Section~\ref{sec:ctrl-firmware-identities}. Where available,
+ UART \texttt{VER}, \texttt{STATUS}, and \texttt{EXPORT} output identify the
+ active version, mode, calibration, and thresholds. These settings matter when
+ tests are compared because they can change the burst pattern.
+--- before/Chapters/01_Introduction/05_Contributions_Attribution.tex
++++ descriptive/Chapters/01_Introduction/05_Contributions_Attribution.tex
+@@ -3,7 +3,7 @@
+ 
+ The starting point is the charge-pump conversion principle and analytical design method developed by Ammar et al. \cite{ammar2020chargepump,ammar2021led}. The LTspice files and planar-magnetics designs also came from that work. The operating prototypes were developed from these supplied designs. Their conversion principle and fitted magnetic assemblies came from the earlier work; a replacement planar-magnetic set was not installed.
+ 
+-The PCB was designed and assembled for this project. The supplied inductor and transformer were integrated, and the power, auxiliary, sensing, and output-interface circuits were implemented. The MCU firmware was developed in stages, from open-loop bring-up to the DMA-based PWR-1.9.20 controller, with startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition.
++The PCB was designed and assembled for this project. The supplied inductor and transformer were integrated, and the power, auxiliary, sensing, and output-interface circuits were implemented. The MCU firmware was developed in stages, from open-loop bring-up to the DMA-based voltage controller, with startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition.
+ 
+ The firmware was then adapted for the MCU on V2. The revised board integrates the control, isolated feedback, local supplies, and USB-C output with the power stage. Browser control and logging were added, and the resonant tank was modified during powered testing. The schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
+ 
+--- before/Chapters/01_Introduction/06_Scope_Limitations.tex
++++ descriptive/Chapters/01_Introduction/06_Scope_Limitations.tex
+@@ -3,7 +3,7 @@
+ 
+ The thesis covers development from the first open-frame laboratory prototype through the integrated V2 board and the reduced V3 edge-card design. The manufactured V1.0 board was tested after bring-up modifications, and later corrections were recorded in schematic V1.1. The V2 design and its preliminary powered tests form the next stage. The hardware chapter identifies the drawing and fitted configuration used at each stage.
+ 
+-The revised plan identifies the integrated controller and PWR-2 firmware as the V2 development described here. It reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. That measured result is kept separate from the reported V2 point and the later tank and thermal observations. Section~\ref{sec:revised-plan-criteria} also tracks the V3 layout work, its remaining release checks, and the matched V2--V3 comparison.
++The revised plan identifies the integrated controller and its ported firmware as the V2 development described here. It reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. That measured result is kept separate from the reported V2 point and the later tank and thermal observations. Section~\ref{sec:revised-plan-criteria} also tracks the V3 layout work, its remaining release checks, and the matched V2--V3 comparison.
+ 
+ The output section was tested electrically at fixed settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}. PPS characterization remains part of the revised plan. USB-IF protocol and interoperability tests, product-safety qualification, surge and ESD qualification, conducted and radiated emissions tests, and long-duration reliability tests remain outside the completed test set.
+ 
+--- before/Chapters/01_Introduction/08_V2_Prototype.tex
++++ descriptive/Chapters/01_Introduction/08_V2_Prototype.tex
+@@ -27,7 +27,7 @@
+ USB-C output & MPQ4242 output stage downstream of the isolated secondary bulk bus\\
+ Local supplies & BAC1S12SC bias supply and separate LMR54410 regulators for primary and secondary local supplies\\
+ PCB & Four copper layers, including internal GND and PWR layers\\
+-Archived timing & Nominal \SI{1}{\mega\hertz} carrier and \SI{40}{\nano\second} programmed dead time in PWR-2.0.1\\
++Archived timing & Nominal \SI{1}{\mega\hertz} carrier and \SI{40}{\nano\second} programmed dead time in the archived V2 controller code\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/03_Requirements_Architecture/07_Operating_Modes.tex
++++ descriptive/Chapters/03_Requirements_Architecture/07_Operating_Modes.tex
+@@ -7,7 +7,7 @@
+ 
+ \begin{table}[H]
+ \centering
+-\caption{States and options in firmware PWR-1.9.20.}
++\caption{States and options in the baseline firmware.}
+ \label{tab:req-states}
+ \begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}Y@{}}
+ \toprule
+--- before/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
++++ descriptive/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
+@@ -8,7 +8,7 @@
+ 
+ The revised plan sets \SI{65}{\watt} continuous output as the minimum and \SI{100}{\watt} continuous output as the target. The earlier plan schedules \SI{75}{\watt} continuous validation \cite{projectEarlierPlan}. The \SI{75}{\watt} level remains the intermediate test milestone. The \SI{65}{\watt} minimum and \SI{100}{\watt} target remain unchanged. Each continuous level requires a defined run time, stated ambient and cooling conditions, stable electrical operation, and a temperature record over the run.
+ 
+-The plan starts from a reported V2 maximum near \SI{85}{\watt} and calls for repeating that point under defined conditions or explaining the difference. The integrated MCU and PWR-2 firmware are part of this V2 development. An output of \SI{79.89}{\watt} was reached on the modified V1.0 assembly in the matched measurements analyzed here. Those measurements form a separate dataset. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} identify the later circuit and firmware needed for a matched V2 test.
++The plan starts from a reported V2 maximum near \SI{85}{\watt} and calls for repeating that point under defined conditions or explaining the difference. The integrated MCU and its ported firmware are part of this V2 development. An output of \SI{79.89}{\watt} was reached on the modified V1.0 assembly in the matched measurements analyzed here. Those measurements form a separate dataset. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} identify the later circuit and firmware needed for a matched V2 test.
+ 
+ \subsection{Design and Test Requirements}
+ 
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ descriptive/Chapters/12_Conclusion/03_Contributions.tex
+@@ -7,7 +7,7 @@
+ principle and planar-magnetic electromagnetic design came from the earlier
+ work.
+ 
+-PWR-1.9.20 was developed around continuous DMA acquisition, a fixed carrier
++The baseline voltage-control firmware was developed around continuous DMA acquisition, a fixed carrier
+ with synchronized burst enable, direct secondary-voltage regulation,
+ loaded duty adjustment, precharge, and no-load behavior. The current-sense
+ interpretation was corrected so that the control law matched the installed
+@@ -15,7 +15,7 @@
+ 
+ For V2, the MCU was integrated into the converter-board
+ design. Its timer and ADC assignments were adapted, and the flash
+-settings journal and PWR-2.0.1 browser commands and logging were
++settings journal, browser commands, and logging were
+ implemented. The four-layer PCB and circuit are documented in the
+ schematic and PCB prints. The complete archived firmware and supporting software are
+ included with the thesis. The tools have been checked in software.
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ descriptive/Chapters/07_Hardware/16_V2_F410.tex
+@@ -1,9 +1,9 @@
+ \section{V2 Hardware and MCU Integration}
+ \label{sec:hw-v2}
+ 
+-The V2 power board was developed with the MCU on the converter PCB \cite{ststm32f410ds}. The power stage, sensing, local supplies, and USB-C output were integrated on a four-layer PCB. The circuit and PCB design are documented in Section~\ref{sec:app-v2-oct27}. This V2 hardware is separate from the earlier controller stage called V2 in \cref{ch:control}, which marked the move to DMA acquisition.
++The V2 power board was developed with the MCU on the converter PCB \cite{ststm32f410ds}. The power stage, sensing, local supplies, and USB-C output were integrated on a four-layer PCB. The circuit and PCB design are documented in Section~\ref{sec:app-v2-oct27}. The V2 hardware followed the earlier DMA-based controller development described in \cref{ch:control}.
+ 
+-The V2 MCU retains the original prototype's fixed \SI{1}{\mega\hertz} carrier and enable-based control. In PWR-2.0.0, the peripherals were changed to match the MCU and drawing. In PWR-2.0.1, browser telemetry and commands were added. The same software can be compiled for either MCU. The selected target, assembly, and firmware version must be stated for each test.
++The V2 MCU retains the original prototype's fixed \SI{1}{\mega\hertz} carrier and enable-based control. The firmware peripherals were adapted to the MCU and circuit connections. Browser telemetry and commands were then added to the ported controller. The same software can be compiled for either MCU. The selected target, assembly, and firmware version must be stated for each test.
+ 
+ \subsection{V2 PCB and Physical Integration}
+ 
+@@ -59,7 +59,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The following timing settings are those in the archived PWR-2.0.1 source. Timer settings are stored in hardware control locations called registers. The auto-reload register (ARR) sets the counter limit, the channel compare register CCR1 sets the threshold that determines output transitions, and the dead-time generator field DTG programs the gap between complementary commands. These names refer to timer settings, not electrical pins. At the nominal \SI{100}{\mega\hertz} timer clock, the MCU code configures center-aligned TIM1 with ARR = 50, CCR1 = 25, and DTG = 4. These settings define a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time, using the timer functions in the MCU reference manual \cite{ststm32f410rm}. TIM5 schedules the enable envelope. For non-static transitions, the carrier update is polled for a bounded time, so software latency still affects the edge. The later powered trial used a reported \SI{60}{\nano\second} software dead-time setting (\cref{sec:res-v2-testing}); its firmware version was not recorded. Driver-input and switch-node captures are still needed to measure the effective dead time at the transistors and check enable alignment.
++The following timing settings are those in the archived V2 controller source. Timer settings are stored in hardware control locations called registers. The auto-reload register (ARR) sets the counter limit, the channel compare register CCR1 sets the threshold that determines output transitions, and the dead-time generator field DTG programs the gap between complementary commands. These names refer to timer settings, not electrical pins. At the nominal \SI{100}{\mega\hertz} timer clock, the MCU code configures center-aligned TIM1 with ARR = 50, CCR1 = 25, and DTG = 4. These settings define a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time, using the timer functions in the MCU reference manual \cite{ststm32f410rm}. TIM5 schedules the enable envelope. For non-static transitions, the carrier update is polled for a bounded time, so software latency still affects the edge. The later powered trial used a reported \SI{60}{\nano\second} software dead-time setting (\cref{sec:res-v2-testing}); its firmware version was not recorded. Driver-input and switch-node captures are still needed to measure the effective dead time at the transistors and check enable alignment.
+ 
+ ADC1 is the internal analog-to-digital converter that turns each input voltage into a numerical reading. It scans the scaled primary-voltage input PA0, secondary-bulk-voltage input PA1, and half-bridge-current input PA2 continuously. Direct memory access (DMA) copies the results into memory without requiring the processor to move each reading. On V2, DMA2 Stream0 Channel0 identifies the internal transfer route; it is separate from the ADC input-channel numbers in the pin table. Acquisition runs independently of the carrier. At the \SI{25}{\mega\hertz} ADC clock, 84 acquisition and 12 conversion cycles give calculated intervals of \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per frame. The reading at PA1 remains the secondary-bulk voltage feedback. The reading at PA2 remains the primary half-bridge-current signal for load classification and optional protection. The MCU change does not change these signal meanings or make either channel a connector output-current measurement on V2.
+ 
+--- before/Chapters/07_Hardware/08_Sensing.tex
++++ descriptive/Chapters/07_Hardware/08_Sensing.tex
+@@ -16,7 +16,7 @@
+ \label{tab:hw-sensing-evidence}
+ \begin{tabularx}{\textwidth}{@{}p{0.12\textwidth}p{0.32\textwidth}X@{}}
+ \toprule
+-Channel & Physical signal & Use in PWR-1.9.20\\
++Channel & Physical signal & Use in the baseline firmware\\
+ \midrule
+ PA0 & Primary-voltage indication & Diagnostics and optional high-line duty reduction\\
+ PA1 & Isolated secondary-bulk voltage & Active voltage regulation and overvoltage decisions\\
+--- before/Chapters/07_Hardware/01_Prototype_Overview.tex
++++ descriptive/Chapters/07_Hardware/01_Prototype_Overview.tex
+@@ -1,7 +1,7 @@
+ \section{Prototype and Board Revisions}
+ \label{sec:hw-overview}
+ 
+-One V1.0 PCB was assembled for bring-up and the final tests. It measures \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} and has four 1~oz copper layers. The final resonant branch had two Wurth Elektronik 7443640470B inductors connected in series. The final controller was PWR-1.9.20.
++One V1.0 PCB was assembled for bring-up and the final tests. It measures \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} and has four 1~oz copper layers. The final resonant branch had two Wurth Elektronik 7443640470B inductors connected in series. The voltage-control firmware used for the identified final tests is described in Chapter~\ref{ch:control}.
+ 
+ Changes made during bring-up were recorded in V1.1. The timer-pin assignment and charge-pump-diode connection were corrected. Some component values and positions were also changed. No separate V1.1 board was manufactured. Differences between the drawings and fitted parts are noted so the tested configuration can be reproduced. Both complete schematic revisions are included in Appendix~\ref{app:hardware}.
+ 
+--- before/Chapters/11_Discussion/03_Control_Contribution.tex
++++ descriptive/Chapters/11_Discussion/03_Control_Contribution.tex
+@@ -18,7 +18,7 @@
+ 
+ The current-sense interpretation was also corrected. PA2 reads the
+ half-bridge current-sense signal, so multiplying that signal by secondary
+-voltage could not give USB-C output power. In PWR-1.9.20, the voltage loop
++voltage could not give USB-C output power. In the baseline firmware, the voltage loop
+ is closed through PA1, while PA2 is used for load classification and
+ diagnostics.
+ 
+--- before/Backmatter/Appendices/G_Software_Tools.tex
++++ descriptive/Backmatter/Appendices/G_Software_Tools.tex
+@@ -3,7 +3,7 @@
+ 
+ The software is used to build the controller, run the later browser interface,
+ and reproduce the result figures. Chapter~\ref{ch:results}
+-uses measurements from the earlier assembly. The PWR-2.0.1 tools
++uses measurements from the earlier assembly. The archived V2 tools
+ support the V2 MCU and browser connection; powered V2 validation of these tools is still
+ needed. Their use is explained here, with complete source in
+ Appendix~\ref{app:full-supporting-source}. The frozen PWR-2.0.1
+--- before/Backmatter/Appendices/C_Firmware_Documentation.tex
++++ descriptive/Backmatter/Appendices/C_Firmware_Documentation.tex
+@@ -3,9 +3,9 @@
+ 
+ \section{Versions and Included Sources}
+ 
+-Two firmware versions are included. PWR-1.9.20 is the controller baseline for the measured assembly. PWR-2.0.1 is the V2 STM32F410CBU6 port of that voltage controller and can also be built for the STM32G071. Reproducing a test requires the board, calibration, and settings as well as the firmware version.
+-
+-The complete sketches are Listings~\ref{lst:full-pwr1920} and \ref{lst:full-pwr201} in Appendix~\ref{app:full-embedded-source}. The editable files are \sourcefile{Code/thesi_power_control_PWR_1_9_20.ino} and \sourcefile{Code/PWR_2_0_1/thesi_power_control.ino}. The frozen manifest, \sourcefile{Code/source_manifest.json}, lists file sizes, line counts, and SHA-256 hashes. PWR-1.9.20 contains 4207 lines; PWR-2.0.1 contains 4848. The line ranges below refer to the frozen PWR-2.0.1 sketch, including comments and blank lines.
++The two archived controller programs are identified in \cref{sec:ctrl-firmware-identities}. Their PWR identifiers refer to software revisions, not hardware generations or power ratings. PWR-1.9.20 is the baseline voltage-control firmware associated with the identified final measurements. PWR-2.0.1 is its V2 hardware port with browser communication and can target either MCU. Reproducing a test also requires the board, calibration, and saved settings.
++
++The complete sketches are Listings~\ref{lst:full-pwr1920} and \ref{lst:full-pwr201} in Appendix~\ref{app:full-embedded-source}. The editable files are \sourcefile{Code/thesi_power_control_PWR_1_9_20.ino} and \sourcefile{Code/PWR_2_0_1/thesi_power_control.ino}. The frozen manifest, \sourcefile{Code/source_manifest.json}, lists file sizes, line counts, and SHA-256 hashes. PWR-1.9.20 contains 4207 lines; PWR-2.0.1 contains 4848. The line ranges below refer to the archived V2 sketch, including comments and blank lines.
+ 
+ \begin{longtable}{@{}L{0.23\linewidth}L{0.69\linewidth}@{}}
+ \caption{Principal firmware milestones and their meaning.}
+@@ -16,7 +16,7 @@
+ \endhead
+ PWR-1.1--1.4 & Version reporting, startup precharge, pulse skipping, bounded commands, and deferred nonvolatile writes\\
+ PWR-1.5--1.6 & Power-estimation experiments and transition to voltage bang-bang control\\
+-PWR-1.7 & ADC circular DMA and minimum enabled burst length; the earlier V2 control-development stage\\
++PWR-1.7 & ADC circular DMA and minimum enabled burst length; the DMA-based control-development stage\\
+ PWR-1.8 & Carrier/enable synchronization experiments\\
+ PWR-1.9.0--1.9.10 & PA1 voltage feedback, no-load guard and recovery, optional line feed-forward, configuration export\\
+ PWR-1.9.11--1.9.18 & Soft OVP holdoff, carrier timing correction, enable-edge timing, loaded detection, averaged duty\\
+@@ -26,7 +26,7 @@
+ \bottomrule
+ \end{longtable}
+ 
+-The plan's V2 prototype and the PWR-2 MCU implementation are part of the same development. Earlier in the controller history, the name V2 was also used for the move to DMA acquisition. The board and firmware identities distinguish these stages here. Approximately \SI{80}{\watt} was measured on the earlier assembly. The plan's reported point at \SI{85}{\watt} for V2 still needs a matched repeat, and \SI{100}{\watt} remains the target.
++The plan's V2 prototype and the later MCU firmware port are part of the same development. The hardware generation and software revision must be identified separately; moving acquisition to DMA was a software-development step, not a new board. Approximately \SI{80}{\watt} was measured on the earlier assembly. The plan's reported point at \SI{85}{\watt} for V2 still needs a matched repeat, and \SI{100}{\watt} remains the target.
+ 
+ \section{MCU Targets and Peripheral Assignments}
+ \label{sec:app-fw-hardware}
+@@ -123,7 +123,7 @@
+ 
+ Closed control runs in the background loop. \texttt{CPER} is the minimum requested interval, not a timer interrupt period. The default \SI{25}{\micro\second} corresponds to a requested \SI{40}{\kilo\hertz}; \texttt{MAXRATE} selects \SI{20}{\micro\second}, or \SI{50}{\kilo\hertz}. Actual elapsed time and its maximum are recorded. An overrun is counted when elapsed time exceeds 1.5 times the request. UART activity, interrupts, and function execution can lengthen that interval. The longest software interval still needs to be checked by an external timing measurement.
+ 
+-\begin{lstlisting}[language=C,basicstyle=\ttfamily\scriptsize,caption={Decision order shared by the baseline and PWR-2.0.1 voltage-control path. BLOW defaults to zero.},label={lst:app-pwr1920}]
++\begin{lstlisting}[language=C,basicstyle=\ttfamily\scriptsize,caption={Decision order shared by the baseline and V2 voltage-control paths. BLOW defaults to zero.},label={lst:app-pwr1920}]
+ if (!enabled) return;
+ if (fault_latched) { request_zero_enable(); return; }
+ if (elapsed_us < CPER) return;
+@@ -193,7 +193,7 @@
+ \begingroup
+ \small
+ \begin{longtable}{@{}L{0.29\linewidth}L{0.63\linewidth}@{}}
+-\caption{Terminal command families in PWR-2.0.1.}\label{tab:app-fw-uart-packet}\\
++\caption{Terminal command families in the archived V2 firmware.}\label{tab:app-fw-uart-packet}\\
+ \toprule Command / setting & Action, units, or bounds\\\midrule
+ \endfirsthead
+ \toprule Command / setting & Action, units, or bounds\\\midrule
+@@ -232,7 +232,7 @@
+ \section{Parameter Reference}
+ \label{sec:app-fw-parameters}
+ 
+-The tables give canonical \texttt{SET} names, input units, parser bounds, and PWR-2.0.1 defaults. An accepted configuration is not an electrical operating rating. A flag is false below 0.5 and true at or above 0.5. Duty is stored in tenths of a percent. Inputs for integer timing and count fields are converted to integers before validation. The full parser and paste-ready \texttt{EXPORT} include alternate names.
++The tables give canonical \texttt{SET} names, input units, parser bounds, and archived V2 defaults. An accepted configuration is not an electrical operating rating. A flag is false below 0.5 and true at or above 0.5. Duty is stored in tenths of a percent. Inputs for integer timing and count fields are converted to integers before validation. The full parser and paste-ready \texttt{EXPORT} include alternate names.
+ 
+ Validation also enforces relationships: FEN stays within FMIN/FMAX; high duty exceeds low duty and stays below DMAX; loaded floor and tuning maximum stay below DMAX; VSET/VON stay within secondary limits; OVP cannot stay below VMAX; and soft trip/rearm depend on the other thresholds. A successful SET may therefore change the requested number. The validated export must be saved.
+ \begingroup
+@@ -381,7 +381,7 @@
+ \begingroup
+ \small
+ \begin{longtable}{@{}L{0.14\linewidth}L{0.78\linewidth}@{}}
+-\caption{Function navigation for the frozen PWR-2.0.1 sketch.}\label{tab:app-fw-function-map}\\
++\caption{Function navigation for the archived V2 sketch.}\label{tab:app-fw-function-map}\\
+ \toprule Lines & Functions and role\\\midrule
+ \endfirsthead
+ \toprule Lines & Functions and role\\\midrule
+@@ -423,12 +423,12 @@
+ \section{Build and Software Test Results}
+ \label{sec:app-fw-verification}
+ 
+-Both PWR-2.0.1 targets were rebuilt and source-level checks were run on October 19, 2026. Compilation, memory allocation, image addresses, and protocol behavior were checked. These were software checks, not powered V2 tests or measurements of sensor calibration, effective dead time, or converter power.
++Both archived V2 firmware targets were rebuilt and source-level checks were run on October 19, 2026. Compilation, memory allocation, image addresses, and protocol behavior were checked. These were software checks, not powered V2 tests or measurements of sensor calibration, effective dead time, or converter power.
+ 
+ \begin{table}[htbp]
+ \centering
+ \small
+-\caption{Checks run on the included PWR-2.0.1 snapshot.}
++\caption{Checks run on the archived V2 firmware.}
+ \label{tab:app-fw-software-checks}
+ \begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}Y@{}}
+ \toprule Check & Result\\\midrule
+--- before/Backmatter/Appendices/J_Revised_Plan_Integration.tex
++++ descriptive/Backmatter/Appendices/J_Revised_Plan_Integration.tex
+@@ -7,7 +7,7 @@
+ 
+ The revised source and its 14-page PDF are \sourcefile{Data/project_records/V2_October_2026_Project_Definition.tex} and \sourcefile{Data/project_records/V2_October_2026_Project_Definition.pdf}. The earlier draft, \sourcefile{Data/project_records/Original_Project_Definition.tex}, includes the \SI{75}{\watt} continuous-validation milestone \cite{projectEarlierPlan}.
+ 
+-The revised plan sets a \SI{65}{\watt} continuous minimum and keeps the \SI{100}{\watt} continuous target. The reported point at approximately \SI{85}{\watt} for V2 still needs to be repeated or explained. V2 includes the MCU/PWR-2 development; the modified V1.0 data are from the earlier assembly. The board, controller, settings, and raw files must be recorded together when the V2 test is repeated.
++The revised plan sets a \SI{65}{\watt} continuous minimum and keeps the \SI{100}{\watt} continuous target. The reported point at approximately \SI{85}{\watt} for V2 still needs to be repeated or explained. V2 includes the integrated MCU and the ported control firmware; the modified V1.0 data are from the earlier assembly. The board, controller, settings, and raw files must be recorded together when the V2 test is repeated.
+ 
+ Section~\ref{sec:disc-plan-gap} explains the \SI{15}{\watt} and \SI{20.11}{\watt} output shortfalls and the \SI{24.53}{\watt} screening input--output difference. The sustained-output limit needs to be identified in the next tests.
+ 
+--- before/Backmatter/Appendices/B_Hardware_Documentation.tex
++++ descriptive/Backmatter/Appendices/B_Hardware_Documentation.tex
+@@ -19,7 +19,7 @@
+ Earlier V2 schematic & Initial circuit reference for the V2 design\\
+ V2 schematic and PCB & Four-sheet schematic and 31-page PCB print set; reproduced in Section~\ref{sec:app-v2-oct27}\\
+ Final resonant inductors & Two Wurth 7443640470B \SI{4.7}{\micro\henry} inductors in series\\
+-Controller & STM32G071RBT6 and the final PWR-1.9.20 firmware family\\
++Controller & STM32G071RBT6 and the final voltage-control firmware\\
+ Planar magnetics & Supplied inductor and transformer assemblies from earlier DTU work\\
+ \bottomrule
+ \end{tabularx}
+--- before/Backmatter/Appendices/H_Full_Embedded_Source.tex
++++ descriptive/Backmatter/Appendices/H_Full_Embedded_Source.tex
+@@ -1,7 +1,7 @@
+ \chapter{Complete Embedded Source Code}
+ \label{app:full-embedded-source}
+ 
+-Both complete controller files are included here. PWR-1.9.20 is the
++Both complete controller files are included here. Their software identifiers and development roles are introduced in \cref{sec:ctrl-firmware-identities}. PWR-1.9.20 is the
+ archived version used to explain the V1.0 measurements. PWR-2.0.1 is
+ the later V2 controller source for F410 and G071 targets, including
+ the browser protocol. The changes can be traced through the two files, while
+--- before/Backmatter/Appendices/F_Contribution_Provenance.tex
++++ descriptive/Backmatter/Appendices/F_Contribution_Provenance.tex
+@@ -16,7 +16,7 @@
+ Planar inductor and transformer & Earlier DTU magnetic-design package; component measurements attributed to M\'ani Gautason & Electrical, mechanical, PCB, and thermal integration\\
+ V1.0/V1.1 schematics and PCB & Project schematics and PCB files & Circuit implementation, prototype bring-up, and documented revisions\\
+ MCU firmware & Project source and archived revisions & DMA acquisition, burst regulation, loaded/no-load control, supervision, diagnostics\\
+-V2 MCU hardware and PWR-2.0.1 software & Later project schematic and frozen source snapshot & MCU port, peripheral mapping, flash settings journal, browser protocol, and documented software checks; no transferred V1.0 performance claim\\
++V2 MCU hardware and controller port & Later project schematic and frozen source snapshot & MCU port, peripheral mapping, flash settings journal, browser protocol, and documented software checks; no transferred V1.0 performance claim\\
+ Browser and analysis tools & Project application, tests, and measurement-processing scripts & Command handling, local experiment logs, exports, software verification, and reproducible thesis figures\\
+ Experimental measurements & Test workbooks, raw scope exports, instrument screens, thermal images & Characterization and interpretation of the assembled prototype\\
+ Device descriptions & Manufacturer documentation cited in the references & Component selection and operating context\\
+--- before/Backmatter/Appendices/A_Analytical_Equations.tex
++++ descriptive/Backmatter/Appendices/A_Analytical_Equations.tex
+@@ -58,7 +58,7 @@
+ \end{cases}
+ \label{eq:app-bangbang}
+ \end{equation}
+-In PWR-1.9.20, loaded-duty averaging, boost recovery, no-load limits, and soft OVP holdoff were added to this basic rule as part of the thesis work. The equation gives the voltage-window behavior; Chapter~\ref{ch:control} covers the complete control path.
++In the baseline firmware, loaded-duty averaging, boost recovery, no-load limits, and soft OVP holdoff were added to this basic rule as part of the thesis work. The equation gives the voltage-window behavior; Chapter~\ref{ch:control} covers the complete control path.
+ 
+ With hard OVP enabled, secondary-voltage samples are checked when the threshold is exceeded. During an eligible light/no-load exception, \texttt{BLOW} (default zero) is requested and OVP remains unlatched while all required samples stay within \(\min(V_{\mathrm{OVP}}+\SI{4}{\volt},\SI{80}{\volt})\). Otherwise, the fault is latched and PA10 is disabled:
+ \begin{equation}

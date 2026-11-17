@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#122e32">
+  <meta name="description" content="Source-backed LC resonance and series-RLC calculations for the thesis converter.">
+  <title>Resonant tank · Converter test bench</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./calculator.css">
+  <script type="module" src="./resonance-ui.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#calculator-workspace">Skip to calculator</a>
+  <header class="app-header">
+    <a class="app-title" href="./index.html"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M3 15h5l3-8 5 15 3-9h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Power Lab<span class="brand-subtitle">CONVERTER TEST BENCH</span></span></a>
+    <span class="project-meta">USB-C charge-pump PFC <span>100 W design target</span></span>
+    <span class="header-meta">Engineering calculations</span>
+  </header>
+  <div class="workspace-nav">
+    <nav aria-label="Main navigation">
+      <a href="./index.html" class="nav-link">Monitor</a>
+      <a href="./calculator.html" class="nav-link active" aria-current="page">Calculator</a>
+      <a href="./index.html#experiments" class="nav-link">Sessions</a>
+      <a href="./index.html#connection-guide" class="nav-link">Connection</a>
+    </nav>
+    <span class="breadcrumb" aria-hidden="true">Calculator <span>/</span> Resonant tank</span>
+  </div>
+  <main id="calculator-workspace" class="calculator-main" tabindex="-1">
+    <div class="calculator-title"><div><h1>Resonant tank</h1><p>See what resonates, where each inductance belongs, and what the model leaves out.</p></div><span class="badge neutral">IDEAL LC / SERIES RLC</span></div>
+    <noscript><div class="app-alert">Enable JavaScript to use the calculator.</div></noscript>
+    <div id="calculation-error" class="app-alert" role="alert" hidden></div>
+    <aside id="selected-result-strip" class="selected-result-strip" aria-label="Selected calculation result"><div><span id="selected-result-label">Resonant frequency</span><strong id="selected-result-value">—</strong><small id="selected-result-note">Nominal LC calculation</small></div><a href="#results-title">Full result <span aria-hidden="true">↓</span></a></aside>
+    <div class="calculator-layout">
+      <section class="panel input-panel" aria-labelledby="inputs-title">
+        <div class="panel-heading"><h2 id="inputs-title">Circuit inputs</h2><button id="reset-preset" class="text-button" type="button">Reload preset</button></div>
+        <form id="tank-form" novalidate>
+          <div class="input-section preset-section">
+            <label class="field-label" for="tank-preset">Schematic / document preset</label>
+            <select id="tank-preset"></select>
+            <p id="preset-description" class="input-note"></p>
+            <div class="preset-state"><span id="preset-state" class="badge neutral">DOCUMENT VALUES</span><span id="preset-note"></span></div>
+          </div>
+          <div class="input-section">
+            <label class="field-label" for="solve-for">Solve for</label>
+            <select id="solve-for"><option value="frequency">Resonant frequency · fᵣ</option><option value="inductance">Discrete inductance · L</option><option value="capacitance">Equivalent capacitance · C</option></select>
+            <div class="calc-input-row target-row"><label for="target-frequency">Target resonance</label><div class="value-with-unit"><input id="target-frequency" type="number" min="0" step="any" inputmode="decimal" value="120"><select id="target-frequency-unit" aria-label="Target resonance unit"><option value="kHz">kHz</option><option value="MHz">MHz</option></select></div></div>
+            <p id="solve-note" class="input-note"></p>
+          </div>
+          <fieldset class="input-section"><legend>Series inductance</legend>
+            <div class="calc-input-row"><label for="discrete-inductance">Discrete inductor <span>L</span></label><div class="value-with-unit"><input id="discrete-inductance" type="number" min="0" step="any" inputmode="decimal"><span>µH</span></div></div>
+            <div class="calc-input-row"><label for="leakage-inductance">Transformer leakage <span>Llk</span></label><div class="value-with-unit"><input id="leakage-inductance" type="number" min="0" step="any" inputmode="decimal" placeholder="Not provided" aria-describedby="leakage-note"><span>µH</span></div></div>
+            <p id="leakage-note" class="input-note assumption-note"></p>
+          </fieldset>
+          <fieldset class="input-section transformer-inputs"><legend>Transformer magnetizing branch</legend>
+            <label class="field-label" for="transformer-reference">Measured transformer reference</label>
+            <select id="transformer-reference" aria-describedby="transformer-reference-note"><option value="custom">Not identified / manual values</option><option value="supplied-a">Use transformer A values</option><option value="supplied-b">Use transformer B values</option></select>
+            <p id="transformer-reference-note" class="input-note">A/B applies both leakage and Lm for comparison. The installed transformer identity is not recorded.</p>
+            <div class="calc-input-row"><label for="magnetizing-inductance">Magnetizing inductance <span>Lm · optional</span></label><div class="value-with-unit"><input id="magnetizing-inductance" type="number" min="0" step="any" inputmode="decimal" placeholder="Not provided" aria-describedby="magnetizing-input-note"><span>µH</span></div></div>
+            <p id="magnetizing-input-note" class="input-note">A separate primary-referred branch, not part of the series L sum. Blank means unknown.</p>
+            <details class="magnetics-reference"><summary>Measured A/B reference values</summary><div class="calc-table-wrap"><table class="magnetics-table"><caption class="sr-only">Supplied standalone transformer measurements</caption><thead><tr><th scope="col">Part</th><th scope="col">Leakage</th><th scope="col">Lm</th><th scope="col">Np/Ns</th></tr></thead><tbody><tr><th scope="row">A</th><td>16.42 µH</td><td>150.78 µH</td><td>8.039</td></tr><tr><th scope="row">B</th><td>16.50 µH</td><td>139.89 µH</td><td>8.000</td></tr></tbody></table></div><p class="input-note">Source: thesis Chapter 6, supplied transformer measurements. Turns ratio matters for reflected load and gain, which this calculator does not solve.</p><p class="input-note">The 34.26 / 33.09 µH inductors in your table are charge-pump parts, used separately below. Their 2.05 / 2.17 Ω AC resistance values are not assumed to be the tank loss at 1 MHz.</p></details>
+          </fieldset>
+          <fieldset class="input-section"><legend>Resonant capacitor bank</legend>
+            <label class="field-label" for="capacitor-values">Capacitor values / equivalent <span>Separate bank values with commas</span></label>
+            <div class="bank-row"><input id="capacitor-values" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="22, 22, 22, 22"><select id="capacitor-unit" aria-label="Capacitor unit"><option value="pF">pF</option><option value="nF" selected>nF</option><option value="uF">µF</option></select></div>
+            <div class="calc-input-row"><label for="capacitor-connection">Bank connection</label><select id="capacitor-connection"><option value="parallel">Parallel · C₁ + C₂ + …</option><option value="series">Series · 1 / Σ(1/Cᵢ)</option></select></div>
+            <p id="bank-note" class="input-note"></p>
+          </fieldset>
+          <details id="advanced-inputs" class="advanced-inputs"><summary><span>Operating point &amp; ranges</span><small id="advanced-inputs-summary">Switching frequency, series R, L / C ranges</small></summary><fieldset class="input-section"><legend class="sr-only">Operating point &amp; tolerances</legend>
+            <div class="calc-input-row"><label for="operating-frequency">Switching frequency <span>fₛ</span></label><div class="value-with-unit"><input id="operating-frequency" type="number" min="0" step="any" inputmode="decimal"><select id="operating-frequency-unit" aria-label="Switching frequency unit"><option value="kHz">kHz</option><option value="MHz">MHz</option></select></div></div>
+            <div class="calc-input-row"><label for="series-resistance">Series resistance <span>Optional</span></label><div class="value-with-unit"><input id="series-resistance" type="number" min="0" step="any" inputmode="decimal" placeholder="Not provided"><span>Ω</span></div></div>
+            <p class="input-note">R is the entered equivalent series resistance. It is not inferred from output power or load.</p>
+            <div class="tolerance-row"><label for="inductor-tolerance">Total L range<div class="value-with-unit"><input id="inductor-tolerance" type="number" min="0" max="99.99" step="any" inputmode="decimal" value="10"><span>± %</span></div></label><label for="capacitor-tolerance">Equivalent C range<div class="value-with-unit"><input id="capacitor-tolerance" type="number" min="0" max="99.99" step="any" inputmode="decimal" value="5"><span>± %</span></div></label></div>
+            <p class="input-note">Editable design ranges, not measured uncertainty. Set them from the actual components and measurements.</p>
+          </fieldset></details>
+        </form>
+        <div class="input-footnote">Calculations stay in this browser. This page does not send commands to the converter.</div>
+      </section>
+      <div class="calculation-column">
+        <section class="panel results-panel" aria-labelledby="results-title">
+          <div class="panel-heading"><h2 id="results-title" tabindex="-1">Calculated tank</h2><span id="result-status" class="small-label">NOMINAL VALUES</span></div>
+          <div class="tank-model">
+            <div class="model-intro"><h3>Where magnetizing inductance fits</h3><p><strong>Leakage adds to series Lr.</strong> Magnetizing Lm is a separate parallel branch. It changes current and converter response without changing the series-resonance equation.</p></div>
+            <figure class="equivalent-circuit">
+              <svg viewBox="0 0 560 160" role="img" aria-labelledby="circuit-title circuit-description"><title id="circuit-title">Series tank feeding a parallel magnetizing branch and reflected load</title><desc id="circuit-description">The AC drive feeds resonant capacitor Cr and series inductance Lr. Lr is the external inductor plus primary-referred leakage. Magnetizing inductance Lm and the reflected load connect in parallel from that node to the return.</desc>
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path class="circuit-wire" d="M28 65H100M116 65H169M249 65H430V85M28 140H430V120M305 65V85M305 125V140"/>
+                  <path class="circuit-series" d="M101 51V79M115 51V79M169 65c0-18 20-18 20 0 0-18 20-18 20 0 0-18 20-18 20 0 0-18 20-18 20 0"/>
+                  <path class="circuit-magnetizing" d="M305 85c-16 0-16 10 0 10-16 0-16 10 0 10-16 0-16 10 0 10-16 0-16 10 0 10"/>
+                  <path class="circuit-load" d="M423 85h14v35h-14z"/>
+                </g>
+                <g class="circuit-wire"><circle cx="28" cy="65" r="3"/><circle cx="28" cy="140" r="3"/><circle cx="305" cy="65" r="3"/><circle cx="305" cy="140" r="3"/></g>
+                <g class="circuit-label"><text x="13" y="36">AC drive</text><text x="97" y="36">Cr</text><text x="199" y="36">Lr</text><text x="320" y="105">Lm</text><text x="451" y="100">Reflected</text><text x="451" y="117">load</text></g>
+                <text class="circuit-caption" x="150" y="101">external + leakage</text>
+              </svg>
+              <div class="circuit-mobile" role="img" aria-label="Cr and Lr in series, feeding Lm in parallel with the reflected load."><span>Cr + Lr</span><span>→</span><span>Lm ∥ reflected load</span></div>
+              <figcaption>Primary-referred equivalent. The switching stage, charge pump and rectifier dynamics are omitted.</figcaption>
+            </figure>
+          </div>
+          <div class="primary-results" aria-live="polite" aria-atomic="true">
+            <div><span>Series resonance <small>fᵣ</small></span><strong id="result-frequency">—</strong><p id="frequency-range">Tolerance range —</p></div>
+            <div><span id="inductance-result-label">Total series inductance · LΣ</span><strong id="result-inductance">—</strong><p id="inductance-breakdown">L + Llk</p></div>
+            <div><span>Equivalent capacitance <small>Ceq</small></span><strong id="result-capacitance">—</strong><p id="capacitance-description">Capacitor bank equivalent</p></div>
+          </div>
+          <div class="equation-strip"><span id="result-equation">fᵣ = 1 / (2π√(LΣ Ceq))</span><span id="result-substitution"></span></div>
+          <dl class="derived-results"><div><dt>Characteristic impedance</dt><dd id="result-impedance">—</dd></div><div><dt>Switching / resonance</dt><dd id="result-ratio">—</dd></div><div><dt>Tank at switching frequency</dt><dd id="result-region">—</dd></div><div><dt>Inductive / capacitive X</dt><dd id="result-reactances">—</dd></div><div><dt>Net series reactance</dt><dd id="result-net-reactance">—</dd></div><div><dt>Series Q / bandwidth</dt><dd id="result-q">—</dd></div></dl>
+          <div class="magnetizing-results">
+            <div class="branch-heading"><h3>Separate magnetizing-branch estimates</h3><span id="magnetizing-status" class="small-label">Lm not provided</span></div>
+            <dl class="branch-metrics"><div><dt>Ideal open-secondary LC frequency</dt><dd><strong id="magnetizing-open-frequency">—</strong></dd></div><div><dt>Magnetizing reactance at fₛ</dt><dd><strong id="magnetizing-reactance">—</strong></dd></div><div><dt>Inductance ratio · Lm / Lr</dt><dd><strong id="magnetizing-ratio">—</strong></dd></div></dl>
+            <p id="magnetizing-note" class="branch-note">Enter Lm or select an A/B reference to compare. The series result above works without it.</p>
+          </div>
+        </section>
+        <section class="panel response-panel" aria-labelledby="response-title">
+          <div class="panel-heading"><h2 id="response-title">Series-path response</h2><span id="response-mode" class="small-label">CALCULATED · NOT MEASURED</span></div>
+          <div class="scope-surface"><div class="chart-legend"><span><i class="green"></i><span id="plot-legend">Net series reactance</span></span><span><i class="orange"></i>Switching point</span><span class="chart-window">0.25–4 × fᵣ</span></div><div class="response-chart-wrap"><canvas id="response-chart" role="img" aria-label="Calculated series tank response against frequency"></canvas></div></div>
+          <div class="chart-footer"><span id="response-note">Enter R to calculate normalized series-RLC current.</span><span>Log frequency axis</span></div>
+        </section>
+        <section class="panel candidates-panel" aria-labelledby="candidates-title">
+          <div class="panel-heading"><h2 id="candidates-title">Nearby standard values</h2><div class="candidate-options"><select id="candidate-type" aria-label="Standard value component"><option value="capacitance">Equivalent C</option><option value="inductance">Discrete L</option></select><select id="preferred-series" aria-label="Preferred value series"><option value="E12">E12</option><option value="E24" selected>E24</option></select></div></div>
+          <div class="calc-table-wrap"><table class="calc-table"><thead><tr><th scope="col">Candidate</th><th scope="col">Value difference</th><th scope="col">Resonance</th><th scope="col">fᵣ difference</th></tr></thead><tbody id="candidate-list"></tbody></table></div>
+          <p class="table-note">Nominal values only. These are comparison values, not selected parts or a magnetics design.</p>
+        </section>
+      </div>
+    </div>
+    <section class="panel pump-panel" aria-labelledby="pump-title">
+      <div class="panel-heading"><h2 id="pump-title">Charge-pump sizing</h2><span class="small-label">THESIS · CLAMPED TRIANGULAR-CURRENT APPROXIMATION</span></div>
+      <div class="pump-layout">
+        <form id="pump-form" novalidate>
+          <label class="pump-solve-label" for="pump-solve-for">Solve for<select id="pump-solve-for"><option value="inductance">Pump inductance · Lp</option><option value="capacitance">Pump capacitance · Cp</option><option value="frequency">Switching frequency · fₛ</option></select></label>
+          <label for="pump-inductance">Pump inductance<div class="value-with-unit"><input id="pump-inductance" type="number" min="0" step="any" value="33" inputmode="decimal"><span>µH</span></div></label>
+          <label for="pump-capacitance">Equivalent pump capacitance<div class="value-with-unit"><input id="pump-capacitance" type="number" min="0" step="any" value="2" inputmode="decimal"><span>nF</span></div></label>
+          <label for="pump-frequency">Switching carrier<div class="value-with-unit"><input id="pump-frequency" type="number" min="0" step="any" value="1" inputmode="decimal"><select id="pump-frequency-unit" aria-label="Pump switching carrier unit"><option value="kHz">kHz</option><option value="MHz" selected>MHz</option></select></div></label>
+        </form>
+        <div class="pump-results"><div><span id="pump-result-label">Estimated pump inductance</span><strong id="pump-result-value">—</strong></div><div><span>Natural LC frequency · fp</span><strong id="pump-natural-frequency">—</strong></div><button id="export-pump" class="button secondary compact" type="button">Pump JSON</button></div>
+      </div>
+      <div id="pump-error" class="pump-error" role="alert" hidden></div>
+      <div class="pump-note"><span id="pump-equation">Lp = 1 / (16 Cp fₛ²)</span><p>The thesis sizes the clamped charge pump using triangular current. Its natural LC frequency is fp = 2fₛ/π for this sizing relation; it is not the switching carrier. Cp is the equivalent pump capacitance, separate from the resonant-tank capacitor. This approximation does not verify clamp timing, current, or device ratings. Source: Chapter 4, “Pump Inductor Design” (05_Pump_Inductor.tex).</p></div>
+      <p id="pump-export-status" class="table-note" role="status">Starting values: Lp 33 µH, Cp 2 nF, fₛ 1 MHz. The selected unknown is solved from the other two values.</p>
+    </section>
+    <div class="calculator-bottom">
+      <section class="panel bom-panel" aria-labelledby="bom-title">
+        <div class="panel-heading"><h2 id="bom-title">Calculation record</h2><div class="export-actions"><button id="copy-bom" class="button secondary compact" type="button">Copy table</button><button id="export-csv" class="button secondary compact" type="button">CSV</button><button id="export-json" class="button secondary compact" type="button">JSON</button></div></div>
+        <details class="supporting-details"><summary>Show the full calculation table</summary><div class="calc-table-wrap"><table class="calc-table record-table"><thead><tr><th scope="col">Item</th><th scope="col">Value</th><th scope="col">Basis</th></tr></thead><tbody id="bom-list"></tbody></table></div></details>
+        <p id="export-status" class="table-note" role="status">Export includes the inputs, source references, assumptions, and calculation results.</p>
+      </section>
+      <section class="panel source-panel" aria-labelledby="sources-title">
+        <div class="panel-heading"><h2 id="sources-title">Sources &amp; model limits</h2><span class="small-label">READ BEFORE USING RESULTS</span></div>
+        <p id="source-provenance" class="source-summary"></p><details class="supporting-details"><summary>Show references, assumptions &amp; equations</summary><div class="sources-content"><ul id="source-list" class="source-list"></ul><ul id="calculation-warnings" class="calculation-warnings"></ul><details class="equations-details"><summary>Equations &amp; assumptions</summary><div><p>fᵣ = 1 / (2π√(LΣCeq)); LΣ = L + Llk.</p><p>LΣ = 1 / ((2πfᵣ)²Ceq); Ceq = 1 / ((2πfᵣ)²LΣ).</p><p>Z₀ = √(LΣ/Ceq); X = 2πfₛLΣ − 1/(2πfₛCeq).</p><p>For positive series R: Q = Z₀/R, BW = R/(2πLΣ), and normalized current = R / √(R² + X²).</p><p>The tolerance interval uses the low and high corners of the entered L and C tolerances. No component correlation, temperature drift, voltage coefficient, or measured spread is assumed.</p><p>A simple LC / series-RLC check cannot predict complete converter gain or efficiency. The separate Lm estimate uses f_open = 1 / (2π√((LΣ + Lm)Ceq)), Xm = 2πfₛLm, and Lm/LΣ. It assumes a linear magnetizing branch and an open secondary (nonconducting rectifier). It is not a loaded operating frequency or converter gain. Rectification, charge-pump switching, losses and parasitics require a fuller model. fₛ above fᵣ alone does not establish ZVS.</p></div></details></div></details>
+      </section>
+    </div>
+    <footer class="calculator-footer"><span>Source-backed nominal calculation · verify against the assembled hardware</span><a href="./index.html">Return to monitor →</a></footer>
+  </main>
+</body>
+</html>

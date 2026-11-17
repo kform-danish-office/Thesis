@@ -1,0 +1,55 @@
+{
+  "repository": "kform-danish-office/Thesis",
+  "repository_visibility": "public",
+  "tag": "pwr-2.0.4",
+  "release_id": 423166048,
+  "draft": false,
+  "prerelease": true,
+  "published_at": "2026-10-25T14:43:21Z",
+  "url": "https://github.com/kform-danish-office/Thesis/releases/tag/pwr-2.0.4",
+  "target_commitish": "e3c3f6ac36ab1458dcf8e20dbb71da87fd1cf51a",
+  "assets_uploaded": true,
+  "assets_download_verified": true,
+  "public_hex_download_verified": true,
+  "main_unchanged": true,
+  "reference_checkout_unchanged": true,
+  "published": true,
+  "blocker": null,
+  "assets": [
+    {
+      "name": "pwr-2.0.4-build.json",
+      "id": 675282424,
+      "size": 2552,
+      "digest": "sha256:df403d11c342784b582c2c8be0454273ab391530f59201875cb268c66c02a4e4",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/pwr-2.0.4/pwr-2.0.4-build.json"
+    },
+    {
+      "name": "pwr-2.0.4-SHA256SUMS.txt",
+      "id": 675282430,
+      "size": 370,
+      "digest": "sha256:2d1484c208a420ad2b97953b14f038a5ee5d37fc412b0996365c41c442967e10",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/pwr-2.0.4/pwr-2.0.4-SHA256SUMS.txt"
+    },
+    {
+      "name": "pwr-2.0.4-v2-f410-release.zip",
+      "id": 675282425,
+      "size": 117826,
+      "digest": "sha256:b8d6266d46d909b30df521b507f5d1608f3185e7d9dbbf980a905ce1dec8b617",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/pwr-2.0.4/pwr-2.0.4-v2-f410-release.zip"
+    },
+    {
+      "name": "pwr-2.0.4-v2-source.zip",
+      "id": 675282422,
+      "size": 85662,
+      "digest": "sha256:f31aa0deb1e335cc7e678fbe57c1f5bbd0f0711c84c2f93c8664ae97d6be03cd",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/pwr-2.0.4/pwr-2.0.4-v2-source.zip"
+    },
+    {
+      "name": "pwr-2.0.4-v2-stm32f410cbu6.hex",
+      "id": 675282436,
+      "size": 255347,
+      "digest": "sha256:fe3a6b02f06b025ba83e53dd482bbfdf9dd166f9f2afc0fe806062eab14ded47",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/pwr-2.0.4/pwr-2.0.4-v2-stm32f410cbu6.hex"
+    }
+  ]
+}

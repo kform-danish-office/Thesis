@@ -1,0 +1,1 @@
+test_id,interval_id,reading_id,quantity,value,unit,statistic,measurement_point,measurement_point_class,instrument_setup_id,window_start_utc,window_end_utc,window_duration_s,timebase_id,window_match_status,value_origin,input_reading_ids,evidence_ids,qualification,notes

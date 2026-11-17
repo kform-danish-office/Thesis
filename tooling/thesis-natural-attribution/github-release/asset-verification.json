@@ -1,0 +1,17 @@
+{
+  "SHA256SUMS.txt": {
+    "bytes": 179,
+    "digest": "sha256:434ed51343411f20344192323b01de6cc97b4ab511d74036208af591e0012329",
+    "matches_local": true
+  },
+  "Thesis_V1_V2_V3.pdf": {
+    "bytes": 20678543,
+    "digest": "sha256:39f0a7678b2b6c94ee749b80ca006cbfaff79ef4245f14182b8582cc9a24c10e",
+    "matches_local": true
+  },
+  "Thesis_V1_V2_V3_Source.zip": {
+    "bytes": 93758466,
+    "digest": "sha256:a5b32fe9d083fd5516bcb3647731715adab7a8d0541bcdd6f989366d4a08d1c8",
+    "matches_local": true
+  }
+}

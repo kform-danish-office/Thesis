@@ -1,0 +1,87 @@
+{
+  "project": "thesis-power-lab",
+  "projectId": "prj_9wBeSEmwNwN2VFnm9eld5yYPM29l",
+  "environment": "production",
+  "proposed_account": "multiplayerfans-8614",
+  "revision": "workspace-ui-refinement",
+  "url": "https://thesis-power-lab.vercel.app",
+  "files": [
+    {
+      "file": "index.html",
+      "bytes": 14283,
+      "sha256": "0f452979132cd155b673633d7cf9cadb1075d7ca94243e6c8f378b004a4cf18c"
+    },
+    {
+      "file": "styles.css",
+      "bytes": 39320,
+      "sha256": "48151d6ae84d1f8210cdb2c46f1f92437bee344955909b53ce0612295bfdc85c"
+    },
+    {
+      "file": "app.js",
+      "bytes": 35267,
+      "sha256": "b5f3139229f7d96f1e4705a810920a2e0ecafac26e010dd7707dccc2e0e80034"
+    },
+    {
+      "file": "serial.js",
+      "bytes": 11960,
+      "sha256": "a27971d5452b39538bb1799faa74b4480aadef460d0f4a38f1a25247b5c80d67"
+    },
+    {
+      "file": "protocol.js",
+      "bytes": 2385,
+      "sha256": "0254f0e9fb34d5892bd9cacca1f392430cd222f4beb4e46544e489395c85b0fb"
+    },
+    {
+      "file": "storage.js",
+      "bytes": 3019,
+      "sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5"
+    },
+    {
+      "file": "calculator.html",
+      "bytes": 15479,
+      "sha256": "2d787320d030d69bd15388df6357e60cf47bba27b8e6f1518fbd9f1c000c6063"
+    },
+    {
+      "file": "calculator.css",
+      "bytes": 18801,
+      "sha256": "71c5ff2907f598b73e8b6d94157c40aeed9a82531b9424b2d46b8d575209915f"
+    },
+    {
+      "file": "resonance.js",
+      "bytes": 13568,
+      "sha256": "9eb03e5e001088dffbcde52294871c246276d0ddf06f00262aa9cf93f8c7c0a3"
+    },
+    {
+      "file": "resonance-ui.js",
+      "bytes": 33894,
+      "sha256": "6fcad62f96c2231ce01425a9c7c67295eb3eb871b8693e37fe2bc10a789e31fa"
+    },
+    {
+      "file": "resonance-presets.js",
+      "bytes": 8294,
+      "sha256": "5f4052c4740489bc07b06fb8cfcf57871717be5f6f9093742428c4c6c6853dd5"
+    },
+    {
+      "file": "package.json",
+      "bytes": 251,
+      "sha256": "f08d5f4d0a4aba3aa7f503756ea2b8b1e857970b493341614c49556f01079cb6"
+    },
+    {
+      "file": "build.mjs",
+      "bytes": 552,
+      "sha256": "5cb2e691414c581466780b338a735d71c6b983eb1bf58d8fc5bfa5743b02920f"
+    },
+    {
+      "file": "vercel.json",
+      "bytes": 642,
+      "sha256": "9927baba1ec548c86f6bafaef0577d127368be5d7b0aafa97f9883fa652c40f9"
+    }
+  ],
+  "excluded": [
+    "firmware",
+    "source PDFs and thesis documents",
+    "recorded sessions",
+    "credentials",
+    "tests and QA artifacts"
+  ]
+}

@@ -1,0 +1,461 @@
+--- before/Chapters/02_Background/01_Offline_ACDC_PFC.tex
++++ direct/Chapters/02_Background/01_Offline_ACDC_PFC.tex
+@@ -19,7 +19,7 @@
+ 
+ Conventional two-stage supplies separate input-current shaping and DC-link regulation from isolated output regulation. The charge-pump architecture shares switching devices between these functions, reducing active-stage component count but coupling output control to input-current quality.
+ 
+-The revised plan compares charge-pump and boost-PFC architectures in efficiency, component stress, power density, and control complexity \cite{projectOctoberPlan}. A numerical comparison requires matched operating points and power boundaries, measured device stress, and complete assembly volumes at verified continuous output. Control complexity includes sensing, actuation, startup, regulation, and fault handling. Only the charge-pump supply was tested; a matched boost-PFC benchmark remains outstanding.
++The revised plan compares charge-pump and boost-PFC architectures in efficiency, component stress, power density, and control complexity \cite{projectOctoberPlan}. A numerical comparison needs the same operating conditions and measurement points, measured device stress, and complete assembly volumes at verified continuous output. Control complexity includes sensing, actuation, startup, regulation, and fault handling. Only the charge-pump supply was tested; boost-PFC comparison tests remain to be done.
+ 
+ Even with an ideal resistive input, single-phase mains power pulsates. For sinusoidal voltage and current in phase,
+ \begin{equation}
+--- before/Chapters/02_Background/03_ClassDE_Resonant.tex
++++ direct/Chapters/02_Background/03_ClassDE_Resonant.tex
+@@ -14,4 +14,4 @@
+ 
+ Above resonance, the loaded series tank presents an inductive impedance, providing lagging current for switch-node commutation during dead time. Pump current also contributes at the shared node and must be included in the soft-switching assessment.
+ 
+-The reference LED-driver approximation neglects magnetizing current, whereas an LLC gain model retains finite magnetizing inductance \cite{ammar2021led}. The series approximation is used for initial sizing; the magnetizing branch and burst dynamics are retained when interpreting prototype switching and transients.
++The reference LED-driver approximation neglects magnetizing current, whereas an LLC gain model retains finite magnetizing inductance \cite{ammar2021led}. The series approximation is used for initial sizing; magnetizing current and burst dynamics are also considered when analyzing prototype switching and transients.
+--- before/Chapters/02_Background/04_Soft_Switching_GaN.tex
++++ direct/Chapters/02_Background/04_Soft_Switching_GaN.tex
+@@ -15,6 +15,6 @@
+ 
+ Dead time must complete node commutation without excessive reverse conduction. An insufficient interval can leave residual turn-on voltage or allow cross conduction; an excessive interval increases loss. The required interval depends on bus voltage, current, capacitance, and tank state, so burst restart is assessed separately from established switching.
+ 
+-The prototype uses an integrated LMG2652 half bridge. The inherited discrete-GaN and external-driver models differ in capacitance, delay, sensing response, and thermal paths. They establish operating principles; measurements establish switching behavior in the assembled stage.
++The prototype uses an integrated LMG2652 half bridge. The inherited discrete-GaN and external-driver models differ in capacitance, delay, sensing response, and thermal paths. These models describe the operating principle, but the assembled stage needs its own switching measurements.
+ 
+-A ZVS assessment requires switch-node voltage aligned with the incoming gate command or device turn-on time, with adequate bandwidth and controlled probe loading, loop area, and common-mode error. Chapter~\ref{ch:results} applies these criteria to the available captures.
++ZVS must be checked from switch-node voltage and the incoming gate command or device turn-on time on the same time base, with adequate bandwidth and controlled probe loading, loop area, and common-mode error. Chapter~\ref{ch:results} applies these criteria to the available captures.
+--- before/Chapters/02_Background/05_Reference_2020.tex
++++ direct/Chapters/02_Background/05_Reference_2020.tex
+@@ -3,7 +3,7 @@
+ 
+ The analytical method was developed by Ammar et al. for a charge-pump resonant AC--DC converter used as an offline PFC rectifier \cite{ammar2020chargepump}. Adding a capacitor and diode to the class-DE circuit shapes the input current without a separate current-loop PFC controller. Their analysis connects capacitor charge transfer with resonant gain and DC-link energy storage.
+ 
+-The reference converter was operated near \SI{1}{\mega\hertz}, with output power up to \SI{50}{\watt}. The reported values were PF of 0.99, input-current THD of 8.6\%, and efficiency up to 88\%. These results establish a working example of the principle and provide a starting point for the design calculations.
++The reference converter was operated near \SI{1}{\mega\hertz}, with output power up to \SI{50}{\watt}. The reported values were PF of 0.99, input-current THD of 8.6\%, and efficiency up to 88\%. These results demonstrate the principle and provide a starting point for the design calculations.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -23,6 +23,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-Frequency changes affect both charge transfer and resonant gain. The prototype adds different magnetics, isolation, a downstream regulator, and sampled burst control; its complete-system performance is therefore measured independently.
++Frequency changes affect both charge transfer and resonant gain. The prototype uses different magnetics, isolation, a downstream regulator, and sampled burst control, so the reference efficiency cannot be assumed for this supply.
+ 
+ The charge-transfer analysis is retained. The following isolated-driver architecture provides the closer precedent, with separate pump and output paths sharing one half bridge.
+--- before/Chapters/02_Background/06_Reference_2021.tex
++++ direct/Chapters/02_Background/06_Reference_2021.tex
+@@ -7,14 +7,14 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Relationship between the reference converters and the present project.}
++\caption{Reference converters and the USB-C prototype.}
+ \label{tab:bg-reference-relationship}
+ \begin{tabularx}{\textwidth}{@{}L{0.22\textwidth}L{0.31\textwidth}Y@{}}
+ \toprule
+-Work & Principal architecture & Relevance\\
++Work & Circuit & Use in this project\\
+ \midrule
+ 2020 rectifier & Charge-pump resonant PFC rectifier & Charge-transfer principle and design analysis\\
+-2021 LED driver & Separate pump and isolated output tanks with shared half bridge & Closest circuit and burst-control precedent\\
++2021 LED driver & Separate pump and isolated output tanks with shared half bridge & Circuit and burst-control starting point\\
+ Present prototype & Related isolated power stage with USB-C output section & System integration and secondary-voltage control\\
+ \bottomrule
+ \end{tabularx}
+--- before/Chapters/03_Requirements_Architecture/chapter.tex
++++ direct/Chapters/03_Requirements_Architecture/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{System Requirements and Architecture}
+ \label{ch:requirements}
+ 
+-The USB-C load requires controlled startup, loaded regulation, load removal, and no-load energy limitation. These states define the hardware interfaces and verification requirements. Power targets are distinguished from implemented controller settings and measured capability.
++The USB-C load requires controlled startup, loaded regulation, load removal, and no-load energy limitation. These operating states determine the hardware interfaces and tests. The following sections give the power targets, controller settings, and measurements needed to check the supply.
+ 
+ \input{Chapters/03_Requirements_Architecture/01_Use_Case}
+ \input{Chapters/03_Requirements_Architecture/02_Electrical_Specifications}
+--- before/Chapters/03_Requirements_Architecture/01_Use_Case.tex
++++ direct/Chapters/03_Requirements_Architecture/01_Use_Case.tex
+@@ -3,8 +3,8 @@
+ 
+ The converter was built for supervised laboratory use as an AC--DC supply with an isolated secondary and USB-C output. The fixed-frequency resonant stage and charge-pump current shaping follow the reference work \cite{ammar2020chargepump,ammar2021led}. External electronic or resistive loads were used to apply the conditions stated with each measurement.
+ 
+-The design target is \SI{100}{\watt} continuous output. The revised plan sets a \SI{65}{\watt} continuous minimum, and the earlier schedule sets a \SI{75}{\watt} continuous validation milestone \cite{projectOctoberPlan,projectEarlierPlan}. Continuous operation requires a stated load and run time, with temperature tracked throughout the run. A short capture at a nominal load only establishes that operating point.
++The design target is \SI{100}{\watt} continuous output. The revised plan sets a \SI{65}{\watt} continuous minimum, and the earlier schedule sets a \SI{75}{\watt} continuous validation milestone \cite{projectOctoberPlan,projectEarlierPlan}. Continuous operation requires a stated load and run time, with temperature tracked throughout the run. A short capture shows operation at that load, but not continuous performance.
+ 
+-The operating sequence covers unloaded startup, load attachment, loaded operation, removal, and commanded shutdown. Residual resonant and capacitive energy after removal makes no-load control and overvoltage response explicit design requirements.
++The operating sequence covers unloaded startup, load attachment, loaded operation, removal, and commanded shutdown. Residual resonant and capacitive energy after load removal must be handled by no-load control and overvoltage protection.
+ 
+ The open-frame assembly gives access for measurement and adjustment. Controlled mains energization and rated probes were used during testing. An enclosed consumer version would also need insulation, fault, environmental, protocol, and EMC qualification.
+--- before/Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex
++++ direct/Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex
+@@ -1,20 +1,20 @@
+ \section{Targets and Prototype Values}
+ \label{sec:req-electrical}
+ 
+-Table~\ref{tab:req-design-specifications} distinguishes power criteria from the original MCU timing and feedback parameters. The fixed carrier is gated into bursts; burst scheduling and sensor/control updates operate on separate time scales. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} describe the V2 implementation, with power-stage enable assigned to PA11.
++Table~\ref{tab:req-design-specifications} lists the power targets and the original MCU timing and feedback settings. The fixed carrier is gated into bursts; burst scheduling and sensor/control updates operate on separate time scales. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} describe the V2 implementation, with power-stage enable assigned to PA11.
+ 
+ \begin{table}[H]
+ \centering
+-\caption{Principal targets and parameters of the laboratory converter.}
++\caption{Converter targets and controller settings.}
+ \label{tab:req-design-specifications}
+ \begin{tabularx}{\textwidth}{@{}L{0.27\textwidth}Y L{0.24\textwidth}@{}}
+ \toprule
+-Quantity & Target or implemented value & Assessment\\
++Parameter & Target or setting & Check\\
+ \midrule
+ Input supply & Single-phase AC; voltage and frequency stated with the test & Recorded test condition\\
+-Output power & \SI{100}{\watt} continuous target; \SI{65}{\watt} revised minimum; \SI{75}{\watt} earlier validation milestone & Matched electrical, duration, and thermal records\\
++Output power & \SI{100}{\watt} continuous target; \SI{65}{\watt} revised minimum; \SI{75}{\watt} earlier validation milestone & Output power, run time, and temperature\\
+ Half-bridge carrier & Fixed \SI{1}{\mega\hertz} on PA8/PA9 & Switching timing\\
+-Power actuator & PA10 enables bursts of carrier cycles & Enable waveform and firmware state\\
++Burst-enable pin & PA10 enables bursts of carrier cycles & Enable waveform and firmware state\\
+ Burst frequency & \SI{10}{\kilo\hertz} default; configurable \SIrange{1}{50}{\kilo\hertz} & Firmware configuration\\
+ Control period & \SI{25}{\micro\second} default; \SI{20}{\micro\second} with \texttt{MAXRATE} & Timing diagnostics\\
+ Main feedback & PA1-derived secondary bulk voltage & Calibration and voltage response\\
+@@ -27,23 +27,23 @@
+ 
+ \begin{table}[H]
+ \centering
+-\caption{Quantities used to characterize performance.}
++\caption{Performance measurements.}
+ \label{tab:req-measured-quantities}
+ \begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}Y@{}}
+ \toprule
+-Quantity & Required interpretation\\
++Quantity & Measurements and test conditions\\
+ \midrule
+-Output regulation & Mean VBUS and its deviation from the selected setting; ripple identified by capture conditions\\
++Output regulation & Mean VBUS, deviation from the selected setting, and ripple with the capture conditions stated\\
+ Transient response & Applied load change, voltage excursion, and recovery or fault behavior\\
+ No-load operation & Observed voltage and switching response, with the applicable controller thresholds\\
+ Input power quality & Real input power, PF, and current distortion at the recorded load\\
+-Efficiency & Corresponding input/output power values and the stated power boundary\\
++Efficiency & Input and output power under the same conditions, with included stages and auxiliaries stated\\
+ Thermal behavior & Surface temperature, load, elapsed time, and available ambient/airflow information\\
+-Switching behavior & Measured node, time scale, probe arrangement, and evidence relevant to commutation\\
++Switching behavior & Switch-node and gate waveforms, time scale, and probe arrangement\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+ 
+ The evaluation covers efficiency, PF, THD, and surface temperature. No numerical acceptance limits were set for these quantities. Comparisons with the reference converters account for their different circuits and power boundaries. Likewise, the input range must come from converter tests rather than the rating of the AC source used to power it.
+ 
+-The revised plan extends the evaluation to the reported V2 baseline, PPS, sustained operation, V3 implementation, and power density. Section~\ref{sec:revised-plan-criteria} gives those criteria and their status. These are requirements for the next tests, rather than demonstrated capabilities of the tested baseline.
++The revised plan extends the evaluation to the reported V2 baseline, PPS, sustained operation, V3 implementation, and power density. Section~\ref{sec:revised-plan-criteria} lists the work still needed. These tests have not all been completed on the baseline prototype.
+--- before/Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex
++++ direct/Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex
+@@ -1,9 +1,9 @@
+ \section{Functional and Performance Requirements}
+ \label{sec:req-functional}
+ 
+-Requirement identifiers connect the implemented control functions and measured performance to the results assessment.
++The FR labels identify control functions, and the PR labels identify performance tests in the results chapter.
+ 
+-Controller interfaces are introduced in \cref{sec:intro-controller-basics}. On the original prototype, PA10 gates switching bursts, PA1 senses secondary bulk voltage, PA0 senses primary voltage, and PA2 senses half-bridge current. Direct memory access (DMA) buffers the ADC scan; the universal asynchronous receiver-transmitter (UART) carries commands and status.
++MCU pin assignments are listed in \cref{sec:intro-controller-basics}. On the original prototype, pin PA10 controls switching bursts, PA1 senses secondary bulk voltage, PA0 senses primary voltage, and PA2 senses half-bridge current. DMA transfers ADC readings to memory, and UART carries commands and status.
+ 
+ \begin{table}[H]
+ \centering
+@@ -27,11 +27,11 @@
+ 
+ \begin{table}[H]
+ \centering
+-\caption{Performance and reporting requirements.}
++\caption{Performance tests and measurement conditions.}
+ \label{tab:req-performance}
+ \begin{tabularx}{\textwidth}{@{}L{0.12\textwidth}Y@{}}
+ \toprule
+-ID & Required assessment\\
++ID & Measurement or test\\
+ \midrule
+ PR-01 & Assess the \SI{65}{\watt} continuous minimum and earlier \SI{75}{\watt} validation milestone against the \SI{100}{\watt} continuous target.\\
+ PR-02 & Identify the AC input conditions used in the tests.\\
+@@ -39,12 +39,12 @@
+ PR-04 & Report mean VBUS, ripple observations, and available load-transient excursions.\\
+ PR-05 & Assess observed no-load voltage against the configured control and protection thresholds where the records permit.\\
+ PR-06 & Report PF and input-current distortion at selected operating points.\\
+-PR-07 & Calculate efficiency only from corresponding input/output power records with a defined boundary.\\
+-PR-08 & Interpret temperature observations together with load, duration, ambient condition, and airflow information.\\
+-PR-09 & Associate numerical results with their assembly, firmware, operating condition, and measurement source.\\
++PR-07 & Calculate efficiency from input and output power measured under the same conditions, with the included circuit stages stated.\\
++PR-08 & Report temperature together with load, run time, ambient condition, and airflow information.\\
++PR-09 & Record the assembly, firmware, operating conditions, and source measurements for each numerical result.\\
+ PR-10 & Identify the limiting mechanism in any reported overload or current-limit test.\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+ 
+-Chapter~\ref{ch:results} compares implementation with measured electrical behavior. Section~\ref{sec:revised-plan-criteria} assigns AP identifiers to the additional V2/V3 development criteria, separate from the baseline functions.
++Chapter~\ref{ch:results} compares implementation with measured electrical behavior. Section~\ref{sec:revised-plan-criteria} lists the additional V2/V3 design and test tasks under AP labels.
+--- before/Chapters/03_Requirements_Architecture/04_USBC_Interface.tex
++++ direct/Chapters/03_Requirements_Architecture/04_USBC_Interface.tex
+@@ -1,4 +1,4 @@
+-\section{USB-C Interface and Voltage Nodes}
++\section{USB-C Output Stage}
+ \label{sec:req-usbc}
+ 
+ The V1.1 MPQ4242GVE-0000-AEC1-P output stage is supplied from \texttt{V\_PW\_OUTPUT\_BULK} and feeds \texttt{USB\_PD\_OUT} and connector VBUS at J1. Configuration channels CC1 and CC2 support attachment detection and power negotiation.
+--- before/Chapters/03_Requirements_Architecture/05_Safety_Protection.tex
++++ direct/Chapters/03_Requirements_Architecture/05_Safety_Protection.tex
+@@ -9,4 +9,4 @@
+ 
+ Primary half-bridge-current feedback (PA2) supports load classification and diagnostics. The configurable current trip is disabled by default, and the active voltage loop does not call legacy foldback helpers. Any current-limited test must identify the active limiter: output controller, AC source, electronic load, or explicitly enabled firmware threshold.
+ 
+-Insulation qualification, leakage-current, abnormal-fault, surge/ESD, and thermal-protection tests remain unfinished. The protection assessment covers laboratory behavior. Product qualification remains separate work.
++Insulation qualification, leakage-current, abnormal-fault, surge/ESD, and thermal-protection tests remain unfinished. The completed checks cover supervised laboratory operation, not product qualification.
+--- before/Chapters/03_Requirements_Architecture/06_System_Architecture.tex
++++ direct/Chapters/03_Requirements_Architecture/06_System_Architecture.tex
+@@ -5,11 +5,11 @@
+ 
+ 
+ 
+-The transformer transfers power across the isolation barrier. The secondary rectifier and capacitor supply the bulk node, from which the MPQ4242 section supplies VBUS. The AMC0330 returns bulk-voltage feedback to the primary-referenced MCU across a separate sensing barrier. The power and sensing barriers serve different functions.
++The transformer transfers power across the isolation barrier. The secondary rectifier and capacitor supply the bulk node, from which the MPQ4242 section supplies VBUS. The AMC0330 returns bulk-voltage feedback to the primary-referenced MCU across a separate sensing barrier.
+ 
+-On the original prototype, PA8 and PA9 generate complementary carrier commands and PA10 gates average transfer through burst enable. Primary-voltage (PA0), secondary-voltage (PA1), and half-bridge-current (PA2) signals are acquired by a continuous ADC scan and buffered by DMA. Sampling is asynchronous to the carrier.
++On the original prototype, MCU pins PA8 and PA9 generate complementary carrier commands, while PA10 enables switching bursts. Primary-voltage (PA0), secondary-voltage (PA1), and half-bridge-current (PA2) signals are acquired by a continuous ADC scan and buffered by DMA. Sampling is asynchronous to the carrier.
+ 
+-Auxiliary rails supply the gate drive, MCU, sensing, and output interface. Bring-up therefore establishes these rails and the inhibited carrier before feedback calibration and low-power transfer. Closed-loop operation follows once isolated feedback is valid.
++Auxiliary rails supply the gate drive, MCU, sensing, and output interface. These rails must be checked with the carrier inhibited before feedback calibration and low-power transfer. Closed-loop regulation requires valid isolated feedback.
+ 
+ The resonant paths meet at the switch node. Burst control consequently changes both secondary transfer and the mains-current envelope; the next chapter analyzes this coupling.
+ 
+@@ -101,6 +101,6 @@
+     at (5.9,-6.2) {Auxiliary rails: BAC1S12SC + LMR54410};
+ \end{tikzpicture}
+ \endgroup
+-\caption{Functional architecture of the tested V1.0 assembly, interpreted with the V1.1 schematic corrections. Charge-pump transfer and resonant transfer use the shared GaN stage. PA1 senses the secondary bulk bus before the USB-C output stage; PA0 and PA2 indicate primary voltage and half-bridge current. The transformer and AMC0330 blocks span their functional isolation boundary.}
++\caption{Power and control architecture of the V1.0 prototype with the V1.1 circuit corrections. The transformer carries power across the isolation barrier, and the AMC0330 returns secondary-bulk feedback to the MCU. PA1 measures this feedback; PA0 and PA2 measure primary voltage and half-bridge current.}
+ \label{fig:req-hardware-architecture}
+ \end{figure}
+--- before/Chapters/03_Requirements_Architecture/07_Operating_Modes.tex
++++ direct/Chapters/03_Requirements_Architecture/07_Operating_Modes.tex
+@@ -1,7 +1,7 @@
+ \section{Operating States}
+ \label{sec:req-modes}
+ 
+-Startup, loaded regulation, and no-load energy limitation require distinct burst limits. The original prototype uses PA10 as the active-high burst-enable GPIO. UART provides command/status access, and ADC readings are buffered by DMA.
++Startup, loaded regulation, and no-load energy limitation require distinct burst limits. The original prototype uses MCU pin PA10 as the active-high burst-enable output. UART provides command/status access, and ADC readings are buffered by DMA.
+ 
+ Table~\ref{tab:req-states} shows how the final firmware separates those tasks. Chapter~\ref{ch:control} gives the thresholds and timing behind the state changes.
+ 
+@@ -15,16 +15,16 @@
+ \midrule
+ Initialization & Configures stored settings, GPIO, UART, timers, ADC DMA, filters, and status indicators.\\
+ Off/inhibited & Holds PA10 low after an off command, reset condition, or latched fault.\\
+-Startup precharge & Applies a limited burst command to establish secondary power and valid feedback before normal regulation.\\
++Startup precharge & Applies limited bursts to power the secondary-side feedback circuit before normal regulation.\\
+ Open loop & Uses the commanded \texttt{OD} burst duty for bring-up and diagnostic operation.\\
+ Voltage control & Uses secondary-voltage thresholds and load-state logic to select bounded PA10 commands.\\
+ Loaded operation & Can hold the averaged \texttt{LDUTY} command and increase demand through \texttt{LBOOST} when secondary voltage falls.\\
+ No-load guard & Lowers the regulation window and caps the high command when the inferred load is high impedance.\\
+-Full-demand escape & Temporarily relaxes the no-load cap after a repeated low-voltage condition, allowing an attached load to receive power.\\
++Load-recovery override & Temporarily relaxes the no-load cap after a repeated low-voltage condition, allowing an attached load to receive power.\\
+ Line feed-forward & Uses PA0 to reduce the permitted high command as primary voltage rises; PA1 remains the feedback variable.\\
+ Fault latch & Inhibits PA10 until the cause is removed and the defined clear or reset action is performed.\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+ 
+-The state logic changes permitted energy transfer while the active carrier remains at \SI{1}{\mega\hertz}. The resulting low-frequency envelope depends on load state and settings, including line feed-forward and \texttt{MAXRATE}. Each waveform is interpreted with the applicable configuration. Precharge ends at either the readiness threshold or the configured attempt limit. Reaching the attempt limit ends precharge without guaranteeing valid feedback.
++The state logic changes permitted energy transfer while the active carrier remains at \SI{1}{\mega\hertz}. The burst envelope depends on load state and settings, including line feed-forward and \texttt{MAXRATE}. Precharge ends at either the readiness threshold or the configured attempt limit. The attempt limit can be reached before feedback becomes valid.
+--- before/Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex
++++ direct/Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex
+@@ -1,15 +1,15 @@
+ \section{Test and Design Checks}
+ \label{sec:req-matrix}
+ 
+-Tables~\ref{tab:req-functional-verification} and \ref{tab:req-performance-verification} connect each requirement to an assessment. The behavior implemented in the firmware is checked against the electrical measurements.
++Tables~\ref{tab:req-functional-verification} and \ref{tab:req-performance-verification} list the tests and measurements needed to check each requirement.
+ 
+ \begin{table}[H]
+ \centering
+-\caption{Assessment of functional requirements.}
++\caption{Checks for the functional requirements.}
+ \label{tab:req-functional-verification}
+ \begin{tabularx}{\textwidth}{@{}L{0.10\textwidth}Y L{0.27\textwidth}@{}}
+ \toprule
+-ID & Assessment & Results section\\
++ID & Test or measurement & Results section\\
+ \midrule
+ FR-01 & Startup sequence, output rise, and transition to valid feedback & \cref{sec:res-startup}\\
+ FR-02 & Carrier frequency and enable timing & \cref{sec:res-bringup}\\
+@@ -25,11 +25,11 @@
+ 
+ \begin{table}[H]
+ \centering
+-\caption{Assessment of performance and reporting requirements.}
++\caption{Checks for the performance requirements.}
+ \label{tab:req-performance-verification}
+ \begin{tabularx}{\textwidth}{@{}L{0.10\textwidth}Y L{0.27\textwidth}@{}}
+ \toprule
+-ID & Assessment & Results section\\
++ID & Test or measurement & Results section\\
+ \midrule
+ PR-01 & Measured power together with available duration and thermal record & \cref{sec:res-steady,sec:res-thermal}\\
+ PR-02 & Stated source voltage and frequency & \cref{sec:res-steady}\\
+@@ -37,12 +37,12 @@
+ PR-04 & DC voltage, ripple capture, and load response & \cref{sec:res-steady,sec:res-transient}\\
+ PR-05 & No-load voltage observations and control thresholds & \cref{sec:res-open}\\
+ PR-06 & Corresponding power, PF, and current-distortion record & \cref{sec:res-pq}\\
+-PR-07 & Consistent input/output power and measurement boundary & \cref{sec:res-efficiency}\\
++PR-07 & Input/output power measured under the same conditions and at stated circuit points & \cref{sec:res-efficiency}\\
+ PR-08 & Surface-temperature record and operating condition & \cref{sec:res-thermal}\\
+-PR-09 & Consistency of test identity and source records & \cref{sec:res-compliance}\\
++PR-09 & Hardware, firmware, and source measurements for each result & \cref{sec:res-compliance}\\
+ PR-10 & Active limiter and observed overload response & \cref{sec:res-transient,sec:res-compliance}\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+ 
+-Section~\ref{sec:res-compliance} compares requirements with completed measurements; Section~\ref{sec:revised-plan-criteria} extends the scope to V2/V3 development. Firmware implementation establishes the commanded function, while measurements establish its electrical response.
++Section~\ref{sec:res-compliance} compares requirements with completed measurements; Section~\ref{sec:revised-plan-criteria} extends the scope to V2/V3 development. Source code shows which functions were implemented; measurements show how the circuit responded.
+--- before/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
++++ direct/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
+@@ -1,7 +1,7 @@
+ \section{Requirements from the Revised Plan}
+ \label{sec:revised-plan-criteria}
+ 
+-The revised July--October plan extends bring-up into V2 evaluation, converter adjustment, and V3 edge-card development \cite{projectOctoberPlan}. The criteria below cover V2 baseline repetition, diagnosis of the output-power limit, controlled design changes, and readiness for final evaluation.
++The revised July--October plan extends bring-up into V2 evaluation, converter adjustment, and V3 edge-card development \cite{projectOctoberPlan}. The plan calls for repeating the V2 tests, finding the output-power limit, testing controlled design changes, and preparing the final evaluation.
+ 
+ \Needspace{10\baselineskip}
+ \subsection{Power Levels and Prototype Versions}
+@@ -12,25 +12,25 @@
+ 
+ \subsection{Design and Test Requirements}
+ 
+-Table~\ref{tab:req-revised-plan-criteria} defines the additional design and test criteria, including thermal, stability, and volume measurements required beyond output power.
++Table~\ref{tab:req-revised-plan-criteria} lists the additional design work and tests, including temperature, stability, and volume measurements.
+ 
+ \begingroup
+ \small
+ \begin{longtable}{@{}L{0.10\linewidth}L{0.82\linewidth}@{}}
+-\caption[Revised-plan acceptance and reporting criteria.]{Acceptance and reporting criteria carried forward from the revised project plan.}
++\caption[Tests and design work in the revised plan.]{Tests and design work in the revised project plan.}
+ \label{tab:req-revised-plan-criteria}\\
+-\toprule ID & Required work and acceptance record\\\midrule
++\toprule ID & Planned test or design work\\\midrule
+ \endfirsthead
+-\toprule ID & Required work and acceptance record\\\midrule
++\toprule ID & Planned test or design work\\\midrule
+ \endhead
+-AP-01 & Assess the \SI{65}{\watt} continuous minimum, earlier \SI{75}{\watt} validation milestone, and \SI{100}{\watt} continuous target using matched electrical measurements and defined-duration thermal/stability records.\\
++AP-01 & Assess the \SI{65}{\watt} continuous minimum, earlier \SI{75}{\watt} validation milestone, and \SI{100}{\watt} continuous target using simultaneous electrical measurements and defined-duration thermal and stability runs.\\
+ AP-02 & Repeat the reported approximately \SI{85}{\watt} V2 point, or explain the difference. Record assembly and fitted parts, firmware/exported settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, uncertainty, and raw-file locations.\\
+ AP-03 & Diagnose the \SI{15}{\watt} reported output shortfall using loss calculations, component stress, control limits, and temperatures. Rank candidate changes from these findings and retest one change at a time. If \SI{100}{\watt} is not reached safely, quantify the highest repeatable power and the remaining limit.\\
+ AP-04 & Characterize no load, the supported fixed PDOs, and PPS. At applicable loads, record regulation, corresponding input/output power, efficiency, PF/THD, ripple, switching/device stress, transient response, temperatures, and protection events. The planned V2 points include \SIlist{25;45;65;75;80}{\watt} and approximately \SI{85}{\watt}.\\
+-AP-05 & Complete a defined-duration thermal and stability run at the final supported power and document extended-load reliability observations. State ambient, cooling, run time, temperature development, interruptions, and stop limits. A single thermal image does not close this criterion.\\
++AP-05 & Complete a defined-duration thermal and stability run at the final supported power and document extended-load reliability observations. State ambient, cooling, run time, temperature development, interruptions, and stop limits. A thermal image alone does not show thermal equilibrium or long-term stability.\\
+ AP-06 & Develop and review the V3 edge-card pinout, outline, component-height limit, current and gate/sense return paths, creepage/clearance, and thermal-spreading arrangement. Record schematic/layout review, DRC, BOM availability, manufacturing review, and release status.\\
+-AP-07 & Compare V2 and V3 power density using the same stated volume convention and supported power basis. Report dimensions, included parts and cooling allowance, efficiency, thermal margin, and any safety or reliability trade-off.\\
+-AP-08 & Record the V3 readiness decision and resulting test scope. If V3 is not ready, use the completed, identified V2 tests as the hardware results and state the remaining V3 work. Identify which V2 tests have usable matched records.\\
++AP-07 & Compare V2 and V3 power density using the same volume calculation and output-power test conditions. Report dimensions, included parts and cooling allowance, efficiency, thermal margin, and any safety or reliability trade-off.\\
++AP-08 & Decide whether V3 is ready for testing and list the tests that can be completed. If V3 is not ready, use the completed, identified V2 tests as the hardware results and state the remaining V3 work. Identify which V2 tests have usable matched records.\\
+ \bottomrule
+ \end{longtable}
+ \endgroup
+@@ -39,6 +39,6 @@
+ 
+ Power density requires verified output and complete assembly dimensions. Section~\ref{sec:method-density} uses a common rectangular envelope including magnetics, connectors, supports, component height, required spacing, and cooling hardware. V2 and V3 assembly dimensions remain necessary; they cannot be inferred from the V1.0 outline.
+ 
+-The completed work includes the measured first-prototype baseline, integrated V2 circuit and firmware, powered tank changes, and a reduced V3 layout. Replacement planar magnetics were not installed. A matched repeat near \SI{85}{\watt}, the full PPS and extended-load tests, a completed V3 readiness decision, and the paired full-system density comparison remain open. Chapter~\ref{ch:results} presents the measurements and design estimate; Chapters~\ref{ch:discussion} and \ref{ch:conclusion} connect them to the next steps.
++The completed work includes the measured first-prototype baseline, integrated V2 circuit and firmware, powered tank changes, and a reduced V3 layout. Replacement planar magnetics were not installed. A matched repeat near \SI{85}{\watt}, the full PPS and extended-load tests, a decision on V3 testing, and the full-system power-density comparison remain open. Chapter~\ref{ch:results} presents the measurements and design estimate; Chapters~\ref{ch:discussion} and \ref{ch:conclusion} connect them to the next steps.
+ 
+-Planar-magnetic optimization is a learning objective. The supplied designs were retained, so this thesis evaluates their integration and effect on converter operation. Original electromagnetic design is attributed in Section~\ref{sec:intro-contributions}.
++Planar-magnetic optimization is a learning objective. The supplied designs were retained, so this thesis evaluates their integration and effect on converter operation. The original electromagnetic design came from the earlier work described in Section~\ref{sec:intro-contributions}.
+--- before/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
++++ direct/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
+@@ -7,7 +7,7 @@
+ 
+ The rectified input follows the mains envelope, while the DC link stores energy and supplies the half bridge. Pump capacitance \(\CP\), inductance \(\LP\), and steering/clamp paths transfer energy between these nodes during each enabled cycle.
+ 
+-The isolated branch is excited from \texttt{VSW} through series capacitance \(\CRES\), discrete inductance, and transformer leakage. The transformer includes a separate magnetizing branch; secondary rectification supplies the bulk capacitor and MPQ4242 stage. Throughout the analysis, \(V_{\mathrm{sec}}\) denotes bulk voltage and VBUS denotes connector voltage.
++The isolated branch is excited from \texttt{VSW} through series capacitance \(\CRES\), discrete inductance, and transformer leakage. The transformer includes a separate magnetizing branch; secondary rectification supplies the bulk capacitor and MPQ4242 stage. \(V_{\mathrm{sec}}\) is the secondary bulk voltage, and VBUS is the USB-C output voltage.
+ 
+ Signed branch currents sum at the half bridge and jointly determine device current and commutation. The DC link couples collected pump power to secondary demand over longer intervals.
+ 
+--- before/Chapters/04_Topology_Analysis/02_Switching_Cycle.tex
++++ direct/Chapters/04_Topology_Analysis/02_Switching_Cycle.tex
+@@ -5,7 +5,7 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Ideal pump-branch intervals in the modified charge-pump topology. Device names refer to functional paths in the reference analysis.}
++\caption{Ideal charge-pump intervals during one switching cycle.}
+ \label{tab:analysis-pump-intervals}
+ \begin{tabularx}{\textwidth}{@{}L{0.09\textwidth}L{0.20\textwidth}Y@{}}
+ \toprule
+@@ -25,4 +25,4 @@
+ 
+ During dead time, signed branch currents charge and discharge device and node capacitances. Pump current can support commutation at low isolated load, whereas opposing branch currents reduce the available net current.
+ 
+-Burst restart begins from the inductor currents and capacitor voltages left by the idle interval. It therefore requires separate assessment from the periodic sequence, particularly during sparse no-load packets.
++Each burst restarts with the inductor currents and capacitor voltages left by the idle interval. The first cycles can therefore differ from steady switching, particularly during sparse no-load packets.
+--- before/Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex
++++ direct/Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex
+@@ -24,6 +24,6 @@
+ \begin{equation}
+ \overline{i}_{\mathrm{rec}}(t)\approx b(t)f_s\CP v_{\mathrm{rec}}(t).
+ \end{equation}
+-Constant \(b\) scales input conductance without changing the ideal envelope. Line-phase variation of \(b(t)\), caused by bulk-voltage ripple response or feed-forward, modifies current shape. Power quality must therefore be assessed with the final controller.
++Constant \(b\) scales input conductance without changing the ideal envelope. Line-phase variation of \(b(t)\), caused by bulk-voltage ripple response or feed-forward, modifies current shape. PF and current THD must therefore be measured with the final controller.
+ 
+ The DC link must remain sufficiently above the rectified-line peak to avoid unintended direct conduction. Ripple, diode drops, finite charging current, and clamp timing alter the actual excursion. The \(f_s\CP\) conductance is an ideal estimate; measured PF/THD includes pump and controller effects.
+--- before/Chapters/04_Topology_Analysis/05_Pump_Inductor.tex
++++ direct/Chapters/04_Topology_Analysis/05_Pump_Inductor.tex
+@@ -18,7 +18,7 @@
+ \end{equation}
+ This estimate assumes the triangular, clamped current sequence of the reference analysis \cite{ammar2021led}.
+ 
+-For \(\CP=\SI{2}{\nano\farad}\) and \(f_s=\SI{1}{\mega\hertz}\), the estimate is \SI{31.25}{\micro\henry}. Supplied measurements of \SI{34.26}{\micro\henry} and \SI{33.09}{\micro\henry} are close to this value (Section~\ref{sec:mag-inherited}); in-circuit current and clamp timing determine agreement with the assumed sequence.
++For \(\CP=\SI{2}{\nano\farad}\) and \(f_s=\SI{1}{\mega\hertz}\), the estimate is \SI{31.25}{\micro\henry}. Supplied measurements of \SI{34.26}{\micro\henry} and \SI{33.09}{\micro\henry} are close to this value (Section~\ref{sec:mag-inherited}); in-circuit current waveforms and clamp timing are needed to check the triangular-current assumption.
+ 
+ The corresponding ideal pump resonance is
+ \begin{equation}
+--- before/Chapters/04_Topology_Analysis/11_Design_Summary.tex
++++ direct/Chapters/04_Topology_Analysis/11_Design_Summary.tex
+@@ -1,7 +1,7 @@
+ \section{Design Values and Checks}
+ \label{sec:analysis-summary}
+ 
+-Table~\ref{tab:analysis-design-summary} lists the values used to connect the reference equations to the prototype. It separates nominal circuit values, supplied magnetic measurements, and calculated estimates.
++Table~\ref{tab:analysis-design-summary} summarizes the prototype parameters used in the calculations.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -9,18 +9,18 @@
+ \label{tab:analysis-design-summary}
+ \begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}L{0.25\textwidth}Y@{}}
+ \toprule
+-Quantity & Value & Interpretation\\
++Parameter & Value & Notes\\
+ \midrule
+-Pump capacitance & \SI{2}{\nano\farad} & Nominal implementation value\\
++Pump capacitance & \SI{2}{\nano\farad} & Nominal circuit value\\
+ Calculated pump inductance & \SI{31.25}{\micro\henry} & Reference triangular-current sizing\\
+-Supplied pump inductors & \SI{33.09}{\micro\henry}, \SI{34.26}{\micro\henry} & Inherited A/B measurements\\
++Supplied pump inductors & \SI{33.09}{\micro\henry}, \SI{34.26}{\micro\henry} & Supplied measurements for inductors A and B\\
+ DC-link capacitor & \SI{22}{\micro\farad}, \SI{450}{\volt} & Nominal value and component rating\\
+-Discrete resonant inductance & Approximately \SI{9.4}{\micro\henry} & Final discrete series contribution\\
+-Transformer leakage & Approximately \SI{16.5}{\micro\henry} & Inherited primary-referred measurement\\
+-Effective series inductance & Approximately \SI{25.9}{\micro\henry} & Sum if the stated contributions act in series\\
+-Resonant capacitance & \SI{1}{\nano\farad} & Nominal implementation value\\
+-Magnetizing inductance & Approximately \SIrange{140}{151}{\micro\henry} & Inherited transformer-variant range\\
+-Turns ratio & \(n=N_p/N_s\approx8\) & Primary-to-secondary step-down convention\\
++Discrete resonant inductance & Approximately \SI{9.4}{\micro\henry} & External series inductance\\
++Transformer leakage & Approximately \SI{16.5}{\micro\henry} & Supplied primary-referred leakage measurement\\
++Effective series inductance & Approximately \SI{25.9}{\micro\henry} & Discrete inductance plus leakage, assuming series connection\\
++Resonant capacitance & \SI{1}{\nano\farad} & Nominal circuit value\\
++Magnetizing inductance & Approximately \SIrange{140}{151}{\micro\henry} & Range of supplied transformer measurements\\
++Turns ratio & \(n=N_p/N_s\approx8\) & Primary-to-secondary turns ratio\\
+ Carrier frequency & \SI{1}{\mega\hertz} & Fixed during active bursts\\
+ \bottomrule
+ \end{tabularx}

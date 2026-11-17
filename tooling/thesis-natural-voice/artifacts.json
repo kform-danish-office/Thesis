@@ -1,0 +1,14 @@
+{
+  "pages": 390,
+  "source_files": 479,
+  "artifacts": {
+    "Thesis_Natural_Voice.pdf": {
+      "bytes": 14748519,
+      "sha256": "34de9450a8015a717037d1ad4e2332c3f826e6955189c794455b44f2d4d87fae"
+    },
+    "Thesis_Natural_Voice_Source.zip": {
+      "bytes": 83673746,
+      "sha256": "a5a53c92ca91631ac5e3f6287eaa6113a268906bc6b021aabfb93acbfba96997"
+    }
+  }
+}

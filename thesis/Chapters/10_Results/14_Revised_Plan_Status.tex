@@ -1,0 +1,46 @@
+\Needspace{11\baselineskip}
+\section{Revised Plan: Results and Remaining Work}
+\label{sec:res-revised-plan}
+
+The revised plan sets the next engineering tasks:
+\SI{100}{\watt} continuous remains the target, \SI{65}{\watt} continuous
+is the minimum, and the previously reported approximately \SI{85}{\watt}
+V2 point needs to be repeated before diagnosing the gap and evaluating V3
+\cite{projectOctoberPlan}. Section~\ref{sec:revised-plan-criteria} gives
+the acceptance criteria used below.
+
+The V1.0 reference test, \sourcefile{PDO20-80W-40A-001}, row 27,
+gives \SI{19.9732}{\volt} at \SI{4}{\ampere}, or
+\SI{79.8928}{\watt}, with the baseline voltage-control firmware. Repeating the reported \SI{85}{\watt} V2 point requires its original
+hardware, firmware, and settings.
+
+Section~\ref{sec:res-v2-testing} reports the V2 tests. An earlier \SI{100}{\watt} constant-power load setting was a setpoint. Later secondary-output measurements reached \SI{137.1}{\watt} with voltage droop, and none of those tests reached thermal equilibrium. A matched repeat of the earlier \SI{85}{\watt} point remains open. Input-bridge and secondary-region heating require further investigation.
+
+\begin{table}[htbp]
+\centering
+\caption[Progress against the revised plan.]{Progress against the revised project plan and remaining tests.}
+\label{tab:revised-plan-results-status}
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}L{0.07\textwidth}L{0.24\textwidth}Y L{0.23\textwidth}@{}}
+\toprule
+ID & Planned work & Result & Remaining work\\
+\midrule
+AP-01 & \SI{100}{\watt} target; \SI{65}{\watt} continuous minimum & V1 connector reached \SI{79.8928}{\watt}; V2 secondary reached \SI{137.1}{\watt} with droop and no thermal equilibrium & Run the supply at the specified loads while following temperatures to stabilization\\
+AP-02 & Repeat the reported approximately \SI{85}{\watt} V2 baseline & The plan reports the point; the retained matched dataset reaches approximately \SI{80}{\watt} on the identified older assembly & Original hardware/settings and a repeat test are still needed\\
+AP-03 & Explain the power gap and identify the highest repeatable safe output & Earlier secondary-winding heating and limited power increase; later higher-current V2 tests with droop and heating at the input bridge and secondary region; suspected interlayer restriction remains under investigation & Measure individual losses, switching behavior, and the condition that limits further loading\\
+AP-04 & Validate supported fixed PDOs and PPS & Electrical results at \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}; qualitative load removal & Negotiation, PPS behavior, defined stability bands, and protection responses need matched tests\\
+AP-05 & Defined-duration thermal and reliability assessment & V1 images include \SI{90.4}{\celsius} at the labeled \SI{20}{\volt}, \SI{4}{\ampere} condition; later V2 secondary-region maximum was \SI{98.3}{\celsius} & Temperature histories, stabilization, ambient/airflow, and endurance remain incomplete\\
+AP-06 & V3 design and release package & A slimmed edge-card layout was prepared with the USB-PD section removed and secondary rectification retained & Design review, fabrication/assembly checks, and replacement-magnetics tests remain incomplete\\
+AP-07 & Compare V2/V3 power density using one volume convention & Approximately \SI{8}{\percent} net volume reduction was estimated for the reduced-function V3 layout & Measure both assemblies using the same included hardware, power, and cooling conditions\\
+AP-08 & V3 readiness decision or documented fallback & V1 and V2 supply the operating results; V3 reached a slimmed layout, with new magnetics not installed & A V3 readiness decision and matched power/thermal tests remain open\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+Continuous rating and revision comparison require an identified baseline
+followed by duration, temperature, stress, and dynamic tests against declared
+limits. The V3 estimate in \cref{sec:res-v3-design} covers the reduced
+layout; comparison of the complete supply includes its external USB-PD stage.
+Follow-up methods and controlled changes are given
+in Sections~\ref{sec:method-plan-validation} and~\ref{sec:disc-plan-gap}.

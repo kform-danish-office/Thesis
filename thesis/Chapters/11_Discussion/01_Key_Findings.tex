@@ -1,0 +1,18 @@
+\section{Measured Performance and Prototype Changes}
+\label{sec:disc-findings}
+
+The charge-pump PFC resonant topology from the earlier AC--DC and LED-driver
+work \cite{ammar2020chargepump,ammar2021led} was adapted for a detachable,
+regulated output. The supplied planar magnetics, new hardware, downstream
+stage, and digital control were integrated to reduce energy transfer after
+load removal.
+
+At \SI{20}{\volt} and \SIrange{3.7}{4.0}{\ampere}, the most complete
+V1.0 high-power measurements gave \SIrange{73.97}{79.89}{\watt} and an initial
+efficiency estimate of \SIrange{76.5}{77.1}{\percent}. Average USB-C output
+voltage remained regulated, while ripple, load-dependent input-current quality,
+and surface heating remained. The input--output power difference and heating
+point to losses in the power path; simultaneous stage-power and temperature
+measurements would help locate them.
+
+Later V2 secondary-output tests showed voltage droop and continued heating at higher loads. V3 addressed occupied volume by removing the USB-PD section; further work remained on the transformer and current paths.

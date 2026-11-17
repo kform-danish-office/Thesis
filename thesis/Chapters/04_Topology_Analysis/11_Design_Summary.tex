@@ -1,0 +1,31 @@
+\section{Design Values and Checks}
+\label{sec:analysis-summary}
+
+Table~\ref{tab:analysis-design-summary} summarizes the prototype parameters used in the calculations.
+
+\begin{table}[htbp]
+\centering
+\caption{Parameters used for first-order converter analysis.}
+\label{tab:analysis-design-summary}
+\begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}L{0.25\textwidth}Y@{}}
+\toprule
+Parameter & Value & Notes\\
+\midrule
+Pump capacitance & \SI{2}{\nano\farad} & Nominal circuit value\\
+Calculated pump inductance & \SI{31.25}{\micro\henry} & Reference triangular-current sizing\\
+Supplied pump inductors & \SI{33.09}{\micro\henry}, \SI{34.26}{\micro\henry} & Supplied measurements for inductors A and B\\
+DC-link capacitor & \SI{22}{\micro\farad}, \SI{450}{\volt} & Nominal value and component rating\\
+Discrete resonant inductance & Approximately \SI{9.4}{\micro\henry} & External series inductance\\
+Transformer leakage & Approximately \SI{16.5}{\micro\henry} & Supplied primary-referred leakage measurement\\
+Effective series inductance & Approximately \SI{25.9}{\micro\henry} & Discrete inductance plus leakage, assuming series connection\\
+Resonant capacitance & \SI{1}{\nano\farad} & Nominal circuit value\\
+Magnetizing inductance & Approximately \SIrange{140}{151}{\micro\henry} & Range of supplied transformer measurements\\
+Turns ratio & \(n=N_p/N_s\approx8\) & Primary-to-secondary turns ratio\\
+Carrier frequency & \SI{1}{\mega\hertz} & Fixed during active bursts\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The pump values place ideal charge transfer in the intended power range, while series values place nominal resonance near the carrier. Magnetizing current, burst transitions, and DC-link ripple determine departures from this estimate.
+
+Pump capacitance and line voltage set charge transfer; link capacitance buffers mains-energy ripple; the tank and ratio set secondary excitation; both branch currents determine commutation and heating. Chapter~\ref{ch:simulation} applies these relationships to the supplied models, and Chapter~\ref{ch:results} evaluates the assembled converter.

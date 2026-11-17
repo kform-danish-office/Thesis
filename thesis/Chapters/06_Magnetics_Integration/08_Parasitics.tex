@@ -1,0 +1,29 @@
+\section{Parasitics in the Installed Magnetics}
+\label{sec:mag-parasitics}
+
+The resonant path includes the added series inductor, transformer leakage, and connecting conductors. The following first-order relationship was used to check how installation changes resonance:
+\begin{equation}
+ f_{r,\mathrm{installed}}\simeq
+ \frac{1}{2\pi\sqrt{(L_{\mathrm{RES}}+L_{\mathrm{lk}}+L_{\mathrm{int}})C_{\mathrm{RES}}}},
+ \label{eq:mag-installed-resonance}
+\end{equation}
+Here \(L_{\mathrm{int}}\) is the added connection inductance. Both component values and wiring can therefore change tank current and commutation timing. Magnetizing inductance, load, and nonlinear device capacitance must also be included in a more complete model.
+
+\begin{table}[htbp]
+\centering
+\caption{Parasitic effects in the installed magnetics.}
+\label{tab:mag-parasitic-mechanisms}
+\begin{tabularx}{\textwidth}{@{}p{0.28\textwidth}X@{}}
+\toprule
+Mechanism & Consequence for the converter\\
+\midrule
+Connection inductance & Resonance shift, switching overshoot, and ringing\\
+Connection resistance & Additional loss and local heating at pads and joints\\
+Primary-to-secondary capacitance & Common-mode current driven by the switch-node transition\\
+Core-gap variation & Change in inductance and magnetizing current\\
+Polarity or terminal error & Incorrect voltage transfer or rectifier operation\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Common-mode current follows \(i_{\mathrm{CM}}=C_{\mathrm{ps}}\,dv/dt\). Interwinding capacitance, adjacent copper, and probe loading therefore affect secondary-noise captures. Quantifying these effects requires impedance and capacitance measurements on the assembled converter.

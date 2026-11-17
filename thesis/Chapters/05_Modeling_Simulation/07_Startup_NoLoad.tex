@@ -1,0 +1,21 @@
+\subsection{Startup and Load-Removal Energy}
+\label{sec:sim-startup}
+
+Limited precharge is used to power the isolated feedback circuit before normal voltage control begins. A startup model must include this supply delay; assuming initially valid feedback omits the condition addressed by precharge.
+
+\begin{samepage}
+At load removal, residual tank energy and continued excitation can charge the secondary capacitor. If a net energy \(\Delta E\) is deposited in an equivalent secondary capacitance \(C_{\mathrm{sec}}\), energy conservation gives
+\begin{equation}
+V_{\mathrm{sec,after}}=
+\sqrt{V_{\mathrm{sec,before}}^2+\frac{2\Delta E}{C_{\mathrm{sec}}}}.
+\label{eq:sim-secondary-energy}
+\end{equation}
+\end{samepage}
+For a small excursion,
+\begin{equation}
+\Delta V_{\mathrm{sec}}\approx
+\frac{\Delta E}{C_{\mathrm{sec}}V_{\mathrm{sec}}}.
+\end{equation}
+Secondary capacitance reduces the voltage rise per packet. Quantitative overshoot prediction requires deposited energy, effective capacitance, and controller delay, including excitation delivered before inhibition.
+
+Driving the original prototype's burst-enable output PA10 low inhibits further excitation while stored energy continues to circulate. The no-load guard reduces repeated packets; soft holdoff and latched OVP block further commands. Checking the resulting peak voltage requires a switched model with the measured circuit and timing.

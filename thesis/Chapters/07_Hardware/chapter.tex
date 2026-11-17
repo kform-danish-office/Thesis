@@ -1,0 +1,28 @@
+\chapter{Hardware Design and Implementation}
+\label{ch:hardware}
+
+The power PCB combines the charge-pump resonant circuit from earlier DTU work and planar magnetics with the input network, auxiliary supplies, isolated feedback, USB-C output stage, and digital control developed in this project. The MCU acquires primary voltage, secondary-bulk voltage, and half-bridge current at PA0--PA2. On the original prototype, carrier commands at PA8/PA9 and burst enable at PA10 control energy transfer. The V2 assignments are given in \cref{sec:hw-v2}.
+
+Bring-up required corrections to the timer connections and changes to the resonant branch. The V2 schematic excerpts show the common power circuit; fitted components and controller assignments are identified for each tested board. The following sections describe the tested assembly, later circuit revisions, and V3 layout.
+
+\input{Chapters/07_Hardware/01_Prototype_Overview}
+\input{Chapters/07_Hardware/02_Input_Filter_Bridge}
+\section{High-Frequency Power Stage}
+\label{sec:hw-powerstage}
+\input{Chapters/07_Hardware/03_Charge_Pump_Network}
+\input{Chapters/07_Hardware/04_GaN_Half_Bridge}
+\input{Chapters/07_Hardware/05_Gate_Drive}
+\input{Chapters/07_Hardware/06_Resonant_Output}
+\input{Chapters/07_Hardware/07_USBC_Interface}
+\input{Chapters/07_Hardware/08_Sensing}
+\input{Chapters/07_Hardware/09_Protection}
+\input{Chapters/07_Hardware/10_Auxiliary_Power}
+\input{Chapters/07_Hardware/11_PCB_Layout}
+\input{Chapters/07_Hardware/12_EMI}
+\input{Chapters/07_Hardware/13_Thermal}
+\input{Chapters/07_Hardware/14_BOM_Manufacturing}
+\input{Chapters/07_Hardware/15_Unmanufactured_Revisions}
+\input{Chapters/07_Hardware/16_V2_F410}
+\input{Chapters/07_Hardware/17_V3_Edge_Card_Plan}
+
+

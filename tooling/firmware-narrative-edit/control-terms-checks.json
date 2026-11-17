@@ -1,0 +1,34 @@
+[
+  {
+    "path": "Chapters/08_Control_Firmware/01_Control_Objectives.tex",
+    "checks": "PASS"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "checks": "PASS"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+    "checks": "PASS"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/08_Control_Law.tex",
+    "checks": "PASS"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+    "checks": "PASS"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+    "checks": "PASS"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+    "checks": "PASS"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "checks": "PASS"
+  }
+]

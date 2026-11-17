@@ -1,0 +1,36 @@
+{
+  "user_statement": "V2 pictures. Thermal is from a 95w run",
+  "photos": [
+    {
+      "path": "Data/measurements/v2_results/evidence/v2_board_overview_original.jpg",
+      "source_filename": "1-1000048184.jpg",
+      "sha256": "407575aab553cb647206ca58b00f86c2e4177d8a4ed228cd73bd4469e18bf968",
+      "description": "V2 board overview",
+      "modified": false
+    },
+    {
+      "path": "Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg",
+      "source_filename": "2-1000048178.jpg",
+      "sha256": "438822989a33edf82e9cd67b63ce873352336291b3bd0c3b23af0dae77ab0bd5",
+      "description": "Thermal image; user identifies this as a 95 W run",
+      "modified": false
+    },
+    {
+      "path": "Data/measurements/v2_results/evidence/v2_thermal_setup_original.jpg",
+      "source_filename": "3-1000048153.jpg",
+      "sha256": "68ed03bbae85c7a05ad8499b902932ad95e8a2c725a6ea2d54290d186f2190cd",
+      "description": "V2 bench and thermal-camera arrangement",
+      "modified": false
+    },
+    {
+      "path": "Data/measurements/v2_results/evidence/v2_board_detail_original.jpg",
+      "source_filename": "4-1000048144.jpg",
+      "sha256": "c3300a4ff0c34bf31b5fcdf2145138077ac438d4870c5fc3a70e968c779412ef",
+      "description": "V2 board component-side detail",
+      "modified": false
+    }
+  ],
+  "reported_thermal_run_power_W": 95,
+  "power_measurement_basis": "Not specified: setpoint versus measured power not confirmed",
+  "limits": "Board photos are not confirmed to show the exact thermal-run configuration."
+}

@@ -1,0 +1,42 @@
+\chapter{Experimental Data and Processing}
+\label{app:data}
+
+\section{Measurements}
+
+The electrical tables give instrument readings for completed fixed-output and extended-load tests. Blank fields mark missing measurements.
+
+Seven V2 secondary-output load captures provide AC-supply and electronic-load readings used to calculate secondary power and estimate efficiency as described in \cref{sec:method-efficiency}. The associated thermal-region readings are described in \cref{sec:method-thermal}.
+
+\section{Calculations and Graph Generation}
+
+Measured values were kept in the electrical tables. The equations in
+Appendix~\ref{app:equations} were used to calculate output power,
+average-voltage error, initial efficiency estimates, and the input-output power
+difference. Efficiency requires a compatible DC average, load current,
+and logged input power. Incomplete rows, unmatched input-power readings,
+and rows flagged for power disagreement are excluded. Some selected rows
+still have differing instrument readings, which limit the accuracy of the
+efficiency estimates. PF and THD readings remain linked to their instruments;
+they cannot be treated as one calibrated measurement across all tests.
+
+AC-coupled detail captures and DC operating-point measurements are listed separately. The spread of \texttt{Vavg} statistics describes variation between average readings; ripple requires an instantaneous peak-to-peak voltage from a defined capture. The thermal results use the maximum surface temperature displayed by the camera. A junction-temperature estimate or continuous rating would also need component identification, a thermal model, and a stabilized run.
+
+The raw waveform exports were plotted with their original amplitudes
+and offsets. Uncertainty in channel calibration or the measured circuit
+node is stated with the result. 
+
+\section{Electrical Measurements and Calculated Results}
+The tables list voltages, load, power-quality readings, firmware version,
+and calculations for each completed test. DC
+operating points, AC-detail captures, and load-removal tests are kept
+separate because the quantities and acquisition conditions differ.
+\input{Data/measurements/processed_rewrite/appendix_electrical_tables}
+
+\section{Current Harmonic Spectra}
+\input{Data/measurements/processed_rewrite/appendix_harmonic_tables}
+
+\section{Thermal-Camera Readings}
+\input{Data/measurements/processed_rewrite/appendix_thermal_tables}
+
+\section{Waveform Acquisition}
+\input{Data/measurements/processed_rewrite/raw_waveform_source_table}

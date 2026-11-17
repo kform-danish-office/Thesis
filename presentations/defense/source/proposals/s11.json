@@ -1,0 +1,82 @@
+{
+  "slide_id": "s11",
+  "proposal_revision": 4,
+  "title": "Input harmonics at the 80 W operating point",
+  "takeaway": {
+    "text": "The plotted input-current harmonic components at the 80 W operating point are below the IEC 61000-3-2 Class A limit curve.",
+    "visible": false
+  },
+  "visible_content": {
+    "condition": "V1 · 20 V, 4 A USB-C · 240 V AC, 50 Hz",
+    "body_1": "Input harmonics are below the Class A limits",
+    "standard_label": "IEC 61000-3-2:2018 · Class A",
+    "metric": "PF 0.99 · logged current THD 3.98%",
+    "phase_label": "Results"
+  },
+  "visual": {
+    "type": "original_embedded_graph",
+    "asset": "/workspace/presentations/defense/dtu-supervisor-flow/assets/original-digest-results.png",
+    "crop_pixels": [
+      0,
+      3150,
+      2650,
+      4644
+    ],
+    "source_image_pixels": [
+      5443,
+      4644
+    ],
+    "layout": "Show the full original panel with its title, axes, legend, measured bars and limit curve intact; use the available space to keep the graph labels legible. Do not redraw, edit or cover the original pixels. Place concise condition, standard and metric text alongside or below it.",
+    "embedded_figure_labels": {
+      "title": "(e) 80 W IEC 61000-3-2 Class A harmonic-current screen",
+      "legend": [
+        "80 W (iTHD 3.98%)",
+        "IEC 61000-3-2 Class A limit"
+      ],
+      "x_axis": "Harmonic order, h",
+      "y_axis": "Harmonic current, Iₕ (mA rms)",
+      "axis_details": "Harmonic orders 2–40; logarithmic vertical scale."
+    }
+  },
+  "speaker_notes": "At the 80-watt USB-C operating point, the input readings gave a power factor of 0.99 and current THD of 3.98 percent. The blue bars show the individual input-current harmonics, and the orange curve shows the IEC 61000-3-2 Class A limits for each harmonic order. The vertical scale is logarithmic. The shown harmonic components are below the Class A limits at this point. Class A is the reference used for this general-purpose supply. The standard limits each harmonic current; power factor and THD summarize input quality. The 3.98 percent is the logged screen value; the harmonic table from a separate capture gives 4.53 percent when reconstructed. This comparison covers one operating point, rather than a full IEC test. The charge pump shapes the average input-current envelope, while variation in burst density over the line cycle can change its shape.",
+  "transition": "The V1 thermal image shows where heating became severe under load.",
+  "duration_seconds": 90,
+  "sources": [
+    {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/assets/original-digest-results.png",
+      "passage": "Original digest Fig. 3(e), native crop [0, 3150, 2650, 4644]",
+      "supports": "Original measured 80 W harmonic-current bars, Class A comparison curve and embedded graph labels."
+    },
+    {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/review/iec-research/source-notes.md",
+      "passage": "Equipment classification and Class A limits",
+      "supports": "IEC 61000-3-2:2018 Class A comparison context and the matching published Class A harmonic-current limits."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/07_Input_Power_Quality.tex",
+      "passage": "Input Power Quality",
+      "supports": "20 V, 4 A logged power factor and THD, and 4.53% separate harmonic-table reconstruction."
+    },
+    {
+      "path": "/workspace/presentations/defense/dtu-focused-story/assets/v1_power_quality.csv",
+      "passage": "PDO20-80W-40A-001",
+      "supports": "20 V, 4 A V1 operating point, 240 V 50 Hz input and PF/current THD readings."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+      "passage": "Line-Cycle Current Shaping",
+      "supports": "Average current envelope and effect of line-phase variation in active-cycle density."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "The original graph is embedded without pixel edits; its blue harmonic bars lie below the plotted orange Class A limits for the shown 80 W point.",
+      "IEC limits refer to individual harmonic currents. Comparison of one operating point does not establish full IEC test conformity.",
+      "The logged 3.98% THD and 4.53% harmonic-table reconstruction come from separate records and the discrepancy is unresolved.",
+      "The charge-pump envelope and burst-density explanation is a mechanism, not an isolated diagnosis of the measured spectrum.",
+      "All text inside the original graph is inventoried in embedded_figure_labels; no prior PF/THD trend panel keys remain."
+    ],
+    "unresolved_questions": [],
+    "timing": "90 seconds including transition; allow time to read the logarithmic graph."
+  }
+}

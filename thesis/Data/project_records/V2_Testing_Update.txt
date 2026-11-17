@@ -1,0 +1,56 @@
+V2 testing update: user-provided bench observations
+=================================================
+
+This record preserves the source wording used for the preliminary V2 testing
+section. It is a bench narrative, not a calibrated measurement table.
+
+Original dictation, verbatim:
+
+This was section for the version 2 testing. Version 2 testing we have tested in original state. There are still excessive losses on the secondary at where the series inductor, sorry, the 9.4 uH inductor. As a result, I have modified the resonant frequency and resonant tank to allow usage of just the pure leakage inductance from the transformer. I had to change to a 1.66 nanofarad resonant cap, but now I am able to successfully remove the series inductor, which reduces a bunch of losses. However, there is one problem in which the full bridge rectifier diodes, my silicon carbide ultra-fast recovery diodes, are having excessive heating. We'll check in on why it's the case. I believe it could be a routing error due to... sorry, I found that it's probably due to a routing error by me. I did not properly put enough... I didn't put enough copper for the traces, so as a result during the load testing it heats up significantly. Next versions I will increase the copper pour density, and hopefully that will also solve that problem as well. I have swapped out the rectifier diodes. As in addition, the problem is still have not fixed the issue of the heating. I'm going to see if I can move the diodes to a different side and hopefully reduce the overall thermal heating. Other than that, the V2 is up and running. Just the problem right now is our full bridge is losing a significant amount of heat. I had to adjust dead time to about 16 nanoseconds. My half bridge is achieving ZVS switching due to it no longer heating up like crazy anymore. But yep, systems for V2 are all good to go.
+
+Later correction, verbatim:
+
+60 Ms dead time for software
+
+Interpretation used in the thesis:
+
+- The correction is interpreted as approximately 60 ns programmed dead time,
+  replacing the earlier 16 ns statement. The interpretation was stated to the
+  user. No scope measurement or firmware version was supplied with the note.
+- The external series resonant inductor is identified without calling it a
+  secondary-side component: the available V2 drawing places L4 in the primary
+  resonant path. The reported approximately 9.4 uH bench value is not silently
+  equated with the drawing's nominal 10 uH part or the earlier V1.0 assembly.
+- Approximately 1.66 nF is retained from the dictation. The preceding discussion
+  reported 1.667 nF; these are treated as approximate reports of the tank change,
+  not as independently measured capacitor values.
+- Lower half-bridge heating is an observation. ZVS was the user's inference;
+  it has not been established here from synchronized switching waveforms.
+- The reported limited copper is a suspected contributor to bridge heating.
+  No measured trace resistance, loss allocation, or completed layout comparison
+  was supplied. Replacing the diodes was reported not to resolve the heating.
+- The wider copper and possible relocation remain proposed changes.
+
+Earlier related user statements, retained as context:
+
+Input and load: 240 V AC, 50 Hz, 100 W constant-power load setting.
+Corrected resonant capacitance in that discussion: 1.667 nF.
+Heated area: D4/D5/D9/D10, after removal of the external 10 uH inductor.
+Clarification: output voltage was steady; instability meant thermal rise.
+Thermal history: approximately 80 C in a few seconds, followed by a slower
+rise toward 90 C, when the user switched off.
+
+Evidence boundary:
+
+The thermal photo was supplied before this latest dictation. Its relationship
+to a particular original/replacement diode fit or to the later timing adjustment
+was not specified. Actual input/output power, output voltage/current, firmware
+version, installed transformer identity, current/voltage waveforms, ambient,
+airflow and a complete timed thermal record were not supplied. No continuous
+100 W rating or numerical before/after efficiency improvement is established.
+
+Later photo clarification (verbatim):
+V2 pictures
+Thermal is from a 95w run
+
+This corrects the thermal image run-power attribution to 95 W. Whether this is a setpoint or measured output was not specified. See evidence/v2_photos_provenance.json for original photo hashes.

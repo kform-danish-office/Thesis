@@ -1,0 +1,121 @@
+\section{Remaining Tests in the Revised Plan}
+\label{sec:method-plan-validation}
+
+The remaining campaign targets a repeatable V2 baseline, power-limit diagnosis,
+and a matched V3 comparison \cite{projectOctoberPlan}. AP-01--AP-08 are defined
+in Section~\ref{sec:revised-plan-criteria}; current results are summarized in
+Section~\ref{sec:res-revised-plan}.
+
+\subsection{Repeat the V2 Baseline}
+
+The reported V2 operating point near \SI{85}{\watt} must be repeated with
+the hardware, rework, magnetics, resonant values, controller target, firmware version, settings and mode
+identified. AC input, output setting and negotiation, load and cable, auxiliary
+supplies, cooling, ambient and duration must also be recorded. Probe scaling
+and zero must be checked. If the original configuration cannot be reconstructed,
+the known differences must be stated.
+
+The measurements must identify the analyzer, ranges and accuracy,
+probe positions, bandwidth, averaging and timing, and thermal sensing method.
+Protocol tests must identify advertised capabilities and requested/accepted
+sink settings.
+
+\subsection{Power and Temperature Measurements}
+
+Real AC input power, external connector voltage, and load current must be
+measured over the same steady interval for the calculation in
+Section~\ref{sec:method-efficiency}. Secondary-bulk measurements and the
+primary-current input PA2 describe upstream control rather than connector
+output power. The boundary must include internally supplied auxiliaries and
+measured external supply power, with any exclusions stated.
+
+Instrument ranges, scaling, calibration, and the propagation method in
+Section~\ref{sec:method-uncertainty} define the uncertainty. Unmatched
+averaging windows, changing load, or omitted auxiliary power invalidate a
+matched efficiency estimate.
+
+Continuous-power tests require a specified duration, thermal-stability
+criterion, and numerical stop limits. Initial condition, elapsed time,
+ambient, airflow, orientation, heat sinks, and temperature histories must be
+recorded; isolated electrical and thermal captures are insufficient.
+
+\subsection{Staged Loading and Controlled Changes}
+
+The planned sequence in Table~\ref{tab:method-revised-load-sequence} is limited
+by the selected PDO/APDO and cable, connector, load, and converter ratings.
+Unsupported voltage/current combinations must be omitted or reconfigured.
+
+\begin{table}[H]
+\centering
+\small
+\caption[Planned load sequence.]{Planned load sequence for the remaining tests.}
+\label{tab:method-revised-load-sequence}
+\begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}Y@{}}
+\toprule
+Stage & Test and condition for increasing load\\
+\midrule
+\SI{25}{\watt}, \SI{45}{\watt}, \SI{65}{\watt} & Measure regulation, power quality, efficiency, stress, and heating at increasing load under an applicable output setting.\\
+\SI{75}{\watt}, \SI{80}{\watt}, approximately \SI{85}{\watt} & Repeat the upper baseline range and document whether the plan's V2 point is reproduced.\\
+\SI{90}{\watt}, \SI{95}{\watt}, \SI{100}{\watt} & Proceed in stages only after the previous point passes the defined stress, temperature, control, and interface checks.\\
+Final stable point & Complete the defined-duration thermal/stability run and the full measurement set; report the highest repeatable power if the target is not reached.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Stop limits must follow component ratings, expected stress, sensing range,
+and thermal assumptions, with surface and junction limits treated separately.
+Limit crossings, loss of regulation/feedback, unexplained protection, or
+abnormal switching require termination and a saved event trace.
+
+Controlled retests must change one item while retaining the remaining setup.
+The log must identify the part or setting, rationale, expected effect, and
+before/after records. Candidates include sensing calibration, control limits,
+switching timing, resonant and charge-pump values, gate behavior, conduction
+paths, rectification, and cooling. Calibration changes require raw readings
+and both scales to separate display correction from electrical improvement.
+
+\subsection{Output, Transient, and Thermal Tests}
+
+Fixed-PDO tests must record advertised and negotiated voltage/current,
+regulation, load range, and attach/detach behavior. PPS tests require an
+advertised APDO, requested/accepted settings, measured connector output,
+transitions, and limit behavior.
+
+Startup, shutdown, load steps/removal, no-load recovery, and mode transitions
+require synchronized connector VBUS, relevant bulk/control signals, and event
+markers. Protection tests must define the applied fault, trigger, response,
+and recovery within the bench limits.
+
+At the final accepted power, efficiency, PF/THD, ripple, transients, stress,
+and extended thermal stability must be assessed. Drift, protection,
+interruptions, and cooldown/restart behavior belong in the run record.
+A defined-duration result applies to those conditions rather than lifetime
+reliability.
+
+\subsection{Comparing V2 and V3 Power Density}
+\label{sec:method-density}
+
+For both assemblies, the rectangular envelope of the complete installed
+converter would be measured:
+\begin{equation}
+ V_{\mathrm{assembly}}=LWH,
+ \qquad
+ \rho_P=\frac{P_{\mathrm{out,continuous}}}{V_{\mathrm{assembly}}}.
+ \label{eq:method-assembly-density}
+\end{equation}
+The envelope includes both PCB sides, required daughterboards/connectors,
+heat sinks, and functional hardware moved off-board. Both assemblies must
+use the same axes and treatment of enclosure, cooling, and supports; bench
+instrumentation is excluded.
+
+The numerator requires externally verified continuous output under stated
+duration, ambient, airflow, input, output setting, and thermal conditions.
+Density must be reported with efficiency, temperature, and margin. A nominal
+\SI{100}{\watt} rating and a short measured peak are not comparable under AP-07.
+
+The approximately \SI{8}{\percent} V3 reduction is a design-volume estimate
+with USB-PD omitted, not a complete-supply comparison. External regulation,
+PD control, connectors, and required cooling must enter the system volume.
+Verified dimensions and matched continuous-power tests remain unavailable,
+so no V2/V3 density result is reported. AP-08 specifies completed V2 testing
+as the fallback if V3 is not ready.

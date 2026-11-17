@@ -1,0 +1,947 @@
+{
+  "zoom": [
+    {
+      "hash": "dashboard",
+      "kind": "zoom-equivalent",
+      "width": 720,
+      "doc": 720,
+      "clips": []
+    },
+    {
+      "hash": "dashboard",
+      "kind": "text-resize",
+      "width": 1440,
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "hash": "device-setup",
+      "kind": "zoom-equivalent",
+      "width": 720,
+      "doc": 720,
+      "clips": [
+        {
+          "tag": "LEGEND",
+          "id": "",
+          "class": "",
+          "text": "Duty & EN timing",
+          "client": [
+            1,
+            1
+          ],
+          "scroll": [
+            42,
+            84
+          ]
+        },
+        {
+          "tag": "LEGEND",
+          "id": "",
+          "class": "",
+          "text": "Auto-calibration scan",
+          "client": [
+            1,
+            1
+          ],
+          "scroll": [
+            71,
+            63
+          ]
+        },
+        {
+          "tag": "LEGEND",
+          "id": "",
+          "class": "",
+          "text": "Startup precharge",
+          "client": [
+            1,
+            1
+          ],
+          "scroll": [
+            67,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "hash": "device-setup",
+      "kind": "text-resize",
+      "width": 1440,
+      "doc": 1440,
+      "clips": [
+        {
+          "tag": "LEGEND",
+          "id": "",
+          "class": "",
+          "text": "Duty & EN timing",
+          "client": [
+            1,
+            1
+          ],
+          "scroll": [
+            84,
+            168
+          ]
+        },
+        {
+          "tag": "LEGEND",
+          "id": "",
+          "class": "",
+          "text": "Auto-calibration scan",
+          "client": [
+            1,
+            1
+          ],
+          "scroll": [
+            142,
+            126
+          ]
+        },
+        {
+          "tag": "LEGEND",
+          "id": "",
+          "class": "",
+          "text": "Startup precharge",
+          "client": [
+            1,
+            1
+          ],
+          "scroll": [
+            133,
+            84
+          ]
+        }
+      ]
+    },
+    {
+      "hash": "calibration",
+      "kind": "zoom-equivalent",
+      "width": 720,
+      "doc": 720,
+      "clips": []
+    },
+    {
+      "hash": "calibration",
+      "kind": "text-resize",
+      "width": 1440,
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "hash": "experiments",
+      "kind": "zoom-equivalent",
+      "width": 720,
+      "doc": 720,
+      "clips": []
+    },
+    {
+      "hash": "experiments",
+      "kind": "text-resize",
+      "width": 1440,
+      "doc": 1440,
+      "clips": []
+    }
+  ],
+  "keyboard": [
+    {
+      "hash": "dashboard",
+      "stops": [
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Power Lab\nCONVERTER TEST BENCH",
+          "outline": "solid",
+          "top": 17.796875,
+          "bottom": 56.1875,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Monitor",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Setup",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Calibration",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Sessions\n0",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Calculator",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "output-off",
+          "text": "Output OFF",
+          "outline": "solid",
+          "top": 786,
+          "bottom": 830,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "exit-demo",
+          "text": "Stop demo",
+          "outline": "solid",
+          "top": 270.5625,
+          "bottom": 302.5625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "demo-button",
+          "text": "Exit demo",
+          "outline": "solid",
+          "top": 475.0625,
+          "bottom": 519.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "connect-button",
+          "text": "Connect USB",
+          "outline": "solid",
+          "top": 475.0625,
+          "bottom": 519.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Voltage",
+          "outline": "solid",
+          "top": 442.65625,
+          "bottom": 476.65625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Duty",
+          "outline": "solid",
+          "top": 442.65625,
+          "bottom": 476.65625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "output-on",
+          "text": "Enable output",
+          "outline": "solid",
+          "top": 437.65625,
+          "bottom": 481.65625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "clear-fault",
+          "text": "Clear fault",
+          "outline": "solid",
+          "top": 437.65625,
+          "bottom": 481.65625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "SELECT",
+          "id": "mode-select",
+          "text": "Select reported mode\nOpen loop\nSecondary voltage o",
+          "outline": "solid",
+          "top": 516.65625,
+          "bottom": 560.65625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Device settings",
+          "outline": "solid",
+          "top": 633.84375,
+          "bottom": 669.84375,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Record a session",
+          "outline": "solid",
+          "top": 673.84375,
+          "bottom": 709.84375,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Auto-calibration",
+          "outline": "solid",
+          "top": 713.84375,
+          "bottom": 749.84375,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        }
+      ],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "hash": "device-setup",
+      "stops": [
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Power Lab\nCONVERTER TEST BENCH",
+          "outline": "solid",
+          "top": 17.796875,
+          "bottom": 56.1875,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Monitor",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Setup",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Calibration",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Sessions\n0",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Calculator",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "output-off",
+          "text": "Output OFF",
+          "outline": "solid",
+          "top": 786,
+          "bottom": 830,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Firmware",
+          "outline": "solid",
+          "top": 174,
+          "bottom": 207,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "exit-demo",
+          "text": "Stop demo",
+          "outline": "solid",
+          "top": 258.5625,
+          "bottom": 290.5625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "demo-button",
+          "text": "Exit demo",
+          "outline": "solid",
+          "top": 463.0625,
+          "bottom": 507.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "connect-button",
+          "text": "Connect USB",
+          "outline": "solid",
+          "top": 463.0625,
+          "bottom": 507.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "setting-VSET",
+          "text": "",
+          "outline": "solid",
+          "top": 676.0625,
+          "bottom": 720.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "setting-VON",
+          "text": "",
+          "outline": "solid",
+          "top": 728.0625,
+          "bottom": 772.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "setting-VMAX",
+          "text": "",
+          "outline": "solid",
+          "top": 780.0625,
+          "bottom": 824.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "setting-OVP",
+          "text": "",
+          "outline": "solid",
+          "top": 800.0625,
+          "bottom": 844.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "setting-LOAD1",
+          "text": "",
+          "outline": "solid",
+          "top": 438.25,
+          "bottom": 482.25,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "setting-LOAD2",
+          "text": "",
+          "outline": "solid",
+          "top": 490.25,
+          "bottom": 534.25,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "setting-LOAD3",
+          "text": "",
+          "outline": "solid",
+          "top": 542.25,
+          "bottom": 586.25,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "SELECT",
+          "id": "load-profile",
+          "text": "Slot 1 · 50 Ω\nSlot 2 · 5 Ω\nSlot 3 · 2.5 Ω",
+          "outline": "solid",
+          "top": 654.75,
+          "bottom": 698.75,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "text": "Duty & EN timing",
+          "outline": "solid",
+          "top": 792.125,
+          "bottom": 844.125,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "text": "Auto-calibration scan",
+          "outline": "solid",
+          "top": 434.125,
+          "bottom": 486.125,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "text": "Startup precharge",
+          "outline": "solid",
+          "top": 508.125,
+          "bottom": 560.125,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "connection-heading",
+          "text": "USB connection & wiring",
+          "outline": "solid",
+          "top": 786.71875,
+          "bottom": 843.71875,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "text": "Serial terminal\nRaw commands and protocol log\n⌄",
+          "outline": "solid",
+          "top": 609.71875,
+          "bottom": 678.21875,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        }
+      ],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "hash": "calibration",
+      "stops": [
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Power Lab\nCONVERTER TEST BENCH",
+          "outline": "solid",
+          "top": 17.796875,
+          "bottom": 56.1875,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Monitor",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Setup",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Calibration",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Sessions\n0",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Calculator",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "output-off",
+          "text": "Output OFF",
+          "outline": "solid",
+          "top": 786,
+          "bottom": 830,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "exit-demo",
+          "text": "Stop demo",
+          "outline": "solid",
+          "top": 289.75,
+          "bottom": 321.75,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "demo-button",
+          "text": "Exit demo",
+          "outline": "solid",
+          "top": 494.25,
+          "bottom": 538.25,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "connect-button",
+          "text": "Connect USB",
+          "outline": "solid",
+          "top": 494.25,
+          "bottom": 538.25,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "SELECT",
+          "id": "calibration-kind",
+          "text": "No-load soft-switch cap · AUTOBANG\nStartup prechar",
+          "outline": "solid",
+          "top": 709.25,
+          "bottom": 753.25,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "calibration-confirm",
+          "text": "",
+          "outline": "solid",
+          "top": 449.8125,
+          "bottom": 469.8125,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "calibration-stop",
+          "text": "Stop / output OFF",
+          "outline": "solid",
+          "top": 577.375,
+          "bottom": 621.375,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        }
+      ],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "hash": "experiments",
+      "stops": [
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Power Lab\nCONVERTER TEST BENCH",
+          "outline": "solid",
+          "top": 17.796875,
+          "bottom": 56.1875,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Monitor",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Setup",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Calibration",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Sessions\n0",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Calculator",
+          "outline": "solid",
+          "top": 74,
+          "bottom": 123,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "output-off",
+          "text": "Output OFF",
+          "outline": "solid",
+          "top": 786,
+          "bottom": 830,
+          "obscured": null,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "exit-demo",
+          "text": "Stop demo",
+          "outline": "solid",
+          "top": 258.5625,
+          "bottom": 290.5625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "demo-button",
+          "text": "Exit demo",
+          "outline": "solid",
+          "top": 463.0625,
+          "bottom": 507.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "connect-button",
+          "text": "Connect USB",
+          "outline": "solid",
+          "top": 463.0625,
+          "bottom": 507.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "experiment-name",
+          "text": "",
+          "outline": "solid",
+          "top": 648.0625,
+          "bottom": 694.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "TEXTAREA",
+          "id": "experiment-notes",
+          "text": "",
+          "outline": "solid",
+          "top": 732.0625,
+          "bottom": 818.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "record-button",
+          "text": "Start recording",
+          "outline": "solid",
+          "top": 438.0625,
+          "bottom": 482.0625,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "text": "Name\tSource\tStarted\tDuration\tSamples\tFiles\nNo reco",
+          "outline": "auto",
+          "top": 636.25,
+          "bottom": 790.25,
+          "obscured": false,
+          "offscreen": false,
+          "hidden": false
+        }
+      ],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    }
+  ]
+}

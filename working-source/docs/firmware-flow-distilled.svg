@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="820" viewBox="0 0 2200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Firmware closed-loop voltage-control block diagram</title>
+  <desc id="desc">A classic control-system diagram showing voltage reference, summing junction, controller, PA10 enable modulation, the power stage, PA1 voltage feedback, and supporting inputs.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#000"/>
+    </marker>
+    <style>
+      .block { fill: #fff; stroke: #000; stroke-width: 3; }
+      .signal { fill: none; stroke: #000; stroke-width: 3; marker-end: url(#arrow); }
+      .branch { fill: none; stroke: #000; stroke-width: 3; }
+      .startup { fill: none; stroke: #000; stroke-width: 3; stroke-dasharray: 12 9; marker-end: url(#arrow); }
+      .title { font-family: "Times New Roman", serif; font-size: 32px; font-weight: 700; text-anchor: middle; }
+      .body { font-family: "Times New Roman", serif; font-size: 25px; text-anchor: middle; }
+      .label { font-family: "Times New Roman", serif; font-size: 24px; font-style: italic; text-anchor: middle; }
+      .sign { font-family: "Times New Roman", serif; font-size: 27px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="2200" height="820" fill="#fff"/>
+
+  <!-- Forward control path. -->
+  <rect class="block" x="40" y="255" width="260" height="150"/>
+  <text class="title" x="170" y="315">Voltage command</text>
+  <text class="body" x="170" y="360">Vref</text>
+
+  <path class="signal" d="M 300 330 H 363"/>
+  <circle class="block" cx="400" cy="330" r="36"/>
+  <text class="sign" x="386" y="329">+</text>
+  <text class="sign" x="401" y="358">-</text>
+
+  <path class="signal" d="M 436 330 H 480"/>
+
+  <rect class="block" x="480" y="225" width="340" height="210"/>
+  <text class="title" x="650" y="278">Voltage controller</text>
+  <text class="body" x="650" y="329">Light load: bang-bang</text>
+  <text class="body" x="650" y="372">Loaded: averaged duty</text>
+  <text class="body" x="650" y="409">with voltage override</text>
+
+  <path class="signal" d="M 820 330 H 920"/>
+
+  <rect class="block" x="920" y="255" width="280" height="150"/>
+  <text class="title" x="1060" y="310">PA10 EN control</text>
+  <text class="body" x="1060" y="354">OFF / burst / ON</text>
+  <text class="body" x="1060" y="390">carrier-synced edges</text>
+
+  <path class="signal" d="M 1200 330 H 1300"/>
+
+  <rect class="block" x="1300" y="225" width="360" height="210"/>
+  <text class="title" x="1480" y="285">Power stage</text>
+  <text class="body" x="1480" y="335">1 MHz half bridge</text>
+  <text class="body" x="1480" y="378">Transformer + rectifier</text>
+  <text class="body" x="1480" y="416">Secondary output</text>
+
+  <path class="signal" d="M 1660 330 H 2100"/>
+  <circle cx="1930" cy="330" r="7" fill="#000"/>
+  <text class="title" x="1810" y="303">Vout</text>
+
+  <!-- Negative voltage-feedback path. -->
+  <path class="branch" d="M 1930 330 V 675"/>
+  <path class="signal" d="M 1930 675 H 1560"/>
+
+  <rect class="block" x="1090" y="610" width="470" height="130"/>
+  <text class="title" x="1325" y="662">PA1 voltage feedback</text>
+  <text class="body" x="1325" y="707">Isolated sense + ADC1 DMA</text>
+
+  <path class="signal" d="M 1090 675 H 400 V 366"/>
+  <text class="label" x="745" y="650">measured secondary voltage</text>
+
+  <!-- Supporting and override inputs. -->
+  <rect class="block" x="510" y="40" width="280" height="120"/>
+  <text class="title" x="650" y="89">PA2 load detector</text>
+  <text class="body" x="650" y="132">Half-bridge current</text>
+  <path class="signal" d="M 650 160 V 225"/>
+  <text class="label" x="718" y="201">mode select</text>
+
+  <rect class="block" x="920" y="40" width="280" height="120"/>
+  <text class="title" x="1060" y="89">Protection</text>
+  <text class="body" x="1060" y="132">OVP / overcurrent</text>
+  <path class="signal" d="M 1060 160 V 255"/>
+  <text class="label" x="1112" y="210">inhibit</text>
+
+  <rect class="block" x="1315" y="40" width="330" height="120"/>
+  <text class="title" x="1480" y="89">TIM1 carrier</text>
+  <text class="body" x="1480" y="132">PA8/PA9 + dead gap</text>
+  <path class="signal" d="M 1480 160 V 225"/>
+
+  <rect class="block" x="900" y="470" width="320" height="100"/>
+  <text class="title" x="1060" y="512">Startup precharge</text>
+  <text class="body" x="1060" y="551">Initial feedback power</text>
+  <path class="startup" d="M 1060 470 V 405"/>
+</svg>

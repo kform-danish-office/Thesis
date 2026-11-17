@@ -1,0 +1,158 @@
+[
+  {
+    "width": 1440,
+    "hash": "connection-guide",
+    "focused": true,
+    "target": "connection-heading",
+    "rect": {
+      "top": 510.875,
+      "bottom": 567.875
+    },
+    "navBottom": 54,
+    "opened": true,
+    "visible": true
+  },
+  {
+    "width": 1440,
+    "hash": "terminal-details",
+    "focused": true,
+    "target": "SUMMARY",
+    "rect": {
+      "top": 335.046875,
+      "bottom": 395.046875
+    },
+    "navBottom": 54,
+    "opened": true,
+    "visible": true
+  },
+  {
+    "width": 1440,
+    "hash": "capture-heading",
+    "focused": true,
+    "target": "capture-heading",
+    "rect": {
+      "top": 222.546875,
+      "bottom": 245.046875
+    },
+    "navBottom": 54,
+    "opened": null,
+    "visible": true
+  },
+  {
+    "width": 1440,
+    "hash": "output-heading",
+    "focused": true,
+    "target": "output-heading",
+    "rect": {
+      "top": 325.046875,
+      "bottom": 347.546875
+    },
+    "navBottom": 54,
+    "opened": null,
+    "visible": true
+  },
+  {
+    "width": 390,
+    "hash": "connection-guide",
+    "focused": true,
+    "target": "connection-heading",
+    "rect": {
+      "top": 233.03125,
+      "bottom": 290.03125
+    },
+    "navBottom": 50,
+    "opened": true,
+    "visible": true
+  },
+  {
+    "width": 390,
+    "hash": "terminal-details",
+    "focused": true,
+    "target": "SUMMARY",
+    "rect": {
+      "top": 202.765625,
+      "bottom": 271.265625
+    },
+    "navBottom": 50,
+    "opened": true,
+    "visible": true
+  },
+  {
+    "width": 390,
+    "hash": "capture-heading",
+    "focused": true,
+    "target": "capture-heading",
+    "rect": {
+      "top": 76.0625,
+      "bottom": 97.0625
+    },
+    "navBottom": 50,
+    "opened": null,
+    "visible": true
+  },
+  {
+    "width": 390,
+    "hash": "output-heading",
+    "focused": true,
+    "target": "output-heading",
+    "rect": {
+      "top": 230.46875,
+      "bottom": 251.46875
+    },
+    "navBottom": 50,
+    "opened": null,
+    "visible": true
+  },
+  {
+    "width": 320,
+    "hash": "connection-guide",
+    "focused": true,
+    "target": "connection-heading",
+    "rect": {
+      "top": 133.71875,
+      "bottom": 190.71875
+    },
+    "navBottom": 50,
+    "opened": true,
+    "visible": true
+  },
+  {
+    "width": 320,
+    "hash": "terminal-details",
+    "focused": true,
+    "target": "SUMMARY",
+    "rect": {
+      "top": 186.625,
+      "bottom": 255.125
+    },
+    "navBottom": 50,
+    "opened": true,
+    "visible": true
+  },
+  {
+    "width": 320,
+    "hash": "capture-heading",
+    "focused": true,
+    "target": "capture-heading",
+    "rect": {
+      "top": 76.0625,
+      "bottom": 97.0625
+    },
+    "navBottom": 50,
+    "opened": null,
+    "visible": true
+  },
+  {
+    "width": 320,
+    "hash": "output-heading",
+    "focused": true,
+    "target": "output-heading",
+    "rect": {
+      "top": 212.65625,
+      "bottom": 233.65625
+    },
+    "navBottom": 50,
+    "opened": null,
+    "visible": true
+  }
+]

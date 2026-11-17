@@ -1,0 +1,17 @@
+\section{Losses and Heating}
+\label{sec:sim-loss}
+
+The supply loss balance includes semiconductor conduction and switching, pump and rectifier diodes, magnetic copper and core loss, capacitor ESR, auxiliary circuits, and the downstream regulator. Active-cycle loss depends on burst operation, while auxiliary and idle circuits continue to draw power. Loss calculations must state which supplies are included and the burst operating state.
+
+The supplied loss calculations use a different circuit and device set from the USB-C supply. The GS66502B model also omits the thermal and package behavior needed to predict the assembly's surface or junction temperatures.
+
+Paired input/output readings in Chapter~\ref{ch:results} provide preliminary efficiency estimates and an input--output power difference. Their accuracy is limited by synchronization, calibration, and uncertainty about included auxiliary power. They do not separate GaN, magnetic, and output-stage dissipation. Thermal images show where heating occurs; surface temperature alone does not quantify component loss.
+
+\subsection{Finding the Output-Power Limit}
+\label{sec:sim-power-gap}
+
+The revised plan asks why the reported \SI{85}{\watt} V2 result falls \SI{15}{\watt} short of the \SI{100}{\watt} target \cite{projectOctoberPlan}. This output-power gap is not a measured loss. The matched V1.0 baseline reached \SI{79.89}{\watt}, or \SI{20.11}{\watt} below the target, under a different configuration and test conditions.
+
+Finding the output limit requires more than a loss calculation. Candidate limits include transformer copper/core loss, pump loss, GaN switching and conduction, rectification, interconnects, auxiliary consumption, heat removal, device stress, and command/protection limits. Hotspots and controller states help choose the next measurements, but neither identifies the limiting mechanism on its own.
+
+The available readings provide an initial input--output power comparison. A V2 component-loss budget and explanation of the reported \SI{15}{\watt} shortfall require a repeatable V2 operating point with matched waveforms and temperatures, followed by controlled single changes. This procedure must also identify the highest repeatable output and remaining limit if the continuous target is not reached.

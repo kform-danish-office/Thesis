@@ -1,0 +1,83 @@
+\section{V2 Controller Port and Browser Interface}
+\label{sec:ctrl-pwr2-port}
+
+The V2 port replaces the STM32G071 Nucleo arrangement with an integrated STM32F410CBU6. Conditional definitions retain support for both MCU targets while adapting the complementary carrier, enable timer, ADC/DMA configuration, and settings storage. The baseline voltage-control law was retained. Browser control and UART logging were followed by automatic calibration, editable reference-load settings, and adjustable carrier timing. The earlier DMA feedback development is described in Section~\ref{sec:ctrl-v2}.
+
+Commands and functions are listed in Appendix~\ref{app:firmware}.
+
+\subsection{Peripheral Changes}
+
+On V2, the complementary carrier uses PA8/TIM1\_CH1 and PB13/TIM1\_CH1N, with burst enable moved to PA11. This releases PA9/PA10 for UART TX/RX; PA10 therefore changes from G071 burst enable to F410 serial receive. The complementary outputs share the TIM1 compare signal and hardware dead-time generator \cite{ststm32f410ds,ststm32f410rm}. The earlier port used center-aligned counting; the adjustable implementation uses edge-aligned counting with equal reference pulse widths. The default remains a \SI{1}{\mega\hertz} carrier with \SI{40}{\nano\second} programmed dead time.
+
+\begin{table}[htbp]
+\centering
+\caption{MCU pin and peripheral changes from the baseline controller to V2.}
+\label{tab:ctrl-pwr2-port}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.31\textwidth}Y@{}}
+\toprule
+Function & STM32G071 baseline & STM32F410 V2 target\\
+\midrule
+Carrier & PA8/PA9; TIM1 CH1/CH2 & PA8/PB13; TIM1 CH1/CH1N\\
+Burst enable & PA10; TIM3 scheduler & PA11; TIM5 scheduler\\
+UART & PC5 RX, PC4 TX & PA10 RX, PA9 TX; USART1\\
+Feedback & PA0, PA1, PA2; ADC1 & Same feedback inputs on the same MCU pins\\
+ADC transfer & DMA1 Channel 1 & DMA2 Stream 0, Channel 0\\
+Saved settings & Four EEPROM-emulation slots & Reserved 16 KiB flash journal\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The free-running ADC scan samples primary voltage, secondary-bulk voltage, and primary current sequentially, without synchronization to the carrier. At the selected \SI{25}{\mega\hertz} clock, 84 sampling plus 12 conversion cycles give \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per scan, about 86.8 thousand scans per second. ADC overrun and DMA errors are polled during filter updates to route detected acquisition failures to the sensor-fault path.
+
+The port retains the earlier conversion defaults. The repeated \SI{6.2}{\mega\ohm} schematic labels need checking against the fitted resistors. The voltage, current, and protection scales must use the measured circuit gains.
+
+\subsection{Saving MCU Settings}
+
+The V2 MCU has no dedicated EEPROM. Sector 1 at \texttt{0x08004000} was reserved for settings. Application code was placed at \texttt{0x08008000}, with vectors at the normal flash base. The linker script and startup layout check keep program data outside the settings sector.
+
+Each save appends a sequence-numbered, checksummed entry and verifies it by reading it back. Occupied entries are skipped after interrupted programming, and successive saves use different entries across the sector. When the journal wraps, the sector is erased; an interruption during erase can remove the saved configuration. If no valid entry remains, defaults load with output OFF. Writes wait until output, startup, and autotuning are inactive so flash work does not interrupt live conversion.
+
+Timing and calibration are saved together in a 488-byte record, giving 33 entries in the reserved sector. Existing settings from the earlier format load with default carrier timing and are not rewritten at startup. Older firmware cannot read the new record format.
+
+The saved boot preference was kept separate from runtime \texttt{ON}/\texttt{OFF}. To keep calibration during a firmware update, the programming method must preserve the settings sector. OFF inhibits transfer; it does not remove charge already stored in the converter.
+
+\subsection{Browser Commands Without Blocking Control}
+
+An opt-in browser protocol was added to the V2 firmware over the existing \SI{115200}{baud} UART. \texttt{WEB HELLO} selects JSON replies without enabling output. Command IDs and acknowledgments show whether the MCU accepted a change. On the MCU, input is limited to 96 characters, the transmit queue has four fixed-size frames, and each loop pass sends at most 16 bytes when the UART has space. Periodic samples are dropped when the queue is congested so old telemetry does not delay the controller.
+
+Browser \texttt{ON} also requires an active communication lease. The host renews it with \texttt{PING}. Expiry requests enable inhibition before an event is formatted. This check runs in the background loop and depends on execution continuing. Calibration routines service UART commands and cancellation checks during their waits, allowing OFF and lease expiry to interrupt a run. A browser settings save requires OFF. Pending RAM changes and completed flash saves are reported separately.
+
+The browser reports \texttt{vsec} as bulk voltage before the MPQ4242, \texttt{current} as the primary half-bridge-current estimate derived from input PA2, and \texttt{power} as their selected diagnostic voltage--current product. External output measurements are still needed for performance calculations. Displayed duty comes from scheduler state and needs a scope check when assessing actual enable timing.
+
+\subsection{Automatic Calibration and Reference Loads}
+
+Browser calibration was added for startup precharge, no-load operation, and three reference loads. For no-load and reference-load tuning, the existing coarse and fine search is used to find a burst duty from the measured secondary-bulk voltage. The burst-enable frequency remains fixed during this search. This makes the earlier terminal routines accessible from the setup interface without adding a separate control algorithm.
+
+Each reference load is connected by the operator, and its resistance is entered in the setup page. The resistance entry describes the connected load; it does not set an electronic load or switch a resistor. Selecting a calibrated slot applies its stored profile. No-load duty, scan step and interval, and startup precharge settings can also be read and adjusted with output OFF. Current-zero capture corrects the current-sense offset. Primary-voltage-reference capture sets the line-feed-forward reference.
+
+A calibration run starts with output OFF and leaves it OFF after completion. OFF, communication-lease expiry, a fault, or the \SI{180}{\second} timeout cancels the run; interrupted or failed runs restore the previous settings. Successful browser changes remain in RAM until explicitly saved with the output disabled.
+
+\subsection{Adjustable Carrier Frequency and Dead Time}
+\label{sec:ctrl-v2-adjustable-timing}
+
+Carrier frequency and dead time were made adjustable so that switching could be set relative to the modified resonant tank and the commutation interval could be varied without rebuilding the firmware. Both values are applied together through \texttt{TIMING} while output is OFF and startup and calibration are inactive. Burst duty continues to regulate the secondary bulk voltage. The separate \texttt{FEN} setting controls the burst-enable frequency; the tank's natural resonant frequency is set by its inductance and capacitance.
+
+The command accepts carrier requests from \SI{500}{\kilo\hertz} to \SI{2}{\mega\hertz} and dead-time requests from \SI{20}{\nano\second} to \SI{200}{\nano\second}. These are timer-setting limits. The converter operating range still needs switching and thermal measurements. TIM1 uses an even period count for balanced reference pulses, and dead time is rounded up to a timer count. At a \SI{100}{\mega\hertz} timer clock, period increments are \SI{20}{\nano\second} and dead-time increments are \SI{10}{\nano\second}. Frequency steps therefore depend on the selected period.
+
+For timer clock \(f_t\), period count \(N_p\), and dead-time count \(N_d\), the applied settings are
+\begin{equation}
+ f_s=\frac{f_t}{N_p},\qquad t_d=\frac{N_d}{f_t},\qquad 4N_d<N_p.
+ \label{eq:ctrl-v2-carrier-timing}
+\end{equation}
+The last condition rejects pairs that leave insufficient pulse time. A request of \SI{950}{\kilo\hertz} and \SI{53}{\nano\second}, for example, gives \(N_p=106\) and \(N_d=6\): approximately \SI{943.396}{\kilo\hertz} and \SI{60}{\nano\second}. The browser displays the applied values from MCU readback, and burst scheduling uses the actual clock and period counts.
+
+Changing either applied timer count clears the three learned load profiles and tuning results. Reference resistances, sensor calibration, and applied duty settings are retained. Calibration must then be repeated before using learned profiles at the new timing. Browser timing changes require an explicit save while OFF; the terminal retains its existing automatic save after a \SI{1.5}{\second} quiet interval while OFF, unless a configuration import is active.
+
+The programmed interval is the separation between timer output commands. Driver delay and switch-node commutation determine the effective transistor dead time, which must be measured on the assembled board. The duty-search calibration holds carrier frequency fixed.
+
+\subsection{Software Verification}
+
+The V2 firmware, protocol tests, settings-storage tests, and browser tests were built and checked. These checks cover timer rounding and pair rejection, application with output disabled, learned-profile clearing, calibration cancellation, and saved-settings recovery after interrupted writes.
+
+Powered validation of the adjustable implementation remains to be completed. The V1.0 measurements and later V2 thermal observations in Chapter~\ref{ch:results} describe the earlier test configurations. Switching waveforms and matched electrical and thermal measurements are needed to assess the new timing controls on the converter.

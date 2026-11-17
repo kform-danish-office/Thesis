@@ -1,0 +1,76 @@
+\documentclass[a4paper,twoside,11pt]{report}
+\input{Setup/Statics.tex}
+\input{Setup/Preamble.tex}
+\input{Setup/Settings.tex}
+\input{Setup/Code_Listings.tex}
+
+% To compile only one chapter while writing, uncomment one line below.
+% \includeonly{Chapters/08_Control_Firmware/chapter}
+% \includeonly{Chapters/07_Hardware/chapter,Chapters/08_Control_Firmware/chapter}
+
+\begin{document}
+
+\pagenumbering{roman}
+\input{Frontmatter/Frontpage.tex}
+\pagecolor{white}
+% Symmetric body margins retain the 150 mm text width on both page parities.
+\newgeometry{top=2.81cm,bottom=2.75cm,left=3cm,right=3cm}
+\pagestyle{empty}
+\clearpage
+\input{Frontmatter/Copyright.tex}
+\clearpage
+\pagestyle{main}
+\input{Frontmatter/Approval.tex}
+\clearpage
+\input{Frontmatter/Abstract.tex}
+\clearpage
+\input{Frontmatter/Acknowledgements.tex}
+\clearpage
+\input{Frontmatter/Nomenclature.tex}
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\cleardoublepage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+\cleardoublepage
+\addcontentsline{toc}{chapter}{List of Code Listings}
+\lstlistoflistings
+\cleardoublepage
+
+\pagenumbering{arabic}
+\include{Chapters/01_Introduction/chapter}
+\include{Chapters/02_Background/chapter}
+\include{Chapters/03_Requirements_Architecture/chapter}
+\include{Chapters/04_Topology_Analysis/chapter}
+\include{Chapters/05_Modeling_Simulation/chapter}
+\include{Chapters/06_Magnetics_Integration/chapter}
+\include{Chapters/07_Hardware/chapter}
+\include{Chapters/08_Control_Firmware/chapter}
+\include{Chapters/09_Experimental_Methods/chapter}
+\include{Chapters/10_Results/chapter}
+\include{Chapters/11_Discussion/chapter}
+\include{Chapters/12_Conclusion/chapter}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{References}
+\input{Backmatter/References.tex}
+\cleardoublepage
+\appendix
+\include{Backmatter/Appendices/A_Analytical_Equations}
+\include{Backmatter/Appendices/B_Hardware_Documentation}
+\include{Backmatter/Appendices/C_Firmware_Documentation}
+\include{Backmatter/Appendices/D_Modeling_Files}
+\include{Backmatter/Appendices/E_Experimental_Data}
+\include{Backmatter/Appendices/F_Contribution_Provenance}
+\include{Backmatter/Appendices/G_Software_Tools}
+\include{Backmatter/Appendices/H_Full_Embedded_Source}
+\include{Backmatter/Appendices/I_Full_Supporting_Source}
+\include{Backmatter/Appendices/J_Revised_Plan_Integration}
+
+\cleartoleftpage
+\input{Backmatter/Backpage.tex}
+\end{document}

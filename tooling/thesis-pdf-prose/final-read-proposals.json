@@ -1,0 +1,22 @@
+[
+  {
+    "id": "final-cross-01",
+    "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+    "old": "Supervisor corrections, technical-claim and reference checks, final compilation, visual PDF review, and source-archive verification.",
+    "new": "Supervisor corrections, technical-claim and reference checks, final compilation, and visual PDF review.",
+    "reason": "Remove administrative archive verification from the reader-facing project schedule. Astra accepts: this removes an administrative task from the displayed schedule without changing its engineering milestones.",
+    "facts_preserved": [
+      "Supervisor corrections, technical checks, compilation and PDF review"
+    ],
+    "checklist": [
+      "standalone PDF",
+      "remove archive commentary"
+    ],
+    "judgment": "Accept",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    }
+  }
+]

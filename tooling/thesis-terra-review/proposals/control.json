@@ -1,0 +1,17 @@
+[
+  {
+    "id": "control-001",
+    "path": "Chapters/09_Experimental_Methods/10_Thermal.tex",
+    "old": "Ambient, airflow, warm-up, and camera setup were not fully recorded.\r\nThe images locate hotspots for temperature monitoring during longer runs.",
+    "new": "Ambient, airflow, warm-up, and camera setup were not fully recorded.\r\nThe identified hotspots can be monitored during longer runs.",
+    "reason": "The previous sentence already says that the images locate hotspots; this connects those locations to the next thermal test without repeating the observation.",
+    "facts_preserved": [
+      "Ambient, airflow, warm-up, and camera setup were incompletely recorded; longer runs are prospective."
+    ],
+    "checklist": [
+      "Connected prose",
+      "Concrete next measurement",
+      "Preserve uncertainty"
+    ]
+  }
+]

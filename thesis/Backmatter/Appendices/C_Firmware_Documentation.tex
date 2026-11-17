@@ -1,0 +1,449 @@
+\chapter{Firmware Documentation}
+\label{app:firmware}
+
+\section{Versions and Included Sources}
+
+The baseline voltage-control firmware and current V2 firmware are described in \cref{sec:ctrl-firmware-identities}. PWR-1.9.20 was used for the main V1.0 test series. The V2 firmware was extended to PWR-2.0.4 with browser calibration, reference-load settings, and adjustable carrier timing. The G071 target in the same source remains PWR-2.0.3 with a fixed carrier.
+
+The complete sketches are Listings~\ref{lst:full-pwr1920} and \ref{lst:full-pwr204} in Appendix~\ref{app:full-embedded-source}.
+
+\begin{longtable}{@{}L{0.23\linewidth}L{0.69\linewidth}@{}}
+\caption{Firmware development milestones.}
+\label{tab:app-fw-milestones}\\
+\toprule Revision & Change\\\midrule
+\endfirsthead
+\toprule Revision & Change\\\midrule
+\endhead
+PWR-1.1--1.4 & Version reporting, startup precharge, pulse skipping, bounded commands, and deferred nonvolatile writes\\
+PWR-1.5--1.6 & Power-estimation experiments and transition to voltage bang-bang control\\
+PWR-1.7 & ADC circular DMA and minimum enabled burst length; the DMA-based control-development stage\\
+PWR-1.8 & Carrier/enable synchronization experiments\\
+PWR-1.9.0--1.9.10 & PA1 voltage feedback, no-load guard and recovery, optional line feed-forward, configuration export\\
+PWR-1.9.11--1.9.18 & Soft OVP holdoff, carrier timing correction, enable-edge timing, loaded detection, averaged duty\\
+PWR-1.9.19--1.9.20 & Separate stored boot state and final loaded steady/boost behavior\\
+PWR-2.0.0 & Port to the V2 MCU: pin map, complementary carrier, TIM5 enable scheduler, ADC/DMA, and flash journal\\
+PWR-2.0.1 & Opt-in JSON UART, bounded transmit work, link lease, and browser diagnostics\\
+PWR-2.0.2 & Browser calibration with progress, cooperative stop handling, and rollback after interruption\\
+PWR-2.0.3 & Reference-load, tuning, and precharge settings with device readback\\
+PWR-2.0.4 & V2 carrier-frequency and dead-time adjustment while output is OFF; timing readback and saved timing/calibration records\\
+\bottomrule
+\end{longtable}
+
+The V2 prototype and its MCU firmware port were developed together. DMA acquisition was introduced in firmware on the earlier board before the hardware port. Approximately \SI{80}{\watt} was measured on the earlier assembly. The plan's reported point at \SI{85}{\watt} for V2 still needs a matched repeat, and \SI{100}{\watt} remains the target.
+
+\section{MCU Targets and Peripheral Assignments}
+\label{sec:app-fw-hardware}
+
+The board definitions are chosen with \texttt{STM32F410Cx}. They specify the command UART, gate pins, enable pin, LEDs, enable timer, and settings backend. Both targets share the same control, calibration, and command functions, so only one voltage controller is maintained.
+
+The MCU pin names are introduced in \cref{sec:intro-controller-basics}.
+The table lists the MCU pins, timer channels, ADC inputs, DMA paths, and
+alternate functions for each board.
+
+\begin{longtable}{@{}L{0.19\linewidth}L{0.34\linewidth}L{0.37\linewidth}@{}}
+\caption{MCU pins and peripherals for both boards. F410 package pins use the UFQFPN48 numbering.}
+\label{tab:app-fw-pin-map}\\
+\toprule Function & G071 / PWR-1.9.20 baseline & F410 / PWR-2.0.4 target\\\midrule
+\endfirsthead
+\toprule Function & G071 baseline & F410 target\\\midrule
+\endhead
+High carrier & PA8, TIM1 CH1 & PA8, package 29, TIM1 CH1, AF1\\
+Low carrier & PA9, TIM1 CH2 & PB13, package 26, TIM1 CH1N, AF1\\
+Burst enable & PA10 GPIO; TIM3 period/compare scheduling & PA11, package 32, GPIO; TIM5 period/compare scheduling\\
+Command UART & PC5 RX, PC4 TX & USART1: PA10 RX, package 31; PA9 TX, package 30\\
+Primary voltage input & PA0, ADC1 channel 0 & PA0, package 10, ADC1 channel 0\\
+Secondary bulk & PA1, ADC1 channel 1 & PA1, package 11, ADC1 channel 1\\
+Half-bridge current input & PA2, ADC1 channel 2 & PA2, package 12, ADC1 channel 2\\
+ADC transfer & DMA1 Channel 1, circular & DMA2 Stream 0, Channel 0, circular\\
+Open-mode LED & PB13 & PA3, package 13\\
+Closed-mode LED & PB14 & PB14, package 27\\
+System LED & PB15 & PB15, package 28\\
+UART format & \SI{115200}{baud} & \SI{115200}{baud}\\
+\bottomrule
+\end{longtable}
+
+The isolated secondary-bulk input PA1 senses voltage before the MPQ4242 stage; the half-bridge current input PA2 does not measure connector current. The primary-voltage input PA0 supports optional duty limiting. V2 assignments follow the device documentation \cite{ststm32f410ds,ststm32f410rm}.
+
+\subsection{Carrier and Burst Timing}
+
+The G071 retains the fixed \SI{1}{\mega\hertz} center-aligned TIM1 CH1/CH2 carrier. V2 uses edge-aligned CH1/CH1N with the TIM1 dead-time unit, leaving PA9 free for USART1. The default remains \SI{1}{\mega\hertz} with \SI{40}{\nano\second} programmed dead time. At the \SI{100}{\mega\hertz} timer clock, the default period is 100 ticks, with ARR \(=99\), CCR1 \(=50\), and DTG \(=4\). CH2 is disabled. Carrier frequency and dead time are applied together while output is OFF; their adjustment is described below.
+In the enable scheduler, \texttt{FEN} and requested duty are converted to a period, enabled interval, and pulse-skip count. V2 converts carrier cycles using the actual timer clock and period ticks, then rounds the enable period to microseconds. A complete minimum burst and minimum low interval are enforced, with a longer period if both cannot fit. Below the minimum burst energy, periods are skipped; bursts are not shortened. With a permitted static \SI{100}{\percent} command, enable stays high.
+
+For nonstatic enable transitions, the TIM1 update flag is polled with a bounded wait. Polling attempts to align the software request with a carrier boundary without an interrupt on every \SI{1}{\mega\hertz} cycle; it can time out without observing an update. Interrupt latency and GPIO execution still affect the physical edge. Calculated effective duty includes the minimum-burst and pulse-skip changes; it is not a measured timing trace.
+
+\subsection{ADC Timing and Calibration}
+
+ADC1 is configured for a free-running, software-started scan in PA0--PA1--PA2 order. Three halfword samples are continually replaced by DMA. The latest entries are read by the control loop without starting a blocking conversion. Channels are sampled sequentially, and entries read together may come from different scan instants.
+
+On the G071, the ADC clock is divided by four, with 39.5 sampling cycles. On the F410, PCLK2 is divided by four, with 84 sampling cycles, high-priority circular DMA, and no FIFO. At the intended \SI{100}{\mega\hertz} PCLK2, the \SI{25}{\mega\hertz} ADC clock gives \SI{3.84}{\micro\second} per 12-bit channel, including 12 conversion cycles, or \SI{11.52}{\micro\second} per scan. DMA completion/error and ADC overrun interrupts are disabled on this path. Overrun, DMA error, and stream-enable flags are polled during filter updates. After an acquisition failure, DMA is marked stopped so a \texttt{SENSOR} fault can be latched.
+
+For ADC count \(n\), the pin voltage and divider ratio are
+\begin{equation}
+ V_{\mathrm{pin}}=\frac{nV_{\mathrm{ref}}}{4095},
+ \qquad
+ r=\frac{R_{\mathrm{bottom}}}{R_{\mathrm{top}}+R_{\mathrm{bottom}}}.
+ \label{eq:app-fw-adc-scale}
+\end{equation}
+Primary indication is \(V_{\mathrm{pin}}G_{\mathrm{pri}}/r_{\mathrm{pri}}+O_{\mathrm{pri}}\). The implemented secondary conversion is
+\begin{equation}
+ V_{\mathrm{AMC,in}}=
+ \frac{2V_{\mathrm{clip}}}{V_{\mathrm{AMC,ref}}}
+ \left(V_{\mathrm{PA1}}-\frac{V_{\mathrm{AMC,ref}}}{2}\right),
+ \qquad
+ V_{\mathrm{sb}}=\frac{V_{\mathrm{AMC,in}}}{r_{\mathrm{sec}}}G_{\mathrm{sec}}+O_{\mathrm{sec}}.
+ \label{eq:app-fw-amc-scale}
+\end{equation}
+The PA2 scale is
+\begin{equation}
+ I_{\mathrm{pri}}=
+ \frac{V_{\mathrm{PA2}}-O_I}{R_{\mathrm{CS}}G_{\mathrm{CS}}}.
+ \label{eq:app-fw-current-scale}
+\end{equation}
+In absolute-current mode, the magnitude is used. Otherwise, negative current results are clamped to zero. Small negative voltage indications near zero are also clamped.
+
+The default ADC reference is \SI{3.3}{\volt}; divider entries are \(1500/10\) in \si{\kilo\ohm} for PA0 and \(390/10\) in \si{\kilo\ohm} for the secondary input. AMC defaults are \SI{3.3}{\volt} reference and \SI{1.28}{\volt} clip. Current defaults are \SI{820}{\ohm} and \(0.000901\) A/A. These defaults do not confirm the fitted V2 values. The repeated \SI{6.2}{\mega\ohm} labels in the V2 drawing must be checked against fitted resistors and measured pin voltages.
+
+With \texttt{ZEROI}, 64 PA2 readings are averaged, with a \SI{2}{\milli\second} delay between reads. Their pin-voltage average is stored as \texttt{CSOFF}. The operator must switch output OFF and check for zero primary current before using the terminal command. This captures the offset; gain calibration uses a separate reference. Voltage gain and offset need external reference readings. The filter uses elapsed time and \(\alpha=\Delta t/(\tau+\Delta t)\), with bounds on elapsed time and coefficient. The first read initializes the filtered values. Legacy \texttt{ADCVP}, \texttt{ADCVS}, \texttt{ADCI}, and \texttt{ADCDUMMY} fields can still be imported but do not turn the active circular-DMA scan into a software averaging loop.
+
+\texttt{PFBSRC} selects \(V_{\mathrm{pri}}I_{\mathrm{pri}}\) or \(V_{\mathrm{sb}}I_{\mathrm{pri}}\) for diagnostics. Neither product is calibrated connector output power. Measured output power is calculated from the external connector-voltage and load-current readings used in the results chapter.
+
+\section{Execution Order, Startup, and Protection}
+\label{sec:app-fw-execution}
+
+In \texttt{setup()}, enable and gate pins are first driven low. UART is started, LEDs and analog pins are configured, and validated settings are loaded. On V2, linker symbols and image extent are checked against the reserved flash sector. If the layout is invalid or ADC initialization fails, a sensor fault is set and the system stays disabled. Carrier and burst timing are then configured, the selected load profile and stored boot preference are applied, the filters are initialized, and the firmware version and status are printed.
+
+In \texttt{loop()}, the web lease is checked before commands are read. Bounded UART input is read, a queued browser calibration is serviced, and enabled startup or closed control is run, transition-rate diagnostics are updated, and UART input is checked again. While OFF or in open loop, analog and fault checks run at a requested \SI{2}{\milli\second} interval. Terminal status and deferred saves follow, then a second lease check, telemetry scheduling, and bounded transmission.
+
+Closed control runs in the background loop. \texttt{CPER} is the minimum requested interval, not a timer interrupt period. The default \SI{25}{\micro\second} corresponds to a requested \SI{40}{\kilo\hertz}; \texttt{MAXRATE} selects \SI{20}{\micro\second}, or \SI{50}{\kilo\hertz}. Actual elapsed time and its maximum are recorded. An overrun is counted when elapsed time exceeds 1.5 times the request. UART activity, interrupts, and function execution can lengthen that interval. The longest software interval still needs to be checked by an external timing measurement.
+
+\begin{lstlisting}[language=C,basicstyle=\ttfamily\scriptsize,caption={Decision order shared by the baseline and V2 voltage-control paths. BLOW defaults to zero.},label={lst:app-pwr1920}]
+if (!enabled) return;
+if (fault_latched) { request_zero_enable(); return; }
+if (elapsed_us < CPER) return;
+update_dma_readings_and_filters();
+update_loaded_state();
+service_soft_ovp();              // holdoff requests BLOW
+if (check_faults()) return;       // latched fault inhibits EN
+if (soft_ovp_active) return;
+
+update_no_load_escape_and_voltage_thresholds();
+if (loaded_steady_eligible)
+    duty = trim_loaded_duty_from_bulk_voltage();
+else
+    duty = hysteretic_high_or_low_demand();
+apply_no_load_cap_and_optional_primary_voltage_cap();
+clamp_and_send_to_enable_scheduler(duty);
+\end{lstlisting}
+
+\subsection{Startup and State Changes}
+
+During precharge, low-duty packets alternate with settling periods because isolated feedback may initially be unpowered. Defaults are \SI{0.1}{\percent} average duty, \SI{3}{\milli\second} burst, \SI{80}{\milli\second} settle, four attempts, and a \SI{4}{\volt} readiness indication. Minimum bursts and pulse skipping still apply. Startup continues when \texttt{PREV} is reached \emph{or} \texttt{PREMAX} attempts have been used. Reaching the attempt limit does not set a separate startup fault. Current is checked during burst and settle; ordinary fault checks also run after settling.
+
+Runtime \texttt{ON} starts precharge without changing the stored boot preference. \texttt{OPEN} applies bounded manual duty; \texttt{VSB}/\texttt{BANG} selects voltage control. Controller state is reset on mode changes. \texttt{OFF} requests zero duty and clears operating-state memories. Further commanded excitation is inhibited, but capacitor charge remains.
+
+At light load, a voltage window and duty cap are used. Under load, duty is held and trimmed from PA1 voltage. PA2 provides load classification with a \SI{500}{\milli\second} release hold. Apparent resistance is estimated from primary current for load classification; it is not a measurement of the external load resistance. \texttt{LBOOST} in status is the loaded-droop boost state, not a \texttt{SET} command. \texttt{SLEW} sets the base loaded correction; the voltage-error multipliers are bounded constants in the function. \texttt{VBOOST}/\texttt{VFOLD} belong to uncalled legacy helpers. Optional \texttt{LINEFF} only caps duty from PA0.
+
+\subsection{Faults and No-Load OVP Holdoff}
+
+In \texttt{checkFaults()}, stopped DMA is checked first, followed by enabled current trip and enabled secondary OVP. Current trip uses filtered PA2 current. Filtered and fresh secondary voltage are checked for OVP. In \texttt{latchFault()}, zero duty is requested and enable is inhibited. During a web session, a fault event is queued instead of a terminal message.
+
+Eligible no-load/light-load overvoltage can be handled with recoverable holdoff instead of latched OVP. The trip is constrained between \texttt{VMAX} and \texttt{OVP}; defaults are \SI{33.5}{\volt} trip and \SI{23}{\volt} rearm. Holdoff requires enabled closed control, a usable secondary indication, no recognized loaded-current state, and an accepted no-load/light-load condition. Above ordinary OVP, each fast, filtered, and latest raw secondary estimate must also stay at or below
+\begin{equation}
+ V_{\mathrm{exception,max}}=\min(\texttt{OVP}+\SI{4}{\volt},\,\SI{80}{\volt}).
+ \label{eq:app-fw-ovp-exception}
+\end{equation}
+Otherwise OVP is latched. With default \texttt{OVP} of \SI{36}{\volt}, the exception ceiling is \SI{40}{\volt} in the configured voltage scale.
+
+During soft holdoff, \texttt{BLOW}, default zero, is requested. Normal duty calculation is bypassed until the fast secondary estimate reaches rearm. A nonzero \texttt{BLOW} therefore changes holdoff behavior. OFF and latched faults always force enable low. These thresholds depend on correct sensing and loop execution; they are not independent analog protection limits.
+
+PI identification, foldback helpers, and \sourcefile{handleMaxDutyProtection()} remain in the source but are not called by the active voltage loop. Their settings remain for compatibility. Setting \texttt{MAXFAULTEN} does not add the missing call.
+
+\section{Saved Settings and the MCU Flash Journal}
+\label{sec:app-fw-persistence}
+
+\texttt{SettingsSlot} contains configuration, three load profiles, tuning metadata, magic value, sequence, and checksum. Fields and their relationships are checked against bounds. For the checksum, record bytes are folded with a rotating XOR and seed \texttt{0xA5A55A5A}, excluding the checksum field. Damaged or incomplete records can be detected, but some errors can pass the check.
+
+The G071 cycles through four EEPROM-emulation slots. The F410 uses reserved sector 1. In the custom linker file, vectors are placed at \texttt{0x08000000} in 16 KiB, settings at \texttt{0x08004000} in 16 KiB, application at \texttt{0x08008000} in 96 KiB, and SRAM at \texttt{0x20000000} in 32 KiB. The default MCU linker layout is different.
+
+V2 saves a 488-byte record containing the unchanged 471-byte settings payload, a version marker, an alignment byte, requested carrier frequency and dead time, and an outer checksum. The reserved sector holds 33 new records. The loader also scans the earlier 472-byte-stride records, retaining their settings and loading the default carrier timing without writing flash at startup. New records are appended after occupied or interrupted records; the latest complete valid record is recovered after an interrupted append.
+
+The older firmware cannot read the new record format. A downgrade can therefore load older settings or defaults. The configuration must be exported before changing back to an earlier firmware.
+Only one sector is used for the journal. An interrupted erase can remove all saved records. If none passes the magic/checksum checks, defaults are loaded with output OFF. The F410 also blocks enable if its storage layout is not ready. The G071 reports success after its EEPROM update calls, without the F410's explicit program/readback checks.
+
+Settings can be written only with output OFF, no autotune, no calibration transaction, and no active startup. Terminal changes made while running are applied in RAM and left pending. They can be saved after OFF and a \SI{1500}{\milli\second} quiet interval, or by explicit save. \texttt{BEGINCFG}/\texttt{ENDCFG} bracket an import. Browser changes need explicit \texttt{SAVE} or \texttt{ENDCFG} while OFF; browser OFF and lease expiry do not write flash.
+
+\texttt{cfg.systemEnabled} stores the boot preference; \texttt{systemEnabled} is the live state. \texttt{BOOTON}/\texttt{BOOTOFF} changes that preference; ordinary ON/OFF does not. Before repeating a test, save the output of these commands:
+\begin{lstlisting}[basicstyle=\ttfamily\small,caption={Commands to print the firmware version, status, and settings.},label={lst:app-fw-identity}]
+VER
+STATUS
+EXPORT
+\end{lstlisting}
+For V2, \texttt{TIMING} also prints the requested pair and exact timer ratios.
+
+\section{Terminal UART Command Reference}
+\label{sec:app-fw-terminal}
+
+Commands are case-insensitive. Empty lines and lines starting with \texttt{\#}, \texttt{;}, or \texttt{//} are ignored. For \texttt{SET NAME VALUE}, input is parsed with the permissive legacy numeric parser, then the configuration is validated. The line limit is 96 characters. Input is limited to 96 bytes per active-loop call or 160 while idle. The receiver can be called twice per loop.
+\begingroup
+\small
+\begin{longtable}{@{}L{0.29\linewidth}L{0.63\linewidth}@{}}
+\caption{Terminal command families in the V2 firmware.}\label{tab:app-fw-uart-packet}\\
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endfirsthead
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endhead
+\texttt{?}, \texttt{STATUS}; \texttt{VER}, \texttt{VERSION}; \texttt{PARAMS} & Full status, firmware version, or short parameter summary.\\
+\texttt{EXPORT}, \texttt{EXPORTCAL}, \texttt{DUMPCAL}, \texttt{COMPS}, \texttt{COMPENSATION} & Print paste-ready SET commands, calibration, timing, and profiles.\\
+\texttt{DIVIDER}, \texttt{LADDER} & Print advice from the configured divider ratios.\\
+\texttt{TIMING}; \texttt{TIMING Hz ns} & V2 only: read the current carrier pair or apply a new pair while OFF and idle.\\
+\texttt{ON}, \texttt{OFF} & Change live state. ON begins precharge. Terminal OFF also attempts to flush pending settings.\\
+\texttt{BOOTON}, \texttt{BOOTOFF}, \texttt{BOOT value} & Change the saved boot preference. Enable aliases: BOOT ON, BOOTEN, AUTOSTART. Disable aliases: BOOT OFF, BOOTDIS, NOAUTOSTART.\\
+\texttt{OPEN}, \texttt{MO} & Select manual bounded enable duty.\\
+\texttt{BANG}, \texttt{VSB}, \texttt{VOLT}, \texttt{VOLTAGE}, \texttt{POWER}, \texttt{MC}, \texttt{CLOSED} & Select bulk-voltage control. POWER does not select an output-power PI loop.\\
+\texttt{VSBONLY}, \texttt{SECONLY}, \texttt{SECONDARYONLY} & Select voltage control with PA0 feed-forward disabled.\\
+\texttt{LINEFF}, \texttt{VINFF}, \texttt{VSBVIN} & Select voltage control with the PA0 duty cap enabled.\\
+\texttt{LFFCAL}, \texttt{VINCAL}, \texttt{LINECAL} & Use the current primary indication as the feed-forward reference if at least 1 V; select closed control and request a save.\\
+\texttt{PFBPRI}, \texttt{PRIMARYVI}, \texttt{PRI\_V\_I}; \texttt{PFBSEC}, \texttt{SECVI}, \texttt{SECONDARYVI}, \texttt{SEC\_V\_I} & Select the diagnostic voltage--PA2-current product; control voltage remains PA1.\\
+\texttt{SET name value}; \texttt{P value}, \texttt{D value}, \texttt{F value} & Change a setting; shortcuts select PTARGET, OD, FEN. Validation can alter related values.\\
+\texttt{BEGINCFG}, \texttt{BEGINIMPORT}; \texttt{ENDCFG}, \texttt{ENDIMPORT}; \texttt{SAVE} & Group an import or request storage. An unsafe save remains pending.\\
+\texttt{DEFAULTS} & Request OFF, restore defaults, select open loop, and save when allowed.\\
+\texttt{CLR} & Clear the terminal latch and reapply enabled-state gate handling. Unlike web CLR, this terminal command does not require OFF first.\\
+\texttt{ZEROI}, \texttt{IZERO} & Capture PA2 pin-voltage offset. Switch output OFF and check for zero primary current before the terminal command; OFF is not enforced automatically.\\
+\texttt{AUTOPRE}, \texttt{PREAUTO}, \texttt{CALPRE} & Run precharge tuning and leave output stopped.\\
+\texttt{CAL}, \texttt{AUTOTUNE}, \texttt{AUTOFULL}, \texttt{AUTOBANG} & Run the fixed-FEN coarse/fine duty scan and select voltage control. All use the same active tuning routine.\\
+\texttt{CALLOAD n}; \texttt{AUTOBANG n}, \texttt{AUTOFULL n}, \texttt{CALFULL n} & Tune with profile 1--3.\\
+\texttt{LOAD n}; \texttt{CAL3} & Apply profile 1--3, or run the prompted three-load tuning procedure.\\
+\texttt{FAST}, \texttt{TURBO}, \texttt{ULTRA}, \texttt{ULTRAFAST}, \texttt{MAXRATE}, \texttt{FASTEST} & Request timing presets. FAST: 100 us; TURBO: 50 us; ULTRA: 25 us; MAXRATE: 20 us. Each also changes filter settings.\\
+\texttt{FULL}, \texttt{FULLPOWER} & Set DMAX/BHIGH/BIAS to 100\%, allow static enable, set VON to VSET, and remove dwell.\\
+\texttt{SAFE} & Set DMAX 50\%, tuning maximum 40\%, disallow static enable, and enable current-trip and stored maximum-duty-fault flags. The latter has no active loop caller.\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection{Tuning and Compatibility Fields}
+
+In \texttt{autoTunePower()}, the converter is started and precharged before duty is scanned at fixed frequency in coarse and fine steps. A score based on secondary voltage selects the no-load duty reference after unsuitable points are rejected; the scan does not optimize measured USB-C efficiency. High voltage-control demand is limited by \texttt{DMAX}. Three profiles store frequency, duty, readings, and older PI metadata. Terminal tuning uses blocking measurement windows and service delays, so it is performed as a bench procedure.
+
+\section{Parameter Reference}
+\label{sec:app-fw-parameters}
+
+The tables give canonical \texttt{SET} names, input units, parser bounds, and V2 defaults. These bounds are software limits, not electrical operating ratings. A flag is false below 0.5 and true at or above 0.5. Duty is stored in tenths of a percent, and integer timing and count inputs are converted before validation. The parser accepts alternate names, and the paste-ready \texttt{EXPORT} includes them.
+
+Validation also enforces relationships: FEN stays within FMIN/FMAX; high duty exceeds low duty and stays below DMAX; loaded floor and tuning maximum stay below DMAX; VSET/VON stay within secondary limits; OVP cannot stay below VMAX; and soft trip/rearm depend on the other thresholds. A successful SET may therefore change the requested number. Save the exported settings after validation.
+\begingroup
+\small
+\begin{longtable}{@{}L{0.29\linewidth}L{0.63\linewidth}@{}}
+\caption{Acquisition and calibration settings.}\label{tab:app-fw-calibration}\\
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endfirsthead
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endhead
+\texttt{VREF} & ADC reference 1--3.6 V; default 3.3.\\
+\texttt{VPRITOP}, \texttt{VPRIBOT} & Divider in \si{\kilo\ohm}: top 1--10000, bottom 0.1--1000; defaults 1500 and 10.\\
+\texttt{VPRIGAIN}, \texttt{VPRIOFF} & Gain 0.1--10, default 1; offset -100--100 V, default 0.\\
+\texttt{AMCREF}, \texttt{AMCVCLIP} & Reference 1--5 V, default 3.3; clip 0.5--3 V, default 1.28.\\
+\texttt{VSECTOP}, \texttt{VSECBOT} & Divider in \si{\kilo\ohm}: top 1--10000, bottom 0.1--1000; defaults 390 and 10.\\
+\texttt{VSECGAIN}, \texttt{VSECOFF} & Gain 0.1--10, default 1; offset -20--20 V, default 0.\\
+\texttt{CSRES}, \texttt{CSGAIN} & 1--10000 \si{\ohm}, default 820; 0.000001--0.1 A/A, default 0.000901.\\
+\texttt{CSOFF}, \texttt{IABS} & PA2 offset -1--1 V, default 0; absolute-current flag default 1.\\
+\texttt{ITRIP}, \texttt{ITRIPEN} & 0.1--100 A, default 8; trip flag default 0.\\
+\texttt{ISOFT}, \texttt{IFOLDEN}, \texttt{IFOLD} & Legacy foldback: 0--100 A, default 6.5; flag default 0; 0--100 \%/A, default 12. Helper not called by active voltage loop.\\
+\texttt{PTAU}, \texttt{VPTAU}, \texttt{VSTAU}, \texttt{ITAU} & Filter constants 0.1--500 ms; defaults 0.5, 0.5, 0.3, 0.3 ms.\\
+\texttt{ADCVP}, \texttt{ADCVS}, \texttt{ADCI}, \texttt{ADCDUMMY} & Legacy sample/dummy fields: 1--64, 1--64, 1--64, 0--8; defaults 2,2,2,1. Do not set active DMA scan length.\\
+\texttt{PFBSRC} & 0: primary V--I diagnostic; 1: secondary V--I diagnostic, the default.\\
+\bottomrule
+\end{longtable}
+\endgroup
+\begingroup
+\small
+\begin{longtable}{@{}L{0.29\linewidth}L{0.63\linewidth}@{}}
+\caption{Envelope, startup, and scheduling settings.}\label{tab:app-fw-timing-settings}\\
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endfirsthead
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endhead
+\texttt{FEN}, \texttt{FMIN}, \texttt{FMAX} & Enable Hz, hard range 1000--50000; defaults 10000, 5000, 50000. FEN also limited by FMIN/FMAX.\\
+\texttt{MINEDGE}, \texttt{GATECYC}, \texttt{GATELEAD} & Minimum low interval 1--20 us, default 2; minimum carrier cycles 1--40, default 8; lead cycles 0--40, default 0.\\
+\texttt{STATIC} & Allow static 100\% enable; flag default 1.\\
+\texttt{DMIN}, \texttt{DMAX} & Duty bounds 0--100\%; defaults 0 and 100.\\
+\texttt{OD}, \texttt{BLOW}, \texttt{BHIGH} & Open, low, high duty 0--100\%; defaults 0, 0, 100. BHIGH also updates BIAS.\\
+\texttt{BIAS}, \texttt{PWRDUTY} & 0--100\%; defaults 12 and 8. BIAS also updates BHIGH. PWRDUTY is stored compatibility data, not active post-startup duty.\\
+\texttt{BOOTON} & Saved boot-enable flag, default 0; web changes prohibited.\\
+\texttt{PRECHEN}, \texttt{PREDUTY} & Precharge flag default 1; 0--100\% duty, default 0.1.\\
+\texttt{PREMS}, \texttt{PRESETTLE} & Burst 1--500 ms, default 3; settle 1--2000 ms, default 80.\\
+\texttt{PREMAX}, \texttt{PREV} & Attempts 1--20, default 4; readiness 0--80 V, default 4; either condition ends startup.\\
+\texttt{PREAUTOMAX}, \texttt{PRETRIES} & Tune maximum duty 0--100\%, default 2; attempts 1--50, default 20.\\
+\texttt{CPER}, \texttt{STATUSMS} & Control request 20--20000 us, default 25; terminal status 100--5000 ms, default 1000.\\
+\bottomrule
+\end{longtable}
+\endgroup
+\begingroup
+\small
+\begin{longtable}{@{}L{0.29\linewidth}L{0.63\linewidth}@{}}
+\caption{Active voltage-control settings.}\label{tab:app-fw-control-settings}\\
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endfirsthead
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endhead
+\texttt{VMIN}, \texttt{VMAX}, \texttt{VSET}, \texttt{VON}, \texttt{OVP} & Parse range 0--80 V; defaults 10, 32, 28, 28, 36; validation enforces threshold relationships.\\
+\texttt{OVPEN} & Ordinary secondary OVP flag, default 1.\\
+\texttt{BONMS}, \texttt{BOFFMS} & Hysteretic on/off dwell 0--1000 ms; both default 0.\\
+\texttt{LSTEADYEN}, \texttt{LDUTY} & Loaded steady flag default 1; duty floor 0--100\%, default 12.\\
+\texttt{LHI}, \texttt{LHR} & Loaded classification current 0--100 A, default 0.15; apparent resistance 0.1--100000 \si{\ohm}, default 25.\\
+\texttt{SLEW} & Base trim 0.1--3000 percentage points/s, default 8; stored in tenths of a point/s.\\
+\texttt{VBOOST}, \texttt{VFOLD} & Legacy voltage gains 0--100 \%/V; defaults 12 and 10. Their helpers are not called by the active voltage loop.\\
+\texttt{NLGUARD}, \texttt{NLDUTY}, \texttt{NLDROP} & Guard flag default 1; cap 0--100\%, default 5; band 0.2--60 V, default 5.\\
+\texttt{NLI}, \texttt{NLR} & No-load current 0--10 A, default 0.35; apparent resistance 1--100000 \si{\ohm}, default 30.\\
+\texttt{NLSLOT}, \texttt{NLFULL} & Reference-slot flag default 1; below-floor iterations before escape 0--100, default 3. Zero disables this counter.\\
+\texttt{NLSOVPEN}, \texttt{NLSOVP}, \texttt{NLSOVPR} & Holdoff flag default 1; trip/rearm parse 0--80 V, defaults 33.5 and 23; constrained by other voltage limits.\\
+\texttt{LFFEN}, \texttt{LFFREF}, \texttt{LFFMINV} & PA0 cap flag default 0; reference 1--1000 V, default 155; minimum usable indication 0--1000 V, default 30.\\
+\texttt{LFFMINS}, \texttt{LFFMAXS} & Scale bounds 0.05--1; defaults 0.25 and 1; maximum cannot stay below minimum.\\
+\bottomrule
+\end{longtable}
+\endgroup
+\begingroup
+\small
+\begin{longtable}{@{}L{0.29\linewidth}L{0.63\linewidth}@{}}
+\caption{Tuning, profiles, and compatibility settings.}\label{tab:app-fw-tune-settings}\\
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endfirsthead
+\toprule Command / setting & Action, units, or bounds\\\midrule
+\endhead
+\texttt{AUTOMAX} & Scan-range setting 0--100\%, default 100, limited by DMAX. Minimum-duty and step rules can raise scan points above a low AUTOMAX; DMAX remains the duty ceiling.\\
+\texttt{AUTOSTEP}, \texttt{AUTOFINE} & Coarse 0.5--25 duty points, default 2; fine 0.1--10 points, default 0.5.\\
+\texttt{AUTOSETTLE}, \texttt{AUTOMEAS} & Settle 20--3000 ms, default 160; measurement 20--2000 ms, default 100.\\
+\texttt{LOAD1}, \texttt{LOAD2}, \texttt{LOAD3} & Reference 0--100000 \si{\ohm}; defaults 50, 5, 2.5. Zero is not a usable resistance reference.\\
+\texttt{ACTIVELOAD} & Profile 1--3; internal index 0--2; default 1.\\
+\texttt{PTARGET} & Legacy/diagnostic target 0.5--2000 W, default 100; does not command measured output power.\\
+\texttt{KP}, \texttt{KI} & Legacy PI gains 0--50 \%/W, 0--200 \%/(W s); defaults 0.25,1.5; stored times 1000.\\
+\texttt{DB}, \texttt{BHYST} & Legacy deadband 0--100 W and hysteresis 0--1000 W; default 2 W each, stored mW. Voltage loop ignores BHYST.\\
+\texttt{IMIN}, \texttt{IMAX} & Legacy integral limits -100--100\%; defaults -60,60; stored times ten.\\
+\texttt{MAXFAULTEN}, \texttt{MAXFAULTMS}, \texttt{MAXFAULTERR} & Legacy flag default 0; 50--10000 ms, default 1200; 0--1000 W, default 3; helper not called by active voltage loop.\\
+\texttt{AUTOTEST}, \texttt{AUTOFSTEP} & Legacy identification step 0.5--15 duty points, default 2; frequency step 500--10000 Hz, default 2000; unused by active fixed-FEN scan.\\
+\texttt{FPREF}, \texttt{FPEN} & Legacy preference 1000--50000 Hz, default 10000; penalty 0--1000 W, default 2; active score does not scan frequency.\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+Each profile also accepts prefix \texttt{L1}, \texttt{L2}, or \texttt{L3} followed by: \texttt{FEN}/\texttt{FREQ} (1000--50000 Hz); \texttt{DUTY}/\texttt{BIAS}/\texttt{NLDUTY} (0--100\%); \texttt{KP} (0--50); \texttt{KI} (0--200); \texttt{GAIN} (0--1000 W/\%); \texttt{TAU} (0--20 s); \texttt{TGT}/\texttt{TARGET} (0--2000 W); \texttt{PMEAS}/\texttt{P} (0--4000 W); \texttt{VMEAS}/\texttt{VSEC} (-5--100 V); and \texttt{IMEAS}/\texttt{I} (0--100 A). For example, \texttt{SET L2DUTY 5} changes profile 2's reference duty. Saved readings use firmware scales and are not independent measurements.
+
+\section{Browser UART Commands and Replies}
+\label{sec:app-fw-web}
+
+The browser uses the same physical UART. \texttt{WEB HELLO} selects protocol version 1 and suppresses ordinary terminal output until reset. Firmware, board, baud, maximum line length, lease requirement, and supported capabilities are reported. The V2 build advertises \texttt{calibration\_v1}, \texttt{bench\_settings\_v1}, and \texttt{carrier\_timing\_v1}; the last capability is V2-only. HELLO does not enable output, change the stored boot preference, arm a lease, or start a stream.
+
+A normal request is \texttt{WEB id command}. IDs contain 1--24 ASCII letters, digits, hyphens, or underscores. The acknowledgment echoes the ID with \texttt{ok}, a machine-readable \texttt{code}, and \texttt{settings\_pending}. Commands are sent one at a time, with the next command held until the matching acknowledgment arrives. HELLO, SNAPSHOT, STREAM, LEASE, and PING also accept forms without an ID.
+
+\begingroup
+\small
+\begin{longtable}{@{}L{0.29\linewidth}L{0.63\linewidth}@{}}
+\caption{Commands accepted after WEB HELLO.}\label{tab:app-fw-web-commands}\\
+\toprule Command & Behavior\\\midrule
+\endfirsthead
+\toprule Command & Behavior\\\midrule
+\endhead
+\texttt{HELLO}; \texttt{SNAPSHOT} & Enter quiet JSON mode; or acknowledge and queue telemetry with V2 timing readback.\\
+\texttt{STREAM ms} & Periodic telemetry at 250--5000 ms; zero disables it.\\
+\texttt{LEASE ms}; \texttt{PING} & Arm a 1000--10000 ms lease, or renew an armed lease. Zero disarms only while OFF. PING cannot rearm an expired lease.\\
+\texttt{ON} & Require a live lease, no latched fault, working ADC and gate initialization, and valid V2 storage layout. Begin startup without waiting for the full sequence.\\
+\texttt{OFF} & Inhibit enable through the OFF path, without saving. Plain OFF remains available after HELLO as an emergency terminal form.\\
+\texttt{CLR} & Require OFF and healthy initialization, then clear the latch without enabling output.\\
+\texttt{OPEN}, \texttt{VSB}, \texttt{BANG}, \texttt{VSBONLY}, \texttt{LINEFF} & Change mode/feed-forward in RAM and report pending settings.\\
+\texttt{SET name number}; \texttt{LOAD n} & Apply validated RAM settings or profile 1--3. Reference-load, tuning, precharge, and slot changes require OFF. Boot-preference changes are terminal-only.\\
+\texttt{CAL PRECHARGE}, \texttt{CAL NOLOAD}, \texttt{CAL LOAD n} & Queue startup or duty tuning, with output initially OFF and an active lease.\\
+\texttt{CAL ZERO}; \texttt{CAL LINE} & Queue current-offset or line-reference capture.\\
+\texttt{TIMING Hz ns} & V2 only: apply an OFF-state carrier/dead-time pair and return matching timing readback.\\
+\texttt{BEGINCFG}; \texttt{ENDCFG}; \texttt{SAVE} & Group changes; ENDCFG/SAVE require OFF. SAVE also requires import closed. Report failed persistence requests.\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+The web parser requires a complete finite number with magnitude no greater than \(10^8\). Negative values are accepted only for voltage/current offsets, integral limits, and signed profile-voltage forms. Invalid or overlong input is rejected as a whole line rather than executed in truncated form. After HELLO, ordinary terminal commands are rejected except plain OFF; reset restores terminal mode. Calibration is requested through the queued \texttt{CAL} commands. Terminal presets, defaults, \texttt{CAL3}, and the large text export are not web commands.
+
+\subsection{Transmit Budget and Link Lease}
+
+The transmit queue has four 1024-byte frames. At most 16 bytes are sent per background pass, limited by \texttt{availableForWrite()}. Periodic V2 telemetry and timing frames are queued together only when two further slots remain free for acknowledgments and events. A command that changes state is not run unless its acknowledgment can be queued. After congestion, the client must time out and resynchronize; an unacknowledged command cannot be assumed to have run.
+
+When the lease expires, OFF and enable inhibition are requested first. The lease is then disarmed, streaming is stopped, and an event is marked pending. Flash is not saved. Reconnection requires a new lease and explicit ON. This guard runs in the background loop; it does not disconnect mains, discharge capacitors, or replace an independent hardware interlock.
+
+\subsection{Telemetry Definitions}
+
+Telemetry contains uptime \texttt{ms}, live enable state, mode, fault, feedback validity, filtered primary voltage, bulk voltage, primary current, diagnostic power, calculated effective duty, three raw ADC counts, selected validated settings, calibration state, lease/stream state, pending settings, and control timing. Unavailable ADC-dependent values are \texttt{null}; nonfinite or out-of-range serialized numbers are also null. Missing feedback must not be plotted as zero.
+
+The timestamp is 32-bit MCU uptime and wraps, so exported data also needs a host timestamp across resets or reconnects. \texttt{control\_dt\_us}, \texttt{control\_max\_us}, and \texttt{control\_overruns} describe software intervals. \texttt{power} is the selected voltage--PA2-current product, and \texttt{duty} is a scheduler calculation. Neither replaces external power or timing measurements.
+
+\section{Browser Calibration and Reference Loads}
+\label{sec:app-fw-web-calibration}
+
+The browser calibration commands reuse the precharge, duty-scan, current-offset, and line-reference routines. Commands are queued first and run outside the serial parser. Serial input, telemetry, faults, and the communication lease continue to be serviced during measurement waits. The browser can therefore stop an active scan without waiting for the complete tuning sequence.
+
+Calibration starts with output OFF, valid feedback, no fault, and an active lease. Precharge and duty tuning then energize the converter; current-zero and line-reference capture keep output OFF. OFF, lease expiry, a fault, lost acquisition, or the \SI{180}{\second} limit cancels the run. Every outcome leaves output OFF. Cancellation or failure restores the previous settings; successful results remain in RAM until an explicit save. The stored boot preference and previous control mode are retained.
+
+The three resistance entries describe the physical loads connected by the operator. Entering \texttt{LOAD1}, \texttt{LOAD2}, or \texttt{LOAD3} does not switch a resistor or command an electronic load. Zero means the reference is unconfigured. \texttt{LOAD n} selects a slot and applies its stored profile when valid; \texttt{ACTLOAD} reports the selected slot. Each physical load is connected with output OFF before its calibration is started.
+
+The browser also exposes the no-load duty, coarse/fine scan steps, measurement and settling intervals, and startup burst/settle timing. These settings are populated from MCU readback. Their edits and reference-slot changes require output OFF, so setup changes do not silently alter an active tuning run.
+
+\section{Adjustable V2 Carrier Timing}
+\label{sec:app-fw-carrier-timing}
+
+\texttt{TIMING Hz ns} accepts carrier requests from \SI{500}{\kilo\hertz} to \SI{2}{\mega\hertz} and dead-time requests from \SI{20}{\nano\second} to \SI{200}{\nano\second}. These are timer limits. The converter operating range still needs switching and thermal measurements. The command is rejected during output, startup, autotuning, or queued/running calibration. Frequency and dead time are applied atomically with enable held low.
+
+With prescaler zero, the period is rounded to an even number of timer ticks, and dead time is rounded up to a whole tick. At \SI{100}{\mega\hertz}, the period grid is \SI{20}{\nano\second} and the dead-time grid is \SI{10}{\nano\second}. The pair must satisfy \(4N_{\mathrm{dead}}<N_{\mathrm{period}}\). For example, a request of \SI{950}{\kilo\hertz} and \SI{53}{\nano\second} gives 106 period ticks and six dead-time ticks: approximately \SI{943.396}{\kilo\hertz} and \SI{60}{\nano\second}. At \SI{2}{\mega\hertz}, \SI{120}{\nano\second} is accepted but \SI{130}{\nano\second} is rejected.
+
+\texttt{FEN} remains the separate burst-enable frequency. Carrier adjustment changes the excitation frequency; the tank's natural resonance remains set by its inductance and capacitance. An effective change to period or dead-time ticks clears all three learned load profiles and tuned metadata. Physical resistance entries, sensor calibration, and applied duty settings are retained. The profiles must be retuned for the new timing.
+
+A dedicated timing frame reports requested and actual values, timer clock, period/dead-time ticks, output/busy state, and a volatile revision counter. The browser requires fresh OFF/idle readback and a matching acknowledgment before confirming an applied pair. A register-verification failure inhibits output. Browser timing changes remain pending until SAVE while OFF; terminal changes before \texttt{WEB HELLO} retain the existing deferred auto-save after \SI{1.5}{\second} of quiet OFF operation.
+
+\section{Function Map and Build Dependencies}
+\label{sec:app-fw-functions}
+
+The principal functions are listed by task. Complete implementations are in Listing~\ref{lst:full-pwr204}; the earlier voltage-control baseline is Listing~\ref{lst:full-pwr1920}.
+\begingroup
+\small
+\begin{longtable}{@{}L{0.25\linewidth}L{0.67\linewidth}@{}}
+\caption{V2 firmware functions.}\label{tab:app-fw-function-map}\\
+\toprule Task & Functions\\\midrule
+\endfirsthead
+\toprule Task & Functions\\\midrule
+\endhead
+Settings and profiles & \nolinkurl{setDefaults}, \nolinkurl{validateSettings}, \nolinkurl{loadProfileValid}, \nolinkurl{storeLoadProfile}, \nolinkurl{applyLoadProfile}\\
+Saved settings & \nolinkurl{loadSettings}, \nolinkurl{validCarrierRecord}, \nolinkurl{safeToWriteEepromNow}, \nolinkurl{saveSettingsNow}, \nolinkurl{flushPendingSettingsSave}\\
+Carrier timing & \nolinkurl{calculateCarrierTiming}, \nolinkurl{calculateGateTiming}, \nolinkurl{setupGatePWM}, \nolinkurl{applyCarrierTiming}\\
+Burst scheduling & \nolinkurl{updateEnableTimingNoInterruptLock}, \nolinkurl{applyEnableTimerNoInterruptLock}, \nolinkurl{enPeriodISR}, \nolinkurl{enCompareISR}\\
+Acquisition and conversion & \nolinkurl{setupAdcDma}, \nolinkurl{readPrimaryVoltageRaw}, \nolinkurl{readSecondaryVoltageRaw}, \nolinkurl{readPrimaryCurrentRaw}, \nolinkurl{updateAnalogFilters}\\
+Startup and voltage control & \nolinkurl{beginStartupPrecharge}, \nolinkurl{handleStartupPrecharge}, \nolinkurl{handlePowerLoop}, \nolinkurl{loadedSteadyDutyX10}\\
+Fault handling & \nolinkurl{checkFaults}, \nolinkurl{latchFault}, \nolinkurl{serviceNoLoadSoftOvp}\\
+Tuning and calibration & \nolinkurl{autoTunePrecharge}, \nolinkurl{autoTunePower}, \nolinkurl{zeroCurrentOffset}, \nolinkurl{runWebCalibration}, \nolinkurl{serviceWebCalibrationWait}\\
+UART and web protocol & \nolinkurl{processCommand}, \nolinkurl{processWebCommand}, \nolinkurl{webQueueTelemetry}, \nolinkurl{serviceWebTelemetry}, \nolinkurl{serviceWebLease}, \nolinkurl{serviceWebTx}\\
+Foreground execution & \nolinkurl{setup}, \nolinkurl{loop}\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+The sketch is built with the STM32 Arduino core. With the build script, the source is copied into a correctly named Arduino directory and F410 or Nucleo G071 is selected. The V2 build also requires the included linker layout and 96 KiB application limit. The selected core uses the internal-HSI PLL clock setup; the port does not assume an external HSE crystal.
+
+The HEX verifier checks the HEX image addresses against the reserved sector and intended flash regions. The firmware protocol test tests the production dispatcher with mocked UART, control, and storage behavior. The browser source and tests are included with these files. HEX can preserve the reserved address gap during programming. A flat binary spans that gap; an unchecked binary write or full-chip erase can remove settings. The build script does not flash the board automatically.
+
+\section{Build and Software Test Results}
+\label{sec:app-fw-verification}
+
+The V2 build and the G071 regression target were compiled, and the firmware image, protocol, saved-settings journal, and browser tests were checked. Powered switching, sensing accuracy, and on-board persistence still require bench verification.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Software checks for the current firmware and browser.}
+\label{tab:app-fw-software-checks}
+\begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}Y@{}}
+\toprule Check & Result\\\midrule
+V2 build & Passed; 90,268 program bytes of 98,304; 6,868 static RAM bytes of 32,768\\
+G071 regression build & Passed; 130,424 program bytes of 131,072; 9,544 static RAM bytes of 32,768\\
+V2 HEX layout & Passed; 90,752 programmed bytes; valid vectors and reserved settings sector excluded\\
+Host protocol & Passed; 131 JSON frames with mocked hardware\\
+Saved-settings journal & Passed; legacy migration, corruption, torn records, and 122 interrupted-append boundaries\\
+Browser tests & Passed; 76 automated tests\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Program size and HEX programmed-byte count use different counting methods. Static RAM excludes later stack and heap demand. These checks exercise software and image layout; the measured converter results remain those described in Chapter~\ref{ch:results}.

@@ -1,0 +1,26 @@
+\section{Control Development}
+\label{sec:ctrl-comparison}
+
+Control development addressed manual voltage adjustment, blocking conversion waits, an unsuitable feedback quantity, and excess energy transfer during startup or after load removal (\Cref{tab:ctrl-version-identity}). Each stage changed how the switching bursts responded to the converter and its load.
+
+\begin{table}[htbp]
+\centering
+\caption{Firmware changes and their functional improvements.}
+\label{tab:ctrl-version-identity}
+\begin{tabularx}{\textwidth}{@{}L{0.17\textwidth}L{0.37\textwidth}Y@{}}
+\toprule
+Stage & Change & Improvement\\
+\midrule
+Open loop & Manual carrier and burst-enable commands & Check switching timing and basic transfer before adding automatic voltage control\\
+Blocking feedback & Voltage feedback with blocking ADC reads & Adjust transfer from the sensed voltage instead of relying on manual correction\\
+DMA feedback & Continuous ADC DMA and corrected feedback scaling & Remove conversion waits and regulate bulk voltage from PA1 rather than an unsuitable voltage--current product\\
+Final baseline & Burst-edge alignment attempts, startup precharge, no-load guard, and loaded duty trim & Limit commanded energy at startup and no load, reduce continued charging after load removal, and adjust transfer as load changes\\
+V2 calibration and setup & Browser calibration, reference-load settings, and output-OFF carrier timing & Repeat duty searches for known loads and vary switching frequency and dead time without rebuilding the firmware\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\input{Chapters/08_Control_Firmware/04_V0_Open_Loop}
+\input{Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop}
+\input{Chapters/08_Control_Firmware/06_Blocking_Limitations}
+\input{Chapters/08_Control_Firmware/07_V2_DMA}

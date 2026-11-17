@@ -7,5 +7,7 @@
 | [firmware-flow.md](firmware-flow.md) | Mermaid diagrams of boot, control decisions, safety handling, and PWM generation |
 | [power-control.md](power-control.md) | Full firmware notes, settings, limits, and tuning details |
 | [uart-commands.md](uart-commands.md) | Compact bench command reference |
+| [web-protocol.md](web-protocol.md) | Browser USB-UART telemetry, command acknowledgments, and communication lease |
+| [calculator-evidence.md](calculator-evidence.md) | Resonant-tank and pump calculator presets, schematic identity, source evidence, and equations |
 
 The current firmware source is [../thesi_power_control.ino](../thesi_power_control.ino). Historical firmware snapshots live under [../firmware/archive](../firmware/archive).

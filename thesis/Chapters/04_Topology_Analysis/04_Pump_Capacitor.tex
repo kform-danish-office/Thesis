@@ -1,0 +1,15 @@
+\section{Pump-Capacitor Selection}
+\label{sec:analysis-cp}
+
+The reference sizing equation is obtained by equating ideal charge-transfer power to the input power needed for the output:
+\begin{equation}
+\CP=\frac{2P_{\mathrm{out}}}{\eta f_sV_{\mathrm{in,pk}}^2}.
+\label{eq:cp-sizing}
+\end{equation}
+Here \(\eta\) is the efficiency assumed during sizing. The equation also assumes a complete capacitor excursion and continuous active switching at maximum demand \cite{ammar2021led}.
+
+The nominal \SI{2}{\nano\farad} pump capacitor sets charge per complete active cycle and maximum ideal conductance at a given line voltage. Burst control can reduce transfer by omitting cycles but cannot increase charge within an unchanged cycle.
+
+Selection also depends on pulse-current capability, voltage margin, effective capacitance, dielectric loss, ESR, and interconnect impedance. Ringing, incomplete clamping, and transients add to the nominal rectified-line excursion.
+
+Increasing \(\CP\) raises transfer and pump current at fixed frequency and changes the inductance required to complete charge transfer. Capacitance and inductance must therefore be evaluated together against clamp loss and semiconductor stress.

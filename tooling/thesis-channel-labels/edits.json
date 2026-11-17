@@ -1,0 +1,47 @@
+[
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "old": "MCU port with browser commands and logging. The later bench-run version was not recorded.",
+    "new": "MCU port with browser commands and logging."
+  },
+  {
+    "path": "Chapters/01_Introduction/07_Thesis_Structure.tex",
+    "old": "what changes with a USB-C load",
+    "new": "the requirements of powering a USB-C device"
+  },
+  {
+    "path": "Chapters/02_Background/08_Research_Gap.tex",
+    "old": "a supply with a detachable USB-C load",
+    "new": "a power supply for USB-C devices that can be connected and disconnected during operation"
+  },
+  {
+    "path": "Chapters/02_Background/07_USBC_Context.tex",
+    "old": "Changes in USB-C load",
+    "new": "Changes in current drawn from the USB-C output"
+  },
+  {
+    "path": "Chapters/02_Background/06_Reference_2021.tex",
+    "old": "A detachable USB-C load requires",
+    "new": "Powering a USB-C device requires"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/chapter.tex",
+    "old": "The USB-C load requires",
+    "new": "Supplying a USB-C device requires"
+  },
+  {
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "old": "The source notes identify yellow as the switch node, green as the secondary bulk voltage, and blue as USB-C VBUS. The complete capture groups are included with the test data.",
+    "new": "Yellow: half-bridge switch-node voltage. Green: secondary output voltage. Blue: USB-C VBUS output voltage."
+  },
+  {
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "old": "AC-coupled output-detail captures. CH1 is DC-coupled; CH2 and CH3 do not show absolute secondary-bus or VBUS voltage.",
+    "new": "Output ripple captures. Yellow: half-bridge switch-node voltage. Green: secondary output voltage. Blue: USB-C VBUS output voltage. The yellow trace is DC-coupled; the green and blue traces are AC-coupled and show voltage ripple."
+  },
+  {
+    "path": "Chapters/10_Results/04_Load_Transients.tex",
+    "old": "Voltage response during load removal. Load current and firmware state were not recorded simultaneously with these traces.",
+    "new": "Voltage response during load removal. Yellow: half-bridge switch-node voltage. Green: secondary output voltage. Blue: USB-C VBUS output voltage."
+  }
+]

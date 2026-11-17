@@ -1,0 +1,217 @@
+[
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "old": "an inherited charge-pump power-factor-correction (PFC) resonant topology",
+    "new": "a charge-pump power-factor-correction (PFC) resonant topology from earlier DTU work"
+  },
+  {
+    "path": "Frontmatter/Approval.tex",
+    "old": "identifies the inherited designs and the author's integration, control, and test work",
+    "new": "describes the earlier designs and the integration, control, and test work completed in this project"
+  },
+  {
+    "path": "Chapters/01_Introduction/01_Motivation.tex",
+    "old": "the inherited conversion principle",
+    "new": "the original conversion principle"
+  },
+  {
+    "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+    "old": "an inherited charge-pump PFC resonant converter",
+    "new": "the DTU charge-pump PFC resonant converter"
+  },
+  {
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "old": "the inherited charge-pump topology",
+    "new": "the charge-pump topology from earlier DTU work"
+  },
+  {
+    "path": "Chapters/01_Introduction/04_Research_Questions.tex",
+    "old": "the inherited charge-pump resonant circuit",
+    "new": "the original charge-pump resonant circuit"
+  },
+  {
+    "path": "Chapters/01_Introduction/07_Thesis_Structure.tex",
+    "old": "the inherited circuit",
+    "new": "the original circuit"
+  },
+  {
+    "path": "Chapters/01_Introduction/07_Thesis_Structure.tex",
+    "old": "the inherited models",
+    "new": "the supplied models"
+  },
+  {
+    "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+    "old": "The inherited discrete-GaN and external-driver models",
+    "new": "The supplied discrete-GaN and external-driver models"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/08_ZVS.tex",
+    "old": "the inherited model",
+    "new": "the supplied model"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/11_Design_Summary.tex",
+    "old": "the inherited models",
+    "new": "the supplied models"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+    "old": "The inherited LTspice circuits",
+    "new": "The supplied LTspice circuits"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "old": "Inherited LTspice Circuits",
+    "new": "Supplied LTspice Circuits"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "old": "The inherited \\sourcefile",
+    "new": "The supplied \\sourcefile"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "old": "Inherited simulation parameters",
+    "new": "Reference simulation parameters"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "old": "the inherited files",
+    "new": "the supplied files"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+    "old": "the inherited model",
+    "new": "the supplied model"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "old": "the inherited simulations",
+    "new": "the supplied simulations"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "old": "the inherited circuits",
+    "new": "the supplied circuits"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "old": "The inherited loss files",
+    "new": "The supplied loss files"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "old": "The inherited work covered",
+    "new": "The earlier design work covered"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "old": "Inherited component work",
+    "new": "Supplied designs and measurements"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+    "old": "the supplied measurements for two inductor variants",
+    "new": "the given measurements for two inductor variants"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+    "old": "the inherited core spacing",
+    "new": "the original core spacing"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+    "old": "the inherited magnetics",
+    "new": "the supplied magnetics"
+  },
+  {
+    "path": "Chapters/07_Hardware/chapter.tex",
+    "old": "the inherited charge-pump resonant circuit",
+    "new": "the charge-pump resonant circuit from earlier DTU work"
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "old": "The inherited planar magnetics",
+    "new": "The supplied planar magnetics"
+  },
+  {
+    "path": "Chapters/10_Results/11_Simulation_Hardware.tex",
+    "old": "The inherited LTspice studies",
+    "new": "The supplied LTspice studies"
+  },
+  {
+    "path": "Chapters/10_Results/11_Simulation_Hardware.tex",
+    "old": "the inherited models",
+    "new": "the supplied models"
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "The inherited leakage values",
+    "new": "The measured leakage values"
+  },
+  {
+    "path": "Chapters/11_Discussion/05_Magnetics_Integration.tex",
+    "old": "sensing; the electromagnetic design was inherited.",
+    "new": "sensing. The electromagnetic design came from earlier DTU work."
+  },
+  {
+    "path": "Chapters/11_Discussion/05_Magnetics_Integration.tex",
+    "old": "The inherited measurements",
+    "new": "The given component measurements"
+  },
+  {
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "old": "The inherited simulations",
+    "new": "The supplied simulations"
+  },
+  {
+    "path": "Chapters/12_Conclusion/chapter.tex",
+    "old": "the inherited converter",
+    "new": "the original DTU converter"
+  },
+  {
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "old": "the inherited DTU charge-pump PFC resonant topology",
+    "new": "the DTU charge-pump PFC resonant topology"
+  },
+  {
+    "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+    "old": "The inherited charge-pump branch",
+    "new": "The original charge-pump branch"
+  },
+  {
+    "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+    "old": "The inherited electromagnetic design was integrated",
+    "new": "The supplied planar magnetics were integrated"
+  },
+  {
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "old": "The inherited charge-pump PFC principle and planar-magnetic design were\r\nintegrated",
+    "new": "The charge-pump PFC principle and planar-magnetic design from earlier DTU\r\nwork were integrated"
+  },
+  {
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "in inherited simulations",
+    "new": "in the supplied simulations"
+  },
+  {
+    "path": "Backmatter/Appendices/F_Contribution_Provenance.tex",
+    "old": "Project Contributions and Inherited Designs",
+    "new": "Project Contributions and Earlier DTU Designs"
+  },
+  {
+    "path": "Backmatter/References.tex",
+    "old": "in inherited planar-magnetics documentation",
+    "new": "in the supplied planar-magnetics documentation"
+  },
+  {
+    "path": "README.md",
+    "old": "the inherited converter",
+    "new": "the original DTU converter"
+  },
+  {
+    "path": "README.md",
+    "old": "hardware, inherited\r\n",
+    "new": "hardware, supplied\r\n"
+  }
+]

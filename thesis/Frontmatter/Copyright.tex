@@ -1,0 +1,24 @@
+\thispagestyle{empty}
+\vspace*{\fill}
+
+\textbf{\thesistitle}\\
+\thesissubtitle
+
+\smallskip
+\documenttype, \thedate
+
+\smallskip
+By \thesisauthor, student number \studentnumber
+
+\bigskip
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+Degree program: & \degreeprogramme\\
+Department: & \departmentdescriber\\
+\ifdefempty{\supervisor}{}{Supervisor: & \supervisor\\}
+\ifdefempty{\cosupervisor}{}{Co-supervisor: & \cosupervisor\\}
+\ifdefempty{\projectperiod}{}{Project period: & \projectperiod\\[4pt]}
+Copyright: & Reproduction in whole or in part must include customary bibliographic citation and author attribution.\\
+Cover photo: & Author's photograph of the right-hand V2 prototype, cropped only.\\
+Published by: & Technical University of Denmark, \departmentdescriber, \addressI, \addressII, Denmark.\\
+Website: & \url{\departmentwebsite}
+\end{tabularx}

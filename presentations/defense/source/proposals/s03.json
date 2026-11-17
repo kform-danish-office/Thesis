@@ -1,0 +1,62 @@
+{
+  "slide_id": "s03",
+  "title": "High frequency makes switching loss a design constraint",
+  "takeaway": {
+    "text": "Higher switching frequency can reduce passive size, while resonant commutation reduces turn-on loss and regulation matches transfer to demand.",
+    "visible": false
+  },
+  "visible_content": {
+    "frequency_heading": "Higher switching frequency → less energy per cycle",
+    "compactness_heading": "Smaller passives",
+    "compactness_body": "Less energy per cycle can reduce magnetic and capacitor size",
+    "loss_heading": "More switching heat",
+    "loss_equation": "Pₛw ≈ fₛ Eₛw",
+    "soft_switching_heading": "Zero-voltage switching",
+    "soft_switching_body": "Resonant current lowers device voltage before turn-on",
+    "regulation_bridge": "Changing USB-C demand still requires energy regulation",
+    "concept_caption": "",
+    "phase_label": "Motivation"
+  },
+  "visual": {
+    "layout": "An editable left-to-right causal diagram linking higher switching frequency to passive size, switching heat and resonant commutation. The regulation bridge closes the sequence below. Use only the exact visible_content strings as labels; connections and arrows are native editable shapes. A compact half-bridge/resonant-path sketch is optional if legible; the actual shared circuit follows on the next slide.",
+    "assets": [],
+    "labels": "Exactly the visible_content values; the title is separate.",
+    "notes": "A connected conceptual sequence; the physical circuit and both shared branches are shown on the following slides. The concept caption is intentionally empty."
+  },
+  "speaker_notes": "The adapter examples show a broad range of output power and voltage. For a compact supply, switching faster can reduce the energy that has to be transferred in each cycle at a given power. That allows the magnetic components and capacitors to be designed smaller, although their losses and parasitics still constrain the design.\n\nThere is a cost to increasing frequency. Each switching cycle dissipates some energy in the devices. At comparable energy per cycle, the switching loss rises approximately in proportion to frequency, so heat becomes a constraint in a small enclosure.\n\nThe resonant branch addresses the turn-on part of that loss. During dead time, current charges and discharges the switch-node capacitances and moves the node toward the target rail. If enough current flows in the required direction to complete the transition before the incoming switch turns on, its voltage is near zero at turn-on. In the actual circuit, both the pump and resonant branches contribute current at the shared node, and their directions matter.\n\nThe demand from a USB-C device can change or disappear, so efficient switching alone is not enough. Average energy transfer must also be adjusted to maintain the secondary bulk voltage.",
+  "transition": "The selected circuit combines those functions around one shared half bridge and adds the USB-C output stage.",
+  "duration_seconds": 115,
+  "sources": [
+    {
+      "claim": "Megahertz operation can reduce passive size; resonant current charges and discharges half-bridge capacitances during dead time; changing USB-C demand requires energy control.",
+      "reference": "/workspace/thesis/Chapters/01_Introduction/01_Motivation.tex",
+      "classification": "design rationale"
+    },
+    {
+      "claim": "Switching-loss expression and charge/discharge mechanism with the required current direction.",
+      "reference": "/workspace/thesis/Chapters/02_Background/04_Soft_Switching_GaN.tex",
+      "classification": "physical model"
+    },
+    {
+      "claim": "Signed pump and primary resonant branch currents can aid or oppose switch-node commutation.",
+      "reference": "/workspace/papers/apec-digest/sections/topology.tex; /workspace/thesis/Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+      "classification": "circuit operation"
+    },
+    {
+      "claim": "MCU regulates secondary bulk while the downstream PD stage regulates selected connector voltage.",
+      "reference": "/workspace/papers/apec-digest/sections/intro.tex",
+      "classification": "control architecture"
+    }
+  ],
+  "checks": {
+    "facts_and_units": [
+      "Eₛw denotes the combined turn-on and turn-off energy per cycle; the proportionality assumes comparable energy per cycle.",
+      "Energy per cycle decreases at a given continuously transferred power as frequency increases; achievable passive size depends on constraints and component design.",
+      "Switch-node motion during dead time is the intended mechanism, not a claim that measured ZVS was established.",
+      "Both branch currents contribute with their signs."
+    ],
+    "unresolved_questions": [],
+    "visual_or_timing": "202 spoken words including transition; approximately 115 seconds with diagram pointing and transitions. No invented gate timing."
+  },
+  "revision": 3
+}

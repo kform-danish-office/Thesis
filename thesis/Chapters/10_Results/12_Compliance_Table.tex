@@ -1,0 +1,44 @@
+\section{Requirements Met and Tests Still Needed}
+\label{sec:res-compliance}
+
+The four selected USB-C outputs were obtained on V1, and \SI{79.89}{\watt} was calculated at its highest matched DC point. Later V2 tests reached \SI{137.1}{\watt} at the secondary output with voltage droop. The \SI{100}{\watt} continuous target, revised \SI{65}{\watt} minimum, and earlier \SI{75}{\watt} validation criterion still need a stabilized run of defined duration.
+Section~\ref{sec:revised-plan-criteria} defines these criteria. The measured behavior is compared with the requirements in
+Chapter~\ref{ch:requirements}.
+
+\begin{table}[htbp]
+\centering
+\caption{Prototype requirements and test results.}
+\label{tab:requirements-compliance}
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}L{0.08\textwidth}L{0.25\textwidth}X L{0.17\textwidth}@{}}
+\toprule
+ID & Requirement & Measurements or implementation & Status\\
+\midrule
+FR-01 & Controlled startup & Implemented precharge; no synchronized startup capture & Incomplete\\
+FR-02 & Fixed carrier and PA10 control & Firmware signal structure and carrier/burst captures & Implemented and observed\\
+FR-03 & PA1 voltage regulation & Loaded operation at the four fixed settings & Met at tested points\\
+FR-04 & Reduced no-load energy & No-load voltage records; burst control implemented in firmware & Incomplete\\
+FR-05 & Recovery after load changes & Load-removal captures; recovery band and timing missing & Response recorded\\
+FR-06 & Latched secondary OVP & Implemented in firmware; no measured trip event & Trip not measured\\
+FR-07 & ADC DMA acquisition & Circular ADC DMA in the baseline firmware; live timing logs incomplete & Implemented\\
+FR-08 & UART configuration and diagnostics & Commands present in source; complete run logs absent & Implemented\\
+\midrule
+PR-01 & \SI{100}{\watt} continuous target; revised \SI{65}{\watt} minimum; earlier \SI{75}{\watt} validation criterion & V1 connector: \SI{79.89}{\watt}; V2 secondary: \SI{137.1}{\watt} with droop; V2 tests did not reach thermal equilibrium & Continuous criteria unverified\\
+PR-02 & State tested AC input & Logged \SI{240}{\volt}, \SI{50}{\hertz} condition & One input condition tested\\
+PR-03 & State tested output modes & \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} loaded records & Met at tested points\\
+PR-04 & Report mean, ripple, and transients & Average voltage measured; ripple definitions and transient timing incomplete & Incomplete\\
+PR-05 & Maximum no-load voltage and OVP margin & No-load captures without complete peak/threshold pair & Unresolved\\
+PR-06 & PF and current THD & Logged analyzer entries and current spectra & Measured; standard compliance not tested\\
+PR-07 & Efficiency at defined input/output points & Eleven initial estimates; included supplies and timing remain uncertain & Initial estimate\\
+PR-08 & Thermal condition and temperature & V1 images: \SI{90.4}{\celsius} at \SI{4}{\ampere}; V2 secondary region: \SI{98.3}{\celsius}; no thermal equilibrium in V2 tests & Surface observations\\
+PR-09 & Link results to configuration & Test identifiers and instrument readings & Setup details incomplete\\
+PR-10 & Identify active overload limiter & The component or control action limiting power was not isolated & Unresolved\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+Average output voltage stayed near the selected level at the tested loads. A rated
+operating range still requires synchronized power/ripple measurements,
+thermal endurance, transient/protection timing, and gate-referenced switching
+captures. USB-PD, safety, harmonic-standard, and EMI qualification remain open.

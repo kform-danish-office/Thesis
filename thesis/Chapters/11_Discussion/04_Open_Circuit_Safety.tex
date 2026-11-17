@@ -1,0 +1,26 @@
+\section{Load-Disconnection Energy Control}
+\label{sec:disc-open}
+
+After load disconnection, stored resonant energy and any additional packets
+can continue charging the secondary capacitance. For packet energy
+\(\Delta E\) delivered to capacitance \(C_o\), the idealized voltage rise is
+\begin{equation}
+V_{o,\mathrm{after}}=\sqrt{V_{o,\mathrm{before}}^2+\frac{2\Delta E}{C_o}}.
+\label{eq:disc-burst-voltage-rise}
+\end{equation}
+Packet energy can therefore produce a substantial voltage step even at
+low average duty. Capacitor discharge and the response of the USB-C PD stage also affect
+the voltage rise.
+
+Startup precharge, a no-load duty cap, a voltage window, and soft
+overvoltage holdoff were implemented. During load recovery, the no-load
+restriction is bypassed below the recovery threshold to restore transfer.
+
+The captures demonstrate no-load and load-removal operation. Quantifying
+the protection margin requires synchronized peak secondary voltage, peak
+VBUS, active thresholds, firmware state, and recovery timing.
+
+An independent secondary shutdown or discharge path should also be added.
+The existing regulation and protection share MCU execution, sensing,
+calibration, and enable output, leaving common failure paths in the
+regulating firmware.

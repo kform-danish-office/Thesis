@@ -1,0 +1,10 @@
+\section{USB-C Output Regulation}
+\label{sec:bg-usbc}
+
+The resonant converter charges the secondary bulk capacitor, which supplies the MPQ4242 USB-C PD stage. The MCU regulates the bulk voltage using feedback at PA1, while the PD stage regulates VBUS to the selected output level. Changes in USB-C load current therefore affect the bulk supply upstream of the output regulator.
+
+Fixed VBUS settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} were tested. Connector voltage was measured downstream of the bulk-voltage control loop.
+
+Load attachment depletes secondary storage before burst transfer increases. Load removal leaves residual tank energy to charge the bulk capacitor. At no load, repeated packets raise bulk voltage whenever their energy exceeds auxiliary and leakage consumption.
+
+Low-power startup, bulk-voltage thresholds, load-dependent burst limits, and overvoltage inhibition were implemented for these conditions and assessed in fixed-setting and transient tests. Formal USB-PD protocol, timing, and interoperability testing remains outstanding.

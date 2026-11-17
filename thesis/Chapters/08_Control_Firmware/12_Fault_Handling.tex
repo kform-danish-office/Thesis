@@ -1,0 +1,18 @@
+\section{Fault Detection and Recovery}
+\label{sec:ctrl-faults}
+
+The baseline checks the ADC/DMA acquisition-running flag and optional PA2 current trip before voltage control. A cleared running flag latches \texttt{SENSOR}; the flag alone does not detect every conversion or transfer error. With current trip enabled, a primary-current reading above threshold latches \texttt{CURRENT}. Both faults force burst enable at PA10 low on the original prototype. Current trip is disabled by default, and the active voltage loop does not call the legacy current-foldback helper even with \texttt{IFOLDEN} enabled.
+
+With \texttt{OVPEN} enabled, a filtered or latest raw secondary-voltage reading from PA1 above \texttt{OVP} normally latches an \texttt{OVP} fault. Eligible light/no-load operation has a recoverable exception when soft protection is enabled. The low-duty request can be held without latching only while every relevant voltage estimate stays at or below
+\begin{equation}
+ V_{\mathrm{hard,NL}}=
+ \min\!\left(V_{\mathrm{OVP}}+\SI{4}{\volt},\SI{80}{\volt}\right).
+ \label{eq:ctrl-no-load-hard-limit}
+\end{equation}
+Above that ceiling, or outside the eligibility conditions, the normal hard check applies. With the default \SI{36}{\volt} OVP value, the eligible exception extends to \SI{40}{\volt}. This higher threshold must be included when checking voltage stress.
+
+The normal soft holdoff is triggered at \texttt{NLSOVP} and rearms below \texttt{NLSOVPR}, defaulting to \SI{33.5}{\volt} and \SI{23}{\volt}. The configured low duty is requested, allowing no-load operation to recover without an operator reset. The response still depends on current classification and voltage conversion.
+
+A latched fault must be cleared with \texttt{CLR} or reset before transfer resumes. The status name \texttt{MAX\_DUTY} remains from the earlier power-control work, but the final voltage path does not call that protection function. It cannot serve as an active output-power limit.
+
+These checks use the same MCU, sensing, and actuator as regulation. Trigger, enable inhibition, and recovery must be captured together in the next protection test. There is no separate hardware protection channel in these firmware checks.

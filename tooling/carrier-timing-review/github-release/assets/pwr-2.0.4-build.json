@@ -1,0 +1,54 @@
+{
+  "firmware": "PWR-2.0.4",
+  "target": "V2 / STM32F410CBU6",
+  "status": "software-validated pre-release; powered bench verification pending",
+  "tag": "pwr-2.0.4",
+  "repository_baseline": "e3c3f6ac36ab1458dcf8e20dbb71da87fd1cf51a",
+  "tag_contains_current_firmware_source": false,
+  "canonical_source_asset": "pwr-2.0.4-v2-source.zip",
+  "source_asset_sha256": "f31aa0deb1e335cc7e678fbe57c1f5bbd0f0711c84c2f93c8664ae97d6be03cd",
+  "source_sketch_sha256": "fa9d842ce7787d37501701379a66b97807969d3a9064f8d03fa372b3842b30ad",
+  "source_file_hashes": {
+    "README.md": "cc293ad507486abd661b3142019f907fd903dace973b5d22c9c57ea9fa71aa97",
+    "docs/stm32f410-port.md": "c601786ee5ae4669d0991ef35689359324b104f83f92e15c3dbe075d60310a37",
+    "docs/web-protocol.md": "bff66b96a03bb7e635759cf0a51146c11b1ebc84574138edaa0f897b1b33fb3a",
+    "firmware/build.ps1": "806e87f8e3638c27ac91b297a99817ff18ffb41a3f52077b4f224dcb30ce6691",
+    "firmware/releases/pwr-2.0.4.md": "bbbb25c8cad40fcb5a447f95ddcc154cbb38b4630c7864242d5bb6a666cda85f",
+    "firmware/stm32f410.ld": "400597cca105a2037c828658e55252bbccfd4285efbe65dece11d364e28299aa",
+    "firmware/test_carrier_storage.py": "6d1899125afe5b4e0424483fe802a903c93a80345b01f157c27d3e1a3c99de5b",
+    "firmware/test_web_protocol.py": "e647fb1987a5fe163b69c8c097be2e9f8b66ca5ee37d7bea98e8a5f3d619c1c7",
+    "firmware/verify_f410_hex.py": "bc4f5c74812ed8ba478da0b1410cc7480f36ef26184e40307af50a5987ce7f75",
+    "thesi_power_control.ino": "fa9d842ce7787d37501701379a66b97807969d3a9064f8d03fa372b3842b30ad"
+  },
+  "hex_asset": "pwr-2.0.4-v2-stm32f410cbu6.hex",
+  "hex_sha256": "fe3a6b02f06b025ba83e53dd482bbfdf9dd166f9f2afc0fe806062eab14ded47",
+  "toolchain": {
+    "arduino_cli": "1.5.0",
+    "stm32_core": "2.8.1",
+    "arm_gcc": "13.2.1-1.1",
+    "native_gcc": "14.2.0"
+  },
+  "fqbn": "STMicroelectronics:stm32:GenF4:pnum=GENERIC_F410CBUX,usb=none,xserial=none,opt=oslto",
+  "linker": "firmware/stm32f410.ld",
+  "flash_bytes": 90268,
+  "flash_limit_bytes": 98304,
+  "static_ram_bytes": 6868,
+  "hex_programmed_bytes": 90752,
+  "initial_sp": "0x20008000",
+  "reset_vector": "0x08016939",
+  "reserved_settings_sector": [
+    "0x08004000",
+    "0x08007FFF"
+  ],
+  "hex_excludes_settings_sector": true,
+  "tests": {
+    "web_passed": 76,
+    "native_protocol_frames": 131,
+    "interrupted_append_word_boundaries": 122,
+    "physical_hardware_tested": false
+  },
+  "binary_package": {
+    "name": "pwr-2.0.4-v2-f410-release.zip",
+    "sha256": "b8d6266d46d909b30df521b507f5d1608f3185e7d9dbbf980a905ce1dec8b617"
+  }
+}

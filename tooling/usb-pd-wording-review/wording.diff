@@ -1,0 +1,502 @@
+--- before/Backmatter/Appendices/A_Analytical_Equations.tex
++++ clear-prose/Backmatter/Appendices/A_Analytical_Equations.tex
+@@ -3,7 +3,7 @@
+ 
+ \section{Voltage Nodes and Transformer Ratio}
+ 
+-\(v_{\mathrm{rec}}(t)\) denotes the full-wave-rectified line voltage, \(\VDC\) the high-voltage link, \(V_{\mathrm{sec}}\) the isolated secondary bus, and \(V_{\mathrm{BUS}}\) the downstream USB-C output. These are separate circuit nodes. Load power is calculated from the connector voltage. The controller's bulk-voltage measurement is upstream of the output stage.
++\(v_{\mathrm{rec}}(t)\) denotes the full-wave-rectified line voltage, \(\VDC\) the high-voltage link, \(V_{\mathrm{sec}}\) the isolated secondary bus, and \(V_{\mathrm{BUS}}\) the USB-C PD output voltage. The MCU measures secondary bulk voltage upstream of the USB-C PD stage. Load power is calculated from connector voltage and external load current.
+ 
+ The transformer convention is
+ \begin{equation}
+--- before/Backmatter/Appendices/C_Firmware_Documentation.tex
++++ clear-prose/Backmatter/Appendices/C_Firmware_Documentation.tex
+@@ -69,7 +69,7 @@
+ 
+ In the enable scheduler, \texttt{FEN} and requested duty are converted to a period, enabled interval, and pulse-skip count. The period is rounded to microseconds. A complete minimum burst and minimum low interval are enforced, with a longer period if both cannot fit. Below the minimum burst energy, periods are skipped; bursts are not shortened. With a permitted static \SI{100}{\percent} command, enable stays high.
+ 
+-For nonstatic enable transitions, the TIM1 update flag is polled with a bounded wait. The software request is aligned with a carrier boundary without an interrupt on every \SI{1}{\mega\hertz} cycle. Interrupt latency and GPIO execution still affect the physical edge. Calculated effective duty includes the minimum-burst and pulse-skip changes; it is not a measured timing trace.
++For nonstatic enable transitions, the TIM1 update flag is polled with a bounded wait. Polling attempts to align the software request with a carrier boundary without an interrupt on every \SI{1}{\mega\hertz} cycle; it can time out without observing an update. Interrupt latency and GPIO execution still affect the physical edge. Calculated effective duty includes the minimum-burst and pulse-skip changes; it is not a measured timing trace.
+ 
+ \subsection{ADC Timing and Calibration}
+ 
+--- before/Backmatter/Appendices/G_Software_Tools.tex
++++ clear-prose/Backmatter/Appendices/G_Software_Tools.tex
+@@ -51,8 +51,8 @@
+ input PA1 senses the bus upstream of the USB-C output stage. The
+ primary-current input PA2 carries the half-bridge-current sensing signal. The scaled current and voltage--current
+ product are used for diagnostics. They do not measure connector load current
+-or delivered USB-C power. They are kept separate from the external
+-load-current and VBUS measurements used for Chapter~\ref{ch:results}.
++or delivered USB-C power. The results in Chapter~\ref{ch:results} use external
++load-current and VBUS measurements.
+ 
+ \section{Serial Framing, Commands, and Link Loss}
+ \label{sec:app-browser-transport}
+@@ -174,7 +174,7 @@
+ allowlists also omit the calculator files. The included interface is therefore incomplete and cannot be used to
+ demonstrate a working browser calculator.
+ 
+-The numerical module works independently. \texttt{toSI} and \texttt{fromSI}
++The numerical module runs without the page interface. \texttt{toSI} and \texttt{fromSI}
+ require explicit units; \sourcefile{equivalentCapacitance} handles series
+ and parallel banks; \sourcefile{equivalentSeriesInductance} sums uncoupled
+ series inductors. \texttt{analyzeTank} solves for ideal series-LC frequency,
+--- before/Chapters/01_Introduction/01_Motivation.tex
++++ clear-prose/Chapters/01_Introduction/01_Motivation.tex
+@@ -1,9 +1,9 @@
+ \section{Motivation}
+ \label{sec:intro-motivation}
+ 
+-MHz switching permits reduced passive-component size but increases sensitivity to commutation time, winding loss, and parasitic impedance. Magnetic integration, gate timing, layout, and control must therefore be evaluated at the installed operating point.
++Switching at megahertz frequencies can reduce the size of passive components, but the shorter switching period leaves less time for commutation. Winding loss and parasitic impedance also become more significant. The magnetics, gate timing, PCB layout, and control must therefore be designed together for the intended operating conditions.
+ 
+-Resonant conversion and GaN devices make MHz operation practical. Resonant current can move the half-bridge node during dead time and reduce turn-on loss, while fast GaN devices allow short switching intervals. A charge-pump PFC rectifier and an integrated resonant LED driver operating near \SI{1}{\mega\hertz} were demonstrated in earlier DTU work \cite{ammar2020chargepump,ammar2021led}. In these converters, capacitor charge transfer shapes the input-current envelope without a separate boost-PFC current controller.
++Resonant conversion and GaN devices make operation at these frequencies practical. Resonant current can reduce turn-on loss by charging and discharging the half-bridge capacitances during dead time. GaN devices provide the short switching transitions needed at these frequencies. A charge-pump PFC rectifier and an integrated resonant LED driver operating near \SI{1}{\mega\hertz} were demonstrated in earlier DTU work \cite{ammar2020chargepump,ammar2021led}. In these converters, capacitor charge transfer shapes the input-current envelope without a separate boost-PFC current controller.
+ 
+ USB-C operation introduces startup without a load, delayed attachment, load removal, and multiple output-voltage settings. These conditions alter the demand on the resonant stage and require control of both secondary stored energy and average transferred power.
+ 
+--- before/Chapters/01_Introduction/02_Problem_Statement.tex
++++ clear-prose/Chapters/01_Introduction/02_Problem_Statement.tex
+@@ -5,7 +5,7 @@
+ 
+ The charge-pump and isolated resonant paths share one half bridge, coupling input-current shaping to secondary power transfer. The DC link buffers the pulsating mains power, while burst control must supply the load and limit residual excitation during startup, light load, and load removal.
+ 
+-The isolated secondary bulk node is regulated by the MCU. The MPQ4242 output section then converts that bulk voltage to the USB-C connector voltage. Both nodes are examined because a steady connector voltage can coexist with substantial ripple upstream.
++The MCU regulates the isolated secondary bulk voltage. The MPQ4242 output stage then regulates the USB-C output voltage to the selected PD level. A steady USB-C output voltage can coexist with substantial ripple on the bulk supply.
+ 
+ The main question is:
+ \begin{quote}
+--- before/Chapters/01_Introduction/08_V2_Prototype.tex
++++ clear-prose/Chapters/01_Introduction/08_V2_Prototype.tex
+@@ -33,8 +33,8 @@
+ \end{table}
+ 
+ On V2, carrier commands use PA8/PB13, burst enable uses PA11, and UART
+-TX/RX use PA9/PA10. The secondary-bulk voltage remains the regulated
+-feedback quantity, distinct from downstream connector VBUS.
++TX/RX use PA9/PA10. The MCU continues to regulate the secondary bulk supply,
++which feeds the USB-C PD output stage.
+ 
+ During later powered V2 tests, heating was observed in the external
+ series resonant inductor. It was removed, and the tank was changed to use
+--- before/Chapters/01_Introduction/10_Controller_Basics.tex
++++ clear-prose/Chapters/01_Introduction/10_Controller_Basics.tex
+@@ -1,18 +1,16 @@
+ \section{Control Architecture and Signal Definitions}
+ \label{sec:intro-controller-basics}
+ 
+-The microcontroller (MCU) regulates the isolated secondary bulk bus through
+-burst modulation of the fixed-frequency half bridge. The downstream USB-C
+-stage regulates connector VBUS independently. These nodes are distinguished
+-throughout the analysis and measurements.
++The microcontroller (MCU) regulates the isolated secondary bulk voltage through
++burst modulation of the fixed-frequency half bridge. The bulk supply feeds
++the downstream USB-C PD stage, which regulates the USB-C output voltage
++to the selected PD level.
+ 
+ The feedback inputs are the scaled primary voltage at PA0, isolated
+ secondary-bulk voltage at PA1, and primary half-bridge-current indication
+ at PA2. The current signal supports load classification and optional
+ protection; it is not a measurement of connector output current. ADC
+-acquisition operates through circular DMA independently of carrier phase.
+-Carrier commands, burst enable, and UART communication use separate MCU
+-signal paths.
++acquisition uses circular DMA and is not synchronized to the carrier.
+ 
+ Table~\ref{tab:intro-controller-signals} compares the assignments on the
+ original STM32G071 platform and the STM32F410 V2 board. Port identifiers
+--- before/Chapters/02_Background/06_Reference_2021.tex
++++ clear-prose/Chapters/02_Background/06_Reference_2021.tex
+@@ -1,7 +1,7 @@
+ \section{Reference Integrated Resonant LED Driver}
+ \label{sec:bg-ref2021}
+ 
+-The 2021 LED driver separates the charge-pump and isolated class-DE tanks while retaining a shared half bridge and driver \cite{ammar2021led}. Independent pump inductance and clamp paths permit more independent selection of isolated-stage gain, while the bus and switching sequence remain shared.
++The 2021 LED driver separates the charge-pump and isolated class-DE tanks while retaining a shared half bridge and driver \cite{ammar2021led}. The separate pump inductor and clamp paths provide more freedom in selecting the isolated-stage gain, while the bus and switching sequence remain shared.
+ 
+ An output of up to \SI{42}{\watt} was reported at \SI{1}{\mega\hertz}, with PF of 0.99, input-current THD of 6\%, and full-load efficiency of approximately 90\%. The carrier cycles were grouped into bursts with a \SI{20}{\kilo\hertz} enable signal to regulate LED current. Average output power could change while the carrier stayed at its designed resonant operating point.
+ 
+--- before/Chapters/02_Background/07_USBC_Context.tex
++++ clear-prose/Chapters/02_Background/07_USBC_Context.tex
+@@ -1,7 +1,7 @@
+ \section{USB-C Output Regulation}
+ \label{sec:bg-usbc}
+ 
+-The USB-C stage negotiates and regulates the connector voltage, while its input demand is supplied through secondary storage by the resonant converter. Connector load changes therefore appear as bulk-bus disturbances at the upstream control loop.
++The USB-C PD stage regulates the output voltage to the selected PD level. It is supplied from the secondary bulk capacitor, which is charged by the resonant converter. Changes in USB-C load therefore affect the bulk voltage regulated by the MCU.
+ 
+ The resonant stage supplies the secondary bulk bus upstream of the MPQ4242 output regulator. Fixed VBUS settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} were tested. Bulk-voltage feedback enters the MCU at PA1; the connector-voltage measurements are downstream of this control loop.
+ 
+--- before/Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex
++++ clear-prose/Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex
+@@ -23,7 +23,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The USB-C settings apply downstream of the regulated bulk bus. Bulk-voltage feedback (PA1) controls the upstream supply; the primary half-bridge-current input (PA2) supports load classification. Neither input directly measures the corresponding connector quantity.
++The USB-C PD stage regulates the selected output voltage from the secondary bulk supply. The MCU regulates that supply using bulk-voltage feedback at PA1; primary half-bridge current at PA2 is used for load classification. USB-C output voltage and current are measured externally.
+ 
+ \begin{table}[H]
+ \centering
+--- before/Chapters/03_Requirements_Architecture/04_USBC_Interface.tex
++++ clear-prose/Chapters/03_Requirements_Architecture/04_USBC_Interface.tex
+@@ -5,6 +5,6 @@
+ 
+ The stage includes local capacitance, current sensing, and VBUS and signal protection. The I2C service header exposes clock \texttt{PD\_SCL} and data \texttt{PD\_SDA}. The MCU does not configure the MPQ4242 over I2C; the fitted controller configuration and sink or trigger determine the tested connector setting.
+ 
+-Secondary bulk voltage denotes the resonant-stage output regulated through PA1; VBUS denotes the measured connector output. The downstream converter changes mean voltage and ripple, so these nodes are reported separately.
++The MCU regulates the secondary bulk voltage using PA1 feedback. The USB-C PD stage uses this supply to regulate its output voltage, VBUS, to the selected PD level. Bulk-voltage ripple and USB-C output ripple are measured on opposite sides of this stage.
+ 
+ The VBUS settings were tested under load and during changes in demand. Those tests do not cover the full negotiation sequence, policy engine, cable-current advertisement, or interoperability. Chapter~\ref{ch:hardware} describes the circuit that was fitted, and Chapter~\ref{ch:results} shows its measured output behavior.
+--- before/Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex
++++ clear-prose/Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex
+@@ -1,11 +1,11 @@
+ \section{How the USB-C Load Changes Operation}
+ \label{sec:analysis-usbc}
+ 
+-The resonant converter supplies the downstream regulator. Secondary demand varies with connector current and VBUS setting; the MCU regulates bulk voltage while the output stage regulates VBUS.
++The resonant converter supplies the USB-C PD stage through the secondary bulk capacitor. The MCU regulates this bulk voltage, while the PD stage regulates the USB-C output voltage to the selected level. The power drawn from the bulk supply depends on USB-C output voltage and load current.
+ 
+ Burst enable varies active-interval duration and spacing at fixed carrier and tank values. Each omitted cycle also removes pump charge transfer, coupling secondary regulation to the input-current envelope.
+ 
+-Bulk-voltage depletion calls for increased transfer under load. At no load, a lower voltage window and burst cap limit accumulation. Repeated low voltage temporarily relaxes the cap for load attachment; OVP independently selects soft holdoff or hard inhibition.
++Bulk-voltage depletion calls for increased transfer under load. At no load, a lower voltage window and burst cap limit accumulation. Repeated low voltage temporarily relaxes the cap for load attachment. The overvoltage logic selects soft holdoff or latched inhibition according to the voltage and operating state.
+ 
+ Secondary capacitance supports load transients and absorbs residual tank energy. Increasing it reduces packet-induced voltage steps but increases startup energy and slows voltage-based load detection. Chapter~\ref{ch:control} applies this tradeoff to storage, command limits, and state logic.
+ 
+--- before/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex
++++ clear-prose/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex
+@@ -23,6 +23,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-Replacing the \SI{158}{\micro\henry} element alone would omit the transformer, reflected load, and revised interconnections. The predecessor regulates a high-voltage output; the prototype has separate isolated bulk and connector VBUS nodes. Model comparison requires corresponding nodes and power boundaries.
++Replacing the \SI{158}{\micro\henry} element alone would omit the transformer, reflected load, and revised interconnections. The predecessor regulates a high-voltage output; in the prototype, the isolated secondary bulk supply feeds the USB-C PD output stage. Comparisons must state where voltages and powers are measured and which stages and auxiliary supplies are included.
+ 
+ The \sourcefile{Power_loss_breakdown.asc} variants and device libraries describe the predecessor's loss calculations. Prototype efficiency is estimated from measured input and output power, subject to the measurement-boundary and timing limitations stated in the results. Appendix~\ref{app:modeling} identifies the inherited files and their roles.
+--- before/Chapters/05_Modeling_Simulation/03_GaN_Model.tex
++++ clear-prose/Chapters/05_Modeling_Simulation/03_GaN_Model.tex
+@@ -3,4 +3,4 @@
+ 
+ The supplied \sourcefile{GaN_LTspice_GS66502B_L1V2.lib} is a GaN Systems Level 1 Version 2.0 library intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded from the model, as stated in its header \cite{gansystemsGS66502Bmodel}. It can represent the electrical device used in the inherited model, but it does not represent the complete LMG2652 package and PCB implementation.
+ 
+-A fitted-stage switching model requires voltage-dependent output charge, gate/enable timing, reverse conduction, and interconnect impedance. Temperature prediction additionally requires package, PCB, and cooling paths. At MHz frequency, transition-energy error directly affects calculated loss, so device-name substitution is insufficient.
++A fitted-stage switching model requires voltage-dependent output charge, gate/enable timing, reverse conduction, and interconnect impedance. Temperature prediction additionally requires package, PCB, and cooling paths. At megahertz switching frequencies, transition-energy error directly affects calculated loss, so device-name substitution is insufficient.
+--- before/Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex
++++ clear-prose/Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex
+@@ -3,6 +3,6 @@
+ 
+ The prototype model requires the pump inductor and clamp sequence; separate transformer leakage and magnetizing branches; turns ratio, rectifier conduction, and storage; and the controller's sampling, burst timing, and isolated-feedback startup delay.
+ 
+-A fixed resistor at connector voltage does not reproduce the downstream regulator's bulk-bus demand. Attachment and removal also change connected capacitance. The assumed power, impedance, and load dynamics must therefore be specified.
++An output resistor alone does not model the USB-C PD stage's input demand as its output voltage and load change. Attachment and removal also change connected capacitance. The assumed power, impedance, and load dynamics must therefore be specified.
+ 
+ Established-burst operation at a known load provides the initial calibration point, followed by line-cycle buffering, load transients, and high-impedance operation. This final-hardware simulation remains unfinished; the following calculations provide analytical expectations for measurement.
+--- before/Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex
++++ clear-prose/Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex
+@@ -1,7 +1,7 @@
+ \subsection{Startup and Load-Removal Energy}
+ \label{sec:sim-startup}
+ 
+-Limited precharge establishes power for isolated feedback before voltage control. A startup model must include this supply delay; assuming initially valid feedback omits the condition addressed by precharge.
++Limited precharge is used to power the isolated feedback circuit before normal voltage control begins. A startup model must include this supply delay; assuming initially valid feedback omits the condition addressed by precharge.
+ 
+ \begin{samepage}
+ At load removal, residual tank energy and continued excitation can charge the secondary capacitor. If a net energy \(\Delta E\) is deposited in an equivalent secondary capacitance \(C_{\mathrm{sec}}\), energy conservation gives
+--- before/Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex
++++ clear-prose/Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex
+@@ -3,4 +3,4 @@
+ 
+ Installed creepage and clearance can be limited by solder fillets, temporary wiring, supports, exposed core surfaces, or the main PCB. Winding-board spacing alone does not establish the complete isolation path.
+ 
+-Main-board spacing and the laboratory insulation check are described in \Cref{sec:hw-layout,sec:hw-overview}. Full insulation assessment additionally requires documented transformer spacing, material group, and standardized dielectric testing. The functional isolation path does not establish these margins.
++Main-board spacing and the laboratory insulation check are described in \Cref{sec:hw-layout,sec:hw-overview}. Full insulation assessment additionally requires documented transformer spacing, material group, and standardized dielectric testing. Functional isolation alone does not establish creepage, clearance, or dielectric strength.
+--- before/Chapters/06_Magnetics_Integration/10_Verification.tex
++++ clear-prose/Chapters/06_Magnetics_Integration/10_Verification.tex
+@@ -1,7 +1,7 @@
+ \section{Assembly Checks and Remaining Measurements}
+ \label{sec:mag-verification}
+ 
+-The supplied measurements characterize the components before installation. Converter tests demonstrate assembled-path power transfer, while installed inductance and individual thermal and isolation margins remain unmeasured.
++The supplied measurements characterize the components before installation. Converter tests demonstrate power transfer through the installed magnetics, while installed inductance and individual thermal and isolation margins remain unmeasured.
+ 
+ The table below lists the measurements needed to resolve the remaining questions.
+ 
+--- before/Chapters/07_Hardware/06_Resonant_Output.tex
++++ clear-prose/Chapters/07_Hardware/06_Resonant_Output.tex
+@@ -1,7 +1,7 @@
+ \subsection{Resonant Path, Transformer, and Rectifier}
+ \label{sec:hw-output}
+ 
+-The transformer primary is connected to VSW through the resonant capacitor and added series inductance. CR1--CR4 rectify the secondary energy into a bulk supply for the MPQ4242 output stage. This separates the resonant transfer function from the final connector voltage setting.
++The transformer primary is connected to VSW through the resonant capacitor and added series inductance. CR1--CR4 rectify the secondary energy into a bulk supply for the MPQ4242 output stage. The USB-C PD stage regulates the output voltage from this bulk supply.
+ 
+ Several inductor arrangements were tried during bring-up. The final assembly has two Wurth Elektronik 7443640470B inductors connected in series, each nominally \SI{4.7}{\micro\henry}. Together they add \SI{9.4}{\micro\henry}, with an individual tolerance of \(\pm20\%\). Each has a maximum DC resistance of \SI{0.97}{\milli\ohm} at \SI{20}{\celsius}, giving \SI{1.94}{\milli\ohm} for the pair before the connecting wires \cite{wurth7443640470b}. Both parts carry the same current. Loss is spread across the two packages, but either part's temperature can still limit operation.
+ 
+--- before/Chapters/07_Hardware/07_USBC_Interface.tex
++++ clear-prose/Chapters/07_Hardware/07_USBC_Interface.tex
+@@ -1,7 +1,7 @@
+ \section{USB-C Output Stage}
+ \label{sec:hw-usbc}
+ 
+-The isolated bulk supply was connected to the USB-C connector through the MPQ4242GVE-0000-AEC1-P stage. The stage includes the switching inductor, output power path, current-sense element, bulk and ceramic capacitors, CC connections, data-line protection, and VBUS TVS protection. The bulk and connector nodes are named separately as \texttt{V\_PW\_OUTPUT\_BULK} and \texttt{USB\_PD\_OUT} in \Cref{fig:schematic-usbc}.
++The MPQ4242GVE-0000-AEC1-P stage regulates the USB-C output voltage from the isolated bulk supply. The stage includes the switching inductor, output power path, current-sense element, bulk and ceramic capacitors, CC connections, data-line protection, and VBUS TVS protection. In \Cref{fig:schematic-usbc}, \texttt{V\_PW\_OUTPUT\_BULK} feeds the stage and \texttt{USB\_PD\_OUT} supplies the USB-C output.
+ 
+ \begin{landscape}
+ \begin{figure}[htbp]
+@@ -14,4 +14,4 @@
+ 
+ The \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} fixed outputs were tested. According to the project notes, the \SI{20}{\volt} setting is advertised for up to \SI{5}{\ampere}. A \SI{100}{\watt} operating point was not reached in the completed tests.
+ 
+-The secondary bulk voltage is regulated by the front-end controller using the secondary-voltage feedback signal received at MCU input PA1. Connector VBUS also depends on the downstream power path and cable drop, so the measured node is stated with each result. The fixed-output tests confirmed operation of the assembled path at those settings. USB-PD negotiation and interoperability still need separate protocol tests before broader compliance can be claimed.
++The MCU regulates the secondary bulk voltage using feedback at PA1. The USB-C PD stage regulates its output to the selected PD level. Voltage at the load can differ because of cable drop, so the measurement point is stated with each result. The fixed-output tests confirmed operation of the assembled path at those settings. USB-PD negotiation and interoperability still need separate protocol tests before broader compliance can be claimed.
+--- before/Chapters/07_Hardware/10_Auxiliary_Power.tex
++++ clear-prose/Chapters/07_Hardware/10_Auxiliary_Power.tex
+@@ -5,4 +5,4 @@
+ 
+ The local supply rails, UART communication, inhibited burst-enable output PA10, carrier outputs, and analog feedback were checked during bring-up before the loop was closed. The LMG2652 bias must be within its operating range, and a valid secondary-voltage reading from input PA1 requires power to the isolated sensing circuit.
+ 
+-Bounded precharge bursts and settling intervals establish the secondary supply before normal control. The sequence ends at the readiness threshold or attempt limit (\cref{sec:ctrl-state}). Auxiliary-rail startup, operating range, and temperature rise require further measurement.
++Bounded precharge bursts and settling intervals are used to power the secondary-side sensing before normal control. The sequence ends at the readiness threshold or attempt limit (\cref{sec:ctrl-state}). Auxiliary-rail startup, operating range, and temperature rise require further measurement.
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ clear-prose/Chapters/07_Hardware/16_V2_F410.tex
+@@ -61,7 +61,7 @@
+ 
+ The archived V2 source configures center-aligned TIM1 at a nominal \SI{100}{\mega\hertz} timer clock, with auto-reload ARR = 50, compare CCR1 = 25, and dead-time field DTG = 4. These settings give a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time \cite{ststm32f410rm}. TIM5 schedules the enable envelope; bounded polling of carrier updates attempts to align non-static transitions but leaves software-dependent edge latency. The later powered trial used a reported \SI{60}{\nano\second} software setting (\cref{sec:res-v2-testing}), with its firmware version unrecorded. Driver-input and switch-node captures are required to establish effective dead time and enable alignment.
+ 
+-ADC1 continuously scans primary voltage at PA0, secondary-bulk voltage at PA1, and half-bridge current at PA2 through DMA2 Stream0 Channel0, independently of carrier phase. At the \SI{25}{\mega\hertz} ADC clock, 84 acquisition and 12 conversion cycles give calculated intervals of \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per frame. Secondary-bulk voltage remains the regulated quantity; primary current supports load classification and optional protection rather than connector output-current measurement.
++ADC1 continuously scans primary voltage at PA0, secondary-bulk voltage at PA1, and half-bridge current at PA2 through DMA2 Stream0 Channel0 without synchronization to the carrier. At the \SI{25}{\mega\hertz} ADC clock, 84 acquisition and 12 conversion cycles give calculated intervals of \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per frame. Secondary-bulk voltage remains the regulated quantity; primary current supports load classification and optional protection rather than connector output-current measurement.
+ 
+ \subsection{Power Circuit, Sensing, and Local Supplies}
+ 
+@@ -73,7 +73,7 @@
+ 
+ The divider labels do not agree with those assumptions. R29--R32 are each labeled \SI{6.2}{\mega\ohm}, and R27--R28 have the same value. Taken literally, the primary and secondary ratios are 4:1 and 2:1. These ratios do not support the intended \SI{450}{\volt} primary and \SI{28}{\volt} secondary ranges. The fitted resistor values and gain from each measured node to its ADC pin still need to be checked. Displayed control and voltage-protection thresholds cannot be interpreted reliably until the firmware conversion scales match the measured circuit.
+ 
+-USB-PD sheet 2 includes the MPQ4242GVE-0000-AEC1-P output stage and separate \texttt{V\_PW\_OUTPUT\_BULK}/\texttt{USB\_PD\_OUT} nodes. The \SI{0.01}{\ohm} connector current-sense resistor is R3. This is separate from the LMG2652 sensing path on PA2. The assembled power path and USB-PD behavior still need dedicated checks beyond the preliminary powered observations in \cref{sec:res-v2-testing}.
++USB-PD sheet 2 includes the MPQ4242GVE-0000-AEC1-P output stage, fed from \texttt{V\_PW\_OUTPUT\_BULK} and supplying \texttt{USB\_PD\_OUT}. The \SI{0.01}{\ohm} connector current-sense resistor is R3. This is separate from the LMG2652 sensing path on PA2. The assembled power path and USB-PD behavior still need dedicated checks beyond the preliminary powered observations in \cref{sec:res-v2-testing}.
+ 
+ \Needspace{0.30\textheight}
+ \subsection{V2 Checks and Remaining Measurements}
+--- before/Chapters/08_Control_Firmware/01_Control_Objectives.tex
++++ clear-prose/Chapters/08_Control_Firmware/01_Control_Objectives.tex
+@@ -3,6 +3,6 @@
+ 
+ The enable envelope controls secondary precharge, bulk-voltage regulation, load-removal response, and fault inhibition without changing carrier timing.
+ 
+-The baseline regulates secondary-bulk voltage \(V_{\mathrm{sb}}\) using PA1 feedback; the downstream MPQ4242 sets connector VBUS. Primary-voltage feedback at PA0 supports optional line feed-forward duty limiting. Primary half-bridge current at PA2 provides load classification and optional current protection, rather than direct USB-C output-current feedback.
++The baseline regulates secondary-bulk voltage \(V_{\mathrm{sb}}\) using PA1 feedback; the MPQ4242 USB-C PD stage regulates the output voltage to the selected PD level. Primary-voltage feedback at PA0 supports optional line feed-forward duty limiting. Primary half-bridge current at PA2 provides load classification and optional current protection, rather than direct USB-C output-current feedback.
+ 
+ On the original prototype, average energy transfer is adjusted through burst-enable duty \(d_{\mathrm{EN}}\) at PA10. Carrier outputs PA8/PA9 remain fixed at \SI{1}{\mega\hertz}.
+--- before/Chapters/08_Control_Firmware/02_Architecture_Timing.tex
++++ clear-prose/Chapters/08_Control_Firmware/02_Architecture_Timing.tex
+@@ -3,7 +3,7 @@
+ 
+ The Arduino STM32 framework was used with direct peripheral configuration. Center-aligned TIM1 generates the carrier commands at PA8/PA9: \SI{1}{\mega\hertz} with a nominal \SI{40}{\nano\second} dead interval at both transitions. TIM3 schedules burst enable at PA10. Before non-static enable transitions, bounded polling attempts to align the edge with a TIM1 update; timeout can occur without an observed update. Static \SI{100}{\percent} command holds PA10 high without repeated gaps. A low enable inhibits further switching but does not discharge the power-circuit capacitors.
+ 
+-ADC1 sequentially samples primary voltage at PA0, secondary-bulk voltage at PA1, and half-bridge current at PA2 into a circular DMA buffer. Acquisition is free-running and independent of both carrier phase and the foreground loop. Each control pass converts and filters the latest samples, evaluates state and faults, and sends a duty request to the enable scheduler. A hardware UART carries commands and status.
++ADC1 sequentially samples primary voltage at PA0, secondary-bulk voltage at PA1, and half-bridge current at PA2 into a circular DMA buffer. The scan is free-running without synchronization to the carrier, and DMA acquisition continues while the foreground loop runs. Each control pass converts and filters the latest samples, evaluates state and faults, and sends a duty request to the enable scheduler. A hardware UART carries commands and status.
+ 
+ \begin{figure}[htbp]
+ \centering
+--- before/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
++++ clear-prose/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
+@@ -28,7 +28,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The free-running ADC scan retains primary voltage, secondary-bulk voltage, and primary current, sampled sequentially and independently of carrier phase. At the selected \SI{25}{\mega\hertz} clock, 84 sampling plus 12 conversion cycles give \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per scan, about 86.8 thousand scans per second. ADC overrun and DMA errors are polled during filter updates to route detected acquisition failures to the sensor-fault path.
++The free-running ADC scan samples primary voltage, secondary-bulk voltage, and primary current sequentially, without synchronization to the carrier. At the selected \SI{25}{\mega\hertz} clock, 84 sampling plus 12 conversion cycles give \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per scan, about 86.8 thousand scans per second. ADC overrun and DMA errors are polled during filter updates to route detected acquisition failures to the sensor-fault path.
+ 
+ The port retains the earlier conversion defaults. The repeated \SI{6.2}{\mega\ohm} schematic labels do not establish the assumed divider ratios; fitted resistors and measured gains must be verified before using the displayed voltage, current, or protection thresholds.
+ 
+--- before/Chapters/09_Experimental_Methods/04_Instrumentation.tex
++++ clear-prose/Chapters/09_Experimental_Methods/04_Instrumentation.tex
+@@ -2,8 +2,8 @@
+ \label{sec:method-instruments}
+ 
+ External instruments measured delivered voltage, current, and power.
+-Controller ADC and UART data were used for sensing and command diagnostics,
+-rather than independent connector-output measurements.
++ADC readings and UART data were used to diagnose controller sensing and
++command handling.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -22,8 +22,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-In Table~\ref{tab:channel-definitions}, CH1--CH4 denote oscilloscope channels,
+-independent of MCU port or package-pin identifiers.
++In Table~\ref{tab:channel-definitions}, CH1--CH4 label the oscilloscope inputs.
+ 
+ \begin{table}[htbp]
+ \centering
+--- before/Chapters/09_Experimental_Methods/chapter.tex
++++ clear-prose/Chapters/09_Experimental_Methods/chapter.tex
+@@ -3,9 +3,9 @@
+ 
+ The test program was organized around three demands on a detachable supply:
+ hold the selected voltage under load, reduce transfer when the load disappears,
+-and manage the resulting electrical and thermal stress. The setup had to
+-separate secondary-bulk regulation from connector output, and controller
+-telemetry from external measurements. This chapter describes the setup and
++and manage the resulting electrical and thermal stress. The setup monitored both
++secondary-bulk and USB-C output voltage. External instruments supplied
++the output-power measurements; controller telemetry was used for diagnostics. This chapter describes the setup and
+ use of the instruments. Chapter~\ref{ch:results} reports the measured behavior
+ and the tests still needed for a continuous rating.
+ 
+--- before/Chapters/10_Results/03_Steady_State.tex
++++ clear-prose/Chapters/10_Results/03_Steady_State.tex
+@@ -9,8 +9,8 @@
+ e_V=\frac{V_\mathrm{BUS,avg}-V_\mathrm{set}}{V_\mathrm{set}}\,100\%,
+ \label{eq:steady-voltage-error}
+ \end{equation}
+-where \(V_\mathrm{BUS,avg}\) is the USB-C connector mean. The upstream
+-controller regulates the separate secondary intermediate bus.
++where \(V_\mathrm{BUS,avg}\) is the mean USB-C output voltage. The MCU
++regulates the secondary bulk supply feeding the USB-C PD stage.
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -23,8 +23,8 @@
+ \SI{5}{\volt} and \SI{1}{\ampere}, with average VBUS of
+ \SI{5.02913}{\volt}. At maximum load for each lower-voltage setting, the
+ averages were \SI{5.02118}{\volt}, \SI{9.00057}{\volt}, and
+-\SI{14.9835}{\volt}. These means establish downstream regulation rather than
+-ripple or transient limits.
++\SI{14.9835}{\volt}. These averages show that the USB-C PD output remained close to its selected
++voltage; ripple and transient limits require separate measurements.
+ 
+ \begin{table}[htbp]
+ \centering
+--- before/Chapters/11_Discussion/01_Key_Findings.tex
++++ clear-prose/Chapters/11_Discussion/01_Key_Findings.tex
+@@ -16,8 +16,7 @@
+ The most complete high-power measurements cover \SI{20}{\volt} at
+ \SIrange{3.7}{4.0}{\ampere}, giving \SIrange{73.97}{79.89}{\watt}
+ and an initial efficiency estimate of \SIrange{76.5}{77.1}{\percent}.
+-The downstream stage maintained average connector voltage across these
+-points. The input--output power difference and surface heating require
++Average USB-C output voltage was maintained across these points. The input--output power difference and surface heating require
+ simultaneous stage-power and temperature measurements; VBUS regulation
+ alone does not establish conversion performance.
+ 
+--- before/Chapters/11_Discussion/02_Topology_Adaptation.tex
++++ clear-prose/Chapters/11_Discussion/02_Topology_Adaptation.tex
+@@ -7,9 +7,9 @@
+ both line-current shape and commutation current.
+ 
+ Unlike the original LED load, a detachable output can switch abruptly
+-between substantial demand and near-zero load. The downstream stage
+-regulates connector voltage, while the upstream loop maintains its
+-secondary-bus headroom. Both stages must remain within their operating
++between substantial demand and near-zero load. The USB-C PD stage
++regulates the output voltage to the selected PD level, while the MCU
++regulates the secondary bulk supply feeding it. Both stages must remain within their operating
+ ranges during disconnection and reconnection.
+ 
+ Mean output voltage was maintained at the tested loads, while ripple and
+@@ -18,5 +18,5 @@
+ significant at high demand. The favorable PF and THD measured at the
+ highest loads on the \SI{20}{\volt} output do not establish light-load
+ performance. Control and hardware changes must therefore be assessed
+-across the charge pump, burst schedule, secondary-bus headroom, downstream
+-stage, and thermal path.
++across the charge pump, burst schedule, secondary bulk supply, USB-C PD
++output stage, and thermal path.
+--- before/Chapters/11_Discussion/03_Control_Contribution.tex
++++ clear-prose/Chapters/11_Discussion/03_Control_Contribution.tex
+@@ -8,7 +8,7 @@
+ 
+ Circular DMA replaced blocking ADC conversion waits. This reduces
+ acquisition-related delay, which can otherwise admit an additional energy
+-packet before inhibition. Enable requests are aligned to carrier
++packet before inhibition. The firmware attempts to align enable requests with carrier
+ boundaries to limit partial intervals. These measures control packet
+ timing; soft switching still requires matched commutation-current and
+ node-voltage measurements.
+--- before/Chapters/11_Discussion/04_Open_Circuit_Safety.tex
++++ clear-prose/Chapters/11_Discussion/04_Open_Circuit_Safety.tex
+@@ -9,8 +9,8 @@
+ \label{eq:disc-burst-voltage-rise}
+ \end{equation}
+ Packet energy can therefore produce a substantial voltage step even at
+-low average duty. Discharge and downstream-stage dynamics modify this
+-relationship.
++low average duty. Capacitor discharge and the response of the USB-C PD stage also affect
++the voltage rise.
+ 
+ Startup precharge, a no-load duty cap, a voltage window, and soft
+ overvoltage holdoff were implemented. During load recovery, the no-load
+--- before/Chapters/11_Discussion/09_Future_Improvements.tex
++++ clear-prose/Chapters/11_Discussion/09_Future_Improvements.tex
+@@ -18,7 +18,7 @@
+ require synchronized secondary-bus voltage, VBUS, board-specific enable,
+ and firmware-state records. These tests should verify protection
+ thresholds and guide an independent secondary shutdown or discharge path.
+-Measured magnetics, parasitics, downstream-stage behavior, and packet
++Measured magnetics, parasitics, USB-C PD stage behavior, and packet
+ energy would then support validation of the installed converter model.
+ 
+ The V3 edge-card layout retains secondary rectification and removes the
+--- before/Chapters/11_Discussion/chapter.tex
++++ clear-prose/Chapters/11_Discussion/chapter.tex
+@@ -3,8 +3,8 @@
+ 
+ V1 established converter operation and control. V2 integrated the hardware
+ and enabled leakage-only tank tests, while V3 reduced the layout by
+-removing the USB-PD section. The remaining limitations are magnetic and
+-input-path heating, sustained output, and equivalent-function volume.
++removing the USB-PD section. The remaining questions concern magnetic and
++input-path heating, sustained output, and the volume of a complete USB-C PD supply.
+ 
+ \input{Chapters/11_Discussion/01_Key_Findings}
+ \input{Chapters/11_Discussion/02_Topology_Adaptation}
+--- before/Chapters/12_Conclusion/01_Project_Summary.tex
++++ clear-prose/Chapters/12_Conclusion/01_Project_Summary.tex
+@@ -4,7 +4,7 @@
+ A digitally controlled USB-C laboratory supply was built and bench-tested
+ using the inherited DTU charge-pump PFC resonant topology and supplied
+ planar magnetics \cite{ammar2020chargepump,ammar2021led}. Power hardware,
+-sensing, auxiliaries, the downstream stage, and the MCU were integrated
++sensing, auxiliaries, the USB-C PD output stage, and the MCU were integrated
+ for detachable-load operation.
+ 
+ The measured V1.0 prototype used a fixed \SI{1}{\mega\hertz} carrier
+--- before/Chapters/12_Conclusion/02_Research_Questions.tex
++++ clear-prose/Chapters/12_Conclusion/02_Research_Questions.tex
+@@ -3,7 +3,7 @@
+ 
+ \paragraph{RQ1: Topology implementation.}
+ The inherited charge-pump branch, GaN half bridge, resonant path, supplied
+-magnetics, downstream stage, sensing, and digital control were integrated
++magnetics, USB-C PD output stage, sensing, and digital control were integrated
+ in the tested V1.0 USB-C assembly. V1.1 is a corrected schematic revision
+ without a separately manufactured and tested board. V2 integrated the
+ MCU, GaN stage, sensing, auxiliaries, and USB-C circuit on a four-layer PCB.
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ clear-prose/Chapters/12_Conclusion/03_Contributions.tex
+@@ -7,7 +7,7 @@
+ interface, sensing, auxiliaries, and hardware rework during bring-up.
+ 
+ The voltage-control firmware combined continuous DMA acquisition,
+-synchronized fixed-carrier bursts, direct secondary-voltage regulation,
++fixed-carrier burst scheduling, direct secondary-voltage regulation,
+ loaded duty adjustment, startup precharge, and separate no-load behavior.
+ The current-sense interpretation was corrected to match the installed
+ hardware.
+--- before/Frontmatter/Approval.tex
++++ clear-prose/Frontmatter/Approval.tex
+@@ -5,7 +5,7 @@
+ 
+ The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the MCU firmware was developed. The first prototype was brought up and tested on the manufactured V1.0 PCB with rework. Its later drawing corrections were documented in V1.1. Development then continued with the integrated V2 board. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
+ 
+-The isolated secondary bulk bus is regulated by the controller, while the downstream USB-C stage sets the connector voltage. The feedback and connector voltages therefore refer to different circuit nodes. They are kept separate when describing the hardware, firmware, and measurements.
++The MCU regulates the isolated secondary bulk supply feeding the USB-C PD stage. The PD stage then regulates the USB-C output voltage to the selected level.
+ 
+ In V2, the controller was moved onto a four-layer converter PCB. The MCU control connections, power circuit, isolated sensing, and downstream USB-C stage are described in \cref{sec:hw-v2}. The schematic and PCB print set are included in \cref{sec:app-v2-oct27}. Browser logging and software tools were developed alongside the controller, with the full source in the appendices. The matched measurements from the first prototype, software checks, and preliminary V2 bench observations are reported with their own configurations.
+ 

@@ -1,0 +1,362 @@
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ current/Chapters/07_Hardware/16_V2_F410.tex
+@@ -29,7 +29,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-At the nominal \SI{100}{\mega\hertz} timer clock, the F410 code configures center-aligned TIM1 with ARR = 50, CCR1 = 25, and DTG = 4. These settings define a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time, using the timer functions in the F410 reference manual \cite{ststm32f410rm}. TIM5 schedules the enable envelope. For non-static transitions, the carrier update is polled for a bounded time, so software latency still affects the edge. Driver-input and switch-node captures are still needed to measure the effective transistor interval and enable alignment.
++The following timing settings describe the frozen PWR-2.0.1 source. At the nominal \SI{100}{\mega\hertz} timer clock, the F410 code configures center-aligned TIM1 with ARR = 50, CCR1 = 25, and DTG = 4. These settings define a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time, using the timer functions in the F410 reference manual \cite{ststm32f410rm}. TIM5 schedules the enable envelope. For non-static transitions, the carrier update is polled for a bounded time, so software latency still affects the edge. The later powered trial used a reported \SI{60}{\nano\second} software dead-time setting (\cref{sec:res-v2-testing}); its firmware version was not recorded. Driver-input and switch-node captures are still needed to measure the effective transistor interval and enable alignment.
+ 
+ ADC1 scans PA0, PA1, and PA2 continuously through DMA2 Stream0 Channel0, independently of the carrier. At the \SI{25}{\mega\hertz} ADC clock, 84 acquisition and 12 conversion cycles give calculated intervals of \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per frame. PA1 remains the secondary-bulk voltage feedback. PA2 remains the primary half-bridge-current signal for load classification and optional protection. The MCU change does not change these signal meanings or make either channel a connector output-current measurement on V2.
+ 
+@@ -37,17 +37,17 @@
+ 
+ Power sheet 3 includes the LMG2652RFBR, AMC0330 isolated feedback, BAC1S12SC bias supply, and two LMR54410DBVR regulators. The primary regulator supplies \texttt{MCU\_3\_3V}; the secondary supplies \texttt{SEC\_3\_3V}. C29 is specified as \SI{1}{\micro\farad} at AUX and C30 as \SI{22}{\nano\farad} at bootstrap. The drawing also includes CAP300DG discharge, the \SI{100}{\micro\henry} L2 input inductor, three \SI{10}{\nano\farad} capacitors C21--C23, the \SI{2}{\nano\farad} C24 pump capacitor, and the \SI{10}{\micro\farad} C25 link capacitor. The fitted parts must be confirmed on the assembled V2 before test results are interpreted.
+ 
+-In the resonant branch, L4 is labeled SER1512-103MED, but complete values or part definitions are missing for L3, T1, and C26. The final V1.0 arrangement with two \SI{4.7}{\micro\henry} series inductors does not establish the missing V2 values. The installed branch and transformer must be identified before calculating resonance or comparing switching waveforms.
++In the resonant branch, L4 is labeled SER1512-103MED, with a nominal value of \SI{10}{\micro\henry}, but complete values or part definitions are missing for L3, T1, and C26. The external series inductor was reported at approximately \SI{9.4}{\micro\henry} in the preliminary powered tests (\cref{sec:res-v2-testing}). Its correspondence to L4 has not been established. The final V1.0 arrangement with two \SI{4.7}{\micro\henry} series inductors does not establish the missing V2 values. The installed branch and transformer must be identified before calculating resonance or comparing switching waveforms.
+ 
+ MCU sheet 4 omits the TLV9064 buffers and connects the feedback nets directly to PA0--PA2. ADC loading and settling must therefore be checked with the actual source impedance. The code assumes a \SI{1.50}{\mega\ohm}/\SI{10}{\kilo\ohm} primary ladder, a \SI{390}{\kilo\ohm}/\SI{10}{\kilo\ohm} secondary divider, and \SI{3.3}{\volt} ADC/AMC references. R50 is labeled \SI{820}{\ohm} between the LMG2652 current-sense node and primary ground.
+ 
+ The divider labels do not agree with those assumptions. R29--R32 are each labeled \SI{6.2}{\mega\ohm}, and R27--R28 have the same value. Taken literally, the primary and secondary ratios are 4:1 and 2:1. These ratios do not support the intended \SI{450}{\volt} primary and \SI{28}{\volt} secondary ranges. The actual resistor population and measured node-to-pin gain must be checked next. Displayed control and voltage-protection thresholds cannot be interpreted reliably until the firmware conversion scales match the measured circuit.
+ 
+-USB-PD sheet 2 includes the MPQ4242GVE-0000-AEC1-P output stage and separate \texttt{V\_PW\_OUTPUT\_BULK}/\texttt{USB\_PD\_OUT} nodes. The \SI{0.01}{\ohm} connector current-sense resistor is R3. This is separate from the LMG2652 sensing path on PA2. The assembled power path and USB-PD behavior still need to be checked in powered V2 tests.
++USB-PD sheet 2 includes the MPQ4242GVE-0000-AEC1-P output stage and separate \texttt{V\_PW\_OUTPUT\_BULK}/\texttt{USB\_PD\_OUT} nodes. The \SI{0.01}{\ohm} connector current-sense resistor is R3. This is separate from the LMG2652 sensing path on PA2. The assembled power path and USB-PD behavior still need dedicated checks beyond the preliminary powered observations in \cref{sec:res-v2-testing}.
+ 
+ \Needspace{0.30\textheight}
+ \subsection{V2 Checks and Remaining Measurements}
+ 
+ The October plan starts from a reported V2 point near \SI{85}{\watt} toward a \SI{100}{\watt} target \cite{projectOctoberPlan}. The source and PDF are under \sourcefile{Data/project_records}. Repeating that point requires the V2 assembly, input power, output voltage/current, temperature, duration, and firmware settings together. These matched details are missing. The reported \SI{85}{\watt} remains a point to reconstruct and is not included in the measured curves.
+ 
+-The matched tests in \cref{ch:results} reached \SI{79.89}{\watt} on the modified V1.0 assembly. These provide the earlier converter baseline; the F410 design needs separate powered tests. The V1.0 photographs and \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} outline cannot be used as V2 dimensions. The V2 drawing and port describe the circuit and software. Further measurements are needed to identify the assembled condition and calculate power density. Both the reported \SI{85}{\watt} and matched \SI{79.89}{\watt} still need defined-duration tests before the \SI{100}{\watt} continuous target can be assessed.
++The matched tests in \cref{ch:results} reached \SI{79.89}{\watt} on the modified V1.0 assembly. These provide the earlier converter baseline. Preliminary powered V2 observations from the F410 design are reported in \cref{sec:res-v2-testing}; matched input--output measurements and thermal-endurance testing are still needed. The V1.0 photographs and \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} outline cannot be used as V2 dimensions. The V2 drawing and port describe the circuit and software. Further measurements are needed to identify the assembled condition and calculate power density. Both the reported \SI{85}{\watt} and matched \SI{79.89}{\watt} still need defined-duration tests before the \SI{100}{\watt} continuous target can be assessed.
+--- before/Chapters/10_Results/14_Revised_Plan_Status.tex
++++ current/Chapters/10_Results/14_Revised_Plan_Status.tex
+@@ -18,6 +18,12 @@
+ setup would be reconstructed before the reported \SI{85}{\watt}
+ value was used as a baseline for changes.
+ 
++Section~\ref{sec:res-v2-testing} reports preliminary powered V2 observations.
++The \SI{100}{\watt} constant-power load setting is a setpoint; measured input
++and output power, thermal stabilization, and a matched repeat of the earlier
++\SI{85}{\watt} point were not recorded. These observations update the fault
++investigation without establishing a continuous output rating.
++
+ \begin{table}[htbp]
+ \centering
+ \caption[Status of revised-plan deliverables.]{Revised-plan deliverables and their status in the results reported here. Scheduled dates are not completion records.}
+@@ -29,12 +35,12 @@
+ \midrule
+ AP-01 & \SI{100}{\watt} target; \SI{65}{\watt} continuous minimum & Highest matched electrical point is \SI{79.8928}{\watt}; earlier tests include points above \SI{75}{\watt} & No defined-duration, stabilized run establishes the continuous criteria\\
+ AP-02 & Repeat the reported approximately \SI{85}{\watt} V2 baseline & The plan reports the point; the retained matched dataset reaches approximately \SI{80}{\watt} on the identified older assembly & Baseline identity, original run, and matched repeat remain unverified here\\
+-AP-03 & Explain the power gap and identify the highest repeatable safe output & Screening power differences, switching captures, and thermal images identify questions to investigate & No stage-loss allocation, controlled limiter diagnosis, or established safe-power ceiling\\
++AP-03 & Explain the power gap and identify the highest repeatable safe output & Earlier screening, switching, and thermal records; preliminary V2 observations of lower half-bridge heating and persistent input-bridge heating & No stage-loss allocation, verified switching improvement, controlled limiter diagnosis, or established safe-power ceiling\\
+ AP-04 & Validate supported fixed PDOs and PPS & Electrical results at \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}; qualitative load removal & Negotiation, PPS behavior, defined stability bands, and protection responses need matched tests\\
+-AP-05 & Defined-duration thermal and reliability assessment & Ten labeled surface-temperature images; \SI{90.4}{\celsius} maximum at the labeled \SI{20}{\volt}, \SI{4}{\ampere} condition & Dwell time, stabilization, component identities, ambient/airflow, and endurance are incomplete\\
++AP-05 & Defined-duration thermal and reliability assessment & Ten labeled surface-temperature images; \SI{90.4}{\celsius} maximum at the labeled \SI{20}{\volt}, \SI{4}{\ampere} condition; later V2 run stopped as heating continued & Dwell time, stabilization, component identities, ambient/airflow, and endurance are incomplete\\
+ AP-06 & V3 design and release package & The plan defines an edge-card revision and its design/release work & A schedule entry or drawing alone does not establish completed release reviews, manufacture, or assembly\\
+ AP-07 & Compare V2/V3 power density using one volume convention & The measured operating points and design material are retained & Matched dimensions, included hardware, continuous power, and thermal conditions are not established for both revisions\\
+-AP-08 & V3 readiness decision or documented fallback & The older assembly's tests remain identified separately from later V2 software and the planned V3 work & No matched V3 readiness/test report or completed V2 baseline repeat establishes this decision here\\
++AP-08 & V3 readiness decision or documented fallback & Older tests and preliminary powered V2 observations remain separate from the planned V3 work; wider copper and input-bridge relocation are planned & No matched V3 readiness/test report or completed V2 baseline repeat establishes this decision here\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/10_Results/chapter.tex
++++ current/Chapters/10_Results/chapter.tex
+@@ -21,3 +21,4 @@
+ \input{Chapters/10_Results/12_Compliance_Table}
+ \input{Chapters/10_Results/13_Failures_Lessons}
+ \input{Chapters/10_Results/14_Revised_Plan_Status}
++\input{Chapters/10_Results/15_V2_Testing_Update}
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ current/Chapters/12_Conclusion/03_Contributions.tex
+@@ -16,8 +16,9 @@
+ For the later V2 work, the F410 port, board-specific timer and ADC mapping,
+ flash settings journal, and PWR-2.0.1 browser commands and logging were
+ implemented. The complete firmware and supporting software are included
+-with the thesis. The tools have been checked in software; powered V2 tests
+-are still needed.
++with the thesis. The tools have been checked in software. Preliminary
++powered V2 observations are reported in \cref{sec:res-v2-testing}; matched
++input--output measurements and thermal-endurance testing are still needed.
+ 
+ The assembled output settings, high-power operation, input quality,
+ initial efficiency estimates, load removal, no load, and surface
+--- before/Frontmatter/Abstract.tex
++++ current/Frontmatter/Abstract.tex
+@@ -7,6 +7,6 @@
+ 
+ At a logged input of \SI{240}{\volt}, \SI{50}{\hertz}, matched \SI{20}{\volt} measurements were used to calculate output powers of \SIrange{73.97}{79.89}{\watt} at the load. Average output voltage was \SIrange{19.973}{19.991}{\volt}, with recorded peak-to-peak ripple of \SIrange{0.416}{0.452}{\volt}. Logged power factor was 0.97--0.99 and current total harmonic distortion was \SIrange{2.23}{3.98}{\percent}. An initial efficiency estimate of \SIrange{76.5}{77.1}{\percent} was calculated from the paired input and output measurements. Uncertainty in their timing and calibration limits the accuracy of this estimate. Controller operation was recorded during the tested no-load and load-removal events. In a thermal image labeled \SI{20}{\volt}, \SI{4}{\ampere}, a \SI{90.4}{\celsius} surface maximum was recorded. Next, losses need to be measured, heat removal improved, and protection timing tested.
+ 
+-The V2 STM32F410 implementation, PWR-2.0.1 firmware, and browser control and logging tools are also documented. The full controller and supporting source are included in the appendices. A V2 retest, investigation of the power shortfall, and a V3 edge-card design are required by the revised July--October plan. Power density is to be compared using the same method for both revisions. Powered V2 characterization and the V3 comparison remain to be completed.
++The V2 STM32F410 implementation, PWR-2.0.1 firmware, and browser control and logging tools are also documented. The full controller and supporting source are included in the appendices. A V2 retest, investigation of the power shortfall, and a V3 edge-card design are required by the revised July--October plan. Power density is to be compared using the same method for both revisions. Preliminary powered V2 observations are reported in \cref{sec:res-v2-testing}. Matched input--output measurements, thermal-endurance testing, and the V3 comparison remain to be completed.
+ 
+ Digitally controlled operation at approximately \SI{80}{\watt} was demonstrated. In the revised plan, a \SI{100}{\watt} continuous target and a \SI{65}{\watt} continuous minimum are retained. Before either can be claimed as a continuous rating, thermal and stability tests must be run for a defined duration. Full-range zero-voltage switching, USB-PD conformance, safety, and EMC also need dedicated verification. The next step is to identify what limits sustained output, measure the effect of each controlled change, and use those findings to guide V3.
+--- before/Frontmatter/Approval.tex
++++ current/Frontmatter/Approval.tex
+@@ -3,11 +3,11 @@
+ 
+ This thesis was prepared at \department, Technical University of Denmark, for the \degreeprogramme. A USB-C laboratory power supply was built around a charge-pump PFC resonant converter. Its controller was developed for operation with a detachable load.
+ 
+-The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the STM32 firmware was developed. The prototype was then brought up and tested. The measurements were obtained from the manufactured V1.0 PCB with rework. Later schematic changes are documented in V1.1. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
++The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the STM32 firmware was developed. The prototype was then brought up and tested. The matched measurements were obtained from the manufactured V1.0 PCB with rework. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Later schematic changes are documented in V1.1. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
+ 
+ The isolated secondary bulk bus is regulated by the controller. The USB-C output stage sits downstream, so the feedback voltage and connector voltage describe different points in the circuit. This distinction matters in the hardware, firmware, and measurements: each signal must be used for the quantity it actually represents.
+ 
+-The later V2 F410 implementation, browser logging, and software tools are also described, with the full source in the appendices. The completed software checks are reported alongside the measured baseline. The remaining powered tests are listed separately.
++The later V2 F410 implementation, browser logging, and software tools are also described, with the full source in the appendices. The completed software checks are reported alongside the measured baseline. Preliminary powered V2 observations and the remaining quantitative tests are listed separately.
+ 
+ The next stage is set out in the revised July--October 2026 plan: the reported V2 baseline is to be repeated, the power limit identified, controlled changes tested, and a V3 edge-card design assessed. In Appendix~\ref{app:revised-plan}, each planned milestone is linked to the relevant technical chapters. The completed hardware, design changes, test results, and remaining work are described in this thesis.
+ 
+--- before/README.md
++++ current/README.md
+@@ -72,6 +72,13 @@
+ 79.89 W result on the earlier V1.0 assembly. Neither establishes the 100 W
+ continuous target.
+ 
++Preliminary powered V2 observations are recorded in
++`Chapters/10_Results/15_V2_Testing_Update.tex`. An earlier load observation used
++a 100 W constant-power setpoint. The latest note reports approximately 60 ns
++software dead time; its firmware version and association with that earlier run
++were not recorded. Matched input--output measurements and
++thermal-endurance testing are still needed; no new continuous rating is established.
++
+ - Controller implementation and commands: Appendix C.
+ - Browser, build, test, and analysis documentation: Appendix G.
+ - Complete PWR-1.9.20 and PWR-2.0.1 firmware: Appendix H.
+--- /dev/null
++++ current/Chapters/10_Results/15_V2_Testing_Update.tex
+@@ -0,0 +1,76 @@
++\section{V2 Testing and Resonant-Tank Changes}
++\label{sec:res-v2-testing}
++
++The V2 prototype was first tested with its original resonant branch.
++Substantial heating was observed in the external series resonant inductor,
++described in the bench notes as approximately \SI{9.4}{\micro\henry}.
++The tank was then changed to use transformer leakage as its series
++inductance. The external inductor was removed, and the total resonant
++capacitance was changed to approximately \SI{1.66}{\nano\farad}.
++The prototype operated with this arrangement. The change removed the
++additional inductor from the current path; the overall loss reduction has
++not yet been quantified from matched input and output measurements.
++
++The supplied leakage measurements in
++Table~\ref{tab:mag-inherited-measurements} give an ideal series resonance
++near \SI{0.96}{\mega\hertz} with this capacitance. This is a calculation
++using the supplied component values, rather than a measurement of the
++installed V2 tank. The fitted transformer and loaded switching behavior
++still need to be recorded with the test configuration.
++
++\subsection{Half-Bridge Heating and Dead Time}
++
++The software dead-time setting was reported as approximately
++\SI{60}{\nano\second}. Lower half-bridge heating was observed after the
++tank and timing changes. ZVS was inferred in the bench notes from this
++improvement, but temperature alone does not establish the turn-on condition.
++A synchronized switch-voltage and current capture is still needed to
++verify ZVS. The firmware version, programmed timing readback, and effective
++dead time at the switches were not recorded with these observations.
++The nominal timing of the frozen controller source is described separately
++in Section~\ref{sec:hw-v2}.
++
++\subsection{Input-Bridge Heating}
++
++Heating remained around the input full-bridge rectifier, D4, D5, D9, and
++D10. The rectifier diodes were replaced, but the heating was not resolved.
++The devices were described in the bench notes as SiC rectifiers; the
++original and replacement part numbers still need to be recorded.
++
++An earlier load test was reported at \SI{240}{\volt} AC,
++\SI{50}{\hertz}, with a \SI{100}{\watt} constant-power load setting.
++Output voltage was reported to remain steady while bridge temperature
++continued to rise. The surface temperature was reported to reach about
++\SI{80}{\celsius} within a few seconds, then rise more slowly toward
++\SI{90}{\celsius}, when the test was stopped. The load setting is not a
++matched measurement of delivered power or a continuous rating.
++
++\begin{figure}[htbp]
++\centering
++\includegraphics[width=0.80\linewidth]{Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg}
++\caption{Earlier V2 thermal image supplied with the load-test observations. The camera reports a regional surface maximum of \SI{70.0}{\celsius} in R3 and \SI{61.5}{\celsius} in R1. These are displayed surface-region values, not diode-junction temperatures. The image was not mapped to individual diodes or to a specific stage of the later diode-replacement and timing changes.}
++\label{fig:v2-bridge-thermal-observation}
++\end{figure}
++\FloatBarrier
++
++Limited trace and copper-pour area around the input bridge was identified
++during the layout review as a likely contributor. Narrow current paths can
++add resistive loss, and limited copper also restricts heat spreading from
++the diode pads. This explanation has not yet been isolated by current,
++voltage-drop, or thermal measurements. The unsuccessful diode replacement
++shows that the heating was not resolved by that component change alone.
++
++\subsection{Next Layout Changes and Test Status}
++
++Wider current paths and more copper for heat spreading are planned for the
++next layout. Moving the rectifier diodes to another side of the board is
++also being considered. The thermal effect of these changes still needs to
++be tested under matched conditions.
++
++V2 is operational, and the leakage-only tank has been exercised. The
++remaining issue is sustained input-bridge heating. A timed thermal run,
++matched input and output power, and switching captures are needed before
++the loss reduction, ZVS behavior, or continuous output can be confirmed.
++The bench observations and their later timing correction are retained in
++\sourcefile{Data/project_records/V2_Testing_Update.txt}; the original
++thermal image and its provenance are retained with the V2 evidence files.
+--- /dev/null
++++ current/Data/measurements/v2_results/evidence/v2_bridge_thermal_provenance.json
+@@ -0,0 +1,101 @@
++{
++  "purpose": "Partial V2 diagnostic evidence; not a validated steady-state performance result",
++  "original_photo": {
++    "path": "Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg",
++    "sha256": "438822989a33edf82e9cd67b63ce873352336291b3bd0c3b23af0dae77ab0bd5",
++    "modified": false
++  },
++  "user_report": {
++    "input_voltage_VAC": 240,
++    "input_frequency_Hz": 50,
++    "load_mode": "constant power",
++    "load_setpoint_W": 100,
++    "external_series_inductor_10uH_removed": true,
++    "reported_resonant_capacitance_nF": 1.667,
++    "temperature_still_rising": true,
++    "system_unstable": false,
++    "heated_area": "D4/D5/D9/D10 input bridge; capacitor and secondary reported cooler",
++    "electrical_output_voltage_steady": true,
++    "thermal_equilibrium_not_reached": true,
++    "clarification": "Initial unstable-system wording referred to thermal rise, not voltage instability.",
++    "thermal_history_qualitative": "About80C within a fewseconds; further rise to about90C took longer; user switched off.",
++    "shutdown_surface_temperature_approx_C": 90
++  },
++  "visible_camera_region_readings_C": {
++    "R3": {
++      "H": 70.0,
++      "L": 28.3,
++      "M": 39.9,
++      "emissivity": 0.95
++    },
++    "R1": {
++      "H": 61.5,
++      "L": 27.0,
++      "M": 39.2,
++      "emissivity": 0.95
++    }
++  },
++  "image_notes": {
++    "global_emissivity_display": 0.97,
++    "color_scale_C": [
++      25.0,
++      66.4
++    ],
++    "camera_date_display": "2026/10/25",
++    "capture_timezone": "unknown",
++    "individual_hotspot_component_identity_verified": false,
++    "junction_temperature_measured": false
++  },
++  "unconfirmed": [
++    "actual switching frequency",
++    "actual output voltage/current/power",
++    "actual AC input real power and RMS current",
++    "test duration and thermal plateau",
++    "HVVCC and secondary-bus voltages/waveforms",
++    "individual fitted bridge-diode part numbers",
++    "actual fitted C24 pump capacitance",
++    "actual installed primary-referred leakage versus inherited A/B values",
++    "fault/enable/duty state during instability"
++  ],
++  "conditional_calculations": {
++    "leakage_assumed_uH": [
++      16.42,
++      16.5
++    ],
++    "series_resonance_kHz": [
++      961.9793629179795,
++      959.6444581086281
++    ],
++    "pump_model_assumptions": {
++      "carrier_Hz": 1000000,
++      "pump_capacitor_nF": 2,
++      "input_Vrms": 240,
++      "continuous_complete_charge_transfer": true
++    },
++    "ideal_pump_input_power_scale_W": 115.2,
++    "required_efficiency_if_input_were_115_2W_for_100W_output": 0.8680555555555556,
++    "CP_example_at_20V_A": 5.0,
++    "CP_example_at_18V_A": 5.555555555555555,
++    "CP_incremental_resistance_at_20V_ohm": -4.0
++  },
++  "interpretation_limits": [
++    "100W is a load setting, not verified delivered output",
++    "Thermal image does not establish overheating beyond ratings, the heat source, or thermal equilibrium",
++    "Pump input-power scale is a conditional ideal model, not a hard maximum",
++    "Old G071 efficiency measurements do not establish V2 efficiency",
++    "Nominal LC resonance alone does not establish ZVS or stable loaded operation",
++    "User subsequently clarified voltage is steady. Constant-power-induced voltage collapse is not observed and must not be reported as the diagnosed issue.",
++    "Slowing rise from80C to90C does not demonstrate accelerating thermal runaway; final equilibrium and junction margin remain unknown."
++  ],
++  "later_bench_note": "Data/project_records/V2_Testing_Update.txt",
++  "temporal_limit": "The supplied photo predates the latest dictation. Association with a particular diode replacement or 60ns timing change was not recorded.",
++  "later_claim_status": {
++    "reported_software_deadtime_ns": 60,
++    "unit_interpretation": "User correction \"60 Ms dead time for software\" interpreted in context as60ns and stated to user",
++    "firmware_version": null,
++    "ZVS": "inferred from reduced half-bridge heating, not independently verified by waveform",
++    "bridge_layout_cause": "suspected limited copper/trace area; not isolated by measurement",
++    "diode_replacement": "reported not to resolve heating",
++    "relocation_and_wider_copper": "proposed, not tested"
++  }
++}
+--- /dev/null
++++ current/Data/project_records/V2_Testing_Update.txt
+@@ -0,0 +1,50 @@
++V2 testing update: user-provided bench observations
++=================================================
++
++This record preserves the source wording used for the preliminary V2 testing
++section. It is a bench narrative, not a calibrated measurement table.
++
++Original dictation, verbatim:
++
++This was section for the version 2 testing. Version 2 testing we have tested in original state. There are still excessive losses on the secondary at where the series inductor, sorry, the 9.4 uH inductor. As a result, I have modified the resonant frequency and resonant tank to allow usage of just the pure leakage inductance from the transformer. I had to change to a 1.66 nanofarad resonant cap, but now I am able to successfully remove the series inductor, which reduces a bunch of losses. However, there is one problem in which the full bridge rectifier diodes, my silicon carbide ultra-fast recovery diodes, are having excessive heating. We'll check in on why it's the case. I believe it could be a routing error due to... sorry, I found that it's probably due to a routing error by me. I did not properly put enough... I didn't put enough copper for the traces, so as a result during the load testing it heats up significantly. Next versions I will increase the copper pour density, and hopefully that will also solve that problem as well. I have swapped out the rectifier diodes. As in addition, the problem is still have not fixed the issue of the heating. I'm going to see if I can move the diodes to a different side and hopefully reduce the overall thermal heating. Other than that, the V2 is up and running. Just the problem right now is our full bridge is losing a significant amount of heat. I had to adjust dead time to about 16 nanoseconds. My half bridge is achieving ZVS switching due to it no longer heating up like crazy anymore. But yep, systems for V2 are all good to go.
++
++Later correction, verbatim:
++
++60 Ms dead time for software
++
++Interpretation used in the thesis:
++
++- The correction is interpreted as approximately 60 ns programmed dead time,
++  replacing the earlier 16 ns statement. The interpretation was stated to the
++  user. No scope measurement or firmware version was supplied with the note.
++- The external series resonant inductor is identified without calling it a
++  secondary-side component: the available V2 drawing places L4 in the primary
++  resonant path. The reported approximately 9.4 uH bench value is not silently
++  equated with the drawing's nominal 10 uH part or the earlier V1.0 assembly.
++- Approximately 1.66 nF is retained from the dictation. The preceding discussion
++  reported 1.667 nF; these are treated as approximate reports of the tank change,
++  not as independently measured capacitor values.
++- Lower half-bridge heating is an observation. ZVS was the user's inference;
++  it has not been established here from synchronized switching waveforms.
++- The reported limited copper is a suspected contributor to bridge heating.
++  No measured trace resistance, loss allocation, or completed layout comparison
++  was supplied. Replacing the diodes was reported not to resolve the heating.
++- The wider copper and possible relocation remain proposed changes.
++
++Earlier related user statements, retained as context:
++
++Input and load: 240 V AC, 50 Hz, 100 W constant-power load setting.
++Corrected resonant capacitance in that discussion: 1.667 nF.
++Heated area: D4/D5/D9/D10, after removal of the external 10 uH inductor.
++Clarification: output voltage was steady; instability meant thermal rise.
++Thermal history: approximately 80 C in a few seconds, followed by a slower
++rise toward 90 C, when the user switched off.
++
++Evidence boundary:
++
++The thermal photo was supplied before this latest dictation. Its relationship
++to a particular original/replacement diode fit or to the later timing adjustment
++was not specified. Actual input/output power, output voltage/current, firmware
++version, installed transformer identity, current/voltage waveforms, ambient,
++airflow and a complete timed thermal record were not supplied. No continuous
++100 W rating or numerical before/after efficiency improvement is established.

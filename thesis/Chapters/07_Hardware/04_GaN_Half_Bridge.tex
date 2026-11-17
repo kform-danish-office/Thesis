@@ -1,0 +1,31 @@
+\subsection{Integrated GaN Half Bridge}
+\label{sec:hw-halfbridge}
+
+The shared switching stage uses the LMG2652RFBR, which integrates two \SI{650}{\volt} GaN FETs, gate drivers, high-side level shifting, bootstrap support, current-sense emulation, and protection in an \SI{8}{\milli\metre} by \SI{6}{\milli\metre} package \cite{tiLMG2652}. Integration reduces external gate-drive connections, but local bias decoupling, short commutation loops, controlled switch-node area, and PCB heat spreading remain necessary.
+
+\begin{table}[htbp]
+\centering
+\caption{LMG2652 ratings and characteristics \cite{tiLMG2652}, under the data-sheet test conditions.}
+\label{tab:lmg2652-ratings}
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.29\textwidth}p{0.31\textwidth}X@{}}
+\toprule
+Parameter & Value & Design consideration\\
+\midrule
+FET voltage rating & \SI{650}{\volt} & Compare with DC-link voltage plus overshoot.\\
+Typical on-resistance & \SI{140}{\milli\ohm} at \SI{25}{\celsius}; \SI{255}{\milli\ohm} at \SI{125}{\celsius} & Conduction loss increases with temperature.\\
+Bias and bootstrap rails & AUX \SIrange{10}{26}{\volt}; BST--SW \SIrange{7.5}{26}{\volt} & Verify rail and bootstrap behavior before switching.\\
+Recommended capacitance & \(C_{\mathrm{BST}}\geq\SI{10}{\nano\farad}\), \(C_{\mathrm{AUX}}\geq3C_{\mathrm{BST}}\) & Account for capacitance under operating bias.\\
+Recommended continuous drain current & \(\pm\SI{6.1}{\ampere}\) per FET & Check current and temperature together.\\
+Output-capacitance quantities & \(Q_{\mathrm{OSS}}=\SI{21.8}{\nano\coulomb}\), \(C_{\mathrm{OSS}}=\SI{34.2}{\pico\farad}\), \(E_{\mathrm{OSS}}=\SI{3.0}{\micro\joule}\) & Allow enough commutation current to charge and discharge the output capacitances.\\
+Reverse-recovery charge & \(Q_{\mathrm{RR}}=\SI{0}{\nano\coulomb}\) & GaN commutation differs from a silicon body diode.\\
+Cycle-by-cycle current limit & \SIrange{5.6}{7.4}{\ampere}; \SI{6.5}{\ampere} typical & This device limit is separate from PA2 firmware thresholds.\\
+Overtemperature trip/reset & \SI{165}{\celsius}/\SI{150}{\celsius} & Protection thresholds are not a normal operating target.\\
+Junction range and thermal metrics & \SIrange{-40}{150}{\celsius}; \(R_{\theta JA}=\SI{22.7}{\celsius\per\watt}\), \(R_{\theta JC(\mathrm{bot})}=\SI{1.20}{\celsius\per\watt}\) & These values depend on the specified mounting and cooling conditions.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The driver delays are comparable to the programmed dead time. At the data-sheet condition of \SI{400}{\volt} and \SI{1.8}{\ampere}, low-side turn-on/turn-off delays are \SI{40}{\nano\second}/\SI{45}{\nano\second}. High-side turn-on is \SI{45}{\nano\second} from INH or \SI{40}{\nano\second} from GDH, while turn-off is \SI{55}{\nano\second} or \SI{45}{\nano\second}, respectively. The listed turn-on slew rate is \SI{80}{\volt\per\nano\second} \cite{tiLMG2652}. These delays affect the switch-node timing. Actual transistor dead time must be measured; timer settings alone are insufficient.
+
+The half-bridge switch node, labeled VSW, also couples through capacitance to neighboring copper, the transformer, and the probes. Both device switching and the installed loop contribute to ringing. Soft turn-on must be checked from the incoming switch's voltage and current at the stated input and load, using the probing method in \cref{sec:method-probing}.

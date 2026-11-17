@@ -11,6 +11,7 @@
 // STM32G071 / STM32F410CBU6 LLC / GaN converter controller
 //
 // Firmware version:
+//   PWR-2.0.4 = V2 OFF-only atomic carrier/dead-time control and versioned timing journal.
 //   PWR-2.0.1 = opt-in browser JSON UART protocol, bounded TX and link-lease shutdown.
 //   PWR-2.0.0 = F410CBU6 schematic-12 port: PA8/PB13 complementary TIM1, PA11 EN, PA9/PA10 UART, ADC1 DMA2, flash journal.
 //   PWR-1.9.20 = loaded steady uses VON as the loaded floor; droop below VON boosts averaged duty without 0/100 mode switching.
@@ -48,12 +49,12 @@
 //               PA0*PA2 primary V/I or PA1*PA2 secondary-voltage/current proxy.
 //   PWR-1.4.0 = defers EEPROM writes while output is active to avoid UART SET freezes.
 //
-// Fixed carrier:
+// Carrier (V2 adjustable only while OFF):
 //   G071: PA8 / PA9. F410: PA8 / PB13 (TIM1 CH1 / CH1N).
 //
 // Power throttle:
 //   G071: PA10. F410: PA11. Default EN frequency is 10 kHz.
-//   Control changes EN high time / duty, not the 1 MHz carrier.
+//   Control changes EN high time / duty; V2 TIMING configures the switching carrier.
 //
 // Feedback:
 //   PA0 = primary voltage divider into MCU ADC, diagnostic / optional mode
@@ -111,13 +112,25 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 // -------------------- Firmware version --------------------
 #define FW_VERSION_MAJOR 2
 #define FW_VERSION_MINOR 0
-#define FW_VERSION_PATCH 1
-#define FW_VERSION_STRING "PWR-2.0.1"
+#if defined(STM32F410Cx)
+#define FW_VERSION_PATCH 4
+#define FW_VERSION_STRING "PWR-2.0.4"
+#else
+#define FW_VERSION_PATCH 3
+#define FW_VERSION_STRING "PWR-2.0.3"
+#endif
 
-// -------------------- Fixed gate settings --------------------
+// -------------------- Gate timing defaults --------------------
 #define GATE_FREQ_HZ       1000000UL
 #define GATE_DEADTIME_NS   40UL
 #define KEEP_GATE_PWM_RUNNING 1
+#if defined(STM32F410Cx)
+// Numerical bench bounds, not a verified electrical safe operating range.
+#define CARRIER_MIN_HZ 500000UL
+#define CARRIER_MAX_HZ 2000000UL
+#define CARRIER_DEAD_MIN_NS 20UL
+#define CARRIER_DEAD_MAX_NS 200UL
+#endif
 
 // -------------------- Hard limits --------------------
 #define ADC_RESOLUTION_BITS 12
@@ -149,7 +162,8 @@ HardwareSerial CmdSerial(CMD_UART_EXTERNAL_RX_PIN, CMD_UART_EXTERNAL_TX_PIN); //
 #define EEPROM_MAGIC       0x5057524FUL  // "PWRO"
 #define EEPROM_MAGIC_NAME  "PWR24"
 #if defined(STM32F410Cx)
-#define SETTINGS_RECORD_BYTES ((sizeof(SettingsSlot) + 3UL) & ~3UL)
+#define LEGACY_SETTINGS_RECORD_BYTES ((sizeof(SettingsSlot) + 3UL) & ~3UL)
+#define SETTINGS_RECORD_BYTES ((sizeof(CarrierSettingsRecord) + 3UL) & ~3UL)
 #define EEPROM_SLOT_COUNT  ((int)(SETTINGS_FLASH_BYTES / SETTINGS_RECORD_BYTES))
 #else
 #define EEPROM_SLOT_COUNT  4
@@ -464,6 +478,22 @@ struct __attribute__((packed)) SettingsSlot {
   uint32_t checksum;
 };
 
+#if defined(STM32F410Cx)
+// CARRIER_STORAGE_TYPES_BEGIN
+#define CARRIER_RECORD_MAGIC 0x50575431UL // "PWT1", versioned record prefix
+struct __attribute__((packed)) CarrierSettingsRecord {
+  uint32_t magic;
+  SettingsSlot settings; // Immutable 471-byte packed legacy payload and its checksum.
+  uint8_t reserved; // New-wrapper alignment byte; never read from old journal padding.
+  uint32_t carrierHz;
+  uint32_t deadNs;
+  uint32_t checksum;
+};
+static_assert(sizeof(SettingsSlot) == 471, "Legacy settings schema must remain unchanged");
+static_assert(sizeof(CarrierSettingsRecord) == 488, "Unexpected carrier journal schema");
+// CARRIER_STORAGE_TYPES_END
+#endif
+
 struct MeasureResult {
   float avgVpri;
   float avgVsec;
@@ -479,6 +509,52 @@ struct MeasureResult {
   bool fault;
   bool highVStop;
 };
+
+#if defined(STM32F410Cx)
+// CARRIER_TIMING_MATH_BEGIN
+struct CarrierTiming {
+  uint32_t timerHz;
+  uint32_t periodTicks;
+  uint32_t ccr;
+  uint32_t deadTicks;
+};
+
+bool calculateCarrierTiming(uint32_t timerHz, uint32_t hz, uint32_t deadNs, CarrierTiming &result) {
+  if (timerHz == 0 || hz < CARRIER_MIN_HZ || hz > CARRIER_MAX_HZ ||
+      deadNs < CARRIER_DEAD_MIN_NS || deadNs > CARRIER_DEAD_MAX_NS) return false;
+  // Even edge-aligned periods give balanced 50% CH1/CH1N reference pulses.
+  uint32_t halfTicks = (uint32_t)(((uint64_t)timerHz + hz) / (2ULL * hz));
+  uint32_t periodTicks = halfTicks * 2UL;
+  if (periodTicks < 16UL || periodTicks > 65536UL) return false;
+  uint32_t deadTicks = (uint32_t)(((uint64_t)deadNs * timerHz + 999999999ULL) / 1000000000ULL);
+  // Keep the existing conservative positive-pulse constraint on both halves.
+  if (deadTicks < 1UL || deadTicks > 127UL || 4UL * deadTicks >= periodTicks) return false;
+  result.timerHz = timerHz;
+  result.periodTicks = periodTicks;
+  result.ccr = halfTicks;
+  result.deadTicks = deadTicks;
+  return true;
+}
+
+uint32_t carrierCyclesToUsCeil(uint32_t cycles, const CarrierTiming &timing) {
+  if (cycles == 0 || timing.timerHz == 0) return 0;
+  uint64_t ticksUs = (uint64_t)cycles * timing.periodTicks * 1000000ULL;
+  return (uint32_t)((ticksUs + timing.timerHz - 1ULL) / timing.timerHz);
+}
+
+uint16_t carrierCyclesFromUsCeil(uint32_t us, const CarrierTiming &timing) {
+  if (us == 0 || timing.periodTicks == 0) return 0;
+  uint64_t denominator = (uint64_t)timing.periodTicks * 1000000ULL;
+  uint64_t cycles = ((uint64_t)us * timing.timerHz + denominator - 1ULL) / denominator;
+  return (uint16_t)(cycles > 65535ULL ? 65535ULL : cycles);
+}
+// CARRIER_TIMING_MATH_END
+
+CarrierTiming carrierTiming = {0, 0, 0, 0};
+uint32_t carrierRequestedHz = GATE_FREQ_HZ;
+uint32_t carrierRequestedDeadNs = GATE_DEADTIME_NS;
+uint32_t carrierTimingRevision = 0;
+#endif
 
 // ============================================================
 // Globals
@@ -572,6 +648,24 @@ uint32_t webLeaseDurationMs = 0;
 uint32_t webLastPingMs = 0;
 bool webLeaseExpiredEvent = false;
 bool webFaultEventPending = false;
+// Calibration is queued outside the parser; cooperative waits service OFF/lease.
+bool webCalibrationRunning = false;
+bool webCalibrationAbort = false;
+bool webCalibrationSucceeded = false;
+uint8_t webCalibrationState = 0; // idle, queued, running, complete, stopped, failed
+uint8_t webCalibrationKind = 0; // precharge, no-load/load, current zero, line reference
+int8_t webCalibrationSlot = -1;
+uint32_t webCalibrationStartMs = 0;
+uint16_t webCalibrationDuty = 0;
+bool serviceWebCalibrationWait();
+void runWebCalibration();
+void handleSerial();
+bool handleWebCalibrationCommand(String body, String id);
+// Suppress legacy human output during web calibration so JSON chunks never mix.
+struct QuietTuneSerial {
+  template<typename... A> void print(A... a) { if (!webSessionActive) CmdSerial.print(a...); }
+  template<typename... A> void println(A... a) { if (!webSessionActive) CmdSerial.println(a...); }
+} TuneSerial;
 
 void serviceWebLease();
 void serviceWebTx();
@@ -1042,6 +1136,29 @@ uint32_t checksumSettings(const SettingsSlot &s) {
   return sum;
 }
 
+#if defined(STM32F410Cx)
+// CARRIER_STORAGE_CHECKSUM_BEGIN
+uint32_t checksumCarrierRecord(const CarrierSettingsRecord &record) {
+  const uint8_t *bytes = (const uint8_t *)&record;
+  uint32_t sum = 0xA5A55A5AUL;
+  for (size_t i = 0; i < sizeof(record) - sizeof(record.checksum); i++) {
+    sum = (sum << 5) | (sum >> 27);
+    sum ^= bytes[i];
+  }
+  return sum;
+}
+
+bool validCarrierRecord(const CarrierSettingsRecord &record, uint32_t timerHz) {
+  CarrierTiming timing;
+  return record.magic == CARRIER_RECORD_MAGIC && record.reserved == 0xFF &&
+         record.settings.magic == EEPROM_MAGIC &&
+         record.settings.checksum == checksumSettings(record.settings) &&
+         record.checksum == checksumCarrierRecord(record) &&
+         calculateCarrierTiming(timerHz, record.carrierHz, record.deadNs, timing);
+}
+// CARRIER_STORAGE_CHECKSUM_END
+#endif
+
 void eepromReadBytes(int addr, uint8_t *dst, size_t len) {
 #if defined(STM32F410Cx)
   if (!settingsStorageReady || addr < 0 || (size_t)addr + len > SETTINGS_FLASH_BYTES) {
@@ -1057,7 +1174,8 @@ void eepromReadBytes(int addr, uint8_t *dst, size_t len) {
 bool eepromWriteBytes(int addr, const uint8_t *src, size_t len) {
 #if defined(STM32F410Cx)
   if (!settingsStorageReady || addr < 0 || (size_t)addr + len > SETTINGS_FLASH_BYTES ||
-      ((uint32_t)addr % 4UL) != 0 || !safeToWriteEepromNow()) return false;
+      ((uint32_t)addr % SETTINGS_RECORD_BYTES) != 0 || len != sizeof(CarrierSettingsRecord) ||
+      !safeToWriteEepromNow()) return false;
   if (HAL_FLASH_Unlock() != HAL_OK) return false;
   __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR |
                         FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR);
@@ -1114,43 +1232,69 @@ bool readSlot(int slot, SettingsSlot &s) {
   return true;
 }
 
+// CARRIER_STORAGE_LOAD_BEGIN
 void loadSettings() {
   SettingsSlot best;
   bool found = false;
   uint32_t bestSeq = 0;
-
-  for (int i = 0; i < EEPROM_SLOT_COUNT; i++) {
-    SettingsSlot s;
-    if (readSlot(i, s)) {
-      if (!found || s.sequence > bestSeq) {
-        found = true;
-        bestSeq = s.sequence;
-        best = s;
-        activeSlotIndex = i;
-      }
-    }
+  activeSlotIndex = -1;
 #if defined(STM32F410Cx)
-    // A torn record is occupied too; do not program over it after a power loss.
-    uint32_t firstWord = 0xFFFFFFFFUL;
-    eepromReadBytes(slotAddress(i), (uint8_t *)&firstWord, sizeof(firstWord));
-    if (firstWord != 0xFFFFFFFFUL) activeSlotIndex = i;
-#endif
+  carrierRequestedHz = GATE_FREQ_HZ;
+  carrierRequestedDeadNs = GATE_DEADTIME_NS;
+  // Migration reads only. Boot never erases or rewrites an old journal.
+  for (int i = 0; i < (int)(SETTINGS_FLASH_BYTES / LEGACY_SETTINGS_RECORD_BYTES); i++) {
+    SettingsSlot legacy;
+    eepromReadBytes(i * (int)LEGACY_SETTINGS_RECORD_BYTES, (uint8_t *)&legacy, sizeof(legacy));
+    if (legacy.magic == EEPROM_MAGIC && legacy.checksum == checksumSettings(legacy) &&
+        (!found || legacy.sequence > bestSeq)) {
+      best = legacy;
+      bestSeq = legacy.sequence;
+      found = true;
+    }
   }
-
+  for (int i = 0; i < EEPROM_SLOT_COUNT; i++) {
+    CarrierSettingsRecord record;
+    eepromReadBytes(slotAddress(i), (uint8_t *)&record, sizeof(record));
+    if (validCarrierRecord(record, carrierTimerClockHz()) && (!found || record.settings.sequence >= bestSeq)) {
+      best = record.settings;
+      bestSeq = best.sequence;
+      found = true;
+      carrierRequestedHz = record.carrierHz;
+      carrierRequestedDeadNs = record.deadNs;
+    }
+    // Legacy and torn records occupy new-stride blocks too. Never program over
+    // any occupied word, even when the prefix or checksum was not completed.
+    const uint8_t *bytes = (const uint8_t *)&record;
+    for (size_t byte = 0; byte < sizeof(record); byte++) {
+      if (bytes[byte] != 0xFF) { activeSlotIndex = i; break; }
+    }
+  }
+#else
+  for (int i = 0; i < EEPROM_SLOT_COUNT; i++) {
+    SettingsSlot slot;
+    if (readSlot(i, slot) && (!found || slot.sequence > bestSeq)) {
+      best = slot;
+      bestSeq = slot.sequence;
+      activeSlotIndex = i;
+      found = true;
+    }
+  }
+#endif
   if (found) {
     cfg = best;
     settingsSequence = bestSeq;
   } else {
     setDefaults();
     settingsSequence = 0;
-    activeSlotIndex = -1;
+    // Keep occupied slots reserved even if none passed integrity checks.
   }
   validateSettings();
   systemEnabled = cfg.systemEnabled ? true : false;
 }
+// CARRIER_STORAGE_LOAD_END
 
 bool safeToWriteEepromNow() {
-  return !systemEnabled && !autoTuneRunning && !startupPrechargeActive();
+  return !systemEnabled && !autoTuneRunning && !webCalibrationRunning && !startupPrechargeActive();
 }
 
 void markSettingsDirty() {
@@ -1158,6 +1302,7 @@ void markSettingsDirty() {
   settingsDirtyMs = millis();
 }
 
+// CARRIER_STORAGE_SAVE_BEGIN
 void saveSettingsNow() {
   cfg.magic = EEPROM_MAGIC;
   cfg.systemEnabled = cfg.systemEnabled ? 1 : 0;
@@ -1172,7 +1317,19 @@ void saveSettingsNow() {
 
   int nextSlot = (activeSlotIndex + 1) % EEPROM_SLOT_COUNT;
   if (activeSlotIndex < 0) nextSlot = 0;
-  if (!eepromWriteBytes(slotAddress(nextSlot), (const uint8_t *)&cfg, sizeof(SettingsSlot))) {
+#if defined(STM32F410Cx)
+  CarrierSettingsRecord record = {};
+  record.magic = CARRIER_RECORD_MAGIC;
+  record.settings = cfg;
+  record.reserved = 0xFF;
+  record.carrierHz = carrierRequestedHz;
+  record.deadNs = carrierRequestedDeadNs;
+  record.checksum = checksumCarrierRecord(record);
+  bool written = eepromWriteBytes(slotAddress(nextSlot), (const uint8_t *)&record, sizeof(record));
+#else
+  bool written = eepromWriteBytes(slotAddress(nextSlot), (const uint8_t *)&cfg, sizeof(SettingsSlot));
+#endif
+  if (!written) {
 #if defined(STM32F410Cx)
     activeSlotIndex = nextSlot;
 #endif
@@ -1186,6 +1343,7 @@ void saveSettingsNow() {
   settingsDirty = false;
   settingsDirtyMs = 0;
 }
+// CARRIER_STORAGE_SAVE_END
 
 bool requestSettingsSave(const char *reason) {
   (void)reason;
@@ -1236,15 +1394,23 @@ void setGateCarrierDrive(bool enable) {
 
 uint32_t gateCyclesToUsCeil(uint32_t cycles) {
   if (cycles == 0) return 0;
+#if defined(STM32F410Cx)
+  return carrierCyclesToUsCeil(cycles, carrierTiming);
+#else
   return (uint32_t)(((uint64_t)cycles * 1000000ULL + GATE_FREQ_HZ - 1ULL) / GATE_FREQ_HZ);
+#endif
 }
 
 uint16_t gateCyclesFromUsCeil(uint32_t us) {
   if (us == 0) return 0;
+#if defined(STM32F410Cx)
+  return carrierCyclesFromUsCeil(us, carrierTiming);
+#else
   uint64_t cycles = ((uint64_t)us * (uint64_t)GATE_FREQ_HZ + 999999ULL) / 1000000ULL;
   if (cycles < 1ULL) cycles = 1ULL;
   if (cycles > 65535ULL) cycles = 65535ULL;
   return (uint16_t)cycles;
+#endif
 }
 
 uint16_t leadGateCycles() {
@@ -1598,7 +1764,7 @@ float getCmdDutyPercent() { return dutyX10ToPercent(enDutyCmdX10); }
 float getEffDutyPercent() { return dutyX10ToPercent(enDutyEffX10); }
 
 // ============================================================
-// TIM1 fixed carrier (board-specific pin pair)
+// TIM1 carrier (V2 complementary outputs; G071 retains fixed timing)
 // ============================================================
 
 void setupGateTimerPins() {
@@ -1622,9 +1788,8 @@ void setupGateTimerPins() {
 #endif
 }
 
-bool calculateGateTiming(uint32_t &arr, uint32_t &ccr1, uint32_t &ccr2,
-                         uint32_t &deadTicks, uint32_t &actualDeadNs) {
 #if defined(STM32F410Cx)
+uint32_t carrierTimerClockHz() {
   uint32_t timClk = HAL_RCC_GetPCLK2Freq();
   uint32_t ppre = (RCC->CFGR & RCC_CFGR_PPRE2) >> RCC_CFGR_PPRE2_Pos;
   if (RCC->DCKCFGR & RCC_DCKCFGR_TIMPRE) {
@@ -1632,16 +1797,26 @@ bool calculateGateTiming(uint32_t &arr, uint32_t &ccr1, uint32_t &ccr2,
   } else if (ppre >= 4UL) {
     timClk *= 2UL;
   }
-  // Center-aligned period is 2 * ARR ticks. CH1N uses the hardware dead-time unit.
-  uint32_t halfTicks = (timClk + GATE_FREQ_HZ) / (2UL * GATE_FREQ_HZ);
-  if (halfTicks < 8UL || halfTicks > 65535UL) return false;
-  arr = halfTicks;
-  ccr1 = halfTicks / 2UL;
-  ccr2 = 0; // CH2 belongs to PA9 UART and must remain disabled.
-  deadTicks = (uint32_t)(((uint64_t)GATE_DEADTIME_NS * timClk + 999999999ULL) / 1000000000ULL);
-  if (deadTicks < 1UL) deadTicks = 1UL;
-  if (deadTicks > 127UL || deadTicks >= ccr1) return false;
-  actualDeadNs = (uint32_t)(((uint64_t)deadTicks * 1000000000ULL) / timClk);
+  return timClk;
+}
+
+bool carrierTimingBusy() {
+  return systemEnabled || startupPrechargeActive() || autoTuneRunning ||
+         webCalibrationRunning || webCalibrationState == 1;
+}
+#endif
+
+bool calculateGateTiming(uint32_t &arr, uint32_t &ccr1, uint32_t &ccr2,
+                         uint32_t &deadTicks, uint32_t &actualDeadNs) {
+#if defined(STM32F410Cx)
+  CarrierTiming next;
+  if (!calculateCarrierTiming(carrierTimerClockHz(), carrierRequestedHz, carrierRequestedDeadNs, next)) return false;
+  carrierTiming = next;
+  arr = next.periodTicks - 1UL;
+  ccr1 = next.ccr;
+  ccr2 = 0; // PA9 is UART; CH2 must stay disabled.
+  deadTicks = next.deadTicks;
+  actualDeadNs = (uint32_t)(((uint64_t)deadTicks * 1000000000ULL + next.timerHz - 1UL) / next.timerHz);
   return true;
 #else
   uint32_t timClk = HAL_RCC_GetPCLK1Freq();
@@ -1702,7 +1877,7 @@ void setupGatePWM() {
   TIM1->CCER |= (1UL << 0); // CH1 enable
 #if defined(STM32F410Cx)
   TIM1->CCER |= TIM_CCER_CC1NE; // PB13 complementary CH1N, active high
-  TIM1->RCR = 1; // One update boundary per complete up/down carrier cycle.
+  TIM1->RCR = 0; // Edge-aligned: one update per complete carrier period.
 #else
   TIM1->CCER |= (1UL << 4); // CH2 enable
 #endif
@@ -1712,7 +1887,11 @@ void setupGatePWM() {
 
   uint32_t arr, ccr1, ccr2, deadTicks, actualDeadNs;
   if (!calculateGateTiming(arr, ccr1, ccr2, deadTicks, actualDeadNs)) {
+#if defined(STM32F410Cx)
+    CmdSerial.println("ERROR: TIM1 gate timing invalid.");
+#else
     CmdSerial.println("ERROR: TIM1 fixed gate timing invalid.");
+#endif
     faultLatched = true;
     faultCode = FAULT_SENSOR;
     systemEnabled = false;
@@ -1725,7 +1904,11 @@ void setupGatePWM() {
 #if defined(STM32F410Cx)
   TIM1->BDTR |= deadTicks; // DTG[7:0], linear range, CKD=0.
 #endif
+#if defined(STM32F410Cx)
+  TIM1->CR1 = TIM_CR1_ARPE; // V2 edge-aligned complementary CH1/CH1N.
+#else
   TIM1->CR1 = TIM_CR1_CMS_0 | TIM_CR1_ARPE;
+#endif
   TIM1->EGR = 1;
   TIM1->SR = 0;
   TIM1->CR1 |= 1UL;          // CEN
@@ -1737,12 +1920,101 @@ void setupGatePWM() {
   NVIC_EnableIRQ(TIM1_BRK_UP_TRG_COM_IRQn);
 #endif
 
+#if defined(STM32F410Cx)
+  CmdSerial.print("TIM1 " GATE_PIN_NAMES " carrier ");
+  CmdSerial.print(carrierTiming.timerHz / carrierTiming.periodTicks);
+#else
   CmdSerial.print("TIM1 " GATE_PIN_NAMES " fixed ");
   CmdSerial.print(GATE_FREQ_HZ);
+#endif
   CmdSerial.print(" Hz, dead-time approx ");
   CmdSerial.print(actualDeadNs);
   CmdSerial.println(" ns");
 }
+
+#if defined(STM32F410Cx)
+// CARRIER_TIMING_APPLY_BEGIN
+void invalidateCarrierCalibration() {
+  for (uint8_t i = 0; i < CAL_LOAD_SLOT_COUNT; i++) {
+    cfg.calLoadFreqHz[i] = cfg.enFreqHz;
+    cfg.calLoadDutyX10[i] = 0;
+    cfg.calLoadKp_x1000[i] = 0;
+    cfg.calLoadKi_x1000[i] = 0;
+    cfg.calLoadGainWPerPct[i] = 0.0f;
+    cfg.calLoadTauS[i] = 0.0f;
+    cfg.calLoadTargetW[i] = 0.0f;
+    cfg.calLoadMeasuredW[i] = 0.0f;
+    cfg.calLoadMeasuredVsec[i] = 0.0f;
+    cfg.calLoadMeasuredI[i] = 0.0f;
+  }
+  cfg.tunedPlantGainWPerPct = 0.0f;
+  cfg.tunedPlantTauS = 0.0f;
+  cfg.tunedDutyX10 = 0;
+  cfg.tunedTargetW = 0.0f;
+  webCalibrationState = 0;
+  webCalibrationKind = 0;
+  webCalibrationSlot = -1;
+  webCalibrationDuty = 0;
+  webCalibrationStartMs = 0;
+  webCalibrationSucceeded = false;
+}
+
+const char *applyCarrierTiming(uint32_t hz, uint32_t deadNs) {
+  if (carrierTimingBusy()) return "turn_off_first";
+  if (!gatePwmReady || !settingsStorageReady) return "hardware_not_ready";
+  CarrierTiming next;
+  if (!calculateCarrierTiming(carrierTimerClockHz(), hz, deadNs, next)) return "timing_pair_not_representable";
+  uint32_t interruptMask = __get_PRIMASK();
+  __disable_irq();
+  if (carrierTimingBusy()) {
+    if (!interruptMask) __enable_irq();
+    return "turn_off_first";
+  }
+  // EN remains physically LOW throughout; neither a request nor a failure enables it.
+  setEnLow();
+  forceEnSyncLowNow();
+  TIM1->BDTR &= ~TIM_BDTR_MOE;
+  TIM1->CR1 &= ~TIM_CR1_CEN;
+  TIM1->DIER = 0;
+  TIM1->PSC = 0;
+  TIM1->CNT = 0;
+  TIM1->RCR = 0;
+  TIM1->ARR = next.periodTicks - 1UL;
+  TIM1->CCR1 = next.ccr;
+  TIM1->CCR2 = 0;
+  TIM1->BDTR = (1UL << 10) | (1UL << 11) | next.deadTicks;
+  TIM1->CR1 = TIM_CR1_ARPE;
+  TIM1->EGR = 1;
+  TIM1->SR = 0;
+  if (TIM1->ARR != next.periodTicks - 1UL || TIM1->CCR1 != next.ccr ||
+      (TIM1->BDTR & 255UL) != next.deadTicks || TIM1->PSC != 0) {
+    gatePwmReady = false;
+    faultLatched = true;
+    faultCode = FAULT_SENSOR;
+    systemEnabled = false;
+    if (!interruptMask) __enable_irq();
+    return "timing_readback_failed";
+  }
+  if (carrierTiming.periodTicks != next.periodTicks || carrierTiming.deadTicks != next.deadTicks) {
+    invalidateCarrierCalibration();
+  }
+  carrierTiming = next;
+  carrierRequestedHz = hz;
+  carrierRequestedDeadNs = deadNs;
+  carrierTimingRevision++;
+  enPulseSkipCountdown = 0;
+  updateEnableTimingNoInterruptLock();
+  applyEnableTimerNoInterruptLock(true);
+  TIM1->CR1 |= TIM_CR1_CEN;
+  // The existing always-running carrier resumes while driver EN stays LOW.
+  setGateCarrierDrive(true);
+  setEnLow();
+  markSettingsDirty();
+  if (!interruptMask) __enable_irq();
+  return nullptr;
+}
+// CARRIER_TIMING_APPLY_END
+#endif
 
 void setGateOutputsEnabled(bool enable) {
 #if KEEP_GATE_PWM_RUNNING
@@ -2243,15 +2515,16 @@ bool handleStartupPrecharge() {
 
 bool runStartupPrechargeBlocking() {
   if (!beginStartupPrecharge()) return !faultLatched;
-  CmdSerial.print("Startup precharge: ");
-  CmdSerial.print(dutyX10ToPercent(cfg.prechargeDutyX10), 2);
-  CmdSerial.print("% for ");
-  CmdSerial.print(cfg.prechargeBurstMs);
-  CmdSerial.print(" ms, settle ");
-  CmdSerial.print(cfg.prechargeSettleMs);
-  CmdSerial.println(" ms");
+  TuneSerial.print("Startup precharge: ");
+  TuneSerial.print(dutyX10ToPercent(cfg.prechargeDutyX10), 2);
+  TuneSerial.print("% for ");
+  TuneSerial.print(cfg.prechargeBurstMs);
+  TuneSerial.print(" ms, settle ");
+  TuneSerial.print(cfg.prechargeSettleMs);
+  TuneSerial.println(" ms");
 
   while (systemEnabled && startupPrechargeActive() && !faultLatched) {
+    if (!serviceWebCalibrationWait()) return false;
     handleStartupPrecharge();
     delay(1);
   }
@@ -2266,9 +2539,11 @@ bool runPrechargeTuneBurst(uint16_t dutyX10, uint32_t burstMs, float &vAfter, fl
   filtersPrimed = false;
   setEnFrequencyHz(cfg.enFreqHz);
   setEnDutyX10BypassLimits(dutyX10);
+  if (webCalibrationRunning) webCalibrationDuty = dutyX10;
 
   uint32_t startMs = millis();
   while (millis() - startMs < burstMs) {
+    if (!serviceWebCalibrationWait()) return false;
     updateAnalogFilters(true);
     if (filteredCurrent > maxCurrent) maxCurrent = filteredCurrent;
     if (checkFaults()) {
@@ -2287,6 +2562,7 @@ bool runPrechargeTuneBurst(uint16_t dutyX10, uint32_t burstMs, float &vAfter, fl
 
   uint32_t settleStartMs = millis();
   while (millis() - settleStartMs < cfg.prechargeSettleMs) {
+    if (!serviceWebCalibrationWait()) return false;
     updateAnalogFilters(true);
     if (filteredCurrent > maxCurrent) maxCurrent = filteredCurrent;
     if (checkFaults()) return false;
@@ -2302,6 +2578,7 @@ bool runPrechargeTuneBurst(uint16_t dutyX10, uint32_t burstMs, float &vAfter, fl
 }
 
 void savePrechargeTuneResult(uint16_t dutyX10, uint8_t bursts, float vAfter) {
+  if (webCalibrationRunning) webCalibrationSucceeded = true;
   cfg.prechargeEnable = 1;
   cfg.prechargeDutyX10 = dutyX10;
   cfg.prechargeMaxBursts = bursts;
@@ -2310,13 +2587,13 @@ void savePrechargeTuneResult(uint16_t dutyX10, uint8_t bursts, float vAfter) {
   setEnDutyX10(0);
   saveSettings();
 
-  CmdSerial.println();
-  CmdSerial.println("AUTOPRE RESULT SELECTED");
-  CmdSerial.print("PREDUTY="); CmdSerial.print(dutyX10ToPercent(cfg.prechargeDutyX10), 2);
-  CmdSerial.print("% PREMS="); CmdSerial.print(cfg.prechargeBurstMs);
-  CmdSerial.print(" PREMAX="); CmdSerial.print(cfg.prechargeMaxBursts);
-  CmdSerial.print(" Vsec="); CmdSerial.print(vAfter, 3);
-  CmdSerial.println(" V");
+  TuneSerial.println();
+  TuneSerial.println("AUTOPRE RESULT SELECTED");
+  TuneSerial.print("PREDUTY="); TuneSerial.print(dutyX10ToPercent(cfg.prechargeDutyX10), 2);
+  TuneSerial.print("% PREMS="); TuneSerial.print(cfg.prechargeBurstMs);
+  TuneSerial.print(" PREMAX="); TuneSerial.print(cfg.prechargeMaxBursts);
+  TuneSerial.print(" Vsec="); TuneSerial.print(vAfter, 3);
+  TuneSerial.println(" V");
 }
 
 void finishAutotuneStopped() {
@@ -2328,10 +2605,10 @@ void autoTunePrecharge() {
   if (autoTuneRunning) return;
   autoTuneRunning = true;
 
-  CmdSerial.println();
-  CmdSerial.println("================================================");
-  CmdSerial.println("AUTOPRE START: tuning initial secondary-feedback burst");
-  CmdSerial.println("================================================");
+  TuneSerial.println();
+  TuneSerial.println("================================================");
+  TuneSerial.println("AUTOPRE START: tuning initial secondary-feedback burst");
+  TuneSerial.println("================================================");
 
   systemEnabled = true;
   controlMode = MODE_OPEN_LOOP;
@@ -2351,9 +2628,9 @@ void autoTunePrecharge() {
 
   if (cfg.prechargeReadyV <= 0.0f || (filteredVsec >= cfg.prechargeReadyV && filteredVsec <= cfg.secMaxV)) {
     savePrechargeTuneResult(cfg.prechargeDutyX10, cfg.prechargeMaxBursts, filteredVsec);
-    CmdSerial.println("Secondary feedback already above PREV; existing precharge kept.");
+    TuneSerial.println("Secondary feedback already above PREV; existing precharge kept.");
     finishAutotuneStopped();
-    CmdSerial.print("> ");
+    TuneSerial.print("> ");
     return;
   }
 
@@ -2374,28 +2651,28 @@ void autoTunePrecharge() {
       bool highStop = false;
       bool ok = runPrechargeTuneBurst(d, cfg.prechargeBurstMs, vAfter, iMax, highStop);
 
-      CmdSerial.print("PRETRY D="); CmdSerial.print(dutyX10ToPercent(d), 2);
-      CmdSerial.print("% burst "); CmdSerial.print(burst);
-      CmdSerial.print(" Vsec="); CmdSerial.print(vAfter, 3);
-      CmdSerial.print("V Imax="); CmdSerial.print(iMax, 3);
-      CmdSerial.println(highStop ? "A HIGHV_STOP" : "A");
+      TuneSerial.print("PRETRY D="); TuneSerial.print(dutyX10ToPercent(d), 2);
+      TuneSerial.print("% burst "); TuneSerial.print(burst);
+      TuneSerial.print(" Vsec="); TuneSerial.print(vAfter, 3);
+      TuneSerial.print("V Imax="); TuneSerial.print(iMax, 3);
+      TuneSerial.println(highStop ? "A HIGHV_STOP" : "A");
 
       if (!ok) {
-        CmdSerial.println("AUTOPRE FAILED: fault during precharge tune.");
+        TuneSerial.println("AUTOPRE FAILED: fault during precharge tune.");
         setEnDutyX10(0);
         systemEnabled = false;
         finishAutotuneStopped();
-        CmdSerial.print("> ");
+        TuneSerial.print("> ");
         return;
       }
 
       if (highStop) {
-        CmdSerial.println("AUTOPRE STOPPED: secondary voltage exceeded VMAX before a safe result was saved.");
+        TuneSerial.println("AUTOPRE STOPPED: secondary voltage exceeded VMAX before a safe result was saved.");
         setEnDutyX10(0);
         systemEnabled = false;
         saveSettings();
         finishAutotuneStopped();
-        CmdSerial.print("> ");
+        TuneSerial.print("> ");
         return;
       }
 
@@ -2415,14 +2692,14 @@ void autoTunePrecharge() {
   if (found) {
     savePrechargeTuneResult(foundDuty, foundBursts, foundV);
   } else {
-    CmdSerial.println("AUTOPRE did not reach PREV within PREAUTOMAX/PRETRIES. Settings not changed.");
+    TuneSerial.println("AUTOPRE did not reach PREV within PREAUTOMAX/PRETRIES. Settings not changed.");
     setEnDutyX10(0);
     systemEnabled = false;
     saveSettings();
   }
 
   finishAutotuneStopped();
-  CmdSerial.print("> ");
+  TuneSerial.print("> ");
 }
 
 void setSystemEnabled(bool enable, bool save) {
@@ -2972,6 +3249,7 @@ void initMeasure(MeasureResult &m) {
 bool serviceDelayMs(uint32_t ms) {
   uint32_t start = millis();
   while (millis() - start < ms) {
+    if (!serviceWebCalibrationWait()) return false;
     handlePowerLoop();
     updateAnalogFilters(true);
     if (checkFaults()) return false;
@@ -2991,6 +3269,7 @@ MeasureResult measureWindow(uint32_t ms) {
   uint32_t start = millis();
 
   while (millis() - start < ms) {
+    if (!serviceWebCalibrationWait()) { m.fault = true; break; }
     updateAnalogFilters(true);
     if (checkFaults()) {
       m.fault = true;
@@ -3052,20 +3331,20 @@ MeasureResult settleAndMeasure(uint32_t settleMs, uint32_t measureMs) {
 }
 
 void printMeasure(const char *tag, uint32_t freqHz, uint16_t dutyX10, const MeasureResult &m, float score) {
-  CmdSerial.print(tag);
-  CmdSerial.print(" FEN="); CmdSerial.print(freqHz);
-  CmdSerial.print("Hz D="); CmdSerial.print(dutyX10ToPercent(dutyX10), 1);
-  CmdSerial.print("% Vsec="); CmdSerial.print(m.avgVsec, 3);
-  CmdSerial.print(" min/max="); CmdSerial.print(m.minVsec, 3);
-  CmdSerial.print("/"); CmdSerial.print(m.maxVsec, 3);
-  CmdSerial.print(" I="); CmdSerial.print(m.avgI, 3);
-  CmdSerial.print("A Pdiag="); CmdSerial.print(m.avgP, 3);
-  CmdSerial.print("W");
-  CmdSerial.print(" score="); CmdSerial.print(score, 3);
-  if (!m.valid) CmdSerial.print(" INVALID");
-  if (m.fault) CmdSerial.print(" FAULT");
-  if (m.highVStop) CmdSerial.print(" HIGHV_STOP");
-  CmdSerial.println();
+  TuneSerial.print(tag);
+  TuneSerial.print(" FEN="); TuneSerial.print(freqHz);
+  TuneSerial.print("Hz D="); TuneSerial.print(dutyX10ToPercent(dutyX10), 1);
+  TuneSerial.print("% Vsec="); TuneSerial.print(m.avgVsec, 3);
+  TuneSerial.print(" min/max="); TuneSerial.print(m.minVsec, 3);
+  TuneSerial.print("/"); TuneSerial.print(m.maxVsec, 3);
+  TuneSerial.print(" I="); TuneSerial.print(m.avgI, 3);
+  TuneSerial.print("A Pdiag="); TuneSerial.print(m.avgP, 3);
+  TuneSerial.print("W");
+  TuneSerial.print(" score="); TuneSerial.print(score, 3);
+  if (!m.valid) TuneSerial.print(" INVALID");
+  if (m.fault) TuneSerial.print(" FAULT");
+  if (m.highVStop) TuneSerial.print(" HIGHV_STOP");
+  TuneSerial.println();
 }
 
 float scorePowerPoint(uint32_t freqHz, uint16_t dutyX10, const MeasureResult &m, int8_t loadSlot) {
@@ -3099,8 +3378,10 @@ bool considerTunePoint(const char *tag, uint32_t freqHz, uint16_t dutyX10, int8_
                        float &bestScore, MeasureResult &bestMeasure) {
   setEnFrequencyHz(freqHz);
   setEnDutyX10(dutyX10);
+  if (webCalibrationRunning) webCalibrationDuty = dutyX10;
   filtersPrimed = false;
   MeasureResult m = settleAndMeasure(cfg.autotuneSettleMs, cfg.autotuneMeasureMs);
+  if (webCalibrationRunning && webCalibrationAbort) return false;
   lastTunePointHighVStop = m.highVStop || m.maxVsec > cfg.secMaxV;
   float score = scorePowerPoint(freqHz, dutyX10, m, loadSlot);
   printMeasure(tag, freqHz, dutyX10, m, score);
@@ -3115,9 +3396,9 @@ bool considerTunePoint(const char *tag, uint32_t freqHz, uint16_t dutyX10, int8_
 }
 
 bool autotunePowerFull(int8_t loadSlot, uint32_t &bestFreq, uint16_t &bestDuty, MeasureResult &bestMeasure) {
-  CmdSerial.println();
-  CmdSerial.println("AUTOBANG: fixed-frequency EN duty voltage calibration");
-  CmdSerial.print("FEN fixed at "); CmdSerial.print(cfg.enFreqHz); CmdSerial.println(" Hz");
+  TuneSerial.println();
+  TuneSerial.println("AUTOBANG: fixed-frequency EN duty voltage calibration");
+  TuneSerial.print("FEN fixed at "); TuneSerial.print(cfg.enFreqHz); TuneSerial.println(" Hz");
 
   uint16_t loDuty = cfg.dutyMinX10;
   if (cfg.bangLowDutyX10 > loDuty) loDuty = cfg.bangLowDutyX10;
@@ -3164,7 +3445,7 @@ bool autotunePowerFull(int8_t loadSlot, uint32_t &bestFreq, uint16_t &bestDuty, 
 }
 
 bool autotuneIdentifyPlant(uint16_t baseDutyX10, float &gainWPerPct, float &tauS) {
-  CmdSerial.println("AUTOPOWER: plant gain/tau estimate");
+  TuneSerial.println("AUTOPOWER: plant gain/tau estimate");
   gainWPerPct = 0.0f;
   tauS = 0.20f;
 
@@ -3230,11 +3511,11 @@ bool autotuneIdentifyPlant(uint16_t baseDutyX10, float &gainWPerPct, float &tauS
   if (!found) tauS = 0.20f;
   tauS = clampFloat(tauS, 0.020f, 2.000f);
 
-  CmdSerial.print("Power gain=");
-  CmdSerial.print(gainWPerPct, 5);
-  CmdSerial.print(" W/%, tau=");
-  CmdSerial.print(tauS, 3);
-  CmdSerial.println(" s");
+  TuneSerial.print("Power gain=");
+  TuneSerial.print(gainWPerPct, 5);
+  TuneSerial.print(" W/%, tau=");
+  TuneSerial.print(tauS, 3);
+  TuneSerial.println(" s");
   return true;
 }
 
@@ -3294,10 +3575,10 @@ void autoTunePower(bool fullScan, int8_t loadSlot) {
   if (autoTuneRunning) return;
   autoTuneRunning = true;
 
-  CmdSerial.println();
-  CmdSerial.println("================================================");
-  CmdSerial.println("AUTOBANG START: fixed-frequency " EN_PIN_NAME " EN duty calibration");
-  CmdSerial.println("================================================");
+  TuneSerial.println();
+  TuneSerial.println("================================================");
+  TuneSerial.println("AUTOBANG START: fixed-frequency " EN_PIN_NAME " EN duty calibration");
+  TuneSerial.println("================================================");
 
   systemEnabled = true;
   controlMode = MODE_OPEN_LOOP;
@@ -3312,18 +3593,18 @@ void autoTunePower(bool fullScan, int8_t loadSlot) {
   if (!runStartupPrechargeBlocking()) {
     setEnDutyX10(0);
     autoTuneRunning = false;
-    CmdSerial.println("AUTOBANG FAILED: startup precharge fault.");
-    CmdSerial.print("> ");
+    TuneSerial.println("AUTOBANG FAILED: startup precharge fault.");
+    TuneSerial.print("> ");
     return;
   }
 
   if (loadSlot >= 0 && validLoadSlot((uint8_t)loadSlot)) {
     cfg.activeCalLoadSlot = (uint8_t)loadSlot;
-    CmdSerial.print("Load slot ");
-    CmdSerial.print((int)loadSlot + 1);
-    CmdSerial.print(" R=");
-    CmdSerial.print(calLoadOhms((uint8_t)loadSlot), 3);
-    CmdSerial.println(" ohm");
+    TuneSerial.print("Load slot ");
+    TuneSerial.print((int)loadSlot + 1);
+    TuneSerial.print(" R=");
+    TuneSerial.print(calLoadOhms((uint8_t)loadSlot), 3);
+    TuneSerial.println(" ohm");
   }
 
   uint32_t bestFreq = cfg.enFreqHz;
@@ -3333,11 +3614,12 @@ void autoTunePower(bool fullScan, int8_t loadSlot) {
   if (!autotunePowerFull(loadSlot, bestFreq, bestDuty, bestMeasure)) {
     setEnDutyX10(0);
     autoTuneRunning = false;
-    CmdSerial.println("AUTOBANG FAILED: no safe duty point found.");
-    CmdSerial.print("> ");
+    TuneSerial.println("AUTOBANG FAILED: no safe duty point found.");
+    TuneSerial.print("> ");
     return;
   }
 
+  if (webCalibrationRunning) webCalibrationSucceeded = true;
   cfg.enFreqHz = bestFreq;
   cfg.noLoadDutyX10 = bestDuty;
   cfg.bangHighDutyX10 = cfg.dutyMaxX10;
@@ -3363,23 +3645,23 @@ void autoTunePower(bool fullScan, int8_t loadSlot) {
   updateModeLEDs();
   saveSettings();
 
-  CmdSerial.println();
-  CmdSerial.println("AUTOBANG RESULT");
-  CmdSerial.print("FEN="); CmdSerial.print(bestFreq); CmdSerial.println(" Hz");
-  CmdSerial.print("BLOW="); CmdSerial.print(dutyX10ToPercent(cfg.bangLowDutyX10), 2); CmdSerial.print(" %, ");
-  CmdSerial.print("NLDUTY="); CmdSerial.print(dutyX10ToPercent(bestDuty), 2); CmdSerial.print(" %, ");
-  CmdSerial.print("BHIGH="); CmdSerial.print(dutyX10ToPercent(cfg.bangHighDutyX10), 2); CmdSerial.println(" %");
-  CmdSerial.print("Voltage band="); CmdSerial.print(cfg.secMinV, 2); CmdSerial.print("-");
-  CmdSerial.print(cfg.secMaxV, 2); CmdSerial.println(" V");
-  CmdSerial.print("Measured Vsec="); CmdSerial.print(bestMeasure.avgVsec, 3);
-  CmdSerial.print(" V min/max="); CmdSerial.print(bestMeasure.minVsec, 3);
-  CmdSerial.print("/"); CmdSerial.print(bestMeasure.maxVsec, 3);
-  CmdSerial.print(" V, I=");
-  CmdSerial.print(bestMeasure.avgI, 3); CmdSerial.print(" A, Pdiag=");
-  CmdSerial.print(bestMeasure.avgP, 3); CmdSerial.println(" W");
-  if (settingsDirty) CmdSerial.println("AUTOBANG COMPLETE. Applied in RAM; EEPROM save pending until OFF.");
-  else CmdSerial.println("AUTOBANG COMPLETE. Settings saved.");
-  CmdSerial.print("> ");
+  TuneSerial.println();
+  TuneSerial.println("AUTOBANG RESULT");
+  TuneSerial.print("FEN="); TuneSerial.print(bestFreq); TuneSerial.println(" Hz");
+  TuneSerial.print("BLOW="); TuneSerial.print(dutyX10ToPercent(cfg.bangLowDutyX10), 2); TuneSerial.print(" %, ");
+  TuneSerial.print("NLDUTY="); TuneSerial.print(dutyX10ToPercent(bestDuty), 2); TuneSerial.print(" %, ");
+  TuneSerial.print("BHIGH="); TuneSerial.print(dutyX10ToPercent(cfg.bangHighDutyX10), 2); TuneSerial.println(" %");
+  TuneSerial.print("Voltage band="); TuneSerial.print(cfg.secMinV, 2); TuneSerial.print("-");
+  TuneSerial.print(cfg.secMaxV, 2); TuneSerial.println(" V");
+  TuneSerial.print("Measured Vsec="); TuneSerial.print(bestMeasure.avgVsec, 3);
+  TuneSerial.print(" V min/max="); TuneSerial.print(bestMeasure.minVsec, 3);
+  TuneSerial.print("/"); TuneSerial.print(bestMeasure.maxVsec, 3);
+  TuneSerial.print(" V, I=");
+  TuneSerial.print(bestMeasure.avgI, 3); TuneSerial.print(" A, Pdiag=");
+  TuneSerial.print(bestMeasure.avgP, 3); TuneSerial.println(" W");
+  if (settingsDirty) TuneSerial.println("AUTOBANG COMPLETE. Applied in RAM; EEPROM save pending until OFF.");
+  else TuneSerial.println("AUTOBANG COMPLETE. Settings saved.");
+  TuneSerial.print("> ");
   autoTuneRunning = false;
 }
 
@@ -3440,6 +3722,9 @@ void printParams() {
   CmdSerial.println("AUTOMAX, AUTOSTEP, AUTOFINE, AUTOSETTLE, AUTOMEAS");
   CmdSerial.println("LOAD1, LOAD2, LOAD3, ACTIVELOAD");
   CmdSerial.println("L1FEN/L1DUTY/L1KP/L1KI/L1GAIN/L1TAU/L1TGT/L1PMEAS/L1VMEAS/L1IMEAS, same for L2/L3");
+#if defined(STM32F410Cx)
+  CmdSerial.println("TIMING [Hz ns]: V2 OFF-only switching carrier; 500000..2000000 Hz, 20..200 ns; pair must be representable. Bench bounds require electrical validation.");
+#endif
   CmdSerial.println("Commands: ON, OFF, BOOTON, BOOTOFF, OPEN, BANG/POWER, VSBONLY, LINEFF, LFFCAL, EXPORT/COMPS, BEGINCFG/ENDCFG, PFBPRI, PFBSEC, AUTOPRE, AUTOBANG/CAL, CALLOAD n, CAL3, LOAD n, ZEROI, FAST, TURBO, ULTRA, MAXRATE, FULL, CLR, SAVE, DEFAULTS");
 }
 
@@ -3527,6 +3812,9 @@ void printCompensationValues() {
   printSetFloat("LFFMINS", cfg.lineFfMinScale, 6);
   printSetFloat("LFFMAXS", cfg.lineFfMaxScale, 6);
 
+#if defined(STM32F410Cx)
+  CmdSerial.print("TIMING "); CmdSerial.print(carrierRequestedHz); CmdSerial.print(" "); CmdSerial.println(carrierRequestedDeadNs);
+#endif
   CmdSerial.println("# EN timing and bang-bang duty");
   printSetUInt("FMIN", cfg.enFreqMinHz);
   printSetUInt("FMAX", cfg.enFreqMaxHz);
@@ -3991,6 +4279,7 @@ void printSaveStateMessage(const char *doneText) {
 void zeroCurrentOffset() {
   float sum = 0.0f;
   for (int i = 0; i < 64; i++) {
+    if (!serviceWebCalibrationWait()) return;
     rawPa2Adc = readAdcDmaChannel(ADC_DMA_I_INDEX);
     rawPa2Voltage = adcCountsToVoltage(rawPa2Adc);
     sum += rawPa2Voltage;
@@ -3998,9 +4287,9 @@ void zeroCurrentOffset() {
   }
   cfg.currentOffsetV = sum / 64.0f;
   saveSettings();
-  CmdSerial.print("Current offset set to ");
-  CmdSerial.print(cfg.currentOffsetV, 5);
-  CmdSerial.println(" V");
+  TuneSerial.print("Current offset set to ");
+  TuneSerial.print(cfg.currentOffsetV, 5);
+  TuneSerial.println(" V");
 }
 
 int8_t parseLoadSlotText(String text) {
@@ -4012,7 +4301,7 @@ int8_t parseLoadSlotText(String text) {
 }
 
 void printLoadCommandHelp() {
-  CmdSerial.println("Use LOAD 1..3, CALLOAD 1..3, AUTOBANG 1..3, CAL3, or SET LOAD1/2/3 ohms.");
+  TuneSerial.println("Use LOAD 1..3, CALLOAD 1..3, AUTOBANG 1..3, CAL3, or SET LOAD1/2/3 ohms.");
 }
 
 int8_t waitForLoadGo(uint8_t slot) {
@@ -4146,6 +4435,31 @@ uint32_t webLeaseRemainingMs() {
   return elapsed >= webLeaseDurationMs ? 0 : webLeaseDurationMs - elapsed;
 }
 
+#if defined(STM32F410Cx)
+bool webQueueCarrierTiming(const String &id) {
+  char *frame = webNewFrame();
+  if (frame == nullptr) return false;
+  uint32_t timerHz = carrierTimerClockHz();
+  uint32_t periodTicks = TIM1->ARR + 1UL;
+  uint32_t deadTicks = TIM1->BDTR & 255UL;
+  uint32_t actualHz = periodTicks ? (timerHz + periodTicks / 2UL) / periodTicks : 0;
+  uint32_t actualDeadNs = timerHz ? (uint32_t)(((uint64_t)deadTicks * 1000000000ULL + timerHz - 1UL) / timerHz) : 0;
+  snprintf(frame, WEB_FRAME_BYTES,
+           "{\"type\":\"timing\",\"protocol\":1,\"id\":\"%s\",\"ms\":%lu,\"timing\":{"
+           "\"requested_hz\":%lu,\"actual_hz\":%lu,\"requested_dead_ns\":%lu,\"actual_dead_ns\":%lu,"
+           "\"timer_hz\":%lu,\"period_ticks\":%lu,\"dead_ticks\":%lu,\"min_hz\":%lu,\"max_hz\":%lu,"
+           "\"min_dead_ns\":%lu,\"max_dead_ns\":%lu,\"revision\":%lu,\"enabled\":%s,\"busy\":%s}}",
+           id.c_str(), (unsigned long)millis(), (unsigned long)carrierRequestedHz, (unsigned long)actualHz,
+           (unsigned long)carrierRequestedDeadNs, (unsigned long)actualDeadNs,
+           (unsigned long)timerHz, (unsigned long)periodTicks, (unsigned long)deadTicks,
+           (unsigned long)CARRIER_MIN_HZ, (unsigned long)CARRIER_MAX_HZ,
+           (unsigned long)CARRIER_DEAD_MIN_NS, (unsigned long)CARRIER_DEAD_MAX_NS,
+           (unsigned long)carrierTimingRevision, systemEnabled ? "true" : "false", carrierTimingBusy() ? "true" : "false");
+  webCommitFrame(frame);
+  return true;
+}
+#endif
+
 bool webQueueTelemetry() {
   char *frame = webNewFrame();
   if (frame == nullptr) return false;
@@ -4182,10 +4496,32 @@ bool webQueueTelemetry() {
   webAppendText(frame, ",\"BHIGH\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.bangHighDutyX10));
   webAppendText(frame, ",\"STATIC\":"); webAppendUInt(frame, cfg.allowStatic100);
   webAppendText(frame, ",\"FEN\":"); webAppendUInt(frame, cfg.enFreqHz);
+  webAppendText(frame, ",\"LOAD1\":"); webAppendNumber(frame, cfg.calLoadOhms[0]);
+  webAppendText(frame, ",\"LOAD2\":"); webAppendNumber(frame, cfg.calLoadOhms[1]);
+  webAppendText(frame, ",\"LOAD3\":"); webAppendNumber(frame, cfg.calLoadOhms[2]);
+  webAppendText(frame, ",\"ACTLOAD\":"); webAppendUInt(frame, cfg.activeCalLoadSlot + 1);
+  webAppendText(frame, ",\"NLDUTY\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.noLoadDutyX10));
+  webAppendText(frame, ",\"AUTOMAX\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.autotuneMaxDutyX10));
+  webAppendText(frame, ",\"AUTOSTEP\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.autotuneCoarseStepX10));
+  webAppendText(frame, ",\"AUTOFINE\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.autotuneFineStepX10));
+  webAppendText(frame, ",\"AUTOSETTLE\":"); webAppendUInt(frame, cfg.autotuneSettleMs);
+  webAppendText(frame, ",\"AUTOMEAS\":"); webAppendUInt(frame, cfg.autotuneMeasureMs);
+  webAppendText(frame, ",\"PREMS\":"); webAppendUInt(frame, cfg.prechargeBurstMs);
+  webAppendText(frame, ",\"PRESETTLE\":"); webAppendUInt(frame, cfg.prechargeSettleMs);
+  webAppendText(frame, ",\"PREMAX\":"); webAppendUInt(frame, cfg.prechargeMaxBursts);
   webAppendText(frame, "},\"lease_ms\":"); webAppendUInt(frame, webLeaseRemainingMs());
   webAppendText(frame, ",\"lease_duration_ms\":"); webAppendUInt(frame, webLeaseDurationMs);
   webAppendText(frame, ",\"stream_ms\":"); webAppendUInt(frame, webStreamMs);
   webAppendText(frame, ",\"settings_pending\":"); webAppendText(frame, settingsDirty ? "true" : "false");
+  webAppendText(frame, ",\"calibration\":{\"state\":"); webAppendUInt(frame, webCalibrationState);
+  webAppendText(frame, ",\"kind\":"); webAppendUInt(frame, webCalibrationKind);
+  webAppendText(frame, ",\"slot\":"); webAppendUInt(frame, webCalibrationSlot < 0 ? 0 : webCalibrationSlot + 1);
+  webAppendText(frame, ",\"duty\":"); webAppendNumber(frame, dutyX10ToPercent(webCalibrationDuty));
+  webAppendText(frame, ",\"nlduty\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.noLoadDutyX10));
+  webAppendText(frame, ",\"preduty\":"); webAppendNumber(frame, dutyX10ToPercent(cfg.prechargeDutyX10));
+  webAppendText(frame, ",\"offset\":"); webAppendNumber(frame, cfg.currentOffsetV);
+  webAppendText(frame, ",\"line_ref\":"); webAppendNumber(frame, cfg.lineFfRefV);
+  webAppendText(frame, "}");
   webAppendText(frame, ",\"control_dt_us\":"); webAppendUInt(frame, lastControlDtUs);
   webAppendText(frame, ",\"control_max_us\":"); webAppendUInt(frame, maxControlDtUs);
   webAppendText(frame, ",\"control_overruns\":"); webAppendUInt(frame, controlOverrunCount);
@@ -4218,6 +4554,8 @@ void serviceWebLease() {
     webLeaseDurationMs = 0;
     webStreamMs = 0;
     webLeaseExpiredEvent = true;
+    webCalibrationAbort = true;
+    if (webCalibrationState == 1) webCalibrationState = 4;
   }
 }
 
@@ -4243,7 +4581,17 @@ void serviceWebTelemetry() {
   // samples are dropped, never accumulated into a stale telemetry backlog.
   if (webStreamMs != 0 && millis() - webLastStreamMs >= webStreamMs) {
     webLastStreamMs = millis();
-    if (webTxCount < 2) webQueueTelemetry();
+#if defined(STM32F410Cx)
+    // Paired samples use two frames and must preserve two reply/event slots.
+    if (webTxCount == 0) {
+#else
+    if (webTxCount < 2) {
+#endif
+      webQueueTelemetry();
+#if defined(STM32F410Cx)
+      webQueueCarrierTiming(String());
+#endif
+    }
   }
 }
 
@@ -4273,7 +4621,6 @@ void processWebCommand(String cmd) {
   serviceWebLease();
   // Never execute a mutation if its acknowledgement cannot be queued. The
   // serialized browser client times out and resynchronizes after congestion.
-  if (webTxCount > WEB_TX_FRAME_COUNT - 2) return;
   String body = cmd.substring(3);
   body.trim();
   String up = body;
@@ -4291,19 +4638,39 @@ void processWebCommand(String cmd) {
     up = body;
     up.toUpperCase();
   }
+  if (up == "OFF") {
+    webCalibrationAbort = true;
+    if (webCalibrationState == 1) webCalibrationState = 4;
+    setSystemEnabled(false, false);
+    setGateOutputsEnabled(false);
+    webAck(id, true, "disabled");
+    return;
+  }
+  // OFF is fail-safe even when no acknowledgement slot remains.
+  if (webTxCount > WEB_TX_FRAME_COUNT - 2) return;
   if (up == "HELLO") {
     webSessionActive = true;
     char *frame = webNewFrame();
     snprintf(frame, WEB_FRAME_BYTES,
-             "{\"type\":\"hello\",\"protocol\":1,\"fw\":\"" FW_VERSION_STRING "\",\"board\":\"" MCU_NAME "\",\"baud\":115200,\"max_line\":96,\"lease_required\":true}");
+             "{\"type\":\"hello\",\"protocol\":1,\"fw\":\"" FW_VERSION_STRING "\",\"board\":\"" MCU_NAME "\",\"baud\":115200,\"max_line\":96,\"lease_required\":true,\"capabilities\":[\"calibration_v1\",\"bench_settings_v1\""
+#if defined(STM32F410Cx)
+             ",\"carrier_timing_v1\""
+#endif
+             "]}");
     webCommitFrame(frame);
     if (id.length()) webAck(id, true, "hello");
     return;
   }
   if (!webSessionActive) { webAck(id, false, "hello_required"); return; }
   if (up == "SNAPSHOT") {
+#if defined(STM32F410Cx)
+    if (webTxCount > WEB_TX_FRAME_COUNT - 3) return;
+#endif
     webAck(id, true, "snapshot");
     webQueueTelemetry();
+#if defined(STM32F410Cx)
+    webQueueCarrierTiming(id);
+#endif
     return;
   }
   if (up == "PING") {
@@ -4333,6 +4700,23 @@ void processWebCommand(String cmd) {
     webAck(id, true, ms ? "stream_enabled" : "stream_disabled");
     return;
   }
+  if (handleWebCalibrationCommand(body, id)) return;
+  if ((webCalibrationRunning || webCalibrationState == 1) && up != "OFF") { webAck(id, false, "calibration_busy_use_off"); return; }
+#if defined(STM32F410Cx)
+  if (up.startsWith("TIMING ")) {
+    String values = body.substring(7);
+    values.trim();
+    int space = values.indexOf(' ');
+    uint32_t hz, deadNs;
+    if (space < 1 || !webParseUInt(values.substring(0, space), hz) || !webParseUInt(values.substring(space + 1), deadNs)) {
+      webAck(id, false, "use_timing_hz_ns_integers"); return;
+    }
+    const char *error = applyCarrierTiming(hz, deadNs);
+    webAck(id, error == nullptr, error == nullptr ? "timing_applied_pending" : error);
+    if (error == nullptr) webQueueCarrierTiming(id);
+    return;
+  }
+#endif
   if (up == "ON") {
     if (webLeaseRemainingMs() == 0) { webAck(id, false, "lease_required"); return; }
     if (faultLatched) { webAck(id, false, "fault_latched"); return; }
@@ -4342,12 +4726,6 @@ void processWebCommand(String cmd) {
 #endif
     setSystemEnabled(true, false);
     webAck(id, systemEnabled && !faultLatched, faultLatched ? "startup_fault" : "enabled");
-    return;
-  }
-  if (up == "OFF") {
-    setSystemEnabled(false, false);
-    setGateOutputsEnabled(false);
-    webAck(id, true, "disabled");
     return;
   }
   if (up == "CLR") {
@@ -4372,6 +4750,7 @@ void processWebCommand(String cmd) {
     return;
   }
   if (up.startsWith("LOAD ")) {
+    if (systemEnabled) { webAck(id, false, "turn_off_first"); return; }
     uint32_t slot;
     if (!webParseUInt(body.substring(5), slot) || slot < 1 || slot > CAL_LOAD_SLOT_COUNT) {
       webAck(id, false, "load_range_1_3"); return;
@@ -4408,6 +4787,12 @@ void processWebCommand(String cmd) {
     if (value.length() == 0 || end == value.c_str() || *end != '\0' || !isfinite(number) || fabsf(number) > 100000000.0f) {
       webAck(id, false, "invalid_number"); return;
     }
+    // Bench/load changes must not retune a running converter. Live voltage
+    // controls retain their existing behavior; saved-profile imports are OFF-only.
+    bool benchParameter = name.startsWith("LOAD") || name == "ACTIVELOAD" ||
+                          name.startsWith("L1") || name.startsWith("L2") || name.startsWith("L3") ||
+                          name == "NLDUTY" || name.startsWith("AUTO") || name.startsWith("PRE");
+    if (systemEnabled && benchParameter) { webAck(id, false, "turn_off_first"); return; }
     bool signedParameter = name == "VPRIOFF" || name == "VSECOFF" || name == "CSOFF" ||
                            name == "IMIN" || name == "IMAX" || name.endsWith("VMEAS") || name.endsWith("VSEC");
     if (number < 0.0f && !signedParameter) {
@@ -4430,6 +4815,89 @@ void processWebCommand(String cmd) {
   webAck(id, false, "unsupported_web_command");
 }
 
+
+// WEB_CALIBRATION_RUNNER_BEGIN
+bool serviceWebCalibrationWait() {
+  if (!webCalibrationRunning) return true;
+  serviceWebLease();
+  handleSerial();
+  if (!webCalibrationAbort) { updateAnalogFilters(true); if (checkFaults()) webCalibrationAbort = true; }
+  if (!adcDmaRunning || !gatePwmReady || faultLatched ||
+      (webCalibrationKind <= 2 && !systemEnabled) ||
+      millis() - webCalibrationStartMs >= 180000UL || webLeaseRemainingMs() == 0)
+    webCalibrationAbort = true;
+  if (webCalibrationAbort) {
+    setSystemEnabled(false, false);
+    setGateOutputsEnabled(false);
+    return false;
+  }
+  serviceWebTelemetry();
+  serviceWebTx();
+  return true;
+}
+
+bool handleWebCalibrationCommand(String body, String id) {
+  String command = body; command.trim(); command.toUpperCase();
+  if (!command.startsWith("CAL ")) return false;
+  if (webCalibrationRunning || webCalibrationState == 1) { webAck(id, false, "calibration_busy_use_off"); return true; }
+  if (systemEnabled) { webAck(id, false, "turn_off_first"); return true; }
+  if (configImportActive) { webAck(id, false, "end_config_first"); return true; }
+  if (!webSessionActive || webLeaseRemainingMs() == 0) { webAck(id, false, "lease_required"); return true; }
+  if (faultLatched || !adcDmaRunning || !gatePwmReady || !filtersPrimed) { webAck(id, false, "calibration_hardware_not_ready"); return true; }
+#if defined(STM32F410Cx)
+  if (!settingsStorageReady) { webAck(id, false, "storage_not_ready"); return true; }
+#endif
+  uint8_t kind = 0; int8_t slot = -1;
+  if (command == "CAL PRECHARGE") kind = 1;
+  else if (command == "CAL NOLOAD") kind = 2;
+  else if (command.startsWith("CAL LOAD ")) {
+    uint32_t n;
+    if (!webParseUInt(command.substring(9), n) || n < 1 || n > CAL_LOAD_SLOT_COUNT) { webAck(id, false, "load_range_1_3"); return true; }
+    kind = 2; slot = (int8_t)(n - 1);
+  } else if (command == "CAL ZERO") kind = 3;
+  else if (command == "CAL LINE") kind = 4;
+  else { webAck(id, false, "unknown_calibration"); return true; }
+  webCalibrationKind = kind; webCalibrationSlot = slot;
+  webCalibrationAbort = false; webCalibrationSucceeded = false;
+  webCalibrationState = 1; webCalibrationDuty = 0;
+  webAck(id, true, "calibration_queued");
+  return true;
+}
+
+void runWebCalibration() {
+  if (webCalibrationState != 1 || webCalibrationRunning) return;
+  if (webLeaseRemainingMs() == 0 || systemEnabled || faultLatched || webCalibrationAbort) { webCalibrationState = 4; return; }
+  SettingsSlot original = cfg;
+  bool dirtyBefore = settingsDirty;
+  ControlMode modeBefore = controlMode;
+  webCalibrationRunning = true; webCalibrationState = 2;
+  webCalibrationStartMs = millis();
+  configImportActive = true; // Algorithm saves remain RAM-only until explicit SAVE.
+  if (webCalibrationKind == 1) autoTunePrecharge();
+  else if (webCalibrationKind == 2) autoTunePower(true, webCalibrationSlot);
+  else if (webCalibrationKind == 3) {
+    zeroCurrentOffset();
+    webCalibrationSucceeded = !webCalibrationAbort;
+  } else if (webCalibrationKind == 4) {
+    updateAnalogFilters(true);
+    float v = latestVpriRaw > 1.0f ? latestVpriRaw : filteredVpri;
+    if (isfinite(v) && v >= 1.0f) { cfg.lineFfRefV = clampFloat(v, 1.0f, 1000.0f); cfg.lineFfEnable = 1; webCalibrationSucceeded = true; }
+  }
+  serviceWebLease();
+  bool success = webCalibrationSucceeded && !webCalibrationAbort && !faultLatched;
+  setSystemEnabled(false, false);
+  setGateOutputsEnabled(false);
+  autoTuneRunning = false;
+  configImportActive = false;
+  if (!success) { cfg = original; settingsDirty = dirtyBefore; }
+  else { cfg.systemEnabled = original.systemEnabled; cfg.controlMode = original.controlMode; markSettingsDirty(); }
+  controlMode = modeBefore;
+  setEnFrequencyHz(cfg.enFreqHz);
+  webCalibrationState = success ? 3 : webCalibrationAbort ? 4 : 5;
+  webCalibrationRunning = false;
+}
+// WEB_CALIBRATION_RUNNER_END
+
 void processCommand(String cmd) {
   cmd.trim();
   if (cmd.length() == 0) return;
@@ -4443,6 +4911,8 @@ void processCommand(String cmd) {
     // A plain emergency OFF remains available; other terminal commands could
     // enter blocking calibration loops and must wait until the board is reset.
     if (up == "OFF") {
+      webCalibrationAbort = true;
+      if (webCalibrationState == 1) webCalibrationState = 4;
       setSystemEnabled(false, false);
       setGateOutputsEnabled(false);
       webAck(String(), true, "disabled");
@@ -4450,6 +4920,27 @@ void processCommand(String cmd) {
     return;
   }
 
+#if defined(STM32F410Cx)
+  if (up == "TIMING") {
+    CmdSerial.print("TIMING requested Hz/ns: "); CmdSerial.print(carrierRequestedHz); CmdSerial.print(" / "); CmdSerial.println(carrierRequestedDeadNs);
+    CmdSerial.print("Exact carrier Hz = "); CmdSerial.print(carrierTimerClockHz()); CmdSerial.print(" / "); CmdSerial.println(TIM1->ARR + 1UL);
+    CmdSerial.print("Exact dead time ns = "); CmdSerial.print(TIM1->BDTR & 255UL); CmdSerial.print(" * 1000000000 / "); CmdSerial.println(carrierTimerClockHz());
+    return;
+  }
+  if (up.startsWith("TIMING ")) {
+    String values = cmd.substring(7);
+    values.trim();
+    int space = values.indexOf(' ');
+    uint32_t hz, deadNs;
+    if (space < 1 || !webParseUInt(values.substring(0, space), hz) || !webParseUInt(values.substring(space + 1), deadNs)) {
+      CmdSerial.println("Use TIMING <integer Hz> <integer ns>, while OFF."); return;
+    }
+    const char *error = applyCarrierTiming(hz, deadNs);
+    if (error) CmdSerial.println(error);
+    else CmdSerial.println("Timing applied in RAM; output stays OFF. Terminal auto-saves after 1.5 s quiet OFF (unless BEGINCFG). SAVE/ENDCFG persists timing and calibration together.");
+    return;
+  }
+#endif
   if (up == "?" || up == "STATUS") { printStatus(); return; }
   if (up == "VER" || up == "VERSION") { CmdSerial.println(FW_VERSION_STRING); return; }
   if (up == "PARAMS") { printParams(); return; }
@@ -4550,6 +5041,10 @@ void processCommand(String cmd) {
   }
   if (up == "DEFAULTS") {
     setSystemEnabled(false, false);
+#if defined(STM32F410Cx)
+    const char *timingError = applyCarrierTiming(GATE_FREQ_HZ, GATE_DEADTIME_NS);
+    if (timingError) { CmdSerial.println(timingError); return; }
+#endif
     setDefaults();
     validateSettings();
     controlMode = MODE_OPEN_LOOP;
@@ -4801,7 +5296,11 @@ void setup() {
   CmdSerial.println();
   CmdSerial.println(MCU_NAME " converter controller loaded");
   CmdSerial.print("Firmware "); CmdSerial.println(FW_VERSION_STRING);
+#if defined(STM32F410Cx)
+  CmdSerial.println(GATE_PIN_NAMES " switching carrier: TIMING reads/configures the OFF-state pair. " EN_PIN_NAME " EN throttles independently.");
+#else
   CmdSerial.println(GATE_PIN_NAMES " fixed 1 MHz. " EN_PIN_NAME " EN uses fixed-frequency voltage bang-bang throttle.");
+#endif
   CmdSerial.println("PA1 closes the voltage loop; PA2 selects load state; PA0 provides optional LINEFF.");
   CmdSerial.println("Type ? for status, VER for version.");
   printDividerAdvice();
@@ -4812,6 +5311,7 @@ void setup() {
 void loop() {
   serviceWebLease();
   handleSerial();
+  runWebCalibration();
 
   if (systemEnabled && !autoTuneRunning) {
     if (!handleStartupPrecharge()) {

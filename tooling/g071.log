@@ -1,0 +1,16 @@
+Downloading index: library_index.tar.bz2 Download failed: performing HEAD request: Head "https://downloads.arduino.cc/libraries/library_index.tar.bz2": Forbidden
+Error initializing instance: Error downloading index 'https://downloads.arduino.cc/libraries/library_index.tar.bz2': Download failed: performing HEAD request: Head "https://downloads.arduino.cc/libraries/library_index.tar.bz2": Forbidden
+Error initializing instance: Loading index file: loading json index file /workspace/tooling/arduino-data/package_index.json: open /workspace/tooling/arduino-data/package_index.json: no such file or directory
+Error initializing instance: Error loading hardware platform: discovery builtin:serial-discovery not found
+Error initializing instance: Error loading hardware platform: discovery builtin:mdns-discovery not found
+Error initializing instance: Error loading hardware platform: discovery builtin:serial-discovery not found
+Error initializing instance: Error loading hardware platform: discovery builtin:mdns-discovery not found
+Error initializing instance: Loading index file: reading library_index.json: open /workspace/tooling/arduino-data/library_index.json: no such file or directory
+
+Used library Version Path
+EEPROM       2.0.1   /workspace/tooling/arduino-data/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM
+SrcWrapper   1.0.1   /workspace/tooling/arduino-data/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/SrcWrapper
+
+Used platform            Version Path
+STMicroelectronics:stm32 2.8.1   /workspace/tooling/arduino-data/packages/STMicroelectronics/hardware/stm32/2.8.1
+Error during build: fork/exec {runtime.tools.ctags.path}/ctags: no such file or directory

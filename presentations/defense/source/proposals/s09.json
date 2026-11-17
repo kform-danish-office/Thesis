@@ -1,0 +1,182 @@
+{
+  "slide_id": "s09",
+  "title": "USB-C output stays close to the selected voltage",
+  "takeaway": {
+    "text": "The selected USB-C voltage stayed close to its setting at the measured load points, with 79.89 W calculated at the connector at 20 V and 4 A.",
+    "visible": false
+  },
+  "visible_content": {
+    "body_1": "Four fixed settings: 5, 9, 15 and 20 V",
+    "body_2": "Largest absolute average error: 0.583% at 5 V, 1 A",
+    "chart_x_axis": "Load current (A)",
+    "chart_y_axis": "Average USB-C voltage error (%)",
+    "chart_x_ticks": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "chart_y_ticks": [
+      "−0.2",
+      "0",
+      "0.2",
+      "0.4",
+      "0.6"
+    ],
+    "chart_legend": [
+      "5 V",
+      "9 V",
+      "15 V",
+      "20 V"
+    ],
+    "test_condition": "V1 · 240 V AC, 50 Hz · USB-C connector",
+    "power_callout": "79.89 W at the USB-C connector",
+    "phase_label": "Results"
+  },
+  "visual": {
+    "type": "editable_xy_scatter",
+    "layout": "Editable scatter chart with four colour- and marker-distinct series. Show the 14 measured points as discrete markers without connecting lines and include a horizontal zero reference. Place the regulation statements, test condition and connector-power callout beside or below the chart.",
+    "asset": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_dc_operating_points.csv",
+    "x_range": [
+      0,
+      4.2
+    ],
+    "y_range": [
+      -0.2,
+      0.7
+    ],
+    "series_field": "selected_v",
+    "x_field": "current_a",
+    "y_field": "error_percent",
+    "chart_data": [
+      {
+        "selected_v": 5.0,
+        "current_a": 1.0,
+        "voltage_v": 5.02913,
+        "error_percent": 0.5826
+      },
+      {
+        "selected_v": 5.0,
+        "current_a": 2.0,
+        "voltage_v": 4.9963,
+        "error_percent": -0.074
+      },
+      {
+        "selected_v": 5.0,
+        "current_a": 3.0,
+        "voltage_v": 5.02118,
+        "error_percent": 0.4236
+      },
+      {
+        "selected_v": 9.0,
+        "current_a": 1.0,
+        "voltage_v": 9.02079,
+        "error_percent": 0.231
+      },
+      {
+        "selected_v": 9.0,
+        "current_a": 2.0,
+        "voltage_v": 9.01365,
+        "error_percent": 0.151666667
+      },
+      {
+        "selected_v": 9.0,
+        "current_a": 3.0,
+        "voltage_v": 9.00057,
+        "error_percent": 0.006333333
+      },
+      {
+        "selected_v": 15.0,
+        "current_a": 1.0,
+        "voltage_v": 15.0104,
+        "error_percent": 0.069333333
+      },
+      {
+        "selected_v": 15.0,
+        "current_a": 2.0,
+        "voltage_v": 14.9949,
+        "error_percent": -0.034
+      },
+      {
+        "selected_v": 15.0,
+        "current_a": 3.0,
+        "voltage_v": 14.9835,
+        "error_percent": -0.11
+      },
+      {
+        "selected_v": 20.0,
+        "current_a": 0.25,
+        "voltage_v": 20.0491,
+        "error_percent": 0.2455
+      },
+      {
+        "selected_v": 20.0,
+        "current_a": 3.7,
+        "voltage_v": 19.9909,
+        "error_percent": -0.0455
+      },
+      {
+        "selected_v": 20.0,
+        "current_a": 3.8,
+        "voltage_v": 19.9813,
+        "error_percent": -0.0935
+      },
+      {
+        "selected_v": 20.0,
+        "current_a": 3.9,
+        "voltage_v": 19.9832,
+        "error_percent": -0.084
+      },
+      {
+        "selected_v": 20.0,
+        "current_a": 4.0,
+        "voltage_v": 19.9732,
+        "error_percent": -0.134
+      }
+    ],
+    "chart_data_description": "Every loaded DC-coupled observation with a measured average USB-C voltage in the source CSV. Positive error means measured average above the selected voltage. Errors are calculated from the recorded average voltages and rounded to nine decimal places for chart data."
+  },
+  "speaker_notes": "The carrier capture shows that the converter is switching under load. These DC measurements show what the supply delivered at the USB-C connector. The MCU regulated the secondary bulk supply feeding the USB-C Power Delivery stage, and that stage regulated the connector to the selected voltage. The four series show fixed settings of five, nine, fifteen and twenty volts. Each marker is the average connector-voltage error at a measured current. The largest absolute error was 0.583 percent at five volts and one ampere. At the highest recorded DC point, the measured average was 19.9732 volts at four amperes, giving 79.89 watts at the connector.",
+  "transition": "The input-to-connector power balance shows the heat cost of delivering that output.",
+  "duration_seconds": 80,
+  "sources": [
+    {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_dc_operating_points.csv",
+      "passage": "All 14 loaded rows with coupling DC and recorded VBUS average",
+      "supports": "Recorded selected voltages, load currents and USB-C average voltages; chart error derived as (average − selected)/selected × 100."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/03_Steady_State.tex",
+      "passage": "Steady-State Output Regulation and equation for average-voltage error",
+      "supports": "Voltage-error definition, largest absolute loaded error 0.583% at 5 V and 1 A, PD output and MCU bulk roles, measurement limits."
+    },
+    {
+      "path": "/workspace/papers/apec-digest/sections/results.tex",
+      "passage": "V1 Connector Output and measured 20 V / 4 A point",
+      "supports": "Four selected settings, measured connector average of 19.9732 V at 4 A, and calculated connector output of 79.8928 W."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/14_Revised_Plan_Status.tex",
+      "passage": "Project requirements and V1 connector output",
+      "supports": "100 W continuous target and 65 W continuous minimum; V1 connector point does not establish continuous target."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "14 loaded DC-coupled measurements included; no-load rows and AC-only 4.7 A capture excluded.",
+      "15 V at 2 A and 3 A retained: input-power disagreement does not invalidate the separately recorded DC-coupled voltage values.",
+      "20 V includes 0.25 A and 3.7, 3.8, 3.9, 4.0 A; no 1, 2 or 3 A 20 V DC observations exist in the asset.",
+      "Largest absolute error is +0.5826%, rounded to +0.583%, from 5.02913 V at 5 V and 1 A.",
+      "Discrete markers prevent an unsupported inference of the shape between measured load currents.",
+      "The chart concerns average voltage; it makes no ripple compliance or transient settling claim.",
+      "Connector output is calculated as 19.9732 V × 4 A = 79.8928 W, rounded to 79.89 W.",
+      "The preceding 20 V / 4.7 A scope capture is a separate acquisition and is not used to calculate connector power.",
+      "The 79.89 W point exceeds the 65 W level but does not establish either continuous rating."
+    ],
+    "unresolved_questions": [],
+    "timing": "80 seconds including transition; allow time to identify the series and maximum deviation.",
+    "timing_reallocation": "Astra reassigned 80 seconds to accommodate the 45-second V1 thermal slide while preserving the 25-minute talk. Spoken notes, measurements and visible content are unchanged."
+  },
+  "revision": 3
+}

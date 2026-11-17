@@ -1,0 +1,25 @@
+{
+  "assets": [
+    {
+      "name": "Thesis_V1_V2_V3.pdf",
+      "bytes": 20458034,
+      "sha256": "63f83945d796caee028581d038323843846646a86b648ab74af8db62778744a6",
+      "matches_local": true
+    },
+    {
+      "name": "Thesis_V1_V2_V3_Source.zip",
+      "bytes": 91997832,
+      "sha256": "d9a488969d9a73d9649be2ecd07e9819b63edd646e05f433649fc1c102bbec7d",
+      "matches_local": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 179,
+      "sha256": "a4f500593d86469294d290c98b31fcf63ec596988331309114536faad711127f",
+      "matches_local": true
+    }
+  ],
+  "source_zip_crc": "PASS",
+  "source_zip_entries": 486,
+  "reference_checkout": "clean; HEAD unchanged"
+}

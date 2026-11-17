@@ -1,0 +1,67 @@
+[
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "This removed the hot component; total loss reduction remains unquantified\nwithout matched input/output power measurements.\n",
+    "new": ""
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "give an ideal series resonance near \\SI{0.96}{\\mega\\hertz}. Installed V2\nresonance was not measured, and the fitted transformer and loaded switching\nwaveforms remain to be identified.",
+    "new": "give an ideal series resonance near \\SI{0.96}{\\mega\\hertz}. The in-circuit\nresonance still needs to be measured."
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "timing changes, but this observation does not verify ZVS. Synchronized\nswitch-voltage, gate-command, and current captures are required. The firmware\nversion, timing readback, and effective switch dead time were not recorded;\narchived-source timing is described in Section~\\ref{sec:hw-v2}.",
+    "new": "timing changes. ZVS still needs to be checked from switch voltage and current\nat turn-on. The earlier controller timing is described in\nSection~\\ref{sec:hw-v2}."
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "\\SIrange{3.3}{3.6}{\\ampere} at the secondary output. No corresponding\nvoltage was recorded, so this range is not converted into a power result\nor substituted for the earlier matched connector measurements.\n\nThe secondary winding was suspected as a limit, without separate loss\nmeasurements to distinguish magnetic, interconnect, rectifier, resonant,\nand control effects. V2 performance was qualitatively comparable to V1,\nwhile the modified tank shifted the main heating concern to the input\nsection. A quantitative efficiency and temperature comparison still requires matched tests.",
+    "new": "\\SIrange{3.3}{3.6}{\\ampere} at the secondary output. The winding was\nsuspected to limit further power increase. Output behavior was comparable\nto V1, while the modified tank shifted the main heating concern to the\ninput bridge."
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "diode replacement. The devices were reported as SiC rectifiers; original\nand replacement part numbers were not recorded.",
+    "new": "diode replacement."
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "In a reported test at",
+    "new": "In a test at"
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "The setpoint does not establish delivered power or continuous capability.\n",
+    "new": ""
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "Figure~\\ref{fig:v2-bridge-thermal-observation} is from a reported\n\\SI{95}{\\watt} run, without identification as setpoint or measured output.\nIts relationship to the separately reported \\SI{100}{\\watt} test and\ntemperature history is unconfirmed.",
+    "new": "Figure~\\ref{fig:v2-bridge-thermal-observation} shows the bridge heating\nduring a \\SI{95}{\\watt} run."
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "V2 thermal image during the reported \\SI{95}{\\watt} run.",
+    "new": "V2 thermal image during the \\SI{95}{\\watt} run."
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": " The image does not identify individual diode junctions or show which diode and timing changes were fitted.",
+    "new": ""
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "Limited bridge copper and a possible single-via interlayer bottleneck were\nsuspected. Either could increase resistive heating or restrict heat spreading,\nbut the fitted path and voltage drop were not measured. Persistence after\ndiode replacement leaves the loss mechanism unresolved.",
+    "new": "Limited bridge copper and a possible single-via connection between layers\nwere suspected to contribute to the heating. Narrow current paths add\nresistance and restrict heat spreading."
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "The next layout will widen current paths and increase heat-spreading copper;\nrectifier relocation is also under consideration. Matched tests are required\nto assess these changes. V2 operation with the leakage-only tank was achieved,\nbut bridge heating, total loss reduction, ZVS, and continuous capability\nremain to be resolved through synchronized electrical and thermal tests.",
+    "new": "Wider current paths and more heat-spreading copper are planned for the next\nlayout. Moving the rectifiers is also being considered to reduce local\nheating."
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "The V2 assembly and thermal-camera arrangement are documented in\nFigure~\\ref{fig:v2-board-test-photos}. These views show the board and bench\narrangement, but do not establish the exact fitted configuration during the\n\\SI{95}{\\watt} thermal run.",
+    "new": "The V2 board and thermal-camera setup are shown in\nFigure~\\ref{fig:v2-board-test-photos}."
+  }
+]

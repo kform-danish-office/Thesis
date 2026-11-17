@@ -1,0 +1,46 @@
+{
+  "startedAt": "2026-10-25T05:08:58.934Z",
+  "server": "Reused existing 127.0.0.1:4173; no server process owned",
+  "checks": [
+    {
+      "name": "Synthetic V2 timing, coupled quantization, OFF, save and resets",
+      "pass": true
+    },
+    {
+      "name": "Unsupported V2 / STM32F410 PWR-2.0.3",
+      "pass": true
+    },
+    {
+      "name": "Unsupported V1 / STM32G071 ",
+      "pass": true
+    },
+    {
+      "name": "Unsupported unrecognized fixture ",
+      "pass": true
+    },
+    {
+      "name": "Missing timing stays blank while telemetry fresh",
+      "pass": true
+    },
+    {
+      "name": "USB recording retains initial and per-sample actual timing; stale null and CSV blanks; timing events deduplicate",
+      "pass": true
+    },
+    {
+      "name": "USB calibration, conflicts, stop and save regression",
+      "pass": true
+    },
+    {
+      "name": "Same-command readback required in browser and timeout preserves draft without automatic ON",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "recording": {
+    "samples": 41,
+    "staleSamples": 5,
+    "timingEvents": 2
+  },
+  "finishedAt": "2026-10-25T05:09:14.096Z",
+  "pass": true
+}

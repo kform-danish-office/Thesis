@@ -1,0 +1,75 @@
+{
+  "slide_id": "s06",
+  "title": "Resonant transfer and shared-node commutation",
+  "takeaway": {
+    "text": "The isolated tank transfers energy near 1 MHz, while the signed sum of both branch currents moves the shared switch node during dead time.",
+    "visible": false
+  },
+  "visible_content": {
+    "body_1": "Near 1 MHz: isolated power transfer",
+    "body_2": "Pump + resonant currents move V_SW during dead time",
+    "phase_label": "Circuit",
+    "embedded_figure_labels": [
+      "Q_HS",
+      "Q_LS",
+      "I_LP",
+      "I_RES_PRI",
+      "V_SW",
+      "C_DC",
+      "V_DC",
+      "C_RES",
+      "L_RES",
+      "V_RES",
+      "I_RES_SEC",
+      "D_R1",
+      "D_R2",
+      "D_R3",
+      "D_R4",
+      "C_DC1",
+      "Power Stage"
+    ]
+  },
+  "visual": {
+    "type": "original_digest_figure_crop",
+    "asset": "original-digest-power-stage.png",
+    "layout": "Use the original embedded power-stage figure, cropped approximately to x=665–1495 and y=125–650 pixels, showing the half bridge, resonant branch, transformer and secondary rectifier. Retain all native labels; no redrawing or relabeling. Place the two body statements beneath the figure.",
+    "annotations": "Native I_LP and I_RES_PRI arrows are the figure’s reference directions.",
+    "revision": "Original digest Figure 1, page 2; the L_RES symbol represents the total series tank inductance, including transformer leakage."
+  },
+  "speaker_notes": "The charge pump shapes the input current, but the same switching node also drives the isolated power path. Starting at the half-bridge switching node, whose voltage is marked V_SW, follow the series capacitor C_RES and inductance L_RES to the transformer primary. The series tank inductance combines transformer leakage and the added inductance in the original tank calculation. Those values placed the estimated resonance close to the nominal one megahertz carrier. The transformer transfers energy across the isolation barrier, and the secondary rectifier charges the bulk supply feeding the USB-C stage.\n\nNow return to the half bridge. During dead time both switches are commanded off, and current moves the switch-node voltage by charging and discharging the associated capacitances. The relevant current is the signed sum of the pump and primary resonant currents at the shared node. Depending on their directions, the two currents can help each other or oppose each other. The available commutation current therefore changes with load, line phase, and the state of the tank when a burst restarts. Its direction and magnitude need to move the node in the available interval; the resonant current alone is not enough to describe the transition.\n\nThe carrier sets the fast energy-transfer cycle. The amount of switching must still follow the power demanded at the output.",
+  "transition": "That is the role of the burst controller: it regulates the secondary bulk supply by adjusting how much of the carrier is enabled.",
+  "duration_seconds": 125,
+  "sources": [
+    {
+      "path": "/workspace/papers/apec-digest/sections/topology.tex",
+      "passage": "Shared Half Bridge and Charge Pump; Isolated Resonant Branch",
+      "supports": "Shared SW, original series capacitor and added inductance with transformer leakage, nominal carrier and estimated resonance, secondary rectification, signed current sum, changes with line, load and burst history."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/07_Hardware/06_Resonant_Output.tex",
+      "passage": "Resonant Path, Transformer, and Rectifier",
+      "supports": "SW-to-primary series path and secondary rectifier feeding the bulk supply."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/02_Background/04_Soft_Switching_GaN.tex",
+      "passage": "High-Frequency GaN Switching",
+      "supports": "Charge and discharge of half-bridge capacitances during dead time and direction and magnitude of commutation current."
+    },
+    {
+      "path": "/workspace/source-archives/APEC_2027_Digest_USB_PD.pdf",
+      "passage": "Figure 1, page 2",
+      "supports": "Original diagram of shared half bridge, resonant branch, transformer and secondary rectifier; native symbols and current reference arrows."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "1 MHz is nominal carrier; the original calculated series resonance is close to it, not a measured installed resonance.",
+      "The original figure represents the total series tank inductance as L_RES, including transformer leakage and the added inductance in the original tank calculation; it does not separately draw the physical added inductor.",
+      "The signed sum of pump and primary resonant currents determines available commutation current; either contribution can aid or oppose the other.",
+      "No achieved ZVS claim or repeat of the measured waveform limitation."
+    ],
+    "unresolved_questions": [],
+    "timing": "125 seconds including transition; about 210 spoken words with time to point to the circuit."
+  },
+  "revision": 3
+}

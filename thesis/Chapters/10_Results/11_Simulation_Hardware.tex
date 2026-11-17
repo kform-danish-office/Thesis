@@ -1,0 +1,28 @@
+\section{How the Models Differ from the Prototype}
+\label{sec:res-simhw}
+
+The supplied LTspice studies were used to interpret charge-pump and resonant
+operation. They do not model the manufactured prototype with its final
+inductors, GaN package, PCB parasitics, USB-C interface, and sampled PA10 burst
+controller.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of the supplied models with the prototype measurements.}
+\label{tab:simulation-hardware}
+\begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.34\textwidth}X@{}}
+\toprule
+Quantity & Measurements & Model comparison\\
+\midrule
+Carrier and resonant switching & Oscilloscope captures and raw waveform exports & Shows circuit operation; no numerical match\\
+Switch-node ringing & Selected screenshots and raw node records & Qualitative only; layout and probe parasitics are not matched\\
+Output regulation and detail & DC records and separate AC-detail captures & Experimental results; no matching final model\\
+Input current and harmonics & Logged analyzer entries and transcribed spectra & Experimental results; filter, source impedance, and controller are not matched\\
+DC-link ripple & No matched model/measurement pair & No numerical comparison\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The prototype results are compared with the requirements at the tested loads.
+A predictive model comparison requires measured magnetics, component/layout
+parasitics, the implemented controller, and matched input and load.

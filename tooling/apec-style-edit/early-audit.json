@@ -1,0 +1,602 @@
+{
+  "changed_files": 54,
+  "before_words": 13106,
+  "after_words": 10272,
+  "errors": [],
+  "changes": [
+    {
+      "path": "Chapters/02_Background/01_Offline_ACDC_PFC.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 397,
+      "after_words": 292
+    },
+    {
+      "path": "Chapters/02_Background/02_Charge_Pump_Principle.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 294,
+      "after_words": 222
+    },
+    {
+      "path": "Chapters/02_Background/03_ClassDE_Resonant.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 277,
+      "after_words": 204
+    },
+    {
+      "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 282,
+      "after_words": 228
+    },
+    {
+      "path": "Chapters/02_Background/05_Reference_2020.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 234,
+      "after_words": 207
+    },
+    {
+      "path": "Chapters/02_Background/06_Reference_2021.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 310,
+      "after_words": 251
+    },
+    {
+      "path": "Chapters/02_Background/07_USBC_Context.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 235,
+      "after_words": 147
+    },
+    {
+      "path": "Chapters/02_Background/08_Research_Gap.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 127,
+      "after_words": 113
+    },
+    {
+      "path": "Chapters/02_Background/chapter.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 64,
+      "after_words": 48
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/01_Use_Case.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 192,
+      "after_words": 166
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 496,
+      "after_words": 418
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 449,
+      "after_words": 375
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/04_USBC_Interface.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 232,
+      "after_words": 149
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 271,
+      "after_words": 213
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/06_System_Architecture.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 566,
+      "after_words": 490
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 364,
+      "after_words": 306
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 285,
+      "after_words": 277
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 739,
+      "after_words": 675
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/chapter.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 66,
+      "after_words": 48
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 315,
+      "after_words": 244
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 363,
+      "after_words": 285
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 242,
+      "after_words": 219
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/04_Pump_Capacitor.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 205,
+      "after_words": 147
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 214,
+      "after_words": 152
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/06_DC_Link.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 231,
+      "after_words": 174
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/07_Resonant_Stage.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 321,
+      "after_words": 271
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/08_ZVS.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 271,
+      "after_words": 206
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 298,
+      "after_words": 215
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 243,
+      "after_words": 162
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/11_Design_Summary.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 257,
+      "after_words": 230
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/chapter.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 81,
+      "after_words": 53
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 169,
+      "after_words": 107
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 282,
+      "after_words": 227
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 128,
+      "after_words": 100
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 169,
+      "after_words": 128
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 166,
+      "after_words": 103
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/06_Steady_State.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 163,
+      "after_words": 102
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 233,
+      "after_words": 149
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 465,
+      "after_words": 350
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 372,
+      "after_words": 274
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/10_Data_Limitations.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 163,
+      "after_words": 93
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/chapter.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 82,
+      "after_words": 56
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 194,
+      "after_words": 179
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 248,
+      "after_words": 216
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 214,
+      "after_words": 165
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/04_Mounting_Concept.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 99,
+      "after_words": 58
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/05_Footprint_Interconnection.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 105,
+      "after_words": 75
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 91,
+      "after_words": 66
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 109,
+      "after_words": 70
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/08_Parasitics.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 202,
+      "after_words": 168
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 107,
+      "after_words": 70
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 172,
+      "after_words": 159
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 140,
+      "after_words": 98
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/chapter.tex",
+      "checks": {
+        "math": true,
+        "protected_environments": true,
+        "command_arguments": true,
+        "newline": true
+      },
+      "before_words": 112,
+      "after_words": 72
+    }
+  ]
+}

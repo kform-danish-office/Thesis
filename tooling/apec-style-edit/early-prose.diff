@@ -1,0 +1,888 @@
+--- before/Chapters/02_Background/01_Offline_ACDC_PFC.tex
++++ after/Chapters/02_Background/01_Offline_ACDC_PFC.tex
+@@ -1,7 +1,7 @@
+ \section{Offline Conversion and Input Power Quality}
+ \label{sec:bg-pfc}
+ 
+-The input stage has to draw power from the mains while the rest of the supply stores energy, provides isolation, and regulates the output. A bridge rectifier followed by a large capacitor is simple, but it draws current mainly when the rectified line exceeds the capacitor voltage. Those narrow current pulses contain harmonics and require more RMS current for the same real power. Input-current shaping addresses that problem.
++A capacitor-input bridge rectifier conducts mainly near the mains-voltage peaks, producing narrow current pulses, harmonic distortion, and increased RMS current for a given real power. Input-current shaping extends conduction over the line cycle while supplying the DC link.
+ 
+ Power factor compares real input power with apparent power:
+ \begin{equation}
+@@ -17,14 +17,14 @@
+ \end{equation}
+ where \(\phi_1\) is the phase displacement of the current fundamental. Both phase displacement and current distortion reduce power factor.
+ 
+-In a conventional two-stage supply, the PFC front end shapes current and controls the high-voltage bus. The isolated DC--DC stage regulates the output. The charge-pump architecture shares switching devices between these tasks. It uses fewer active-stage components, but an output-control change can then affect the input current.
++Conventional two-stage supplies separate input-current shaping and DC-link regulation from isolated output regulation. The charge-pump architecture shares switching devices between these functions, reducing active-stage component count but coupling output control to input-current quality.
+ 
+-The revised plan calls for a comparison of charge-pump and boost-PFC architectures in efficiency, component stress, power density, and control complexity \cite{projectOctoberPlan}. The comparison needs consistent conditions. Efficiency would be compared at the same operating point and power boundary. Measured voltage and current waveforms would be used to compare stress. Power density would be compared using complete assembly volume and verified continuous output. Control complexity includes the sensing, actuators, startup, regulation, and fault handling needed for each circuit. The present tests cover the charge-pump supply. A matched boost-PFC test is still needed for a numerical architecture comparison.
++The revised plan compares charge-pump and boost-PFC architectures in efficiency, component stress, power density, and control complexity \cite{projectOctoberPlan}. A numerical comparison requires matched operating points and power boundaries, measured device stress, and complete assembly volumes at verified continuous output. Control complexity includes sensing, actuation, startup, regulation, and fault handling. Only the charge-pump supply was tested; a matched boost-PFC benchmark remains outstanding.
+ 
+ Even with an ideal resistive input, single-phase mains power pulsates. For sinusoidal voltage and current in phase,
+ \begin{equation}
+ p_{\mathrm{in}}(t)=P_{\mathrm{in}}\left[1-\cos(2\omega_l t)\right].
+ \end{equation}
+-The supply must store the difference between this pulsating input and the load demand. Raising the switching frequency reduces the energy handled within each switching period, but it does not remove the twice-line-frequency storage requirement. This distinction becomes important when sizing the DC-link capacitor and assessing bulk-voltage ripple.
++The DC link buffers the mismatch between pulsating input power and load demand. Higher switching frequency reduces per-cycle energy but does not remove the twice-line-frequency storage and ripple requirements.
+ 
+-In this converter, the charge-pump branch shapes input current without a separate boost-PFC current loop. The DC link and secondary capacitance buffer power variation. Since both conversion paths use the same switching sequence, input power quality must be checked again after secondary-voltage control is introduced.
++The charge-pump branch shapes input current without a separate boost-PFC current loop. The DC link and secondary capacitance buffer the power imbalance. Because both paths share the switching sequence, input power quality must be evaluated with secondary-voltage control active.
+--- before/Chapters/02_Background/02_Charge_Pump_Principle.tex
++++ after/Chapters/02_Background/02_Charge_Pump_Principle.tex
+@@ -12,10 +12,10 @@
+ \end{equation}
+ If the diode and clamp sequence makes \(\Delta v_C\) approximately equal to the rectified line voltage, the input acts like a conductance proportional to \(f_s\CP\).
+ 
+-This relationship depends on the capacitor completing its charge and discharge excursion. Low DC-link voltage, incomplete clamping, or interrupted switching changes the charge moved in each cycle. The modified pump in the 2021 reference uses an inductor and clamp paths to control these intervals and separates the pump tank from the isolated-output tank \cite{ammar2021led}.
++Complete capacitor charge and discharge are required for this relationship. Low DC-link voltage, incomplete clamping, and interrupted switching reduce or alter the per-cycle charge. The 2021 reference adds an inductor and clamp paths to control these intervals while separating the pump and isolated-output tanks \cite{ammar2021led}.
+ 
+-The capacitor and inductor therefore have different roles. Capacitance sets the charge available per active cycle; inductance sets the current slope, peak, and clamp timing. More capacitance can transfer more power, but the shared half bridge must carry the added pump current. These relationships are used later to estimate power transfer, current stress, and commutation requirements.
++Capacitance sets the available charge per active cycle; inductance sets current slope, peak current, and clamp timing. Increasing capacitance can increase transfer, with corresponding pump-current and commutation demands on the shared half bridge.
+ 
+-Burst control changes the number of active cycles rather than their carrier frequency. During a burst, the pump follows its switching sequence; between bursts, it receives no commanded excitation. With a roughly constant burst density, average input conductance is reduced over the mains cycle. If density changes with line phase or secondary ripple, it also changes the current envelope. The burst controller can therefore affect harmonic distortion.
++Burst control varies active-cycle density at fixed carrier frequency. Charge transfer follows the pump sequence during each packet; commanded excitation is inhibited between packets. Constant density scales the average input conductance; density varying with line phase or secondary ripple distorts the input-current envelope.
+ 
+-Inherent PFC refers to this charge-transfer mechanism and its expected current envelope. PF and THD still need to be measured on the assembled supply because the load and burst controller change how often the pump operates.
++Inherent PFC describes the charge-transfer mechanism. Assembled-supply PF and THD remain dependent on load and burst control and require measurement.
+--- before/Chapters/02_Background/03_ClassDE_Resonant.tex
++++ after/Chapters/02_Background/03_ClassDE_Resonant.tex
+@@ -1,17 +1,17 @@
+ \section{Class-DE Resonant Conversion}
+ \label{sec:bg-classde}
+ 
+-The second power path takes energy from the DC link through the half bridge, series resonant network, transformer, and secondary rectifier. The switch node applies a rectangular voltage, while the tank current is approximately sinusoidal. The transformer provides isolation and voltage reduction, and the rectifier charges the secondary bulk capacitor. This is the node regulated by the controller.
++The isolated path comprises the half bridge, series resonant network, transformer, and secondary rectifier. The rectangular switch-node voltage excites approximately sinusoidal tank current. The rectifier charges the secondary bulk capacitor, whose voltage is regulated by the controller.
+ 
+ For series inductance \(\LRES\) and capacitance \(\CRES\),
+ \begin{equation}
+ f_0=\frac{1}{2\pi\sqrt{\LRES\CRES}}.
+ \label{eq:bg-series-resonance}
+ \end{equation}
+-The first-harmonic approximation replaces the bridge voltage with its fundamental and the rectifier/load with an equivalent resistance. This gives an initial estimate of gain and component values when the tank current is approximately sinusoidal. It is less suitable at burst edges, during discontinuous rectifier conduction, or at no load, where the assumed steady load no longer describes the circuit.
++The first-harmonic approximation represents the bridge by its fundamental voltage and the rectifier/load by an equivalent resistance. It supports initial gain and component sizing for approximately sinusoidal tank current. Burst transitions, discontinuous rectifier conduction, and no-load operation violate its steady-state load assumptions.
+ 
+-The discrete inductor and transformer leakage form the series inductance. The magnetizing branch remains separate. Its current still flows in the primary and matters especially at light load. The magnetizing branch can be omitted from a first series-resonance calculation, but its effects on current, loss, and commutation still need to be included.
++Discrete inductance and transformer leakage form the series branch; magnetizing inductance remains a separate branch. Although omitted from the first series-resonance estimate, magnetizing current contributes to primary RMS current, loss, and commutation, particularly at light load.
+ 
+-Above resonance, a simple loaded series tank presents an inductive input impedance. Its lagging current can move the switch node during dead time. The pump contributes current to that same node, so assessing soft switching requires both paths rather than the output tank alone.
++Above resonance, the loaded series tank presents an inductive impedance, providing lagging current for switch-node commutation during dead time. Pump current also contributes at the shared node and must be included in the soft-switching assessment.
+ 
+-The reference LED-driver design uses a series-tank approximation that neglects magnetizing current; an LLC model retains finite magnetizing inductance in its gain function \cite{ammar2021led}. The simpler equations give an initial check of the design values. The prototype's magnetizing branch and burst operation are included when explaining switching and transients.
++The reference LED-driver approximation neglects magnetizing current, whereas an LLC gain model retains finite magnetizing inductance \cite{ammar2021led}. The series approximation is used for initial sizing; the magnetizing branch and burst dynamics are retained when interpreting prototype switching and transients.
+--- before/Chapters/02_Background/04_Soft_Switching_GaN.tex
++++ after/Chapters/02_Background/04_Soft_Switching_GaN.tex
+@@ -1,7 +1,7 @@
+ \section{High-Frequency GaN Switching}
+ \label{sec:bg-gan}
+ 
+-At \SI{1}{\mega\hertz}, a small energy loss per transition can become a substantial power loss. The basic relationship is
++At \SI{1}{\mega\hertz}, switching loss is sensitive to the energy dissipated per transition:
+ \begin{equation}
+ P_{\mathrm{sw}}\approx f_s(E_{\mathrm{on}}+E_{\mathrm{off}}).
+ \end{equation}
+@@ -11,10 +11,10 @@
+ \end{equation}
+ The current must also have the correct direction and move the node to the required voltage before the available dead time ends.
+ 
+-GaN allows short switching intervals, but the fast edges make parasitic effects in the physical connections more important. Interconnect inductance produces a voltage \(L\,\mathrm{d}i/\mathrm{d}t\), and capacitance couples switch-node motion into sensing and control. The switching analysis therefore has to include gate-drive layout, local decoupling, commutation-loop area, and return paths.
++Fast GaN transitions increase sensitivity to interconnect inductance, producing \(L\,\mathrm{d}i/\mathrm{d}t\) overshoot, and to capacitive coupling from the switch node into sensing and control. Gate-drive layout, decoupling, commutation-loop area, and return paths therefore affect switching behavior.
+ 
+-Dead time has to give the node enough time to move without adding excessive reverse conduction. Too little can leave the transition incomplete or permit cross conduction; too much adds loss. The required interval changes with bus voltage, current, device capacitance, and tank state. A burst restart is therefore a separate switching condition from the middle of an established burst.
++Dead time must complete node commutation without excessive reverse conduction. An insufficient interval can leave residual turn-on voltage or allow cross conduction; an excessive interval increases loss. The required interval depends on bus voltage, current, capacitance, and tank state, so burst restart is assessed separately from established switching.
+ 
+-An integrated LMG2652 half bridge was used in the prototype. The inherited models instead use discrete GaN devices and an external driver, with different capacitances, delays, sensing response, and thermal paths. Their waveforms illustrate the operating principle. Switching behavior in the assembled prototype is assessed from measurements.
++The prototype uses an integrated LMG2652 half bridge. The inherited discrete-GaN and external-driver models differ in capacitance, delay, sensing response, and thermal paths. They establish operating principles; measurements establish switching behavior in the assembled stage.
+ 
+-The measurement must resolve the transition. Probe capacitance loads the node, and bandwidth, loop area, and common-mode rejection affect the capture. A ZVS check needs the switch-node voltage aligned with the incoming gate command or device turn-on time. Chapter~\ref{ch:results} applies that requirement to the available captures.
++A ZVS assessment requires switch-node voltage aligned with the incoming gate command or device turn-on time, with adequate bandwidth and controlled probe loading, loop area, and common-mode error. Chapter~\ref{ch:results} applies these criteria to the available captures.
+--- before/Chapters/02_Background/05_Reference_2020.tex
++++ after/Chapters/02_Background/05_Reference_2020.tex
+@@ -23,6 +23,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-For the present design, changing switching frequency matters because it changes both pump charge transfer and resonant gain. The prototype adds different magnetics, isolation, a downstream regulator, and sampled burst control. The reference is used to explain circuit operation. Performance is measured on the complete prototype.
++Frequency changes affect both charge transfer and resonant gain. The prototype adds different magnetics, isolation, a downstream regulator, and sampled burst control; its complete-system performance is therefore measured independently.
+ 
+-The charge-transfer analysis from this rectifier is used here. The next reference is more closely related to the prototype: the pump and isolated-output paths are separated while a shared half bridge is retained.
++The charge-transfer analysis is retained. The following isolated-driver architecture provides the closer precedent, with separate pump and output paths sharing one half bridge.
+--- before/Chapters/02_Background/06_Reference_2021.tex
++++ after/Chapters/02_Background/06_Reference_2021.tex
+@@ -1,7 +1,7 @@
+ \section{Reference Integrated Resonant LED Driver}
+ \label{sec:bg-ref2021}
+ 
+-The 2021 LED driver keeps a shared half bridge and driver but separates the charge-pump and isolated class-DE tanks \cite{ammar2021led}. The pump has its own inductor and clamp paths; the output tank has a series resonant network and transformer. This allows the isolated-stage gain to be chosen more independently, although both paths still share the bus and switching operation.
++The 2021 LED driver separates the charge-pump and isolated class-DE tanks while retaining a shared half bridge and driver \cite{ammar2021led}. Independent pump inductance and clamp paths permit more independent selection of isolated-stage gain, while the bus and switching sequence remain shared.
+ 
+ An output of up to \SI{42}{\watt} was reported at \SI{1}{\mega\hertz}, with PF of 0.99, input-current THD of 6\%, and full-load efficiency of approximately 90\%. The carrier cycles were grouped into bursts with a \SI{20}{\kilo\hertz} enable signal to regulate LED current. Average output power could change while the carrier stayed at its designed resonant operating point.
+ 
+@@ -20,6 +20,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The separate paths still meet at the half bridge, which makes pump current important for ZVS. In the reference, its amplitude can exceed the primary-referred output-tank current, and its inductive phase helps commutation over much of the line cycle. Leaving it out would miss a major part of the current available to move the switch node.
++Pump current contributes directly to half-bridge commutation. In the reference, its amplitude can exceed the primary-referred output-tank current, and its inductive phase supports ZVS over much of the line cycle. Omitting this branch would understate available commutation current.
+ 
+-The same burst-control principle was adapted for secondary-voltage regulation in this project. The LED driver controls a normally connected current load; the USB-C supply must keep a usable bulk voltage when the connector load changes or disappears. That change required a different feedback variable, a startup sequence, and explicit no-load behavior. The downstream stage then supplies the selected VBUS setting.
++Burst control was adapted from LED-current regulation to secondary-bulk-voltage regulation. A detachable USB-C load requires startup and no-load states that retain a usable bulk voltage through attachment and removal. The downstream stage supplies the selected VBUS setting.
+--- before/Chapters/02_Background/07_USBC_Context.tex
++++ after/Chapters/02_Background/07_USBC_Context.tex
+@@ -1,10 +1,10 @@
+ \section{USB-C Output Regulation}
+ \label{sec:bg-usbc}
+ 
+-The USB-C output adds a second regulation stage. The interface and configuration determine the voltage offered to the connected device, called the sink, and how that voltage is negotiated. Enough energy must be supplied by the upstream converter to support the selected output. A load change therefore reaches the resonant converter through the output stage and secondary storage.
++The USB-C stage negotiates and regulates the connector voltage, while its input demand is supplied through secondary storage by the resonant converter. Connector load changes therefore appear as bulk-bus disturbances at the upstream control loop.
+ 
+-The isolated resonant stage in the prototype feeds the secondary bulk bus: the rectified transformer-output supply before the USB-C regulator. The MPQ4242-based output section then supplies VBUS from that bus, and fixed settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} were tested. The bulk-voltage sensing input, identified as PA1 on the MCU, provides the feedback used to control this upstream supply. The connector-voltage measurement in the results tables is downstream of that control loop.
++The resonant stage supplies the secondary bulk bus upstream of the MPQ4242 output regulator. Fixed VBUS settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} were tested. Bulk-voltage feedback enters the MCU at PA1; the connector-voltage measurements are downstream of this control loop.
+ 
+-On attachment, the load can draw down secondary storage before the burst controller increases transfer. On removal, energy already in the tank can continue charging the bulk capacitor. At no load, even small repeated bursts can raise the voltage if they deliver more energy than the auxiliary circuits and leakage consume. The startup, no-load, and overvoltage states were developed to handle these conditions.
++Load attachment depletes secondary storage before burst transfer increases. Load removal leaves residual tank energy to charge the bulk capacitor. At no load, repeated packets raise bulk voltage whenever their energy exceeds auxiliary and leakage consumption.
+ 
+-Low-power startup, secondary-voltage thresholds, load-dependent burst limits, and overvoltage inhibition were implemented to handle these conditions. Their electrical effect was checked in the fixed-setting and transient tests. Formal USB-PD protocol, timing, and interoperability tests remain separate work.
++Low-power startup, bulk-voltage thresholds, load-dependent burst limits, and overvoltage inhibition were implemented for these conditions and assessed in fixed-setting and transient tests. Formal USB-PD protocol, timing, and interoperability testing remains outstanding.
+--- before/Chapters/02_Background/08_Research_Gap.tex
++++ after/Chapters/02_Background/08_Research_Gap.tex
+@@ -3,6 +3,6 @@
+ 
+ Charge-pump input-current shaping in high-frequency rectifiers and LED drivers was demonstrated in the earlier work \cite{ammar2020chargepump,ammar2021led}. In this project, the related circuit was adapted to a supply with a detachable USB-C load.
+ 
+-The selected semiconductors, supplied magnetics, auxiliary rails, sensing, and output interface were integrated. The controller had to start before isolated feedback was ready. Further energy transfer had to be limited at no load. The connector voltage, upstream bulk voltage, input current, and temperature were measured separately to check the combined behavior of the hardware and control.
++The selected semiconductors, supplied magnetics, auxiliary rails, sensing, and output interface were integrated with a controller that starts before isolated feedback is available and limits no-load transfer. Connector voltage, upstream bulk voltage, input current, and temperature were measured separately to assess the combined hardware and control response.
+ 
+-The assembled prototype was tested with the developed voltage-control firmware. Later circuit corrections appear in schematic V1.1. The next chapter turns these application demands into targets and operating states for evaluating the supply.
++The assembled prototype was tested with the developed voltage-control firmware. Later circuit corrections are documented in schematic V1.1. The resulting operating requirements are defined in the next chapter.
+--- before/Chapters/02_Background/chapter.tex
++++ after/Chapters/02_Background/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Background and Related Work}
+ \label{ch:background}
+ 
+-The inherited circuit uses one switching stage for two jobs: shaping the mains current and transferring power through an isolated resonant path. This chapter explains each path before examining their interaction. The reference converters establish the operating principle; the USB-C application adds the startup and load-change requirements addressed in this project.
++The charge-pump and isolated resonant paths share one switching stage. Their interaction determines input-current shaping, power transfer, and commutation. The reference converters establish this operating principle; the USB-C adaptation adds startup, no-load, and load-transient requirements.
+ 
+ \input{Chapters/02_Background/01_Offline_ACDC_PFC}
+ \input{Chapters/02_Background/02_Charge_Pump_Principle}
+--- before/Chapters/03_Requirements_Architecture/01_Use_Case.tex
++++ after/Chapters/03_Requirements_Architecture/01_Use_Case.tex
+@@ -5,6 +5,6 @@
+ 
+ The design target is \SI{100}{\watt} continuous output. The revised plan sets a \SI{65}{\watt} continuous minimum, and the earlier schedule sets a \SI{75}{\watt} continuous validation milestone \cite{projectOctoberPlan,projectEarlierPlan}. Continuous operation requires a stated load and run time, with temperature tracked throughout the run. A short capture at a nominal load only establishes that operating point.
+ 
+-Operation begins without a load. The converter must then handle load attachment, loaded operation, removal, and commanded shutdown. Load removal is especially important because energy remains in the resonant network and capacitors after the load is disconnected. No-load behavior and the overvoltage response are therefore explicit requirements, rather than side effects of the normal voltage loop.
++The operating sequence covers unloaded startup, load attachment, loaded operation, removal, and commanded shutdown. Residual resonant and capacitive energy after removal makes no-load control and overvoltage response explicit design requirements.
+ 
+ The open-frame assembly gives access for measurement and adjustment. Controlled mains energization and rated probes were used during testing. An enclosed consumer version would also need insulation, fault, environmental, protocol, and EMC qualification.
+--- before/Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex
++++ after/Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex
+@@ -1,7 +1,7 @@
+ \section{Targets and Prototype Values}
+ \label{sec:req-electrical}
+ 
+-Table~\ref{tab:req-design-specifications} separates the power criteria from the original prototype's MCU timing and feedback parameters. The carrier is the repeating command that times the power switches. Bursts are groups of these switching cycles, separated by intervals when further switching is inhibited. The burst frequency sets how often a group can be enabled, while the control period sets how often the sensor readings are evaluated and the command updated. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} describe the V2 MCU implementation, whose power-stage enable output is assigned to pin PA11.
++Table~\ref{tab:req-design-specifications} distinguishes power criteria from the original MCU timing and feedback parameters. The fixed carrier is gated into bursts; burst scheduling and sensor/control updates operate on separate time scales. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} describe the V2 implementation, with power-stage enable assigned to PA11.
+ 
+ \begin{table}[H]
+ \centering
+@@ -23,7 +23,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The output-voltage settings apply at the USB-C connector, downstream of the regulated bulk node. The upstream bulk voltage is measured through the secondary-feedback input (PA1), so its setpoint is not the selected connector voltage. The primary-current sensing input (PA2) provides information about the half bridge for load classification; it does not measure current at the USB-C connector. The voltage and current results are interpreted according to these signal locations.
++The USB-C settings apply downstream of the regulated bulk bus. Bulk-voltage feedback (PA1) controls the upstream supply; the primary half-bridge-current input (PA2) supports load classification. Neither input directly measures the corresponding connector quantity.
+ 
+ \begin{table}[H]
+ \centering
+--- before/Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex
++++ after/Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex
+@@ -1,9 +1,9 @@
+ \section{Functional and Performance Requirements}
+ \label{sec:req-functional}
+ 
+-The functional requirements define controller behavior. The performance requirements define what must be measured to assess that behavior. The identifiers link each requirement to its assessment in the results summary.
++Requirement identifiers connect the implemented control functions and measured performance to the results assessment.
+ 
+-The pin notation and controller functions are introduced in \cref{sec:intro-controller-basics}. In the original prototype below, the power-stage enable output (PA10) permits or stops bursts, while the secondary-voltage input (PA1) supplies the main feedback reading. The other two sensor inputs measure primary voltage (PA0) and primary half-bridge current (PA2). Direct memory access (DMA) transfers the converted readings into memory without a separate software copy for each sample. The universal asynchronous receiver-transmitter (UART) provides the serial connection used to exchange commands and status with a computer.
++Controller interfaces are introduced in \cref{sec:intro-controller-basics}. On the original prototype, PA10 gates switching bursts, PA1 senses secondary bulk voltage, PA0 senses primary voltage, and PA2 senses half-bridge current. Direct memory access (DMA) buffers the ADC scan; the universal asynchronous receiver-transmitter (UART) carries commands and status.
+ 
+ \begin{table}[H]
+ \centering
+@@ -47,4 +47,4 @@
+ \end{tabularx}
+ \end{table}
+ 
+-Chapter~\ref{ch:results} compares these requirements with the completed tests. The code shows the intended behavior; the corresponding measurement shows its electrical effect. Section~\ref{sec:revised-plan-criteria} uses AP identifiers for the additional V2/V3 work so that the development plan remains separate from the baseline functions.
++Chapter~\ref{ch:results} compares implementation with measured electrical behavior. Section~\ref{sec:revised-plan-criteria} assigns AP identifiers to the additional V2/V3 development criteria, separate from the baseline functions.
+--- before/Chapters/03_Requirements_Architecture/04_USBC_Interface.tex
++++ after/Chapters/03_Requirements_Architecture/04_USBC_Interface.tex
+@@ -1,10 +1,10 @@
+ \section{USB-C Interface and Voltage Nodes}
+ \label{sec:req-usbc}
+ 
+-The V1.1 schematic shows an MPQ4242GVE-0000-AEC1-P output section supplied from the isolated bulk node \texttt{V\_PW\_OUTPUT\_BULK}. Its output feeds \texttt{USB\_PD\_OUT} and VBUS at the USB-C socket, J1. CC1 and CC2 are the connector's configuration-channel lines, used by the interface controller to detect attachment and support power negotiation. They are distinct from the connector's power contacts and data lines.
++The V1.1 MPQ4242GVE-0000-AEC1-P output stage is supplied from \texttt{V\_PW\_OUTPUT\_BULK} and feeds \texttt{USB\_PD\_OUT} and connector VBUS at J1. Configuration channels CC1 and CC2 support attachment detection and power negotiation.
+ 
+-The output section has local input and output capacitance, current sensing, and VBUS and signal protection. An Inter-Integrated Circuit (I2C) service header provides a two-wire communication connection: \texttt{PD\_SCL} carries the clock and \texttt{PD\_SDA} carries data. The MCU controls the upstream converter; its firmware does not actively configure the MPQ4242 over I2C. The fitted output-controller configuration and the sink or trigger arrangement therefore determine the connector setting used in a test.
++The stage includes local capacitance, current sensing, and VBUS and signal protection. The I2C service header exposes clock \texttt{PD\_SCL} and data \texttt{PD\_SDA}. The MCU does not configure the MPQ4242 over I2C; the fitted controller configuration and sink or trigger determine the tested connector setting.
+ 
+-In this thesis, secondary bulk voltage refers to the resonant-stage output, and VBUS to the connector output. The secondary bulk voltage is regulated using the MCU's secondary-voltage sensing input, PA1. VBUS is measured in the load tests. The downstream converter changes both the mean voltage and the ripple, so the two voltages must be measured and reported separately.
++Secondary bulk voltage denotes the resonant-stage output regulated through PA1; VBUS denotes the measured connector output. The downstream converter changes mean voltage and ripple, so these nodes are reported separately.
+ 
+ The VBUS settings were tested under load and during changes in demand. Those tests do not cover the full negotiation sequence, policy engine, cable-current advertisement, or interoperability. Chapter~\ref{ch:hardware} describes the circuit that was fitted, and Chapter~\ref{ch:results} shows its measured output behavior.
+--- before/Chapters/03_Requirements_Architecture/05_Safety_Protection.tex
++++ after/Chapters/03_Requirements_Architecture/05_Safety_Protection.tex
+@@ -5,8 +5,8 @@
+ 
+ The V1.1 drawing includes an input fuse, surge suppression, line filtering, and a CAP300DG discharge circuit, along with protection components in the auxiliary and USB-C sections. Chapter~\ref{ch:hardware} explains their roles. These functions support laboratory operation; qualification still requires tests of the complete assembly.
+ 
+-Controls were added to limit energy transfer when the output load could no longer absorb it. Limited excitation is applied during precharge to establish power for the isolated feedback path. For a high-impedance load classification, the burst limit and voltage window are then lowered. For eligible light/no-load overvoltage, soft holdoff is applied within the hard margin. Outside the allowed conditions, overvoltage protection (OVP) is latched: the stop condition remains active until the defined clear or reset action. The power-stage enable output (PA10) is held at logic low, the digital state that inhibits switching bursts. This command does not discharge energy already stored in the capacitors. Chapter~\ref{ch:control} and Appendix~\ref{app:equations} give the exact conditions.
++Precharge applies limited excitation until the isolated feedback supply is established. High-impedance classification lowers the burst limit and voltage window. Eligible light/no-load overvoltage invokes soft holdoff within the hard margin; other overvoltage conditions latch overvoltage protection (OVP) until the defined clear or reset action. Burst enable (PA10) is held low to inhibit further excitation, without discharging stored energy. Chapter~\ref{ch:control} and Appendix~\ref{app:equations} specify the conditions.
+ 
+-The primary half-bridge-current sensing input (PA2) is used for load classification and diagnostics. The configurable firmware current trip is off by default, and the legacy foldback helpers are not called by the active voltage loop. A current-limited test must therefore identify the active limiter: the output controller, AC source, electronic load, or an explicitly enabled firmware threshold.
++Primary half-bridge-current feedback (PA2) supports load classification and diagnostics. The configurable current trip is disabled by default, and the active voltage loop does not call legacy foldback helpers. Any current-limited test must identify the active limiter: output controller, AC source, electronic load, or explicitly enabled firmware threshold.
+ 
+ Insulation qualification, leakage-current, abnormal-fault, surge/ESD, and thermal-protection tests remain unfinished. The protection assessment covers laboratory behavior. Product qualification remains separate work.
+--- before/Chapters/03_Requirements_Architecture/06_System_Architecture.tex
++++ after/Chapters/03_Requirements_Architecture/06_System_Architecture.tex
+@@ -7,11 +7,11 @@
+ 
+ The transformer transfers power across the isolation barrier. The secondary rectifier and capacitor supply the bulk node, from which the MPQ4242 section supplies VBUS. The AMC0330 returns bulk-voltage feedback to the primary-referenced MCU across a separate sensing barrier. The power and sensing barriers serve different functions.
+ 
+-The MCU on the original prototype produces the complementary switching commands at the carrier outputs, PA8 and PA9. Average transfer is controlled through a separate burst-enable output, PA10. These pins carry low-voltage commands to the gate driver; they do not carry the load power. The sensor inputs provide primary-voltage information (PA0), secondary-voltage feedback (PA1), and primary half-bridge-current information (PA2). Their voltages are converted into numerical readings by the analog-to-digital converter. DMA transfers those readings into memory while the scan continues, without blocking the control loop. Sampling is not synchronized to each carrier cycle.
++On the original prototype, PA8 and PA9 generate complementary carrier commands and PA10 gates average transfer through burst enable. Primary-voltage (PA0), secondary-voltage (PA1), and half-bridge-current (PA2) signals are acquired by a continuous ADC scan and buffered by DMA. Sampling is asynchronous to the carrier.
+ 
+-The auxiliary rails power the gate drive, controller, sensing, and output interface. Secondary feedback is useful only after its supply is established. During bring-up, the rails and inhibited carrier must be checked first. Feedback must then be calibrated and low-power transfer established before closed-loop operation is enabled.
++Auxiliary rails supply the gate drive, MCU, sensing, and output interface. Bring-up therefore establishes these rails and the inhibited carrier before feedback calibration and low-power transfer. Closed-loop operation follows once isolated feedback is valid.
+ 
+-The two resonant paths meet at the switch node rather than operating as independent cascaded converters. A change in burst command therefore affects both the secondary output and the mains-current envelope. The next chapter analyzes these two effects together.
++The resonant paths meet at the switch node. Burst control consequently changes both secondary transfer and the mains-current envelope; the next chapter analyzes this coupling.
+ 
+ \begin{figure}[H]
+ \centering
+--- before/Chapters/03_Requirements_Architecture/07_Operating_Modes.tex
++++ after/Chapters/03_Requirements_Architecture/07_Operating_Modes.tex
+@@ -1,7 +1,7 @@
+ \section{Operating States}
+ \label{sec:req-modes}
+ 
+-One burst limit cannot cover every load condition. Feedback must be established during startup. Under load, the converter must meet demand; at no load, added energy must be limited. The digital enable output is the controller's permission for the power stage to switch: logic high permits a burst and logic low inhibits it. On the original prototype, this output is PA10. The table also names general-purpose input/output (GPIO), which is the configurable pin interface; UART, which exchanges serial commands; and the analog-to-digital converter (ADC), whose readings are transferred by DMA.
++Startup, loaded regulation, and no-load energy limitation require distinct burst limits. The original prototype uses PA10 as the active-high burst-enable GPIO. UART provides command/status access, and ADC readings are buffered by DMA.
+ 
+ Table~\ref{tab:req-states} shows how the final firmware separates those tasks. Chapter~\ref{ch:control} gives the thresholds and timing behind the state changes.
+ 
+--- before/Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex
++++ after/Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex
+@@ -45,4 +45,4 @@
+ \end{tabularx}
+ \end{table}
+ 
+-Section~\ref{sec:res-compliance} compares the requirements with the completed measurements. Section~\ref{sec:revised-plan-criteria} extends that test scope to V2/V3 development. A function implemented in firmware still needs to be tested before its electrical behavior can be assessed.
++Section~\ref{sec:res-compliance} compares requirements with completed measurements; Section~\ref{sec:revised-plan-criteria} extends the scope to V2/V3 development. Firmware implementation establishes the commanded function, while measurements establish its electrical response.
+--- before/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
++++ after/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
+@@ -1,7 +1,7 @@
+ \section{Requirements from the Revised Plan}
+ \label{sec:revised-plan-criteria}
+ 
+-The revised July--October plan takes the project from bring-up into V2 evaluation, converter adjustment, and a V3 edge-card implementation \cite{projectOctoberPlan}. The next steps are to repeat the V2 baseline, identify the output-power limit, test selected changes, and determine which hardware is ready for the final evaluation. The criteria below separate those planned steps from completed circuit, firmware, and test work.
++The revised July--October plan extends bring-up into V2 evaluation, converter adjustment, and V3 edge-card development \cite{projectOctoberPlan}. The criteria below cover V2 baseline repetition, diagnosis of the output-power limit, controlled design changes, and readiness for final evaluation.
+ 
+ \Needspace{10\baselineskip}
+ \subsection{Power Levels and Prototype Versions}
+@@ -12,7 +12,7 @@
+ 
+ \subsection{Design and Test Requirements}
+ 
+-Table~\ref{tab:req-revised-plan-criteria} lists the additional test and design work. Each criterion includes the measurements needed to judge it: output power alone is not enough to assess temperature, power density, or reliability.
++Table~\ref{tab:req-revised-plan-criteria} defines the additional design and test criteria, including thermal, stability, and volume measurements required beyond output power.
+ 
+ \begingroup
+ \small
+@@ -37,8 +37,8 @@
+ 
+ \subsection{Power Density and Remaining Work}
+ 
+-A density comparison needs both verified power and complete assembly dimensions. Section~\ref{sec:method-density} uses the same rectangular assembly envelope for both versions, including the identified magnetics, connectors, supports, component height, required spacing, and cooling hardware. This avoids comparing a bare board with a complete supply. The V1.0 outline does not give the V2 or V3 assembly dimensions, so those dimensions are still needed for the density comparison.
++Power density requires verified output and complete assembly dimensions. Section~\ref{sec:method-density} uses a common rectangular envelope including magnetics, connectors, supports, component height, required spacing, and cooling hardware. V2 and V3 assembly dimensions remain necessary; they cannot be inferred from the V1.0 outline.
+ 
+ The completed work includes the measured first-prototype baseline, integrated V2 circuit and firmware, powered tank changes, and a reduced V3 layout. Replacement planar magnetics were not installed. A matched repeat near \SI{85}{\watt}, the full PPS and extended-load tests, a completed V3 readiness decision, and the paired full-system density comparison remain open. Chapter~\ref{ch:results} presents the measurements and design estimate; Chapters~\ref{ch:discussion} and \ref{ch:conclusion} connect them to the next steps.
+ 
+-The plan includes planar-magnetic optimization as a learning objective. The supplied magnetic designs are used here. The assessment covers their installation and effect on converter operation. Section~\ref{sec:intro-contributions} attributes their original electromagnetic design.
++Planar-magnetic optimization is a learning objective. The supplied designs were retained, so this thesis evaluates their integration and effect on converter operation. Original electromagnetic design is attributed in Section~\ref{sec:intro-contributions}.
+--- before/Chapters/03_Requirements_Architecture/chapter.tex
++++ after/Chapters/03_Requirements_Architecture/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{System Requirements and Architecture}
+ \label{ch:requirements}
+ 
+-The load behavior described in the previous chapter determines what the supply and controller must do. The operating states, hardware connections, and test measurements follow from that behavior. The power requirements and implemented controller settings are listed separately. Electrical capability must be confirmed by measurement, rather than inferred from a controller setting.
++The USB-C load requires controlled startup, loaded regulation, load removal, and no-load energy limitation. These states define the hardware interfaces and verification requirements. Power targets are distinguished from implemented controller settings and measured capability.
+ 
+ \input{Chapters/03_Requirements_Architecture/01_Use_Case}
+ \input{Chapters/03_Requirements_Architecture/02_Electrical_Specifications}
+--- before/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
++++ after/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
+@@ -5,13 +5,13 @@
+ 
+ 
+ 
+-The rectified input and DC link are separate voltage nodes. The input follows the mains envelope, while the link stores energy and supplies the half bridge. The pump capacitor \(\CP\), inductor \(\LP\), and steering/clamp paths transfer energy between these nodes during each enabled switching cycle.
++The rectified input follows the mains envelope, while the DC link stores energy and supplies the half bridge. Pump capacitance \(\CP\), inductance \(\LP\), and steering/clamp paths transfer energy between these nodes during each enabled cycle.
+ 
+-From \texttt{VSW}, the isolated branch passes through the series capacitor \(\CRES\), discrete inductance, transformer leakage, magnetizing branch, and secondary rectifier. The bulk capacitor then supplies the MPQ4242 output section. Here \(V_{\mathrm{sec}}\) denotes the bulk voltage, and VBUS refers to the connector output. The same voltage-node definitions are used in the analysis and tests.
++The isolated branch is excited from \texttt{VSW} through series capacitance \(\CRES\), discrete inductance, and transformer leakage. The transformer includes a separate magnetizing branch; secondary rectification supplies the bulk capacitor and MPQ4242 stage. Throughout the analysis, \(V_{\mathrm{sec}}\) denotes bulk voltage and VBUS denotes connector voltage.
+ 
+-The two branch currents add with their instantaneous signs at the half bridge. Device-current and commutation checks must therefore include both branches, even though their resonant components are separate. Over longer intervals, the DC link couples the input power collected by the pump to the power demanded by the secondary.
++Signed branch currents sum at the half bridge and jointly determine device current and commutation. The DC link couples collected pump power to secondary demand over longer intervals.
+ 
+-The carrier remains at \SI{1}{\mega\hertz} during enabled operation. The controller changes the switching-burst duration through its enable output, PA10 on the original prototype. The conditioned secondary-bulk voltage \(V_{\mathrm{sec}}\) is read at input PA1. The conditioned primary-voltage signal at PA0 provides optional feed-forward, while the primary-current signal at PA2 is used to distinguish loaded from no-load operation. The burst command changes average energy transfer at the selected carrier operating point and sets how often the pump transfers charge.
++The active carrier remains at \SI{1}{\mega\hertz}; burst duration is controlled by PA10 on the original prototype. Secondary-bulk feedback \(V_{\mathrm{sec}}\) enters PA1, optional primary-voltage feed-forward enters PA0, and primary-current feedback at PA2 distinguishes loaded and no-load states. Burst control changes both average secondary transfer and pump charge-transfer density.
+ 
+ \begin{landscape}
+ \begin{figure}[H]
+--- before/Chapters/04_Topology_Analysis/02_Switching_Cycle.tex
++++ after/Chapters/04_Topology_Analysis/02_Switching_Cycle.tex
+@@ -1,7 +1,7 @@
+ \section{Switching-Cycle Operation}
+ \label{sec:analysis-switching}
+ 
+-Each enabled cycle moves the switch node between the DC-link rails. The pump has charge-transfer, clamp, and freewheeling intervals. Within an established burst, the isolated tank carries inductive current. The six intervals in the reference analysis \cite{ammar2021led}, summarized in Table~\ref{tab:analysis-pump-intervals}, explain how the pump completes one capacitor excursion.
++Each enabled cycle commutates the switch node between the DC-link rails. The pump sequence comprises charge-transfer, clamp, and freewheeling intervals, while the isolated tank carries inductive current within an established burst. Table~\ref{tab:analysis-pump-intervals} summarizes the six reference intervals \cite{ammar2021led}.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -21,8 +21,8 @@
+ \end{tabularx}
+ \end{table}
+ 
+-In that ideal cycle, the pump-capacitor voltage moves approximately from zero to the rectified line voltage. The input current is pulsed, but its average is set by the charge transferred to the capacitor. The inductor \(\LP\) determines how fast the current changes and whether the required intervals fit within the cycle.
++The ideal pump-capacitor excursion is approximately zero to the rectified line voltage. Transferred charge sets the cycle-averaged input current; \(\LP\) sets the current slope and completion time.
+ 
+-During dead time, the device and switch-node capacitances are charged and discharged by the sum of the signed branch currents. The pump can supply commutation current when the isolated tank carries little load current. When the branch currents oppose each other, less current is available for commutation. The ZVS check later in the chapter therefore needs both branch currents.
++During dead time, signed branch currents charge and discharge device and node capacitances. Pump current can support commutation at low isolated load, whereas opposing branch currents reduce the available net current.
+ 
+-The repeating sequence describes the middle of a burst. After an idle interval, the next burst starts with different inductor currents and capacitor voltages. Burst restart is therefore a separate case, especially at no load when the controller can leave long gaps between short packets.
++Burst restart begins from the inductor currents and capacitor voltages left by the idle interval. It therefore requires separate assessment from the periodic sequence, particularly during sparse no-load packets.
+--- before/Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex
++++ after/Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex
+@@ -24,6 +24,6 @@
+ \begin{equation}
+ \overline{i}_{\mathrm{rec}}(t)\approx b(t)f_s\CP v_{\mathrm{rec}}(t).
+ \end{equation}
+-Constant \(b\) reduces average conductance without changing the ideal envelope shape. When \(b(t)\) varies with line phase, it also changes that shape. This can occur when the secondary-voltage loop responds to twice-line-frequency energy ripple or when feed-forward changes the permitted burst command. Power quality must therefore be measured with the final controller.
++Constant \(b\) scales input conductance without changing the ideal envelope. Line-phase variation of \(b(t)\), caused by bulk-voltage ripple response or feed-forward, modifies current shape. Power quality must therefore be assessed with the final controller.
+ 
+-The DC link must also stay sufficiently above the rectified-line peak to prevent unintended direct conduction. Ripple, diode drops, finite charging current, and clamp timing all change the real charge excursion. The ideal conductance is estimated from \(f_s\CP\). PF/THD measurements assess the implemented pump and controller together.
++The DC link must remain sufficiently above the rectified-line peak to avoid unintended direct conduction. Ripple, diode drops, finite charging current, and clamp timing alter the actual excursion. The \(f_s\CP\) conductance is an ideal estimate; measured PF/THD includes pump and controller effects.
+--- before/Chapters/04_Topology_Analysis/04_Pump_Capacitor.tex
++++ after/Chapters/04_Topology_Analysis/04_Pump_Capacitor.tex
+@@ -8,8 +8,8 @@
+ \end{equation}
+ Here \(\eta\) is the efficiency assumed during sizing. The equation also assumes a complete capacitor excursion and continuous active switching at maximum demand \cite{ammar2021led}.
+ 
+-The prototype has nominal \SI{2}{\nano\farad} pump capacitance. At a given line voltage, it sets the charge available per complete carrier cycle and the ideal maximum conductance. The burst actuator can reduce average transfer by omitting cycles; it cannot add charge to an otherwise unchanged active cycle.
++The nominal \SI{2}{\nano\farad} pump capacitor sets charge per complete active cycle and maximum ideal conductance at a given line voltage. Burst control can reduce transfer by omitting cycles but cannot increase charge within an unchanged cycle.
+ 
+-The part also has to carry high-frequency current pulses, so capacitance alone is not enough to select it. Voltage rating, effective capacitance, dielectric loss, ESR, and connections affect both heating and the charge excursion. The ideal excursion follows the rectified input voltage, while ringing, incomplete clamping, and transients add to the voltage that the installed part must withstand.
++Selection also depends on pulse-current capability, voltage margin, effective capacitance, dielectric loss, ESR, and interconnect impedance. Ringing, incomplete clamping, and transients add to the nominal rectified-line excursion.
+ 
+-Increasing \(\CP\) is one possible way to raise transfer at a fixed frequency, but it also raises pump current and changes the inductance needed to complete the cycle. The capacitor and inductor would therefore be checked together for clamp loss and semiconductor stress before capacitance is increased to raise power.
++Increasing \(\CP\) raises transfer and pump current at fixed frequency and changes the inductance required to complete charge transfer. Capacitance and inductance must therefore be evaluated together against clamp loss and semiconductor stress.
+--- before/Chapters/04_Topology_Analysis/05_Pump_Inductor.tex
++++ after/Chapters/04_Topology_Analysis/05_Pump_Inductor.tex
+@@ -16,14 +16,14 @@
+ \LP=\frac{1}{16\CP f_s^2}.
+ \label{eq:lp-sizing}
+ \end{equation}
+-The result is the reference estimate for a triangular, clamped pump-current cycle \cite{ammar2021led}. The estimate applies only under those timing assumptions.
++This estimate assumes the triangular, clamped current sequence of the reference analysis \cite{ammar2021led}.
+ 
+-For \(\CP=\SI{2}{\nano\farad}\) and \(f_s=\SI{1}{\mega\hertz}\), the estimate is \SI{31.25}{\micro\henry}. The supplied planar inductors had measured inductances of \SI{34.26}{\micro\henry} and \SI{33.09}{\micro\henry}, as listed in Section~\ref{sec:mag-inherited}. Both values are close to the estimate. The installed current waveform and clamp timing determine how closely the real cycle follows the approximation.
++For \(\CP=\SI{2}{\nano\farad}\) and \(f_s=\SI{1}{\mega\hertz}\), the estimate is \SI{31.25}{\micro\henry}. Supplied measurements of \SI{34.26}{\micro\henry} and \SI{33.09}{\micro\henry} are close to this value (Section~\ref{sec:mag-inherited}); in-circuit current and clamp timing determine agreement with the assumed sequence.
+ 
+ The corresponding ideal pump resonance is
+ \begin{equation}
+ f_P=\frac{1}{2\pi\sqrt{\LP\CP}}=\frac{2f_s}{\pi}.
+ \end{equation}
+-The estimate places the carrier above the ideal pump resonance. The pump current is therefore inductive in this approximation and can help commutate the shared half bridge through much of the line cycle.
++The carrier lies above ideal pump resonance, giving inductive current that can support shared-half-bridge commutation over much of the line cycle.
+ 
+-Lower inductance steepens the current ramp and can raise peak stress and clamp conduction. Higher inductance slows the ramp and can leave the capacitor excursion unfinished at the end of the cycle. The measured inductance can be compared with the estimate, but an in-circuit waveform is still needed to check whether charge transfer finishes in time.
++Lower inductance increases current slope, peak stress, and possible clamp conduction. Higher inductance can prevent completion of the capacitor excursion. In-circuit waveforms are required to establish the timing margin.
+--- before/Chapters/04_Topology_Analysis/06_DC_Link.tex
++++ after/Chapters/04_Topology_Analysis/06_DC_Link.tex
+@@ -11,7 +11,7 @@
+ \frac{P_{\mathrm{out}}}{2\omega_l\CDC\VDC}.
+ \label{eq:analysis-bus-ripple}
+ \end{equation}
+-The expression gives ripple amplitude. For comparison with an oscilloscope capture, the approximate peak-to-peak ripple is twice this value.
++The expression gives ripple amplitude; approximate peak-to-peak ripple is twice this value.
+ 
+ Requiring \(\VDC-\widehat{\Delta V}_{\mathrm{DC}}>V_{\mathrm{in,pk}}\) gives the reference minimum-capacitance estimate
+ \begin{equation}
+@@ -25,6 +25,6 @@
+ \begin{equation}
+ E_{\mathrm{DC}}=\frac{1}{2}\CDC\VDC^2.
+ \end{equation}
+-More link capacitance reduces the line-frequency voltage variation and helps preserve pump voltage margin. It also leaves more stored energy to manage during startup, load removal, and abnormal switching. DC-link storage must therefore be considered together with regulation and discharge behavior.
++Increasing link capacitance reduces line-frequency ripple and improves pump-voltage margin, but increases stored energy during startup, load removal, and abnormal switching.
+ 
+-The voltage rating is a component limit, not the operating bus voltage. Checking voltage margin requires the measured bus mean, ripple, and maximum. These measurements also show the voltage applied to the half bridge and its branches. Control can redistribute the energy variation, but some part of the single-phase supply still has to store it.
++Measured bus mean, ripple, and maximum establish capacitor-voltage margin and half-bridge excitation. Control can redistribute the single-phase energy ripple but cannot eliminate its storage requirement.
+--- before/Chapters/04_Topology_Analysis/07_Resonant_Stage.tex
++++ after/Chapters/04_Topology_Analysis/07_Resonant_Stage.tex
+@@ -10,7 +10,7 @@
+ f_0\approx\frac{1}{2\pi\sqrt{\LRES\CRES}}
+ \approx\SI{0.989}{\mega\hertz}.
+ \end{equation}
+-The nominal resonance is close to the \SI{1}{\mega\hertz} carrier. The component values are therefore consistent with the selected switching frequency. Gain and commutation still depend on the load, magnetizing branch, and pump current.
++The nominal resonance lies close to the \SI{1}{\mega\hertz} carrier. Loaded gain and commutation also depend on the magnetizing branch and pump current.
+ 
+ The transformer turns ratio is defined as
+ \begin{equation}
+@@ -26,7 +26,7 @@
+ \begin{equation}
+ R_{\mathrm{REC,p}}=n^2R_{\mathrm{REC,s}}.
+ \end{equation}
+-Here \(P_{\mathrm{sec}}\) is the power drawn from the resonant secondary, including downstream demand and losses. Connector power alone would understate that demand and give the wrong equivalent load for the tank.
++Here \(P_{\mathrm{sec}}\) includes downstream demand and losses. Using connector power alone would understate tank loading.
+ 
+ If magnetizing current is neglected, the required series-tank gain is
+ \begin{equation}
+@@ -44,8 +44,8 @@
+ \qquad
+ \CRES=\frac{1}{\omega_0Q_LR_{\mathrm{REC,p}}}.
+ \end{equation}
+-These expressions give an initial design check by relating the series components to the assumed load and required gain \cite{ammar2021led}.
++These first-harmonic relationships provide an initial component and gain check at the assumed load \cite{ammar2021led}.
+ 
+-The supplied magnetizing inductance is approximately \SIrange{140}{151}{\micro\henry}, about five to six times the nominal series inductance. Its current can change input impedance, especially at light load and at burst edges. Since Equation~\eqref{eq:analysis-series-gain} omits that branch, a voltage mismatch should first be checked with a fuller model before changing the series value to fit the measurement.
++The supplied magnetizing inductance is approximately \SIrange{140}{151}{\micro\henry}, about five to six times nominal series inductance. Its effect on input impedance increases at light load and burst transitions. Because Equation~\eqref{eq:analysis-series-gain} omits this branch, measured gain discrepancies require a fuller model before revising series components.
+ 
+-In the installed circuit, the transformer variant and polarity, rectifier conduction, and frequency-dependent parasitics also matter. The connections and installation are described in Chapters~\ref{ch:magnetics} and \ref{ch:hardware}.
++Installed behavior also depends on transformer variant and polarity, rectifier conduction, and frequency-dependent parasitics. Chapters~\ref{ch:magnetics} and \ref{ch:hardware} describe the integration.
+--- before/Chapters/04_Topology_Analysis/08_ZVS.tex
++++ after/Chapters/04_Topology_Analysis/08_ZVS.tex
+@@ -11,10 +11,10 @@
+ \begin{equation}
+ |i_{\mathrm{dt}}|t_{\mathrm{dt}}\gtrsim C_{\mathrm{eq}}\VDC.
+ \end{equation}
+-The charge condition is only part of the check. The current must have the required polarity, and the switch node must reach the intended rail before turn-on. Sufficient charge with the wrong direction or timing does not produce ZVS.
++The charge condition must be met with the required polarity and before turn-on; charge magnitude alone does not establish ZVS.
+ 
+-Both power paths contribute to \(i_{\mathrm{dt}}\). In the modified reference circuit, the pump-current amplitude can exceed the primary-referred output-path current, so its inductive phase supplies much of the commutation current \cite{ammar2021led}. In the prototype, line voltage and burst history change that contribution. Load and magnetizing current from the isolated branch add according to the transformer impedance and rectifier state.
++Both paths contribute to \(i_{\mathrm{dt}}\). In the modified reference, inductive pump current can exceed primary-referred output current and provide much of the commutation charge \cite{ammar2021led}. Its prototype contribution varies with line voltage and burst history; isolated load and magnetizing currents depend on transformer impedance and rectifier state.
+ 
+-A nominal resonance near the carrier therefore does not establish ZVS at every operating point. Component variation moves resonance, pump current falls near the mains zero crossing, and circulating current can be absent after an idle interval. The available commutation current therefore changes even with fixed dead time. A separate waveform check is required for each condition.
++Near-carrier resonance does not establish ZVS across the operating range. Tolerances shift resonance, pump current falls near line zero crossings, and idle intervals can remove circulating current. These conditions require separate switching captures even at fixed dead time.
+ 
+-Dead time should allow node commutation to finish without excessive reverse conduction. The actual interval depends on the controller command, driver propagation, and device response. Calculating a commutation margin requires calibrated capacitance and timing at the final switch node. The inherited model does not provide them. The switching captures in Section~\ref{sec:res-zvs} are compared with these conditions.
++Dead time must complete commutation without excessive reverse conduction. The effective interval includes command timing, driver propagation, and device response. A quantitative margin requires calibrated node capacitance and timing, which the inherited model does not provide. Section~\ref{sec:res-zvs} assesses the available captures.
+--- before/Chapters/04_Topology_Analysis/09_Device_Stress.tex
++++ after/Chapters/04_Topology_Analysis/09_Device_Stress.tex
+@@ -5,16 +5,16 @@
+ \begin{equation}
+ i_{\mathrm{HB}}(t)=i_P(t)+i_{\mathrm{res,p}}(t).
+ \end{equation}
+-The primary resonant-path current already includes magnetizing current. It can be separated as \(i_{\mathrm{res,p}}=i_{\mathrm{load,p}}+i_m\), but adding \(i_m\) again to the full branch current would count it twice.
++The primary branch already includes magnetizing current: \(i_{\mathrm{res,p}}=i_{\mathrm{load,p}}+i_m\). Adding \(i_m\) to the complete branch again would double-count it.
+ 
+ Adding the branch-current magnitudes gives a conservative peak estimate. Calculating RMS loss requires their actual signed waveform through active and idle intervals. For the triangular pump approximation,
+ \begin{equation}
+ I_{P,\mathrm{pk}}\approx4f_s\CP V_{\mathrm{in,pk}}.
+ \end{equation}
+-The pump can therefore create substantial half-bridge current even when connector current is modest. The current-sense voltage at controller input PA2 represents that primary-side current according to the sensing circuit and its calibration. It can be used for load classification, but it is not a direct measurement of connector current.
++Pump current can impose substantial half-bridge stress at modest connector current. Calibrated primary-current feedback at PA2 supports load classification; it does not directly measure connector current.
+ 
+-The same current pulses load the pump capacitor, inductor, and steering diodes. Their peaks depend on line phase, link voltage, and whether the capacitor completes its excursion. The isolated branch adds circulating current that can heat the windings and resonant capacitor beyond what connector power alone suggests. Secondary rectifier stress likewise depends on its conduction intervals and storage voltage.
++Pump-capacitor, inductor, and steering-diode stress depends on line phase, link voltage, and charge-transfer completion. Isolated-branch circulating current contributes winding and resonant-capacitor heating, while secondary rectifier stress depends on conduction intervals and storage voltage.
+ 
+-A command change does not instantly stop energy transfer. Holding the MCU burst-enable output PA10 on the original prototype low ends further commanded excitation, but energy already stored in the inductors and capacitors can still reach the secondary. The hard OVP threshold therefore has to allow for sensing delay, actuation delay, and the residual transfer after inhibition.
++Driving the original prototype's burst-enable output PA10 low inhibits excitation but does not remove stored tank energy. The hard OVP margin must therefore include sensing and actuation delays and residual transfer after inhibition.
+ 
+ Measured bus maxima, overshoot, current peaks, and temperature are compared with the \SI{450}{\volt} capacitor rating and the semiconductor ratings. Nominal passive values and supplied magnetic measurements establish the starting design; the waveforms determine the stresses reached in the tested circuit.
+--- before/Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex
++++ after/Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex
+@@ -1,12 +1,12 @@
+ \section{How the USB-C Load Changes Operation}
+ \label{sec:analysis-usbc}
+ 
+-The resonant converter supplies the downstream stage rather than the connector load directly. More connector current at the same VBUS setting increases secondary bulk demand, and changing the VBUS setting changes that relationship. The MCU therefore responds to bulk voltage while the output section regulates the connector.
++The resonant converter supplies the downstream regulator. Secondary demand varies with connector current and VBUS setting; the MCU regulates bulk voltage while the output stage regulates VBUS.
+ 
+-Burst enable changes the number and spacing of active intervals while keeping the carrier and tank components fixed. Output power is controlled in this way, but every omitted cycle also removes a pump charge-transfer interval. The same command that regulates the secondary can therefore alter the input-current envelope.
++Burst enable varies active-interval duration and spacing at fixed carrier and tank values. Each omitted cycle also removes pump charge transfer, coupling secondary regulation to the input-current envelope.
+ 
+-Under load, falling bulk voltage calls for more transfer. Without a load, that command can instead accumulate energy in the secondary capacitor. A lower voltage window and burst cap are used at no load. After repeated low voltage, the cap can be exceeded temporarily so that an attached load can receive power. OVP separately selects soft holdoff or hard inhibition.
++Bulk-voltage depletion calls for increased transfer under load. At no load, a lower voltage window and burst cap limit accumulation. Repeated low voltage temporarily relaxes the cap for load attachment; OVP independently selects soft holdoff or hard inhibition.
+ 
+-The output capacitor provides energy during short load changes and absorbs residual tank energy. More capacitance reduces the voltage change from a given packet, but raises startup energy and slows the voltage response used to detect a change in demand. This tradeoff is considered in the storage calculation, command limits, and state logic in Chapter~\ref{ch:control}.
++Secondary capacitance supports load transients and absorbs residual tank energy. Increasing it reduces packet-induced voltage steps but increases startup energy and slows voltage-based load detection. Chapter~\ref{ch:control} applies this tradeoff to storage, command limits, and state logic.
+ 
+ This interaction is evaluated using secondary-control waveforms and connector measurements at the fixed settings obtained during testing. USB-PD protocol and interoperability need a separate test sequence.
+--- before/Chapters/04_Topology_Analysis/11_Design_Summary.tex
++++ after/Chapters/04_Topology_Analysis/11_Design_Summary.tex
+@@ -26,6 +26,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The pump values give an ideal charge-transfer estimate in the intended power range, and the series values place nominal resonance near the carrier. The next step is to check how magnetizing current, burst transitions, and DC-link ripple affect operation around that point.
++The pump values place ideal charge transfer in the intended power range, while series values place nominal resonance near the carrier. Magnetizing current, burst transitions, and DC-link ripple determine departures from this estimate.
+ 
+-These checks are coupled: pump capacitance and line voltage set charge transfer; link capacitance buffers the mains energy variation; the tank and turns ratio set secondary drive; and both branch currents determine commutation and heating. The inherited models are examined using this framework in Chapter~\ref{ch:simulation}. Tests in Chapter~\ref{ch:results} then check whether the assembled converter behaves as these relationships predict.
++Pump capacitance and line voltage set charge transfer; link capacitance buffers mains-energy ripple; the tank and ratio set secondary excitation; both branch currents determine commutation and heating. Chapter~\ref{ch:simulation} applies these relationships to the inherited models, and Chapter~\ref{ch:results} evaluates the assembled converter.
+--- before/Chapters/04_Topology_Analysis/chapter.tex
++++ after/Chapters/04_Topology_Analysis/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Converter Operation and Design Calculations}
+ \label{ch:analysis}
+ 
+-The controller acts on one switching stage shared by both power paths. Each command therefore affects both paths. Energy transfer is traced from the pump into the DC link and through the isolated tank. The currents that commutate the half bridge are then checked. The reference equations and fitted component values are used to estimate operation and identify the measurements needed on the bench.
++The shared switching stage couples pump charge transfer, DC-link energy balance, and isolated resonant transfer. Reference equations and fitted values are used to estimate power transfer, commutation, and stress, and to define the corresponding bench checks.
+ 
+ \input{Chapters/04_Topology_Analysis/01_Topology_Overview}
+ \input{Chapters/04_Topology_Analysis/02_Switching_Cycle}
+--- before/Chapters/05_Modeling_Simulation/01_Objectives.tex
++++ after/Chapters/05_Modeling_Simulation/01_Objectives.tex
+@@ -1,8 +1,8 @@
+ \section{What the Models Can Explain}
+ \label{sec:sim-objectives}
+ 
+-Different models are needed to examine charge transfer, resonant behavior, switching, and heating. The input-power scale is estimated from charge transfer, while gain and phase during active cycles are estimated from a resonant equivalent circuit. Clamp timing and the beginning and end of each burst require a switched-circuit model. Losses and heat flow must also be included to predict efficiency and temperature. The inherited models are therefore used only for the behavior they represent.
++Charge-transfer analysis estimates input-power scale, and the resonant equivalent circuit estimates active-cycle gain and phase. Clamp timing and burst transitions require a switched model; efficiency and temperature additionally require calibrated loss and thermal models. Each inherited model is used within this scope.
+ 
+-The supplied LTspice circuits describe the predecessor rectifier and its passive values. The inductor and transformer parameters in Chapter~\ref{ch:analysis} come from the supplied magnetic measurements. These sources are used for an initial check of the prototype, with the differences between the earlier circuit and the final board taken into account.
++The inherited LTspice circuits describe the predecessor rectifier. Supplied magnetic measurements provide the inductance and transformer parameters used in Chapter~\ref{ch:analysis}. Their application to the prototype accounts for the changed topology and installed components.
+ 
+-For the final USB-C circuit and voltage-control firmware, the analytical expectations are compared with measurements. The comparison focuses on bus ripple, turn-on current, energy added by a burst, and the effect of component or command changes on these quantities.
++For the USB-C circuit and voltage-control firmware, analytical expectations are compared with measured bus ripple, turn-on current, packet energy, and response to component or command changes.
+--- before/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex
++++ after/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex
+@@ -1,7 +1,7 @@
+ \section{Inherited LTspice Circuits}
+ \label{sec:sim-files}
+ 
+-The main inherited circuits are \sourcefile{Simplified_for_journal_revision.asc} and \sourcefile{Simplified_for_journal_revision_2.asc}. They contain the earlier high-voltage PFC rectifier: a sinusoidal source, input bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. For the prototype, an isolated transformer, a separate modified-pump inductor, the USB-C stage, and the MCU burst controller were added. These additions change the model structure as well as its values.
++The inherited \sourcefile{Simplified_for_journal_revision.asc} and \sourcefile{Simplified_for_journal_revision_2.asc} circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.
+ 
+ \begin{table}[H]
+ \centering
+@@ -23,6 +23,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-Updating the inherited model requires more than replacing component values. Replacing the \SI{158}{\micro\henry} element with the isolated-path inductance would still leave out the transformer, reflected load, and changed connections. In the predecessor, a high-voltage output is regulated. In the prototype, the isolated secondary bulk bus and connector VBUS are separate nodes. The same nodes and power paths must be used when results are compared.
++Replacing the \SI{158}{\micro\henry} element alone would omit the transformer, reflected load, and revised interconnections. The predecessor regulates a high-voltage output; the prototype has separate isolated bulk and connector VBUS nodes. Model comparison requires corresponding nodes and power boundaries.
+ 
+-The \sourcefile{Power_loss_breakdown.asc} variants and device libraries likewise belong to the earlier loss calculations. These files are useful for understanding the earlier circuit. The prototype is assessed using measured input and output power. Appendix~\ref{app:modeling} lists the model files and their roles.
++The \sourcefile{Power_loss_breakdown.asc} variants and device libraries describe the predecessor's loss calculations. Prototype efficiency is established from measured input and output power. Appendix~\ref{app:modeling} identifies the inherited files and their roles.
+--- before/Chapters/05_Modeling_Simulation/03_GaN_Model.tex
++++ after/Chapters/05_Modeling_Simulation/03_GaN_Model.tex
+@@ -3,4 +3,4 @@
+ 
+ The supplied \sourcefile{GaN_LTspice_GS66502B_L1V2.lib} is a GaN Systems Level 1 Version 2.0 library intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded from the model, as stated in its header \cite{gansystemsGS66502Bmodel}. It can represent the electrical device used in the inherited model, but it does not represent the complete LMG2652 package and PCB implementation.
+ 
+-To predict switching in the fitted stage, voltage-dependent output charge, gate and enable timing, reverse conduction, and connection impedance would have to be included. The package, PCB, and cooling paths would also be needed to predict temperature. At MHz frequency, even a small error in energy per transition can produce a significant loss error. Updating the old model therefore requires more than changing the device name.
++A fitted-stage switching model requires voltage-dependent output charge, gate/enable timing, reverse conduction, and interconnect impedance. Temperature prediction additionally requires package, PCB, and cooling paths. At MHz frequency, transition-energy error directly affects calculated loss, so device-name substitution is insufficient.
+--- before/Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex
++++ after/Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex
+@@ -3,6 +3,6 @@
+ 
+ The first schematic runs to \SI{40}{\milli\second}, with data saved from \SI{20}{\milli\second}. The second runs to \SI{100}{\milli\second}, with data saved from \SI{80}{\milli\second}. Both save the final \SI{20}{\milli\second} interval, or one \SI{50}{\hertz} line period. Their ideal gate pulses have 40\% command duty and half-period displacement. These settings belong to the inherited simulations. The dead time of the final half bridge cannot be determined from them.
+ 
+-Input current, RMS voltage/current, input and output power, efficiency, and PF are calculated by Fourier and measurement directives. The logs and RAW files contain the results from those earlier runs. A matching final-board model was not rerun for comparison with the prototype captures.
++Fourier and measurement directives calculate input current, RMS voltage/current, power, efficiency, and PF. The retained logs and RAW files are inherited results; a matching final-board model was not rerun.
+ 
+-For a final switched-model comparison, the circuit would first be allowed to settle. An interval containing both line and burst behavior would then be saved. The time step would need to be small enough to resolve the transitions. Before comparison with bench data, convergence would be checked by confirming that the energy balance and calculated quantities remain consistent between runs.
++A final switched-model comparison requires settling, an evaluation interval spanning line and burst behavior, and a time step resolving commutation. Time-step convergence and energy balance must be established before comparison with measured waveforms.
+--- before/Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex
++++ after/Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex
+@@ -1,8 +1,8 @@
+ \section{What the Prototype Model Needs}
+ \label{sec:sim-cases}
+ 
+-A prototype model must connect the modified pump and isolated path to the controller and output demand. The pump needs its inductor and clamp sequence. The isolated path needs separate leakage and magnetizing inductance, the turns ratio, rectifier conduction, and energy storage. To model startup and burst response, the feedback-supply startup delay, sampling, burst timing, and load at the secondary bulk bus must also be included.
++The prototype model requires the pump inductor and clamp sequence; separate transformer leakage and magnetizing branches; turns ratio, rectifier conduction, and storage; and the controller's sampling, burst timing, and isolated-feedback startup delay.
+ 
+-A fixed resistor selected for the connector voltage would not represent the downstream regulator's changing input demand. Attachment and removal also change the load and connected capacitance. The power, impedance, and dynamic assumptions must be stated before even a reduced load model can explain startup or no-load voltage.
++A fixed resistor at connector voltage does not reproduce the downstream regulator's bulk-bus demand. Attachment and removal also change connected capacitance. The assumed power, impedance, and load dynamics must therefore be specified.
+ 
+-Established bursts at a known load would be modeled first. Line-cycle buffering, attachment/removal, and high-impedance operation would be added next. This simulation of the final hardware remains unfinished. The following sections use the analytical relationships to identify expected effects and the measurements needed to check them.
++Established-burst operation at a known load provides the initial calibration point, followed by line-cycle buffering, load transients, and high-impedance operation. This final-hardware simulation remains unfinished; the following calculations provide analytical expectations for measurement.
+--- before/Chapters/05_Modeling_Simulation/06_Steady_State.tex
++++ after/Chapters/05_Modeling_Simulation/06_Steady_State.tex
+@@ -1,8 +1,8 @@
+ \subsection{Burst and Line-Cycle Behavior}
+ \label{sec:sim-steady}
+ 
+-Steady operation has three time scales. Phase, clamp timing, and energy per active cycle are set by the carrier and tank. Average transfer over many cycles is controlled by burst density. The remaining difference between transferred and consumed energy is buffered by the DC link and secondary storage over the mains cycle. A model that resolves only one scale can miss the behavior at another.
++Three time scales govern operation: carrier-scale phase, clamp timing, and energy per active cycle; burst-scale average transfer; and line-cycle storage imbalance in the DC link and secondary capacitors. Resolving one scale does not establish behavior at the others.
+ 
+-The nominal series resonance is near \SI{0.989}{\mega\hertz} and close to the carrier. Current phase at turn-on also depends on the magnetizing branch, pump current, and rectifier state. Predicting commutation therefore needs those branches as well as the nominal resonance.
++Nominal series resonance is near \SI{0.989}{\mega\hertz}. Turn-on phase also depends on magnetizing current, pump current, and rectifier state, which must be included in commutation prediction.
+ 
+-The model would be set to the measured input and secondary demand. The slow voltage envelope and switching waveform would then be compared with measurements. Agreement in mean VBUS alone would not show whether bulk ripple or commutation current had been modeled correctly. Those measurements are reported separately in Chapter~\ref{ch:results} for the same reason.
++Calibration requires matched input and secondary demand, followed by separate comparisons of voltage envelopes and switching waveforms. Mean VBUS agreement alone does not validate bulk ripple or commutation current. Chapter~\ref{ch:results} reports these quantities separately.
+--- before/Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex
++++ after/Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex
+@@ -1,7 +1,7 @@
+ \subsection{Startup and Load-Removal Energy}
+ \label{sec:sim-startup}
+ 
+-The isolated feedback path may have no power at startup. This condition is not represented by the steady-state equivalent circuit. Limited precharge was added to power the feedback path before normal voltage control. The feedback supply or its startup delay must therefore be included in the model. Assuming valid feedback from the start would omit the condition that precharge was added to address.
++Limited precharge establishes power for isolated feedback before voltage control. A startup model must include this supply delay; assuming initially valid feedback omits the condition addressed by precharge.
+ 
+ \begin{samepage}
+ At load removal, residual tank energy and continued excitation can charge the secondary capacitor. If a net energy \(\Delta E\) is deposited in an equivalent secondary capacitance \(C_{\mathrm{sec}}\), energy conservation gives
+@@ -16,6 +16,6 @@
+ \Delta V_{\mathrm{sec}}\approx
+ \frac{\Delta E}{C_{\mathrm{sec}}V_{\mathrm{sec}}}.
+ \end{equation}
+-This relationship explains why even a small energy packet can raise the voltage after the load disappears. More secondary capacitance reduces the voltage rise per packet. Calculating the actual overshoot still requires the delivered energy, effective capacitance, and timing, including any excitation that continues before the controller reacts.
++Secondary capacitance reduces the voltage rise per packet. Quantitative overshoot prediction requires deposited energy, effective capacitance, and controller delay, including excitation delivered before inhibition.
+ 
+-When the MCU burst-enable output PA10 on the original prototype is held low, no further excitation is commanded, but stored energy continues to circulate. Repeated packets are reduced by the no-load guard. Further excitation is blocked by soft holdoff or a latched hard fault. These actions are checked against the controller implementation and waveforms. Calculating a margin would require a switched model of the same circuit and timing.
++Driving the original prototype's burst-enable output PA10 low inhibits further excitation while stored energy continues to circulate. The no-load guard reduces repeated packets; soft holdoff and latched OVP block further commands. Their margins require a switched model with the measured circuit and timing.
+--- before/Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex
++++ after/Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex
+@@ -1,13 +1,13 @@
+ \section{Analytical Parameter Sensitivity}
+ \label{sec:sim-sweeps}
+ 
+-The first-order equations are used to estimate how a parameter change affects the circuit. The results describe analytical sensitivity; a tolerance sweep of the final board has not been completed. Differentiating ideal input power gives
++The first-order equations estimate analytical sensitivity; no final-board tolerance sweep was completed. For continuous ideal charge transfer,
+ \begin{equation}
+ \frac{\delta P_{\mathrm{in}}}{P_{\mathrm{in}}}\approx
+ \frac{\delta f_s}{f_s}+\frac{\delta\CP}{\CP}
+ +2\frac{\delta V_{\mathrm{in,rms}}}{V_{\mathrm{in,rms}}},
+ \end{equation}
+-for continuous ideal charge transfer. The squared input-voltage term shows why changing the line voltage changes the power transferred by an otherwise unchanged pump. Burst operation also depends on active-cycle density, so a matched comparison must account for command behavior.
++The quadratic line-voltage dependence changes power transfer without a component change. Burst operation adds active-cycle-density dependence, which must be included in matched comparisons.
+ 
+ Series resonance changes according to
+ \begin{equation}
+@@ -16,14 +16,14 @@
+ +\frac{\delta\CRES}{\CRES}\right).
+ \label{eq:sim-resonance-sensitivity}
+ \end{equation}
+-For example, a 5\% increase in either series parameter lowers resonance by approximately 2.5\% to first order. These percentages illustrate the equation and were not obtained from measurements or a simulation. Since the carrier is close to resonance, even that change can matter to current phase and should be checked in the complete circuit.
++A 5\% increase in either series parameter gives an approximately 2.5\% first-order resonance reduction. These calculated sensitivities are illustrative, rather than measured or simulated results. Near-carrier operation makes the corresponding phase shift relevant to commutation.
+ 
+ The small-ripple DC-link relationship gives
+ \begin{equation}
+ \widehat{\Delta V}_{\mathrm{DC}}\propto
+ \frac{P}{\omega_l\CDC\VDC}.
+ \end{equation}
+-The effect on energy storage follows directly: more link capacitance reduces ripple but increases stored energy, while more secondary capacitance reduces the voltage rise per packet but requires more startup energy. A change that improves one waveform can therefore change the startup or removal response.
++Increasing link capacitance reduces ripple and increases stored energy. Increasing secondary capacitance reduces packet-induced voltage rise but increases startup energy. Storage changes therefore affect both steady operation and transients.
+ 
+ \begin{table}[H]
+ \centering
+@@ -43,6 +43,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-These trends help select changes for closer testing. Saturation, nonlinear capacitance, rectifier conduction, and controller-state changes can alter the simple relationships. Checking the combined result therefore needs a switched model or a matched hardware comparison.
++Saturation, nonlinear capacitance, rectifier conduction, and control-state changes limit these sensitivities. Combined effects require a switched model or matched hardware comparison.
+ 
+-The revised plan \cite{projectOctoberPlan} calls for repeating the baseline, changing one parameter or fitted part, and repeating the relevant measurements. Candidate checks cover sensing calibration, timing, control limits, pump and resonant values, gate-drive behavior, and local cooling. Apart from the intended change, the input, output setting, load, firmware, and thermal conditions must stay the same. The included controller has a fixed carrier. Frequency or dead-time experiments therefore need a separately documented configuration. The progression from a repeated \SI{85}{\watt} point through \SI{90}{\watt}, \SI{95}{\watt}, and \SI{100}{\watt} remains a planned test sequence. Testing can proceed to the next step only within the electrical-stress and temperature limits.
++The revised plan \cite{projectOctoberPlan} specifies baseline repetition followed by one-parameter or one-part changes under matched input, output setting, load, firmware, and thermal conditions. Candidate variables include sensing calibration, timing, control limits, pump and tank values, gate drive, and cooling. The included controller has a fixed carrier; frequency and dead-time experiments require a separately identified configuration. The planned progression from \SI{85}{\watt} through \SI{90}{\watt}, \SI{95}{\watt}, and \SI{100}{\watt} remains conditional on electrical-stress and temperature limits.
+--- before/Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex
++++ after/Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex
+@@ -1,17 +1,17 @@
+ \section{Losses and Heating}
+ \label{sec:sim-loss}
+ 
+-A complete loss balance covers the whole supply: semiconductor conduction and switching, pump and rectifier diodes, magnetic copper and core loss, capacitor ESR, auxiliary circuits, and the downstream output stage. The active losses follow the burst waveforms, while auxiliary consumption and some idle loss continue between packets. The input and output measurement points and the burst state must therefore be specified when losses are estimated.
++The supply loss balance includes semiconductor conduction and switching, pump and rectifier diodes, magnetic copper and core loss, capacitor ESR, auxiliary circuits, and the downstream regulator. Burst-dependent active loss and persistent auxiliary/idle consumption require stated power boundaries and burst state.
+ 
+ The inherited loss files use a different circuit and device set, so their efficiency cannot be transferred to the USB-C supply. The GS66502B model also omits thermal and package behavior needed to predict the assembly's surface or junction temperatures.
+ 
+-Prototype efficiency is calculated from paired input and output power measurements at the points defined in Chapter~\ref{ch:results}. The difference estimates the total loss between those measurement points. It does not divide the loss among the GaN stage, magnetics, and output controller. Thermal images help choose where to investigate next, but surface temperature alone does not measure a component's dissipation.
++Paired input/output measurements at the Chapter~\ref{ch:results} boundaries establish efficiency and aggregate loss. They do not separate GaN, magnetic, and output-stage dissipation. Thermal images locate investigation areas; surface temperature alone does not quantify component loss.
+ 
+ \subsection{Finding the Output-Power Limit}
+ \label{sec:sim-power-gap}
+ 
+ The revised plan asks why the reported \SI{85}{\watt} V2 result falls \SI{15}{\watt} short of the \SI{100}{\watt} target \cite{projectOctoberPlan}. That is a gap in output capability, not a measured \SI{15}{\watt} loss. The matched \SI{79.89}{\watt} V1.0 baseline is \SI{20.11}{\watt} below the target and must be diagnosed using its own configuration and test conditions.
+ 
+-Finding the output-power limit requires two checks: where power is dissipated and what prevents the next load increase. The plan includes transformer copper/core loss, the pump network, GaN conduction and switching, rectification, interconnects, auxiliary/control consumption, and heat removal. Component stress and control limits must also be checked. A hot surface indicates where further loss measurements may be needed. A duty limit or protection event requires the relevant signals and settings to be checked. Neither observation alone establishes what limits output power.
++Diagnosis must distinguish dissipation from the mechanism preventing further load increase. Candidate limits include transformer copper/core loss, pump loss, GaN switching and conduction, rectification, interconnects, auxiliary consumption, heat removal, device stress, and command/protection limits. Temperature and controller-state observations identify follow-up measurements but do not individually establish the limiting mechanism.
+ 
+-The present measurements give the overall loss. A component loss budget for V2 and an explanation of the reported \SI{15}{\watt} gap are still needed. The next step is a repeatable V2 operating point with matched waveforms and temperatures, followed by retests with one change at a time. If the continuous target cannot be reached safely, that procedure should still identify the highest repeatable power and the remaining limit.
++The available measurements establish aggregate loss. A V2 component-loss budget and explanation of the reported \SI{15}{\watt} shortfall require a repeatable V2 operating point with matched waveforms and temperatures, followed by controlled single changes. This procedure must also identify the highest repeatable output and remaining limit if the continuous target is not reached.
+--- before/Chapters/05_Modeling_Simulation/10_Data_Limitations.tex
++++ after/Chapters/05_Modeling_Simulation/10_Data_Limitations.tex
+@@ -1,8 +1,8 @@
+ \section{Model Limits and Next Steps}
+ \label{sec:sim-limitations}
+ 
+-The analysis provides estimates of the pump's charge-transfer scale and nominal tank resonance, and shows how parameter changes are expected to affect the circuit. The observed bench behavior can also be related to DC-link ripple, magnetizing current, burst timing, and energy remaining after switching is inhibited.
++The analysis estimates pump charge-transfer scale, nominal resonance, and parameter sensitivity. DC-link ripple, magnetizing current, burst timing, and residual tank energy provide a framework for interpreting bench behavior.
+ 
+-To predict the prototype, the model needs to represent the installed circuit. The actual branches, load behavior, parasitics, and timing would be added first. Startup, load steps, no-load operation, and switching could then be compared with the corresponding captures. Loss and thermal paths would also be needed to predict efficiency and temperature. Details would be added where they help explain a measured difference or answer a specific design question.
++A predictive prototype model requires the installed branches, load dynamics, parasitics, and timing, calibrated against startup, load-step, no-load, and switching captures. Efficiency and temperature prediction additionally require loss and thermal calibration.
+ 
+-The next chapters describe how the supplied magnetic assemblies were integrated, the hardware was built, and the controller was developed. Those details establish the circuit and operating conditions needed for a calibrated model. The subsequent tests assess progress toward the project targets.
++The following magnetics, hardware, and control chapters define the installed circuit and operating conditions required for that calibration. Laboratory tests establish progress toward the power and thermal targets.
+--- before/Chapters/05_Modeling_Simulation/chapter.tex
++++ after/Chapters/05_Modeling_Simulation/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Converter Models and Calculations}
+ \label{ch:simulation}
+ 
+-The main circuit relationships are established by the analysis. To predict the prototype, the hardware and controller must also be represented. The differences between the supplied models and the prototype are described in this chapter, followed by calculations of energy transfer and the effect of parameter changes. The final board was not modeled and calibrated as a complete system, so the laboratory tests provide its performance results.
++The inherited models and analytical relationships are used to estimate charge transfer, resonant operation, and parameter sensitivity. They do not represent the complete prototype hardware and controller. Complete-system performance is therefore established by laboratory measurements rather than a calibrated final-board model.
+ 
+ \input{Chapters/05_Modeling_Simulation/01_Objectives}
+ \input{Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files}
+--- before/Chapters/06_Magnetics_Integration/01_Provenance.tex
++++ after/Chapters/06_Magnetics_Integration/01_Provenance.tex
+@@ -3,7 +3,7 @@
+ 
+ A planar inductor and transformer from earlier DTU work were used in this converter. The \texttt{Planar\_ChargePump\_2025 (5)} package contains the calculations and manufacturing information: MATLAB files, COMSOL models, component plots, PCB designs, and Gerber files. Its headers and presentation identify Bima Nugraha Sanusi and the DTU Power Electronics group. The component measurements are attributed to M\'ani Gautason.
+ 
+-The earlier work had already covered core selection, winding geometry, air-gap studies, and electromagnetic loss calculations using MATLAB and two-dimensional FEM in COMSOL Multiphysics 6.2 \cite{comsol62}. The supplied cores and windings were kept. For this thesis, the parts were connected to the converter, mounted on the assembly, and analyzed using the supplied values. The table below separates the inherited work from the integration work.
++The inherited work covered core selection, winding geometry, air-gap studies, and loss calculations using MATLAB and two-dimensional FEM in COMSOL Multiphysics 6.2 \cite{comsol62}. The supplied cores and windings were retained; this thesis covers electrical connection, mechanical integration, and converter analysis using the supplied values. The table distinguishes these contributions.
+ 
+ \begin{table}[htbp]
+ \centering
+--- before/Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex
++++ after/Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex
+@@ -26,6 +26,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-Both inductors are close to the \SI{33}{\micro\henry} target. The transformer adds about \SI{16.5}{\micro\henry} of leakage, with magnetizing inductance from approximately \SI{140}{\micro\henry} to \SI{151}{\micro\henry} and a turns ratio close to 8:1. The leakage was included when the additional series inductance was chosen because it is already part of the resonant current path.
++Both inductors are close to the \SI{33}{\micro\henry} target. Transformer leakage is about \SI{16.5}{\micro\henry}, magnetizing inductance spans approximately \SI{140}{\micro\henry} to \SI{151}{\micro\henry}, and the turns ratio is near 8:1. Leakage was included in selecting the additional series inductance.
+ 
+-The assembly information does not identify the installed A/B combination. The calculations therefore use the supplied range or a stated nominal value, with the turns-ratio convention in \cref{eq:app-turns-ratio}. Winding-loss calculations from the AC-resistance values also need the original test frequency and fixture. The installed parts would need to be identified and remeasured under documented conditions to resolve these uncertainties.
++The installed A/B combination is unidentified, so calculations use the supplied range or a stated nominal value with the \cref{eq:app-turns-ratio} convention. AC-resistance loss estimates also require the original measurement frequency and fixture. Identifying and remeasuring the fitted parts would resolve these uncertainties.
+--- before/Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex
++++ after/Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex
+@@ -1,9 +1,9 @@
+ \section{Electrical and Mechanical Interfaces}
+ \label{sec:mag-requirements}
+ 
+-The inductor and transformer have different jobs in the assembled converter. The inductor carries charge-pump current, while the transformer transfers resonant power to the secondary. Component and connection resistance and inductance must be considered together, including each outgoing conductor and its return path.
++The inductor carries pump current; the transformer transfers isolated resonant power. Component and interconnect resistance and inductance are evaluated as complete outgoing-and-return loops.
+ 
+-The transformer also provides separation between the primary and secondary. This separation has to be maintained across the winding PCB, solder joints, supports, and nearby main-board copper. The integration requirements therefore cover the complete assembly rather than the magnetic component alone.
++Primary-to-secondary separation must be maintained through the winding PCB, solder joints, supports, and adjacent main-board copper. Isolation assessment therefore covers the complete assembly.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -23,4 +23,4 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The connections in \Cref{fig:schematic-v11-power-stage} and assembly in \cref{fig:final-prototype-main-photo} show how the supplied parts fit into the converter. A component-specific terminal drawing is still needed to make that assembly reproducible without relying on photographs.
++The schematic in \Cref{fig:schematic-v11-power-stage} and assembly in \cref{fig:final-prototype-main-photo} identify the converter integration. A component-specific terminal drawing is still required for reproducible assembly.
+--- before/Chapters/06_Magnetics_Integration/04_Mounting_Concept.tex
++++ after/Chapters/06_Magnetics_Integration/04_Mounting_Concept.tex
+@@ -1,6 +1,6 @@
+ \subsection{Mounting the Magnetics}
+ \label{sec:mag-mounting}
+ 
+-The supplied cores and winding PCBs were mounted as complete subassemblies. Their terminal positions and size constrained the main-board interface. Nearby components also needed room for assembly and rework.
++The cores and winding PCBs were mounted as subassemblies. Terminal positions and dimensions constrained the main-board interface and surrounding assembly/rework access.
+ 
+-The magnetic assembly needs to be supported so its weight is not carried by the solder joints. Excessive mounting pressure can also change the core gap or bend the winding PCB. The photographs show the prototype arrangement. A repeatable build still needs a written fastening procedure and an air-gap check after mounting. Those checks would establish whether assembly changes the component values used in the calculations.
++Mechanical support must avoid loading solder joints or altering the core gap through mounting pressure and PCB bending. The photographed arrangement requires a defined fastening procedure and post-mounting air-gap check to establish repeatability.
+--- before/Chapters/06_Magnetics_Integration/05_Footprint_Interconnection.tex
++++ after/Chapters/06_Magnetics_Integration/05_Footprint_Interconnection.tex
+@@ -1,6 +1,6 @@
+ \subsection{Footprints and Winding Connections}
+ \label{sec:mag-footprint}
+ 
+-The footprint is both a mounting interface and part of the resonant current path. Its pads, vias, terminal links, and return paths were considered as one loop. The complete loop adds resistance and inductance. A mechanically suitable connection can therefore still alter the resonant circuit.
++Pads, vias, terminal links, and return paths form part of the resonant loop, adding resistance and inductance. Footprint selection therefore affects electrical behavior as well as mounting.
+ 
+-Transformer polarity also has to agree with the secondary rectifier. The primary and secondary nodes are named in the schematic. The available assembly information does not map every terminal of the installed A/B part. The turns ratio is used to estimate gain. The terminals and polarity must also be checked to reproduce the winding connections.
++Transformer polarity must match the secondary rectifier connections. The schematic names the winding nodes, but the available information does not map every terminal of the installed A/B variant. Reproduction requires terminal and polarity verification in addition to the gain estimate from turns ratio.
+--- before/Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex
++++ after/Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex
+@@ -1,6 +1,6 @@
+ \subsection{Assembly Tolerance and Rework}
+ \label{sec:mag-mechanical}
+ 
+-The resonant loop is changed when a terminal link is moved or a winding connection is lengthened during rework. Core alignment, spacing, and board bending can also change the magnetic path or terminal contact.
++Terminal-link movement and longer winding connections alter resonant-loop impedance. Core alignment, spacing, PCB bending, and contact changes can also affect the installed magnetic path.
+ 
+-The supplied values in \cref{tab:mag-inherited-measurements} were used because inductance was not remeasured after installation and no detailed magnetic rework log was kept. The assembled circuit also includes parasitics from the main board and connecting links. The calculated resonance is therefore a starting estimate. Refining the model requires measurements at the installed terminals.
++Values in \cref{tab:mag-inherited-measurements} were retained because inductance was not remeasured after installation and no detailed rework log was kept. Main-board and link parasitics make the calculated resonance an initial estimate; refinement requires measurement at the installed terminals.
+--- before/Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex
++++ after/Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex
+@@ -1,6 +1,6 @@
+ \section{Isolation at the Transformer Interface}
+ \label{sec:mag-isolation}
+ 
+-The transformer separates the primary and secondary circuits, but the shortest physical path can pass around the part through solder fillets, temporary wires, supports, exposed core surfaces, or the main PCB. Creepage and clearance therefore need to be checked across the installed assembly. Checking the winding PCB alone would miss some of those paths.
++Installed creepage and clearance can be limited by solder fillets, temporary wiring, supports, exposed core surfaces, or the main PCB. Winding-board spacing alone does not establish the complete isolation path.
+ 
+-The main-board spacing rules and laboratory insulation check are described in \Cref{sec:hw-layout,sec:hw-overview}. To assess the full insulation system, the transformer spacing needs to be documented, the material group established, and a standardized dielectric test performed. The transformer connection establishes functional separation. Assessing the insulation margin requires those additional checks.
++Main-board spacing and the laboratory insulation check are described in \Cref{sec:hw-layout,sec:hw-overview}. Full insulation assessment additionally requires documented transformer spacing, material group, and standardized dielectric testing. The functional isolation path does not establish these margins.
+--- before/Chapters/06_Magnetics_Integration/08_Parasitics.tex
++++ after/Chapters/06_Magnetics_Integration/08_Parasitics.tex
+@@ -26,4 +26,4 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The installed connections also affect secondary noise. Common-mode current follows \(i_{\mathrm{CM}}=C_{\mathrm{ps}}\,dv/dt\), so transformer interwinding capacitance, nearby copper, and the probe itself can all change the measured waveform. These relationships were used to interpret the behavior. Impedance and capacitance measurements on the installed assembly are needed before assigning a numerical shift or noise level to a particular connection.
++Common-mode current follows \(i_{\mathrm{CM}}=C_{\mathrm{ps}}\,dv/dt\). Interwinding capacitance, adjacent copper, and probe loading therefore affect secondary-noise captures. Numerical attribution requires installed-assembly impedance and capacitance measurements.
+--- before/Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex
++++ after/Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex
+@@ -1,6 +1,6 @@
+ \section{Thermal Environment}
+ \label{sec:mag-thermal}
+ 
+-The temperature of each magnetic component depends on its winding, core, and terminal losses, as well as heat from the surrounding circuit. Nearby GaN devices, rectifiers, auxiliary supplies, copper spreading, and airflow all affect the result. The thermal limit of the installed component cannot be determined from the supplied inductance and turns ratio alone.
++Magnetic temperature depends on winding, core, and terminal losses and thermal coupling from GaN devices, rectifiers, auxiliary supplies, copper, and airflow. Inductance and turns ratio do not establish an installed thermal limit.
+ 
+-The board's temperature patterns at the tested outputs were compared using the images in \cref{sec:method-thermal,sec:res-thermal}. They show hot areas but do not separate core and winding losses or show the hottest point inside a winding. A continuous thermal rating would require a timed temperature measurement on the identified magnetic assembly.
++The images in \cref{sec:method-thermal,sec:res-thermal} compare surface-temperature patterns at tested outputs. They do not separate core and winding losses or resolve internal winding maxima. A continuous rating requires a timed thermal record on the identified assembly.
+--- before/Chapters/06_Magnetics_Integration/10_Verification.tex
++++ after/Chapters/06_Magnetics_Integration/10_Verification.tex
+@@ -1,7 +1,7 @@
+ \section{Assembly Checks and Remaining Measurements}
+ \label{sec:mag-verification}
+ 
+-The supplied measurements describe the components before installation. Power transfer through the complete magnetic path was demonstrated in the assembled converter during the tests for this thesis. The installed inductances and individual thermal or isolation margins remain unmeasured.
++The supplied measurements characterize the components before installation. Converter tests demonstrate assembled-path power transfer, while installed inductance and individual thermal and isolation margins remain unmeasured.
+ 
+ The table below lists the measurements needed to resolve the remaining questions.
+ 
+--- before/Chapters/06_Magnetics_Integration/11_Limitations.tex
++++ after/Chapters/06_Magnetics_Integration/11_Limitations.tex
+@@ -1,8 +1,8 @@
+ \subsection{Remaining Measurements}
+ \label{sec:mag-limitations}
+ 
+-The approximately \SI{33}{\micro\henry} pump inductor and \SI{16.5}{\micro\henry} transformer leakage set the starting point for the prototype. These values provided a basis for building and operating the circuit, although the board connections and mounting also affected its installed behavior.
++The approximately \SI{33}{\micro\henry} pump inductance and \SI{16.5}{\micro\henry} transformer leakage provided the initial design values. Interconnect and mounting effects remain part of the installed impedance.
+ 
+-The next step is to identify the fitted variants and winding terminals, remeasure inductance in place, check the complete isolation path, and track temperature during a stabilized run. The assembly could then be reproduced more reliably, and its measured losses could be used to guide another board revision.
++Further characterization requires fitted-part and terminal identification, in-circuit inductance measurement, complete-path isolation checks, and a stabilized thermal run. These measurements support reproducible assembly and loss-driven revision.
+ 
+-Secondary-winding heating and limited power increase at higher load made transformer optimization a priority for the later revisions. The operating prototypes retained the inherited magnetic assemblies. New planar magnetics were not installed within the project time, so a smaller V3 layout did not establish improved magnetic loss or higher continuous output.
++Secondary-winding heating and limited power increase at higher load made transformer optimization a priority. The operating prototypes retained the inherited magnetics; replacement planar parts were not installed within the project time. The smaller V3 layout therefore establishes neither reduced magnetic loss nor increased continuous output.
+--- before/Chapters/06_Magnetics_Integration/chapter.tex
++++ after/Chapters/06_Magnetics_Integration/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Integration of the Planar Magnetics}
+ \label{ch:magnetics}
+ 
+-The converter was built around the supplied planar magnetics. The starting inductance, turns ratio, terminal arrangement, and physical size were set by these parts. They were connected to the power PCB. Their installed behavior also depends on the connections, mounting, and surrounding circuit.
++The supplied planar magnetics fixed the initial inductance, turns ratio, terminal arrangement, and assembly envelope. Integration into the power PCB adds interconnect impedance, mounting constraints, and thermal coupling that affect installed behavior.
+ 
+ \input{Chapters/06_Magnetics_Integration/01_Provenance}
+ \input{Chapters/06_Magnetics_Integration/02_Inherited_Specifications}
+@@ -15,4 +15,4 @@
+ \input{Chapters/06_Magnetics_Integration/10_Verification}
+ \input{Chapters/06_Magnetics_Integration/11_Limitations}
+ 
+-The supplied magnetics set the starting point for the power stage. Their installed behavior also depends on the board and its connections. The next chapter describes the hardware integration and the changes made during bring-up. Measurements of the installed magnetic path are still needed to investigate the remaining losses and switching behavior.
++The following hardware chapter describes the power-board integration and bring-up changes. Installed magnetic-path measurements remain necessary to separate magnetic, interconnect, and switching losses.

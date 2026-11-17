@@ -1,0 +1,30 @@
+\section{Test Program and Data}
+\label{sec:method-matrix}
+
+Switching and power transfer were checked during bring-up, followed by loaded and
+no-load characterization.
+
+\begin{table}[htbp]
+\centering
+\caption{Prototype test program.}
+\label{tab:master-test-matrix}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}p{0.31\textwidth}X@{}}
+\toprule
+Test & Controlled condition & Main observations\\
+\midrule
+Bring-up & Limited input and selected load & Carrier, PA10, auxiliary rails, and basic transfer\\
+Startup/shutdown & Initial voltage, load, and mode & Output rise/decay and enable transitions\\
+Steady output & Fixed output setting and load & Voltage, ripple, current, and power\\
+Load event & Attachment or removal of load & Voltage excursion and subsequent control response\\
+No load & Open output at a selected setting & Bulk/output voltage and burst pattern\\
+Power quality & Recorded AC input and output condition & Real power, PF, THD, and harmonics\\
+Efficiency & Matched operating-point readings & AC input and DC output power\\
+Thermal & Recorded output setting and load & Surface temperatures and location\\
+Switching & Selected line and load point & Switch-node, command, and current where available\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Missing setup details and peak markers limit the calculations, as discussed in
+\cref{sec:method-uncertainty}. Plot lines connect measured points and are not
+fitted converter characteristics.

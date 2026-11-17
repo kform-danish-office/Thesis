@@ -1,0 +1,101 @@
+%\usepackage{microtype}      % better looking text
+%\usepackage[utf8]{inputenc}
+\usepackage{fontspec}       % Package for custom fonts
+\usepackage[]{geometry}     % Package for changing page margins (before fancyhdr) 
+\usepackage{fancyhdr}       % Package to change header and footer
+\usepackage{parskip}        % Package to tweak paragraph skipping (instead of indents a small skip is added after every paragraph)
+\usepackage{titlesec}
+\usepackage{tikz}           % Package for drawing
+\usepackage{pgfplots}       % Package for creating graphs and charts
+\usepackage{xcolor}         % Package for defining DTU colors to be used
+\usepackage{amsmath}        % For aligning equations among other
+\usepackage{amssymb}        % Comparison symbols used in commutation estimates
+\usepackage{siunitx}        % SI units
+\usepackage{listings}       % Package for inserting code, (before cleveref)
+\PassOptionsToPackage{hyphens}{url} % Ability to line break urls at hyphens
+\usepackage{hyperref}       % Package for cross referencing (also loads url package)
+\usepackage{cleveref}       % improved cross referencing
+\usepackage{textcomp}       % \textdegree = °C and other useful symbols
+\usepackage[american]{babel} % localization 
+\usepackage{caption}        % better captions
+\usepackage{subcaption}     % for subfigures
+\usepackage{csquotes}       % Context-aware quotation marks
+\usepackage{tabularx}       % for ability to adjust column spacing in tabular better
+\usepackage{booktabs}       % for better tables
+\usepackage{float}          % floating figures in correct places
+\usepackage{calc}           % Adds ability for latex to calculate (3pt+2pt) 
+\usepackage{graphicx}       % Explicit image support
+\usepackage{longtable}      % Multi-page tables
+\usepackage{array}          % Extended table column definitions
+\usepackage{multirow}       % Multi-row table cells
+\usepackage{enumitem}       % Compact and controlled lists
+\usepackage{mathtools}      % Extensions to amsmath
+\usepackage{placeins}       % FloatBarrier
+\usepackage{pdflscape}      % Landscape pages for wide tables
+\usepackage{etoolbox}       % Conditional helpers
+\usepackage{xspace}         % Spacing after macros
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% Keep short pages natural instead of stretching list gaps to fill the page.
+\raggedbottom
+\brokenpenalty=10000 % Keep a hyphenated word on the same page.
+\clubpenalty=10000
+\widowpenalty=10000
+\setlist[itemize]{topsep=0.45\baselineskip,itemsep=0.25\baselineskip,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{topsep=0.45\baselineskip,itemsep=0.25\baselineskip,parsep=0pt,partopsep=0pt}
+
+
+% Thesis drafting helpers. Set \showdraftnotestrue while writing.
+% The default clean build keeps evidence gaps visible in the source, but removes
+% draft-note boxes and heavy placeholder figures from the PDF.
+\newif\ifshowdraftnotes
+\showdraftnotesfalse
+\newcommand{\draftnote}[1]{%
+  \ifshowdraftnotes
+  \par\smallskip\noindent
+  \fcolorbox{orange}{orange!10}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+      \textbf{Draft note:} #1}}
+  \par\smallskip
+  \fi}
+\newcommand{\placeholdervalue}[1]{%
+  \ifshowdraftnotes
+    \textcolor{red}{\textbf{[#1]}}%
+  \else
+    \textcolor{black!45}{\emph{[#1]}}%
+  \fi}
+\newcommand{\placeholderfigure}[2][0.20\textheight]{%
+  \ifshowdraftnotes
+  \begin{figure}[H]
+  \centering
+  \fbox{\parbox[c][#1][c]{0.90\linewidth}{\centering\textbf{Figure placeholder}\\[4pt]#2}}
+  \caption{#2}
+  \end{figure}
+  \fi}
+\newcommand{\sourcefile}[1]{{\footnotesize\nolinkurl{#1}}}
+\newcommand{\CP}{C_{\mathrm{P}}}
+\newcommand{\LP}{L_{\mathrm{P}}}
+\newcommand{\CDC}{C_{\mathrm{DC}}}
+\newcommand{\LRES}{L_{\mathrm{RES}}}
+\newcommand{\CRES}{C_{\mathrm{RES}}}
+\newcommand{\VDC}{V_{\mathrm{DC}}}
+\newcommand{\VIN}{V_{\mathrm{IN}}}
+\newcommand{\VOUT}{V_{\mathrm{OUT}}}
+\graphicspath{{Pictures/}{Pictures/Thesis/}}
+\addto\captionsamerican{\renewcommand{\bibname}{References}}
+
+% Allow modest additional inter-word stretch before producing overfull lines.
+\setlength{\emergencystretch}{3em}
+
+
+% Accommodate section numbers such as 10.13 without loading tocloft.
+\makeatletter
+\renewcommand*{\@pnumwidth}{2.1em}
+\renewcommand*{\@tocrmarg}{3.1em}
+\renewcommand*{\l@section}{\@dottedtocline{1}{1.5em}{3.4em}}
+\renewcommand*{\l@subsection}{\@dottedtocline{2}{3.8em}{4.2em}}
+\renewcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{3.5em}}
+\renewcommand*{\l@table}{\@dottedtocline{1}{1.5em}{3.5em}}
+\makeatother

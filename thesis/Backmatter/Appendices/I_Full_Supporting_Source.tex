@@ -1,0 +1,172 @@
+\chapter{Complete Supporting Software Source}
+\label{app:full-supporting-source}
+
+These are the complete project files for the controller build,
+browser interface, software tests, and thesis data processing.
+Appendix~\ref{app:software-tools} explains how they work together.
+The browser files include the monitoring dashboard, calibration and setup controls, and resonant-tank calculator.
+
+The two complete firmware versions are in Appendix~\ref{app:full-embedded-source}.
+
+\Needspace{10\baselineskip}
+\section{Firmware build script}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Firmware build script: complete source.},label={lst:full-support-1}]{Code/PWR_2_0_4/firmware/build.ps1}
+
+\Needspace{10\baselineskip}
+\section{MCU linker layout}
+
+
+\lstinputlisting[language={},style=fullsource,caption={MCU linker layout: complete source.},label={lst:full-support-2}]{Code/PWR_2_0_4/firmware/stm32f410.ld}
+
+\Needspace{10\baselineskip}
+\section{MCU HEX verifier}
+
+
+\lstinputlisting[language={},style=fullsource,caption={MCU HEX verifier: complete source.},label={lst:full-support-3}]{Code/PWR_2_0_4/firmware/verify_f410_hex.py}
+
+\Needspace{10\baselineskip}
+\section{Firmware protocol host tests}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Firmware protocol host tests: complete source.},label={lst:full-support-4}]{Code/PWR_2_0_4/firmware/test_web_protocol.py}
+
+\Needspace{10\baselineskip}
+\section{Browser application}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Browser application: complete source.},label={lst:full-support-5}]{Code/PWR_2_0_4/web/app.js}
+
+\Needspace{10\baselineskip}
+\section{Static application build}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Static application build: complete source.},label={lst:full-support-6}]{Code/PWR_2_0_4/web/build.mjs}
+
+\Needspace{10\baselineskip}
+\section{Calculator styling}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Calculator styling: complete source.},label={lst:full-support-7}]{Code/PWR_2_0_4/web/calculator.css}
+
+\Needspace{10\baselineskip}
+\section{Calculator page}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Calculator page: complete source.},label={lst:full-support-8}]{Code/PWR_2_0_4/web/calculator.html}
+
+\Needspace{10\baselineskip}
+\section{Bench application page}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Bench application page: complete source.},label={lst:full-support-9}]{Code/PWR_2_0_4/web/index.html}
+
+\Needspace{10\baselineskip}
+\section{UART framing and protocol validation}
+
+
+\lstinputlisting[language={},style=fullsource,caption={UART framing and protocol validation: complete source.},label={lst:full-support-10}]{Code/PWR_2_0_4/web/protocol.js}
+
+\Needspace{10\baselineskip}
+\section{Resonance calculations}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Resonance calculations: complete source.},label={lst:full-support-11}]{Code/PWR_2_0_4/web/resonance.js}
+
+\Needspace{10\baselineskip}
+\section{Serial connection and command queue}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Serial connection and command queue: complete source.},label={lst:full-support-12}]{Code/PWR_2_0_4/web/serial.js}
+
+\Needspace{10\baselineskip}
+\section{Local application server}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Local application server: complete source.},label={lst:full-support-13}]{Code/PWR_2_0_4/web/server.mjs}
+
+\Needspace{10\baselineskip}
+\section{Session export and CSV formatting}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Session export and CSV formatting: complete source.},label={lst:full-support-14}]{Code/PWR_2_0_4/web/storage.js}
+
+\Needspace{10\baselineskip}
+\section{Bench application styling}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Bench application styling: complete source.},label={lst:full-support-15}]{Code/PWR_2_0_4/web/styles.css}
+
+\Needspace{10\baselineskip}
+\section{Node package and commands}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Node package and commands: complete source.},label={lst:full-support-16}]{Code/PWR_2_0_4/web/package.json}
+
+\Needspace{10\baselineskip}
+\section{Static hosting configuration}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Static hosting configuration: complete source.},label={lst:full-support-17}]{Code/PWR_2_0_4/web/vercel.json}
+
+\Needspace{10\baselineskip}
+\section{Protocol tests}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Protocol tests: complete source.},label={lst:full-support-18}]{Code/PWR_2_0_4/web/tests/protocol.test.mjs}
+
+\Needspace{10\baselineskip}
+\section{Resonance calculation tests}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Resonance calculation tests: complete source.},label={lst:full-support-19}]{Code/PWR_2_0_4/web/tests/resonance.test.mjs}
+
+\Needspace{10\baselineskip}
+\section{Serial connection tests}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Serial connection tests: complete source.},label={lst:full-support-20}]{Code/PWR_2_0_4/web/tests/serial.test.mjs}
+
+\Needspace{10\baselineskip}
+\section{Session export tests}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Session export tests: complete source.},label={lst:full-support-21}]{Code/PWR_2_0_4/web/tests/storage.test.mjs}
+
+\Needspace{10\baselineskip}
+\section{Measurement tables and graph reconstruction}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Measurement tables and graph reconstruction: complete source.},label={lst:full-support-22}]{Data/analysis/rebuild_results.py}
+
+\Needspace{10\baselineskip}
+\section{Workbook inspection}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Workbook inspection: complete source.},label={lst:full-support-23}]{Data/analysis/inspect_measurements.py}
+
+
+\Needspace{10\baselineskip}
+\section{Carrier settings storage tests}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Carrier settings storage tests: complete source.},label={lst:full-support-24}]{Code/PWR_2_0_4/firmware/test_carrier_storage.py}
+
+\Needspace{10\baselineskip}
+\section{Resonant-tank calculator interface}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Resonant-tank calculator interface: complete source.},label={lst:full-support-25}]{Code/PWR_2_0_4/web/resonance-ui.js}
+
+\Needspace{10\baselineskip}
+\section{Measured magnetic component presets}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Measured magnetic component presets: complete source.},label={lst:full-support-26}]{Code/PWR_2_0_4/web/resonance-presets.js}
+
+\Needspace{10\baselineskip}
+\section{Magnetic component preset tests}
+
+
+\lstinputlisting[language={},style=fullsource,caption={Magnetic component preset tests: complete source.},label={lst:full-support-27}]{Code/PWR_2_0_4/web/tests/resonance-presets.test.mjs}

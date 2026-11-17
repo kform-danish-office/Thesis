@@ -1,0 +1,7 @@
+{
+  "type": "AI-assisted cover illustration, not technical evidence",
+  "tool": "built-in image_gen",
+  "original": "Data/measurements/v2_results/evidence/v2_board_overview_original.jpg",
+  "subject": "Right-hand V2 board with amber tape",
+  "limitations": "Generated cleanup redraws fine markings and circuitry. Original evidence remains unchanged."
+}

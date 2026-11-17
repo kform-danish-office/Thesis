@@ -1,10 +1,12 @@
 # STM32F410CBU6 Port
 
-Firmware: `PWR-2.0.1`, retaining the `PWR-2.0.0` F410 port based on the existing
+Firmware: V2 / F410 `PWR-2.0.4` candidate, retaining the `PWR-2.0.0` port based on the existing
 `PWR-1.9.20` control behavior and the supplied
 `Schematic PDF_[No Variations] (12).pdf`, MCU sheet 4 and power sheet 3.
 See the [browser protocol](web-protocol.md) for the added JSON telemetry,
-correlated commands, and explicit communication lease.
+correlated commands, explicit communication lease and F410-only carrier timing.
+This candidate is software-validated; physical flashing and powered bench
+validation remain pending. G071 remains PWR-2.0.3 with its fixed carrier.
 
 ## Schematic Pin Map
 
@@ -37,16 +39,33 @@ outputs on this board.
 The installed STM32 core's F410CBU variant uses internal HSI and PLL for 100 MHz;
 the schematic does not populate an external high-speed crystal.
 
-TIM1 generates center-aligned complementary CH1/CH1N. At a 100 MHz timer clock,
-ARR=50, CCR1=25, and DTG=4 produce a nominal 1 MHz carrier with 40 ns dead time
-at both transitions. The repetition counter is 1, giving one update per full
-up/down cycle. CH2 stays disabled so it cannot take PA9 away from USART1.
+TIM1 generates edge-aligned complementary CH1/CH1N with prescaler 0 and an even
+period tick count for balanced reference pulses. At a 100 MHz timer clock, the
+default ARR=99, CCR1=50, DTG=4 and repetition counter 0 produce a nominal 1 MHz
+carrier with 40 ns deadtime. CH2 stays disabled so it cannot take PA9 away from
+USART1. The steady default frequency/deadtime are retained, but center-to-edge
+alignment changes the timer phase; verify steady waveforms and first-pulse
+behavior on the scope.
+
+With output OFF and startup/autotune/calibration idle, `TIMING <Hz> <ns>` changes
+the pair atomically while EN stays low. Requests accept integer 500000–2000000 Hz
+and 20–200 ns. Frequency selects the nearest even period; deadtime rounds up to
+a timer tick. The actual pair must satisfy `4 * dead_ticks < period_ticks`.
+At 100 MHz, 950000 Hz / 53 ns becomes 106 period ticks / 6 deadtime ticks,
+reported as 943396 Hz / 60 ns; exact frequency is 100000000/106 Hz. At 2 MHz,
+120 ns is accepted and 130 ns is rejected. These are timer bounds, not an
+electrically validated operating range. The LC components set natural resonance;
+`FEN` remains the separate EN burst frequency. Read
+[the timing protocol](web-protocol.md#pwr-204-carrier-timing-capability) for
+requested/actual readback and client interlocks.
 
 TIM5 replaces the unavailable TIM3. The existing bounded TIM1 update-polling
 path aligns non-static EN edge requests; this retains software latency and is
 not a hardware-triggered zero-jitter EN output. There is no continuous 1 MHz ISR.
 Static 100% EN, minimum carrier-cycle bursts, pulse skipping, and 10 kHz default
-EN frequency remain available.
+EN frequency remain available. Cycle-to-time scheduling uses the actual timer
+clock and period, including quantized frequencies; EN is still subject to
+software latency and needs scope verification across the intended timing range.
 
 ADC1 scans PA0, PA1, PA2 into circular DMA2 Stream0 Channel0, with no blocking
 `analogRead()` and no per-conversion CPU interrupt. At PCLK2=100 MHz, ADC clock
@@ -102,14 +121,14 @@ the firmware requires the custom linker's storage-layout symbols.
 
 Artifacts: `arduino-build-f410/thesi_power_control.ino.hex`, `.bin`, `.elf`, `.map`.
 
-Fresh `PWR-2.0.1` builds completed successfully for both targets:
+Current builds completed successfully for both targets:
 
 | Target | Program storage | Static RAM | RAM remaining after static allocation |
 |---|---|---|---|
-| F410 | 85,184 / 98,304 bytes | 6,820 / 32,768 bytes | 25,948 bytes |
-| G071 | 127,340 / 131,072 bytes | 9,524 / 32,768 bytes | 23,244 bytes |
+| F410 PWR-2.0.4 | 90,268 / 98,304 bytes | 6,868 / 32,768 bytes | 25,900 bytes |
+| G071 PWR-2.0.3 | 130,424 / 131,072 bytes | 9,544 / 32,768 bytes | 23,224 bytes |
 
-The G071 build has 3,732 bytes of program storage remaining. These are compiler
+The G071 build has 648 bytes of program storage remaining. These are compiler
 size reports, not measurements of runtime control timing or validation of stack
 and heap use. The HEX verifier checks record checksums, initial stack/reset
 vectors, and exclusion of the settings sector:
@@ -139,16 +158,41 @@ journal instead:
 | Sectors 2-4 | 0x08008000..0x0801FFFF | Up to 96 KB of program code and constants |
 | SRAM | 0x20000000..0x20007FFF | 32 KB RAM |
 
-Packed settings are padded to a word-aligned flash record. Saves append complete
-records and verify readback. This version uses 472-byte records, giving 34 slots.
-Boot scans checksummed records and selects the newest
-valid sequence, skipping a torn final write. Erase occurs only when the journal
-wraps or no valid settings exist. Flash writes are deferred while EN is active.
+PWR-2.0.4 stores timing and calibration together in 488-byte records, giving
+33 slots. Each wrapper contains a 4-byte version magic, the unchanged 471-byte
+packed legacy settings payload and its checksum, a new explicit reserved
+`0xFF` byte, requested carrier Hz (4 bytes), requested deadtime ns (4 bytes), and
+an outer checksum (4 bytes). The reserved byte belongs to the new wrapper;
+legacy padding is never treated as a timing field.
+
+Boot scans both the original 472-byte legacy stride (34 old slots) and the new
+488-byte wrapper stride, validates integrity/timing and selects the newest valid
+sequence. A legacy-only journal loads its original settings/calibration with
+the default 1 MHz / 40 ns timing. Boot does not rewrite or erase the journal.
+Saves append after occupied legacy/torn blocks, verify readback and retain a
+previous valid record if an append is interrupted. Flash writes require output
+OFF and idle startup/tuning. Web changes require explicit SAVE; the legacy
+terminal retains its auto-save after 1.5 s quiet OFF unless BEGINCFG holds an
+import, as well as SAVE/ENDCFG.
+
+Changing actual period/deadtime ticks clears all three learned load profiles,
+tuned metadata and previous web calibration-completion state in RAM. Physical
+load-reference resistances, sensor calibration and applied duty settings remain.
+Retune explicitly and save timing/calibration together. Legacy calibration
+loaded at migration is retained; the alignment/first-pulse change still needs
+bench verification.
+
+Older firmware cannot read the new wrapper. A downgrade may recover an older
+surviving legacy record or fall back to defaults rather than the latest saved
+timing/calibration. Export and review the current configuration and plan any
+downgrade before flashing; do not assume saved state will follow it.
 
 This is a single-sector journal, not a redundant two-sector store: a power loss
 during the wrap erase can lose the saved settings. Missing/invalid settings use
 defaults with output OFF. `STATUS` reports the slot, sequence, pending state,
-and flash-layout readiness. Flash errors leave the save pending in RAM.
+and flash-layout readiness. Flash errors leave the save pending in RAM. The
+single-sector wrap risk is unchanged. Continue using the custom-linker HEX,
+preserve 0x08004000–0x08007FFF and avoid full-chip erase/BIN flashing.
 
 ## Initial Commands
 
@@ -158,6 +202,7 @@ First check UART and raw feedback with output OFF:
 VER
 OFF
 BOOTOFF
+TIMING
 STATUS
 ```
 
@@ -185,8 +230,9 @@ STATUS
 ```
 
 The values above assume the populations listed earlier. Use `ON` only after the
-readings are correct. Check PA8/PB13 dead time and PA11 EN with the scope at low
-input first. `AUTOPRE` tunes the initial burst; `AUTOBANG` and `CALLOAD 1..3` keep
+readings are correct. Check PA8/PB13 deadtime, first pulses and PA11 EN with the
+scope at low input first; qualify each intended timing pair before powered use.
+`AUTOPRE` tunes the initial burst; `AUTOBANG` and `CALLOAD 1..3` keep
 their existing meanings. An old board's EXPORT block can be imported, but sensor
 offsets and tuning must be checked on the new board.
 

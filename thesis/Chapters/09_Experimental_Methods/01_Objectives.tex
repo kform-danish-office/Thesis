@@ -1,0 +1,35 @@
+\section{Test Objectives and Configuration}
+\label{sec:method-objectives}
+
+The test campaign assessed loaded regulation, startup, load removal, and
+no-load energy control. Input power quality, efficiency, switching waveforms,
+and surface temperatures were measured to identify operating limits and
+priorities for the next revision.
+
+The V1.0 PCB was tested with two series resonant inductors. V1.1 is the corrected
+schematic reference. The baseline voltage-control firmware is described in Section~\ref{sec:ctrl-firmware-identities}. Where available,
+UART \texttt{VER}, \texttt{STATUS}, and \texttt{EXPORT} output identify the
+active version, mode, calibration, and thresholds for comparisons of burst
+operation.
+
+\begin{table}[htbp]
+\centering
+\caption{Prototype tests and measurement objectives.}
+\label{tab:method-objectives}
+\begin{tabularx}{\textwidth}{@{}p{0.31\textwidth}X@{}}
+\toprule
+Question & Measured quantities\\
+\midrule
+Output capability & VBUS, load current, and delivered output power\\
+Control response & Output voltage and PA10 during startup, steady operation, and load removal\\
+Input-current shaping & Input voltage/current, real power, PF, THD, and harmonics\\
+Conversion loss & Input and output power at the same recorded operating condition\\
+Switching condition & Switch-node, command, and current waveforms where available\\
+Thermal behavior & Surface-temperature markers and their locations at recorded loads\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The measurements were obtained during supervised prototype tests. USB-PD interoperability,
+standardized safety and electromagnetic-emissions qualification, and a full
+soft-switching map over input and load require separate test programs.

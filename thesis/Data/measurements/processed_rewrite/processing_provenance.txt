@@ -1,0 +1,5 @@
+Primary electrical data: original workbook Load Data sheet; workbook not modified. Original recorded voltages/power retained, derived values recomputed.
+Prior presentation waveform exports in outputs/input_voltage_current_240v_10w and outputs/input_voltage_current_95w were filtered, offset-adjusted and rescaled by earlier scripts to force target power and/or RMS voltage. They were excluded. Raw waveform copies are byte-identical to original exports and have SHA-256 digests.
+Harmonic tables were manually transcribed and visually verified against original ITECH screenshots for all orders 1–40.
+AC detail columns often contain ranges of Vavg measurement statistics, not waveform peak-to-peak ripple. Labels preserve this distinction. The 15 V/1 A workbook field 27.3799 mV differs from the explicitly noted Vpp/detail 50.582 mV; neither is substituted.
+Thermal figures use the maximum marker, separately from cursor and reference marker, from the retained reference table; no stabilization time or calibrated component identity is assumed.

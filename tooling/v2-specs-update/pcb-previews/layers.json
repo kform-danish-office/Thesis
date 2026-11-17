@@ -1,0 +1,167 @@
+[
+  [
+    1,
+    "PCB Prints",
+    1
+  ],
+  [
+    2,
+    "thesis_sml.PcbDoc",
+    1
+  ],
+  [
+    3,
+    "Top Layer",
+    1
+  ],
+  [
+    3,
+    "Int1 (GND)",
+    2
+  ],
+  [
+    3,
+    "Int2 (PWR)",
+    3
+  ],
+  [
+    3,
+    "Bottom Layer",
+    4
+  ],
+  [
+    3,
+    "Top Silkscreen Overlay",
+    5
+  ],
+  [
+    3,
+    "Bottom Silkscreen Overlay",
+    6
+  ],
+  [
+    3,
+    "Top Paste Mask Print",
+    7
+  ],
+  [
+    3,
+    "Bottom Paste Mask Print",
+    8
+  ],
+  [
+    3,
+    "Top Solder Mask Print",
+    9
+  ],
+  [
+    3,
+    "Board",
+    10
+  ],
+  [
+    3,
+    "Top Tenting",
+    11
+  ],
+  [
+    3,
+    "Bottom Tenting",
+    12
+  ],
+  [
+    3,
+    "Bottom Component Center",
+    13
+  ],
+  [
+    3,
+    "Route Tool Path",
+    14
+  ],
+  [
+    3,
+    "Top 3D Body",
+    15
+  ],
+  [
+    3,
+    "Bottom 3D Body",
+    16
+  ],
+  [
+    3,
+    "Top Component Center",
+    17
+  ],
+  [
+    3,
+    "Top Component Outline",
+    18
+  ],
+  [
+    3,
+    "Bottom Component Outline",
+    19
+  ],
+  [
+    3,
+    "Top Coating",
+    20
+  ],
+  [
+    3,
+    "Bottom Coating",
+    21
+  ],
+  [
+    3,
+    "Top Assembly",
+    22
+  ],
+  [
+    3,
+    "Bottom Assembly",
+    23
+  ],
+  [
+    3,
+    "Top Courtyard",
+    24
+  ],
+  [
+    3,
+    "Bottom Courtyard",
+    25
+  ],
+  [
+    3,
+    "Top Designator",
+    26
+  ],
+  [
+    3,
+    "Bottom Designator",
+    27
+  ],
+  [
+    3,
+    "Top Pad Master",
+    28
+  ],
+  [
+    3,
+    "Bottom Pad Master",
+    29
+  ],
+  [
+    3,
+    "Drill Drawing For (Top Layer - Bottom Layer)",
+    30
+  ],
+  [
+    3,
+    "Drill Guide For (Top Layer - Bottom Layer)",
+    31
+  ]
+]

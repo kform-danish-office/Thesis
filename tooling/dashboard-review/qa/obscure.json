@@ -1,0 +1,50 @@
+[
+  {
+    "width": 320,
+    "hash": "dashboard",
+    "stops": 18,
+    "issues": []
+  },
+  {
+    "width": 320,
+    "hash": "device-setup",
+    "stops": 39,
+    "issues": []
+  },
+  {
+    "width": 320,
+    "hash": "calibration",
+    "stops": 13,
+    "issues": []
+  },
+  {
+    "width": 320,
+    "hash": "experiments",
+    "stops": 14,
+    "issues": []
+  },
+  {
+    "width": 390,
+    "hash": "dashboard",
+    "stops": 18,
+    "issues": []
+  },
+  {
+    "width": 390,
+    "hash": "device-setup",
+    "stops": 39,
+    "issues": []
+  },
+  {
+    "width": 390,
+    "hash": "calibration",
+    "stops": 13,
+    "issues": []
+  },
+  {
+    "width": 390,
+    "hash": "experiments",
+    "stops": 14,
+    "issues": []
+  }
+]

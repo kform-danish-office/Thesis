@@ -1,0 +1,12 @@
+\section{Motivation}
+\label{sec:intro-motivation}
+
+Switching at megahertz frequencies can reduce the size of passive components, but the shorter switching period leaves less time for commutation. Winding loss and parasitic impedance also become more significant. The magnetics, gate timing, PCB layout, and control must therefore be designed together for the intended operating conditions.
+
+Resonant conversion and GaN devices make operation at these frequencies practical. Resonant current can reduce turn-on loss by charging and discharging the half-bridge capacitances during dead time. GaN devices provide the short switching transitions needed at these frequencies. A charge-pump PFC rectifier and an integrated resonant LED driver operating near \SI{1}{\mega\hertz} were demonstrated in earlier DTU work \cite{ammar2020chargepump,ammar2021led}. In these converters, capacitor charge transfer shapes the input-current envelope without a separate boost-PFC current controller.
+
+USB-C operation introduces startup without a load, delayed attachment, load removal, and multiple output-voltage settings. These conditions alter the demand on the resonant stage and require control of both secondary stored energy and average transferred power.
+
+The supplied planar inductor and transformer set the starting point. Their PCB windings provide a low profile. The board had to accommodate their footprint, winding connections, insulation spacing, and mounting, while the resonant operating point had to match their electrical parameters.
+
+An LMG2652 GaN half bridge, an MCU, and the USB-C output section were added around these parts in the first prototype. Average power was controlled by enabling groups of fixed-frequency switching cycles. The same approach was carried into V2, with the controller integrated onto the converter PCB. This allowed the original conversion principle to be tested with a detachable, variable load and then developed into a more integrated assembly.

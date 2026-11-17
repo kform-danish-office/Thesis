@@ -1,0 +1,2748 @@
+--- before/Backmatter/Appendices/C_Firmware_Documentation.tex
++++ after/Backmatter/Appendices/C_Firmware_Documentation.tex
+@@ -3,9 +3,9 @@
+ 
+ \section{Versions and Included Sources}
+ 
+-The two archived controller programs are described in \cref{sec:ctrl-firmware-identities}. The PWR numbers name firmware revisions. PWR-1.9.20 is the baseline voltage-control firmware; the test tables state which runs used it. PWR-2.0.1 is its V2 hardware port with browser communication and can target either MCU. Reproducing a test also requires the board, calibration, and saved settings.
+-
+-The complete sketches are Listings~\ref{lst:full-pwr1920} and \ref{lst:full-pwr201} in Appendix~\ref{app:full-embedded-source}. The editable files are \sourcefile{Code/thesi_power_control_PWR_1_9_20.ino} and \sourcefile{Code/PWR_2_0_1/thesi_power_control.ino}. The source manifest, \sourcefile{Code/source_manifest.json}, lists file sizes, line counts, and SHA-256 hashes. PWR-1.9.20 contains 4207 lines; PWR-2.0.1 contains 4848. The line ranges below refer to the archived V2 sketch, including comments and blank lines.
++The baseline voltage-control firmware and current V2 firmware are described in \cref{sec:ctrl-firmware-identities}. PWR-1.9.20 was used for the main V1.0 test series. The V2 firmware was extended to PWR-2.0.4 with browser calibration, reference-load settings, and adjustable carrier timing. The G071 target in the same source remains PWR-2.0.3 with a fixed carrier.
++
++The complete sketches are Listings~\ref{lst:full-pwr1920} and \ref{lst:full-pwr204} in Appendix~\ref{app:full-embedded-source}. The editable files are \sourcefile{Code/thesi_power_control_PWR_1_9_20.ino} and \sourcefile{Code/PWR_2_0_4/thesi_power_control.ino}. The source manifest, \sourcefile{Code/source_manifest.json}, lists file sizes, line counts, and SHA-256 hashes. PWR-1.9.20 contains 4207 lines; the current V2 sketch contains 5348 lines. The earlier V2 port is retained under \sourcefile{Code/PWR_2_0_1}.
+ 
+ \begin{longtable}{@{}L{0.23\linewidth}L{0.69\linewidth}@{}}
+ \caption{Firmware development milestones.}
+@@ -23,6 +23,9 @@
+ PWR-1.9.19--1.9.20 & Separate stored boot state and final loaded steady/boost behavior\\
+ PWR-2.0.0 & Port to the V2 MCU: pin map, complementary carrier, TIM5 enable scheduler, ADC/DMA, and flash journal\\
+ PWR-2.0.1 & Opt-in JSON UART, bounded transmit work, link lease, and browser diagnostics\\
++PWR-2.0.2 & Browser calibration with progress, cooperative stop handling, and rollback after interruption\\
++PWR-2.0.3 & Reference-load, tuning, and precharge settings with device readback\\
++PWR-2.0.4 & V2 carrier-frequency and dead-time adjustment while output is OFF; timing readback and saved timing/calibration records\\
+ \bottomrule
+ \end{longtable}
+ 
+@@ -40,7 +43,7 @@
+ \begin{longtable}{@{}L{0.19\linewidth}L{0.34\linewidth}L{0.37\linewidth}@{}}
+ \caption{MCU pins and peripherals for both boards. F410 package pins use the UFQFPN48 numbering.}
+ \label{tab:app-fw-pin-map}\\
+-\toprule Function & G071 / PWR-1.9.20 baseline & F410 / PWR-2.0.1 target\\\midrule
++\toprule Function & G071 / PWR-1.9.20 baseline & F410 / PWR-2.0.4 target\\\midrule
+ \endfirsthead
+ \toprule Function & G071 baseline & F410 target\\\midrule
+ \endhead
+@@ -63,10 +66,8 @@
+ 
+ \subsection{Carrier and Burst Timing}
+ 
+-Both targets are configured for a fixed \SI{1}{\mega\hertz} carrier and nominal \SI{40}{\nano\second} dead interval. The G071 uses center-aligned TIM1 CH1/CH2 compare spacing. The F410 uses CH1/CH1N with the TIM1 dead-time unit, leaving PA9 free for USART1. ARR sets the timer range, CCR1 the output compare point, and DTG the programmed
+-dead time. With a \SI{100}{\mega\hertz} timer clock, the V2 settings are ARR \(=50\), CCR1 \(=25\), DTG \(=4\), and repetition count \(=1\). CH2 is disabled. The programmed dead time is calculated from the timer registers. Actual gate timing and transistor commutation still need to be measured.
+-
+-In the enable scheduler, \texttt{FEN} and requested duty are converted to a period, enabled interval, and pulse-skip count. The period is rounded to microseconds. A complete minimum burst and minimum low interval are enforced, with a longer period if both cannot fit. Below the minimum burst energy, periods are skipped; bursts are not shortened. With a permitted static \SI{100}{\percent} command, enable stays high.
++The G071 retains the fixed \SI{1}{\mega\hertz} center-aligned TIM1 CH1/CH2 carrier. V2 uses edge-aligned CH1/CH1N with the TIM1 dead-time unit, leaving PA9 free for USART1. The default remains \SI{1}{\mega\hertz} with \SI{40}{\nano\second} programmed dead time. At the \SI{100}{\mega\hertz} timer clock, the default period is 100 ticks, with ARR \(=99\), CCR1 \(=50\), and DTG \(=4\). CH2 is disabled. Carrier frequency and dead time are applied together while output is OFF; their adjustment is described below.
++In the enable scheduler, \texttt{FEN} and requested duty are converted to a period, enabled interval, and pulse-skip count. V2 converts carrier cycles using the actual timer clock and period ticks, then rounds the enable period to microseconds. A complete minimum burst and minimum low interval are enforced, with a longer period if both cannot fit. Below the minimum burst energy, periods are skipped; bursts are not shortened. With a permitted static \SI{100}{\percent} command, enable stays high.
+ 
+ For nonstatic enable transitions, the TIM1 update flag is polled with a bounded wait. Polling attempts to align the software request with a carrier boundary without an interrupt on every \SI{1}{\mega\hertz} cycle; it can time out without observing an update. Interrupt latency and GPIO execution still affect the physical edge. Calculated effective duty includes the minimum-burst and pulse-skip changes; it is not a measured timing trace.
+ 
+@@ -111,7 +112,7 @@
+ 
+ In \texttt{setup()}, enable and gate pins are first driven low. UART is started, LEDs and analog pins are configured, and validated settings are loaded. On V2, linker symbols and image extent are checked against the reserved flash sector. If the layout is invalid or ADC initialization fails, a sensor fault is set and the system stays disabled. Carrier and burst timing are then configured, the selected load profile and stored boot preference are applied, the filters are initialized, and the firmware version and status are printed.
+ 
+-In \texttt{loop()}, the web lease is checked before commands are read. Bounded UART input is read, enabled startup or closed control is run, transition-rate diagnostics are updated, and UART input is checked again. While OFF or in open loop, analog and fault checks run at a requested \SI{2}{\milli\second} interval. Terminal status and deferred saves follow, then a second lease check, telemetry scheduling, and bounded transmission.
++In \texttt{loop()}, the web lease is checked before commands are read. Bounded UART input is read, a queued browser calibration is serviced, and enabled startup or closed control is run, transition-rate diagnostics are updated, and UART input is checked again. While OFF or in open loop, analog and fault checks run at a requested \SI{2}{\milli\second} interval. Terminal status and deferred saves follow, then a second lease check, telemetry scheduling, and bounded transmission.
+ 
+ Closed control runs in the background loop. \texttt{CPER} is the minimum requested interval, not a timer interrupt period. The default \SI{25}{\micro\second} corresponds to a requested \SI{40}{\kilo\hertz}; \texttt{MAXRATE} selects \SI{20}{\micro\second}, or \SI{50}{\kilo\hertz}. Actual elapsed time and its maximum are recorded. An overrun is counted when elapsed time exceeds 1.5 times the request. UART activity, interrupts, and function execution can lengthen that interval. The longest software interval still needs to be checked by an external timing measurement.
+ 
+@@ -164,11 +165,12 @@
+ 
+ The G071 cycles through four EEPROM-emulation slots. The F410 uses reserved sector 1. In the custom linker file, vectors are placed at \texttt{0x08000000} in 16 KiB, settings at \texttt{0x08004000} in 16 KiB, application at \texttt{0x08008000} in 96 KiB, and SRAM at \texttt{0x20000000} in 32 KiB. The default MCU linker layout is different.
+ 
+-The aligned record is 472 bytes, so 34 records fit in the reserved sector. The valid record with the highest sequence is selected at startup. A partially written record is not reused if its first word was programmed; the next write can skip it. Saves are appended until the next slot wraps to zero. The sector is erased when slot zero is written. Programming is word-aligned, and saved bytes are compared with RAM afterward.
+-
++V2 saves a 488-byte record containing the unchanged 471-byte settings payload, a version marker, an alignment byte, requested carrier frequency and dead time, and an outer checksum. The reserved sector holds 33 new records. The loader also scans the earlier 472-byte-stride records, retaining their settings and loading the default carrier timing without writing flash at startup. New records are appended after occupied or interrupted records; the latest complete valid record is recovered after an interrupted append.
++
++The older firmware cannot read the new record format. A downgrade can therefore load older settings or defaults. The configuration must be exported before changing back to an earlier firmware.
+ Only one sector is used for the journal. An interrupted erase can remove all saved records. If none passes the magic/checksum checks, defaults are loaded with output OFF. The F410 also blocks enable if its storage layout is not ready. The G071 reports success after its EEPROM update calls, without the F410's explicit program/readback checks.
+ 
+-Settings can be written only with output OFF, no autotune, and no active startup. Terminal changes made while running are applied in RAM and left pending. They can be saved after OFF and a \SI{1500}{\milli\second} quiet interval, or by explicit save. \texttt{BEGINCFG}/\texttt{ENDCFG} bracket an import. Browser changes need explicit \texttt{SAVE} or \texttt{ENDCFG} while OFF; browser OFF and lease expiry do not write flash.
++Settings can be written only with output OFF, no autotune, no calibration transaction, and no active startup. Terminal changes made while running are applied in RAM and left pending. They can be saved after OFF and a \SI{1500}{\milli\second} quiet interval, or by explicit save. \texttt{BEGINCFG}/\texttt{ENDCFG} bracket an import. Browser changes need explicit \texttt{SAVE} or \texttt{ENDCFG} while OFF; browser OFF and lease expiry do not write flash.
+ 
+ \texttt{cfg.systemEnabled} stores the boot preference; \texttt{systemEnabled} is the live state. \texttt{BOOTON}/\texttt{BOOTOFF} changes that preference; ordinary ON/OFF does not. Before repeating a test, save the output of these commands:
+ \begin{lstlisting}[basicstyle=\ttfamily\small,caption={Commands to print the firmware version, status, and settings.},label={lst:app-fw-identity}]
+@@ -176,7 +178,7 @@
+ STATUS
+ EXPORT
+ \end{lstlisting}
+-Some earlier tests have no complete settings export. Their missing settings remain unknown.
++For V2, \texttt{TIMING} also prints the requested pair and exact timer ratios.
+ 
+ \section{Terminal UART Command Reference}
+ \label{sec:app-fw-terminal}
+@@ -185,7 +187,7 @@
+ \begingroup
+ \small
+ \begin{longtable}{@{}L{0.29\linewidth}L{0.63\linewidth}@{}}
+-\caption{Terminal command families in the archived V2 firmware.}\label{tab:app-fw-uart-packet}\\
++\caption{Terminal command families in the V2 firmware.}\label{tab:app-fw-uart-packet}\\
+ \toprule Command / setting & Action, units, or bounds\\\midrule
+ \endfirsthead
+ \toprule Command / setting & Action, units, or bounds\\\midrule
+@@ -193,6 +195,7 @@
+ \texttt{?}, \texttt{STATUS}; \texttt{VER}, \texttt{VERSION}; \texttt{PARAMS} & Full status, firmware version, or short parameter summary.\\
+ \texttt{EXPORT}, \texttt{EXPORTCAL}, \texttt{DUMPCAL}, \texttt{COMPS}, \texttt{COMPENSATION} & Print paste-ready SET commands, calibration, timing, and profiles.\\
+ \texttt{DIVIDER}, \texttt{LADDER} & Print advice from the configured divider ratios.\\
++\texttt{TIMING}; \texttt{TIMING Hz ns} & V2 only: read the current carrier pair or apply a new pair while OFF and idle.\\
+ \texttt{ON}, \texttt{OFF} & Change live state. ON begins precharge. Terminal OFF also attempts to flush pending settings.\\
+ \texttt{BOOTON}, \texttt{BOOTOFF}, \texttt{BOOT value} & Change the saved boot preference. Enable aliases: BOOT ON, BOOTEN, AUTOSTART. Disable aliases: BOOT OFF, BOOTDIS, NOAUTOSTART.\\
+ \texttt{OPEN}, \texttt{MO} & Select manual bounded enable duty.\\
+@@ -224,7 +227,7 @@
+ \section{Parameter Reference}
+ \label{sec:app-fw-parameters}
+ 
+-The tables give canonical \texttt{SET} names, input units, parser bounds, and archived V2 defaults. An accepted configuration is not an electrical operating rating. A flag is false below 0.5 and true at or above 0.5. Duty is stored in tenths of a percent. Inputs for integer timing and count fields are converted to integers before validation. The full parser and paste-ready \texttt{EXPORT} include alternate names.
++The tables give canonical \texttt{SET} names, input units, parser bounds, and V2 defaults. An accepted configuration is not an electrical operating rating. A flag is false below 0.5 and true at or above 0.5. Duty is stored in tenths of a percent. Inputs for integer timing and count fields are converted to integers before validation. The full parser and paste-ready \texttt{EXPORT} include alternate names.
+ 
+ Validation also enforces relationships: FEN stays within FMIN/FMAX; high duty exceeds low duty and stays below DMAX; loaded floor and tuning maximum stay below DMAX; VSET/VON stay within secondary limits; OVP cannot stay below VMAX; and soft trip/rearm depend on the other thresholds. A successful SET may therefore change the requested number. Save the exported settings after validation.
+ \begingroup
+@@ -306,7 +309,7 @@
+ \endfirsthead
+ \toprule Command / setting & Action, units, or bounds\\\midrule
+ \endhead
+-\texttt{AUTOMAX} & Tune maximum duty 0--100\%, default 100, limited by DMAX.\\
++\texttt{AUTOMAX} & Scan-range setting 0--100\%, default 100, limited by DMAX. Minimum-duty and step rules can raise scan points above a low AUTOMAX; DMAX remains the duty ceiling.\\
+ \texttt{AUTOSTEP}, \texttt{AUTOFINE} & Coarse 0.5--25 duty points, default 2; fine 0.1--10 points, default 0.5.\\
+ \texttt{AUTOSETTLE}, \texttt{AUTOMEAS} & Settle 20--3000 ms, default 160; measurement 20--2000 ms, default 100.\\
+ \texttt{LOAD1}, \texttt{LOAD2}, \texttt{LOAD3} & Reference 0--100000 \si{\ohm}; defaults 50, 5, 2.5. Zero is not a usable resistance reference.\\
+@@ -327,7 +330,7 @@
+ \section{Browser UART Commands and Replies}
+ \label{sec:app-fw-web}
+ 
+-The browser uses the same physical UART. \texttt{WEB HELLO} selects protocol version 1 and suppresses ordinary terminal output until reset. Firmware, board, baud, maximum line length, and the lease requirement are reported. HELLO does not enable output, change the stored boot preference, arm a lease, or start a stream.
++The browser uses the same physical UART. \texttt{WEB HELLO} selects protocol version 1 and suppresses ordinary terminal output until reset. Firmware, board, baud, maximum line length, lease requirement, and supported capabilities are reported. The V2 build advertises \texttt{calibration\_v1}, \texttt{bench\_settings\_v1}, and \texttt{carrier\_timing\_v1}; the last capability is V2-only. HELLO does not enable output, change the stored boot preference, arm a lease, or start a stream.
+ 
+ A normal request is \texttt{WEB id command}. IDs contain 1--24 ASCII letters, digits, hyphens, or underscores. The acknowledgment echoes the ID with \texttt{ok}, a machine-readable \texttt{code}, and \texttt{settings\_pending}. Commands are sent one at a time, with the next command held until the matching acknowledgment arrives. HELLO, SNAPSHOT, STREAM, LEASE, and PING also accept forms without an ID.
+ 
+@@ -339,98 +342,108 @@
+ \endfirsthead
+ \toprule Command & Behavior\\\midrule
+ \endhead
+-\texttt{HELLO}; \texttt{SNAPSHOT} & Enter quiet JSON mode; or acknowledge and queue one telemetry frame.\\
++\texttt{HELLO}; \texttt{SNAPSHOT} & Enter quiet JSON mode; or acknowledge and queue telemetry with V2 timing readback.\\
+ \texttt{STREAM ms} & Periodic telemetry at 250--5000 ms; zero disables it.\\
+ \texttt{LEASE ms}; \texttt{PING} & Arm a 1000--10000 ms lease, or renew an armed lease. Zero disarms only while OFF. PING cannot rearm an expired lease.\\
+ \texttt{ON} & Require a live lease, no latched fault, working ADC and gate initialization, and valid V2 storage layout. Begin startup without waiting for the full sequence.\\
+ \texttt{OFF} & Inhibit enable through the OFF path, without saving. Plain OFF remains available after HELLO as an emergency terminal form.\\
+ \texttt{CLR} & Require OFF and healthy initialization, then clear the latch without enabling output.\\
+ \texttt{OPEN}, \texttt{VSB}, \texttt{BANG}, \texttt{VSBONLY}, \texttt{LINEFF} & Change mode/feed-forward in RAM and report pending settings.\\
+-\texttt{SET name number}; \texttt{LOAD n} & Apply validated RAM settings or profile 1--3. Boot-preference changes are terminal-only.\\
++\texttt{SET name number}; \texttt{LOAD n} & Apply validated RAM settings or profile 1--3. Reference-load, tuning, precharge, and slot changes require OFF. Boot-preference changes are terminal-only.\\
++\texttt{CAL PRECHARGE}, \texttt{CAL NOLOAD}, \texttt{CAL LOAD n} & Queue startup or duty tuning, with output initially OFF and an active lease.\\
++\texttt{CAL ZERO}; \texttt{CAL LINE} & Queue current-offset or line-reference capture.\\
++\texttt{TIMING Hz ns} & V2 only: apply an OFF-state carrier/dead-time pair and return matching timing readback.\\
+ \texttt{BEGINCFG}; \texttt{ENDCFG}; \texttt{SAVE} & Group changes; ENDCFG/SAVE require OFF. SAVE also requires import closed. Report failed persistence requests.\\
+ \bottomrule
+ \end{longtable}
+ \endgroup
+ 
+-The web parser requires a complete finite number with magnitude no greater than \(10^8\). Negative values are accepted only for voltage/current offsets, integral limits, and signed profile-voltage forms. Invalid or overlong input is rejected as a whole line rather than executed in truncated form. After HELLO, ordinary terminal commands are rejected except plain OFF; reset restores terminal mode. Blocking autotuning, current-zero capture, presets, defaults, and the large export are not web commands.
++The web parser requires a complete finite number with magnitude no greater than \(10^8\). Negative values are accepted only for voltage/current offsets, integral limits, and signed profile-voltage forms. Invalid or overlong input is rejected as a whole line rather than executed in truncated form. After HELLO, ordinary terminal commands are rejected except plain OFF; reset restores terminal mode. Calibration is requested through the queued \texttt{CAL} commands. Terminal presets, defaults, \texttt{CAL3}, and the large text export are not web commands.
+ 
+ \subsection{Transmit Budget and Link Lease}
+ 
+-The transmit queue has four 1024-byte frames. At most 16 bytes are sent per background pass, limited by \texttt{availableForWrite()}. Periodic telemetry is queued only while two slots remain free, leaving room for acknowledgments and events. A command that changes state is not run unless its acknowledgment can be queued. After congestion, the client must time out and resynchronize; an unacknowledged command cannot be assumed to have run.
++The transmit queue has four 1024-byte frames. At most 16 bytes are sent per background pass, limited by \texttt{availableForWrite()}. Periodic V2 telemetry and timing frames are queued together only when two further slots remain free for acknowledgments and events. A command that changes state is not run unless its acknowledgment can be queued. After congestion, the client must time out and resynchronize; an unacknowledged command cannot be assumed to have run.
+ 
+ When the lease expires, OFF and enable inhibition are requested first. The lease is then disarmed, streaming is stopped, and an event is marked pending. Flash is not saved. Reconnection requires a new lease and explicit ON. This guard runs in the background loop; it does not disconnect mains, discharge capacitors, or replace an independent hardware interlock.
+ 
+ \subsection{Telemetry Definitions}
+ 
+-Telemetry contains uptime \texttt{ms}, live enable state, mode, fault, feedback validity, filtered primary voltage, bulk voltage, primary current, diagnostic power, calculated effective duty, three raw ADC counts, selected validated settings, lease/stream state, pending settings, and control timing. Unavailable ADC-dependent values are \texttt{null}; nonfinite or out-of-range serialized numbers are also null. Missing feedback must not be plotted as zero.
++Telemetry contains uptime \texttt{ms}, live enable state, mode, fault, feedback validity, filtered primary voltage, bulk voltage, primary current, diagnostic power, calculated effective duty, three raw ADC counts, selected validated settings, calibration state, lease/stream state, pending settings, and control timing. Unavailable ADC-dependent values are \texttt{null}; nonfinite or out-of-range serialized numbers are also null. Missing feedback must not be plotted as zero.
+ 
+ The timestamp is 32-bit MCU uptime and wraps, so exported data also needs a host timestamp across resets or reconnects. \texttt{control\_dt\_us}, \texttt{control\_max\_us}, and \texttt{control\_overruns} describe software intervals. \texttt{power} is the selected voltage--PA2-current product, and \texttt{duty} is a scheduler calculation. Neither replaces external power or timing measurements.
++
++\section{Browser Calibration and Reference Loads}
++\label{sec:app-fw-web-calibration}
++
++The browser calibration commands reuse the precharge, duty-scan, current-offset, and line-reference routines. Commands are queued first and run outside the serial parser. Serial input, telemetry, faults, and the communication lease continue to be serviced during measurement waits. The browser can therefore stop an active scan without waiting for the complete tuning sequence.
++
++Calibration starts with output OFF, valid feedback, no fault, and an active lease. Precharge and duty tuning then energize the converter; current-zero and line-reference capture keep output OFF. OFF, lease expiry, a fault, lost acquisition, or the \SI{180}{\second} limit cancels the run. Every outcome leaves output OFF. Cancellation or failure restores the previous settings; successful results remain in RAM until an explicit save. The stored boot preference and previous control mode are retained.
++
++The three resistance entries describe the physical loads connected by the operator. Entering \texttt{LOAD1}, \texttt{LOAD2}, or \texttt{LOAD3} does not switch a resistor or command an electronic load. Zero means the reference is unconfigured. \texttt{LOAD n} selects a slot and applies its stored profile when valid; \texttt{ACTLOAD} reports the selected slot. Each physical load is connected with output OFF before its calibration is started.
++
++The browser also exposes the no-load duty, coarse/fine scan steps, measurement and settling intervals, and startup burst/settle timing. These settings are populated from MCU readback. Their edits and reference-slot changes require output OFF, so setup changes do not silently alter an active tuning run.
++
++\section{Adjustable V2 Carrier Timing}
++\label{sec:app-fw-carrier-timing}
++
++\texttt{TIMING Hz ns} accepts carrier requests from \SI{500}{\kilo\hertz} to \SI{2}{\mega\hertz} and dead-time requests from \SI{20}{\nano\second} to \SI{200}{\nano\second}. These are timer limits; the usable converter range must be established from switching and thermal measurements. The command is rejected during output, startup, autotuning, or queued/running calibration. Frequency and dead time are applied atomically with enable held low.
++
++With prescaler zero, the period is rounded to an even number of timer ticks, and dead time is rounded up to a whole tick. At \SI{100}{\mega\hertz}, the period grid is \SI{20}{\nano\second} and the dead-time grid is \SI{10}{\nano\second}. The pair must satisfy \(4N_{\mathrm{dead}}<N_{\mathrm{period}}\). For example, a request of \SI{950}{\kilo\hertz} and \SI{53}{\nano\second} gives 106 period ticks and six dead-time ticks: approximately \SI{943.396}{\kilo\hertz} and \SI{60}{\nano\second}. At \SI{2}{\mega\hertz}, \SI{120}{\nano\second} is accepted but \SI{130}{\nano\second} is rejected.
++
++\texttt{FEN} remains the separate burst-enable frequency. Carrier adjustment changes the excitation frequency; the tank's natural resonance remains set by its inductance and capacitance. An effective change to period or dead-time ticks clears all three learned load profiles and tuned metadata. Physical resistance entries, sensor calibration, and applied duty settings are retained. The profiles must be retuned for the new timing.
++
++A dedicated timing frame reports requested and actual values, timer clock, period/dead-time ticks, output/busy state, and a volatile revision counter. The browser requires fresh OFF/idle readback and a matching acknowledgment before confirming an applied pair. A register-verification failure inhibits output. Browser timing changes remain pending until SAVE while OFF; terminal changes before \texttt{WEB HELLO} retain the existing deferred auto-save after \SI{1.5}{\second} of quiet OFF operation.
+ 
+ \section{Function Map and Build Dependencies}
+ \label{sec:app-fw-functions}
+ 
+-The functions are listed below in source order, with related helpers grouped by their place in the control path. Complete implementations are in Listing~\ref{lst:full-pwr201}; the matching baseline is Listing~\ref{lst:full-pwr1920}.
+-\begingroup
+-\small
+-\begin{longtable}{@{}L{0.14\linewidth}L{0.78\linewidth}@{}}
+-\caption{V2 firmware functions and source lines.}\label{tab:app-fw-function-map}\\
+-\toprule Lines & Functions and role\\\midrule
+-\endfirsthead
+-\toprule Lines & Functions and role\\\midrule
+-\endhead
+-653--708 & \nolinkurl{clampFloat}, \nolinkurl{clampU32}, \nolinkurl{clampI32}, \nolinkurl{clampDutyX10}, \nolinkurl{dutyPercentToX10}, \nolinkurl{dutyX10ToPercent}, \nolinkurl{validLoadSlot}, \nolinkurl{calLoadOhms}, \nolinkurl{expectedLoadPowerW}, \nolinkurl{loadProfileValid}\par Clamp fields, convert percent units, and validate reference-load profiles.\\
+-709--1033 & \nolinkurl{ledWrite}, \nolinkurl{updateModeLEDs}, \nolinkurl{setDefaults}, \nolinkurl{validateSettings}\par Drive LEDs, initialize settings, and enforce bounds and relationships.\\
+-1035--1150 & \nolinkurl{checksumSettings}, \nolinkurl{eepromReadBytes}, \nolinkurl{eepromWriteBytes}, \nolinkurl{slotAddress}, \nolinkurl{readSlot}, \nolinkurl{loadSettings}\par Calculate checksums, access target storage, and recover valid settings.\\
+-1152--1215 & \nolinkurl{safeToWriteEepromNow}, \nolinkurl{markSettingsDirty}, \nolinkurl{saveSettingsNow}, \nolinkurl{requestSettingsSave}, \nolinkurl{saveSettings}, \nolinkurl{flushPendingSettingsSave}\par Gate writes, append or defer a save, and report pending/failure state.\\
+-1222--1305 & \nolinkurl{setEnHigh}, \nolinkurl{setEnLow}, \nolinkurl{setGateCarrierDrive}, \nolinkurl{gateCyclesToUsCeil}, \nolinkurl{gateCyclesFromUsCeil}, \nolinkurl{leadGateCycles}, \nolinkurl{leadGateUs}, \nolinkurl{setTim1CarrierSyncIrq}, \nolinkurl{waitForCarrierBoundaryPolled}, \nolinkurl{setEnHighCarrierSynced}, \nolinkurl{setEnLowCarrierSynced}\par Control GPIO/carrier state, convert burst timing, and attempt to align enable transitions.\\
+-1306--1410 & \nolinkurl{forceEnSyncLowNow}, \nolinkurl{requestCarrierSyncedBurst}, \nolinkurl{requestCarrierSyncedLow}, \nolinkurl{clampEnFreq}, \nolinkurl{clampControlDutyLimit}, \nolinkurl{minCompleteGateBurstUs}, \nolinkurl{updateEnableTimingNoInterruptLock}, \nolinkurl{enCompareUsForTimer}, \nolinkurl{applyEnableTimerNoInterruptLock}\par Form bounded complete bursts, pulse skipping, compare timing, and forced inhibition.\\
+-1411--1527 & \nolinkurl{enPeriodISR}, \nolinkurl{enCompareISR}, \nolinkurl{handleTim1CarrierSyncUpdate}, \nolinkurl{TIM1_BRK_UP_TRG_COM_IRQHandler}\par Handle enable events. The conditional G071 carrier-update handler remains; the normal path uses bounded polling.\\
+-1529--1598 & \nolinkurl{setupEnablePWM}, \nolinkurl{setEnFrequencyHz}, \nolinkurl{applyEnDutyCommand}, \nolinkurl{setEnDutyX10}, \nolinkurl{setEnDutyX10BypassLimits}, \nolinkurl{getCmdDutyPercent}, \nolinkurl{getEffDutyPercent}\par Create the enable timer, apply commands/startup bypass, and expose requested/effective duty.\\
+-1604--1763 & \nolinkurl{setupGateTimerPins}, \nolinkurl{calculateGateTiming}, \nolinkurl{setupGatePWM}, \nolinkurl{setGateOutputsEnabled}\par Configure alternate functions, TIM1 values, and enable inhibition.\\
+-1769--1886 & \nolinkurl{configAdcDmaChannel}, \nolinkurl{setupAdcDma}, \nolinkurl{readAdcDmaChannel}, \nolinkurl{adcCountsToVoltage}\par Configure the free-running scan/DMA and read scaled counts.\\
+-1888--2001 & \nolinkurl{dividerRatio}, \nolinkurl{readPrimaryVoltageRaw}, \nolinkurl{amcOutputToInputVoltage}, \nolinkurl{readSecondaryVoltageRaw}, \nolinkurl{readPrimaryCurrentRaw}, \nolinkurl{powerFeedbackName}, \nolinkurl{computeFeedbackPower}, \nolinkurl{feedbackMeasurementValid}, \nolinkurl{updateAnalogFilters}\par Convert indications, form diagnostic power, check tuning feedback, poll acquisition health, and filter.\\
+-2006--2133 & \nolinkurl{faultName}, \nolinkurl{latchFault}, \nolinkurl{noLoadSoftOvpTripVoltage}, \nolinkurl{noLoadSoftOvpResetVoltage}, \nolinkurl{noLoadSoftOvpLightLoadEligible}, \nolinkurl{enterNoLoadSoftOvpHoldoff}, \nolinkurl{serviceNoLoadSoftOvp}, \nolinkurl{noLoadSoftOvpAllowsRideThrough}, \nolinkurl{checkFaults}\par Apply ordinary trips and eligible recoverable no-load OVP.\\
+-2135--2260 & \nolinkurl{startupPhaseName}, \nolinkurl{startupPrechargeActive}, \nolinkurl{checkStartupCurrentFault}, \nolinkurl{applyPostStartupDuty}, \nolinkurl{startStartupBurst}, \nolinkurl{beginStartupPrecharge}, \nolinkurl{handleStartupPrecharge}, \nolinkurl{runStartupPrechargeBlocking}\par Run burst/settle startup and its blocking wrapper for setup/tuning.\\
+-2261--2426 & \nolinkurl{runPrechargeTuneBurst}, \nolinkurl{savePrechargeTuneResult}, \nolinkurl{finishAutotuneStopped}, \nolinkurl{autoTunePrecharge}\par Test precharge packets, store the result, and leave tuning stopped.\\
+-2428--2515 & \nolinkurl{setSystemEnabled}, \nolinkurl{setMode}\par Change runtime enable/mode and reset dependent state memories.\\
+-2518--2635 & \nolinkurl{highVoltageFoldbackPct}, \nolinkurl{lowVoltageBoostPct}, \nolinkurl{currentFoldbackPct}, \nolinkurl{lightLoadStateActive}, \nolinkurl{fastSecondaryVoltage}, \nolinkurl{noLoadLowVoltage}, \nolinkurl{noLoadReleaseVoltage}, \nolinkurl{loadedTurnOnVoltage}, \nolinkurl{noLoadSlotActive}, \nolinkurl{measuredLoadResistance}, \nolinkurl{loadedCurrentDetectThresholdA}, \nolinkurl{loadedCurrentInstantDetected}, \nolinkurl{serviceLoadedCurrentState}, \nolinkurl{loadedCurrentDetected}\par Provide thresholds and load classification. The first three helpers have no active voltage-loop call.\\
+-2637--2796 & \nolinkurl{adaptiveNoLoadDutyX10}, \nolinkurl{primaryFeedForwardScale}, \nolinkurl{primaryFeedForwardCapX10}, \nolinkurl{noLoadGuardActive}, \nolinkurl{loadedSteadyEligible}, \nolinkurl{loadedSteadyDutyX10}\par Calculate no-load caps, PA0 limiting, and stored loaded duty.\\
+-2798--2962 & \nolinkurl{handleMaxDutyProtection}, \nolinkurl{recordBangBangTransition}, \nolinkurl{serviceBangBangTransitionRate}, \nolinkurl{handlePowerLoop}\par Run voltage control and transition diagnostics. The maximum-duty helper is not called by this controller.\\
+-2964--3115 & \nolinkurl{initMeasure}, \nolinkurl{serviceDelayMs}, \nolinkurl{measureWindow}, \nolinkurl{settleAndMeasure}, \nolinkurl{printMeasure}, \nolinkurl{scorePowerPoint}, \nolinkurl{considerTunePoint}\par Collect, score, and print tuning windows and candidate points.\\
+-3117--3388 & \nolinkurl{autotunePowerFull}, \nolinkurl{autotuneIdentifyPlant}, \nolinkurl{autotuneComputePI}, \nolinkurl{storeLoadProfile}, \nolinkurl{applyLoadProfile}, \nolinkurl{autoTunePower}\par Run fixed-FEN duty tuning and manage profiles. Plant identification and PI computation remain unused compatibility functions.\\
+-3390--3793 & \nolinkurl{modeName}, \nolinkurl{printLiveStatusLine}, \nolinkurl{printParams}, \nolinkurl{printSetFloat}, \nolinkurl{printSetUInt}, \nolinkurl{printSetDuty}, \nolinkurl{printSetGainX1000}, \nolinkurl{printLoadProfileExport}, \nolinkurl{printCompensationValues}, \nolinkurl{printDividerAdvice}, \nolinkurl{printStatus}\par Print the firmware version, diagnostics, units, and paste-ready configuration.\\
+-3795--4095 & \nolinkurl{parseLoadProfileSetParam}, \nolinkurl{parseSetParam}, \nolinkurl{printSaveStateMessage}, \nolinkurl{zeroCurrentOffset}, \nolinkurl{parseLoadSlotText}, \nolinkurl{printLoadCommandHelp}, \nolinkurl{waitForLoadGo}, \nolinkurl{autoTuneThreeLoads}, \nolinkurl{webNewFrame}\par Parse settings/profiles, capture offset, guide three-load tuning, and reserve a web frame.\\
+-4097--4195 & \nolinkurl{webAppendText}, \nolinkurl{webAppendUInt}, \nolinkurl{webAppendNumber}, \nolinkurl{webCommitFrame}, \nolinkurl{webAck}, \nolinkurl{webLeaseRemainingMs}, \nolinkurl{webQueueTelemetry}\par Build bounded JSON, serialize numbers, acknowledge commands, and snapshot telemetry.\\
+-4197--4270 & \nolinkurl{serviceWebTx}, \nolinkurl{serviceWebLease}, \nolinkurl{serviceWebTelemetry}, \nolinkurl{webParseUInt}, \nolinkurl{webValidId}\par Enforce transmit/lease budgets, queue events/samples, and validate integers/IDs.\\
+-4272--4736 & \nolinkurl{processWebCommand}, \nolinkurl{processCommand}, \nolinkurl{handleSerial}\par Dispatch web/terminal requests and assemble bounded input lines.\\
+-4738--4848 & \nolinkurl{setup}, \nolinkurl{loop}\par Initialize the target and execute ordered foreground services.\\
+-\bottomrule
+-\end{longtable}
+-\endgroup
+-
+-The sketch is built with the STM32 Arduino core. With \sourcefile{Code/PWR_2_0_1/firmware/build.ps1}, the source is copied into a correctly named Arduino directory and F410 or Nucleo G071 is selected. The V2 build also requires the included \sourcefile{firmware/stm32f410.ld} and 96 KiB application limit. The selected core uses the internal-HSI PLL clock setup; the port does not assume an external HSE crystal.
++The principal functions are listed by task. Complete implementations are in Listing~\ref{lst:full-pwr204}; the earlier voltage-control baseline is Listing~\ref{lst:full-pwr1920}.
++\begingroup
++\small
++\begin{longtable}{@{}L{0.25\linewidth}L{0.67\linewidth}@{}}
++\caption{V2 firmware functions.}\label{tab:app-fw-function-map}\\
++\toprule Task & Functions\\\midrule
++\endfirsthead
++\toprule Task & Functions\\\midrule
++\endhead
++Settings and profiles & \nolinkurl{setDefaults}, \nolinkurl{validateSettings}, \nolinkurl{loadProfileValid}, \nolinkurl{storeLoadProfile}, \nolinkurl{applyLoadProfile}\\
++Saved settings & \nolinkurl{loadSettings}, \nolinkurl{validCarrierRecord}, \nolinkurl{safeToWriteEepromNow}, \nolinkurl{saveSettingsNow}, \nolinkurl{flushPendingSettingsSave}\\
++Carrier timing & \nolinkurl{calculateCarrierTiming}, \nolinkurl{calculateGateTiming}, \nolinkurl{setupGatePWM}, \nolinkurl{applyCarrierTiming}\\
++Burst scheduling & \nolinkurl{updateEnableTimingNoInterruptLock}, \nolinkurl{applyEnableTimerNoInterruptLock}, \nolinkurl{enPeriodISR}, \nolinkurl{enCompareISR}\\
++Acquisition and conversion & \nolinkurl{setupAdcDma}, \nolinkurl{readPrimaryVoltageRaw}, \nolinkurl{readSecondaryVoltageRaw}, \nolinkurl{readPrimaryCurrentRaw}, \nolinkurl{updateAnalogFilters}\\
++Startup and voltage control & \nolinkurl{beginStartupPrecharge}, \nolinkurl{handleStartupPrecharge}, \nolinkurl{handlePowerLoop}, \nolinkurl{loadedSteadyDutyX10}\\
++Fault handling & \nolinkurl{checkFaults}, \nolinkurl{latchFault}, \nolinkurl{serviceNoLoadSoftOvp}\\
++Tuning and calibration & \nolinkurl{autoTunePrecharge}, \nolinkurl{autoTunePower}, \nolinkurl{zeroCurrentOffset}, \nolinkurl{runWebCalibration}, \nolinkurl{serviceWebCalibrationWait}\\
++UART and web protocol & \nolinkurl{processCommand}, \nolinkurl{processWebCommand}, \nolinkurl{webQueueTelemetry}, \nolinkurl{serviceWebTelemetry}, \nolinkurl{serviceWebLease}, \nolinkurl{serviceWebTx}\\
++Foreground execution & \nolinkurl{setup}, \nolinkurl{loop}\\
++\bottomrule
++\end{longtable}
++\endgroup
++
++The sketch is built with the STM32 Arduino core. With \sourcefile{Code/PWR_2_0_4/firmware/build.ps1}, the source is copied into a correctly named Arduino directory and F410 or Nucleo G071 is selected. The V2 build also requires the included \sourcefile{firmware/stm32f410.ld} and 96 KiB application limit. The selected core uses the internal-HSI PLL clock setup; the port does not assume an external HSE crystal.
+ 
+ \sourcefile{firmware/verify_f410_hex.py} checks the HEX image addresses against the reserved sector and intended flash regions. \sourcefile{firmware/test_web_protocol.py} tests the production dispatcher with mocked UART, control, and storage behavior. The browser source and tests are included with these files. HEX can preserve the reserved address gap during programming. A flat binary spans that gap; an unchecked binary write or full-chip erase can remove settings. The build script does not flash the board automatically.
+ 
+ \section{Build and Software Test Results}
+ \label{sec:app-fw-verification}
+ 
+-Both archived V2 firmware targets were rebuilt and source-level checks were run on October 19, 2026. Compilation, memory allocation, image addresses, and protocol behavior were checked. These were software checks, not powered V2 tests or measurements of sensor calibration, effective dead time, or converter power.
++The V2 build and the G071 regression target were compiled, and the firmware image, protocol, saved-settings journal, and browser tests were checked. Powered switching, sensing accuracy, and on-board persistence still require bench verification.
+ 
+ \begin{table}[htbp]
+ \centering
+ \small
+-\caption{Checks run on the archived V2 firmware.}
++\caption{Software checks for the current firmware and browser.}
+ \label{tab:app-fw-software-checks}
+ \begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}Y@{}}
+ \toprule Check & Result\\\midrule
+-F410 build & Passed; 85,184 program bytes of 98,304; 6,820 static RAM bytes of 32,768\\
+-G071 build & Passed; 127,340 program bytes of 131,072; 9,524 static RAM bytes of 32,768\\
+-F410 HEX layout & Passed; 85,668 programmed bytes, valid vectors, settings range \texttt{0x08004000}--\texttt{0x08007FFF} excluded\\
+-Host dispatcher & Passed; 46 JSON frames checked with mocked hardware\\
+-Browser tests & Passed; 38 automated tests\\
++V2 build & Passed; 90,268 program bytes of 98,304; 6,868 static RAM bytes of 32,768\\
++G071 regression build & Passed; 130,424 program bytes of 131,072; 9,544 static RAM bytes of 32,768\\
++V2 HEX layout & Passed; 90,752 programmed bytes; valid vectors and reserved settings sector excluded\\
++Host protocol & Passed; 131 JSON frames with mocked hardware\\
++Saved-settings journal & Passed; legacy migration, corruption, torn records, and 122 interrupted-append boundaries\\
++Browser tests & Passed; 76 automated tests\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+ 
+-Program size and HEX programmed-byte count are calculated differently, so they need not match. Static RAM use excludes later stack/heap demand. No physical hardware test was performed during these software checks.
++Program size and HEX programmed-byte count use different counting methods. Static RAM excludes later stack and heap demand. These checks exercise software and image layout; the measured converter results remain those described in Chapter~\ref{ch:results}.
+--- before/Backmatter/Appendices/G_Software_Tools.tex
++++ after/Backmatter/Appendices/G_Software_Tools.tex
+@@ -3,9 +3,9 @@
+ 
+ The software builds the controller, runs the V2 browser interface, and
+ processes measurements into the thesis figures. Chapter~\ref{ch:results} uses earlier-assembly measurements;
+-the archived V2 interface still needs testing with the powered converter. Complete source is
+-included in Appendix~\ref{app:full-supporting-source}. The archived PWR-2.0.1
+-files are under \sourcefile{Code/PWR_2_0_1}, with measurement-processing
++the current V2 interface adds calibration, reference-load setup, and carrier timing. Complete source is
++included in Appendix~\ref{app:full-supporting-source}. The current PWR-2.0.4
++files are under \sourcefile{Code/PWR_2_0_4}, with measurement-processing
+ scripts under \sourcefile{Data/analysis}.
+ 
+ \section{Browser Architecture and Data Flow}
+@@ -20,18 +20,19 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Browser application files. Paths are relative to \sourcefile{Code/PWR_2_0_1/web}.}
++\caption{Browser application files. Paths are relative to \sourcefile{Code/PWR_2_0_4/web}.}
+ \label{tab:app-browser-modules}
+ \small
+ \begin{tabularx}{\textwidth}{@{}L{0.24\textwidth}Y@{}}
+ \toprule
+ File & Function\\
+ \midrule
+-\sourcefile{index.html}, \sourcefile{styles.css} & Page structure, controls, status labels, and responsive layout.\\
++\sourcefile{index.html}, \sourcefile{styles.css} & Monitor, Setup, Calibration, and Sessions views, global OFF controls, status labels, and responsive layout.\\
+ \sourcefile{app.js} & Connects controls to the device link, updates the chart, records sessions, and displays command acknowledgments and device readings.\\
+ \sourcefile{serial.js} & Implements \texttt{DeviceLink}: connection, command ordering, acknowledgments, readiness checks, and the synthetic Demo.\\
+ \sourcefile{protocol.js} & Implements \texttt{LineFramer}, \texttt{parseFrame}, \texttt{validateCommand}, and \texttt{faultActive}.\\
+-\sourcefile{storage.js} & Stores sessions locally and provides CSV and download helpers.\\
++\sourcefile{storage.js} & Stores sessions locally and provides CSV and download helpers, including per-sample carrier timing.\\
++\sourcefile{resonance.js}, \sourcefile{resonance-ui.js}, \sourcefile{resonance-presets.js} & Tank and pump calculations, calculator controls, and component presets.\\
+ \sourcefile{server.mjs}, \sourcefile{build.mjs} & Serve an explicit file allowlist locally or copy that list to \sourcefile{dist}. Both use paths relative to their own module.\\
+ \sourcefile{package.json}, \sourcefile{vercel.json} & Define the Node commands and static-host configuration, including response headers. The package specifies Node 20 or later and has no third-party application dependencies.\\
+ \bottomrule
+@@ -70,8 +71,7 @@
+ 8 data bits, no parity, and one stop bit. After \texttt{WEB HELLO}
+ is sent and the handshake is received, \texttt{LEASE 5000} is armed,
+ followed by requests for \texttt{STREAM 500} and a \texttt{SNAPSHOT}.
+-No \texttt{ON} or preset settings are sent, so connecting the
+-interface leaves the existing bench configuration unchanged.
++No \texttt{ON} or preset settings are sent when connecting.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -112,11 +112,16 @@
+ separately requests nonvolatile storage with output OFF. Command acceptance,
+ limits, and returned telemetry values remain under firmware control.
+ 
++The Setup view adds physical reference-load resistance entries, profile selection, no-load duty, tuning steps and waits, and precharge timing. The resistances describe loads attached by the operator; they do not command or switch the load. These settings require output OFF and the \texttt{bench\_settings\_v1} capability.
++
++The Calibration view queues precharge, no-load, individual load-slot, current-zero, and line-reference routines. Progress and completion come from MCU telemetry. Each reference load is connected with output OFF before its slot is started. OFF cancels the run, and successful calibration still requires an explicit save. The firmware's \texttt{calibration\_v1} capability and fresh state determine whether these controls are available.
++
++V2 carrier controls apply switching frequency and dead time as one OFF-state pair. The draft preview is kept separate from actual device readback. The interface confirms the change only after receiving both its acknowledgment and matching timing frame; stale or mismatched readback leaves the operation unconfirmed. The timer limits and quantization are given in \cref{sec:app-fw-carrier-timing}. A timing change invalidates learned load profiles, which must be retuned.
++
+ \texttt{DeviceLink.startDemo} uses a separate synthetic device
+ state. No USB port is opened or written. The firmware identifier is
+ \texttt{SIMULATED}, and recorded sessions have the source \texttt{demo}.
+-The interface, controls, and exports can be tested without the
+-generated values being presented as converter measurements.
++The display, basic controls, synthetic timing, and exports can be checked without a connected board. Demo cannot run physical calibration.
+ 
+ \texttt{openStore} creates the IndexedDB database \texttt{thesis-power-lab}
+ with a \texttt{sessions} object store. A recording contains a
+@@ -137,7 +142,7 @@
+ names, session source, settings, and diagnostic-current/power
+ labels. Text is quoted, embedded quotes are escaped, and missing values
+ are kept. Text fields are prevented from becoming spreadsheet formulas.
+-JSON export keeps the complete session, including events and metadata
++Each sample includes only fresh verified carrier timing. The CSV adds requested/actual carrier and dead time, timer clock, period and dead-time ticks, timing revision, receipt time, and source. Stale or missing timing fields remain blank; later metadata is not copied back into earlier samples. JSON export keeps the complete session, including events and metadata
+ not repeated in CSV. \texttt{exportSession} prefixes filenames
+ with \texttt{DEMO-} or \texttt{USB-}; \texttt{download} creates
+ the browser download without uploading the recording to a server.
+@@ -148,10 +153,10 @@
+ \sourcefile{server.mjs} binds to the loopback interface and serves only
+ the listed application files. Response headers are read from
+ \sourcefile{vercel.json}. The server is not a serial bridge or data-collection
+-API. \sourcefile{build.mjs} checks and copies the six bench-interface
++API. \sourcefile{build.mjs} checks and copies 15 application and font
+ files to \sourcefile{dist}. That list excludes firmware, thesis
+-documents, and experiment recordings from the static build. The archived
+-interface can be checked from \sourcefile{Code/PWR_2_0_1/web} with:
++documents, and experiment recordings from the static build. The current
++interface can be checked from \sourcefile{Code/PWR_2_0_4/web} with:
+ 
+ \begin{lstlisting}[caption={Commands to test, build, and serve the browser app.},label={lst:app-web-reproduce}]
+ node --test tests/*.test.mjs
+@@ -162,29 +167,16 @@
+ The local server defaults to \texttt{http://localhost:4173}. Static builds verify file
+ availability; board UART communication requires separate validation.
+ 
+-\section{Unfinished Calculator Page}
++\section{Resonant-Tank and Pump Calculator}
+ \label{sec:app-calculator-snapshot}
+ 
+-The frozen web folder also contains \sourcefile{resonance.js},
+-\sourcefile{calculator.html}, \sourcefile{calculator.css}, and
+-\sourcefile{tests/resonance.test.mjs}. Integration of these archived files was unfinished.
+-\sourcefile{calculator.html} imports \sourcefile{resonance-ui.js},
+-which is absent from the snapshot. The local-server and static-build
+-allowlists also omit the calculator files. The archived calculator page cannot run without the missing module and build entries.
+-
+-The numerical module runs without the page interface. \texttt{toSI} and \texttt{fromSI}
+-require explicit units; \sourcefile{equivalentCapacitance} handles series
+-and parallel banks; \sourcefile{equivalentSeriesInductance} sums uncoupled
+-series inductors. \texttt{analyzeTank} solves for ideal series-LC frequency,
+-inductance, or capacitance and reports reactance, characteristic impedance,
+-tolerance corners, and optional series-loss quantities. Leakage must already
+-be referred to the resonant side and included once. Transformer magnetizing
+-inductance is a separate branch, not added series inductance.
+-\texttt{preferredCandidates} returns tabulated E12/E24 candidates, while
+-\texttt{generateFrequencyResponse} calculates normalized series-RLC current
+-for positive series resistance. These calculations do not predict complete
+-converter gain, ZVS, efficiency, power capability, or component ratings.
+-Source links and model assumptions are included in the module and page.
++The calculator is included in the local server and static build. \sourcefile{resonance-ui.js} connects the page controls to the numerical routines; \sourcefile{resonance-presets.js} supplies nominal component sets and the transformer A/B measurements used for comparison.
++
++\texttt{toSI} and \texttt{fromSI} handle explicit units. \texttt{equivalentCapacitance} combines series and parallel banks, and \texttt{equivalentSeriesInductance} sums uncoupled series inductors. \texttt{analyzeTank} solves the ideal series-LC frequency, inductance, or capacitance, with reactance, characteristic impedance, tolerance corners, and optional series-loss quantities. Leakage is referred to the resonant side and included once.
++
++Magnetizing inductance is treated as a separate branch. \texttt{analyzeMagnetizingBranch} calculates its reactance, the magnetizing-to-series inductance ratio, and an ideal open-secondary resonance. Magnetizing inductance is therefore not added to the loaded series-resonance calculation. The pump calculator uses the approximate triangular-current sizing relationship \(L_p=1/(16C_p f_s^2)\), separately from the series-LC resonance equation.
++
++\texttt{preferredCandidates} returns E12/E24 values, and \texttt{generateFrequencyResponse} plots the normalized series-RLC current for an entered series resistance. These models support component and operating-point comparisons; complete-converter gain, loss, and ZVS still require the full circuit and measurements. Calculator edits do not change MCU settings.
+ 
+ \section{Firmware Builds and HEX Checks}
+ \label{sec:app-firmware-build-tools}
+@@ -210,7 +202,7 @@
+ start, initial stack pointer, and Thumb reset vector. A sparse HEX image
+ is used for flashing because a flat BIN spans the reserved gap. These
+ checks do not test flash persistence or electrical pin behavior. Build
+-and image checks can be run from \sourcefile{Code/PWR_2_0_1} with:
++and image checks can be run from \sourcefile{Code/PWR_2_0_4} with:
+ 
+ \begin{lstlisting}[caption={Firmware build and HEX-check commands.},label={lst:app-firmware-reproduce}]
+ .\firmware\build.ps1 -Target F410
+@@ -234,26 +226,17 @@
+ \sourcefile{web/tests/protocol.test.mjs} & Partial chunks, CR/LF framing, oversized-line recovery, frame validation, command validation, and fault interpretation.\\
+ \sourcefile{web/tests/serial.test.mjs} & Handshake, acknowledgments, timeouts, stale/fault/lease interlocks, OFF priority, disconnect races, port cancellation, unplug, and separation of Demo and serial state, using an in-memory serial device.\\
+ \sourcefile{web/tests/storage.test.mjs} & CSV quoting, missing fields, units, session source, formula-like text, and empty sessions. These tests exercise export formatting, not physical storage endurance.\\
+-\sourcefile{web/tests/resonance.test.mjs} & Unit conversion, bank topology, inverse LC solves, leakage handling, tolerance corners, reactance, series-loss response, preferred values, and invalid inputs.\\
+-\sourcefile{firmware/test_web_protocol.py} & Production firmware dispatcher and serializer with mocked UART, timing, settings, and control dependencies.\\
++\sourcefile{web/tests/resonance.test.mjs}, \sourcefile{web/tests/resonance-presets.test.mjs} & Unit conversion, bank topology, inverse LC solves, leakage and magnetizing branches, pump sizing, tolerance corners, preferred values, and presets.\\
++\sourcefile{firmware/test_web_protocol.py} & Production dispatcher, timing math and application, scheduler, calibration cancellation, lease and queue behavior with mocked hardware.\\
++\sourcefile{firmware/test_carrier_storage.py} & Production journal loader/writer, legacy records, corruption, torn writes, and interrupted appends with mocked flash.\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+ \FloatBarrier
+ 
+-All 38 Node tests passed on the archived source, including the calculator's
+-numerical helpers. The calculator page remains incomplete because the UI module
+-is missing. In the firmware host harness, production protocol code is extracted
+-from the sketch, and a C++ harness is generated and built with Visual Studio
+-C++ Build Tools. The fixtures cover malformed commands, rejection and save
+-failure, enable interlocks, lease expiry and uptime wrap, queue congestion,
+-missing measurements, and bounded writes. The documented host run produced
+-46 JSON frames. UART and hardware actions are stubbed, so this verifies
+-software behavior under those fixtures, not powered converter operation.
+-
+-Powered tests still need to check UART wiring and acknowledgment timing,
+-sensor calibration and fitted dividers, loaded loop timing, settings
+-persistence, protection, and link-loss response.
++All 76 Node tests passed, including protocol, timing/readback, calibration transport, session export, and calculator checks. The firmware harness extracts production code and runs it with mocked hardware. Its 131 JSON frames cover command dispatch, timing-pair quantization and rejection, OFF/busy conditions, calibration cancellation and rollback, lease expiry, bounded transmission, and readback failure. Journal tests cover legacy migration and all 122 interrupted-append word boundaries. The Linux host checks were run with a native C++ compiler; the Windows/MSVC runner was not executed.
++
++Powered tests must check UART wiring, sensing gains, gate and enable timing, calibration response, on-board persistence, and link-loss stop behavior.
+ 
+ \section{Checking Measurements and Rebuilding Results}
+ \label{sec:app-analysis-tools}
+--- before/Backmatter/Appendices/H_Full_Embedded_Source.tex
++++ after/Backmatter/Appendices/H_Full_Embedded_Source.tex
+@@ -1,34 +1,35 @@
+-\chapter{Complete Embedded Source Code}
+-\label{app:full-embedded-source}
+-
+-The two controller programs are listed in full below. Their development is described in \cref{sec:ctrl-firmware-identities}. PWR-1.9.20 is the
+-archived baseline controller for V1.0. PWR-2.0.1 is
+-the later V2 controller source for F410 and G071 targets, including
+-the browser protocol.
+-
+-The listings include every function, comment, and source line. Line numbers restart at 1 for each file; a
+-continuation arrow marks a printed line wrap. The original UTF-8 files are
+-included in the editable package. Their SHA-256 checksums are recorded in
+-\sourcefile{Code/source_manifest.json}. Appendix~\ref{app:firmware} explains
+-the controller and commands. The compiler core and external libraries
+-are dependencies, rather than project-authored source reproduced here.
+-
+-\section{Measured-Prototype Controller: PWR-1.9.20}
+-\label{sec:source-pwr1920}
+-
+-The complete file contains 4,207 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Complete PWR-1.9.20 controller source.},label={lst:full-pwr1920}]{Code/thesi_power_control_PWR_1_9_20.ino}
+-
+-\clearpage
+-\section{V2 Controller: PWR-2.0.1}
+-\label{sec:source-pwr201}
+-
+-The conditional board definitions specify the MCU pins, timer,
+-ADC/DMA path, and settings store. The shared voltage controller
+-follows those definitions. A successful build does not verify fitted
+-divider ratios, gate timing, or powered-converter performance.
+-
+-The complete file contains 4,848 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Complete PWR-2.0.1 controller source for V2 F410 and G071 targets.},label={lst:full-pwr201}]{Code/PWR_2_0_1/thesi_power_control.ino}
++\chapter{Complete Embedded Source Code}
++\label{app:full-embedded-source}
++
++The two controller programs are listed in full below. Their development is described in \cref{sec:ctrl-firmware-identities}. PWR-1.9.20 is the
++archived baseline controller for V1.0. PWR-2.0.4 is
++the later V2 controller source with browser calibration, reference-load settings,
++and adjustable carrier timing. The same file builds the G071 target as
++PWR-2.0.3 with its fixed carrier.
++
++The listings include every function, comment, and source line. Line numbers restart at 1 for each file; a
++continuation arrow marks a printed line wrap. The original UTF-8 files are
++included in the editable package. Their SHA-256 checksums are recorded in
++\sourcefile{Code/source_manifest.json}. Appendix~\ref{app:firmware} explains
++the controller and commands. The compiler core and external libraries
++are dependencies, rather than project-authored source reproduced here.
++
++\section{Measured-Prototype Controller: PWR-1.9.20}
++\label{sec:source-pwr1920}
++
++The complete file contains 4,207 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Complete PWR-1.9.20 controller source.},label={lst:full-pwr1920}]{Code/thesi_power_control_PWR_1_9_20.ino}
++
++\clearpage
++\section{V2 Controller: PWR-2.0.4}
++\label{sec:source-pwr204}
++
++The conditional board definitions specify the MCU pins, timer,
++ADC/DMA path, and settings store. The shared voltage controller
++follows those definitions. A successful build does not verify fitted
++divider ratios, gate timing, or powered-converter performance.
++
++The complete file contains 5,348 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Complete V2 controller source: PWR-2.0.4 for F410 and PWR-2.0.3 for G071.},label={lst:full-pwr204}]{Code/PWR_2_0_4/thesi_power_control.ino}
+--- before/Backmatter/Appendices/I_Full_Supporting_Source.tex
++++ after/Backmatter/Appendices/I_Full_Supporting_Source.tex
+@@ -1,153 +1,174 @@
+-\chapter{Complete Supporting Software Source}
+-\label{app:full-supporting-source}
+-
+-These are the complete project files for the controller build,
+-browser interface, software tests, and thesis data processing.
+-Appendix~\ref{app:software-tools} explains how they work together.
+-The listings also include the archived calculator files. When these files were archived,
+-the calculator page was not connected to the application build,
+-and the imported \sourcefile{resonance-ui.js} was absent. The
+-calculation tests alone do not demonstrate a working calculator page.
+-
+-Generated build outputs, duplicate deployment copies, third-party libraries,
+-and intermediate sketches are omitted. The two full firmware versions are in Appendix~\ref{app:full-embedded-source}.
+-The editable package includes the original files and checksums.
+-
+-\Needspace{10\baselineskip}
+-\section{Firmware build script}
+-\noindent\sourcefile{Code/PWR_2_0_1/firmware/build.ps1}; 42 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Firmware build script: complete source.},label={lst:full-support-1}]{Code/PWR_2_0_1/firmware/build.ps1}
+-
+-\Needspace{10\baselineskip}
+-\section{MCU linker layout}
+-\noindent\sourcefile{Code/PWR_2_0_1/firmware/stm32f410.ld}; 121 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={MCU linker layout: complete source.},label={lst:full-support-2}]{Code/PWR_2_0_1/firmware/stm32f410.ld}
+-
+-\Needspace{10\baselineskip}
+-\section{MCU HEX verifier}
+-\noindent\sourcefile{Code/PWR_2_0_1/firmware/verify_f410_hex.py}; 76 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={MCU HEX verifier: complete source.},label={lst:full-support-3}]{Code/PWR_2_0_1/firmware/verify_f410_hex.py}
+-
+-\Needspace{10\baselineskip}
+-\section{Firmware protocol host tests}
+-\noindent\sourcefile{Code/PWR_2_0_1/firmware/test_web_protocol.py}; 233 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Firmware protocol host tests: complete source.},label={lst:full-support-4}]{Code/PWR_2_0_1/firmware/test_web_protocol.py}
+-
+-\Needspace{10\baselineskip}
+-\section{Browser application}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/app.js}; 617 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Browser application: complete source.},label={lst:full-support-5}]{Code/PWR_2_0_1/web/app.js}
+-
+-\Needspace{10\baselineskip}
+-\section{Static application build}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/build.mjs}; 5 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Static application build: complete source.},label={lst:full-support-6}]{Code/PWR_2_0_1/web/build.mjs}
+-
+-\Needspace{10\baselineskip}
+-\section{Archived calculator styling}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/calculator.css}; 90 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Archived calculator styling: complete source.},label={lst:full-support-7}]{Code/PWR_2_0_1/web/calculator.css}
+-
+-\Needspace{10\baselineskip}
+-\section{Archived calculator page}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/calculator.html}; 105 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Archived calculator page: complete source.},label={lst:full-support-8}]{Code/PWR_2_0_1/web/calculator.html}
+-
+-\Needspace{10\baselineskip}
+-\section{Bench application page}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/index.html}; 99 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Bench application page: complete source.},label={lst:full-support-9}]{Code/PWR_2_0_1/web/index.html}
+-
+-\Needspace{10\baselineskip}
+-\section{UART framing and protocol validation}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/protocol.js}; 44 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={UART framing and protocol validation: complete source.},label={lst:full-support-10}]{Code/PWR_2_0_1/web/protocol.js}
+-
+-\Needspace{10\baselineskip}
+-\section{Resonance calculations}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/resonance.js}; 204 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Resonance calculations: complete source.},label={lst:full-support-11}]{Code/PWR_2_0_1/web/resonance.js}
+-
+-\Needspace{10\baselineskip}
+-\section{Serial connection and command queue}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/serial.js}; 157 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Serial connection and command queue: complete source.},label={lst:full-support-12}]{Code/PWR_2_0_1/web/serial.js}
+-
+-\Needspace{10\baselineskip}
+-\section{Local application server}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/server.mjs}; 15 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Local application server: complete source.},label={lst:full-support-13}]{Code/PWR_2_0_1/web/server.mjs}
+-
+-\Needspace{10\baselineskip}
+-\section{Session export and CSV formatting}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/storage.js}; 43 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Session export and CSV formatting: complete source.},label={lst:full-support-14}]{Code/PWR_2_0_1/web/storage.js}
+-
+-\Needspace{10\baselineskip}
+-\section{Bench application styling}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/styles.css}; 354 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Bench application styling: complete source.},label={lst:full-support-15}]{Code/PWR_2_0_1/web/styles.css}
+-
+-\Needspace{10\baselineskip}
+-\section{Node package and commands}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/package.json}; 12 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Node package and commands: complete source.},label={lst:full-support-16}]{Code/PWR_2_0_1/web/package.json}
+-
+-\Needspace{10\baselineskip}
+-\section{Static hosting configuration}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/vercel.json}; 16 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Static hosting configuration: complete source.},label={lst:full-support-17}]{Code/PWR_2_0_1/web/vercel.json}
+-
+-\Needspace{10\baselineskip}
+-\section{Protocol tests}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/tests/protocol.test.mjs}; 45 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Protocol tests: complete source.},label={lst:full-support-18}]{Code/PWR_2_0_1/web/tests/protocol.test.mjs}
+-
+-\Needspace{10\baselineskip}
+-\section{Resonance calculation tests}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/tests/resonance.test.mjs}; 158 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Resonance calculation tests: complete source.},label={lst:full-support-19}]{Code/PWR_2_0_1/web/tests/resonance.test.mjs}
+-
+-\Needspace{10\baselineskip}
+-\section{Serial connection tests}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/tests/serial.test.mjs}; 160 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Serial connection tests: complete source.},label={lst:full-support-20}]{Code/PWR_2_0_1/web/tests/serial.test.mjs}
+-
+-\Needspace{10\baselineskip}
+-\section{Session export tests}
+-\noindent\sourcefile{Code/PWR_2_0_1/web/tests/storage.test.mjs}; 51 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Session export tests: complete source.},label={lst:full-support-21}]{Code/PWR_2_0_1/web/tests/storage.test.mjs}
+-
+-\Needspace{10\baselineskip}
+-\section{Measurement tables and graph reconstruction}
+-\noindent\sourcefile{Data/analysis/rebuild_results.py}; 335 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Measurement tables and graph reconstruction: complete source.},label={lst:full-support-22}]{Data/analysis/rebuild_results.py}
+-
+-\Needspace{10\baselineskip}
+-\section{Workbook inspection}
+-\noindent\sourcefile{Data/analysis/inspect_measurements.py}; 47 physical lines.
+-
+-\lstinputlisting[language={},style=fullsource,caption={Workbook inspection: complete source.},label={lst:full-support-23}]{Data/analysis/inspect_measurements.py}
+-
++\chapter{Complete Supporting Software Source}
++\label{app:full-supporting-source}
++
++These are the complete project files for the controller build,
++browser interface, software tests, and thesis data processing.
++Appendix~\ref{app:software-tools} explains how they work together.
++The browser files include the monitoring dashboard, calibration and setup controls, and resonant-tank calculator.
++
++Generated build outputs, duplicate deployment copies, third-party libraries,
++and intermediate sketches are omitted. The two full firmware versions are in Appendix~\ref{app:full-embedded-source}.
++The editable package includes the original files and checksums.
++
++\Needspace{10\baselineskip}
++\section{Firmware build script}
++\noindent\sourcefile{Code/PWR_2_0_4/firmware/build.ps1}; 42 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Firmware build script: complete source.},label={lst:full-support-1}]{Code/PWR_2_0_4/firmware/build.ps1}
++
++\Needspace{10\baselineskip}
++\section{MCU linker layout}
++\noindent\sourcefile{Code/PWR_2_0_4/firmware/stm32f410.ld}; 121 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={MCU linker layout: complete source.},label={lst:full-support-2}]{Code/PWR_2_0_4/firmware/stm32f410.ld}
++
++\Needspace{10\baselineskip}
++\section{MCU HEX verifier}
++\noindent\sourcefile{Code/PWR_2_0_4/firmware/verify_f410_hex.py}; 76 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={MCU HEX verifier: complete source.},label={lst:full-support-3}]{Code/PWR_2_0_4/firmware/verify_f410_hex.py}
++
++\Needspace{10\baselineskip}
++\section{Firmware protocol host tests}
++\noindent\sourcefile{Code/PWR_2_0_4/firmware/test_web_protocol.py}; 517 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Firmware protocol host tests: complete source.},label={lst:full-support-4}]{Code/PWR_2_0_4/firmware/test_web_protocol.py}
++
++\Needspace{10\baselineskip}
++\section{Browser application}
++\noindent\sourcefile{Code/PWR_2_0_4/web/app.js}; 900 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Browser application: complete source.},label={lst:full-support-5}]{Code/PWR_2_0_4/web/app.js}
++
++\Needspace{10\baselineskip}
++\section{Static application build}
++\noindent\sourcefile{Code/PWR_2_0_4/web/build.mjs}; 19 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Static application build: complete source.},label={lst:full-support-6}]{Code/PWR_2_0_4/web/build.mjs}
++
++\Needspace{10\baselineskip}
++\section{Calculator styling}
++\noindent\sourcefile{Code/PWR_2_0_4/web/calculator.css}; 312 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Calculator styling: complete source.},label={lst:full-support-7}]{Code/PWR_2_0_4/web/calculator.css}
++
++\Needspace{10\baselineskip}
++\section{Calculator page}
++\noindent\sourcefile{Code/PWR_2_0_4/web/calculator.html}; 154 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Calculator page: complete source.},label={lst:full-support-8}]{Code/PWR_2_0_4/web/calculator.html}
++
++\Needspace{10\baselineskip}
++\section{Bench application page}
++\noindent\sourcefile{Code/PWR_2_0_4/web/index.html}; 126 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Bench application page: complete source.},label={lst:full-support-9}]{Code/PWR_2_0_4/web/index.html}
++
++\Needspace{10\baselineskip}
++\section{UART framing and protocol validation}
++\noindent\sourcefile{Code/PWR_2_0_4/web/protocol.js}; 70 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={UART framing and protocol validation: complete source.},label={lst:full-support-10}]{Code/PWR_2_0_4/web/protocol.js}
++
++\Needspace{10\baselineskip}
++\section{Resonance calculations}
++\noindent\sourcefile{Code/PWR_2_0_4/web/resonance.js}; 254 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Resonance calculations: complete source.},label={lst:full-support-11}]{Code/PWR_2_0_4/web/resonance.js}
++
++\Needspace{10\baselineskip}
++\section{Serial connection and command queue}
++\noindent\sourcefile{Code/PWR_2_0_4/web/serial.js}; 268 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Serial connection and command queue: complete source.},label={lst:full-support-12}]{Code/PWR_2_0_4/web/serial.js}
++
++\Needspace{10\baselineskip}
++\section{Local application server}
++\noindent\sourcefile{Code/PWR_2_0_4/web/server.mjs}; 15 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Local application server: complete source.},label={lst:full-support-13}]{Code/PWR_2_0_4/web/server.mjs}
++
++\Needspace{10\baselineskip}
++\section{Session export and CSV formatting}
++\noindent\sourcefile{Code/PWR_2_0_4/web/storage.js}; 57 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Session export and CSV formatting: complete source.},label={lst:full-support-14}]{Code/PWR_2_0_4/web/storage.js}
++
++\Needspace{10\baselineskip}
++\section{Bench application styling}
++\noindent\sourcefile{Code/PWR_2_0_4/web/styles.css}; 511 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Bench application styling: complete source.},label={lst:full-support-15}]{Code/PWR_2_0_4/web/styles.css}
++
++\Needspace{10\baselineskip}
++\section{Node package and commands}
++\noindent\sourcefile{Code/PWR_2_0_4/web/package.json}; 12 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Node package and commands: complete source.},label={lst:full-support-16}]{Code/PWR_2_0_4/web/package.json}
++
++\Needspace{10\baselineskip}
++\section{Static hosting configuration}
++\noindent\sourcefile{Code/PWR_2_0_4/web/vercel.json}; 16 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Static hosting configuration: complete source.},label={lst:full-support-17}]{Code/PWR_2_0_4/web/vercel.json}
++
++\Needspace{10\baselineskip}
++\section{Protocol tests}
++\noindent\sourcefile{Code/PWR_2_0_4/web/tests/protocol.test.mjs}; 76 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Protocol tests: complete source.},label={lst:full-support-18}]{Code/PWR_2_0_4/web/tests/protocol.test.mjs}
++
++\Needspace{10\baselineskip}
++\section{Resonance calculation tests}
++\noindent\sourcefile{Code/PWR_2_0_4/web/tests/resonance.test.mjs}; 251 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Resonance calculation tests: complete source.},label={lst:full-support-19}]{Code/PWR_2_0_4/web/tests/resonance.test.mjs}
++
++\Needspace{10\baselineskip}
++\section{Serial connection tests}
++\noindent\sourcefile{Code/PWR_2_0_4/web/tests/serial.test.mjs}; 387 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Serial connection tests: complete source.},label={lst:full-support-20}]{Code/PWR_2_0_4/web/tests/serial.test.mjs}
++
++\Needspace{10\baselineskip}
++\section{Session export tests}
++\noindent\sourcefile{Code/PWR_2_0_4/web/tests/storage.test.mjs}; 86 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Session export tests: complete source.},label={lst:full-support-21}]{Code/PWR_2_0_4/web/tests/storage.test.mjs}
++
++\Needspace{10\baselineskip}
++\section{Measurement tables and graph reconstruction}
++\noindent\sourcefile{Data/analysis/rebuild_results.py}; 335 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Measurement tables and graph reconstruction: complete source.},label={lst:full-support-22}]{Data/analysis/rebuild_results.py}
++
++\Needspace{10\baselineskip}
++\section{Workbook inspection}
++\noindent\sourcefile{Data/analysis/inspect_measurements.py}; 47 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Workbook inspection: complete source.},label={lst:full-support-23}]{Data/analysis/inspect_measurements.py}
++
++
++\Needspace{10\baselineskip}
++\section{Carrier settings storage tests}
++\noindent\sourcefile{Code/PWR_2_0_4/firmware/test_carrier_storage.py}; 287 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Carrier settings storage tests: complete source.},label={lst:full-support-24}]{Code/PWR_2_0_4/firmware/test_carrier_storage.py}
++
++\Needspace{10\baselineskip}
++\section{Resonant-tank calculator interface}
++\noindent\sourcefile{Code/PWR_2_0_4/web/resonance-ui.js}; 606 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Resonant-tank calculator interface: complete source.},label={lst:full-support-25}]{Code/PWR_2_0_4/web/resonance-ui.js}
++
++\Needspace{10\baselineskip}
++\section{Measured magnetic component presets}
++\noindent\sourcefile{Code/PWR_2_0_4/web/resonance-presets.js}; 112 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Measured magnetic component presets: complete source.},label={lst:full-support-26}]{Code/PWR_2_0_4/web/resonance-presets.js}
++
++\Needspace{10\baselineskip}
++\section{Magnetic component preset tests}
++\noindent\sourcefile{Code/PWR_2_0_4/web/tests/resonance-presets.test.mjs}; 55 physical lines.
++
++\lstinputlisting[language={},style=fullsource,caption={Magnetic component preset tests: complete source.},label={lst:full-support-27}]{Code/PWR_2_0_4/web/tests/resonance-presets.test.mjs}
+--- before/Chapters/01_Introduction/08_V2_Prototype.tex
++++ after/Chapters/01_Introduction/08_V2_Prototype.tex
+@@ -1,51 +1,51 @@
+-\section{Development of the V2 Prototype}
+-\label{sec:intro-v2}
+-
+-The first prototype was used to develop the power circuit and burst
+-controller. V2 was then designed with the MCU on the converter board in place of
+-the separate controller platform. The charge-pump
+-PFC and isolated resonant paths were retained, together with the supplied
+-planar magnetics and downstream USB-C output stage.
+-
+-The main V2 design specifications are summarized in
+-Table~\ref{tab:intro-v2-specs}. The circuit connections and controller
+-timing are described in \cref{sec:hw-v2}; the complete schematic and PCB
+-print set are included in \cref{sec:app-v2-oct27}.
+-
+-\begin{table}[htbp]
+-\centering
+-\caption{V2 design specifications.}
+-\label{tab:intro-v2-specs}
+-\small
+-\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}X@{}}
+-\toprule
+-Function & V2 implementation\\
+-\midrule
+-Controller & STM32F410CBU6 integrated on the converter PCB\\
+-Power stage & LMG2652RFBR GaN half bridge shared by the charge-pump and resonant paths\\
+-Feedback & Scaled primary-voltage input (PA0), isolated secondary-bulk voltage feedback through AMC0330 (PA1), and primary half-bridge-current sensing (PA2)\\
+-USB-C output & MPQ4242 output stage downstream of the isolated secondary bulk bus\\
+-Local supplies & BAC1S12SC bias supply and separate LMR54410 regulators for primary and secondary local supplies\\
+-PCB & Four copper layers, including internal GND and PWR layers\\
+-Archived timing & Nominal \SI{1}{\mega\hertz} carrier and \SI{40}{\nano\second} programmed dead time in the archived V2 controller code\\
+-\bottomrule
+-\end{tabularx}
+-\end{table}
+-
+-On V2, carrier commands use PA8/PB13, burst enable uses PA11, and UART
+-TX/RX use PA9/PA10. The MCU continues to regulate the secondary bulk supply,
+-which feeds the USB-C PD output stage.
+-
+-During later powered V2 tests, heating was observed in the external
+-series resonant inductor. It was removed, and the tank was changed to use
+-transformer leakage with approximately \SI{1.66}{\nano\farad} resonant
+-capacitance. The software dead-time setting was approximately
+-\SI{60}{\nano\second}. The input bridge continued to heat up during the
+-test labelled \SI{95}{\watt} (\cref{sec:res-v2-testing}). A continuous
+-output rating and an efficiency improvement were not established.
+-
+-The V2 drawings show the resonant branch before the external inductor was
+-removed. Some component values and feedback scales still need checking
+-against the assembled board (\cref{sec:hw-v2}). Further tests are needed
+-to resolve the bridge heating and compare the fitted V2 converter with
+-the V3 edge-card design.
++\section{Development of the V2 Prototype}
++\label{sec:intro-v2}
++
++The first prototype was used to develop the power circuit and burst
++controller. V2 was then designed with the MCU on the converter board in place of
++the separate controller platform. The charge-pump
++PFC and isolated resonant paths were retained, together with the supplied
++planar magnetics and downstream USB-C output stage.
++
++The main V2 design specifications are summarized in
++Table~\ref{tab:intro-v2-specs}. The circuit connections and controller
++timing are described in \cref{sec:hw-v2}; the complete schematic and PCB
++print set are included in \cref{sec:app-v2-oct27}.
++
++\begin{table}[htbp]
++\centering
++\caption{V2 design specifications.}
++\label{tab:intro-v2-specs}
++\small
++\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}X@{}}
++\toprule
++Function & V2 implementation\\
++\midrule
++Controller & STM32F410CBU6 integrated on the converter PCB\\
++Power stage & LMG2652RFBR GaN half bridge shared by the charge-pump and resonant paths\\
++Feedback & Scaled primary-voltage input (PA0), isolated secondary-bulk voltage feedback through AMC0330 (PA1), and primary half-bridge-current sensing (PA2)\\
++USB-C output & MPQ4242 output stage downstream of the isolated secondary bulk bus\\
++Local supplies & BAC1S12SC bias supply and separate LMR54410 regulators for primary and secondary local supplies\\
++PCB & Four copper layers, including internal GND and PWR layers\\
++Carrier timing & Default \SI{1}{\mega\hertz} carrier and \SI{40}{\nano\second} programmed dead time; both adjustable with output disabled (\cref{sec:ctrl-v2-adjustable-timing})\\
++\bottomrule
++\end{tabularx}
++\end{table}
++
++On V2, carrier commands use PA8/PB13, burst enable uses PA11, and UART
++TX/RX use PA9/PA10. The MCU continues to regulate the secondary bulk supply,
++which feeds the USB-C PD output stage.
++
++During later powered V2 tests, heating was observed in the external
++series resonant inductor. It was removed, and the tank was changed to use
++transformer leakage with approximately \SI{1.66}{\nano\farad} resonant
++capacitance. The software dead-time setting was approximately
++\SI{60}{\nano\second}. The input bridge continued to heat up during the
++test labelled \SI{95}{\watt} (\cref{sec:res-v2-testing}). A continuous
++output rating and an efficiency improvement were not established.
++
++The V2 drawings show the resonant branch before the external inductor was
++removed. Some component values and feedback scales still need checking
++against the assembled board (\cref{sec:hw-v2}). Further tests are needed
++to resolve the bridge heating and compare the fitted V2 converter with
++the V3 edge-card design.
+--- before/Chapters/01_Introduction/09_V3_Development.tex
++++ after/Chapters/01_Introduction/09_V3_Development.tex
+@@ -20,6 +20,5 @@
+ New planar magnetics were not installed within the available time. V3
+ therefore represents layout development and an identified direction for
+ further work, rather than a demonstrated increase in continuous power.
+-The immediate objective remains \SI{100}{\watt}; operation toward
+-\SI{240}{\watt} USB-PD EPR is a longer-term goal. The design changes and
+-remaining checks are described in \cref{sec:hw-v3-plan}.
++The objective remains \SI{100}{\watt}. The design changes and remaining
++checks are described in \cref{sec:hw-v3-plan}.
+--- before/Chapters/01_Introduction/10_Controller_Basics.tex
++++ after/Chapters/01_Introduction/10_Controller_Basics.tex
+@@ -1,38 +1,38 @@
+-\section{Control Architecture and MCU Pins}
+-\label{sec:intro-controller-basics}
+-
+-The microcontroller (MCU) regulates the isolated secondary bulk voltage through
+-burst modulation of the fixed-frequency half bridge. The bulk supply feeds
+-the downstream USB-C PD stage, which regulates the USB-C output voltage
+-to the selected PD level.
+-
+-Primary-voltage feedback is connected to MCU pin PA0, secondary-bulk
+-feedback to PA1, and half-bridge-current sensing to PA2. The current signal
+-is used for load classification and optional protection. ADC sampling runs
+-continuously through circular DMA without synchronization to the carrier.
+-
+-Table~\ref{tab:intro-controller-signals} lists the MCU pins used on the
+-original STM32G071 controller and the STM32F410 V2 board. The original
+-controller uses PA10 for burst enable. On V2, PA10 is the UART receive pin,
+-and PA11 provides burst enable.
+-
+-\begin{table}[htbp]
+-\centering
+-\small
+-\caption{MCU pin assignments for the original controller and V2.}
+-\label{tab:intro-controller-signals}
+-\begin{tabularx}{\textwidth}{@{}L{0.52\textwidth}L{0.22\textwidth}Y@{}}
+-\toprule
+-Function & Original controller & V2\\
+-\midrule
+-Primary-voltage feedback & PA0 & PA0\\
+-Secondary-bulk voltage feedback & PA1 & PA1\\
+-Half-bridge current sensing & PA2 & PA2\\
+-Half-bridge carrier outputs & PA8 / PA9 & PA8 / PB13\\
+-Burst enable output & PA10 & PA11\\
+-UART transmit (TX) & PC4 & PA9\\
+-UART receive (RX) & PC5 & PA10\\
+-\bottomrule
+-\end{tabularx}
+-\end{table}
+-\FloatBarrier
++\section{Control Architecture and MCU Pins}
++\label{sec:intro-controller-basics}
++
++The microcontroller (MCU) regulates the isolated secondary bulk voltage through
++burst modulation of the half bridge. The bulk supply feeds
++the downstream USB-C PD stage, which regulates the USB-C output voltage
++to the selected PD level.
++
++Primary-voltage feedback is connected to MCU pin PA0, secondary-bulk
++feedback to PA1, and half-bridge-current sensing to PA2. The current signal
++is used for load classification and optional protection. ADC sampling runs
++continuously through circular DMA without synchronization to the carrier.
++
++Table~\ref{tab:intro-controller-signals} lists the MCU pins used on the
++original STM32G071 controller and the STM32F410 V2 board. The original
++controller uses PA10 for burst enable. On V2, PA10 is the UART receive pin,
++and PA11 provides burst enable.
++
++\begin{table}[htbp]
++\centering
++\small
++\caption{MCU pin assignments for the original controller and V2.}
++\label{tab:intro-controller-signals}
++\begin{tabularx}{\textwidth}{@{}L{0.52\textwidth}L{0.22\textwidth}Y@{}}
++\toprule
++Function & Original controller & V2\\
++\midrule
++Primary-voltage feedback & PA0 & PA0\\
++Secondary-bulk voltage feedback & PA1 & PA1\\
++Half-bridge current sensing & PA2 & PA2\\
++Half-bridge carrier outputs & PA8 / PA9 & PA8 / PB13\\
++Burst enable output & PA10 & PA11\\
++UART transmit (TX) & PC4 & PA9\\
++UART receive (RX) & PC5 & PA10\\
++\bottomrule
++\end{tabularx}
++\end{table}
++\FloatBarrier
+--- before/Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex
++++ after/Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex
+@@ -1,48 +1,48 @@
+-\section{Analytical Parameter Sensitivity}
+-\label{sec:sim-sweeps}
+-
+-The first-order equations estimate analytical sensitivity; no final-board tolerance sweep was completed. For continuous ideal charge transfer,
+-\begin{equation}
+-\frac{\delta P_{\mathrm{in}}}{P_{\mathrm{in}}}\approx
+-\frac{\delta f_s}{f_s}+\frac{\delta\CP}{\CP}
+-+2\frac{\delta V_{\mathrm{in,rms}}}{V_{\mathrm{in,rms}}},
+-\end{equation}
+-The quadratic line-voltage dependence changes power transfer without a component change. Burst operation adds active-cycle-density dependence, which must be included in matched comparisons.
+-
+-Series resonance changes according to
+-\begin{equation}
+-\frac{\delta f_0}{f_0}\approx-
+-\frac{1}{2}\left(\frac{\delta\LRES}{\LRES}
+-+\frac{\delta\CRES}{\CRES}\right).
+-\label{eq:sim-resonance-sensitivity}
+-\end{equation}
+-A 5\% increase in either series parameter gives an approximately 2.5\% first-order resonance reduction. These are first-order calculations, not measured or simulated results. Near-carrier operation makes the corresponding phase shift relevant to commutation.
+-
+-The small-ripple DC-link relationship gives
+-\begin{equation}
+-\widehat{\Delta V}_{\mathrm{DC}}\propto
+-\frac{P}{\omega_l\CDC\VDC}.
+-\end{equation}
+-Increasing link capacitance reduces ripple and increases stored energy. Increasing secondary capacitance reduces packet-induced voltage rise but increases startup energy. Storage changes therefore affect both steady operation and transients.
+-
+-\begin{table}[H]
+-\centering
+-\caption{Calculated effects of changing circuit values and burst density.}
+-\label{tab:sim-analytical-sensitivity}
+-\begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}L{0.30\textwidth}Y@{}}
+-\toprule
+-Change & Ideal trend & Practical consequence\\
+-\midrule
+-Increase \(\CP\) & More charge per active cycle & More available power and pump-current stress; \(\LP\) timing should be reconsidered\\
+-Increase \(\LP\) & Slower pump-current evolution & Different clamp duration and possible incomplete excursion\\
+-Increase series \(L\) or \(C\) & Lower series resonance & Changed gain/phase at the fixed carrier\\
+-Increase \(\CDC\) & Less link-voltage ripple & Greater stored energy and changed startup/discharge behavior\\
+-Increase secondary capacitance & Less voltage excursion per energy packet & More startup energy and a different transient response\\
+-Reduce burst density & Lower average excitation & Lower pump transfer and changed burst-start conditions\\
+-\bottomrule
+-\end{tabularx}
+-\end{table}
+-
+-Saturation, nonlinear capacitance, rectifier conduction, and control-state changes limit these sensitivities. Combined effects require a switched model or matched hardware comparison.
+-
+-The revised plan \cite{projectOctoberPlan} specifies baseline repetition followed by one-parameter or one-part changes under matched input, output setting, load, firmware, and thermal conditions. Candidate variables include sensing calibration, timing, control limits, pump and tank values, gate drive, and cooling. The included controller has a fixed carrier; frequency and dead-time experiments require their own recorded configuration. The planned progression from \SI{85}{\watt} through \SI{90}{\watt}, \SI{95}{\watt}, and \SI{100}{\watt} remains conditional on electrical-stress and temperature limits.
++\section{Analytical Parameter Sensitivity}
++\label{sec:sim-sweeps}
++
++The first-order equations estimate analytical sensitivity; no final-board tolerance sweep was completed. For continuous ideal charge transfer,
++\begin{equation}
++\frac{\delta P_{\mathrm{in}}}{P_{\mathrm{in}}}\approx
++\frac{\delta f_s}{f_s}+\frac{\delta\CP}{\CP}
+++2\frac{\delta V_{\mathrm{in,rms}}}{V_{\mathrm{in,rms}}},
++\end{equation}
++The quadratic line-voltage dependence changes power transfer without a component change. Burst operation adds active-cycle-density dependence, which must be included in matched comparisons.
++
++Series resonance changes according to
++\begin{equation}
++\frac{\delta f_0}{f_0}\approx-
++\frac{1}{2}\left(\frac{\delta\LRES}{\LRES}
+++\frac{\delta\CRES}{\CRES}\right).
++\label{eq:sim-resonance-sensitivity}
++\end{equation}
++A 5\% increase in either series parameter gives an approximately 2.5\% first-order resonance reduction. These are first-order calculations, not measured or simulated results. Near-carrier operation makes the corresponding phase shift relevant to commutation.
++
++The small-ripple DC-link relationship gives
++\begin{equation}
++\widehat{\Delta V}_{\mathrm{DC}}\propto
++\frac{P}{\omega_l\CDC\VDC}.
++\end{equation}
++Increasing link capacitance reduces ripple and increases stored energy. Increasing secondary capacitance reduces packet-induced voltage rise but increases startup energy. Storage changes therefore affect both steady operation and transients.
++
++\begin{table}[H]
++\centering
++\caption{Calculated effects of changing circuit values and burst density.}
++\label{tab:sim-analytical-sensitivity}
++\begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}L{0.30\textwidth}Y@{}}
++\toprule
++Change & Ideal trend & Practical consequence\\
++\midrule
++Increase \(\CP\) & More charge per active cycle & More available power and pump-current stress; \(\LP\) timing should be reconsidered\\
++Increase \(\LP\) & Slower pump-current evolution & Different clamp duration and possible incomplete excursion\\
++Increase series \(L\) or \(C\) & Lower series resonance & Changed gain/phase at the fixed carrier\\
++Increase \(\CDC\) & Less link-voltage ripple & Greater stored energy and changed startup/discharge behavior\\
++Increase secondary capacitance & Less voltage excursion per energy packet & More startup energy and a different transient response\\
++Reduce burst density & Lower average excitation & Lower pump transfer and changed burst-start conditions\\
++\bottomrule
++\end{tabularx}
++\end{table}
++
++Saturation, nonlinear capacitance, rectifier conduction, and control-state changes limit these sensitivities. Combined effects require a switched model or matched hardware comparison.
++
++The revised plan \cite{projectOctoberPlan} specifies baseline repetition followed by one-parameter or one-part changes under matched input, output setting, load, firmware, and thermal conditions. Candidate variables include sensing calibration, timing, control limits, pump and tank values, gate drive, and cooling. The later V2 firmware allows carrier frequency and dead time to be changed with output disabled (\cref{sec:ctrl-v2-adjustable-timing}), allowing these parameters to be varied separately from the tank components. The planned progression from \SI{85}{\watt} through \SI{90}{\watt}, \SI{95}{\watt}, and \SI{100}{\watt} remains conditional on electrical-stress and temperature limits.
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ after/Chapters/07_Hardware/16_V2_F410.tex
+@@ -3,7 +3,7 @@
+ 
+ V2 integrates the MCU, power stage, sensing, local supplies, and USB-C output on a four-layer PCB \cite{ststm32f410ds}. The circuit and PCB design are documented in Section~\ref{sec:app-v2-oct27}.
+ 
+-The fixed \SI{1}{\mega\hertz} carrier and burst-enable control were retained from the earlier DMA-based controller (\cref{ch:control}). Board-dependent peripherals were ported before browser telemetry and commands were added. The common source supports both MCUs. Each test needs the MCU, fitted parts, and firmware settings recorded together.
++The nominal \SI{1}{\mega\hertz} carrier and burst-enable control were retained from the earlier DMA-based controller (\cref{ch:control}). Board-dependent peripherals were ported before browser telemetry and commands were added. The later V2 firmware adds output-OFF adjustment of carrier frequency and dead time (\cref{sec:ctrl-v2-adjustable-timing}).
+ 
+ \subsection{V2 PCB and Physical Integration}
+ 
+@@ -59,7 +59,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The archived V2 source configures center-aligned TIM1 at a nominal \SI{100}{\mega\hertz} timer clock, with auto-reload ARR = 50, compare CCR1 = 25, and dead-time field DTG = 4. These settings give a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time \cite{ststm32f410rm}. TIM5 schedules the enable envelope; bounded polling of carrier updates attempts to align non-static transitions but leaves software-dependent edge latency. The later powered trial used a reported \SI{60}{\nano\second} software setting (\cref{sec:res-v2-testing}), with its firmware version unrecorded. Driver-input and switch-node captures are required to establish effective dead time and enable alignment.
++The earlier V2 port configures center-aligned TIM1 at a nominal \SI{100}{\mega\hertz} timer clock, with auto-reload ARR = 50, compare CCR1 = 25, and dead-time field DTG = 4. These settings give a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time \cite{ststm32f410rm}. TIM5 schedules the enable envelope; bounded polling of carrier updates attempts to align non-static transitions but leaves software-dependent edge latency. The later powered trial used a reported \SI{60}{\nano\second} software setting (\cref{sec:res-v2-testing}), with its firmware version unrecorded. Driver-input and switch-node captures are required to establish effective dead time and enable alignment.
+ 
+ ADC1 continuously scans primary voltage at PA0, secondary-bulk voltage at PA1, and half-bridge current at PA2 through DMA2 Stream0 Channel0 without synchronization to the carrier. At the \SI{25}{\mega\hertz} ADC clock, 84 acquisition and 12 conversion cycles give calculated intervals of \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per frame. Secondary-bulk voltage remains the regulated quantity; primary current supports load classification and optional protection rather than connector output-current measurement.
+ 
+--- before/Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex
++++ after/Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex
+@@ -67,11 +67,9 @@
+ tank gain, and output headroom have not been separated sufficiently to
+ identify the transformer as the limiting component.
+ 
+-The immediate objective remains \SI{100}{\watt}. Operation toward the
+-\SI{240}{\watt} USB-PD Extended Power Range (EPR) level is a longer-term
+-development goal. That increase would require the complete power path,
+-control, thermal design, and external USB-PD output stage to be checked.
+-It is not a capability demonstrated by the reduced V3 layout.
++The objective remains \SI{100}{\watt}. Transformer optimization and
++matched power and thermal tests are needed to assess whether the revised
++converter can reach this output continuously.
+ 
+ \subsection{Release and Bring-Up Status}
+ 
+--- before/Chapters/08_Control_Firmware/14_Version_Comparison.tex
++++ after/Chapters/08_Control_Firmware/14_Version_Comparison.tex
+@@ -3,20 +3,21 @@
+ 
+ Control development addressed manual voltage adjustment, blocking conversion waits, an unsuitable feedback quantity, and excess energy transfer during startup or after load removal (\Cref{tab:ctrl-version-identity}). Each stage changed how the switching bursts responded to the converter and its load.
+ 
+-\begin{table}[htbp]
+-\centering
+-\caption{Firmware changes and their functional improvements.}
+-\label{tab:ctrl-version-identity}
+-\begin{tabularx}{\textwidth}{@{}L{0.17\textwidth}L{0.37\textwidth}Y@{}}
+-\toprule
+-Stage & Change & Improvement\\
+-\midrule
+-Open loop & Manual carrier and burst-enable commands & Check switching timing and basic transfer before adding automatic voltage control\\
+-Blocking feedback & Voltage feedback with blocking ADC reads & Adjust transfer from the sensed voltage instead of relying on manual correction\\
+-DMA feedback & Continuous ADC DMA and corrected feedback scaling & Remove conversion waits and regulate bulk voltage from PA1 rather than an unsuitable voltage--current product\\
+-Final baseline & Burst-edge alignment attempts, startup precharge, no-load guard, and loaded duty trim & Limit commanded energy at startup and no load, reduce continued charging after load removal, and adjust transfer as load changes\\
+-\bottomrule
+-\end{tabularx}
++\begin{table}[htbp]
++\centering
++\caption{Firmware changes and their functional improvements.}
++\label{tab:ctrl-version-identity}
++\begin{tabularx}{\textwidth}{@{}L{0.17\textwidth}L{0.37\textwidth}Y@{}}
++\toprule
++Stage & Change & Improvement\\
++\midrule
++Open loop & Manual carrier and burst-enable commands & Check switching timing and basic transfer before adding automatic voltage control\\
++Blocking feedback & Voltage feedback with blocking ADC reads & Adjust transfer from the sensed voltage instead of relying on manual correction\\
++DMA feedback & Continuous ADC DMA and corrected feedback scaling & Remove conversion waits and regulate bulk voltage from PA1 rather than an unsuitable voltage--current product\\
++Final baseline & Burst-edge alignment attempts, startup precharge, no-load guard, and loaded duty trim & Limit commanded energy at startup and no load, reduce continued charging after load removal, and adjust transfer as load changes\\
++V2 calibration and setup & Browser calibration, reference-load settings, and output-OFF carrier timing & Repeat duty searches for known loads and vary switching frequency and dead time without rebuilding the firmware\\
++\bottomrule
++\end{tabularx}
+ \end{table}
+ 
+ \input{Chapters/08_Control_Firmware/04_V0_Open_Loop}
+--- before/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
++++ after/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
+@@ -1,13 +1,13 @@
+ \section{V2 Controller Port and Browser Interface}
+ \label{sec:ctrl-pwr2-port}
+ 
+-The V2 port replaces the STM32G071 Nucleo arrangement with an integrated STM32F410CBU6. Conditional definitions retain support for both MCU targets while adapting the complementary carrier, enable timer, ADC/DMA configuration, and settings storage. The baseline voltage-control law was retained; browser control and UART logging were added after the hardware port. The earlier DMA feedback development is described in Section~\ref{sec:ctrl-v2}.
++The V2 port replaces the STM32G071 Nucleo arrangement with an integrated STM32F410CBU6. Conditional definitions retain support for both MCU targets while adapting the complementary carrier, enable timer, ADC/DMA configuration, and settings storage. The baseline voltage-control law was retained. Browser control and UART logging were followed by automatic calibration, editable reference-load settings, and adjustable carrier timing. The earlier DMA feedback development is described in Section~\ref{sec:ctrl-v2}.
+ 
+ Commands and functions are listed in Appendix~\ref{app:firmware}. The full firmware sources are in Appendix~\ref{app:full-embedded-source}, and their versions are listed in \cref{sec:ctrl-firmware-identities}.
+ 
+ \subsection{Peripheral Changes}
+ 
+-On V2, the complementary carrier uses PA8/TIM1\_CH1 and PB13/TIM1\_CH1N, with burst enable moved to PA11. This releases PA9/PA10 for UART TX/RX; PA10 therefore changes from G071 burst enable to F410 serial receive. At a \SI{100}{\mega\hertz} TIM1 clock, ARR \(=50\), CCR1 \(=25\), and DTG \(=4\) give the nominal \SI{1}{\mega\hertz} carrier and \SI{40}{\nano\second} programmed dead time through the complementary-output hardware \cite{ststm32f410ds,ststm32f410rm}. Driver-input and switch-node timing remain to be measured on the assembled V2.
++On V2, the complementary carrier uses PA8/TIM1\_CH1 and PB13/TIM1\_CH1N, with burst enable moved to PA11. This releases PA9/PA10 for UART TX/RX; PA10 therefore changes from G071 burst enable to F410 serial receive. The complementary outputs share the TIM1 compare signal and hardware dead-time generator \cite{ststm32f410ds,ststm32f410rm}. The earlier port used center-aligned counting; the adjustable implementation uses edge-aligned counting with equal reference pulse widths. The default remains a \SI{1}{\mega\hertz} carrier with \SI{40}{\nano\second} programmed dead time.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -38,16 +38,46 @@
+ 
+ Each save appends a sequence-numbered, checksummed entry and verifies it by reading it back. Occupied entries are skipped after interrupted programming. Successive saves use different entries across the sector. The sector is erased when the journal wraps. An interruption during erase can still remove the saved configuration. Defaults then load with output OFF if no valid entry remains. Writes wait until output, startup, and autotuning are inactive so flash work does not interrupt live conversion.
+ 
++Timing and calibration are saved together in a 488-byte record, giving 33 entries in the reserved sector. Existing settings from the earlier format load with default carrier timing and are not rewritten at startup. Older firmware cannot read the new record format.
++
+ The saved boot preference was kept separate from runtime \texttt{ON}/\texttt{OFF}. To keep calibration during a firmware update, the programming method must preserve the settings sector. OFF inhibits transfer; it does not remove charge already stored in the converter.
+ 
+ \subsection{Browser Commands Without Blocking Control}
+ 
+ An opt-in browser protocol was added to the V2 firmware over the existing \SI{115200}{baud} UART. \texttt{WEB HELLO} selects JSON replies without enabling output. Command IDs and acknowledgments show whether the MCU accepted a change. On the MCU, input is limited to 96 characters, the transmit queue has four fixed-size frames, and each loop pass sends at most 16 bytes when the UART has space. Periodic samples are dropped when the queue is congested so old telemetry does not delay the controller.
+ 
+-Browser \texttt{ON} also requires an active communication lease. The host renews it with \texttt{PING}. Expiry requests enable inhibition before an event is formatted. This check runs in the background loop and depends on execution continuing. Blocking autotuning is excluded from the web interface, and a browser settings save requires OFF. Pending RAM changes and completed flash saves are reported separately.
++Browser \texttt{ON} also requires an active communication lease. The host renews it with \texttt{PING}. Expiry requests enable inhibition before an event is formatted. This check runs in the background loop and depends on execution continuing. Calibration routines service UART commands and cancellation checks during their waits, allowing OFF and lease expiry to interrupt a run. A browser settings save requires OFF. Pending RAM changes and completed flash saves are reported separately.
+ 
+ The browser reports \texttt{vsec} as bulk voltage before the MPQ4242, \texttt{current} as the primary half-bridge-current estimate derived from input PA2, and \texttt{power} as their selected diagnostic voltage--current product. External output measurements are still needed for performance calculations. Displayed duty comes from scheduler state and needs a scope check when assessing actual enable timing.
+ 
+-\subsection{V2 Software Checks and Remaining Tests}
++\subsection{Automatic Calibration and Reference Loads}
+ 
+-Further powered tests require the fitted parts, sensing gains, and switching timing to be checked, followed by matched electrical and thermal tests toward \SI{100}{\watt}. The reported V2 \SI{85}{\watt} point and approximately \SI{80}{\watt} baseline dataset come from different tests (Section~\ref{sec:hw-v2}).
++Browser calibration was added for startup precharge, no-load operation, and three reference loads. For no-load and reference-load tuning, the existing coarse and fine search is used to find a burst duty from the measured secondary-bulk voltage. The burst-enable frequency remains fixed during this search. This makes the earlier terminal routines accessible from the setup interface without adding a separate control algorithm.
++
++Each reference load is connected by the operator, and its resistance is entered in the setup page. The resistance entry describes the connected load; it does not set an electronic load or switch a resistor. Selecting a calibrated slot applies its stored profile. No-load duty, scan step and interval, and startup precharge settings can also be read and adjusted with output OFF. Current-zero capture corrects the current-sense offset. Primary-voltage-reference capture sets the line-feed-forward reference.
++
++A calibration run starts with output OFF and leaves it OFF after completion. OFF, communication-lease expiry, a fault, or the \SI{180}{\second} timeout cancels the run; interrupted or failed runs restore the previous settings. Successful browser changes remain in RAM until explicitly saved with the output disabled.
++
++\subsection{Adjustable Carrier Frequency and Dead Time}
++\label{sec:ctrl-v2-adjustable-timing}
++
++Carrier frequency and dead time were made adjustable so that switching could be set relative to the modified resonant tank and the commutation interval could be varied without rebuilding the firmware. Both values are applied together through \texttt{TIMING} while output is OFF and startup and calibration are inactive. Burst duty continues to regulate the secondary bulk voltage. The separate \texttt{FEN} setting controls the burst-enable frequency; the tank's natural resonant frequency is set by its inductance and capacitance.
++
++The command accepts carrier requests from \SI{500}{\kilo\hertz} to \SI{2}{\mega\hertz} and dead-time requests from \SI{20}{\nano\second} to \SI{200}{\nano\second}. These are timer-setting limits; the usable converter range must be established from switching and thermal measurements. TIM1 uses an even period count for balanced reference pulses, and dead time is rounded up to a timer count. At a \SI{100}{\mega\hertz} timer clock, period increments are \SI{20}{\nano\second} and dead-time increments are \SI{10}{\nano\second}. Frequency steps therefore depend on the selected period.
++
++For timer clock \(f_t\), period count \(N_p\), and dead-time count \(N_d\), the applied settings are
++\begin{equation}
++ f_s=\frac{f_t}{N_p},\qquad t_d=\frac{N_d}{f_t},\qquad 4N_d<N_p.
++ \label{eq:ctrl-v2-carrier-timing}
++\end{equation}
++The last condition rejects pairs that leave insufficient pulse time. A request of \SI{950}{\kilo\hertz} and \SI{53}{\nano\second}, for example, gives \(N_p=106\) and \(N_d=6\): approximately \SI{943.396}{\kilo\hertz} and \SI{60}{\nano\second}. The browser displays the applied values from MCU readback, and burst scheduling uses the actual clock and period counts.
++
++Changing either applied timer count clears the three learned load profiles and tuning results. Reference resistances, sensor calibration, and applied duty settings are retained. Calibration must then be repeated before using learned profiles at the new timing. Browser timing changes require an explicit save while OFF; the terminal retains its existing automatic save after a \SI{1.5}{\second} quiet interval while OFF, unless a configuration import is active.
++
++The programmed interval is the separation between timer output commands. Driver delay and switch-node commutation determine the effective transistor dead time, which must be measured on the assembled board. Automatic calibration does not search carrier frequency or establish zero-voltage switching.
++
++\subsection{Software Verification}
++
++The V2 firmware, protocol tests, settings-storage tests, and browser tests were built and checked. These checks cover timer rounding and pair rejection, application with output disabled, learned-profile clearing, calibration cancellation, and saved-settings recovery after interrupted writes. The complete source and build results are included in Appendices~\ref{app:firmware} and \ref{app:full-embedded-source}.
++
++Powered validation of the adjustable implementation remains to be completed. The V1.0 measurements and later V2 thermal observations in Chapter~\ref{ch:results} describe the earlier test configurations. Switching waveforms and matched electrical and thermal measurements are needed to assess the new timing controls on the converter.
+--- before/Chapters/08_Control_Firmware/chapter.tex
++++ after/Chapters/08_Control_Firmware/chapter.tex
+@@ -11,7 +11,9 @@
+ Control development progressed from manual switching commands through
+ blocking voltage feedback to continuous ADC acquisition by direct memory
+ access (DMA). The resulting voltage-control baseline was used for the
+-main final test series and retained in the integrated V2 port.
++main final test series and retained in the integrated V2 port. The later V2
++firmware adds calibration and timing controls without changing the bulk-voltage
++control law. These additions are described in Section~\ref{sec:ctrl-pwr2-port}.
+ 
+ Table~\ref{tab:ctrl-software-identities} lists the two firmware programs
+ included with this thesis. The \texttt{PWR} labels are software versions;
+@@ -27,7 +29,7 @@
+ Firmware & Version & Use\\
+ \midrule
+ Baseline voltage-control firmware & PWR-1.9.20 & Used in the main V1.0 test series; individual run versions are listed with the results\\
+-Archived V2 firmware & PWR-2.0.1 & MCU port with browser commands and logging.\\
++V2 controller firmware & PWR-2.0.4 & Browser calibration, reference-load settings, and adjustable carrier frequency and dead time on V2.\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/11_Discussion/05_Magnetics_Integration.tex
++++ after/Chapters/11_Discussion/05_Magnetics_Integration.tex
+@@ -1,35 +1,39 @@
+-\section{Planar-Magnetics Integration}
+-\label{sec:disc-magnetics}
+-
+-The supplied planar inductor and transformer were integrated into the
+-converter, including terminal assignment, polarity, mounting, and return
+-paths. Their proximity to switching nodes also affects parasitics and
+-sensing; the electromagnetic design was inherited.
+-
+-The inherited measurements in Table~\ref{tab:mag-inherited-measurements}
+-are approximately \SI{33}{\micro\henry} for the inductors,
+-\SI{16.5}{\micro\henry} transformer leakage,
+-\SIrange{140}{151}{\micro\henry} magnetizing inductance, and a turns
+-ratio near 8:1 in this thesis's convention. The installed equivalent
+-circuit must also account for the final A/B assignment and added series
+-resonant inductors.
+-
+-At \SI{1}{\mega\hertz}, leakage, winding capacitance, and connection
+-inductance affect resonance and commutation, while winding proximity and
+-interconnect resistance affect loss. Power transfer was demonstrated,
+-but transformer, pump-inductor, and added-inductor losses were not
+-separated. Resonant current, installed impedances, and component
+-temperatures are needed to distinguish magnetic-design limitations from
+-mounting and interconnection losses.
+-
+-Secondary-winding heating was observed, with the highest-power region
+-around \SIrange{3.3}{3.6}{\ampere} at the secondary output. The transformer
+-is therefore a candidate limitation. Winding resistance, current
+-distribution, leakage, and output headroom have not been measured together,
+-so the cause of the limited power increase remains unresolved.
+-
+-V3 retained these magnetic constraints; replacement planar magnetics were
+-not installed within the available time. Transformer optimization may
+-support the \SI{100}{\watt} objective. The longer-term
+-\SI{240}{\watt} EPR goal additionally requires review of the pump,
+-switches, tank, rectifiers, control, cooling, and USB-PD output stage.
++\section{Planar-Magnetics Integration}
++\label{sec:disc-magnetics}
++
++The supplied planar inductor and transformer were integrated into the
++converter, including terminal assignment, polarity, mounting, and return
++paths. Their proximity to switching nodes also affects parasitics and
++sensing; the electromagnetic design was inherited.
++
++The inherited measurements in Table~\ref{tab:mag-inherited-measurements}
++are approximately \SI{33}{\micro\henry} for the inductors,
++\SI{16.5}{\micro\henry} transformer leakage,
++\SIrange{140}{151}{\micro\henry} magnetizing inductance, and a turns
++ratio near 8:1 in this thesis's convention. The installed equivalent
++circuit must also account for the final A/B assignment and added series
++resonant inductors.
++
++At \SI{1}{\mega\hertz}, leakage, winding capacitance, and connection
++inductance affect resonance and commutation, while winding proximity and
++interconnect resistance affect loss. Power transfer was demonstrated,
++but transformer, pump-inductor, and added-inductor losses were not
++separated. Resonant current, installed impedances, and component
++temperatures are needed to distinguish magnetic-design limitations from
++mounting and interconnection losses.
++
++Secondary-winding heating was observed, with the highest-power region
++around \SIrange{3.3}{3.6}{\ampere} at the secondary output. The transformer
++is therefore a candidate limitation. Winding resistance, current
++distribution, leakage, and output headroom have not been measured together,
++so the cause of the limited power increase remains unresolved.
++
++V3 retained these magnetic constraints; replacement planar magnetics were
++not installed within the available time. Transformer optimization may
++support the \SI{100}{\watt} objective.
++
++Feedback on the APEC digest raised the question of whether the converter
++could support higher loads, including \SI{240}{\watt} USB-PD Extended
++Power Range (EPR). Assessing higher-power operation first requires the
++secondary-winding heating and limited power increase in the tested
++high-load range to be resolved.
+--- before/Chapters/12_Conclusion/02_Research_Questions.tex
++++ after/Chapters/12_Conclusion/02_Research_Questions.tex
+@@ -1,50 +1,49 @@
+-\section{Answers to the Research Questions}
+-\label{sec:concl-rq}
+-
+-\paragraph{RQ1: Topology implementation.}
+-The inherited charge-pump branch, GaN half bridge, resonant path, supplied
+-magnetics, USB-C PD output stage, sensing, and digital control were integrated
+-in the tested V1.0 USB-C assembly. V1.1 is a corrected schematic revision
+-without a separately manufactured and tested board. V2 integrated the
+-MCU, GaN stage, sensing, auxiliaries, and USB-C circuit on a four-layer PCB.
+-It was operated with the leakage-only tank; its preliminary observations
+-are reported separately in \cref{sec:res-v2-testing}.
+-
+-\paragraph{RQ2: Control of loaded and unloaded operation.}
+-Fixed-carrier burst control regulates average transfer from secondary-
+-voltage feedback PA1, with half-bridge current sensing PA2 used for load
+-classification. Startup precharge provides limited excitation for the isolated feedback supply. Loaded
+-duty adjustment, no-load limits, and soft overvoltage holdoff manage demand
+-and load removal. Loaded, no-load, and load-removal behavior was captured on V1.0; timed startup captures remain unavailable. The control
+-law was retained in the V2 port with revised carrier, enable, ADC/DMA, and
+-UART assignments. Matched V2 transients, startup timing, and worst-case
+-excursions still require synchronized event records.
+-
+-\paragraph{RQ3: Measured performance.}
+-For V1.0 at \SI{20}{\volt}, matched measurements give
+-\SIrange{73.97}{79.89}{\watt}, including points at and above
+-\SI{75}{\watt}. Average VBUS remains within approximately
+-\SI{0.14}{\percent} of \SI{20}{\volt}, with logged ripple of
+-\SIrange{0.416}{0.452}{\volt}. Logged PF is 0.97--0.99 and current THD
+-is \SIrange{2.23}{3.98}{\percent}; initial efficiency estimates are
+-\SIrange{76.5}{77.1}{\percent}. These are operating-point results,
+-not a continuous thermal rating. The \SI{100}{\watt} objective and
+-\SI{65}{\watt} continuous minimum require defined-duration validation.
+-
+-\paragraph{RQ4: Planar-magnetics integration.}
+-The inherited electromagnetic design was integrated through terminal and
+-polarity assignment, resonant connections, isolation spacing, mechanical
+-support, and thermal arrangement. Secondary-winding heating motivated
+-transformer optimization, but no replacement magnetic set was installed.
+-
+-\paragraph{RQ5: Further development.}
+-V2 operation did not establish greater output capability than V1.
+-Secondary-winding heating, limited power increase around
+-\SIrange{3.3}{3.6}{\ampere} at the secondary output, and the later input
+-hotspot identify the next diagnostic tests. The transformer and suspected
+-single-via restriction remain candidate limitations. V3 provides an
+-estimated \SI{8}{\percent} net volume reduction by removing the USB-PD
+-section, requiring external hardware for equivalent USB-C function.
+-Replacement magnetics, readiness checks, and matched power/thermal tests
+-remain unfinished. The immediate objective is \SI{100}{\watt};
+-\SI{240}{\watt} EPR remains a longer-term goal.
++\section{Answers to the Research Questions}
++\label{sec:concl-rq}
++
++\paragraph{RQ1: Topology implementation.}
++The inherited charge-pump branch, GaN half bridge, resonant path, supplied
++magnetics, USB-C PD output stage, sensing, and digital control were integrated
++in the tested V1.0 USB-C assembly. V1.1 is a corrected schematic revision
++without a separately manufactured and tested board. V2 integrated the
++MCU, GaN stage, sensing, auxiliaries, and USB-C circuit on a four-layer PCB.
++It was operated with the leakage-only tank; its preliminary observations
++are reported separately in \cref{sec:res-v2-testing}.
++
++\paragraph{RQ2: Control of loaded and unloaded operation.}
++Fixed-carrier burst control regulates average transfer from secondary-
++voltage feedback PA1, with half-bridge current sensing PA2 used for load
++classification. Startup precharge provides limited excitation for the isolated feedback supply. Loaded
++duty adjustment, no-load limits, and soft overvoltage holdoff manage demand
++and load removal. Loaded, no-load, and load-removal behavior was captured on V1.0; timed startup captures remain unavailable. The control
++law was retained in the V2 port with revised carrier, enable, ADC/DMA, and
++UART assignments. Matched V2 transients, startup timing, and worst-case
++excursions still require synchronized event records.
++
++\paragraph{RQ3: Measured performance.}
++For V1.0 at \SI{20}{\volt}, matched measurements give
++\SIrange{73.97}{79.89}{\watt}, including points at and above
++\SI{75}{\watt}. Average VBUS remains within approximately
++\SI{0.14}{\percent} of \SI{20}{\volt}, with logged ripple of
++\SIrange{0.416}{0.452}{\volt}. Logged PF is 0.97--0.99 and current THD
++is \SIrange{2.23}{3.98}{\percent}; initial efficiency estimates are
++\SIrange{76.5}{77.1}{\percent}. These are operating-point results,
++not a continuous thermal rating. The \SI{100}{\watt} objective and
++\SI{65}{\watt} continuous minimum require defined-duration validation.
++
++\paragraph{RQ4: Planar-magnetics integration.}
++The inherited electromagnetic design was integrated through terminal and
++polarity assignment, resonant connections, isolation spacing, mechanical
++support, and thermal arrangement. Secondary-winding heating motivated
++transformer optimization, but no replacement magnetic set was installed.
++
++\paragraph{RQ5: Further development.}
++V2 operation did not establish greater output capability than V1.
++Secondary-winding heating, limited power increase around
++\SIrange{3.3}{3.6}{\ampere} at the secondary output, and the later input
++hotspot identify the next diagnostic tests. The transformer and suspected
++single-via restriction remain candidate limitations. V3 provides an
++estimated \SI{8}{\percent} net volume reduction by removing the USB-PD
++section, requiring external hardware for equivalent USB-C function.
++Replacement magnetics, readiness checks, and matched power/thermal tests
++remain unfinished. The objective is \SI{100}{\watt}.
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ after/Chapters/12_Conclusion/03_Contributions.tex
+@@ -1,32 +1,35 @@
+-\section{Original Contributions}
+-\label{sec:concl-contributions}
+-
+-The inherited charge-pump PFC principle and planar-magnetic design were
+-integrated into a USB-C power supply. The work covered
+-the offline input, charge pump, GaN stage, magnetic connections, output
+-interface, sensing, auxiliaries, and hardware rework during bring-up.
+-
+-The voltage-control firmware combined continuous DMA acquisition,
+-fixed-carrier burst scheduling, direct secondary-voltage regulation,
+-loaded duty adjustment, startup precharge, and separate no-load behavior.
+-The current-sense interpretation was corrected to match the installed
+-hardware.
+-
+-V2 integrated the MCU onto the converter board. Timer and ADC assignments
+-were adapted, and a flash settings journal, browser commands, and logging
+-were implemented. The four-layer circuit and layout are documented in
+-the schematic and PCB prints. Archived firmware and supporting software
+-are included with the thesis and have been checked in software.
+-Preliminary powered observations appear in \cref{sec:res-v2-testing};
+-the firmware version used on the bench was not recorded, and comparable
+-power and thermal-endurance tests are still needed.
+-
+-The prototype was evaluated for output settings, high-power operation,
+-input-current quality, initial efficiency, load removal, no-load behavior,
+-and surface temperature. Numerical tables, reconstructed plots, and
+-schematics document the results and circuit configurations.
+-
+-A reduced V3 edge-card layout retained secondary rectification while
+-removing the USB-PD section. It provides a design-level volume reduction
+-and a basis for magnetic and thermal development, without establishing
+-improved continuous power or a validated replacement transformer.
++\section{Original Contributions}
++\label{sec:concl-contributions}
++
++The inherited charge-pump PFC principle and planar-magnetic design were
++integrated into a USB-C power supply. The work covered
++the offline input, charge pump, GaN stage, magnetic connections, output
++interface, sensing, auxiliaries, and hardware rework during bring-up.
++
++The voltage-control firmware combined continuous DMA acquisition,
++fixed-carrier burst scheduling, direct secondary-voltage regulation,
++loaded duty adjustment, startup precharge, and separate no-load behavior.
++The current-sense interpretation was corrected to match the installed
++hardware.
++
++V2 integrated the MCU onto the converter board. Timer and ADC assignments
++were adapted, and a flash settings journal, browser commands, and logging
++were implemented. Browser calibration and editable reference-load settings
++were then added to repeat the duty search for connected test loads. Carrier
++frequency and dead time can be set together with output disabled, allowing
++switching conditions to be varied without rebuilding the firmware. The four-layer circuit and layout are documented in
++the schematic and PCB prints. Archived firmware and supporting software
++are included with the thesis and have been checked in software.
++Preliminary powered observations appear in \cref{sec:res-v2-testing};
++powered tests of the later adjustable firmware and comparable power and
++thermal-endurance measurements are still needed.
++
++The prototype was evaluated for output settings, high-power operation,
++input-current quality, initial efficiency, load removal, no-load behavior,
++and surface temperature. Numerical tables, reconstructed plots, and
++schematics document the results and circuit configurations.
++
++A reduced V3 edge-card layout retained secondary rectification while
++removing the USB-PD section. It provides a design-level volume reduction
++and a basis for magnetic and thermal development, without establishing
++improved continuous power or a validated replacement transformer.
+--- before/Chapters/12_Conclusion/04_Future_Work.tex
++++ after/Chapters/12_Conclusion/04_Future_Work.tex
+@@ -1,42 +1,37 @@
+-\section{Future Work}
+-\label{sec:concl-future}
+-
+-The immediate priority is to separate secondary magnetic loss from
+-input-path heating through matched current, temperature, voltage-drop,
+-and power measurements. The suspected single-via restriction should be
+-verified before additional copper or diode relocation is selected.
+-Commutation waveforms are also required to establish ZVS.
+-
+-The approximately \SI{85}{\watt} V2 result needs to be repeated using the
+-original hardware and settings \cite{projectOctoberPlan}.
+-The \SI{79.8928}{\watt} result belongs to the older assembly.
+-Synchronized input, secondary-bus, connector, and auxiliary power,
+-with component temperature histories, should establish loss distribution
+-and sustained output. Continuous validation should first establish the
+-\SI{65}{\watt} minimum under declared electrical and thermal conditions.
+-
+-The diagnostic tests in Section~\ref{sec:disc-plan-gap} should guide
+-individual changes and matched retests toward \SI{100}{\watt}
+-continuous. Any limiting result should report repeatable output, duration,
+-and measured stop condition. Attachment, detachment, overload, and fault
+-tests require synchronized secondary voltage, VBUS, board-specific enable,
+-and firmware state against declared bands and recovery times.
+-
+-An independent secondary shutdown or discharge path should be developed
+-alongside a model of installed magnetics, switching parasitics, packet
+-energy, and commutation. This would support evaluation of scheduling,
+-capacitance, layout, and cooling changes.
+-
+-V3 requires completion around the selected magnetics and external output
+-stage, followed by review, assembly, and gradual bring-up. Comparison must
+-use equivalent functions, volume definitions, supported power, cooling,
+-and electrical conditions. Estimated size reduction alone establishes
+-neither power-density nor thermal improvement.
+-
+-USB-PD fixed-PDO and PPS protocol tests, independent safety assessment,
+-and EMC verification are also required before assigning a supply rating.
+-
+-The longer-term \SI{240}{\watt} USB-PD EPR goal requires adequate pump
+-charge transfer, switch and capacitor stress margins, rectification,
+-magnetic current capability, control range, isolation, cooling, and output
+-hardware. EPR delivery has not been demonstrated.
++\section{Future Work}
++\label{sec:concl-future}
++
++The immediate priority is to separate secondary magnetic loss from
++input-path heating through matched current, temperature, voltage-drop,
++and power measurements. The suspected single-via restriction should be
++verified before additional copper or diode relocation is selected.
++Commutation waveforms are also required to establish ZVS.
++
++The approximately \SI{85}{\watt} V2 result needs to be repeated using the
++original hardware and settings \cite{projectOctoberPlan}.
++The \SI{79.8928}{\watt} result belongs to the older assembly.
++Synchronized input, secondary-bus, connector, and auxiliary power,
++with component temperature histories, should establish loss distribution
++and sustained output. Continuous validation should first establish the
++\SI{65}{\watt} minimum under declared electrical and thermal conditions.
++
++The diagnostic tests in Section~\ref{sec:disc-plan-gap} should guide
++individual changes and matched retests toward \SI{100}{\watt}
++continuous. Any limiting result should report repeatable output, duration,
++and measured stop condition. Attachment, detachment, overload, and fault
++tests require synchronized secondary voltage, VBUS, board-specific enable,
++and firmware state against declared bands and recovery times.
++
++An independent secondary shutdown or discharge path should be developed
++alongside a model of installed magnetics, switching parasitics, packet
++energy, and commutation. This would support evaluation of scheduling,
++capacitance, layout, and cooling changes.
++
++V3 requires completion around the selected magnetics and external output
++stage, followed by review, assembly, and gradual bring-up. Comparison must
++use equivalent functions, volume definitions, supported power, cooling,
++and electrical conditions. Estimated size reduction alone establishes
++neither power-density nor thermal improvement.
++
++USB-PD fixed-PDO and PPS protocol tests, independent safety assessment,
++and EMC verification are also required before assigning a supply rating.
+--- before/Code/README.md
++++ after/Code/README.md
+@@ -1,11 +1,7 @@
+-# Code folder
++# Thesis firmware and software
+ 
+-Store versioned exports or links for:
++The current V2 snapshot is `PWR_2_0_4`: firmware, linker/build tools, protocol and storage tests, browser runtime and tests, fonts, and supporting documentation. The F410 build identifies as PWR-2.0.4; the G071 build remains PWR-2.0.3 with fixed carrier timing. `source_manifest.json` lists the exact source hashes and `software_verification.json` records software checks.
+ 
+-- Firmware V0 open loop
+-- Firmware V1 blocking-ADC closed loop
+-- Firmware V2 DMA-based closed loop
+-- LTspice models and netlists
+-- MATLAB/Python post-processing scripts
++`PWR_2_0_1` is retained as a historical snapshot, including its original manifest and software verification. The separate `thesi_power_control_PWR_1_9_20.ino` remains the measured V1.0 baseline. Earlier test results are not relabelled as current-firmware tests.
+ 
+-Do not place inherited COMSOL/MATLAB magnetics code here as original work. Put it in a clearly marked `Inherited` folder with provenance and licence information if it must be archived.
++The new snapshot adds browser calibration, editable reference-load/setup settings and output-OFF carrier/dead-time adjustment. The physical test load is connected separately. Powered verification remains necessary; no board is flashed by the browser application.
+--- before/Code/software_verification.json
++++ after/Code/software_verification.json
+@@ -1,38 +1,45 @@
+-{
+-  "date": "2026-10-19",
+-  "firmware": "PWR-2.0.1",
+-  "source_sha256": "132c60aeeaed5572f294334059a61f6100640861e08b4e0fd2d2a6b4106314b7",
+-  "f410_build": {
+-    "result": "passed",
+-    "program_bytes": 85184,
+-    "program_limit_bytes": 98304,
+-    "static_ram_bytes": 6820,
+-    "ram_bytes": 32768
+-  },
+-  "g071_build": {
+-    "result": "passed",
+-    "program_bytes": 127340,
+-    "program_limit_bytes": 131072,
+-    "static_ram_bytes": 9524,
+-    "ram_bytes": 32768
+-  },
+-  "f410_hex": {
+-    "result": "passed",
+-    "programmed_bytes": 85668,
+-    "valid_vectors": true,
+-    "reserved_settings_sector_excluded": true
+-  },
+-  "firmware_protocol_host_tests": {
+-    "result": "passed",
+-    "json_frames_checked": 46,
+-    "hardware": "mocked"
+-  },
+-  "node_tests": {
+-    "result": "passed",
+-    "passed": 38,
+-    "failed": 0
+-  },
+-  "powered_converter_test_performed": false,
+-  "firmware_flashing_performed": false,
+-  "limits": "Software checks do not verify board population, physical UART, sensing calibration, flash persistence, transistor timing, electrical protection, or output power."
+-}+{
++  "firmware": "PWR-2.0.4",
++  "g071_target_firmware": "PWR-2.0.3",
++  "source_sha256": "fa9d842ce7787d37501701379a66b97807969d3a9064f8d03fa372b3842b30ad",
++  "f410_build": {
++    "result": "passed",
++    "program_bytes": 90268,
++    "program_limit_bytes": 98304,
++    "static_ram_bytes": 6868,
++    "ram_bytes": 32768
++  },
++  "g071_build": {
++    "result": "passed",
++    "program_bytes": 130424,
++    "program_limit_bytes": 131072,
++    "static_ram_bytes": 9544,
++    "ram_bytes": 32768
++  },
++  "f410_hex": {
++    "result": "passed",
++    "programmed_bytes": 90752,
++    "valid_vectors": true,
++    "reserved_settings_sector_excluded": true
++  },
++  "firmware_protocol_host_tests": {
++    "result": "passed",
++    "json_frames_checked": 131,
++    "hardware": "mocked"
++  },
++  "storage_tests": {
++    "result": "passed",
++    "interrupted_append_boundaries": 122,
++    "hardware": "mocked"
++  },
++  "node_tests": {
++    "result": "passed",
++    "passed": 76,
++    "failed": 0
++  },
++  "browser_build": "passed",
++  "powered_converter_test_performed": false,
++  "firmware_flashing_performed": false,
++  "evidence": "/workspace/tooling/thesis-firmware-204",
++  "limits": "Physical sensing, flash writes, gate/enable waveforms, stop latency and powered performance require bench tests."
++}
+--- before/Code/source_manifest.json
++++ after/Code/source_manifest.json
+@@ -1,262 +1,398 @@
+-{
+-  "captured_utc": "2026-10-19T00:49:06.978497+00:00",
+-  "firmware": "PWR-2.0.1",
+-  "files": [
+-    {
+-      "source": "thesi_power_control.ino",
+-      "copy": "Code/PWR_2_0_1/thesi_power_control.ino",
+-      "bytes": 186865,
+-      "lines": 4848,
+-      "sha256": "132c60aeeaed5572f294334059a61f6100640861e08b4e0fd2d2a6b4106314b7",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "firmware/build.ps1",
+-      "copy": "Code/PWR_2_0_1/firmware/build.ps1",
+-      "bytes": 1926,
+-      "lines": 42,
+-      "sha256": "806e87f8e3638c27ac91b297a99817ff18ffb41a3f52077b4f224dcb30ce6691",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "firmware/stm32f410.ld",
+-      "copy": "Code/PWR_2_0_1/firmware/stm32f410.ld",
+-      "bytes": 2489,
+-      "lines": 121,
+-      "sha256": "400597cca105a2037c828658e55252bbccfd4285efbe65dece11d364e28299aa",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "firmware/verify_f410_hex.py",
+-      "copy": "Code/PWR_2_0_1/firmware/verify_f410_hex.py",
+-      "bytes": 3062,
+-      "lines": 76,
+-      "sha256": "bc4f5c74812ed8ba478da0b1410cc7480f36ef26184e40307af50a5987ce7f75",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "firmware/test_web_protocol.py",
+-      "copy": "Code/PWR_2_0_1/firmware/test_web_protocol.py",
+-      "bytes": 10845,
+-      "lines": 233,
+-      "sha256": "424e0682b49d6177bde643f02ebdb48f59274e4466fcdb392f2da1f085be7eac",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/app.js",
+-      "copy": "Code/PWR_2_0_1/web/app.js",
+-      "bytes": 33394,
+-      "lines": 617,
+-      "sha256": "044954a48312711abb2cf0e08de6c80a08850e2637c3df87f3fff92a28929ae2",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/build.mjs",
+-      "copy": "Code/PWR_2_0_1/web/build.mjs",
+-      "bytes": 461,
+-      "lines": 5,
+-      "sha256": "cc652e66a87631a045502caf01a1a668d18ab4c5ee09281cf06bff46b6931b37",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/calculator.css",
+-      "copy": "Code/PWR_2_0_1/web/calculator.css",
+-      "bytes": 10809,
+-      "lines": 90,
+-      "sha256": "4c9051ffdaaea49a56c9545da53924a0d5da22654be864920a3dc24bff20126b",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/calculator.html",
+-      "copy": "Code/PWR_2_0_1/web/calculator.html",
+-      "bytes": 12070,
+-      "lines": 105,
+-      "sha256": "cd4caf9a60402fc039040551cacc78ffba159d8b922bbdf858f248b914375290",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/index.html",
+-      "copy": "Code/PWR_2_0_1/web/index.html",
+-      "bytes": 13176,
+-      "lines": 99,
+-      "sha256": "2f4b587117d3478665186552184b637077d1451098fbdb5e3d0f89a04c5dbb44",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/protocol.js",
+-      "copy": "Code/PWR_2_0_1/web/protocol.js",
+-      "bytes": 2385,
+-      "lines": 44,
+-      "sha256": "0254f0e9fb34d5892bd9cacca1f392430cd222f4beb4e46544e489395c85b0fb",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/resonance.js",
+-      "copy": "Code/PWR_2_0_1/web/resonance.js",
+-      "bytes": 11781,
+-      "lines": 204,
+-      "sha256": "fbdbcb1e97a6155cb7ba00101f7408f8697b6848675717d381a7d8fcb7597691",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/serial.js",
+-      "copy": "Code/PWR_2_0_1/web/serial.js",
+-      "bytes": 11960,
+-      "lines": 157,
+-      "sha256": "a27971d5452b39538bb1799faa74b4480aadef460d0f4a38f1a25247b5c80d67",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/server.mjs",
+-      "copy": "Code/PWR_2_0_1/web/server.mjs",
+-      "bytes": 1091,
+-      "lines": 15,
+-      "sha256": "dbfb0cfa99592d75442cf4ba50785c39bc0a88d351f9a04bce12773fc6fb4d82",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/storage.js",
+-      "copy": "Code/PWR_2_0_1/web/storage.js",
+-      "bytes": 3019,
+-      "lines": 43,
+-      "sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/styles.css",
+-      "copy": "Code/PWR_2_0_1/web/styles.css",
+-      "bytes": 28506,
+-      "lines": 354,
+-      "sha256": "5d648d261e47f2eef2c744a9a10aa4d93d360fe4d4b0b094def894c8e5b4e822",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/package.json",
+-      "copy": "Code/PWR_2_0_1/web/package.json",
+-      "bytes": 251,
+-      "lines": 12,
+-      "sha256": "f08d5f4d0a4aba3aa7f503756ea2b8b1e857970b493341614c49556f01079cb6",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/vercel.json",
+-      "copy": "Code/PWR_2_0_1/web/vercel.json",
+-      "bytes": 642,
+-      "lines": 16,
+-      "sha256": "9927baba1ec548c86f6bafaef0577d127368be5d7b0aafa97f9883fa652c40f9",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/tests/protocol.test.mjs",
+-      "copy": "Code/PWR_2_0_1/web/tests/protocol.test.mjs",
+-      "bytes": 3102,
+-      "lines": 45,
+-      "sha256": "a9bfd90ecef436ecf4a1c0b8f3858bdfc96cbbb381d55e195b886b48d4325401",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/tests/resonance.test.mjs",
+-      "copy": "Code/PWR_2_0_1/web/tests/resonance.test.mjs",
+-      "bytes": 9875,
+-      "lines": 158,
+-      "sha256": "5e019e3cf5acc3f343c494dc4d62bc44b63a9fe44f94219b243b14d24f38f289",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/tests/serial.test.mjs",
+-      "copy": "Code/PWR_2_0_1/web/tests/serial.test.mjs",
+-      "bytes": 10580,
+-      "lines": 160,
+-      "sha256": "2cc0f59b469c39791f531af101eba2aa566ca2bb9f2d22caebbcbccb215a2de1",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "web/tests/storage.test.mjs",
+-      "copy": "Code/PWR_2_0_1/web/tests/storage.test.mjs",
+-      "bytes": 3109,
+-      "lines": 51,
+-      "sha256": "5d1b9470ffd907d6a933fa456e02093a7651d44902d7de129d371f7f18ab7cf3",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "docs/firmware-flow-distilled.md",
+-      "copy": "Code/PWR_2_0_1/docs/firmware-flow-distilled.md",
+-      "bytes": 1648,
+-      "lines": 37,
+-      "sha256": "b515e507c7dd2d1c37e62ce15b371f7f6cb9534ebc9a5d2a2381f629e0d72971",
+-      "kind": "documentation"
+-    },
+-    {
+-      "source": "docs/firmware-flow.md",
+-      "copy": "Code/PWR_2_0_1/docs/firmware-flow.md",
+-      "bytes": 6363,
+-      "lines": 122,
+-      "sha256": "82216c2e30f2238f7c7c7a2274a89fbb6e7b51cc3c0985bfb5990af46a5cf93b",
+-      "kind": "documentation"
+-    },
+-    {
+-      "source": "docs/power-control.md",
+-      "copy": "Code/PWR_2_0_1/docs/power-control.md",
+-      "bytes": 25541,
+-      "lines": 360,
+-      "sha256": "02c85aa57dd0856e5d8ab4d66f2e66f832781bb6d06a8c344c84dd697f4b6d67",
+-      "kind": "documentation"
+-    },
+-    {
+-      "source": "docs/README.md",
+-      "copy": "Code/PWR_2_0_1/docs/README.md",
+-      "bytes": 875,
+-      "lines": 12,
+-      "sha256": "a159fdd984de794167d56bd3dce8e3a38ce9a484ca6ff2680b66c3536a51225e",
+-      "kind": "documentation"
+-    },
+-    {
+-      "source": "docs/stm32f410-port.md",
+-      "copy": "Code/PWR_2_0_1/docs/stm32f410-port.md",
+-      "bytes": 7852,
+-      "lines": 184,
+-      "sha256": "33057ee8d9658ecb32e8d5a921092a0d971152366eeda5d1ab552353a89ebc6f",
+-      "kind": "documentation"
+-    },
+-    {
+-      "source": "docs/uart-commands.md",
+-      "copy": "Code/PWR_2_0_1/docs/uart-commands.md",
+-      "bytes": 5485,
+-      "lines": 130,
+-      "sha256": "40c416128d0f347ca6de734f95c450bd7661f63b63f27d03ded681472eed0a64",
+-      "kind": "documentation"
+-    },
+-    {
+-      "source": "docs/web-protocol.md",
+-      "copy": "Code/PWR_2_0_1/docs/web-protocol.md",
+-      "bytes": 10222,
+-      "lines": 186,
+-      "sha256": "aec6c801f9432c96741682f94a647271a8e7072cea5ebfe6ba3a9aa6da2de867",
+-      "kind": "documentation"
+-    },
+-    {
+-      "source": "Code/thesi_power_control_PWR_1_9_20.ino",
+-      "copy": "Code/thesi_power_control_PWR_1_9_20.ino",
+-      "bytes": 161712,
+-      "lines": 4207,
+-      "sha256": "39c2769a4a597e9e70cc0a8ee11dbc221aab084e2eb082b5b60e41b28f2de70a",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "Data/analysis/rebuild_results.py",
+-      "copy": "Data/analysis/rebuild_results.py",
+-      "bytes": 30723,
+-      "lines": 335,
+-      "sha256": "9ba727aa340832f6d9aea7e998b2b17f82c799bbfbcf1c75ecc0b3b8f965e076",
+-      "kind": "source"
+-    },
+-    {
+-      "source": "Data/analysis/inspect_measurements.py",
+-      "copy": "Data/analysis/inspect_measurements.py",
+-      "bytes": 2325,
+-      "lines": 47,
+-      "sha256": "9832429c1d17e5252f36ec19542fd7b782e685d43c9be4c5db2b294bde38bfed",
+-      "kind": "source"
+-    }
+-  ]
+-}+{
++  "firmware": "PWR-2.0.4 (F410); PWR-2.0.3 (G071 target)",
++  "historical_manifest": "Code/PWR_2_0_1/source_manifest.json",
++  "files": [
++    {
++      "source": "README.md",
++      "copy": "Code/PWR_2_0_4/README.md",
++      "bytes": 7335,
++      "lines": 148,
++      "sha256": "caa82148b8569582d26606bf3fa5b12beb2c5947b24323106c97d16b315a1780",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/README.md",
++      "copy": "Code/PWR_2_0_4/docs/README.md",
++      "bytes": 1024,
++      "lines": 13,
++      "sha256": "f47c79792cffce0f8d29c0c46378012fafb2f2cf17bbcb606ad943b712df517a",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/calculator-evidence.md",
++      "copy": "Code/PWR_2_0_4/docs/calculator-evidence.md",
++      "bytes": 9237,
++      "lines": 164,
++      "sha256": "57e164ca7120f096146a53e580318c6066483d05dd67e007ef1a6e0bd4058120",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/firmware-flow-distilled.md",
++      "copy": "Code/PWR_2_0_4/docs/firmware-flow-distilled.md",
++      "bytes": 1648,
++      "lines": 37,
++      "sha256": "b515e507c7dd2d1c37e62ce15b371f7f6cb9534ebc9a5d2a2381f629e0d72971",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/firmware-flow-distilled.png",
++      "copy": "Code/PWR_2_0_4/docs/firmware-flow-distilled.png",
++      "bytes": 80105,
++      "lines": null,
++      "sha256": "9fb5bfce5a0d9ee2a42bb74652914849f004595cae97eba3063c95accc51cbe9",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/firmware-flow-distilled.svg",
++      "copy": "Code/PWR_2_0_4/docs/firmware-flow-distilled.svg",
++      "bytes": 4601,
++      "lines": 92,
++      "sha256": "ac39eff7db28ffebe910cbdf3cb293f75f8b2921c93d8183aed18c084868d178",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/firmware-flow.md",
++      "copy": "Code/PWR_2_0_4/docs/firmware-flow.md",
++      "bytes": 6363,
++      "lines": 122,
++      "sha256": "82216c2e30f2238f7c7c7a2274a89fbb6e7b51cc3c0985bfb5990af46a5cf93b",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/firmware-flow.png",
++      "copy": "Code/PWR_2_0_4/docs/firmware-flow.png",
++      "bytes": 685191,
++      "lines": null,
++      "sha256": "90e6f933c3bd3f7f9e43668fe0040855e806d5d5c760c41843c07d8ae3e83d12",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/power-control.md",
++      "copy": "Code/PWR_2_0_4/docs/power-control.md",
++      "bytes": 25541,
++      "lines": 360,
++      "sha256": "02c85aa57dd0856e5d8ab4d66f2e66f832781bb6d06a8c344c84dd697f4b6d67",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/stm32f410-port.md",
++      "copy": "Code/PWR_2_0_4/docs/stm32f410-port.md",
++      "bytes": 11670,
++      "lines": 244,
++      "sha256": "c601786ee5ae4669d0991ef35689359324b104f83f92e15c3dbe075d60310a37",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/uart-commands.md",
++      "copy": "Code/PWR_2_0_4/docs/uart-commands.md",
++      "bytes": 5485,
++      "lines": 130,
++      "sha256": "40c416128d0f347ca6de734f95c450bd7661f63b63f27d03ded681472eed0a64",
++      "kind": "reference"
++    },
++    {
++      "source": "docs/web-protocol.md",
++      "copy": "Code/PWR_2_0_4/docs/web-protocol.md",
++      "bytes": 21615,
++      "lines": 365,
++      "sha256": "224fb9157317a88d32ae988f7c2b547b92059ddfdd93f90d37f1ee62a6f9cff8",
++      "kind": "reference"
++    },
++    {
++      "source": "firmware/README.md",
++      "copy": "Code/PWR_2_0_4/firmware/README.md",
++      "bytes": 4545,
++      "lines": 71,
++      "sha256": "5392d954ff68fbe4f4be0e3d43bd91e2be179a44a46e7bbcca2c96fad4cb55d2",
++      "kind": "reference"
++    },
++    {
++      "source": "firmware/build.ps1",
++      "copy": "Code/PWR_2_0_4/firmware/build.ps1",
++      "bytes": 1926,
++      "lines": 42,
++      "sha256": "806e87f8e3638c27ac91b297a99817ff18ffb41a3f52077b4f224dcb30ce6691",
++      "kind": "source"
++    },
++    {
++      "source": "firmware/releases/pwr-2.0.1.md",
++      "copy": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.1.md",
++      "bytes": 4308,
++      "lines": 92,
++      "sha256": "3760e0683a66cc8cd71f5371428941ba64986224ed358d7141923d2836fe7ff8",
++      "kind": "reference"
++    },
++    {
++      "source": "firmware/releases/pwr-2.0.2.md",
++      "copy": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.2.md",
++      "bytes": 2276,
++      "lines": 39,
++      "sha256": "c8284fa5787336b148e9585e32cc8b98e754a21286cab44c7543c91b8c530426",
++      "kind": "reference"
++    },
++    {
++      "source": "firmware/releases/pwr-2.0.3.md",
++      "copy": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.3.md",
++      "bytes": 3555,
++      "lines": 57,
++      "sha256": "0254b36b1eb99ce086da525e95afa7fee03dc1c062381ba4fa496c2d73ada441",
++      "kind": "reference"
++    },
++    {
++      "source": "firmware/releases/pwr-2.0.4.md",
++      "copy": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.4.md",
++      "bytes": 6858,
++      "lines": 108,
++      "sha256": "225e3ce71f5428eff25b044b58643f8cd7447a6483c20056bcc4811ec3c08013",
++      "kind": "reference"
++    },
++    {
++      "source": "firmware/stm32f410.ld",
++      "copy": "Code/PWR_2_0_4/firmware/stm32f410.ld",
++      "bytes": 2489,
++      "lines": 121,
++      "sha256": "400597cca105a2037c828658e55252bbccfd4285efbe65dece11d364e28299aa",
++      "kind": "source"
++    },
++    {
++      "source": "firmware/test_carrier_storage.py",
++      "copy": "Code/PWR_2_0_4/firmware/test_carrier_storage.py",
++      "bytes": 15623,
++      "lines": 287,
++      "sha256": "6d1899125afe5b4e0424483fe802a903c93a80345b01f157c27d3e1a3c99de5b",
++      "kind": "source"
++    },
++    {
++      "source": "firmware/test_web_protocol.py",
++      "copy": "Code/PWR_2_0_4/firmware/test_web_protocol.py",
++      "bytes": 30724,
++      "lines": 517,
++      "sha256": "e647fb1987a5fe163b69c8c097be2e9f8b66ca5ee37d7bea98e8a5f3d619c1c7",
++      "kind": "source"
++    },
++    {
++      "source": "firmware/verify_f410_hex.py",
++      "copy": "Code/PWR_2_0_4/firmware/verify_f410_hex.py",
++      "bytes": 3062,
++      "lines": 76,
++      "sha256": "bc4f5c74812ed8ba478da0b1410cc7480f36ef26184e40307af50a5987ce7f75",
++      "kind": "source"
++    },
++    {
++      "source": "thesi_power_control.ino",
++      "copy": "Code/PWR_2_0_4/thesi_power_control.ino",
++      "bytes": 209211,
++      "lines": 5348,
++      "sha256": "fa9d842ce7787d37501701379a66b97807969d3a9064f8d03fa372b3842b30ad",
++      "kind": "source"
++    },
++    {
++      "source": "web/README.md",
++      "copy": "Code/PWR_2_0_4/web/README.md",
++      "bytes": 13397,
++      "lines": 228,
++      "sha256": "16e696b206940f44ef40ae2a8210c3bfac51abbf95685ebb74c26c3783126611",
++      "kind": "reference"
++    },
++    {
++      "source": "web/app.js",
++      "copy": "Code/PWR_2_0_4/web/app.js",
++      "bytes": 56872,
++      "lines": 900,
++      "sha256": "350f3e00c89499a175d951391a9b1fcebab24c8b69a2c7551792300ade88de7f",
++      "kind": "source"
++    },
++    {
++      "source": "web/build.mjs",
++      "copy": "Code/PWR_2_0_4/web/build.mjs",
++      "bytes": 804,
++      "lines": 19,
++      "sha256": "2dbd284c20aea608e9c98ee6f66023b5e14eb9bfba61562a147111855d1a0ec5",
++      "kind": "source"
++    },
++    {
++      "source": "web/calculator.css",
++      "copy": "Code/PWR_2_0_4/web/calculator.css",
++      "bytes": 24856,
++      "lines": 312,
++      "sha256": "9d2ff8f6d6233b0680b5d9f19f20f87d149f75968ee0c4c498d50a5a70b64dba",
++      "kind": "source"
++    },
++    {
++      "source": "web/calculator.html",
++      "copy": "Code/PWR_2_0_4/web/calculator.html",
++      "bytes": 21428,
++      "lines": 154,
++      "sha256": "c635876d4fdd9d607c59fd1cc6b7a1462496835a9a43d65247c2e27fb62e7489",
++      "kind": "source"
++    },
++    {
++      "source": "web/fonts/IBMPlexMono-Medium.ttf",
++      "copy": "Code/PWR_2_0_4/web/fonts/IBMPlexMono-Medium.ttf",
++      "bytes": 23816,
++      "lines": null,
++      "sha256": "5f460401d03995ca099270707e78662513b5be9d17060eb7c7fffadb4d4d334b",
++      "kind": "reference"
++    },
++    {
++      "source": "web/fonts/IBMPlexSans-Bold.ttf",
++      "copy": "Code/PWR_2_0_4/web/fonts/IBMPlexSans-Bold.ttf",
++      "bytes": 46160,
++      "lines": null,
++      "sha256": "5bb3030115b2a8d4494afd9c42c69a659ad80329694f8056d21ba6680612422b",
++      "kind": "reference"
++    },
++    {
++      "source": "web/fonts/IBMPlexSans-Regular.ttf",
++      "copy": "Code/PWR_2_0_4/web/fonts/IBMPlexSans-Regular.ttf",
++      "bytes": 46220,
++      "lines": null,
++      "sha256": "b7687a7b11bf4972c2807e6f1701bb55d1837e6957373e6610a81e3bbd4423a9",
++      "kind": "reference"
++    },
++    {
++      "source": "web/fonts/OFL-IBMPlex.txt",
++      "copy": "Code/PWR_2_0_4/web/fonts/OFL-IBMPlex.txt",
++      "bytes": 4456,
++      "lines": 93,
++      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
++      "kind": "reference"
++    },
++    {
++      "source": "web/index.html",
++      "copy": "Code/PWR_2_0_4/web/index.html",
++      "bytes": 27895,
++      "lines": 126,
++      "sha256": "863acd844cc9853b94bf7e62fa6fc2f5af62051d9046ec892937cf68cf66ed41",
++      "kind": "source"
++    },
++    {
++      "source": "web/package.json",
++      "copy": "Code/PWR_2_0_4/web/package.json",
++      "bytes": 251,
++      "lines": 12,
++      "sha256": "f08d5f4d0a4aba3aa7f503756ea2b8b1e857970b493341614c49556f01079cb6",
++      "kind": "source"
++    },
++    {
++      "source": "web/protocol.js",
++      "copy": "Code/PWR_2_0_4/web/protocol.js",
++      "bytes": 4673,
++      "lines": 70,
++      "sha256": "f3571eff542a3c368d5f66c7a0aefc236435edd9bba5bbb66914f19e91d92793",
++      "kind": "source"
++    },
++    {
++      "source": "web/resonance-presets.js",
++      "copy": "Code/PWR_2_0_4/web/resonance-presets.js",
++      "bytes": 8889,
++      "lines": 112,
++      "sha256": "4687c77c361bdbae0e707b822a3c23b5403aab9ea074a8270dcf583259ee35fa",
++      "kind": "source"
++    },
++    {
++      "source": "web/resonance-ui.js",
++      "copy": "Code/PWR_2_0_4/web/resonance-ui.js",
++      "bytes": 38475,
++      "lines": 606,
++      "sha256": "573c19e5338c9f3e4574b953bf81eae600458cca6eb982a3cc25dd79a08ac749",
++      "kind": "source"
++    },
++    {
++      "source": "web/resonance.js",
++      "copy": "Code/PWR_2_0_4/web/resonance.js",
++      "bytes": 15044,
++      "lines": 254,
++      "sha256": "8f31134163faede8358f82da861a1ad4391b8266d7bf1d882c92968cb5876d43",
++      "kind": "source"
++    },
++    {
++      "source": "web/serial.js",
++      "copy": "Code/PWR_2_0_4/web/serial.js",
++      "bytes": 21708,
++      "lines": 268,
++      "sha256": "fe5a36451b5112269cf21d5cf32a83f779d132e464db1dfa9fb0a51d0dc88bc6",
++      "kind": "source"
++    },
++    {
++      "source": "web/server.mjs",
++      "copy": "Code/PWR_2_0_4/web/server.mjs",
++      "bytes": 1345,
++      "lines": 15,
++      "sha256": "2e60f787432a3016e367da126b6062acd3fdf50679a6b569c05c55a5a61b87ba",
++      "kind": "source"
++    },
++    {
++      "source": "web/storage.js",
++      "copy": "Code/PWR_2_0_4/web/storage.js",
++      "bytes": 3661,
++      "lines": 57,
++      "sha256": "459fd3d10ed41f383fd8b16350fff407e1c710bafac4ff5016313a12bf12b51d",
++      "kind": "source"
++    },
++    {
++      "source": "web/styles.css",
++      "copy": "Code/PWR_2_0_4/web/styles.css",
++      "bytes": 38813,
++      "lines": 511,
++      "sha256": "5e2984e63ce6a50155bf22d62c41b387451cf19f070c86ccbc522e1e4df90645",
++      "kind": "source"
++    },
++    {
++      "source": "web/tests/protocol.test.mjs",
++      "copy": "Code/PWR_2_0_4/web/tests/protocol.test.mjs",
++      "bytes": 5857,
++      "lines": 76,
++      "sha256": "05847ad9313abbaf11bb06f025164fb29539adb9b202b934b2ad4e40db8c683e",
++      "kind": "source"
++    },
++    {
++      "source": "web/tests/resonance-presets.test.mjs",
++      "copy": "Code/PWR_2_0_4/web/tests/resonance-presets.test.mjs",
++      "bytes": 3055,
++      "lines": 55,
++      "sha256": "fe359a8cb01d59939d8211a996a70d336f3b21efc7a30be930051c169671f880",
++      "kind": "source"
++    },
++    {
++      "source": "web/tests/resonance.test.mjs",
++      "copy": "Code/PWR_2_0_4/web/tests/resonance.test.mjs",
++      "bytes": 16469,
++      "lines": 251,
++      "sha256": "3c009e5194d50671a16d71b53f45f98865eb9b5faf3af0c8a4e128597dc061a4",
++      "kind": "source"
++    },
++    {
++      "source": "web/tests/serial.test.mjs",
++      "copy": "Code/PWR_2_0_4/web/tests/serial.test.mjs",
++      "bytes": 30470,
++      "lines": 387,
++      "sha256": "efd932215e0f89dbeaacc6b766658a59a42686fe9eb83c912998d58d0a0d8818",
++      "kind": "source"
++    },
++    {
++      "source": "web/tests/storage.test.mjs",
++      "copy": "Code/PWR_2_0_4/web/tests/storage.test.mjs",
++      "bytes": 5973,
++      "lines": 86,
++      "sha256": "370fd90948daa83128696b915a4f5fe335f153349d8eeade889cb2efd854e085",
++      "kind": "source"
++    },
++    {
++      "source": "web/vercel.json",
++      "copy": "Code/PWR_2_0_4/web/vercel.json",
++      "bytes": 642,
++      "lines": 16,
++      "sha256": "9927baba1ec548c86f6bafaef0577d127368be5d7b0aafa97f9883fa652c40f9",
++      "kind": "source"
++    },
++    {
++      "source": "baseline PWR-1.9.20",
++      "copy": "Code/thesi_power_control_PWR_1_9_20.ino",
++      "bytes": 161712,
++      "lines": 4207,
++      "sha256": "39c2769a4a597e9e70cc0a8ee11dbc221aab084e2eb082b5b60e41b28f2de70a",
++      "kind": "source"
++    }
++  ]
++}
+--- before/Frontmatter/Abstract.tex
++++ after/Frontmatter/Abstract.tex
+@@ -1,12 +1,12 @@
+-\section*{Abstract}
+-\addcontentsline{toc}{section}{Abstract}
+-
+-A digitally controlled USB-C power supply was implemented using an inherited charge-pump power-factor-correction (PFC) resonant topology and planar magnetics. Burst control was developed for secondary-bulk regulation, startup sequencing, and energy limitation at no load and after load removal.
+-
+-The gallium-nitride (GaN) half bridge operated at a nominal \SI{1}{\mega\hertz}. Average power was controlled by enabling bursts of switching cycles. A circular direct memory access (DMA) buffer supplied the feedback samples. Startup precharge and separate duty limits for loaded and no-load operation were implemented. The USB-C PD stage provided the tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings.
+-
+-At \SI{240}{\volt}, \SI{50}{\hertz} input, matched measurements at the \SI{20}{\volt} setting yielded \SIrange{73.97}{79.89}{\watt} at the load. Average output voltage was \SIrange{19.973}{19.991}{\volt}, with \SIrange{0.416}{0.452}{\volt} recorded peak-to-peak ripple. Logged power factor was 0.97--0.99 and current total harmonic distortion was \SIrange{2.23}{3.98}{\percent}. Paired input/output readings gave preliminary efficiency estimates of \SIrange{76.5}{77.1}{\percent}, limited by acquisition timing and calibration uncertainty. The tests included no-load operation and load removal. A thermal image labeled \SI{20}{\volt}, \SI{4}{\ampere} showed a \SI{90.4}{\celsius} surface maximum, motivating further loss and thermal characterization.
+-
+-V2 integrated the MCU, GaN stage, isolated feedback, and USB-C circuit on a four-layer PCB. Lower half-bridge heating was observed after tank and timing changes, while input-bridge heating remained unresolved (\cref{sec:res-v2-testing}). Bench performance remained comparable to the first prototype. Winding loss and the input current path remained possible limits on output power. The V3 edge-card layout retained secondary rectification and omitted the USB-PD output section, giving an estimated net volume reduction of approximately \SI{8}{\percent}. Replacement planar magnetics were not installed. The external regulated USB-PD stage must be included when comparing the volume of complete supplies.
+-
+-Digitally controlled operation near \SI{80}{\watt} was demonstrated. Operation at the \SI{100}{\watt} continuous target and \SI{65}{\watt} minimum still needs long-duration thermal and stability tests. Full-range zero-voltage switching, USB-PD conformance, safety, and EMC remain unverified. Operation toward \SI{240}{\watt} USB-PD Extended Power Range (EPR) is a longer-term development objective.
++\section*{Abstract}
++\addcontentsline{toc}{section}{Abstract}
++
++A digitally controlled USB-C power supply was implemented using an inherited charge-pump power-factor-correction (PFC) resonant topology and planar magnetics. Burst control was developed for secondary-bulk regulation, startup sequencing, and energy limitation at no load and after load removal.
++
++The gallium-nitride (GaN) half bridge operated at a nominal \SI{1}{\mega\hertz}. Average power was controlled by enabling bursts of switching cycles. A circular direct memory access (DMA) buffer supplied the feedback samples. Startup precharge and separate duty limits for loaded and no-load operation were implemented. The USB-C PD stage provided the tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings.
++
++At \SI{240}{\volt}, \SI{50}{\hertz} input, matched measurements at the \SI{20}{\volt} setting yielded \SIrange{73.97}{79.89}{\watt} at the load. Average output voltage was \SIrange{19.973}{19.991}{\volt}, with \SIrange{0.416}{0.452}{\volt} recorded peak-to-peak ripple. Logged power factor was 0.97--0.99 and current total harmonic distortion was \SIrange{2.23}{3.98}{\percent}. Paired input/output readings gave preliminary efficiency estimates of \SIrange{76.5}{77.1}{\percent}, limited by acquisition timing and calibration uncertainty. The tests included no-load operation and load removal. A thermal image labeled \SI{20}{\volt}, \SI{4}{\ampere} showed a \SI{90.4}{\celsius} surface maximum, motivating further loss and thermal characterization.
++
++V2 integrated the MCU, GaN stage, isolated feedback, and USB-C circuit on a four-layer PCB. Lower half-bridge heating was observed after tank and timing changes, while input-bridge heating remained unresolved (\cref{sec:res-v2-testing}). Bench performance remained comparable to the first prototype. Winding loss and the input current path remained possible limits on output power. The V3 edge-card layout retained secondary rectification and omitted the USB-PD output section, giving an estimated net volume reduction of approximately \SI{8}{\percent}. Replacement planar magnetics were not installed. The external regulated USB-PD stage must be included when comparing the volume of complete supplies.
++
++Digitally controlled operation near \SI{80}{\watt} was demonstrated. Operation at the \SI{100}{\watt} continuous target and \SI{65}{\watt} minimum still needs long-duration thermal and stability tests. Full-range zero-voltage switching, USB-PD conformance, safety, and EMC remain unverified.
+--- before/README.md
++++ after/README.md
+@@ -1,129 +1,122 @@
+-# Charge-pump PFC USB-C thesis — rewritten October 2026
+-
+-This is the editable source of Richard Xu's thesis. The complete text, result
+-figures, measurement appendix, V1.0/V1.1 schematics, and the V2 F410 drawing
+-are included. The thesis also reproduces both complete firmware versions and
+-the complete supporting software source in line-numbered appendices.
+-
+-The text builds on the October 20 revision. It follows the engineering work
+-from the inherited converter and supplied magnetics through hardware
+-integration, feedback and timing changes, detachable-load control, measured
+-results, and the later V2/V3 work. Direct, factual American English and passive
+-reporting are used. Technical equations, figures, tables, citations, source code,
+-attribution, and the distinction between measured and planned work are preserved.
+-
+-## Compile
+-
+-Upload the source ZIP to Overleaf, select `main.tex`, and use **XeLaTeX**.
+-The reference list uses `thebibliography`; Biber is not required. The complete
+-project has been compiled with XeLaTeX and latexmk in the cloud environment. Author and submission metadata are
+-in `Setup/Statics.tex`. The current date reflects the October submission plan.
+-
+-## Measurement data and figures
+-
+-- Original workbooks and instrument images: `Data/measurements`.
+-- Completed electrical, AC-detail, harmonic, thermal, and transient tables:
+-  Appendix E and `Data/measurements/processed_rewrite`.
+-- Original waveform copies and their SHA-256 register: `processed_rewrite/raw_waveforms`
+-  and `raw_waveform_index.csv`.
+-- Eight rebuilt figures, each as vector PDF and PNG:
+-  `Pictures/Thesis/10_Results/Rebuilt`.
+-- Four vector schematic excerpts: `Pictures/Thesis/07_Hardware/Rebuilt`.
+-- Full V1.0 and V1.1 schematic PDFs: `Pictures/Thesis/07_Hardware`, also reproduced
+-  in Appendix B.
+-- Final firmware snapshot: `Code/thesi_power_control_PWR_1_9_20.ino`.
+-
+-`Data/analysis/rebuild_results.py` regenerates the charts and data tables with
+-Python, NumPy, and Matplotlib. Run it from any directory:
+-
+-```text
+-python Data/analysis/rebuild_results.py
+-```
+-
+-The included raw copies are used when the original local acquisition folders
+-are unavailable. They retain the exported samples and offsets. No waveform is
+-rescaled to force a target line voltage or input power. Detailed processing
+-choices are recorded in `processing_provenance.txt` and `figure_manifest.json`.
+-
+-## Interpretation
+-
+-The measured assembly is the V1.0 PCB with rework, not a separately manufactured
+-V1.1 board. The thesis separates drawing changes, fitted hardware, inherited
+-magnetic design, and original integration/control work. Inconsistent input-power
+-records, AC statistic ranges, unverified raw-channel calibration, and absent
+-thermal endurance measurements are identified in the results and appendix.
+-Planned test rows are retained in the CSV register but are not measurements.
+-
+-## Language
+-
+-Use direct American English throughout the thesis and defense materials.
+-Methods, results, and project actions are reported in natural passive or
+-impersonal form. Use short, concrete sentences and familiar engineering terms.
+-Keep definitions and circuit behavior direct; avoid forced passive sentences,
+-vague claims, and repeated statements about what the document contains.
+-Proposed tests retain conditional wording, and estimates remain distinct from
+-measurements. Quotations and frozen source listings retain their original text.
+-
+-## V2 and complete source
+-
+-Project V2 is the development described in the October plan and the later
+-STM32F410 schematic. Its full four-sheet drawing is in Appendix B. The plan's
+-reported approximately 85 W baseline is kept separate from the matched
+-79.89 W result on the earlier V1.0 assembly. Neither establishes the 100 W
+-continuous target.
+-
+-Preliminary powered V2 observations are recorded in
+-`Chapters/10_Results/15_V2_Testing_Update.tex`. An earlier load observation used
+-a 100 W constant-power setpoint. The latest note reports approximately 60 ns
+-software dead time; its firmware version and association with that earlier run
+-were not recorded. Matched input--output measurements and
+-thermal-endurance testing are still needed; no new continuous rating is established.
+-
+-- Controller implementation and commands: Appendix C.
+-- Browser, build, test, and analysis documentation: Appendix G.
+-- Complete PWR-1.9.20 and PWR-2.0.1 firmware: Appendix H.
+-- Complete supporting software, test, and analysis files: Appendix I.
+-- Frozen V2 software: `Code/PWR_2_0_1`.
+-- File identities, physical line counts, and SHA-256 checksums:
+-  `Code/source_manifest.json`.
+-
+-The full listings read the frozen files directly, without selecting line
+-ranges. Generated build products, third-party libraries, and intermediate
+-historical duplicates are not separate source implementations. The captured
+-calculator page is incomplete: its imported UI module was absent and the
+-bench application's build and local server did not include it. Its calculation
+-tests do not establish a working calculator page.
+-
+-The frozen PWR-2.0.1 source compiled for both STM32F410 and STM32G071. The F410
+-HEX passed the vector, checksum, and reserved-settings-sector checks. All 38
+-browser/module tests and the production protocol host tests passed. These
+-software checks do not verify physical UART, sensing calibration, flash writes
+-on a board, gate timing, or powered-converter performance.
+-
+-## Revised July–October plan
+-
+-The revised July 27–October 27, 2026 plan is incorporated into the introduction,
+-requirements, modeling, hardware, methods, results, discussion, and conclusions.
+-Chapter 3 defines criteria AP-01–AP-08; Chapter 10 assesses them against the
+-available records. Appendix J connects the planned milestones to the chapters.
+-The original plan source and its 14-page PDF remain in `Data/project_records`.
+-The earlier working draft is retained there as `Original_Project_Definition.tex`.
+-
+-The current plan sets a 65 W continuous minimum and a 100 W continuous target.
+-The 75 W figure is retained as an earlier validation milestone. The reported
+-approximately 85 W V2 baseline needs its own repeatable, matched test record;
+-the reconstructed measured result remains 79.89 W on the modified V1.0 assembly.
+-The 15 W planning shortfall, 20.11 W shortfall from that matched result, and
+-24.53 W screening input–output difference are separate quantities.
+-
+-The V3 edge-card design brief, release checks, V2/V3 volume method, PDO/PPS tests,
+-and extended thermal/stability work are documented with their current evidence
+-status. Scheduled dates do not establish completion. No V3 build, continuous
+-rating, or numeric V2/V3 power-density improvement is inferred from the plan.
+-
+-Latest V2 photo clarification: the thermal image is from a user-reported 95 W run.
+-Its earlier association with the 100 W setting is superseded; whether 95 W is
+-a setpoint or measured output is unspecified. Three original board/setup photos
+-are included in Section 10.15 and retained with the V2 evidence.
+-
+-Current development narrative: V1 establishes the measured baseline; V2 adds integrated control and tank/thermal observations; V3 is a slimmed edge-card layout with the USB-PD section removed and secondary rectifiers retained. Approximately 8% net volume reduction is a design estimate for the reduced-function layout, not a measured complete-system power-density gain. New planar magnetics were not installed. The 3.3–3.6 A secondary-output region, suspected transformer limit and possible input via bottleneck remain qualitative bench findings. The 100 W target and longer-term 240 W EPR goal are not continuous ratings.
++# Charge-pump PFC USB-C thesis — rewritten October 2026
++
++This is the editable source of Richard Xu's thesis. The complete text, result
++figures, measurement appendix, V1.0/V1.1 schematics, and the V2 F410 drawing
++are included. The thesis also reproduces both complete firmware versions and
++the complete supporting software source in line-numbered appendices.
++
++The text builds on the October 20 revision. It follows the engineering work
++from the inherited converter and supplied magnetics through hardware
++integration, feedback and timing changes, detachable-load control, measured
++results, and the later V2/V3 work. Direct, factual American English and passive
++reporting are used. Technical equations, figures, tables, citations, source code,
++attribution, and the distinction between measured and planned work are preserved.
++
++## Compile
++
++Upload the source ZIP to Overleaf, select `main.tex`, and use **XeLaTeX**.
++The reference list uses `thebibliography`; Biber is not required. The complete
++project has been compiled with XeLaTeX and latexmk in the cloud environment. Author and submission metadata are
++in `Setup/Statics.tex`. The current date reflects the October submission plan.
++
++## Measurement data and figures
++
++- Original workbooks and instrument images: `Data/measurements`.
++- Completed electrical, AC-detail, harmonic, thermal, and transient tables:
++  Appendix E and `Data/measurements/processed_rewrite`.
++- Original waveform copies and their SHA-256 register: `processed_rewrite/raw_waveforms`
++  and `raw_waveform_index.csv`.
++- Eight rebuilt figures, each as vector PDF and PNG:
++  `Pictures/Thesis/10_Results/Rebuilt`.
++- Four vector schematic excerpts: `Pictures/Thesis/07_Hardware/Rebuilt`.
++- Full V1.0 and V1.1 schematic PDFs: `Pictures/Thesis/07_Hardware`, also reproduced
++  in Appendix B.
++- Final firmware snapshot: `Code/thesi_power_control_PWR_1_9_20.ino`.
++
++`Data/analysis/rebuild_results.py` regenerates the charts and data tables with
++Python, NumPy, and Matplotlib. Run it from any directory:
++
++```text
++python Data/analysis/rebuild_results.py
++```
++
++The included raw copies are used when the original local acquisition folders
++are unavailable. They retain the exported samples and offsets. No waveform is
++rescaled to force a target line voltage or input power. Detailed processing
++choices are recorded in `processing_provenance.txt` and `figure_manifest.json`.
++
++## Interpretation
++
++The measured assembly is the V1.0 PCB with rework, not a separately manufactured
++V1.1 board. The thesis separates drawing changes, fitted hardware, inherited
++magnetic design, and original integration/control work. Inconsistent input-power
++records, AC statistic ranges, unverified raw-channel calibration, and absent
++thermal endurance measurements are identified in the results and appendix.
++Planned test rows are retained in the CSV register but are not measurements.
++
++## Language
++
++Use direct American English throughout the thesis and defense materials.
++Methods, results, and project actions are reported in natural passive or
++impersonal form. Use short, concrete sentences and familiar engineering terms.
++Keep definitions and circuit behavior direct; avoid forced passive sentences,
++vague claims, and repeated statements about what the document contains.
++Proposed tests retain conditional wording, and estimates remain distinct from
++measurements. Quotations and frozen source listings retain their original text.
++
++## V2 and complete source
++
++Project V2 is the development described in the October plan and the later
++STM32F410 schematic. Its full four-sheet drawing is in Appendix B. The plan's
++reported approximately 85 W baseline is kept separate from the matched
++79.89 W result on the earlier V1.0 assembly. Neither establishes the 100 W
++continuous target.
++
++Preliminary powered V2 observations are recorded in
++`Chapters/10_Results/15_V2_Testing_Update.tex`. An earlier load observation used
++a 100 W constant-power setpoint. The latest note reports approximately 60 ns
++software dead time; its firmware version and association with that earlier run
++were not recorded. Matched input--output measurements and
++thermal-endurance testing are still needed; no new continuous rating is established.
++
++- Controller implementation and commands: Appendix C.
++- Browser, build, test, and analysis documentation: Appendix G.
++- Complete PWR-1.9.20 and current V2 firmware: Appendix H.
++- Complete supporting software, test, and analysis files: Appendix I.
++- Current V2 software: `Code/PWR_2_0_4`; historical V2 snapshot: `Code/PWR_2_0_1`.
++- File identities, physical line counts, and SHA-256 checksums:
++  `Code/source_manifest.json`.
++
++The full listings read the frozen files directly, without selecting line
++ranges. Generated build products, third-party libraries, and intermediate
++historical duplicates are not separate source implementations. The current calculator is included in the application build and local server, with its UI module, magnetic presets, tests and fonts.
++
++The current F410 source builds as PWR-2.0.4; G071 remains PWR-2.0.3 with fixed carrier timing. The F410 HEX passed the vector, checksum and reserved-settings-sector checks. All 76 browser tests, 131 protocol frames and storage tests including 122 interrupted-append boundaries passed. The current firmware adds browser calibration, reference-load/setup controls and output-OFF carrier/dead-time adjustment. Powered validation remains pending. Earlier measured results retain their original test configurations.
++
++## Revised July–October plan
++
++The revised July 27–October 27, 2026 plan is incorporated into the introduction,
++requirements, modeling, hardware, methods, results, discussion, and conclusions.
++Chapter 3 defines criteria AP-01–AP-08; Chapter 10 assesses them against the
++available records. Appendix J connects the planned milestones to the chapters.
++The original plan source and its 14-page PDF remain in `Data/project_records`.
++The earlier working draft is retained there as `Original_Project_Definition.tex`.
++
++The current plan sets a 65 W continuous minimum and a 100 W continuous target.
++The 75 W figure is retained as an earlier validation milestone. The reported
++approximately 85 W V2 baseline needs its own repeatable, matched test record;
++the reconstructed measured result remains 79.89 W on the modified V1.0 assembly.
++The 15 W planning shortfall, 20.11 W shortfall from that matched result, and
++24.53 W screening input–output difference are separate quantities.
++
++The V3 edge-card design brief, release checks, V2/V3 volume method, PDO/PPS tests,
++and extended thermal/stability work are documented with their current evidence
++status. Scheduled dates do not establish completion. No V3 build, continuous
++rating, or numeric V2/V3 power-density improvement is inferred from the plan.
++
++Latest V2 photo clarification: the thermal image is from a user-reported 95 W run.
++Its earlier association with the 100 W setting is superseded; whether 95 W is
++a setpoint or measured output is unspecified. Three original board/setup photos
++are included in Section 10.15 and retained with the V2 evidence.
++
++Current development narrative: V1 establishes the measured baseline; V2 adds integrated control and tank/thermal observations; V3 is a slimmed edge-card layout with the USB-PD section removed and secondary rectifiers retained. Approximately 8% net volume reduction is a design estimate for the reduced-function layout, not a measured complete-system power-density gain. New planar magnetics were not installed. The 3.3–3.6 A secondary-output region, suspected transformer limit and possible input via bottleneck remain qualitative bench findings. The project target remains 100 W. The question of higher-load operation, including 240 W USB-PD EPR, arose from feedback on the APEC digest.
+--- before/Setup/Code_Listings.tex
++++ after/Setup/Code_Listings.tex
+@@ -1,17 +1,33 @@
+-% Full source is read directly from the frozen files; no line ranges are used.
+-\usepackage{needspace}
+-\renewcommand{\lstlistlistingname}{List of Code Listings}
+-\newfontfamily\thesiscodefont[Path=Setup/Fonts/,Ligatures=NoCommon]{DejaVuSansMono.ttf}
+-\lstdefinestyle{fullsource}{
+-  basicstyle=\thesiscodefont\fontsize{8}{9.6}\selectfont,
+-  numbers=left,numberstyle=\thesiscodefont\fontsize{6.5}{8}\selectfont,
+-  numbersep=7pt,stepnumber=1,firstnumber=1,numberblanklines=true,
+-  xleftmargin=25pt,xrightmargin=3pt,frame=lines,framesep=4pt,
+-  breaklines=true,breakatwhitespace=false,breakautoindent=false,breakindent=10pt,
+-  postbreak=\mbox{$\hookrightarrow$\space},
+-  keepspaces=true,columns=fullflexible,tabsize=2,showstringspaces=false,
+-  showspaces=false,showtabs=false,captionpos=t,
+-  aboveskip=10pt,belowskip=10pt,
+-  keywordstyle=\bfseries,commentstyle=\thesiscodefont,stringstyle=\thesiscodefont,
+-  literate={,}{{,\allowbreak}}1
+-}
++% Full source is read directly from the frozen files; no line ranges are used.
++\usepackage{needspace}
++\renewcommand{\lstlistlistingname}{List of Code Listings}
++\newfontfamily\thesiscodefont[Path=Setup/Fonts/,Ligatures=NoCommon]{DejaVuSansMono.ttf}
++\lstdefinestyle{fullsource}{
++  basicstyle=\thesiscodefont\fontsize{8}{9.6}\selectfont,
++  numbers=left,numberstyle=\thesiscodefont\fontsize{6.5}{8}\selectfont,
++  numbersep=7pt,stepnumber=1,firstnumber=1,numberblanklines=true,
++  xleftmargin=25pt,xrightmargin=3pt,frame=lines,framesep=4pt,
++  breaklines=true,breakatwhitespace=false,breakautoindent=false,breakindent=10pt,
++  postbreak=\mbox{$\hookrightarrow$\space},
++  keepspaces=true,columns=fullflexible,tabsize=2,showstringspaces=false,
++  showspaces=false,showtabs=false,captionpos=t,
++  aboveskip=10pt,belowskip=10pt,
++  keywordstyle=\bfseries,commentstyle=\thesiscodefont,stringstyle=\thesiscodefont,
++  literate={,}{{,\allowbreak}}1 {∥}{{$\parallel$}}1
++}
++
++% listings measures a complete physical source line even when it wraps.
++% Bound that bookkeeping width for wrapped listings to avoid TeX dimension
++% overflow on long HTML lines; the original input and line numbers are retained.
++% Activate the Unicode parallel symbol so the listings substitution is used.
++\makeatletter
++\lst@AddToHookAtTop{SelectCharTable}{\catcode`∥=\active}
++% Allow a wrapped physical source line to continue onto the next page.
++\lst@AddToHook{Init}{\lst@ifbreaklines\brokenpenalty=0\relax\fi}
++\lst@AddToHook{PostOutput}{%
++  \lst@ifbreaklines
++    \ifdim\lst@currlwidth>\linewidth
++      \global\lst@currlwidth\linewidth
++    \fi
++  \fi}
++\makeatother

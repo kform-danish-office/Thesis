@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-25T02:22:35.463724+00:00",
+  "source_root": "/workspace/thesis",
+  "source_files": 451,
+  "edited_prose_files": 130,
+  "artifacts": [
+    {
+      "path": "/workspace/tooling/thesis-tone-review/Richard_Xu_Thesis_Revised_2026-10-25.pdf",
+      "bytes": 16795188,
+      "sha256": "90b4d273fcc25de0c48484a448efe76a8d3b93a2fd916c3b5bbaf69cb7bfea94"
+    },
+    {
+      "path": "/workspace/tooling/thesis-tone-review/Thesis_Tone_Revision_2026-10-25.zip",
+      "bytes": 77660745,
+      "sha256": "9e70e7bb2a19a810e7062b6ca757e817edbdb629cbc1afea1285a1818861cc71"
+    }
+  ]
+}

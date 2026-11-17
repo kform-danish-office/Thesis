@@ -1,0 +1,30 @@
+\section{Offline Conversion and Input Power Quality}
+\label{sec:bg-pfc}
+
+A capacitor-input bridge rectifier conducts mainly near the mains-voltage peaks, producing narrow current pulses, harmonic distortion, and increased RMS current for a given real power. Input-current shaping extends conduction over the line cycle while supplying the DC link.
+
+Power factor compares real input power with apparent power:
+\begin{equation}
+\mathrm{PF}=\frac{P_{\mathrm{in}}}{V_{\mathrm{in,rms}}I_{\mathrm{in,rms}}}.
+\end{equation}
+Input-current distortion is described by
+\begin{equation}
+\mathrm{THD}_i=\frac{\sqrt{\sum_{h=2}^{H}I_{h,\mathrm{rms}}^2}}{I_{1,\mathrm{rms}}},
+\end{equation}
+where \(H\) is the highest harmonic included. Multiplying by \(100\%\) gives the percentage value. For sinusoidal input voltage and negligible DC current,
+\begin{equation}
+\mathrm{PF}=\frac{\cos\phi_1}{\sqrt{1+\mathrm{THD}_i^2}},
+\end{equation}
+where \(\phi_1\) is the phase displacement of the current fundamental. Both phase displacement and current distortion reduce power factor.
+
+Conventional two-stage supplies separate input-current shaping and DC-link regulation from isolated output regulation. The charge-pump architecture shares switching devices between these functions, reducing active-stage component count but coupling output control to input-current quality.
+
+The revised plan compares charge-pump and boost-PFC architectures in efficiency, component stress, power density, and control complexity \cite{projectOctoberPlan}. A numerical comparison needs the same operating conditions and measurement points, measured device stress, and complete assembly volumes at verified continuous output. Control complexity includes sensing, actuation, startup, regulation, and fault handling. Only the charge-pump supply was tested; boost-PFC comparison tests remain to be done.
+
+Even with an ideal resistive input, single-phase mains power pulsates. For sinusoidal voltage and current in phase,
+\begin{equation}
+p_{\mathrm{in}}(t)=P_{\mathrm{in}}\left[1-\cos(2\omega_l t)\right].
+\end{equation}
+The DC link buffers the mismatch between pulsating input power and load demand. Higher switching frequency reduces per-cycle energy but does not remove the twice-line-frequency storage and ripple requirements.
+
+The charge-pump branch shapes input current without a separate boost-PFC current loop. The DC link and secondary capacitance buffer the power imbalance. Because both paths share the switching sequence, input power quality must be evaluated with secondary-voltage control active.

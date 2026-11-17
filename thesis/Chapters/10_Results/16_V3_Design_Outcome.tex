@@ -1,0 +1,31 @@
+\section{V3 Design Outcome and Revision Comparison}
+\label{sec:res-v3-design}
+
+The V3 edge-card layout retained secondary rectification and removed the
+USB-PD section, giving an estimated net volume reduction of approximately
+\SI{8}{\percent}. External regulation and USB-PD remain necessary for a
+complete USB-C supply. Replacement planar magnetics were not installed,
+and the smaller layout still needs to be built and tested.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Main changes and results for each prototype.}
+\label{tab:revision-development-outcomes}
+\begin{tabularx}{\textwidth}{@{}L{0.14\textwidth}L{0.34\textwidth}Y@{}}
+\toprule
+Revision & Main change & Result and remaining work\\
+\midrule
+V1.0/G071 & Converter integration and DMA-based burst control with the downstream USB-C stage & Matched electrical measurements and load-event records; thermal and loss limitations remained\\
+V2/F410 & Integrated controller, browser interface, and leakage-only tank trial & Secondary-load tests reached \SI{137.1}{\watt} with voltage droop; input-bridge and secondary heating remained\\
+V3 edge card & Slimmed layout with USB-PD section removed and secondary rectification retained & Approximately \SI{8}{\percent} estimated net volume reduction; replacement magnetics and matched power/thermal validation remained incomplete\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+The winding and input-path observations identify priorities for the next
+prototype.
+A V2--V3 comparison must match continuous power and thermal conditions and
+include all output hardware required for the same function, following
+\cref{sec:method-density}.

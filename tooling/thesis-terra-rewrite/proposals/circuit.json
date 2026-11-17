@@ -1,0 +1,107 @@
+[
+  {
+    "id": "circuit-01",
+    "path": "Chapters/07_Hardware/13_Thermal.tex",
+    "old": "Heat leaves the GaN device through its bottom pad and board copper. Heat is also dissipated by the resonant and secondary components. The two series inductors share the branch loss, but both carry the same current. Thermal images are compared at the labeled loads and measured surfaces. Complete records of test duration and ambient conditions were not included with the high-power captures. These observations are given in \\Cref{sec:res-thermal} using the method in \\cref{sec:method-thermal}. Component temperatures still need to be recorded over time to check sustained operation.",
+    "new": "Heat leaves the GaN device through its bottom pad and board copper. The resonant and secondary components also dissipate heat; the two series inductors share the branch loss while carrying the same current. Thermal images at the labeled loads and measured surfaces are discussed in \\Cref{sec:res-thermal}, using the method in \\cref{sec:method-thermal}. Test duration and ambient conditions were not fully recorded for the high-power captures, so component temperatures still need to be recorded over time to check sustained operation.",
+    "reason": "Connects the thermal paths and the missing test conditions to the sustained-operation measurement.",
+    "facts_preserved": [
+      "Same-current series inductors, labeled loads and surfaces, incomplete duration and ambient records, and required temperature histories."
+    ],
+    "checklist": [
+      "Concrete physical action",
+      "Connected prose",
+      "Technical fidelity and uncertainty"
+    ]
+  },
+  {
+    "id": "circuit-02",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "In the resonant branch, L4 is labeled SER1512-103MED, with a nominal value of \\SI{10}{\\micro\\henry}, but complete values or part definitions are missing for L3, T1, and C26. The external series inductor was reported at approximately \\SI{9.4}{\\micro\\henry} in the preliminary powered tests (\\cref{sec:res-v2-testing}). It has not been confirmed whether this was the component fitted at L4. The final V1.0 arrangement used two \\SI{4.7}{\\micro\\henry} series inductors; this does not give the missing V2 values. The fitted branch and transformer must be checked before calculating resonance or comparing switching waveforms.",
+    "new": "In the resonant branch, L4 is labeled SER1512-103MED, with a nominal value of \\SI{10}{\\micro\\henry}, but complete values or part definitions are missing for L3, T1, and C26. The external series inductor used in preliminary powered tests was reported at approximately \\SI{9.4}{\\micro\\henry} (\\cref{sec:res-v2-testing}); whether it was the component fitted at L4 has not been confirmed. The final V1.0 arrangement used two \\SI{4.7}{\\micro\\henry} series inductors. The fitted V2 branch and transformer must be checked before calculating resonance or comparing switching waveforms.",
+    "reason": "Connects the reported V2 inductor to its unresolved identity and retains the distinct V1 arrangement without an explanatory aside.",
+    "facts_preserved": [
+      "Nominal L4, missing L3/T1/C26 definitions, reported V2 inductor and uncertain identity, V1.0 series pair, need to check fitted branch."
+    ],
+    "checklist": [
+      "Concrete physical action",
+      "Connected prose",
+      "Technical fidelity and uncertainty"
+    ]
+  },
+  {
+    "id": "circuit-03",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "The October plan starts from a reported V2 point near \\SI{85}{\\watt} toward a \\SI{100}{\\watt} target \\cite{projectOctoberPlan}. Repeating that point requires the V2 assembly, input power, output voltage/current, temperature, duration, and firmware settings together. These conditions were not recorded together. The reported \\SI{85}{\\watt} point still needs to be repeated and is not included in the measured curves.",
+    "new": "The October plan reports a V2 operating point near \\SI{85}{\\watt} and a \\SI{100}{\\watt} target \\cite{projectOctoberPlan}. The assembly, input power, output voltage/current, temperature, duration, and firmware settings were not recorded together, so the point must be repeated with these conditions recorded. It is not included in the measured curves.",
+    "reason": "Brings the missing matched conditions and consequence into one connected explanation.",
+    "facts_preserved": [
+      "Reported 85 W point, 100 W target, missing matched conditions, repetition needed and exclusion from measured curves."
+    ],
+    "checklist": [
+      "Concrete physical action",
+      "Connected prose",
+      "Technical fidelity and uncertainty"
+    ]
+  },
+  {
+    "id": "circuit-04",
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "old": "The supplied measurements characterize the components before installation. Converter tests demonstrate power transfer through the installed magnetics, while installed inductance and individual thermal and isolation margins remain unmeasured.\n\nThe remaining measurements are listed below.",
+    "new": "The supplied component measurements were used in the converter calculations, and the assembled converter transferred power through the installed magnetics during testing. The installed inductance, thermal behavior, and isolation margins still require measurement, as listed in \\Cref{tab:mag-verification-actions}.",
+    "reason": "Connects the component measurements and converter tests to the remaining measurements.",
+    "facts_preserved": [
+      "Pre-installation measurements, power transfer, and missing installed inductance, thermal and isolation measurements."
+    ],
+    "checklist": [
+      "Connected prose",
+      "Concrete engineering work",
+      "Technical fidelity and uncertainty"
+    ]
+  },
+  {
+    "id": "circuit-05",
+    "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+    "old": "Charge-transfer analysis estimates input-power scale, and the resonant equivalent circuit estimates active-cycle gain and phase. Clamp timing and burst transitions require a switched model; efficiency and temperature additionally require calibrated loss and thermal models.\r\n\r\nThe supplied LTspice circuits describe the predecessor rectifier. Supplied magnetic measurements provide the inductance and transformer parameters used in Chapter~\\ref{ch:analysis}. Their application to the prototype accounts for the changed topology and installed components.\r\n\r\nA prototype model must predict bus ripple, turn-on current, packet energy, and the response to component or command changes. Matched turn-on-current and packet-energy measurements are still needed to check it.",
+    "new": "The charge-transfer calculation estimates the input-power scale, while the resonant equivalent circuit estimates active-cycle gain and phase. The supplied LTspice circuits describe the predecessor rectifier, and the given magnetic measurements provide the inductance and transformer parameters used in Chapter~\\ref{ch:analysis}. The calculations account for the prototype's changed topology and installed components.\n\nA switched prototype model is needed to examine clamp timing and burst transitions and to predict bus ripple, turn-on current, packet energy, and the response to component or command changes. Matched turn-on-current and packet-energy measurements are still needed to check it. Efficiency and temperature prediction also require calibrated loss and thermal models.",
+    "reason": "Groups calculations and supplied inputs before relating the unfinished switched model to the quantities and calibration it needs.",
+    "facts_preserved": [
+      "Predecessor LTspice circuits, magnetic measurements, changed topology and components, matched measurements and loss/thermal calibration."
+    ],
+    "checklist": [
+      "Connected prose",
+      "Concrete engineering work",
+      "Technical fidelity and uncertainty"
+    ]
+  },
+  {
+    "id": "circuit-06",
+    "path": "Chapters/05_Modeling_Simulation/06_Steady_State.tex",
+    "old": "Three time scales govern operation: carrier-scale phase, clamp timing, and energy per active cycle; burst-scale average transfer; and line-cycle storage imbalance in the DC link and secondary capacitors. The model must resolve all three time scales.\r\n\r\nNominal series resonance is near \\SI{0.989}{\\mega\\hertz}. Turn-on phase also depends on magnetizing current, pump current, and rectifier state, which must be included in commutation prediction.\r\n\r\nCalibration requires matched input and secondary demand, followed by separate comparisons of voltage envelopes and switching waveforms. Mean VBUS agreement alone does not validate bulk ripple or commutation current. Chapter~\\ref{ch:results} reports these quantities separately.",
+    "new": "The model must resolve carrier-scale phase, clamp timing, and energy per active cycle, as well as average transfer over each burst and the line-cycle energy imbalance in the DC link and secondary capacitors. Nominal series resonance is near \\SI{0.989}{\\mega\\hertz}, but turn-on phase also depends on magnetizing current, pump current, and rectifier state.\n\nCalibration requires matched input and secondary demand, followed by separate comparisons of voltage envelopes and switching waveforms. This checks bulk ripple and commutation current as well as mean VBUS. Chapter~\\ref{ch:results} reports these quantities separately.",
+    "reason": "Connects the time scales to physical quantities and explains what waveform comparison checks.",
+    "facts_preserved": [
+      "Three operating time scales, nominal resonance, phase dependencies, matched demand and separate comparisons."
+    ],
+    "checklist": [
+      "Connected prose",
+      "Concrete engineering work",
+      "Technical fidelity and uncertainty"
+    ]
+  },
+  {
+    "id": "circuit-07",
+    "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+    "old": "Magnetic temperature depends on winding, core, and terminal losses and thermal coupling from GaN devices, rectifiers, auxiliary supplies, copper, and airflow. The thermal limit cannot be predicted from inductance and turns ratio alone.\n\nThe images in \\cref{sec:method-thermal,sec:res-thermal} compare surface-temperature patterns at tested outputs. They do not separate core and winding losses or resolve internal winding maxima. Continuous output must be checked by recording temperature over time on the tested assembly.",
+    "new": "Magnetic temperature depends on winding, core, and terminal losses, as well as heat transferred from the GaN devices, rectifiers, auxiliary supplies, and copper and removed by airflow. The images in \\cref{sec:method-thermal,sec:res-thermal} compare surface-temperature patterns at tested outputs, but do not separate core and winding losses or resolve internal winding maxima. Temperatures must be recorded over time on the tested assembly to check continuous output.",
+    "reason": "Connects thermal paths to the images and measurement needed for sustained operation.",
+    "facts_preserved": [
+      "Thermal paths, tested-output images, unresolved core and winding losses and internal maxima, temperature history."
+    ],
+    "checklist": [
+      "Connected prose",
+      "Concrete engineering work",
+      "Technical fidelity and uncertainty"
+    ]
+  }
+]

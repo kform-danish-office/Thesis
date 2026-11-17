@@ -1,0 +1,31 @@
+\subsection{Control, No-Load, and Load-Removal Tests}
+\label{sec:method-control}
+
+The final baseline controller acquired secondary-bulk voltage at PA1 through
+continuous ADC DMA and controlled switching intervals through the MCU burst-enable
+pin PA10. Saved UART settings, where available, identified the active
+configuration rather than source-code defaults.
+
+Loaded tests checked delivered voltage and burst structure at a fixed output setting. Because the records begin after startup, synchronized measurements of initial conditions, precharge, output rise and peak, the burst-enable signal (PA10), inhibition, decay, and fault status are still needed to quantify startup and shutdown.
+
+Load-removal captures covered output voltage and switching around disconnection.
+A complete assessment requires both the immediate stored-energy response and
+later no-load cycling, with thresholds, latch state, and recovery recorded to
+distinguish holdoff from a latched fault.
+
+\begin{table}[htbp]
+\centering
+\caption{Signals needed for control-response tests.}
+\label{tab:control-tests}
+\begin{tabularx}{\textwidth}{@{}p{0.27\textwidth}X@{}}
+\toprule
+Condition & Observations\\
+\midrule
+Startup & Initial state, precharge, output rise, maximum voltage, and fault status\\
+Loaded operation & Output voltage/ripple, load current, and PA10 pattern\\
+Load removal & Immediate voltage excursion, enable response, and final no-load behavior\\
+No load & Complete/partial burst structure and voltage cycling\\
+Protection event & Calibrated threshold, inhibition, latch/holdoff state, and recovery\\
+\bottomrule
+\end{tabularx}
+\end{table}

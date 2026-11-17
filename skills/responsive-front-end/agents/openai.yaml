@@ -1,0 +1,4 @@
+interface:
+  display_name: "Responsive Front-End"
+  short_description: "Build responsive UI from screenshots and design briefs"
+  default_prompt: "Use $responsive-front-end to implement these references in the current project and verify the desktop and mobile layouts."

@@ -1,0 +1,96 @@
+{
+  "url": "https://thesis-power-lab.vercel.app",
+  "deploymentId": "dpl_G2ybAVuksqV4L8nWyxrQSdu3ngX8",
+  "checkedAt": "2026-10-19T01:05:07.188184+00:00",
+  "files": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 13362,
+      "sha256": "4c1756a745bc06fa528e98111510f0520205d32b5dab055fef87fa9cfdc3bc10",
+      "matches": true,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "file": "styles.css",
+      "status": 200,
+      "bytes": 28506,
+      "sha256": "5d648d261e47f2eef2c744a9a10aa4d93d360fe4d4b0b094def894c8e5b4e822",
+      "matches": true,
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "file": "app.js",
+      "status": 200,
+      "bytes": 33405,
+      "sha256": "badb11436d26910d66a984d13cda4b32cf8bb64029438c44e1e26fe0e6ccb0f0",
+      "matches": true,
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "file": "serial.js",
+      "status": 200,
+      "bytes": 11960,
+      "sha256": "a27971d5452b39538bb1799faa74b4480aadef460d0f4a38f1a25247b5c80d67",
+      "matches": true,
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "file": "protocol.js",
+      "status": 200,
+      "bytes": 2385,
+      "sha256": "0254f0e9fb34d5892bd9cacca1f392430cd222f4beb4e46544e489395c85b0fb",
+      "matches": true,
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "file": "storage.js",
+      "status": 200,
+      "bytes": 3019,
+      "sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5",
+      "matches": true,
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "file": "calculator.html",
+      "status": 200,
+      "bytes": 14756,
+      "sha256": "4eb332aa0b734a390d28aca724faa7db9e1976bc127003b981f626584e328ecc",
+      "matches": true,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "file": "calculator.css",
+      "status": 200,
+      "bytes": 12829,
+      "sha256": "00a1900146d6582b5bb5174ea6cb821635ac2b26fc86e30130d863ab8d690e7e",
+      "matches": true,
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "file": "resonance.js",
+      "status": 200,
+      "bytes": 13568,
+      "sha256": "9eb03e5e001088dffbcde52294871c246276d0ddf06f00262aa9cf93f8c7c0a3",
+      "matches": true,
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "file": "resonance-ui.js",
+      "status": 200,
+      "bytes": 29954,
+      "sha256": "06e8052c057abd21c7dc932e769f1973960c3cc3fd414df558d4ca64c678caaa",
+      "matches": true,
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "file": "resonance-presets.js",
+      "status": 200,
+      "bytes": 8294,
+      "sha256": "5f4052c4740489bc07b06fb8cfcf57871717be5f6f9093742428c4c6c6853dd5",
+      "matches": true,
+      "contentType": "application/javascript; charset=utf-8"
+    }
+  ],
+  "allPublicAssetsByteMatch": true
+}

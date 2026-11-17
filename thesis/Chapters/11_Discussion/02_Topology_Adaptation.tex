@@ -1,0 +1,20 @@
+\section{Topology Adaptation for a Detachable Output}
+\label{sec:disc-adaptation}
+
+The shared half bridge couples charge-pump PFC and resonant transfer.
+Charge-pump current, DC-link energy, resonant current, and output demand
+interact through this stage. Secondary-bus changes can therefore affect
+both line-current shape and commutation current.
+
+Unlike the original LED load, a detachable output can switch abruptly
+between substantial demand and near-zero load. The USB-C PD stage
+regulates the output voltage to the selected PD level, while the MCU
+regulates the secondary bulk supply feeding it. Both stages must remain within their operating
+ranges during disconnection and reconnection.
+
+Mean output voltage was maintained at the tested loads, while ripple and
+input-current quality varied with load. Burst spacing and fixed losses affect
+low-demand performance, while current stress and heating become more significant
+at high demand. The best PF and THD were measured at the highest loads on the
+\SI{20}{\volt} output. Changes to the charge pump or burst schedule should
+therefore be assessed together with their effects on the secondary bulk supply, USB-C PD stage, and heating.

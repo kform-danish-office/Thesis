@@ -1,0 +1,7 @@
+board_manager:
+  additional_urls:
+    - https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+directories:
+  data: /workspace/tooling/arduino-data
+  downloads: /workspace/tooling/arduino-downloads
+  user: /workspace/tooling/arduino-user

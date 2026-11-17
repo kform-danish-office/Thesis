@@ -1,0 +1,309 @@
+[
+  {
+    "id": "front-01",
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "old": "A planar inductor and transformer from earlier DTU work were used in this converter. The \\texttt{Planar\\_ChargePump\\_2025 (5)} package contains the calculations and manufacturing information: MATLAB files, COMSOL models, component plots, PCB designs, and Gerber files. Its headers and presentation identify Bima Nugraha Sanusi and the DTU Power Electronics group. The components were measured by M\\'ani Gautason.\n",
+    "new": "A planar inductor and transformer from earlier DTU work by Bima Nugraha Sanusi and the DTU Power Electronics group were used in this converter. The components were measured by M\\'ani Gautason.\n",
+    "reason": "Retains attribution and measurements while removing a package inventory.",
+    "facts_preserved": [
+      "Earlier DTU design attribution",
+      "Mán​​i Gautason measured components"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-02",
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "old": "The supplied \\sourcefile{Simplified_for_journal_revision.asc} and \\sourcefile{Simplified_for_journal_revision_2.asc} circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.\r\n",
+    "new": "The supplied LTspice circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.\r\n",
+    "reason": "Describes models directly without filenames in the narrative.",
+    "facts_preserved": [
+      "Two supplied reference circuits",
+      "Topology differences retained"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-03",
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "old": "The \\sourcefile{Power_loss_breakdown.asc} variants and device libraries describe the predecessor's loss calculations. Prototype efficiency is estimated from measured input and output power. The measurement locations and timing uncertainties are described with the results. Appendix~\\ref{app:modeling} identifies the supplied files and their roles.\r\n",
+    "new": "The predecessor loss calculations use a different circuit and device set. Prototype efficiency is estimated from measured input and output power, with measurement locations and timing uncertainties discussed alongside the results.\r\n",
+    "reason": "Replaces filename and appendix inventory with the technical comparison.",
+    "facts_preserved": [
+      "Predecessor loss calculations",
+      "Measured prototype efficiency and timing uncertainty"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-04",
+    "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+    "old": "The supplied \\sourcefile{GaN_LTspice_GS66502B_L1V2.lib} is a GaN Systems Level 1 Version 2.0 library intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded from the model, as stated in its header \\cite{gansystemsGS66502Bmodel}. It can represent the electrical device used in the supplied model, but it does not represent the complete LMG2652 package and PCB implementation.\r\n",
+    "new": "The supplied GaN Systems GS66502B Level 1 Version 2.0 model is intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded \\cite{gansystemsGS66502Bmodel}. It represents the electrical device in the supplied circuit rather than the complete LMG2652 package and PCB implementation.\r\n",
+    "reason": "Identifies the electrical model and its limits without a library filename.",
+    "facts_preserved": [
+      "Model and version",
+      "Excluded thermal, leakage and package effects",
+      "Prototype device distinction"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-05",
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "old": "Fourier and measurement directives calculate input current, RMS voltage/current, power, efficiency, and PF. The saved logs and RAW files are results from the supplied circuits. No simulation of the final board was completed.\r\n",
+    "new": "Fourier and measurement directives calculate input current, RMS voltage and current, power, efficiency, and PF. The supplied simulations describe the reference circuits; the final board was not simulated.\r\n",
+    "reason": "Removes the file inventory while preserving the scope of simulation.",
+    "facts_preserved": [
+      "Calculated quantities",
+      "Final board not simulated"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-06",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": "AP-02 & Repeat the reported approximately \\SI{85}{\\watt} V2 point, or explain the difference. Record assembly and fitted parts, firmware/exported settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, uncertainty, and raw-file locations.\\\\\n",
+    "new": "AP-02 & Repeat the reported approximately \\SI{85}{\\watt} V2 point, or explain the difference. State the assembly and fitted parts, firmware settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, and uncertainty.\\\\\n",
+    "reason": "Removes raw-file location inventory while retaining conditions for a reproducible test.",
+    "facts_preserved": [
+      "Reported V2 power",
+      "Operating, instrumentation and uncertainty conditions"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-07",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": "AP-06 & Develop and review the V3 edge-card pinout, outline, component-height limit, current and gate/sense return paths, creepage/clearance, and thermal-spreading arrangement. Record schematic/layout review, DRC, BOM availability, manufacturing review, and release status.\\\\\n",
+    "new": "AP-06 & Develop and review the V3 edge-card pinout, outline, component-height limit, current and gate/sense return paths, creepage/clearance, and thermal-spreading arrangement. Check the schematic and layout, design-rule checks, component availability, manufacturing readiness, and release status.\\\\\n",
+    "reason": "Focuses the requirement on design and manufacturing checks.",
+    "facts_preserved": [
+      "V3 electrical, mechanical and insulation design",
+      "Manufacturing and component availability"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-08",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": "AP-08 & Decide whether V3 is ready for testing and list the tests that can be completed. If V3 is not ready, use the completed, identified V2 tests as the hardware results and state the remaining V3 work. Identify which V2 tests have usable matched records.\\\\\n",
+    "new": "AP-08 & Determine whether V3 is ready for testing and identify the tests that can be completed. If it is not ready, use completed V2 tests with identified configurations and usable matched measurements, and state the remaining V3 work.\\\\\n",
+    "reason": "Removes administrative instructions while preserving V2 and V3 evaluation.",
+    "facts_preserved": [
+      "V3 readiness and remaining work",
+      "Matched V2 tests"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-09",
+    "path": "Frontmatter/Approval.tex",
+    "old": "In V2, the controller was moved onto a four-layer converter PCB. The MCU control connections, power circuit, isolated sensing, and downstream USB-C stage are described in \\cref{sec:hw-v2}. The schematic and PCB print set are included in \\cref{sec:app-v2-oct27}. Browser logging and software tools were developed alongside the controller, with the full source in the appendices. \r\n",
+    "new": "In V2, the controller was moved onto a four-layer converter PCB with the power circuit, isolated sensing, and downstream USB-C stage (\\cref{sec:hw-v2}). Browser logging and software tools were developed alongside the controller.\r\n",
+    "reason": "Connects the integration work and removes an appendix inventory from the preface.",
+    "facts_preserved": [
+      "V2 four-layer integration",
+      "Browser logging and software tools"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-10",
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "old": "\\item measure output voltage, load response, switching behavior, input power quality, efficiency, and temperature using the available laboratory records; and\r\n",
+    "new": "\\item measure output voltage, load response, switching behavior, input power quality, efficiency, and temperature; and\r\n",
+    "reason": "States the measurement objective without record-keeping language.",
+    "facts_preserved": [
+      "All measurement objectives retained"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-11",
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "old": "The revised plan extends the work to V2 evaluation and a V3 edge-card design \\cite{projectOctoberPlan}. It calls for a repeat of the reported \\SI{85}{\\watt} V2 operating point and an investigation of the \\SI{15}{\\watt} shortfall to the \\SI{100}{\\watt} target. V2 was subsequently operated with a modified resonant tank and reached \\SI{137.1}{\\watt} at the secondary output, with voltage droop and continued heating (\\cref{sec:res-v2-testing}). Defined-duration thermal tests remain necessary. The plan also calls for fixed-PDO and PPS tests and thermal and stability runs of defined duration. A V2--V3 power-density comparison requires the same definition of assembly volume for both designs. Section~\\ref{sec:revised-plan-criteria} gives the criteria and their current status.\r\n",
+    "new": "The revised plan extends the work to V2 evaluation and a V3 edge-card design \\cite{projectOctoberPlan}. It calls for a repeat of the reported \\SI{85}{\\watt} V2 operating point and an investigation of the \\SI{15}{\\watt} shortfall to the \\SI{100}{\\watt} target. With a modified resonant tank, V2 later reached \\SI{137.1}{\\watt} at the secondary output, with voltage droop and continued heating (\\cref{sec:res-v2-testing}). Fixed-PDO, PPS, and defined-duration thermal and stability tests remain necessary. A V2--V3 power-density comparison also requires a common assembly-volume definition. Section~\\ref{sec:revised-plan-criteria} gives the criteria and their current status.\r\n",
+    "reason": "Removes repeated duration requirement and connects the V2 observation to outstanding tests.",
+    "facts_preserved": [
+      "Reported 85 W, 15 W gap, target",
+      "137.1 W secondary with droop and heating",
+      "Thermal duration and comparison remain open"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific engineering work"
+    ]
+  },
+  {
+    "id": "front-12",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": "The plan starts from a reported V2 maximum near \\SI{85}{\\watt} and calls for repeating that point under defined conditions or explaining the difference. The integrated MCU and its ported firmware are part of this V2 development. An output of \\SI{79.89}{\\watt} was reached on the modified V1.0 assembly in the matched measurements analyzed here. Those measurements form a separate dataset. Sections~\\ref{sec:hw-v2} and \\ref{sec:ctrl-pwr2-port} identify the later circuit and firmware needed for a matched V2 test.\n",
+    "new": "The plan calls for a repeat of the reported V2 maximum near \\SI{85}{\\watt} under defined conditions, or an explanation of the difference. The integrated MCU and its ported firmware form part of the V2 development described in Sections~\\ref{sec:hw-v2} and \\ref{sec:ctrl-pwr2-port}. The separate matched measurements on the modified V1.0 assembly reached \\SI{79.89}{\\watt}.\n",
+    "reason": "Connects the reported V2 point, its development context and the separate V1 measurement without choppy dataset narration.",
+    "facts_preserved": [
+      "Reported V2 85 W",
+      "V1 measured 79.89 W separate",
+      "V2 hardware and firmware references"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific engineering work"
+    ]
+  },
+  {
+    "id": "front-13",
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "old": "A 5\\% increase in either series parameter gives an approximately 2.5\\% first-order resonance reduction. These are first-order calculations, not measured or simulated results. Near-carrier operation makes the corresponding phase shift relevant to commutation.\r\n",
+    "new": "A 5\\% increase in either series parameter gives an approximately 2.5\\% first-order resonance reduction. Near-carrier operation makes the corresponding phase shift relevant to commutation.\r\n",
+    "reason": "Removes a redundant disclaimer immediately following a first-order equation.",
+    "facts_preserved": [
+      "First-order calculation, not a measurement",
+      "5 percent and 2.5 percent values"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific engineering work"
+    ]
+  },
+  {
+    "id": "front-14",
+    "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+    "old": "Magnetic temperature depends on winding, core, and terminal losses, as well as heat transferred from the GaN devices, rectifiers, auxiliary supplies, and copper and removed by airflow. The images in \\cref{sec:method-thermal,sec:res-thermal} compare surface-temperature patterns at tested outputs, but do not separate core and winding losses or resolve internal winding maxima. Temperatures must be recorded over time on the tested assembly to check continuous output.\n",
+    "new": "Magnetic temperature depends on winding, core, and terminal losses, heat transferred from the GaN devices, rectifiers, auxiliary supplies, and copper, and heat removed by airflow. The images in \\cref{sec:method-thermal,sec:res-thermal} show surface-temperature patterns at the tested outputs. Internal winding temperatures and temperature over time on the assembled converter are needed to assess continuous operation.\n",
+    "reason": "Replaces a list of what images cannot resolve with the measurements needed for continuous operation.",
+    "facts_preserved": [
+      "Thermal coupling and airflow",
+      "Images are surface temperatures",
+      "Continuous rating needs temperature history"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific engineering work"
+    ]
+  },
+  {
+    "id": "front-15",
+    "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+    "old": "The revised project plan sets a continuous-output target of \\SI{100}{\\watt} and a continuous minimum of \\SI{65}{\\watt} \\cite{projectOctoberPlan}. The earlier schedule sets a \\SI{75}{\\watt} continuous validation milestone \\cite{projectEarlierPlan}. The minimum is the revised acceptance requirement, the milestone is an intermediate test, and the target is the intended capability. Each requires a stated load, duration, and thermal condition. Reaching a power level briefly does not show that the converter can hold it as its temperature settles.\r\n",
+    "new": "The revised project plan sets a continuous-output target of \\SI{100}{\\watt} and a continuous minimum of \\SI{65}{\\watt} \\cite{projectOctoberPlan}; the earlier schedule sets a \\SI{75}{\\watt} continuous validation milestone \\cite{projectEarlierPlan}. Each level must be tested at a stated load and duration while temperature is tracked as it settles.\r\n",
+    "reason": "Combines the three power levels and their common thermal test requirement without repeating their administrative labels.",
+    "facts_preserved": [
+      "100 W target, 65 W minimum, 75 W earlier milestone",
+      "Continuous duration and temperature conditions"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "front-16",
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "old": "The circuit relationships and approximate component values could be checked against the supplied analysis and LTspice files. These do not form a validated simulation of the final board and firmware. Chapter~\\ref{ch:simulation} explains the useful analytical results, the model differences, and the comparisons still needed.\r\n",
+    "new": "The supplied analysis and LTspice circuits were used to check circuit relationships and approximate component values. Chapter~\\ref{ch:simulation} describes the calculations and the changes needed to model the final board and firmware.\r\n",
+    "reason": "States how the supplied models were used and what development remains in connected prose.",
+    "facts_preserved": [
+      "Approximate checks against supplied analysis",
+      "No validated final-board simulation implied"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "front-17",
+    "path": "Chapters/02_Background/02_Charge_Pump_Principle.tex",
+    "old": "Inherent PFC describes the charge-transfer mechanism. Assembled-supply PF and THD remain dependent on load and burst control and require measurement.\r\n",
+    "new": "The charge-transfer mechanism provides inherent PFC, while the assembled supply's power factor and current distortion depend on load and burst control.\r\n",
+    "reason": "Connects the mechanism to the practical effect of load and control without repeating a generic measurement requirement.",
+    "facts_preserved": [
+      "Load and burst control affect PF and THD"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "front-18",
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "old": "The supplied loss files use a different circuit and device set, so their efficiency cannot be transferred to the USB-C supply. The GS66502B model also omits thermal and package behavior needed to predict the assembly's surface or junction temperatures.\r\n",
+    "new": "The supplied loss calculations use a different circuit and device set from the USB-C supply. The GS66502B model also omits the thermal and package behavior needed to predict the assembly's surface or junction temperatures.\r\n",
+    "reason": "Uses engineering context instead of a file reference and preserves the reason the model cannot predict prototype heating.",
+    "facts_preserved": [
+      "Predecessor circuit and device differ",
+      "Thermal and package model omissions"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "front-19",
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "old": "The revised plan asks why the reported \\SI{85}{\\watt} V2 result falls \\SI{15}{\\watt} short of the \\SI{100}{\\watt} target \\cite{projectOctoberPlan}. That is a gap in output capability, not a measured \\SI{15}{\\watt} loss. The matched \\SI{79.89}{\\watt} V1.0 baseline is \\SI{20.11}{\\watt} below the target and must be diagnosed using its own configuration and test conditions.\r\n",
+    "new": "The revised plan asks why the reported \\SI{85}{\\watt} V2 result falls \\SI{15}{\\watt} short of the \\SI{100}{\\watt} target \\cite{projectOctoberPlan}. This output-power gap is not a measured loss. The matched V1.0 baseline reached \\SI{79.89}{\\watt}, or \\SI{20.11}{\\watt} below the target, under a different configuration and test conditions.\r\n",
+    "reason": "Clarifies the two operating points and the meaning of the power gap in connected prose.",
+    "facts_preserved": [
+      "Reported V2 85 W and gap",
+      "Measured V1 79.89 W and gap",
+      "Output shortfall is not measured loss"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+\section{Auxiliary Supplies and Startup}
+\label{sec:hw-aux}
+
+Startup depends on the auxiliary supplies. The primary bias rail is supplied by BAC1S12SC, and the local controller and sensing circuits are powered by LMR54410 regulators. The isolated feedback and output electronics use secondary power. The MCU can therefore start before the isolated sensing circuit is powered sufficiently to provide a valid reading.
+
+The local supply rails, UART communication, inhibited burst-enable output PA10, carrier outputs, and analog feedback were checked during bring-up before the loop was closed. The LMG2652 bias must be within its operating range before switching.
+
+Bounded precharge bursts and settling intervals are used to power the secondary-side sensing before normal control. The sequence ends at the readiness threshold or attempt limit (\cref{sec:ctrl-state}). Auxiliary-rail startup, operating range, and temperature rise require further measurement.

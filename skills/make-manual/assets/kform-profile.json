@@ -1,0 +1,18 @@
+{
+  "organization": "KFORM Systems",
+  "colors": {
+    "charcoal": "#101416",
+    "accent": "#C9AD73",
+    "ink": "#242E33",
+    "muted": "#586A72",
+    "light": "#F4F5F3",
+    "line": "#D6DCDA"
+  },
+  "logo": "kform/kform-logo-inverse.png",
+  "fonts": {
+    "heading": "kform/BebasNeue-Regular.ttf",
+    "body": "kform/IBMPlexSans-Regular.ttf",
+    "bold": "kform/IBMPlexSans-Bold.ttf",
+    "mono": "kform/IBMPlexMono-Medium.ttf"
+  }
+}

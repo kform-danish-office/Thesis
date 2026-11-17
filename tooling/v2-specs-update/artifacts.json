@@ -1,0 +1,19 @@
+{
+  "pages": 430,
+  "source_files": 483,
+  "intro_pages": 6,
+  "artifacts": {
+    "Thesis_V2_Specifications_Update.pdf": {
+      "bytes": 21380297,
+      "sha256": "224df54046faf357f2e9cb93e6e51572b2a549a06ece2302300de7a048630cdf"
+    },
+    "Thesis_V2_Specifications_Source.zip": {
+      "bytes": 92005287,
+      "sha256": "5b2468237e0453c98f323c816398d806ad998d7365d9d2ee9790a97ba9129de9"
+    },
+    "V2_Introduction_Excerpt.pdf": {
+      "bytes": 61542,
+      "sha256": "9fa19868195344b4fe06ffc85a35d6db02a9979f8993ca8dd899aa094eb9de5c"
+    }
+  }
+}

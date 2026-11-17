@@ -1,0 +1,20 @@
+\section{Component and Semiconductor Stress}
+\label{sec:analysis-stress}
+
+The half bridge is exposed to DC-link voltage plus transient overshoot. Its current is the signed sum of pump current and the complete primary resonant-path current:
+\begin{equation}
+i_{\mathrm{HB}}(t)=i_P(t)+i_{\mathrm{res,p}}(t).
+\end{equation}
+The primary branch already includes magnetizing current: \(i_{\mathrm{res,p}}=i_{\mathrm{load,p}}+i_m\). Adding \(i_m\) to the complete branch again would double-count it.
+
+Adding the branch-current magnitudes gives a conservative peak estimate. Calculating RMS loss requires their actual signed waveform through active and idle intervals. For the triangular pump approximation,
+\begin{equation}
+I_{P,\mathrm{pk}}\approx4f_s\CP V_{\mathrm{in,pk}}.
+\end{equation}
+Pump current can impose substantial half-bridge stress at modest connector current. Calibrated primary-current feedback at PA2 supports load classification; it does not directly measure connector current.
+
+Pump-capacitor, inductor, and steering-diode stress depends on line phase, link voltage, and charge-transfer completion. Isolated-branch circulating current contributes winding and resonant-capacitor heating, while secondary rectifier stress depends on conduction intervals and storage voltage.
+
+Driving the original prototype's burst-enable output PA10 low inhibits excitation but does not remove stored tank energy. The hard OVP margin must therefore include sensing and actuation delays and residual transfer after inhibition.
+
+Measured bus maxima, overshoot, current peaks, and temperature are compared with the \SI{450}{\volt} capacitor rating and the semiconductor ratings. The initial calculations use nominal passive values and supplied magnetic measurements. The waveforms give the stresses reached in the tested circuit.

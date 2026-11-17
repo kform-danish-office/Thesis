@@ -1,0 +1,15 @@
+{
+  "tables": [
+    "dc_complete_table.tex",
+    "ac_complete_table.tex",
+    "efficiency_table.tex",
+    "pq_complete_table.tex",
+    "thermal_complete_table.tex",
+    "raw_waveform_source_table.tex",
+    "transient_complete_table.tex",
+    "record_metadata_table.tex"
+  ],
+  "mismatches": [],
+  "temporary_output": "/tmp/thesis-table-check-pezql0p5",
+  "numerical_inputs": "unchanged existing CSVs; no recomputation or current-tree regeneration"
+}

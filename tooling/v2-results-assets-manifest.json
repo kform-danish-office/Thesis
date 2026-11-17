@@ -1,0 +1,82 @@
+[
+  {
+    "path": "Data/measurements/v2_results/DATA_DICTIONARY.md",
+    "sha256": "1d0b666f50fc8aafe01776b9ee190624dff93d61a3733e73d28fa704752634f8",
+    "bytes": 17806
+  },
+  {
+    "path": "Data/measurements/v2_results/README.md",
+    "sha256": "a8a29fc8fb89412c76eec1c51df46f594b2327b4aab5c72c9fc4741cb6543550",
+    "bytes": 5533
+  },
+  {
+    "path": "Data/measurements/v2_results/V2_Results_Entry.xlsx",
+    "sha256": "bc53c2aea6c7191229734002448189d3764c10e935fcc8f6a8620a15dba0f245",
+    "bytes": 36933
+  },
+  {
+    "path": "Data/measurements/v2_results/events.csv",
+    "sha256": "854d810439edd8a0fc2034fab5305f8364b413b5dadec69aab95864f1345a60e",
+    "bytes": 367
+  },
+  {
+    "path": "Data/measurements/v2_results/evidence.csv",
+    "sha256": "1fecea32dd4e235b199ec130b06e972b0ecb88f0fc7c6c15e9dbb3f83e51290d",
+    "bytes": 211
+  },
+  {
+    "path": "Data/measurements/v2_results/instruments.csv",
+    "sha256": "4cbe645273970133324c7ec41c9ecfe4711bd361df504ad24f4d4f7ad4246f2c",
+    "bytes": 427
+  },
+  {
+    "path": "Data/measurements/v2_results/steady_state.csv",
+    "sha256": "2cebb545592fcb85789187fcfe1f0dd754d362bdacf6bf893fa102b3edaaa33b",
+    "bytes": 269
+  },
+  {
+    "path": "Data/measurements/v2_results/test_setup.csv",
+    "sha256": "0703efb9c912c5004dccef3bcbb0cb8c8445e94cb3968edb43e48b0471333348",
+    "bytes": 125
+  },
+  {
+    "path": "Data/measurements/v2_results/thermal.csv",
+    "sha256": "3753edf0ec65c77281567c9251c1f74142f7ff2ef067b216dd8c1bf10582065f",
+    "bytes": 237
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/README.md",
+    "sha256": "d08b7bf0a610cc6b1943d1656147bbef5e83305b6ee8565f064fe648e31f9a1b",
+    "bytes": 1913
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/figure_v2_board.tex",
+    "sha256": "838d38a8fcf14f4fccc48552050ea81c265f664fefd5ba22dfa4131485387e7c",
+    "bytes": 440
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/image-edit-prompt.txt",
+    "sha256": "9de17ce275597d2bb431b3fb57020a203e11d81cd693053eef3589aa1adfd3dd",
+    "bytes": 1790
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/provenance.json",
+    "sha256": "a09ce73a9b975287ed50b746afdb2e7c290b98ebb8a5cd039d55e6ecae7912b3",
+    "bytes": 1308
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_cleaned_illustration.png",
+    "sha256": "c609bee3b9f6566d6f19cfa459141df075e5216592808675f7a308460cec4317",
+    "bytes": 2639853
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_documentary_crop.pdf",
+    "sha256": "565c7764cb631670d60e8d7f4bc8c3ebba48c8ac1369c11339630f54136a51a2",
+    "bytes": 110047
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_original.jpg",
+    "sha256": "0ca0e42a90be805e7854421ac385da3fdaaa08c4c43c68c9dd58b9afb005d4aa",
+    "bytes": 109610
+  }
+]

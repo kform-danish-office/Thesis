@@ -1,0 +1,48 @@
+\section{Analytical Parameter Sensitivity}
+\label{sec:sim-sweeps}
+
+The first-order equations estimate analytical sensitivity; no final-board tolerance sweep was completed. For continuous ideal charge transfer,
+\begin{equation}
+\frac{\delta P_{\mathrm{in}}}{P_{\mathrm{in}}}\approx
+\frac{\delta f_s}{f_s}+\frac{\delta\CP}{\CP}
++2\frac{\delta V_{\mathrm{in,rms}}}{V_{\mathrm{in,rms}}},
+\end{equation}
+The quadratic line-voltage dependence changes power transfer without a component change. Burst operation adds active-cycle-density dependence, which must be included in matched comparisons.
+
+Series resonance changes according to
+\begin{equation}
+\frac{\delta f_0}{f_0}\approx-
+\frac{1}{2}\left(\frac{\delta\LRES}{\LRES}
++\frac{\delta\CRES}{\CRES}\right).
+\label{eq:sim-resonance-sensitivity}
+\end{equation}
+A 5\% increase in either series parameter gives an approximately 2.5\% first-order resonance reduction. Near-carrier operation makes the corresponding phase shift relevant to commutation.
+
+The small-ripple DC-link relationship gives
+\begin{equation}
+\widehat{\Delta V}_{\mathrm{DC}}\propto
+\frac{P}{\omega_l\CDC\VDC}.
+\end{equation}
+Increasing link capacitance reduces ripple and increases stored energy. Increasing secondary capacitance reduces packet-induced voltage rise but increases startup energy. Storage changes therefore affect both steady operation and transients.
+
+\begin{table}[H]
+\centering
+\caption{Calculated effects of changing circuit values and burst density.}
+\label{tab:sim-analytical-sensitivity}
+\begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}L{0.30\textwidth}Y@{}}
+\toprule
+Change & Ideal trend & Practical consequence\\
+\midrule
+Increase \(\CP\) & More charge per active cycle & More available power and pump-current stress; \(\LP\) timing should be reconsidered\\
+Increase \(\LP\) & Slower pump-current evolution & Different clamp duration and possible incomplete excursion\\
+Increase series \(L\) or \(C\) & Lower series resonance & Changed gain/phase at the fixed carrier\\
+Increase \(\CDC\) & Less link-voltage ripple & Greater stored energy and changed startup/discharge behavior\\
+Increase secondary capacitance & Less voltage excursion per energy packet & More startup energy and a different transient response\\
+Reduce burst density & Lower average excitation & Lower pump transfer and changed burst-start conditions\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Saturation, nonlinear capacitance, rectifier conduction, and control-state changes limit these sensitivities. Combined effects require a switched model or matched hardware comparison.
+
+The revised plan \cite{projectOctoberPlan} specifies baseline repetition followed by one-parameter or one-part changes under matched input, output setting, load, firmware, and thermal conditions. Candidate variables include sensing calibration, timing, control limits, pump and tank values, gate drive, and cooling. The later V2 firmware allows carrier frequency and dead time to be changed with output disabled (\cref{sec:ctrl-v2-adjustable-timing}), allowing these parameters to be varied separately from the tank components. The planned progression from \SI{85}{\watt} through \SI{90}{\watt}, \SI{95}{\watt}, and \SI{100}{\watt} remains conditional on electrical-stress and temperature limits.

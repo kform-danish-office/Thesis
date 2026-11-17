@@ -1,0 +1,244 @@
+--- before/Backmatter/Appendices/C_Firmware_Documentation.tex
++++ after/Backmatter/Appendices/C_Firmware_Documentation.tex
+@@ -103,7 +103,7 @@
+ 
+ The default ADC reference is \SI{3.3}{\volt}; divider entries are \(1500/10\) in \si{\kilo\ohm} for PA0 and \(390/10\) in \si{\kilo\ohm} for the secondary input. AMC defaults are \SI{3.3}{\volt} reference and \SI{1.28}{\volt} clip. Current defaults are \SI{820}{\ohm} and \(0.000901\) A/A. These defaults do not confirm the fitted V2 values. The repeated \SI{6.2}{\mega\ohm} labels in the V2 drawing must be checked against fitted resistors and measured pin voltages.
+ 
+-With \texttt{ZEROI}, 64 PA2 readings are averaged, with a \SI{2}{\milli\second} delay between reads. Their pin-voltage average is stored as \texttt{CSOFF}. The command does not switch output OFF or establish zero current. Zero primary current must be established before use; sensor gain is not calibrated. Voltage gain and offset need external reference readings. The filter uses elapsed time and \(\alpha=\Delta t/(\tau+\Delta t)\), with bounds on elapsed time and coefficient. The first read initializes the filtered values. Legacy \texttt{ADCVP}, \texttt{ADCVS}, \texttt{ADCI}, and \texttt{ADCDUMMY} fields can still be imported but do not turn the active circular-DMA scan into a software averaging loop.
++With \texttt{ZEROI}, 64 PA2 readings are averaged, with a \SI{2}{\milli\second} delay between reads. Their pin-voltage average is stored as \texttt{CSOFF}. The operator must switch output OFF and check for zero primary current before using the terminal command. This captures the offset; gain calibration uses a separate reference. Voltage gain and offset need external reference readings. The filter uses elapsed time and \(\alpha=\Delta t/(\tau+\Delta t)\), with bounds on elapsed time and coefficient. The first read initializes the filtered values. Legacy \texttt{ADCVP}, \texttt{ADCVS}, \texttt{ADCI}, and \texttt{ADCDUMMY} fields can still be imported but do not turn the active circular-DMA scan into a software averaging loop.
+ 
+ \texttt{PFBSRC} selects \(V_{\mathrm{pri}}I_{\mathrm{pri}}\) or \(V_{\mathrm{sb}}I_{\mathrm{pri}}\) for diagnostics. Neither product is calibrated connector output power. Measured output power is calculated from the external connector-voltage and load-current readings used in the results chapter.
+ 
+@@ -208,7 +208,7 @@
+ \texttt{BEGINCFG}, \texttt{BEGINIMPORT}; \texttt{ENDCFG}, \texttt{ENDIMPORT}; \texttt{SAVE} & Group an import or request storage. An unsafe save remains pending.\\
+ \texttt{DEFAULTS} & Request OFF, restore defaults, select open loop, and save when allowed.\\
+ \texttt{CLR} & Clear the terminal latch and reapply enabled-state gate handling. Unlike web CLR, this terminal command does not require OFF first.\\
+-\texttt{ZEROI}, \texttt{IZERO} & Capture PA2 pin-voltage offset. The operator must first establish zero primary current; the command does not enforce OFF.\\
++\texttt{ZEROI}, \texttt{IZERO} & Capture PA2 pin-voltage offset. Switch output OFF and check for zero primary current before the terminal command; OFF is not enforced automatically.\\
+ \texttt{AUTOPRE}, \texttt{PREAUTO}, \texttt{CALPRE} & Run precharge tuning and leave output stopped.\\
+ \texttt{CAL}, \texttt{AUTOTUNE}, \texttt{AUTOFULL}, \texttt{AUTOBANG} & Run the fixed-FEN coarse/fine duty scan and select voltage control. All use the same active tuning routine.\\
+ \texttt{CALLOAD n}; \texttt{AUTOBANG n}, \texttt{AUTOFULL n}, \texttt{CALFULL n} & Tune with profile 1--3.\\
+@@ -386,7 +386,7 @@
+ \section{Adjustable V2 Carrier Timing}
+ \label{sec:app-fw-carrier-timing}
+ 
+-\texttt{TIMING Hz ns} accepts carrier requests from \SI{500}{\kilo\hertz} to \SI{2}{\mega\hertz} and dead-time requests from \SI{20}{\nano\second} to \SI{200}{\nano\second}. These are timer limits; the usable converter range must be established from switching and thermal measurements. The command is rejected during output, startup, autotuning, or queued/running calibration. Frequency and dead time are applied atomically with enable held low.
++\texttt{TIMING Hz ns} accepts carrier requests from \SI{500}{\kilo\hertz} to \SI{2}{\mega\hertz} and dead-time requests from \SI{20}{\nano\second} to \SI{200}{\nano\second}. These are timer limits. The converter operating range still needs switching and thermal measurements. The command is rejected during output, startup, autotuning, or queued/running calibration. Frequency and dead time are applied atomically with enable held low.
+ 
+ With prescaler zero, the period is rounded to an even number of timer ticks, and dead time is rounded up to a whole tick. At \SI{100}{\mega\hertz}, the period grid is \SI{20}{\nano\second} and the dead-time grid is \SI{10}{\nano\second}. The pair must satisfy \(4N_{\mathrm{dead}}<N_{\mathrm{period}}\). For example, a request of \SI{950}{\kilo\hertz} and \SI{53}{\nano\second} gives 106 period ticks and six dead-time ticks: approximately \SI{943.396}{\kilo\hertz} and \SI{60}{\nano\second}. At \SI{2}{\mega\hertz}, \SI{120}{\nano\second} is accepted but \SI{130}{\nano\second} is rejected.
+ 
+--- before/Backmatter/Appendices/G_Software_Tools.tex
++++ after/Backmatter/Appendices/G_Software_Tools.tex
+@@ -262,8 +262,7 @@
+ The original local acquisition paths are tried first, with the included
+ raw copies used when those paths are unavailable. Exported amplitudes,
+ offsets, and times are kept. Switching period is estimated from
+-stated hysteretic thresholds and median edge spacing; single-node
+-records still cannot establish gate timing or ZVS. The scripts save source and
++stated hysteretic thresholds and median edge spacing. The scripts save source and
+ output checksums, CSV data, file lists, figure descriptions, and processing
+ notes beside the results. Assertions check that the expected records were processed.
+ 
+--- before/Backmatter/Appendices/H_Full_Embedded_Source.tex
++++ after/Backmatter/Appendices/H_Full_Embedded_Source.tex
+@@ -27,8 +27,7 @@
+ 
+ The conditional board definitions specify the MCU pins, timer,
+ ADC/DMA path, and settings store. The shared voltage controller
+-follows those definitions. A successful build does not verify fitted
+-divider ratios, gate timing, or powered-converter performance.
++follows those definitions.
+ 
+ The complete file contains 5,348 physical lines.
+ 
+--- before/Chapters/02_Background/04_Soft_Switching_GaN.tex
++++ after/Chapters/02_Background/04_Soft_Switching_GaN.tex
+@@ -13,7 +13,7 @@
+ 
+ Fast GaN transitions increase sensitivity to interconnect inductance, producing \(L\,\mathrm{d}i/\mathrm{d}t\) overshoot, and to capacitive coupling from the switch node into sensing and control. Gate-drive layout, decoupling, commutation-loop area, and return paths therefore affect switching behavior.
+ 
+-Dead time must complete node commutation without excessive reverse conduction. An insufficient interval can leave residual turn-on voltage or allow cross conduction; an excessive interval increases loss. The required interval depends on bus voltage, current, capacitance, and tank state, so burst restart is assessed separately from established switching.
++Dead time must complete node commutation without excessive reverse conduction. An insufficient interval can leave residual turn-on voltage or allow cross conduction; an excessive interval increases loss. The required interval depends on bus voltage, current, capacitance, and tank state, so burst restart is assessed separately from switching within an active burst.
+ 
+ The prototype uses an integrated LMG2652 half bridge. The supplied discrete-GaN and external-driver models differ in capacitance, delay, sensing response, and thermal paths. These models describe the operating principle, but the assembled stage needs its own switching measurements.
+ 
+--- before/Chapters/02_Background/chapter.tex
++++ after/Chapters/02_Background/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Background and Related Work}
+ \label{ch:background}
+ 
+-The charge-pump and isolated resonant paths share one switching stage. Their interaction determines input-current shaping, power transfer, and commutation. The reference converters establish this operating principle; the USB-C adaptation adds startup, no-load, and load-transient requirements.
++The charge-pump and isolated resonant paths share one switching stage. Their interaction determines input-current shaping, power transfer, and commutation. The reference converters use this operating principle; the USB-C adaptation adds startup, no-load, and load-transient requirements.
+ 
+ \input{Chapters/02_Background/01_Offline_ACDC_PFC}
+ \input{Chapters/02_Background/02_Charge_Pump_Principle}
+--- before/Chapters/03_Requirements_Architecture/05_Safety_Protection.tex
++++ after/Chapters/03_Requirements_Architecture/05_Safety_Protection.tex
+@@ -5,7 +5,7 @@
+ 
+ The V1.1 drawing includes an input fuse, surge suppression, line filtering, and a CAP300DG discharge circuit, along with protection components in the auxiliary and USB-C sections. Chapter~\ref{ch:hardware} explains their roles. These functions support laboratory operation; qualification still requires tests of the complete assembly.
+ 
+-Precharge applies limited excitation to establish the isolated feedback supply. It ends when the feedback threshold or configured attempt limit is reached. High-impedance classification lowers the burst limit and voltage window. Eligible light/no-load overvoltage invokes soft holdoff within the hard margin; other overvoltage conditions latch overvoltage protection (OVP) until the defined clear or reset action. Burst enable (PA10) is held low to inhibit further excitation, without discharging stored energy. Chapter~\ref{ch:control} and Appendix~\ref{app:equations} specify the conditions.
++Precharge applies limited excitation to power the isolated feedback circuit. It ends when the feedback threshold or configured attempt limit is reached. High-impedance classification lowers the burst limit and voltage window. Eligible light/no-load overvoltage invokes soft holdoff within the hard margin; other overvoltage conditions latch overvoltage protection (OVP) until the defined clear or reset action. Burst enable (PA10) is held low to inhibit further excitation, without discharging stored energy. Chapter~\ref{ch:control} and Appendix~\ref{app:equations} specify the conditions.
+ 
+ Primary half-bridge-current feedback (PA2) supports load classification and diagnostics. The configurable current trip is disabled by default, and the active voltage loop does not call legacy foldback helpers. Any current-limited test must identify the active limiter: output controller, AC source, electronic load, or explicitly enabled firmware threshold.
+ 
+--- before/Chapters/04_Topology_Analysis/02_Switching_Cycle.tex
++++ after/Chapters/04_Topology_Analysis/02_Switching_Cycle.tex
+@@ -1,7 +1,7 @@
+ \section{Switching-Cycle Operation}
+ \label{sec:analysis-switching}
+ 
+-Each enabled cycle commutates the switch node between the DC-link rails. The pump sequence comprises charge-transfer, clamp, and freewheeling intervals, while the isolated tank carries inductive current within an established burst. Table~\ref{tab:analysis-pump-intervals} summarizes the six reference intervals \cite{ammar2021led}.
++Each enabled cycle commutates the switch node between the DC-link rails. The pump sequence comprises charge-transfer, clamp, and freewheeling intervals, while the isolated tank carries inductive current during an active burst. Table~\ref{tab:analysis-pump-intervals} summarizes the six reference intervals \cite{ammar2021led}.
+ 
+ \begin{table}[htbp]
+ \centering
+--- before/Chapters/04_Topology_Analysis/05_Pump_Inductor.tex
++++ after/Chapters/04_Topology_Analysis/05_Pump_Inductor.tex
+@@ -26,4 +26,4 @@
+ \end{equation}
+ The carrier lies above ideal pump resonance, giving inductive current that can support shared-half-bridge commutation over much of the line cycle.
+ 
+-Lower inductance increases current slope, peak stress, and possible clamp conduction. Higher inductance can prevent completion of the capacitor excursion. In-circuit waveforms are required to establish the timing margin.
++Lower inductance increases current slope, peak stress, and possible clamp conduction. Higher inductance can prevent completion of the capacitor excursion. In-circuit waveforms show how much time remains between charge-transfer completion and the next transition.
+--- before/Chapters/04_Topology_Analysis/06_DC_Link.tex
++++ after/Chapters/04_Topology_Analysis/06_DC_Link.tex
+@@ -27,4 +27,4 @@
+ \end{equation}
+ Increasing link capacitance reduces line-frequency ripple and improves pump-voltage margin, but increases stored energy during startup, load removal, and abnormal switching.
+ 
+-Measured bus mean, ripple, and maximum establish capacitor-voltage margin and half-bridge excitation. Control can redistribute the single-phase energy ripple but cannot eliminate its storage requirement.
++Measured bus mean, ripple, and maximum are used to calculate capacitor-voltage margin and half-bridge excitation. Control can redistribute the single-phase energy ripple but cannot eliminate its storage requirement.
+--- before/Chapters/04_Topology_Analysis/08_ZVS.tex
++++ after/Chapters/04_Topology_Analysis/08_ZVS.tex
+@@ -11,10 +11,10 @@
+ \begin{equation}
+ |i_{\mathrm{dt}}|t_{\mathrm{dt}}\gtrsim C_{\mathrm{eq}}\VDC.
+ \end{equation}
+-The charge condition must be met with the required polarity and before turn-on; charge magnitude alone does not establish ZVS.
++The charge condition must be met with the required polarity and before turn-on.
+ 
+ Both paths contribute to \(i_{\mathrm{dt}}\). In the modified reference, inductive pump current can exceed primary-referred output current and provide much of the commutation charge \cite{ammar2021led}. Its prototype contribution varies with line voltage and burst history; isolated load and magnetizing currents depend on transformer impedance and rectifier state.
+ 
+-Near-carrier resonance does not establish ZVS across the operating range. Tolerances shift resonance, pump current falls near line zero crossings, and idle intervals can remove circulating current. These conditions require separate switching captures even at fixed dead time.
++Tolerances shift resonance, pump current falls near line zero crossings, and idle intervals can remove circulating current. Switch-node transitions therefore need checking near line zero crossings and at burst restart, even with fixed dead time.
+ 
+ Dead time must complete commutation without excessive reverse conduction. The effective interval includes command timing, driver propagation, and device response. A quantitative margin requires calibrated node capacitance and timing, which the supplied model does not provide. Section~\ref{sec:res-zvs} assesses the available captures.
+--- before/Chapters/04_Topology_Analysis/09_Device_Stress.tex
++++ after/Chapters/04_Topology_Analysis/09_Device_Stress.tex
+@@ -17,4 +17,4 @@
+ 
+ Driving the original prototype's burst-enable output PA10 low inhibits excitation but does not remove stored tank energy. The hard OVP margin must therefore include sensing and actuation delays and residual transfer after inhibition.
+ 
+-Measured bus maxima, overshoot, current peaks, and temperature are compared with the \SI{450}{\volt} capacitor rating and the semiconductor ratings. Nominal passive values and supplied magnetic measurements establish the starting design; the waveforms determine the stresses reached in the tested circuit.
++Measured bus maxima, overshoot, current peaks, and temperature are compared with the \SI{450}{\volt} capacitor rating and the semiconductor ratings. The initial calculations use nominal passive values and supplied magnetic measurements. The waveforms give the stresses reached in the tested circuit.
+--- before/Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex
++++ after/Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex
+@@ -3,4 +3,4 @@
+ 
+ Installed creepage and clearance can be limited by solder fillets, temporary wiring, supports, exposed core surfaces, or the main PCB. Checking winding-board spacing alone is insufficient.
+ 
+-Main-board spacing and the laboratory insulation check are described in \Cref{sec:hw-layout,sec:hw-overview}. A full insulation check also requires the transformer spacing, material group, and standardized dielectric tests. Functional isolation alone does not establish creepage, clearance, or dielectric strength.
++Main-board spacing and the laboratory insulation check are described in \Cref{sec:hw-layout,sec:hw-overview}. The full insulation check includes transformer spacing, material group, and standardized dielectric tests.
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ after/Chapters/07_Hardware/16_V2_F410.tex
+@@ -59,7 +59,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The earlier V2 port configures center-aligned TIM1 at a nominal \SI{100}{\mega\hertz} timer clock, with auto-reload ARR = 50, compare CCR1 = 25, and dead-time field DTG = 4. These settings give a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time \cite{ststm32f410rm}. TIM5 schedules the enable envelope; bounded polling of carrier updates attempts to align non-static transitions but leaves software-dependent edge latency. The later powered trial used a reported \SI{60}{\nano\second} software setting (\cref{sec:res-v2-testing}), with its firmware version unrecorded. Driver-input and switch-node captures are required to establish effective dead time and enable alignment.
++The earlier V2 port configures center-aligned TIM1 at a nominal \SI{100}{\mega\hertz} timer clock, with auto-reload ARR = 50, compare CCR1 = 25, and dead-time field DTG = 4. These settings give a nominal \SI{1}{\mega\hertz} complementary carrier and \SI{40}{\nano\second} programmed dead time \cite{ststm32f410rm}. TIM5 schedules the enable envelope; bounded polling of carrier updates attempts to align non-static transitions but leaves software-dependent edge latency. The later powered trial used a reported \SI{60}{\nano\second} software setting (\cref{sec:res-v2-testing}), with its firmware version unrecorded. Effective dead time and enable alignment are measured from driver-input and switch-node captures.
+ 
+ ADC1 continuously scans primary voltage at PA0, secondary-bulk voltage at PA1, and half-bridge current at PA2 through DMA2 Stream0 Channel0 without synchronization to the carrier. At the \SI{25}{\mega\hertz} ADC clock, 84 acquisition and 12 conversion cycles give calculated intervals of \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per frame. Secondary-bulk voltage remains the regulated quantity; primary current supports load classification and optional protection rather than connector output-current measurement.
+ 
+@@ -80,4 +80,4 @@
+ 
+ The October plan starts from a reported V2 point near \SI{85}{\watt} toward a \SI{100}{\watt} target \cite{projectOctoberPlan}. Repeating that point requires the V2 assembly, input power, output voltage/current, temperature, duration, and firmware settings together. These conditions were not recorded together. The reported \SI{85}{\watt} point still needs to be repeated and is not included in the measured curves.
+ 
+-The matched \SI{79.89}{\watt} tests on the modified V1.0 assembly provide the measured baseline (\cref{ch:results}). V2 bench observations are reported in \cref{sec:res-v2-testing}; matched input--output and thermal-endurance tests remain incomplete. The V1.0 outline is \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre}; V2 assembly dimensions must be measured separately before calculating its power density. The reported \SI{85}{\watt} point and matched \SI{79.89}{\watt} point do not demonstrate sustained operation at the \SI{100}{\watt} target.
++The matched \SI{79.89}{\watt} tests on the modified V1.0 assembly provide the measured baseline (\cref{ch:results}). V2 bench observations are reported in \cref{sec:res-v2-testing}; matched input--output and thermal-endurance tests remain incomplete. The V1.0 outline is \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre}; V2 assembly dimensions must be measured separately before calculating its power density. The reported \SI{85}{\watt} point and matched \SI{79.89}{\watt} point are intermediate loads below the \SI{100}{\watt} target.
+--- before/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
++++ after/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
+@@ -30,7 +30,7 @@
+ 
+ The free-running ADC scan samples primary voltage, secondary-bulk voltage, and primary current sequentially, without synchronization to the carrier. At the selected \SI{25}{\mega\hertz} clock, 84 sampling plus 12 conversion cycles give \SI{3.84}{\micro\second} per channel and \SI{11.52}{\micro\second} per scan, about 86.8 thousand scans per second. ADC overrun and DMA errors are polled during filter updates to route detected acquisition failures to the sensor-fault path.
+ 
+-The port retains the earlier conversion defaults. The repeated \SI{6.2}{\mega\ohm} schematic labels do not establish the assumed divider ratios; fitted resistors and measured gains must be verified before using the displayed voltage, current, or protection thresholds.
++The port retains the earlier conversion defaults. The repeated \SI{6.2}{\mega\ohm} schematic labels need checking against the fitted resistors. The voltage, current, and protection scales must use the measured circuit gains.
+ 
+ \subsection{Saving MCU Settings}
+ 
+@@ -63,7 +63,7 @@
+ 
+ Carrier frequency and dead time were made adjustable so that switching could be set relative to the modified resonant tank and the commutation interval could be varied without rebuilding the firmware. Both values are applied together through \texttt{TIMING} while output is OFF and startup and calibration are inactive. Burst duty continues to regulate the secondary bulk voltage. The separate \texttt{FEN} setting controls the burst-enable frequency; the tank's natural resonant frequency is set by its inductance and capacitance.
+ 
+-The command accepts carrier requests from \SI{500}{\kilo\hertz} to \SI{2}{\mega\hertz} and dead-time requests from \SI{20}{\nano\second} to \SI{200}{\nano\second}. These are timer-setting limits; the usable converter range must be established from switching and thermal measurements. TIM1 uses an even period count for balanced reference pulses, and dead time is rounded up to a timer count. At a \SI{100}{\mega\hertz} timer clock, period increments are \SI{20}{\nano\second} and dead-time increments are \SI{10}{\nano\second}. Frequency steps therefore depend on the selected period.
++The command accepts carrier requests from \SI{500}{\kilo\hertz} to \SI{2}{\mega\hertz} and dead-time requests from \SI{20}{\nano\second} to \SI{200}{\nano\second}. These are timer-setting limits. The converter operating range still needs switching and thermal measurements. TIM1 uses an even period count for balanced reference pulses, and dead time is rounded up to a timer count. At a \SI{100}{\mega\hertz} timer clock, period increments are \SI{20}{\nano\second} and dead-time increments are \SI{10}{\nano\second}. Frequency steps therefore depend on the selected period.
+ 
+ For timer clock \(f_t\), period count \(N_p\), and dead-time count \(N_d\), the applied settings are
+ \begin{equation}
+@@ -74,7 +74,7 @@
+ 
+ Changing either applied timer count clears the three learned load profiles and tuning results. Reference resistances, sensor calibration, and applied duty settings are retained. Calibration must then be repeated before using learned profiles at the new timing. Browser timing changes require an explicit save while OFF; the terminal retains its existing automatic save after a \SI{1.5}{\second} quiet interval while OFF, unless a configuration import is active.
+ 
+-The programmed interval is the separation between timer output commands. Driver delay and switch-node commutation determine the effective transistor dead time, which must be measured on the assembled board. Automatic calibration does not search carrier frequency or establish zero-voltage switching.
++The programmed interval is the separation between timer output commands. Driver delay and switch-node commutation determine the effective transistor dead time, which must be measured on the assembled board. The duty-search calibration holds carrier frequency fixed.
+ 
+ \subsection{Software Verification}
+ 
+--- before/Chapters/09_Experimental_Methods/06_Test_Matrix.tex
++++ after/Chapters/09_Experimental_Methods/06_Test_Matrix.tex
+@@ -1,7 +1,7 @@
+ \section{Test Program and Data}
+ \label{sec:method-matrix}
+ 
+-Bring-up established switching and power transfer, followed by loaded and
++Switching and power transfer were checked during bring-up, followed by loaded and
+ no-load characterization. Workbook rows and instrument captures supplied the
+ numerical results and plots.
+ 
+--- before/Chapters/09_Experimental_Methods/10_Thermal.tex
++++ after/Chapters/09_Experimental_Methods/10_Thermal.tex
+@@ -7,6 +7,5 @@
+ component visibility affect the readings. Junction temperature and individual
+ copper, winding, and core losses cannot be extracted.
+ 
+-Incomplete ambient, airflow, warm-up, and camera-setup records prevent a
+-thermal steady-state assessment. The images guide instrumented monitoring
+-but do not establish a continuous power rating.
++Ambient, airflow, warm-up, and camera setup were not fully recorded.
++The images locate hotspots for temperature monitoring during longer runs.
+--- before/Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex
++++ after/Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex
+@@ -10,9 +10,8 @@
+ 
+ The reported approximately \SI{85}{\watt} V2 point must be repeated with
+ identified hardware, rework, magnetics, resonant values, controller target,
+-firmware source, saved settings, and live mode. Version, status, and validated
+-configuration exports are required; a successful build does not verify powered
+-operation.
++firmware source, saved settings, and live mode. Version, status, and
++configuration exports are recorded with the test.
+ 
+ The baseline record must identify AC input, output setting and negotiation,
+ load/cable, auxiliary supplies, cooling, ambient, and duration. Probe scaling
+@@ -58,7 +57,7 @@
+ \toprule
+ Stage & Test and condition for increasing load\\
+ \midrule
+-\SI{25}{\watt}, \SI{45}{\watt}, \SI{65}{\watt} & Establish regulation, power quality, efficiency, stress, and heating at increasing load under an applicable output setting.\\
++\SI{25}{\watt}, \SI{45}{\watt}, \SI{65}{\watt} & Measure regulation, power quality, efficiency, stress, and heating at increasing load under an applicable output setting.\\
+ \SI{75}{\watt}, \SI{80}{\watt}, approximately \SI{85}{\watt} & Repeat the upper baseline range and document whether the plan's V2 point is reproduced.\\
+ \SI{90}{\watt}, \SI{95}{\watt}, \SI{100}{\watt} & Proceed in stages only after the previous point passes the defined stress, temperature, control, and interface checks.\\
+ Final stable point & Complete the defined-duration thermal/stability run and the full measurement set; report the highest repeatable power if the target is not reached.\\
+@@ -83,7 +82,7 @@
+ Fixed-PDO tests must record advertised and negotiated voltage/current,
+ regulation, load range, and attach/detach behavior. PPS tests require an
+ advertised APDO, requested/accepted settings, measured connector output,
+-transitions, and limit behavior; fixed-voltage records do not verify PPS.
++transitions, and limit behavior.
+ 
+ Startup, shutdown, load steps/removal, no-load recovery, and mode transitions
+ require synchronized connector VBUS, relevant bulk/control signals, and event

@@ -1,0 +1,38 @@
+\section{Comparison with Published Converters}
+\label{sec:disc-reference}
+
+\begin{table}[htbp]
+\centering
+\caption{Published charge-pump results and the present prototype.}
+\label{tab:discussion-reference-comparison}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.23\textwidth}Y@{}}
+\toprule
+System & Test conditions & Reported performance\\
+\midrule
+Ammar et al. (2020) \cite{ammar2020chargepump} & \SI{1}{\mega\hertz}, \SI{50}{\watt} resonant AC--DC converter & PF 0.99; THD 8.6\%; efficiency up to approximately 88\%\\
+Ammar et al. (2021) \cite{ammar2021led} & \SI{1}{\mega\hertz}, up to \SI{42}{\watt}, isolated LED driver & PF 0.99; THD 6\%; full-load efficiency approximately 90\%\\
+Present prototype & \SI{240}{\volt}, \SI{50}{\hertz}; matched \SI{20}{\volt} cases near \SIrange{74}{80}{\watt} & Logged PF 0.97--0.99; THD \SIrange{2.23}{3.98}{\percent}; calculated efficiency \SIrange{76.5}{77.1}{\percent}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The earlier converters used the same conversion principle with their
+reported loads, magnetics, and control. The present converter extends the
+application to a detachable output and a higher tested output-power range,
+which limits direct comparison.
+
+The initial high-power efficiency estimates are below the published
+values. Output and auxiliary stages, magnetics, interconnects, control,
+and measurement power boundaries changed together; the additional loss
+cannot be allocated from this comparison.
+
+At \SI{20}{\volt}, \SI{4}{\ampere}, logged input minus calculated
+output is approximately \SI{24.5}{\watt}. This difference and the thermal
+images make simultaneous stage-power measurements a priority despite
+regulated average VBUS. Direct efficiency comparison requires consistent
+power boundaries and component-loss measurements.
+
+The selected low-THD points are encouraging, but harmonic ranges,
+analyzer settings, and operating conditions must be matched for comparison.
+Standards compliance requires a dedicated test procedure.

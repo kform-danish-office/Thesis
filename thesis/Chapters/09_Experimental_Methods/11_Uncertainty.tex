@@ -1,0 +1,35 @@
+\section{Measurement Uncertainty and Repeatability}
+\label{sec:method-uncertainty}
+
+Relevant uncertainties include instrument accuracy, probe attenuation and
+zero, voltage/current phase error, channel timing, output sense location,
+cable drop, emissivity, and repeatability. ADC scaling and thresholds can
+also shift burst operation and the operating point.
+
+For independent measured inputs \(x_i\), the combined standard uncertainty
+of a calculated quantity \(y\) is
+\begin{equation}
+ u_c(y)=
+ \sqrt{\sum_i
+ \left(\frac{\partial y}{\partial x_i}u(x_i)\right)^2}.
+ \label{eq:uncertainty-propagation}
+\end{equation}
+For output power and efficiency, this gives
+\begin{equation}
+ \frac{u(P_{\mathrm{out}})}{P_{\mathrm{out}}}
+ =
+ \sqrt{\left(\frac{u(V_{\mathrm{out}})}{V_{\mathrm{out}}}\right)^2+
+ \left(\frac{u(I_{\mathrm{out}})}{I_{\mathrm{out}}}\right)^2},
+ \label{eq:pout-uncertainty}
+\end{equation}
+\begin{equation}
+ \frac{u(\eta)}{\eta}
+ =
+ \sqrt{\left(\frac{u(P_{\mathrm{out}})}{P_{\mathrm{out}}}\right)^2+
+ \left(\frac{u(P_{\mathrm{in}})}{P_{\mathrm{in}}}\right)^2}.
+ \label{eq:eta-uncertainty}
+\end{equation}
+Correlated inputs require covariance terms in addition to these simplified
+independent-input expressions.
+
+The setup information and repeated measurements needed for a numerical uncertainty budget are incomplete, so no error bars are given. Characterizing worst-case transients requires repeated events with a defined acceptance band; thermal equilibrium requires a temperature history, and jitter requires timing measurements. These limits apply throughout Chapter~\ref{ch:results}.

@@ -1,0 +1,95 @@
+{
+  "slide_id": "b04",
+  "section": "backup",
+  "position": 19,
+  "purpose": "Give useful V1 connector operating-point details for questions.",
+  "title": "V1 USB-C connector operating points",
+  "takeaway": "At the 20 V, 4 A point, the calculated connector output was 79.89 W; selected loaded points remained close to their selected voltage. Planning only, not visible.",
+  "visible_content": {
+    "condition": "V1 · USB-C connector · approximately 240 V AC, 50 Hz",
+    "table_headers": [
+      "Selected (V)",
+      "Load (A)",
+      "Average VBUS (V)",
+      "Voltage error (%)",
+      "Connector power (W)"
+    ],
+    "table_rows": [
+      [
+        "5",
+        "3.0",
+        "5.02118",
+        "+0.4236",
+        "15.06"
+      ],
+      [
+        "9",
+        "3.0",
+        "9.00057",
+        "+0.0063",
+        "27.00"
+      ],
+      [
+        "15",
+        "3.0",
+        "14.98350",
+        "−0.1100",
+        "44.95"
+      ],
+      [
+        "20",
+        "3.7",
+        "19.99090",
+        "−0.0455",
+        "73.97"
+      ],
+      [
+        "20",
+        "4.0",
+        "19.97320",
+        "−0.1340",
+        "79.89"
+      ]
+    ],
+    "power_caption": "19.9732 V × 4 A = 79.89 W at the connector",
+    "phase_label": "Backup"
+  },
+  "visual": {
+    "layout": "Editable five-column, five-row table with condition above and power calculation below; use the requested values and labels exactly.",
+    "table_source": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_dc_operating_points.csv",
+    "table_column_order": [
+      "pdo_v",
+      "iout_a",
+      "vbus_avg_v",
+      "voltage_error_percent_derived",
+      "pout_w_derived"
+    ],
+    "rounding": "Average VBUS consistently to five decimal places, signed voltage error to four decimal places, and connector power to two decimal places. Calculate power from the unrounded recorded average voltage and load current."
+  },
+  "speaker_notes": "These are selected loaded operating points at the USB-C connector for V1. The input was approximately 240 volts AC at 50 hertz. The selected voltage is compared with the average measured VBUS, and the signed error is relative to the selected voltage. Connector power is calculated as average VBUS multiplied by the load current. At the 20 volt, 4 ampere point this gives 19.9732 times 4, or 79.89 watts. Across all 14 loaded points, the largest absolute average-voltage error was 0.5826 percent at 5 volts and 1 ampere, which is outside this compact table. The 20 volt, 4.7 ampere oscilloscope capture shown earlier illustrates switching; the 79.89 watt connector result comes from the separate 4 ampere operating point.",
+  "transition": null,
+  "duration_seconds": 90,
+  "sources": [
+    {
+      "type": "operating-point measurements",
+      "reference": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_dc_operating_points.csv",
+      "supports": "Five displayed selected-voltage, load-current and average-VBUS points, signed errors and calculated connector powers; 5 V, 1 A maximum loaded absolute average-voltage error."
+    },
+    {
+      "type": "V1 switching capture",
+      "reference": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_scope_20v_4p7a.png",
+      "supports": "Separate 20 V, 4.7 A scope capture; distinct from the 20 V, 4 A connector operating point."
+    }
+  ],
+  "checks": {
+    "verified": [
+      "Source records PDO5-MAX3A-001, PDO9-27W-3A-001, PDO15-45W-3A-001, PDO20-75W-001 and PDO20-80W-40A-001.",
+      "Power calculated with unrounded CSV values: 15.06354, 27.00171, 44.95050, 73.96633 and 79.89280 W, then rounded to two decimal places.",
+      "Signed errors are (average VBUS − selected voltage) / selected voltage × 100; the largest absolute error among all 14 loaded points is 0.5826% at 5 V, 1 A.",
+      "The 4.7 A scope capture and 4 A connector endpoint are separate measurements. Selected voltages and connector results do not establish USB-PD negotiation compliance."
+    ],
+    "unresolved": [],
+    "assembly": "Backup position 19; 90 seconds if called for questions, excluded from main timing. Preserve five rows, units and signs; table and all visible text editable."
+  },
+  "revision": 1
+}

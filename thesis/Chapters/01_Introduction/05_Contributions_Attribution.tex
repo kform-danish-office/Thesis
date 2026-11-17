@@ -1,0 +1,12 @@
+\section{Project Contributions and Earlier Designs}
+\label{sec:intro-contributions}
+
+The charge-pump conversion principle and analytical design method were developed by Ammar et al. \cite{ammar2020chargepump,ammar2021led}. The LTspice files and planar-magnetics designs came from that work. The supplied magnetic assemblies were used in the prototypes; a replacement set was not installed.
+
+The PCB was designed and assembled around the supplied inductor and transformer, with power, auxiliary, sensing, and output-interface circuits. Firmware development began with open-loop bring-up and progressed to DMA-based voltage control. Startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition were added to manage the operating states.
+
+For V2, the firmware was adapted to the onboard MCU, and control, isolated feedback, local supplies, and USB-C output were integrated with the power stage. Browser control and logging were added. During powered testing, the resonant tank was modified after the series inductor became hot. The schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
+
+Output voltage, load response, input power quality, and surface temperature were measured on the assembled supply. Input and output power readings were used to estimate conversion loss.
+
+The V3 contribution was a slimmed edge-card layout with the USB-PD output section removed and secondary rectification retained. The resulting volume reduction was estimated at the design stage. Further magnetic optimization was identified, but no new magnetic set was installed or validated within the project.

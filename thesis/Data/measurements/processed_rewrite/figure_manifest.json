@@ -1,0 +1,60 @@
+[
+  {
+    "figure": "efficiency_and_loss",
+    "description": "Eleven eligible row-level calculations; no fitted or interpolated curve.",
+    "sources": [
+      "efficiency_screening.csv"
+    ]
+  },
+  {
+    "figure": "regulation_and_logged_ripple",
+    "description": "DC voltage error and original logged peak-to-peak fields, retaining anomalous entries.",
+    "sources": [
+      "dc_operating_points.csv"
+    ]
+  },
+  {
+    "figure": "ac_detail_statistics",
+    "description": "Logged AC-detail ranges; these are not independently validated instantaneous waveform ripple.",
+    "sources": [
+      "ac_detail_statistics.csv"
+    ]
+  },
+  {
+    "figure": "power_quality",
+    "description": "Power factor and current THD at logged loads; instruments differ across records.",
+    "sources": [
+      "power_quality_logged.csv"
+    ]
+  },
+  {
+    "figure": "current_harmonic_spectrum",
+    "description": "Transcribed normalized current spectrum; panel scales intentionally differ; no assumed standards class.",
+    "sources": [
+      "current_harmonic_spectrum.csv"
+    ]
+  },
+  {
+    "figure": "thermal_observations",
+    "description": "Surface-temperature observations from labeled thermal screenshots; stabilization is unknown.",
+    "sources": [
+      "thermal_camera_readings.csv"
+    ]
+  },
+  {
+    "figure": "raw_switching_records",
+    "description": "Unmodified source switching records with carrier and burst detail; no gate-source trace or matched test-ID metadata.",
+    "sources": [
+      "raw_waveform_index.csv",
+      "switching_derived_metrics.csv"
+    ]
+  },
+  {
+    "figure": "raw_line_records",
+    "description": "Original recorded channel amplitudes, without power-target scaling or smoothing; channel calibration unresolved.",
+    "sources": [
+      "line_waveform_plot_data.csv",
+      "raw_waveform_index.csv"
+    ]
+  }
+]

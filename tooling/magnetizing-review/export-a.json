@@ -1,0 +1,204 @@
+{
+  "schema": "thesis-power-lab-resonance-v1",
+  "createdAt": "2026-10-24T22:58:18.039Z",
+  "preset": {
+    "id": "thesis-tested-nominal",
+    "label": "Tested V1.0 · thesis nominal tank",
+    "sourceNote": "Nominal analysis of the tested, modified V1.0 hardware. The 1 nF entry is an equivalent tank capacitance, not a documented individual capacitor population. Carrier = 1 MHz; nominal resonance ≈ 988.941 kHz.",
+    "sourceIds": [
+      "thesisTank",
+      "thesisMagnetics",
+      "thesisHardware",
+      "tiModel",
+      "rlcModel",
+      "preferredValues"
+    ]
+  },
+  "sourceReferences": {
+    "thesisTank": {
+      "title": "Thesis Chapter 4: Resonant Network and Transformer Ratio",
+      "detail": "07_Resonant_Stage.tex: 9.4 µH external series inductance + approximately 16.5 µH primary-referred leakage, with 1 nF equivalent resonant capacitance; approximately 989 kHz. This is a nominal model of the tested V1.0 assembly."
+    },
+    "thesisMagnetics": {
+      "title": "Thesis Chapter 6: Electrical Reference Values",
+      "detail": "02_Inherited_Specifications.tex: standalone transformer A leakage 16.42 µH, Lm 150.78 µH, primary/secondary turns ratio 8.039; B leakage 16.50 µH, Lm 139.89 µH, turns ratio 8.000. Installed A/B identity and post-assembly inductance were not recorded. Lm is a separate branch."
+    },
+    "thesisHardware": {
+      "title": "Thesis Appendix B: Identity of the Tested Assembly",
+      "detail": "The tested V1.0 assembly used two Würth 7443640470B 4.7 µH inductors in series. Later drawing values do not identify the fitted final hardware. Individual resonant-bank capacitor population values are not recorded by the 1 nF lumped model."
+    },
+    "tiModel": {
+      "title": "TI: Series resonant frequency and separate magnetizing branch",
+      "detail": "Supports fr = 1/(2π√(Lr Cr)); a complete resonant converter also includes the magnetizing branch and load.",
+      "url": "https://www.ti.com/document-viewer/lit/html/SSZTC48/GUID-448E1208-D9B0-4FF1-B7E8-481DA3288A83"
+    },
+    "rlcModel": {
+      "title": "Analog Devices: Resonance in RLC circuits",
+      "detail": "Ideal series-RLC response with an explicitly entered series resistance. The response is not the measured transfer function of this converter.",
+      "url": "https://wiki.analog.com/university/courses/electronics/rlc_resonance"
+    },
+    "preferredValues": {
+      "title": "Vishay: Preferred E-series values",
+      "detail": "E12/E24 nominal series. Candidate values do not imply available components, tolerances or ratings.",
+      "url": "https://www.vishay.com/docs/28372/e-series.pdf"
+    }
+  },
+  "inputUnits": "SI: H, F, Hz, ohm; fractional tolerances",
+  "inputs": {
+    "solveFor": "frequency",
+    "targetFrequencyHz": null,
+    "discreteInductanceH": 0.0000094,
+    "leakageInductanceH": 0.000016420000000000002,
+    "magnetizingInductanceH": 0.00015078,
+    "capacitanceF": 1e-9,
+    "operatingFrequencyHz": 1000000,
+    "seriesResistanceOhm": null,
+    "inductorTolerance": 0.1,
+    "capacitorTolerance": 0.05
+  },
+  "magnetizingBranch": {
+    "magnetizingInductanceH": 0.00015078,
+    "magnetizingReactanceOhm": 947.3786806165369,
+    "inductanceRatio": 5.83965917893106,
+    "openSecondaryFrequencyHz": 378725.7044043653
+  },
+  "transformerReference": {
+    "id": "supplied-a",
+    "label": "Transformer A",
+    "leakageInductanceUh": 16.42,
+    "magnetizingInductanceUh": 150.78,
+    "turnsRatio": 8.039,
+    "sourceId": "thesisMagnetics"
+  },
+  "enteredCapacitorBank": {
+    "valuesF": [
+      1e-9
+    ],
+    "connection": "parallel",
+    "usedInSolution": true
+  },
+  "assumptions": {
+    "leakageAssumedZero": false,
+    "model": "Ideal LC resonance / ideal series RLC; not a full converter model",
+    "tolerance": "Independent low/high L-total and C corners; no measured component distribution",
+    "capacitorSolutionIsEquivalentOnly": false,
+    "inputsModifiedFromPreset": true,
+    "magnetizingBranch": "Linear primary-referred Lm; open-secondary LC estimate excludes load, rectifier conduction, switching, pump and parasitics",
+    "transformerIdentity": "A/B references are comparisons; installed identity is not recorded"
+  },
+  "results": {
+    "solveFor": "frequency",
+    "resonantFrequencyHz": 990471.5663385775,
+    "totalInductanceH": 0.00002582,
+    "discreteInductanceH": 0.0000094,
+    "leakageInductanceH": 0.000016420000000000002,
+    "capacitanceF": 1e-9,
+    "operatingFrequencyHz": 1000000,
+    "characteristicImpedanceOhm": 160.68602926203621,
+    "inductiveReactanceOhm": 162.2318446313769,
+    "capacitiveReactanceOhm": 159.15494309189532,
+    "netReactanceOhm": 3.0769015394815824,
+    "frequencyRatio": 1.009620098128254,
+    "region": "inductive",
+    "q": null,
+    "bandwidthHz": null,
+    "tolerance": {
+      "frequencyMinHz": 921618.1533266859,
+      "frequencyMaxHz": 1071171.3672070426
+    },
+    "warnings": [
+      "Ideal series LC estimate: converter gain, ZVS, power, efficiency, parasitics, and component ratings require a separate model and measurement.",
+      "Leakage is included once, referred to the resonant side. Do not add it again if the measured Lr already includes it."
+    ]
+  },
+  "warnings": [
+    "Transformer leakage is a supplied nominal standalone value; no installed extraction is available. Magnetizing inductance is excluded from series L.",
+    "The default ±10% total-L and ±5% C ranges are editable starting assumptions, not measured uncertainty or guaranteed fitted-component tolerances. Edited ranges are user inputs.",
+    "Ideal series LC estimate: converter gain, ZVS, power, efficiency, parasitics, and component ratings require a separate model and measurement.",
+    "Leakage is included once, referred to the resonant side. Do not add it again if the measured Lr already includes it.",
+    "Inputs differ from the source preset. The cited document is a baseline, not evidence of the edited values.",
+    "The series-response plot excludes the magnetizing branch. Separate Lm estimates assume an ideal open secondary, not a loaded converter. Rectification, charge-pump switching and parasitics are not modeled; fₛ above fᵣ alone does not establish ZVS."
+  ],
+  "record": [
+    {
+      "item": "Discrete series inductor",
+      "value": "9.4 µH",
+      "basis": "Edited input; preset is a reference"
+    },
+    {
+      "item": "Transformer leakage",
+      "value": "16.42 µH",
+      "basis": "Edited input; preset is a reference"
+    },
+    {
+      "item": "Entered equivalent C",
+      "value": "1 nF",
+      "basis": "Single equivalent input; physical bank not inferred"
+    },
+    {
+      "item": "Bank equivalent capacitor",
+      "value": "1 nF",
+      "basis": "Calculated from entered bank"
+    },
+    {
+      "item": "Nominal resonance",
+      "value": "990.5 kHz",
+      "basis": "Ideal LC equation"
+    },
+    {
+      "item": "Switching frequency",
+      "value": "1 MHz",
+      "basis": "Edited input; preset is a reference"
+    },
+    {
+      "item": "Equivalent series resistance",
+      "value": "Not provided",
+      "basis": "Q and bandwidth not calculated"
+    },
+    {
+      "item": "Total L / equivalent C range",
+      "value": "±10 % / ±5 %",
+      "basis": "Editable design ranges; not measured uncertainty"
+    },
+    {
+      "item": "Resonance corner interval",
+      "value": "921.6 kHz–1.071 MHz",
+      "basis": "Combined low/high L-total and C corners"
+    },
+    {
+      "item": "Transformer reference",
+      "value": "Transformer A · supplied measurement",
+      "basis": "Comparison only; installed identity unknown"
+    },
+    {
+      "item": "Magnetizing inductance · Lm",
+      "value": "150.8 µH",
+      "basis": "Separate primary-referred shunt branch; excluded from series Lr"
+    },
+    {
+      "item": "Measured Np/Ns",
+      "value": "8.039",
+      "basis": "Reference only; reflected load and converter gain are not calculated"
+    },
+    {
+      "item": "Ideal open-secondary LC frequency",
+      "value": "378.7 kHz",
+      "basis": "Linear, open-secondary limit; not a loaded converter prediction"
+    },
+    {
+      "item": "Magnetizing reactance at fs",
+      "value": "947.4 Ω",
+      "basis": "Xm = 2 pi fs Lm; not inferred branch current"
+    },
+    {
+      "item": "Lm / Lr",
+      "value": "5.84",
+      "basis": "Ratio to external plus primary-referred leakage inductance"
+    }
+  ],
+  "comparison": {
+    "component": "capacitance",
+    "preferredSeries": "E24",
+    "partsSelected": false
+  }
+}

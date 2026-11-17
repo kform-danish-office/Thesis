@@ -1,0 +1,66 @@
+\chapter{Revised Plan and Remaining Work}
+\label{app:revised-plan}
+
+The revised July 27--October 27, 2026 plan requires V2 retesting, loss and temperature diagnosis, and V3 development \cite{projectOctoberPlan}. Section~\ref{sec:res-revised-plan} gives the current status.
+
+\section{Plan Documents and Power Requirements}
+
+The earlier plan included a \SI{75}{\watt} continuous-validation milestone \cite{projectEarlierPlan}.
+
+The revised plan sets a \SI{65}{\watt} continuous minimum and keeps the \SI{100}{\watt} continuous target. The reported point at approximately \SI{85}{\watt} for V2 still needs to be repeated or explained. V2 includes the integrated MCU and the ported control firmware; the modified V1.0 data are from the earlier assembly. The board, controller, and settings must be recorded with the measurements when the V2 test is repeated.
+
+Section~\ref{sec:disc-plan-gap} explains the \SI{15}{\watt} and \SI{20.11}{\watt} output shortfalls and the \SI{24.53}{\watt} screening input--output difference. The sustained-output limit needs to be identified in the next tests.
+
+\section{Thesis Sections for the Revised Plan}
+
+\begingroup
+\small
+\begin{longtable}{@{}L{0.27\linewidth}L{0.65\linewidth}@{}}
+\caption[Revised plan and thesis sections.]{Revised plan and corresponding thesis sections.}
+\label{tab:plan-thesis-map}\\
+\toprule Planned work & Thesis section\\\midrule
+\endfirsthead
+\toprule Planned work & Thesis section\\\midrule
+\endhead
+Objectives and test criteria & Chapter~\ref{ch:introduction} sets the revised scope. Section~\ref{sec:revised-plan-criteria} defines AP-01--AP-08, including power levels, tests, and design documents.\\
+Repeat V2 and diagnose the gap & Section~\ref{sec:method-plan-validation} describes how to repeat the baseline, measure input and output power, increase the load in stages, and change one parameter at a time. Section~\ref{sec:disc-plan-gap} discusses possible causes of the power limit.\\
+V2 circuit and software & Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} document the V2 circuit and MCU firmware. Appendices~\ref{app:firmware} and \ref{app:software-tools} explain the software; the complete source follows in Appendices~\ref{app:full-embedded-source} and \ref{app:full-supporting-source}.\\
+V3 edge-card implementation & Section~\ref{sec:hw-v3-plan} describes the reduced edge-card layout, removal of the USB-PD section, and the replacement magnetics and hardware checks still needed. Section~\ref{sec:res-v3-design} reports the design outcome.\\
+PDO/PPS, thermal, and stability tests & Section~\ref{sec:method-plan-validation} identifies the required protocol, dynamic, protection, and defined-duration tests. Section~\ref{sec:res-revised-plan} summarizes the available test results.\\
+Power density and fallback & Section~\ref{sec:method-density} defines a common assembly-volume and continuous-power basis. Section~\ref{sec:res-revised-plan} reports the V3 design-volume estimate; a complete-system power-density comparison and readiness decision remain unfinished.\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\section{Planned Dates and Required Work}
+
+Table~\ref{tab:plan-milestones} lists the revised plan's technical milestones and submission dates. Section~\ref{sec:res-revised-plan} summarizes the completed designs and available test results.
+
+\begingroup
+\small
+\begin{longtable}{@{}L{0.17\linewidth}L{0.75\linewidth}@{}}
+\caption[Revised-plan milestones in 2026.]{Scheduled milestones in the revised July--October 2026 plan. All dates are in 2026.}
+\label{tab:plan-milestones}\\
+\toprule Planned date & Planned work\\\midrule
+\endfirsthead
+\toprule Planned date & Planned work\\\midrule
+\endhead
+August 7 & Updated plan and test procedure: operating and stop limits, instruments, test matrix, raw-file locations, and common V2/V3 volume convention.\\
+August 21 & V2 hardware and bench checked; the approximately \SI{85}{\watt} point repeated or its difference explained.\\
+September 4 & V2 operating-point test set completed, with raw files and configuration records.\\
+September 11 & Power-gap analysis, uncertainty, loss/stress assessment, and changes affecting the V3 fabrication files completed.\\
+September 16 & V3 schematic/layout, design-rule, BOM, and manufacturing reviews completed; the board released with its size and density definition. Fabrication was scheduled for September 17.\\
+September 25 & Adjusted V2 retested, with measured effects of the selected changes.\\
+September 30 & Target V3 board arrival; October 2 was the latest planned arrival. Assembly, inspection, and gradual bring-up were scheduled before the readiness decision.\\
+October 7 & V3 readiness decision: proceed with matched final V3 tests, or use completed, identified V2 tests and explain the remaining V3 work.\\
+October 14 & Final tests completed: sustained \SI{100}{\watt} under stated conditions, or the highest repeatable supported power and remaining limit, together with the agreed electrical, thermal, stress, and density results.\\
+October 16 & Complete thesis draft with methods, V2 findings, V3 design/status, results, figures, limitations, and conclusions.\\
+October 19--26 & Supervisor corrections, technical-claim and reference checks, final compilation, and visual PDF review. Final submission files were scheduled to be ready on October 26.\\
+October 27 & Thesis submission.\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+After the scheduled September 16 release, the plan limits changes to tuning, firmware, compatible parts, testing, and controlled rework unless a safety problem requires new fabrication files. This keeps the final test period focused on the released design. Further PCB ideas belong in the next revision.
+
+The matched numerical measurements are from the earlier prototype. V2 adds the integrated circuit, software, and later tank and thermal observations. V3 adds a slimmed layout with secondary rectification retained and the USB-PD section removed. A replacement magnetic set was not installed, and a matched complete-system V2--V3 power-density comparison remains unfinished.

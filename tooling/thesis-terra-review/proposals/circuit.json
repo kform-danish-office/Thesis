@@ -1,0 +1,50 @@
+[
+  {
+    "id": "circuit-01",
+    "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+    "old": "V2 sheet 3 power paths: charge-pump branch, GaN half bridge, resonant tank and transformer, and secondary rectifier. The circuit blocks are connected through their named nets.",
+    "new": "V2 sheet 3 power paths: charge-pump branch, GaN half bridge, resonant tank and transformer, and secondary rectifier.",
+    "reason": "Remove a generic caption sentence that adds no circuit information.",
+    "facts_preserved": "V2 schematic and identified circuit blocks retained.",
+    "checklist": [
+      "direct engineering language",
+      "preserve technical meaning"
+    ]
+  },
+  {
+    "id": "circuit-02",
+    "path": "Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex",
+    "old": "Calculations use the values in \\cref{tab:mag-inherited-measurements} because inductance was not remeasured after installation and no detailed rework log was kept. Main-board and link parasitics make the calculated resonance an initial estimate; refinement requires measurement at the installed terminals.",
+    "new": "Calculations use the values in \\cref{tab:mag-inherited-measurements}; inductance was not remeasured after installation. Main-board and link parasitics make the calculated resonance an initial estimate; refinement requires measurement at the installed terminals.",
+    "reason": "Remove an administrative aside while retaining the missing measurement and its consequence.",
+    "facts_preserved": "Given values, missing installed inductance measurement and parasitic effects retained.",
+    "checklist": [
+      "direct engineering language",
+      "preserve technical meaning"
+    ]
+  },
+  {
+    "id": "circuit-03",
+    "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+    "old": "The operating prototypes retained the supplied magnetics; replacement planar parts were not installed within the project time. No reduction in magnetic loss or increase in continuous output was demonstrated with the smaller V3 layout.",
+    "new": "The operating prototypes retained the supplied magnetics; replacement planar parts were not installed within the project time. Magnetic loss and continuous output remain to be measured on the smaller V3 layout.",
+    "reason": "State the outstanding measurements directly rather than as a negative demonstration.",
+    "facts_preserved": "V3 magnetic loss and continuous output remain unmeasured; replacement parts were not installed.",
+    "checklist": [
+      "direct engineering language",
+      "preserve technical meaning"
+    ]
+  },
+  {
+    "id": "circuit-04",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "V2 top copper (upper) and bottom copper (lower). Both layers use the same view. Changes made during testing are described in the text.",
+    "new": "V2 top copper (upper) and bottom copper (lower), shown in the same orientation.",
+    "reason": "Make the caption describe the drawing directly and remove a generic cross-reference.",
+    "facts_preserved": "Top and bottom layers and their common orientation retained.",
+    "checklist": [
+      "direct engineering language",
+      "preserve technical meaning"
+    ]
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "zip_sha256": "a22a2160ecb183852ea2ea44d7c94a1122c2fdd98c8d9e60f5647b042b619e72",
+  "members": [
+    {
+      "member": "Capture 020-thermal.jpg",
+      "path": "Data/measurements/v2_load_thermal/thermal/Capture 020-thermal.jpg",
+      "sha256": "fdd4f8a74066c30bc1ae7e01cf146639ea76b673cb026ec174e0c15bf28ce5fb"
+    },
+    {
+      "member": "Capture 021-thermal.jpg",
+      "path": "Data/measurements/v2_load_thermal/thermal/Capture 021-thermal.jpg",
+      "sha256": "7d9919bbf3d889eb1b67a90a022cc35e54b27abbd11b9c68de862e6125ec36fd"
+    },
+    {
+      "member": "Capture 022-thermal (1).jpg",
+      "path": "Data/measurements/v2_load_thermal/thermal/Capture 022-thermal (1).jpg",
+      "sha256": "cf672ffe5a293ccd796219c4150769e2fd6a442f2606d1851a35f095a1fc063c"
+    },
+    {
+      "member": "Capture 022-thermal.jpg",
+      "path": "Data/measurements/v2_load_thermal/thermal/Capture 022-thermal.jpg",
+      "sha256": "cf672ffe5a293ccd796219c4150769e2fd6a442f2606d1851a35f095a1fc063c"
+    },
+    {
+      "member": "Capture 015-thermal.jpg",
+      "path": "Data/measurements/v2_load_thermal/thermal/Capture 015-thermal.jpg",
+      "sha256": "2a43c4ca9f378f2e2584859574158480fae2f6aa027efb4875bb278771d27b3b"
+    },
+    {
+      "member": "Capture 017-thermal.jpg",
+      "path": "Data/measurements/v2_load_thermal/thermal/Capture 017-thermal.jpg",
+      "sha256": "4efb78c7049aef2e463bc57f77718b66166051470c8aeec3a0067bc06d243edf"
+    },
+    {
+      "member": "Capture 018-thermal.jpg",
+      "path": "Data/measurements/v2_load_thermal/thermal/Capture 018-thermal.jpg",
+      "sha256": "82f3e6b54296ddee0fcd3c9d254c70c081bc47950baa82297dd3c11e846b199e"
+    },
+    {
+      "member": "Capture 019-thermal.jpg",
+      "path": "Data/measurements/v2_load_thermal/thermal/Capture 019-thermal.jpg",
+      "sha256": "aa66f67f28eaba0986cebc47ccf87e0059323f3a9b88fd43fce1c9eb06f1714a"
+    }
+  ]
+}

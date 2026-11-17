@@ -1,0 +1,41 @@
+\section{Feedback Conversion and Calibration}
+\label{sec:ctrl-feedback}
+
+For a 12-bit ADC count \(N_i\), the input voltage is reconstructed from the configured reference:
+\begin{equation}
+ V_{\mathrm{ADC},i}=\frac{N_i}{4095}V_{\mathrm{ref}}.
+ \label{eq:ctrl-adc-voltage}
+\end{equation}
+Divider and isolation-amplifier scaling, followed by gain and offset correction, gives the secondary-bulk estimate from PA1:
+\begin{equation}
+ \widehat V_{\mathrm{sb}}=
+ G_{\mathrm{sec}}
+ \frac{2V_{\mathrm{clip}}}{V_{\mathrm{AMC,ref}}}
+ \left(V_{\mathrm{ADC},1}-\frac{V_{\mathrm{AMC,ref}}}{2}\right)
+ \frac{R_{\mathrm{top}}+R_{\mathrm{bottom}}}{R_{\mathrm{bottom}}}
+ +V_{\mathrm{off}}.
+ \label{eq:ctrl-secondary-calibration}
+\end{equation}
+The clipping and reference terms describe the configured AMC0330 behavior. \(G_{\mathrm{sec}}\) and \(V_{\mathrm{off}}\) are the gain and offset corrections.
+
+The source defaults are a \SI{3.3}{\volt} ADC/reference setting and a \SI{390}{\kilo\ohm}/\SI{10}{\kilo\ohm} secondary divider. These must match the actual circuit before the voltage thresholds can be relied on. The reference changes between drawings in \cref{sec:hw-sensing} must be checked by measuring the circuit voltage and corresponding ADC-pin voltage.
+
+\begin{table}[htbp]
+\centering
+\caption{ADC calibration settings in the configuration export.}
+\label{tab:fw-calibration-fields}
+\begin{tabularx}{\textwidth}{@{}p{0.12\textwidth}p{0.40\textwidth}X@{}}
+\toprule
+MCU pin & Settings & Purpose\\
+\midrule
+All & \texttt{VREF} & ADC conversion scale\\
+PA0 & \texttt{VPRITOP}, \texttt{VPRIBOT}, \texttt{VPRIGAIN}, \texttt{VPRIOFF} & Primary-voltage conversion\\
+PA1 & \texttt{AMCREF}, \texttt{AMCVCLIP}, \texttt{VSECTOP}, \texttt{VSECBOT}, \texttt{VSECGAIN}, \texttt{VSECOFF} & Secondary-bulk voltage conversion\\
+PA2 & \texttt{CSRES}, \texttt{CSGAIN}, \texttt{CSOFF}, \texttt{IABS} & Current-signal scaling and zero\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Fresh secondary-voltage samples can reduce transfer before the filtered estimate responds. Filtered values reduce noise sensitivity in load classification and duty adjustment, at the cost of delay that must be assessed with the burst pattern.
+
+Calibration and threshold changes can alter the response without changing the firmware version, so the settings must be recorded with each test. External measurements of connector voltage, load current, and AC input power provide the performance calculations and a check on the controller readings.

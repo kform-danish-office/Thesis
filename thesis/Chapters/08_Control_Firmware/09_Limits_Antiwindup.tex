@@ -1,0 +1,10 @@
+\section{Burst Timing and Duty Limits}
+\label{sec:ctrl-limits}
+
+Requested average duty is converted into bursts with a minimum duration. The MCU burst-enable output PA10 on the original prototype is scheduled with an envelope frequency, edge margin, and minimum number of \SI{1}{\mega\hertz} cycles. At the default \SI{10}{\kilo\hertz} envelope, the period is \SI{100}{\micro\second}. A literal \SI{0.1}{\percent} command would be only \SI{0.1}{\micro\second} long, shorter than a complete carrier cycle.
+
+Low duty was handled with a minimum enabled interval followed by skipped envelope periods. \texttt{GATECYC} sets the minimum count, with eight cycles as the source default. The scheduler also accounts for carrier-update synchronization requests and low-time margin. The period can be extended if these timing requirements cannot be met. Static \SI{100}{\percent} enable is handled separately from an almost full-width burst.
+
+\texttt{FEN}, \texttt{FMIN}, \texttt{FMAX}, \texttt{MINEDGE}, \texttt{GATECYC}, \texttt{GATELEAD}, \texttt{STATIC}, \texttt{DMIN}, and \texttt{DMAX} set these constraints. Waveform comparisons need the requested duty, scheduled burst width, and effective average duty.
+
+Threshold states, stored duty, trim steps, and no-load caps are limited in the active control path, and transfer is inhibited by the fault checks. The old PI power integrator is outside this path. Its stored settings do not provide antiwindup in the voltage controller.

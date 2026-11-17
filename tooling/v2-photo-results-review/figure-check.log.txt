@@ -1,0 +1,33 @@
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(/workspace/tooling/v2-photo-results-review/figure-check.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.cloFontconfig error: No writable cache directories
+))
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)
+No file figure-check.aux.
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(./Pictures/Thesis/07_Hardware/V2_2026-10-25/figure_v2_board.tex)
+[1] (/workspace/tooling/v2-photo-results-review/figure-check.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+Output written on /workspace/tooling/v2-photo-results-review/figure-check.pdf (
+1 page).
+Transcript written on /workspace/tooling/v2-photo-results-review/figure-check.l
+og.

@@ -1,0 +1,20 @@
+\section{From the V2 Findings to V3}
+\label{sec:intro-v3}
+
+The power circuit and burst-control method were developed on V1. V2
+integrated the controller and interface functions on the power board.
+During powered testing, the resonant tank was changed after heating was
+observed in the series inductor. Later secondary-output tests reached higher loads with voltage droop, while heating was observed at the input bridge and secondary region.
+
+Secondary-winding heating and the difficulty of increasing power around
+the high-load operating region motivated further transformer work. The
+V3 edge-card layout was then slimmed by removing the USB-PD output section
+and retaining secondary rectification. A net volume reduction of about
+\SI{8}{\percent} was estimated. The output function changed with that
+reduction, so an external regulated USB-PD stage would have to be included
+in a complete-system comparison.
+
+New planar magnetics were not installed within the available time. V3
+remained a layout prototype for further magnetic and thermal development.
+The objective remains \SI{100}{\watt}. The design changes and remaining
+checks are described in \cref{sec:hw-v3-plan}.

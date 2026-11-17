@@ -1,0 +1,93 @@
+[
+  {
+    "id": "opening-01",
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "old": "The revised plan reports an earlier V2 result near \\SI{85}{\\watt}. In the matched measurements analyzed here, \\SI{79.89}{\\watt} was reached on the modified V1.0 assembly. The matched electrical results were obtained on V1.0; the later V2 tests covered tank changes and heating. Section~\\ref{sec:revised-plan-criteria} also tracks the V3 layout work, its remaining release checks, and the matched V2--V3 comparison.",
+    "new": "The revised plan reports an earlier V2 result near \\SI{85}{\\watt}. The matched electrical measurements analyzed here were made on the modified V1.0 assembly, reaching \\SI{79.89}{\\watt}. Later V2 tests examined tank changes and heating. Section~\\ref{sec:revised-plan-criteria} sets out the remaining V3 layout checks and the planned matched V2--V3 comparison.",
+    "reason": "Removes the repeated V1.0 attribution and connects each result to its test stage.",
+    "facts_preserved": "Reported V2 power and separately measured V1.0 power; V2 tank and heating tests and outstanding V3 comparison.",
+    "checklist": [
+      "connected prose",
+      "concrete circuit function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "opening-02",
+    "path": "Chapters/01_Introduction/09_V3_Development.tex",
+    "old": "The revisions were used to address different parts of the same problem.\nThe power circuit and burst-control method were developed on V1. V2\nintegrated the controller and interface functions on the power board and\nallowed the resonant tank to be changed. Comparable output behavior was\nobserved on the bench, but the dominant heating in the modified V2\narrangement was concentrated near the input bridge.",
+    "new": "The power circuit and burst-control method were developed on V1. V2\nintegrated the controller and interface functions on the power board.\nDuring powered testing, the resonant tank was changed after heating was\nobserved in the series inductor. Comparable output behavior was observed\non the bench, while heating in the modified V2 arrangement was\nconcentrated near the input bridge.",
+    "reason": "Replaces an abstract opening and explains why the tank was changed, connecting the modification to the subsequent observation.",
+    "facts_preserved": "V1 control development, V2 integration, series-inductor heating and subsequent input-bridge heating; comparable bench behavior.",
+    "checklist": [
+      "connected prose",
+      "concrete circuit function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "opening-03",
+    "path": "Chapters/02_Background/07_USBC_Context.tex",
+    "old": "The USB-C PD stage regulates the output voltage to the selected PD level. It is supplied from the secondary bulk capacitor, which is charged by the resonant converter. Changes in current drawn from the USB-C output therefore affect the bulk voltage regulated by the MCU.\r\n\r\nThe resonant stage supplies the secondary bulk bus upstream of the MPQ4242 output regulator. Fixed VBUS settings of \\SI{5}{\\volt}, \\SI{9}{\\volt}, \\SI{15}{\\volt}, and \\SI{20}{\\volt} were tested. Bulk-voltage feedback enters the MCU at PA1; the connector-voltage measurements are downstream of this control loop.",
+    "new": "The resonant converter charges the secondary bulk capacitor, which supplies the MPQ4242 USB-C PD stage. The MCU regulates the bulk voltage using feedback at PA1, while the PD stage regulates VBUS to the selected output level. Changes in USB-C load current therefore affect the bulk supply upstream of the output regulator.\r\n\r\nFixed VBUS settings of \\SI{5}{\\volt}, \\SI{9}{\\volt}, \\SI{15}{\\volt}, and \\SI{20}{\\volt} were tested. Connector voltage was measured downstream of the bulk-voltage control loop.",
+    "reason": "Combines repeated descriptions of the power path into one connected explanation of the two control roles.",
+    "facts_preserved": "MCU PA1 bulk feedback, MPQ4242 VBUS regulation, load coupling and four tested settings.",
+    "checklist": [
+      "connected prose",
+      "concrete circuit function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "opening-04",
+    "path": "Chapters/03_Requirements_Architecture/01_Use_Case.tex",
+    "old": "The design target is \\SI{100}{\\watt} continuous output. The revised plan sets a \\SI{65}{\\watt} continuous minimum, and the earlier schedule sets a \\SI{75}{\\watt} continuous validation milestone \\cite{projectOctoberPlan,projectEarlierPlan}. Continuous operation requires a stated load and run time, with temperature tracked throughout the run. A short capture shows operation at that load, but not continuous performance.\r\n\r\nThe operating sequence covers unloaded startup, load attachment, loaded operation, removal, and commanded shutdown. Residual resonant and capacitive energy after load removal must be handled by no-load control and overvoltage protection.",
+    "new": "The design target is \\SI{100}{\\watt} continuous output. The revised plan sets a \\SI{65}{\\watt} continuous minimum, and the earlier schedule sets a \\SI{75}{\\watt} continuous validation milestone \\cite{projectOctoberPlan,projectEarlierPlan}. Continuous tests require a stated load and run time, with temperature tracked throughout the run.\r\n\r\nThe operating sequence covers unloaded startup, load attachment, loaded operation, removal, and commanded shutdown. After load removal, no-load control and overvoltage protection must limit the effect of residual resonant and capacitive energy.",
+    "reason": "States the continuous-test conditions directly while connecting load removal to the control response.",
+    "facts_preserved": "100 W target, 65 W minimum, 75 W milestone; load, duration and temperature conditions; residual energy after load removal.",
+    "checklist": [
+      "connected prose",
+      "concrete circuit function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "opening-05",
+    "path": "Frontmatter/Abstract.tex",
+    "old": "The gallium-nitride (GaN) half bridge operated at a nominal \\SI{1}{\\mega\\hertz}. Average power was controlled by enabling bursts of switching cycles. A circular direct memory access (DMA) buffer supplied the feedback samples. Startup precharge and separate duty limits for loaded and no-load operation were implemented. The USB-C PD stage provided the tested \\SI{5}{\\volt}, \\SI{9}{\\volt}, \\SI{15}{\\volt}, and \\SI{20}{\\volt} USB-C settings.",
+    "new": "The gallium-nitride (GaN) half bridge operated at a nominal \\SI{1}{\\mega\\hertz}, with average power controlled by bursts of switching cycles. Feedback samples were supplied through a circular direct memory access (DMA) buffer. Startup precharge and separate burst-duty limits were used for loaded and no-load operation. The USB-C PD stage provided the tested \\SI{5}{\\volt}, \\SI{9}{\\volt}, \\SI{15}{\\volt}, and \\SI{20}{\\volt} USB-C settings.",
+    "reason": "Connects carrier frequency to burst power control and names the duty limits, making the control description less fragmented.",
+    "facts_preserved": "Nominal carrier, burst control, circular DMA feedback, precharge, separate duty limits and tested settings.",
+    "checklist": [
+      "connected prose",
+      "concrete circuit function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "opening-06",
+    "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+    "old": "The PCB was designed and assembled for this project. The supplied inductor and transformer were integrated, and the power, auxiliary, sensing, and output-interface circuits were implemented. The MCU firmware was developed in stages, from open-loop bring-up to the DMA-based voltage controller, with startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition.\r\n\r\nThe firmware was then adapted for the MCU on V2. The revised board integrates the control, isolated feedback, local supplies, and USB-C output with the power stage. Browser control and logging were added, and the resonant tank was modified during powered testing. The schematic and PCB documentation are included in Appendix~\\ref{app:hardware}.",
+    "new": "The PCB was designed and assembled around the supplied inductor and transformer, with power, auxiliary, sensing, and output-interface circuits. Firmware development began with open-loop bring-up and progressed to DMA-based voltage control. Startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition were added to manage the operating states.\r\n\r\nFor V2, the firmware was adapted to the onboard MCU, and control, isolated feedback, local supplies, and USB-C output were integrated with the power stage. Browser control and logging were added. During powered testing, the resonant tank was modified after the series inductor became hot. The schematic and PCB documentation are included in Appendix~\\ref{app:hardware}.",
+    "reason": "Organizes the contribution around hardware, firmware development and V2 integration; explains why the tank was modified instead of leaving the action isolated.",
+    "facts_preserved": "Supplied magnetics and implemented circuits; firmware features and V2 port; browser tools; observed series-inductor heating.",
+    "checklist": [
+      "connected prose",
+      "concrete circuit function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "opening-07",
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "old": "The revised plan carries this work into V2 evaluation and a V3 edge-card design \\cite{projectOctoberPlan}. It calls for the reported \\SI{85}{\\watt} V2 operating point to be repeated and the \\SI{15}{\\watt} shortfall to the \\SI{100}{\\watt} target to be investigated. V2 has since been operated with a modified resonant tank, as described in \\cref{sec:res-v2-testing}. Those preliminary observations still need matched power and thermal measurements. The plan also calls for fixed-PDO and PPS tests, thermal and stability tests of defined duration, and a V2--V3 power-density comparison using the same definition of assembly volume. Section~\\ref{sec:revised-plan-criteria} sets out these criteria and their current status.",
+    "new": "The revised plan extends the work to V2 evaluation and a V3 edge-card design \\cite{projectOctoberPlan}. It calls for a repeat of the reported \\SI{85}{\\watt} V2 operating point and an investigation of the \\SI{15}{\\watt} shortfall to the \\SI{100}{\\watt} target. V2 was subsequently operated with a modified resonant tank (\\cref{sec:res-v2-testing}); matched power and thermal measurements are still needed for these observations. The plan also calls for fixed-PDO and PPS tests and thermal and stability runs of defined duration. A V2--V3 power-density comparison requires the same definition of assembly volume for both designs. Section~\\ref{sec:revised-plan-criteria} gives the criteria and their current status.",
+    "reason": "Separates the repeat test, subsequent tank observations and volume comparison into connected actions instead of a long compressed list.",
+    "facts_preserved": "Reported V2 point, numerical shortfall and target, preliminary modified-tank tests, remaining matched tests and comparison criteria.",
+    "checklist": [
+      "connected prose",
+      "concrete circuit function",
+      "technical fidelity"
+    ]
+  }
+]

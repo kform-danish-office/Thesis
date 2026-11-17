@@ -1,0 +1,66 @@
+{
+  "slide_id": "s15",
+  "proposal_revision": 4,
+  "title": "Controlled USB-C output, with thermal limits",
+  "takeaway": "The integrated high-frequency supply produced controlled USB-C output; heating and the absence of thermal equilibrium leave the 100 W continuous target unfulfilled; planning only, not visible.",
+  "visible_content": {
+    "row_1_label": "Implementation",
+    "row_1_text": "USB-C integration and secondary-voltage burst control",
+    "row_2_label": "Connector result",
+    "row_2_text": "V1: 79.89 W measured at the USB-C connector",
+    "row_3_label": "Continuous power limit",
+    "row_3_text": "100 W continuous remains limited by heating",
+    "phase_label": "Conclusion"
+  },
+  "visual": {
+    "layout": "Three aligned outcome rows on the DTU template, with narrow left labels and a wider right column. Use restrained rules and typography without icons or checkboxes.",
+    "asset": null,
+    "visible_labels": "All row and section labels are specified in visible_content."
+  },
+  "speaker_notes": "The project brought the high-frequency charge-pump supply together with the USB-C output, sensing and local supplies. The MCU regulates the secondary voltage using bursts, while the USB-C power-delivery stage sets the selected connector voltage. On V1, 79.89 watts was measured at the USB-C connector. V2 transferred higher power to a direct secondary load, with an expected reduction in secondary voltage as the load increased. The secondary region continued to heat, and the load points did not reach thermal equilibrium. Heating still limits continuous operation. The 100-watt continuous target remains unfulfilled.",
+  "transition": null,
+  "duration_seconds": 60,
+  "sources": [
+    {
+      "path": "/workspace/thesis/Chapters/01_Introduction/05_Contributions_Attribution.tex",
+      "passage": "Project Contributions and Earlier Designs",
+      "supports": "Integration of power, sensing, local supplies and USB-C; secondary-voltage control and testing; earlier topology and magnetics attribution."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/01_Introduction/02_Problem_Statement.tex",
+      "passage": "Project plan",
+      "supports": "100 W continuous target and 65 W continuous minimum are design goals."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/03_Steady_State.tex",
+      "passage": "20 V, 4 A DC-coupled point",
+      "supports": "19.9732 V at 4 A gives 79.89 W at the V1 connector."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+      "passage": "Secondary-Output Load and Thermal Tests",
+      "supports": "V2 reached higher direct-secondary power with voltage droop and continued heating."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/12_Compliance_Table.tex",
+      "passage": "Continuous power criteria",
+      "supports": "Continuous power criteria remain unverified."
+    },
+    {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/review/current-brief.md",
+      "passage": "Supervisor argument: V2 power control",
+      "supports": "Author clarification that the V2 higher-load voltage response was expected throttle behavior, with greater burst-enable PWM transferring more power."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "79.89 W is the rounded V1 connector result, not a continuous rating.",
+      "The higher V2 power is explicitly a direct-secondary result, not USB-C connector output; the voltage response is described as expected.",
+      "The 100 W continuous target remains unfulfilled; the 65 W minimum is not asserted as achieved.",
+      "The MCU regulates the secondary bulk voltage and the USB-C PD stage sets connector voltage.",
+      "All visible body and section-label text is specified by the manifest keys."
+    ],
+    "unresolved_questions": [],
+    "timing": "Approximately 100 spoken words, estimated at 60 seconds with a short pause; transition is null."
+  }
+}

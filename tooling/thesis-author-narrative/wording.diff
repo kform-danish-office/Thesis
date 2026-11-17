@@ -1,0 +1,477 @@
+--- before/Chapters/10_Results/15_V2_Testing_Update.tex
++++ author-narrative/Chapters/10_Results/15_V2_Testing_Update.tex
+@@ -78,18 +78,14 @@
+ measurements over a defined test duration, matched input and output power
+ readings, and switching waveforms are still needed to confirm the loss
+ reduction, ZVS, and continuous output capability.
+-The bench observations and their later timing correction are retained in
+-\sourcefile{Data/project_records/V2_Testing_Update.txt}; the original
+-thermal image and its source information are retained with the V2 evidence files.
+ 
+ 
+ \subsection{V2 Board and Test-Setup Photographs}
+ 
+ The V2 assembly and thermal-camera arrangement are documented in
+-Figure~\ref{fig:v2-board-test-photos}. The original photographs have been
+-retained. The board configuration used for each photograph and its
+-relationship to the \SI{95}{\watt}
+-thermal run have not been recorded.
++Figure~\ref{fig:v2-board-test-photos}. These views show the board and bench
++arrangement, but do not establish the exact fitted configuration during the
++\SI{95}{\watt} thermal run.
+ 
+ \begin{figure}[p]
+ \centering
+@@ -99,7 +95,7 @@
+ 
+ \vspace{0.8em}
+ \includegraphics[width=0.86\linewidth]{Data/measurements/v2_results/evidence/v2_board_detail_original.jpg}
+-\caption{V2 assembly overview (upper left), thermal-camera bench arrangement (upper right), and component-side detail (lower). The photographs document the supplied hardware and setup; a common test configuration across all images has not been verified.}
++\caption{V2 assembly overview (upper left), thermal-camera bench arrangement (upper right), and component-side detail (lower). The photographs show the V2 hardware and test setup; a common test configuration across all images has not been verified.}
+ \label{fig:v2-board-test-photos}
+ \end{figure}
+ \FloatBarrier
+--- before/Chapters/01_Introduction/08_V2_Prototype.tex
++++ author-narrative/Chapters/01_Introduction/08_V2_Prototype.tex
+@@ -7,15 +7,14 @@
+ PFC and isolated resonant paths were retained, together with the supplied
+ planar magnetics and downstream USB-C output stage.
+ 
+-The V2 documentation supplied on October 27, 2026 describes this
+-integrated design. The main specifications are summarized in
++The main V2 design specifications are summarized in
+ Table~\ref{tab:intro-v2-specs}. The circuit connections and controller
+ timing are described in \cref{sec:hw-v2}; the complete schematic and PCB
+ print set are included in \cref{sec:app-v2-oct27}.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{V2 design summary from the schematic, PCB prints, and archived controller source. These are design specifications, rather than verified continuous-performance ratings.}
++\caption{V2 prototype design specifications. Timing values refer to the archived controller source; continuous performance is assessed separately.}
+ \label{tab:intro-v2-specs}
+ \small
+ \begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}X@{}}
+@@ -27,7 +26,7 @@
+ Feedback & Primary voltage on PA0, isolated secondary-bulk voltage on PA1 through AMC0330, and half-bridge-current signal on PA2\\
+ USB-C output & MPQ4242 output stage downstream of the isolated secondary bulk bus\\
+ Local supplies & BAC1S12SC bias supply and separate LMR54410 regulators for primary and secondary local supplies\\
+-PCB & Four copper layers; assembly dimensions, thickness, and copper weight are not specified in the supplied print set\\
++PCB & Four copper layers, including internal GND and PWR layers\\
+ Archived timing & Nominal \SI{1}{\mega\hertz} carrier and \SI{40}{\nano\second} programmed dead time in PWR-2.0.1\\
+ \bottomrule
+ \end{tabularx}
+--- before/Chapters/12_Conclusion/04_Future_Work.tex
++++ author-narrative/Chapters/12_Conclusion/04_Future_Work.tex
+@@ -4,7 +4,7 @@
+ The immediate V2 task is to investigate the input-bridge heating under
+ repeatable conditions. The fitted diodes, resonant tank, sensing scales,
+ firmware, and timing settings should be recorded before comparison with
+-the new drawings. The effect of wider current paths, more copper for
++the V2 circuit design. The effect of wider current paths, more copper for
+ heat spreading, or diode relocation still needs to be measured.
+ Synchronized switching waveforms are also needed to check the inferred
+ ZVS behavior.
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ author-narrative/Chapters/07_Hardware/16_V2_F410.tex
+@@ -1,22 +1,22 @@
+ \section{V2 Hardware and the F410 Controller}
+ \label{sec:hw-v2}
+ 
+-The V2 power board was developed with an STM32F410CBU6 controller \cite{ststm32f410ds}. This is the V2 prototype named in the October project plan. The latest circuit documentation is the four-sheet Altium schematic exported on October 27, 2026, supplied with a 31-page PCB print set. Both are reproduced in Section~\ref{sec:app-v2-oct27}. The earlier October 18 export is retained in Appendix~\ref{app:hardware}. The new drawing groups the circuit functions more clearly; it does not assign a new circuit revision or resolve every unspecified part value. This V2 hardware is separate from the earlier controller stage called V2 in \cref{ch:control}, which marked the move to DMA acquisition.
++The V2 power board was developed with an STM32F410CBU6 controller \cite{ststm32f410ds}. The power stage, sensing, local supplies, and USB-C output were integrated on a four-layer PCB. The circuit and PCB design are documented in Section~\ref{sec:app-v2-oct27}. This V2 hardware is separate from the earlier controller stage called V2 in \cref{ch:control}, which marked the move to DMA acquisition.
+ 
+ The F410 port uses the G071's fixed \SI{1}{\mega\hertz} carrier and enable-based control. In PWR-2.0.0, the peripherals were changed to match the MCU and drawing. In PWR-2.0.1, browser telemetry and commands were added. The same software can be compiled for either MCU. The selected target, assembly, and firmware version must be stated for each test.
+ 
+ \subsection{V2 PCB and Physical Integration}
+ 
+-The supplied PCB prints document four copper layers: Top Layer, Int1
++The V2 PCB was designed with four copper layers: Top Layer, Int1
+ (GND), Int2 (PWR), and Bottom Layer. Components are placed on both sides.
+ The input and high-voltage power circuitry occupy one end of the board,
+ the planar-magnetic connections occupy the central region, and the USB-C
+-output is at the opposite end. The supplied design views show the planar
+-magnetic boards mounted upright. The controller, sensing, local supplies,
++output is at the opposite end. The planar-magnetic boards are mounted
++upright in the mechanical design. The controller, sensing, local supplies,
+ and external resonant inductor are also distributed across the two sides.
+ Figure~\ref{fig:v2-pcb-layout-overview} shows the top and bottom copper prints.
+ The complete layer, assembly, mask, and drill prints are included with the
+-new schematic in Section~\ref{sec:app-v2-oct27}.
++schematic in Section~\ref{sec:app-v2-oct27}.
+ 
+ \begin{figure}[p]
+ \centering
+@@ -24,17 +24,16 @@
+ 
+ \vspace{0.8em}
+ \includegraphics[page=4,width=\linewidth,height=0.33\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 top copper (upper) and bottom copper (lower), from pages 1 and 4 of the October 27 PCB export. These are layout prints, not photographs of a tested configuration. The bottom print uses the source document's common projection.}
++\caption{V2 top copper (upper) and bottom copper (lower). Both layers are shown in the same projection. These layout views describe the board design; fitted changes made during testing are described separately.}
+ \label{fig:v2-pcb-layout-overview}
+ \end{figure}
+ \FloatBarrier
+ 
+-The four-layer layout is a documented design specification. The finished
+-board dimensions, assembly height, copper weights, and layer thicknesses
+-are not stated in this print set. The PDF page size is not the board size,
+-and the earlier V1.0 outline cannot be used to calculate V2 power density.
+-The printed L4 footprint also describes the original design; it does not
+-show whether the inductor was fitted during the later leakage-only test.
++The finished board dimensions, assembly height, copper weights, and layer
++thicknesses are not specified in the PCB drawings. V2 power density
++therefore requires separate assembly measurements. The L4 footprint belongs
++to the original resonant branch. The external inductor was removed during
++the later leakage-only test described in \cref{sec:res-v2-testing}.
+ 
+ \subsection{Controller Connections and Timing}
+ 
+@@ -79,6 +78,6 @@
+ \Needspace{0.30\textheight}
+ \subsection{V2 Checks and Remaining Measurements}
+ 
+-The October plan starts from a reported V2 point near \SI{85}{\watt} toward a \SI{100}{\watt} target \cite{projectOctoberPlan}. The source and PDF are under \sourcefile{Data/project_records}. Repeating that point requires the V2 assembly, input power, output voltage/current, temperature, duration, and firmware settings together. The supplied records do not include these details together. The reported \SI{85}{\watt} remains a point to reconstruct and is not included in the measured curves.
++The October plan starts from a reported V2 point near \SI{85}{\watt} toward a \SI{100}{\watt} target \cite{projectOctoberPlan}. Repeating that point requires the V2 assembly, input power, output voltage/current, temperature, duration, and firmware settings together. A complete test record linking these conditions is not available. The reported \SI{85}{\watt} remains a point to reconstruct and is not included in the measured curves.
+ 
+-The matched tests in \cref{ch:results} reached \SI{79.89}{\watt} on the modified V1.0 assembly. These provide the earlier converter baseline. Preliminary powered V2 observations from the F410 design are reported in \cref{sec:res-v2-testing}; matched input--output measurements and thermal-endurance testing are still needed. The V1.0 photographs and \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} outline cannot be used as V2 dimensions. The October 27 schematic and PCB prints document the V2 circuit and four-layer layout; the controller port describes its software. The fitted configuration and assembly dimensions still need to be recorded before power density can be calculated. Both the reported \SI{85}{\watt} and matched \SI{79.89}{\watt} still need defined-duration tests before the \SI{100}{\watt} continuous target can be assessed.
++The matched tests in \cref{ch:results} reached \SI{79.89}{\watt} on the modified V1.0 assembly. These provide the earlier converter baseline. Preliminary powered V2 observations from the F410 design are reported in \cref{sec:res-v2-testing}; matched input--output measurements and thermal-endurance testing are still needed. The V1.0 photographs and \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} outline cannot be used as V2 dimensions. The V2 circuit and four-layer PCB layout describe the hardware design; the controller port describes its software. The fitted configuration and assembly dimensions still need to be recorded before power density can be calculated. Both the reported \SI{85}{\watt} and matched \SI{79.89}{\watt} still need defined-duration tests before the \SI{100}{\watt} continuous target can be assessed.
+--- before/Chapters/07_Hardware/01_Prototype_Overview.tex
++++ author-narrative/Chapters/07_Hardware/01_Prototype_Overview.tex
+@@ -20,7 +20,7 @@
+ \end{tabularx}
+ \end{table}
+ 
+-V2 continued this work with the F410 controller integrated on the converter board. The October 27 schematic and four-layer PCB print set document that design in \cref{sec:hw-v2}. Preliminary powered V2 tests, including the leakage-only tank change and remaining input-bridge heating, are described in \cref{sec:res-v2-testing}. The earlier matched measurements remain associated with the modified V1.0 board.
++V2 continued this work with the F410 controller integrated on the converter board. The schematic and four-layer PCB layout are described in \cref{sec:hw-v2}. Preliminary powered V2 tests, including the leakage-only tank change and remaining input-bridge heating, are described in \cref{sec:res-v2-testing}. The earlier matched measurements remain associated with the modified V1.0 board.
+ 
+ Before fabrication, the board passed the configured Altium design-rule check. During bring-up, insulation was checked at \SI{1000}{\volt} for \SI{30}{\second} with the available handheld tester. This was a laboratory check; standardized safety qualification requires a defined test procedure and conditions.
+ 
+--- before/Backmatter/Appendices/B_Hardware_Documentation.tex
++++ author-narrative/Backmatter/Appendices/B_Hardware_Documentation.tex
+@@ -16,8 +16,8 @@
+ Manufactured V1.0 PCB & Board used for prototype bring-up and final tests\\
+ Schematic V1.0 & Original design reference reproduced below\\
+ Schematic V1.1 & Later corrections and part changes; these were not all confirmed on the tested board\\
+-Earlier V2 F410 schematic & Four-sheet export created October 18, 2026; retained as an earlier circuit reference\\
+-Current V2 documentation & October 27 four-sheet schematic and 31-page PCB print set; reproduced in Section~\ref{sec:app-v2-oct27}\\
++Earlier V2 F410 schematic & Initial circuit reference for the F410 design\\
++V2 schematic and PCB & Four-sheet schematic and 31-page PCB print set; reproduced in Section~\ref{sec:app-v2-oct27}\\
+ Final resonant inductors & Two Wurth 7443640470B \SI{4.7}{\micro\henry} inductors in series\\
+ Controller & STM32G071RBT6 and the final PWR-1.9.20 firmware family\\
+ Planar magnetics & Supplied inductor and transformer assemblies from earlier DTU work\\
+@@ -84,7 +84,7 @@
+ \FloatBarrier
+ 
+ \section{Complete Schematics}
+-The three earlier four-sheet schematic sets below cover V1.0, V1.1, and the October 18 V2 F410 drawing. The latest V2 schematic and complete PCB print set follow in Section~\ref{sec:app-v2-oct27} and support the design description in \cref{sec:hw-v2}. The vector pages keep component labels readable when enlarged. V1.0 was used for the manufactured test board; V1.1 contains the later changes listed above. The V2 export was originally named \sourcefile{Schematic PDF_[No Variations] (12).pdf}. The number belongs to the export; the title blocks have no assigned drawing revision. Each set contains the project hierarchy, USB-C output, power and sensing circuits, and STM32 controller.
++The schematic sets below cover V1.0, V1.1, and an earlier V2 F410 circuit drawing. The complete V2 schematic and PCB design follow in Section~\ref{sec:app-v2-oct27} and support the hardware description in \cref{sec:hw-v2}. The vector pages keep component labels readable when enlarged. V1.0 was used for the manufactured test board; V1.1 contains the later corrections listed above. Each set contains the project hierarchy, USB-C output, power and sensing circuits, and STM32 controller.
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V1_0.pdf}
+@@ -129,255 +129,247 @@
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+-\caption{V2 F410 schematic, sheet 1: Project hierarchy. Export created October 18, 2026.}\label{fig:app-schematic-v2-sheet1}
++\caption{Earlier V2 F410 schematic, sheet 1: Project hierarchy.}\label{fig:app-schematic-v2-sheet1}
+ \end{figure}\end{landscape}
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=2,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+-\caption{V2 F410 schematic, sheet 2: USB-C output stage. Values are those in the drawing.}\label{fig:app-schematic-v2-sheet2}
++\caption{Earlier V2 F410 schematic, sheet 2: USB-C output stage. Values are those in the drawing.}\label{fig:app-schematic-v2-sheet2}
+ \end{figure}\end{landscape}
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=3,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+-\caption{V2 F410 schematic, sheet 3: Power stage, local supplies, and sensing. Unspecified resonant parts and divider labels require confirmation as explained in \cref{sec:hw-v2}.}\label{fig:app-schematic-v2-sheet3}
++\caption{Earlier V2 F410 schematic, sheet 3: Power stage, local supplies, and sensing. Unspecified resonant parts and divider labels require confirmation as explained in \cref{sec:hw-v2}.}\label{fig:app-schematic-v2-sheet3}
+ \end{figure}\end{landscape}
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+-\caption{V2 F410 schematic, sheet 4: STM32F410CBU6 and direct PA0--PA2 feedback connections.}\label{fig:app-schematic-v2-sheet4}
++\caption{Earlier V2 F410 schematic, sheet 4: STM32F410CBU6 and direct PA0--PA2 feedback connections.}\label{fig:app-schematic-v2-sheet4}
+ \end{figure}\end{landscape}
+ 
+ 
+ \clearpage
+-\section{V2 Schematic and PCB Documentation: October 27 Export}
++\section{V2 Schematic and PCB Design}
+ \label{sec:app-v2-oct27}
+ 
+-The new V2 documentation comprises a four-sheet schematic and the complete
+-31-page PCB print set supplied in
+-\sourcefile{Schematic Prints - 10-27-2026 2-58-51 AM.zip}.
+-The schematic groups the system into the MCU, charge-pump/resonant converter,
+-and USB-C output stage. Its core part labels and controller connections
+-agree with the earlier V2 export. The unspecified tank values and divider
+-labels discussed in \cref{sec:hw-v2} remain unresolved.
+-
+-All pages of both new documents are reproduced below. The PCB set contains
+-top and bottom copper, two internal copper layers, silkscreen, mask,
+-assembly, mechanical, and drill prints. The original layer names are used
+-in the captions. Layers named ``3D Body'' are printed footprint projections,
+-not the separate perspective renderings supplied in the chat. The prints
+-document the design; they do not identify every fitted part or the
+-configuration used in the later leakage-only bench test.
+-
+-The original vector PDFs and a file-hash record are retained under
+-\sourcefile{Pictures/Thesis/07_Hardware}. The October 18 schematic is
+-retained above so the earlier circuit reference remains available.
++The V2 circuit was organized around the MCU, the charge-pump/resonant
++converter, and the USB-C output stage. The four-sheet schematic and
++complete 31-page PCB print set are reproduced below. The component values
++and feedback scaling that still need confirmation are discussed in
++\cref{sec:hw-v2}.
++
++The PCB drawings cover the top and bottom copper, two internal copper
++layers, silkscreen, mask, assembly, mechanical, and drill information.
++Layers named ``3D Body'' show the projected component outlines.
++The drawings describe the original board design. The tank changes made
++during powered testing are described in \cref{sec:res-v2-testing}.
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 schematic, sheet 1: System overview.}\label{fig:app-v2-oct27-schematic-1}
++\caption{V2 schematic, sheet 1: System overview.}\label{fig:app-v2-oct27-schematic-1}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=2,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 schematic, sheet 2: USB-C output stage.}\label{fig:app-v2-oct27-schematic-2}
++\caption{V2 schematic, sheet 2: USB-C output stage.}\label{fig:app-v2-oct27-schematic-2}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=3,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 schematic, sheet 3: Power stage, sensing, and local supplies.}\label{fig:app-v2-oct27-schematic-3}
++\caption{V2 schematic, sheet 3: Power stage, sensing, and local supplies.}\label{fig:app-v2-oct27-schematic-3}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 schematic, sheet 4: STM32F410 controller and service connections.}\label{fig:app-v2-oct27-schematic-4}
++\caption{V2 schematic, sheet 4: STM32F410 controller and service connections.}\label{fig:app-v2-oct27-schematic-4}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 1: Top Layer.}\label{fig:app-v2-oct27-pcb-1}
++\caption{V2 PCB print 1: Top Layer.}\label{fig:app-v2-oct27-pcb-1}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=2,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 2: Int1 (GND).}\label{fig:app-v2-oct27-pcb-2}
++\caption{V2 PCB print 2: Int1 (GND).}\label{fig:app-v2-oct27-pcb-2}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=3,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 3: Int2 (PWR).}\label{fig:app-v2-oct27-pcb-3}
++\caption{V2 PCB print 3: Int2 (PWR).}\label{fig:app-v2-oct27-pcb-3}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 4: Bottom Layer.}\label{fig:app-v2-oct27-pcb-4}
++\caption{V2 PCB print 4: Bottom Layer.}\label{fig:app-v2-oct27-pcb-4}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=5,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 5: Top Silkscreen Overlay.}\label{fig:app-v2-oct27-pcb-5}
++\caption{V2 PCB print 5: Top Silkscreen Overlay.}\label{fig:app-v2-oct27-pcb-5}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=6,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 6: Bottom Silkscreen Overlay.}\label{fig:app-v2-oct27-pcb-6}
++\caption{V2 PCB print 6: Bottom Silkscreen Overlay.}\label{fig:app-v2-oct27-pcb-6}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=7,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 7: Top Paste Mask Print.}\label{fig:app-v2-oct27-pcb-7}
++\caption{V2 PCB print 7: Top Paste Mask Print.}\label{fig:app-v2-oct27-pcb-7}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=8,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 8: Bottom Paste Mask Print.}\label{fig:app-v2-oct27-pcb-8}
++\caption{V2 PCB print 8: Bottom Paste Mask Print.}\label{fig:app-v2-oct27-pcb-8}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=9,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 9: Top Solder Mask Print.}\label{fig:app-v2-oct27-pcb-9}
++\caption{V2 PCB print 9: Top Solder Mask Print.}\label{fig:app-v2-oct27-pcb-9}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=10,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 10: Board.}\label{fig:app-v2-oct27-pcb-10}
++\caption{V2 PCB print 10: Board.}\label{fig:app-v2-oct27-pcb-10}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=11,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 11: Top Tenting.}\label{fig:app-v2-oct27-pcb-11}
++\caption{V2 PCB print 11: Top Tenting.}\label{fig:app-v2-oct27-pcb-11}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=12,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 12: Bottom Tenting.}\label{fig:app-v2-oct27-pcb-12}
++\caption{V2 PCB print 12: Bottom Tenting.}\label{fig:app-v2-oct27-pcb-12}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=13,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 13: Bottom Component Center.}\label{fig:app-v2-oct27-pcb-13}
++\caption{V2 PCB print 13: Bottom Component Center.}\label{fig:app-v2-oct27-pcb-13}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=14,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 14: Route Tool Path.}\label{fig:app-v2-oct27-pcb-14}
++\caption{V2 PCB print 14: Route Tool Path.}\label{fig:app-v2-oct27-pcb-14}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=15,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 15: Top 3D Body.}\label{fig:app-v2-oct27-pcb-15}
++\caption{V2 PCB print 15: Top 3D Body.}\label{fig:app-v2-oct27-pcb-15}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=16,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 16: Bottom 3D Body.}\label{fig:app-v2-oct27-pcb-16}
++\caption{V2 PCB print 16: Bottom 3D Body.}\label{fig:app-v2-oct27-pcb-16}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=17,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 17: Top Component Center.}\label{fig:app-v2-oct27-pcb-17}
++\caption{V2 PCB print 17: Top Component Center.}\label{fig:app-v2-oct27-pcb-17}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=18,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 18: Top Component Outline.}\label{fig:app-v2-oct27-pcb-18}
++\caption{V2 PCB print 18: Top Component Outline.}\label{fig:app-v2-oct27-pcb-18}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=19,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 19: Bottom Component Outline.}\label{fig:app-v2-oct27-pcb-19}
++\caption{V2 PCB print 19: Bottom Component Outline.}\label{fig:app-v2-oct27-pcb-19}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=20,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 20: Top Coating.}\label{fig:app-v2-oct27-pcb-20}
++\caption{V2 PCB print 20: Top Coating.}\label{fig:app-v2-oct27-pcb-20}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=21,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 21: Bottom Coating.}\label{fig:app-v2-oct27-pcb-21}
++\caption{V2 PCB print 21: Bottom Coating.}\label{fig:app-v2-oct27-pcb-21}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=22,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 22: Top Assembly.}\label{fig:app-v2-oct27-pcb-22}
++\caption{V2 PCB print 22: Top Assembly.}\label{fig:app-v2-oct27-pcb-22}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=23,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 23: Bottom Assembly.}\label{fig:app-v2-oct27-pcb-23}
++\caption{V2 PCB print 23: Bottom Assembly.}\label{fig:app-v2-oct27-pcb-23}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=24,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 24: Top Courtyard.}\label{fig:app-v2-oct27-pcb-24}
++\caption{V2 PCB print 24: Top Courtyard.}\label{fig:app-v2-oct27-pcb-24}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=25,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 25: Bottom Courtyard.}\label{fig:app-v2-oct27-pcb-25}
++\caption{V2 PCB print 25: Bottom Courtyard.}\label{fig:app-v2-oct27-pcb-25}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=26,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 26: Top Designator.}\label{fig:app-v2-oct27-pcb-26}
++\caption{V2 PCB print 26: Top Designator.}\label{fig:app-v2-oct27-pcb-26}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=27,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 27: Bottom Designator.}\label{fig:app-v2-oct27-pcb-27}
++\caption{V2 PCB print 27: Bottom Designator.}\label{fig:app-v2-oct27-pcb-27}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=28,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 28: Top Pad Master.}\label{fig:app-v2-oct27-pcb-28}
++\caption{V2 PCB print 28: Top Pad Master.}\label{fig:app-v2-oct27-pcb-28}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=29,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 29: Bottom Pad Master.}\label{fig:app-v2-oct27-pcb-29}
++\caption{V2 PCB print 29: Bottom Pad Master.}\label{fig:app-v2-oct27-pcb-29}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=30,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 30: Drill Drawing For (Top Layer - Bottom Layer).}\label{fig:app-v2-oct27-pcb-30}
++\caption{V2 PCB print 30: Drill Drawing For (Top Layer - Bottom Layer).}\label{fig:app-v2-oct27-pcb-30}
+ \end{figure}\end{landscape}
+ 
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=31,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 October 27 PCB print 31: Drill Guide For (Top Layer - Bottom Layer).}\label{fig:app-v2-oct27-pcb-31}
+-\end{figure}\end{landscape}
++\caption{V2 PCB print 31: Drill Guide For (Top Layer - Bottom Layer).}\label{fig:app-v2-oct27-pcb-31}
++\end{figure}\end{landscape}

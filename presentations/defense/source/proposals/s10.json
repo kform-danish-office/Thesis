@@ -1,0 +1,62 @@
+{
+  "slide_id": "s10",
+  "title": "Efficiency and heat at 79.89 W",
+  "takeaway": {
+    "text": "At the V1 79.89 W connector point, the 76.51% efficiency estimate corresponds to a 24.53 W input–output difference, making heat a central constraint on compact continuous-power operation.",
+    "visible": false
+  },
+  "visible_content": {
+    "body": [],
+    "test_condition": "V1 · 240 V AC, 50 Hz · 20 V selected",
+    "measurement": "19.9732 V × 4.0 A",
+    "input_label": "Input: 104.42 W",
+    "connector_label": "USB-C connector: 79.89 W",
+    "difference_label": "Input–output difference: 24.53 W",
+    "efficiency_label": "Efficiency estimate: 76.51%",
+    "phase_label": "Results"
+  },
+  "visual": {
+    "type": "editable_power_flow",
+    "layout": "Two editable boxes linked by an arrow: input on the left and USB-C connector on the right, with measured connector voltage and load current beneath. Show the efficiency estimate and input–output difference below in ordinary styling.",
+    "chart_data": {
+      "unit": "W",
+      "input": 104.418,
+      "connector_output": 79.8928,
+      "input_minus_output": 24.5252,
+      "efficiency_percent": 76.51247869141335
+    },
+    "visible_labels": "Use the exact strings in visible_content.",
+    "source_asset": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_efficiency.csv",
+    "test_id": "PDO20-80W-40A-001"
+  },
+  "speaker_notes": "At the 20 volt, 4 ampere connector point just shown, the average USB-C voltage was 19.9732 volts. Multiplying voltage by current gives 79.89 watts delivered at the connector. The logged input power was 104.42 watts, so the input-to-connector efficiency estimate is 76.51 percent.\n\nThe input–output difference is nearly 24.53 watts at this operating point. This is the overall difference across the supply; it does not identify the loss of any one component. The heat associated with conversion matters when the supply is made compact, because less space is available to spread and remove it. It also matters for continuous power: a point that can be reached electrically must still be sustained at an acceptable temperature.",
+  "transition": "The input-current harmonics can also be compared with the IEC limits at this operating point.",
+  "duration_seconds": 75,
+  "sources": [
+    {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_efficiency.csv",
+      "passage": "PDO20-80W-40A-001",
+      "supports": "Selected 20 V, 4 A V1 connector point, 19.9732 V and 104.418 W input; calculated output, difference and efficiency."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/08_Efficiency.tex",
+      "passage": "Efficiency and Power Difference",
+      "supports": "Input-to-connector calculation, preliminary estimate, and overall difference not allocated to individual parts."
+    },
+    {
+      "path": "/workspace/papers/apec-digest/sections/results.tex",
+      "passage": "Test Setup and V1 Connector Output",
+      "supports": "240 V AC, 50 Hz test condition and 79.8928 W connector result."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "19.9732 V × 4 A = 79.8928 W; 104.418 W − 79.8928 W = 24.5252 W; 79.8928 / 104.418 × 100 = 76.51248%.",
+      "24.53 W is the overall input–output difference, not a measured allocation to a component.",
+      "Efficiency is presented as an estimate at this operating point."
+    ],
+    "unresolved_questions": [],
+    "timing": "75 seconds estimated including transition and pointing to the input and connector figures."
+  },
+  "revision": 2
+}

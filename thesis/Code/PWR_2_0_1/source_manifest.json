@@ -1,0 +1,262 @@
+{
+  "captured_utc": "2026-10-19T00:49:06.978497+00:00",
+  "firmware": "PWR-2.0.1",
+  "files": [
+    {
+      "source": "thesi_power_control.ino",
+      "copy": "Code/PWR_2_0_1/thesi_power_control.ino",
+      "bytes": 186865,
+      "lines": 4848,
+      "sha256": "132c60aeeaed5572f294334059a61f6100640861e08b4e0fd2d2a6b4106314b7",
+      "kind": "source"
+    },
+    {
+      "source": "firmware/build.ps1",
+      "copy": "Code/PWR_2_0_1/firmware/build.ps1",
+      "bytes": 1926,
+      "lines": 42,
+      "sha256": "806e87f8e3638c27ac91b297a99817ff18ffb41a3f52077b4f224dcb30ce6691",
+      "kind": "source"
+    },
+    {
+      "source": "firmware/stm32f410.ld",
+      "copy": "Code/PWR_2_0_1/firmware/stm32f410.ld",
+      "bytes": 2489,
+      "lines": 121,
+      "sha256": "400597cca105a2037c828658e55252bbccfd4285efbe65dece11d364e28299aa",
+      "kind": "source"
+    },
+    {
+      "source": "firmware/verify_f410_hex.py",
+      "copy": "Code/PWR_2_0_1/firmware/verify_f410_hex.py",
+      "bytes": 3062,
+      "lines": 76,
+      "sha256": "bc4f5c74812ed8ba478da0b1410cc7480f36ef26184e40307af50a5987ce7f75",
+      "kind": "source"
+    },
+    {
+      "source": "firmware/test_web_protocol.py",
+      "copy": "Code/PWR_2_0_1/firmware/test_web_protocol.py",
+      "bytes": 10845,
+      "lines": 233,
+      "sha256": "424e0682b49d6177bde643f02ebdb48f59274e4466fcdb392f2da1f085be7eac",
+      "kind": "source"
+    },
+    {
+      "source": "web/app.js",
+      "copy": "Code/PWR_2_0_1/web/app.js",
+      "bytes": 33394,
+      "lines": 617,
+      "sha256": "044954a48312711abb2cf0e08de6c80a08850e2637c3df87f3fff92a28929ae2",
+      "kind": "source"
+    },
+    {
+      "source": "web/build.mjs",
+      "copy": "Code/PWR_2_0_1/web/build.mjs",
+      "bytes": 461,
+      "lines": 5,
+      "sha256": "cc652e66a87631a045502caf01a1a668d18ab4c5ee09281cf06bff46b6931b37",
+      "kind": "source"
+    },
+    {
+      "source": "web/calculator.css",
+      "copy": "Code/PWR_2_0_1/web/calculator.css",
+      "bytes": 10809,
+      "lines": 90,
+      "sha256": "4c9051ffdaaea49a56c9545da53924a0d5da22654be864920a3dc24bff20126b",
+      "kind": "source"
+    },
+    {
+      "source": "web/calculator.html",
+      "copy": "Code/PWR_2_0_1/web/calculator.html",
+      "bytes": 12070,
+      "lines": 105,
+      "sha256": "cd4caf9a60402fc039040551cacc78ffba159d8b922bbdf858f248b914375290",
+      "kind": "source"
+    },
+    {
+      "source": "web/index.html",
+      "copy": "Code/PWR_2_0_1/web/index.html",
+      "bytes": 13176,
+      "lines": 99,
+      "sha256": "2f4b587117d3478665186552184b637077d1451098fbdb5e3d0f89a04c5dbb44",
+      "kind": "source"
+    },
+    {
+      "source": "web/protocol.js",
+      "copy": "Code/PWR_2_0_1/web/protocol.js",
+      "bytes": 2385,
+      "lines": 44,
+      "sha256": "0254f0e9fb34d5892bd9cacca1f392430cd222f4beb4e46544e489395c85b0fb",
+      "kind": "source"
+    },
+    {
+      "source": "web/resonance.js",
+      "copy": "Code/PWR_2_0_1/web/resonance.js",
+      "bytes": 11781,
+      "lines": 204,
+      "sha256": "fbdbcb1e97a6155cb7ba00101f7408f8697b6848675717d381a7d8fcb7597691",
+      "kind": "source"
+    },
+    {
+      "source": "web/serial.js",
+      "copy": "Code/PWR_2_0_1/web/serial.js",
+      "bytes": 11960,
+      "lines": 157,
+      "sha256": "a27971d5452b39538bb1799faa74b4480aadef460d0f4a38f1a25247b5c80d67",
+      "kind": "source"
+    },
+    {
+      "source": "web/server.mjs",
+      "copy": "Code/PWR_2_0_1/web/server.mjs",
+      "bytes": 1091,
+      "lines": 15,
+      "sha256": "dbfb0cfa99592d75442cf4ba50785c39bc0a88d351f9a04bce12773fc6fb4d82",
+      "kind": "source"
+    },
+    {
+      "source": "web/storage.js",
+      "copy": "Code/PWR_2_0_1/web/storage.js",
+      "bytes": 3019,
+      "lines": 43,
+      "sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5",
+      "kind": "source"
+    },
+    {
+      "source": "web/styles.css",
+      "copy": "Code/PWR_2_0_1/web/styles.css",
+      "bytes": 28506,
+      "lines": 354,
+      "sha256": "5d648d261e47f2eef2c744a9a10aa4d93d360fe4d4b0b094def894c8e5b4e822",
+      "kind": "source"
+    },
+    {
+      "source": "web/package.json",
+      "copy": "Code/PWR_2_0_1/web/package.json",
+      "bytes": 251,
+      "lines": 12,
+      "sha256": "f08d5f4d0a4aba3aa7f503756ea2b8b1e857970b493341614c49556f01079cb6",
+      "kind": "source"
+    },
+    {
+      "source": "web/vercel.json",
+      "copy": "Code/PWR_2_0_1/web/vercel.json",
+      "bytes": 642,
+      "lines": 16,
+      "sha256": "9927baba1ec548c86f6bafaef0577d127368be5d7b0aafa97f9883fa652c40f9",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/protocol.test.mjs",
+      "copy": "Code/PWR_2_0_1/web/tests/protocol.test.mjs",
+      "bytes": 3102,
+      "lines": 45,
+      "sha256": "a9bfd90ecef436ecf4a1c0b8f3858bdfc96cbbb381d55e195b886b48d4325401",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/resonance.test.mjs",
+      "copy": "Code/PWR_2_0_1/web/tests/resonance.test.mjs",
+      "bytes": 9875,
+      "lines": 158,
+      "sha256": "5e019e3cf5acc3f343c494dc4d62bc44b63a9fe44f94219b243b14d24f38f289",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/serial.test.mjs",
+      "copy": "Code/PWR_2_0_1/web/tests/serial.test.mjs",
+      "bytes": 10580,
+      "lines": 160,
+      "sha256": "2cc0f59b469c39791f531af101eba2aa566ca2bb9f2d22caebbcbccb215a2de1",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/storage.test.mjs",
+      "copy": "Code/PWR_2_0_1/web/tests/storage.test.mjs",
+      "bytes": 3109,
+      "lines": 51,
+      "sha256": "5d1b9470ffd907d6a933fa456e02093a7651d44902d7de129d371f7f18ab7cf3",
+      "kind": "source"
+    },
+    {
+      "source": "docs/firmware-flow-distilled.md",
+      "copy": "Code/PWR_2_0_1/docs/firmware-flow-distilled.md",
+      "bytes": 1648,
+      "lines": 37,
+      "sha256": "b515e507c7dd2d1c37e62ce15b371f7f6cb9534ebc9a5d2a2381f629e0d72971",
+      "kind": "documentation"
+    },
+    {
+      "source": "docs/firmware-flow.md",
+      "copy": "Code/PWR_2_0_1/docs/firmware-flow.md",
+      "bytes": 6363,
+      "lines": 122,
+      "sha256": "82216c2e30f2238f7c7c7a2274a89fbb6e7b51cc3c0985bfb5990af46a5cf93b",
+      "kind": "documentation"
+    },
+    {
+      "source": "docs/power-control.md",
+      "copy": "Code/PWR_2_0_1/docs/power-control.md",
+      "bytes": 25541,
+      "lines": 360,
+      "sha256": "02c85aa57dd0856e5d8ab4d66f2e66f832781bb6d06a8c344c84dd697f4b6d67",
+      "kind": "documentation"
+    },
+    {
+      "source": "docs/README.md",
+      "copy": "Code/PWR_2_0_1/docs/README.md",
+      "bytes": 875,
+      "lines": 12,
+      "sha256": "a159fdd984de794167d56bd3dce8e3a38ce9a484ca6ff2680b66c3536a51225e",
+      "kind": "documentation"
+    },
+    {
+      "source": "docs/stm32f410-port.md",
+      "copy": "Code/PWR_2_0_1/docs/stm32f410-port.md",
+      "bytes": 7852,
+      "lines": 184,
+      "sha256": "33057ee8d9658ecb32e8d5a921092a0d971152366eeda5d1ab552353a89ebc6f",
+      "kind": "documentation"
+    },
+    {
+      "source": "docs/uart-commands.md",
+      "copy": "Code/PWR_2_0_1/docs/uart-commands.md",
+      "bytes": 5485,
+      "lines": 130,
+      "sha256": "40c416128d0f347ca6de734f95c450bd7661f63b63f27d03ded681472eed0a64",
+      "kind": "documentation"
+    },
+    {
+      "source": "docs/web-protocol.md",
+      "copy": "Code/PWR_2_0_1/docs/web-protocol.md",
+      "bytes": 10222,
+      "lines": 186,
+      "sha256": "aec6c801f9432c96741682f94a647271a8e7072cea5ebfe6ba3a9aa6da2de867",
+      "kind": "documentation"
+    },
+    {
+      "source": "Code/thesi_power_control_PWR_1_9_20.ino",
+      "copy": "Code/thesi_power_control_PWR_1_9_20.ino",
+      "bytes": 161712,
+      "lines": 4207,
+      "sha256": "39c2769a4a597e9e70cc0a8ee11dbc221aab084e2eb082b5b60e41b28f2de70a",
+      "kind": "source"
+    },
+    {
+      "source": "Data/analysis/rebuild_results.py",
+      "copy": "Data/analysis/rebuild_results.py",
+      "bytes": 30723,
+      "lines": 335,
+      "sha256": "9ba727aa340832f6d9aea7e998b2b17f82c799bbfbcf1c75ecc0b3b8f965e076",
+      "kind": "source"
+    },
+    {
+      "source": "Data/analysis/inspect_measurements.py",
+      "copy": "Data/analysis/inspect_measurements.py",
+      "bytes": 2325,
+      "lines": 47,
+      "sha256": "9832429c1d17e5252f36ec19542fd7b782e685d43c9be4c5db2b294bde38bfed",
+      "kind": "source"
+    }
+  ]
+}

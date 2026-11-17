@@ -1,0 +1,18 @@
+{
+  "modified_table_calls": [
+    "dc_complete_table.tex",
+    "ac_complete_table.tex",
+    "efficiency_table.tex",
+    "pq_complete_table.tex",
+    "thermal_complete_table.tex",
+    "raw_waveform_source_table.tex",
+    "transient_complete_table.tex",
+    "record_metadata_table.tex"
+  ],
+  "computational_ast_unchanged": true,
+  "width_normalization": [
+    "raw_waveform_source_table.tex",
+    "thermal_complete_table.tex",
+    "appendix_thermal_complete_table.tex"
+  ]
+}

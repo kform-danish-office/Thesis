@@ -1,0 +1,71 @@
+
+> thesis-power-lab@1.0.0 test
+> node --test tests/*.test.mjs
+
+✔ line framer preserves arbitrary chunks and CRLF without empty frames (0.931253ms)
+✔ line framer drops a whole oversized frame and recovers at newline (0.127331ms)
+✔ frame parser handles a UART prompt and ignores text, echo, malformed and unknown frames (0.311185ms)
+✔ telemetry rejects missing, mistyped and nonfinite measurement fields while preserving null diagnostics (0.252527ms)
+✔ telemetry lease must be a finite nonnegative number before it can authorize control (0.147932ms)
+✔ command validation normalizes whitespace and rejects command injection and protocol prefixes (0.353189ms)
+✔ fault gating permits only known clear states (0.099679ms)
+✔ calibration telemetry is validated before presenting running/completed state (0.183495ms)
+✔ tested thesis preset reproduces the nominal 25.9 uH / 1 nF tank (0.739536ms)
+✔ unvalued C26 and leakage remain unknown in drawing-only presets (0.917963ms)
+✔ borrowed F410 circuit values are explicitly an assumed equivalent (0.193068ms)
+✔ every preset has unique identity and valid source references (0.143405ms)
+✔ transformer references retain measured pairs and source provenance without assigning fitted identity (0.267811ms)
+✔ thesis pump sizing solves the documented 2 nF / 1 MHz example independently of tank resonance (4.781964ms)
+✔ all three triangular/clamped pump solves roundtrip (0.137586ms)
+✔ pump model rejects invalid inputs and out-of-range results (0.254611ms)
+✔ documented nominal Lr includes 9.4 uH discrete plus 16.5 uH leakage (0.135112ms)
+✔ explicit units preserve SI dimensions and reject missing, unknown, or nonfinite values (0.210975ms)
+✔ capacitor banks use their actual series or parallel topology (0.21352ms)
+✔ frequency, capacitance, and inductance solves roundtrip independently (0.1467ms)
+✔ leakage belongs in total series inductance and is subtracted from the discrete solution (0.226659ms)
+✔ a leakage-only series path is valid while adding an Lm property cannot change Lr (0.489532ms)
+✔ worst-case tolerance endpoints are exact and encompass every corner (0.246769ms)
+✔ operating-frequency reactance changes sign around resonance (0.143164ms)
+✔ series-loss Q and half-power bandwidth are consistent (0.131116ms)
+✔ current response peaks at one at fr and is reciprocal symmetric in frequency ratio (0.337795ms)
+✔ analytical half-power endpoints reproduce exact R/(2 pi L) bandwidth (0.149554ms)
+✔ lossless or malformed response requests cannot masquerade as finite current curves (0.148482ms)
+✔ E12 and E24 use tabulated values, bracket decade transitions, and expose real error (0.296063ms)
+✔ invalid component values and numeric overflow fail instead of displaying NaN or Infinity (0.188843ms)
+✔ separate magnetizing branch reproduces supplied A and B comparison values (0.155713ms)
+✔ magnetizing comparison scales physically without changing the series solve (0.097786ms)
+✔ missing operating frequency leaves magnetizing reactance unknown (0.055033ms)
+✔ magnetizing comparison rejects invalid quantities and unsupported numeric results (0.319658ms)
+✔ USB handshake, lease, streaming and snapshots negotiate at 115200 without a physical port (6.404651ms)
+✔ unknown acknowledgments and human UART output do not settle or corrupt a command (3.947806ms)
+✔ board rejections become actionable command errors and the queue recovers (1.279394ms)
+✔ invalid commands are rejected before any bytes are sent (0.631435ms)
+✔ ON is refused after stale telemetry, a fault, or loss of the reported lease (2.33284ms)
+✔ OFF bypasses a pending command and cancels queued ON and parameter changes (0.908179ms)
+✔ disconnect sends OFF then stops streaming and closes the fake port (1.019705ms)
+✔ disconnect immediately blocks a concurrent ON from passing its OFF command (0.880557ms)
+✔ unplug clears readiness and rejects pending control requests (0.877592ms)
+✔ demo remains visibly synthetic and never requests or writes to USB (0.676132ms)
+✔ disconnect cancels a pending port chooser before the chosen port can open (0.145958ms)
+✔ a command acknowledgment timeout is an error and never retries the mutation (2201.448877ms)
+✔ demo settings persistence is explicit and requires output OFF (0.759827ms)
+✔ calibration is capability-gated and never sent to legacy firmware or demo (0.663153ms)
+✔ capable calibration commands require output OFF and reject conflicting commands while running (1.416431ms)
+✔ CSV preserves quoted names, commas, newlines, missing diagnostics, units and column order (0.790143ms)
+✔ CSV prevents spreadsheet formulas while preserving negative numeric readings (3.872213ms)
+✔ every CSV sample retains session provenance and firmware, including synthetic sessions (0.183614ms)
+✔ empty sessions produce only a header (0.076795ms)
+✔ CSV handles absent firmware metadata from an imported session (0.172578ms)
+ℹ tests 54
+ℹ suites 0
+ℹ pass 54
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2304.806084
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

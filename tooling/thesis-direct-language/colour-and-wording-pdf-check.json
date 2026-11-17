@@ -1,0 +1,51 @@
+{
+  "pages": 424,
+  "colour_schematic_pages": {
+    "fig:analysis-power-stage": {
+      "physical_page": 44,
+      "non_gray_pixels_at_72dpi": 9635
+    },
+    "fig:hw-input-schematic": {
+      "physical_page": 63,
+      "non_gray_pixels_at_72dpi": 8854
+    },
+    "fig:schematic-power-stage": {
+      "physical_page": 64,
+      "non_gray_pixels_at_72dpi": 9707
+    },
+    "fig:schematic-usbc": {
+      "physical_page": 68,
+      "non_gray_pixels_at_72dpi": 24246
+    },
+    "fig:schematic-mcu": {
+      "physical_page": 69,
+      "non_gray_pixels_at_72dpi": 14723
+    },
+    "fig:app-v2-oct27-schematic-1": {
+      "physical_page": 152,
+      "non_gray_pixels_at_72dpi": 734
+    },
+    "fig:app-v2-oct27-schematic-2": {
+      "physical_page": 153,
+      "non_gray_pixels_at_72dpi": 16909
+    },
+    "fig:app-v2-oct27-schematic-3": {
+      "physical_page": 154,
+      "non_gray_pixels_at_72dpi": 15404
+    },
+    "fig:app-v2-oct27-schematic-4": {
+      "physical_page": 155,
+      "non_gray_pixels_at_72dpi": 8011
+    }
+  },
+  "pin_caption_updated": true,
+  "control_improvement_table_present": true,
+  "models_opening_describes_calculations": true,
+  "selected_pages": {
+    "mcu-pins": 23,
+    "calculation-parameters": 51,
+    "control-stage-table": 83,
+    "control-development": 82,
+    "models-opening": 52
+  }
+}

@@ -1,0 +1,65 @@
+[
+  {
+    "path": "raw/Capture 015.csv",
+    "sha256": "2072b4e2cf1691ce6d16dc7b8fd9e8d21a0b14385eed5353dacaa4f3be772892",
+    "used_devices": [
+      "4c5d43a8-3948-432f-9320-a8eeab4d5849",
+      "d80f4f53-4f7c-44ee-8ce0-d5860477faa7"
+    ],
+    "excluded_scope_rows": 1
+  },
+  {
+    "path": "raw/Capture 017.csv",
+    "sha256": "d64a3f0d80848acbfa25e00b7320316c4c1f57c3a3688e3c9419faf990b1d58b",
+    "used_devices": [
+      "4c5d43a8-3948-432f-9320-a8eeab4d5849",
+      "d80f4f53-4f7c-44ee-8ce0-d5860477faa7"
+    ],
+    "excluded_scope_rows": 1
+  },
+  {
+    "path": "raw/Capture 018.csv",
+    "sha256": "867f5424b992bc1cd9d7fcc727ee76a94ca4a16313bc66dc28a460efe560011d",
+    "used_devices": [
+      "4c5d43a8-3948-432f-9320-a8eeab4d5849",
+      "d80f4f53-4f7c-44ee-8ce0-d5860477faa7"
+    ],
+    "excluded_scope_rows": 1
+  },
+  {
+    "path": "raw/Capture 019.csv",
+    "sha256": "9a45ca418da38c60b978075ebf3f1f5fb9092be14c840dda7a310a2ceb663f13",
+    "used_devices": [
+      "4c5d43a8-3948-432f-9320-a8eeab4d5849",
+      "d80f4f53-4f7c-44ee-8ce0-d5860477faa7"
+    ],
+    "excluded_scope_rows": 1
+  },
+  {
+    "path": "raw/Capture 020.csv",
+    "sha256": "16b5eeb2c38f17ccfdb0faec5375306591edfe07792be06cd2fbab88680b04a4",
+    "used_devices": [
+      "4c5d43a8-3948-432f-9320-a8eeab4d5849",
+      "d80f4f53-4f7c-44ee-8ce0-d5860477faa7"
+    ],
+    "excluded_scope_rows": 1
+  },
+  {
+    "path": "raw/Capture 021.csv",
+    "sha256": "86fde71363e71cc00fe5553c7b4a007daa82f4c10b4854dd54e625148ffaf891",
+    "used_devices": [
+      "4c5d43a8-3948-432f-9320-a8eeab4d5849",
+      "d80f4f53-4f7c-44ee-8ce0-d5860477faa7"
+    ],
+    "excluded_scope_rows": 1
+  },
+  {
+    "path": "raw/Capture 022 (2).csv",
+    "sha256": "ccfb9437e0a42e0c4ea57a83de86d1937767946784c0b251b3565136e71f87c4",
+    "used_devices": [
+      "4c5d43a8-3948-432f-9320-a8eeab4d5849",
+      "d80f4f53-4f7c-44ee-8ce0-d5860477faa7"
+    ],
+    "excluded_scope_rows": 1
+  }
+]

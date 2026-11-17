@@ -1,0 +1,28 @@
+\section{Switching-Cycle Operation}
+\label{sec:analysis-switching}
+
+Each enabled cycle commutates the switch node between the DC-link rails. The pump sequence comprises charge-transfer, clamp, and freewheeling intervals, while the isolated tank carries inductive current during an active burst. Table~\ref{tab:analysis-pump-intervals} summarizes the six reference intervals \cite{ammar2021led}.
+
+\begin{table}[htbp]
+\centering
+\caption{Ideal charge-pump intervals during one switching cycle.}
+\label{tab:analysis-pump-intervals}
+\begin{tabularx}{\textwidth}{@{}L{0.09\textwidth}L{0.20\textwidth}Y@{}}
+\toprule
+Interval & Half-bridge state & Pump behavior\\
+\midrule
+1 & Low side on & Stored pump-capacitor energy transfers toward the DC link; pump current decreases.\\
+2 & Low side on & A clamp path holds the internal pump node at the high rail while the inductor current approaches zero.\\
+3 & Low side on & The input bridge supplies charge to the pump capacitor after the preceding tank energy is depleted.\\
+4 & High side on & Charging continues until the pump-capacitor voltage reaches the instantaneous rectified input voltage.\\
+5 & High side on & The opposite clamp holds the internal node at the low rail while the inductor current returns toward zero.\\
+6 & High side on & The pump tank freewheels through the steering path before the next transition.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The ideal pump-capacitor excursion is approximately zero to the rectified line voltage. Transferred charge sets the cycle-averaged input current; \(\LP\) sets the current slope and completion time.
+
+During dead time, signed branch currents charge and discharge device and node capacitances. Pump current can support commutation at low isolated load, whereas opposing branch currents reduce the available net current.
+
+Each burst restarts with the inductor currents and capacitor voltages left by the idle interval. The first cycles can therefore differ from steady switching, particularly during sparse no-load packets.

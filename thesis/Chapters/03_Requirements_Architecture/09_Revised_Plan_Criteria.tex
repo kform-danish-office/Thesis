@@ -1,0 +1,44 @@
+\section{Requirements from the Revised Plan}
+\label{sec:revised-plan-criteria}
+
+The revised July--October plan extends bring-up into V2 evaluation, converter adjustment, and V3 edge-card development \cite{projectOctoberPlan}. The plan calls for repeating the V2 tests, finding the output-power limit, testing controlled design changes, and preparing the final evaluation.
+
+\Needspace{10\baselineskip}
+\subsection{Power Levels and Prototype Versions}
+
+The revised plan sets \SI{65}{\watt} continuous output as the minimum and \SI{100}{\watt} continuous output as the target. The earlier plan schedules \SI{75}{\watt} continuous validation as an intermediate test milestone \cite{projectEarlierPlan}. Each continuous level requires a defined run time, stated ambient and cooling conditions, stable electrical operation, and a temperature record over the run.
+
+The plan calls for a repeat of the reported V2 maximum near \SI{85}{\watt} under defined conditions, or an explanation of the difference. The integrated MCU and its ported firmware form part of the V2 development described in Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port}. The separate matched measurements on the modified V1.0 assembly reached \SI{79.89}{\watt}.
+
+\subsection{Design and Test Requirements}
+
+Table~\ref{tab:req-revised-plan-criteria} lists the additional design work and tests, including temperature, stability, and volume measurements.
+
+\begingroup
+\small
+\begin{longtable}{@{}L{0.10\linewidth}L{0.82\linewidth}@{}}
+\caption[Tests and design work in the revised plan.]{Tests and design work in the revised project plan.}
+\label{tab:req-revised-plan-criteria}\\
+\toprule ID & Planned test or design work\\\midrule
+\endfirsthead
+\toprule ID & Planned test or design work\\\midrule
+\endhead
+AP-01 & Assess the \SI{65}{\watt} continuous minimum, earlier \SI{75}{\watt} validation milestone, and \SI{100}{\watt} continuous target using simultaneous electrical measurements and defined-duration thermal and stability runs.\\
+AP-02 & Repeat the reported approximately \SI{85}{\watt} V2 point, or explain the difference. State the assembly and fitted parts, firmware settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, and uncertainty.\\
+AP-03 & Diagnose the \SI{15}{\watt} reported output shortfall using loss calculations, component stress, control limits, and temperatures. Rank candidate changes from these findings and retest one change at a time. If \SI{100}{\watt} is not reached safely, quantify the highest repeatable power and the remaining limit.\\
+AP-04 & Characterize no load, the supported fixed PDOs, and PPS. At applicable loads, record regulation, corresponding input/output power, efficiency, PF/THD, ripple, switching/device stress, transient response, temperatures, and protection events. The planned V2 points include \SIlist{25;45;65;75;80}{\watt} and approximately \SI{85}{\watt}.\\
+AP-05 & Complete a defined-duration thermal and stability run at the final supported power and document extended-load reliability observations. State ambient, cooling, run time, temperature development, interruptions, and stop limits.\\
+AP-06 & Develop and review the V3 edge-card pinout, outline, component-height limit, current and gate/sense return paths, creepage/clearance, and thermal-spreading arrangement. Record schematic/layout review, DRC, BOM availability, manufacturing review, and release status.\\
+AP-07 & Compare V2 and V3 power density using the same volume calculation and output-power test conditions. Report dimensions, included parts and cooling allowance, efficiency, thermal margin, and any safety or reliability trade-off.\\
+AP-08 & Determine whether V3 is ready for testing, identify the tests that can be completed, and state the remaining work. If V3 is not ready, use the completed V2 tests with matched operating conditions as the hardware results.\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection{Power Density and Remaining Work}
+
+Power density requires verified output and complete assembly dimensions. Section~\ref{sec:method-density} uses a common rectangular envelope including magnetics, connectors, supports, component height, required spacing, and cooling hardware. V2 and V3 assembly dimensions remain necessary; they cannot be inferred from the V1.0 outline.
+
+The completed work includes the measured first-prototype baseline, integrated V2 circuit and firmware, powered tank changes, and a reduced V3 layout. Replacement planar magnetics were not installed. A matched repeat near \SI{85}{\watt}, the full PPS and extended-load tests, a decision on V3 testing, and the full-system power-density comparison remain open. Chapter~\ref{ch:results} presents the measurements and design estimate; Chapters~\ref{ch:discussion} and \ref{ch:conclusion} connect them to the next steps.
+
+Planar-magnetic optimization is a learning objective. The supplied designs were retained, so this thesis evaluates their integration and effect on converter operation. The original electromagnetic design came from the earlier work described in Section~\ref{sec:intro-contributions}.

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "cross-01",
+    "path": "Backmatter/References.tex",
+    "old": "Source and PDF supplied in \\sourcefile{Data/project_records}.",
+    "new": "",
+    "reason": "Remove a reader-facing directory unavailable in the standalone PDF.",
+    "facts_preserved": [
+      "Author, project title, and report or draft identification"
+    ],
+    "checklist": [
+      "standalone PDF",
+      "retain attribution"
+    ]
+  },
+  {
+    "id": "cross-02",
+    "path": "Backmatter/References.tex",
+    "old": "Earlier working project-plan draft, retained as \\sourcefile{Data/project_records/Original_Project_Definition.tex}.",
+    "new": "Earlier working project-plan draft.",
+    "reason": "Retain the draft identification without directing the reader to a source file.",
+    "facts_preserved": [
+      "Author, project title, and report or draft identification"
+    ],
+    "checklist": [
+      "standalone PDF",
+      "retain attribution"
+    ]
+  }
+]

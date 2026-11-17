@@ -1,0 +1,42 @@
+{
+  "format": "raw-binary-slices-in-stored-zip-containers-v1",
+  "original_filename": "DTU_Thesis_USB_C_Plain_Headings_2026-10-24.zip",
+  "original_byte_size": 77661674,
+  "original_sha256": "fed0ef9fadd0c1c4632b3d0f9aa057885d61714cfa8eacb5b60ed2adbbe3e8ed",
+  "original_zip_entries": 451,
+  "part_count": 3,
+  "chunk_byte_size": 27262976,
+  "parts": [
+    {
+      "order": 1,
+      "container": "Thesis_Transfer_Part_01_of_03.zip",
+      "payload_file": "original.zip.part001",
+      "byte_offset": 0,
+      "byte_size": 27262976,
+      "sha256": "ea04ac85ea690dbb34ee9939bafc939412169ed5a3cbd23e859ea6c586442e26"
+    },
+    {
+      "order": 2,
+      "container": "Thesis_Transfer_Part_02_of_03.zip",
+      "payload_file": "original.zip.part002",
+      "byte_offset": 27262976,
+      "byte_size": 27262976,
+      "sha256": "a9bbf8ed47df1b684057d05259d4ee767118214f0de6f8e86aea29d1dbb19ba5"
+    },
+    {
+      "order": 3,
+      "container": "Thesis_Transfer_Part_03_of_03.zip",
+      "payload_file": "original.zip.part003",
+      "byte_offset": 54525952,
+      "byte_size": 23135722,
+      "sha256": "97d87cefa1202f0150266c1026d1e9a5ba90f076190d83ad03c2afd8548f2132"
+    }
+  ],
+  "reconstruction_instructions": [
+    "Open each transport ZIP and read its original.zip.partNNN payload.",
+    "Concatenate the raw payload bytes in the listed parts order: part001, part002, part003.",
+    "Save the concatenated bytes using original_filename.",
+    "Verify the reconstructed byte size and SHA-256 against original_byte_size and original_sha256.",
+    "Open the reconstructed original ZIP and verify that its 451 entries pass ZIP CRC checks."
+  ]
+}

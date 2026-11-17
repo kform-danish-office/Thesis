@@ -1,0 +1,140 @@
+[
+  {
+    "id": "control-01",
+    "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+    "old": "The baseline uses continuous three-channel ADC1 acquisition and circular DMA. The sample-time setting is \\texttt{ADC\\_SAMPLETIME\\_39CYCLES\\_5}. The foreground reads the buffer without waiting in \\texttt{analogRead()}, so acquisition continues during command handling and control updates. The control loop can use the latest available samples without pausing for a conversion.",
+    "new": "The baseline uses continuous three-channel ADC1 acquisition and circular DMA with the sample-time setting \\texttt{ADC\\_SAMPLETIME\\_39CYCLES\\_5}. Samples are transferred to memory in the background, so the foreground can read the latest available values without waiting in \\texttt{analogRead()} while handling commands and control updates.",
+    "reason": "Combines repeated explanations of acquisition and the removal of conversion waits.",
+    "facts_preserved": [
+      "Three-channel continuous ADC1 DMA",
+      "Exact sample-time setting",
+      "Foreground reads latest available samples"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific function"
+    ]
+  },
+  {
+    "id": "control-02",
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "Browser calibration was added for startup precharge, no-load operation, and three reference loads. For no-load and reference-load tuning, the existing coarse and fine search is used to find a burst duty from the measured secondary-bulk voltage. The burst-enable frequency remains fixed during this search. This makes the earlier terminal routines accessible from the setup interface without adding a separate control algorithm.",
+    "new": "Browser calibration was added for startup precharge, no-load operation, and three reference loads. The no-load and reference-load routines use the existing coarse and fine search to find a burst duty from the measured secondary-bulk voltage, with burst-enable frequency held fixed. The setup interface therefore provides access to the earlier terminal routines without a separate control algorithm.",
+    "reason": "Connects the search method and interface purpose in one progression.",
+    "facts_preserved": [
+      "Search adjusts burst duty using bulk voltage",
+      "Burst-enable frequency fixed",
+      "Existing routines retained"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific function"
+    ]
+  },
+  {
+    "id": "control-03",
+    "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+    "old": "\\texttt{STATUS} was used to inspect the last/maximum interval, overruns, ADC snapshot time, DMA state, requested/effective duty, envelope timing, skipped periods, and carrier-sync counts. These fields show where software delay occurs. An external capture is needed to measure the jitter distribution and its relationship to the switching waveform.",
+    "new": "\\texttt{STATUS} was used to inspect the last and maximum control intervals, overruns, ADC snapshot time, DMA state, requested and effective duty, envelope timing, skipped periods, and carrier-sync counts. These software fields help locate delays; an external capture is needed to measure the jitter distribution and its relationship to the switching waveform.",
+    "reason": "Makes the distinction between software timing diagnostics and measured waveform jitter direct.",
+    "facts_preserved": [
+      "All listed status fields retained",
+      "External capture required for jitter distribution"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific function"
+    ]
+  },
+  {
+    "id": "control-04",
+    "path": "Chapters/09_Experimental_Methods/07_Control_Tests.tex",
+    "old": "Loaded tests checked delivered voltage and burst structure at a fixed output\r\nsetting. The records begin after startup; synchronized initial conditions,\r\nprecharge, output rise/peak, PA10, inhibition, decay, and fault status remain\r\nnecessary to quantify startup and shutdown.",
+    "new": "Loaded tests checked delivered voltage and burst structure at a fixed output setting. Because the records begin after startup, synchronized measurements of initial conditions, precharge, output rise and peak, PA10, inhibition, decay, and fault status are still needed to quantify startup and shutdown.",
+    "reason": "Links the limitation of the existing records to the specific measurements needed.",
+    "facts_preserved": [
+      "Loaded records begin after startup",
+      "All listed future measurements retained"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific function"
+    ]
+  },
+  {
+    "id": "control-06",
+    "path": "Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex",
+    "old": "Adding voltage feedback allowed the burst command to respond to the sensed voltage instead of relying on manual adjustment. The controller could therefore increase or reduce energy transfer when the voltage changed under load.\n\nThe first implementation waited for each ADC conversion before continuing the control update. Conversion waits, UART handling, and other foreground work shared the same execution path and could delay the next duty adjustment.",
+    "new": "Voltage feedback allowed the burst command to increase or reduce energy transfer as the sensed voltage changed under load, replacing manual adjustment. The first implementation waited for each ADC conversion before updating the command. These conversion waits shared the foreground execution path with UART handling and other work, delaying opportunities to adjust duty.",
+    "reason": "Connects the benefit of feedback to the blocking implementation and its practical timing limitation.",
+    "facts_preserved": [
+      "Voltage feedback changes burst transfer",
+      "ADC conversions blocked foreground updates",
+      "UART and foreground work also affect timing"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific function"
+    ]
+  },
+  {
+    "id": "control-07",
+    "path": "Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex",
+    "old": "Load removal leaves limited discharge through the connector, so further bursts can raise the bulk voltage. Average transfer was capped while minimum burst duration was retained to avoid truncating individual carrier cycles.\n\nThe no-load guard uses the primary-current indication at PA2 and the configured reference conditions to select a narrower band and lower high-duty cap. The defaults are \\(V_{\\mathrm{set}}=\\SI{28}{\\volt}\\), \\(V_{\\mathrm{NLdrop}}=\\SI{5}{\\volt}\\), and \\(d_{\\mathrm{NL}}=\\SI{5}{\\percent}\\), giving approximately \\SI{23}{\\volt} to \\SI{28}{\\volt} at the secondary bulk. These defaults apply to the secondary bulk supply; the USB-C output has its own voltage setting.",
+    "new": "After load removal, limited discharge through the connector allows continued bursts to raise the bulk voltage. The no-load guard uses the primary-current indication at PA2 and configured reference conditions to select a narrower voltage band and lower high-duty cap. Average transfer is thereby limited while the minimum burst duration is retained to avoid truncating individual carrier cycles. The defaults are \\(V_{\\mathrm{set}}=\\SI{28}{\\volt}\\), \\(V_{\\mathrm{NLdrop}}=\\SI{5}{\\volt}\\), and \\(d_{\\mathrm{NL}}=\\SI{5}{\\percent}\\), giving approximately \\SI{23}{\\volt} to \\SI{28}{\\volt} at the secondary bulk. The USB-C output has its own voltage setting.",
+    "reason": "Combines the cause of post-removal charging with the guard selection and burst constraint before giving the thresholds.",
+    "facts_preserved": [
+      "PA2 and configured reference conditions select guard",
+      "Minimum burst retained",
+      "All default values and bulk versus USB-C distinction retained"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific function"
+    ]
+  },
+  {
+    "id": "control-08",
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "Each save appends a sequence-numbered, checksummed entry and verifies it by reading it back. Occupied entries are skipped after interrupted programming. Successive saves use different entries across the sector. The sector is erased when the journal wraps. An interruption during erase can still remove the saved configuration. Defaults then load with output OFF if no valid entry remains. Writes wait until output, startup, and autotuning are inactive so flash work does not interrupt live conversion.",
+    "new": "Each save appends a sequence-numbered, checksummed entry and verifies it by reading it back. Occupied entries are skipped after interrupted programming, and successive saves use different entries across the sector. When the journal wraps, the sector is erased; an interruption during erase can remove the saved configuration. If no valid entry remains, defaults load with output OFF. Writes wait until output, startup, and autotuning are inactive so flash work does not interrupt live conversion.",
+    "reason": "Groups interrupted-write recovery and erase behavior by the operation that causes each outcome, retaining the conditions on writes.",
+    "facts_preserved": [
+      "Sequence and checksum with readback",
+      "Occupied entries skipped",
+      "Interrupted erase can remove configuration",
+      "Defaults load OFF",
+      "Output, startup and autotuning write conditions"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific function"
+    ]
+  },
+  {
+    "id": "control-09",
+    "path": "Chapters/09_Experimental_Methods/11_Uncertainty.tex",
+    "old": "Incomplete setup records and repeat measurements prevent a numerical\r\nuncertainty budget at every point. The workbook values are shown at their original precision. Error bars are\r\nomitted because the required uncertainty data are incomplete. Worst-case transients require repeated events and a defined\r\nacceptance band, thermal equilibrium requires a temperature history, and\r\njitter requires measured timing. These limits apply throughout\r\nChapter~\\ref{ch:results}.",
+    "new": "Incomplete setup records and repeat measurements prevent a numerical uncertainty budget at every point. Workbook values are shown at their original precision, and error bars are omitted where the required uncertainty data are incomplete. Repeated events and a defined acceptance band are needed for worst-case transients; a temperature history is needed for thermal equilibrium, and measured timing is needed for jitter. These limits apply throughout Chapter~\\ref{ch:results}.",
+    "reason": "Connects the available data to the presentation choices and states the measurements needed for each unresolved result.",
+    "facts_preserved": [
+      "Incomplete records prevent full numerical budgets",
+      "Original precision",
+      "Incomplete data prevent error bars",
+      "Transient, thermal and jitter requirements retained",
+      "Results chapter reference retained"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific function"
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+% Full source is read directly from the frozen files; no line ranges are used.
+\usepackage{needspace}
+\renewcommand{\lstlistlistingname}{List of Code Listings}
+\newfontfamily\thesiscodefont[Path=Setup/Fonts/,Ligatures=NoCommon]{DejaVuSansMono.ttf}
+\lstdefinestyle{fullsource}{
+  basicstyle=\thesiscodefont\fontsize{8}{9.6}\selectfont,
+  numbers=left,numberstyle=\thesiscodefont\fontsize{6.5}{8}\selectfont,
+  numbersep=7pt,stepnumber=1,firstnumber=1,numberblanklines=true,
+  xleftmargin=25pt,xrightmargin=3pt,frame=lines,framesep=4pt,
+  breaklines=true,breakatwhitespace=false,breakautoindent=false,breakindent=10pt,
+  postbreak=\mbox{$\hookrightarrow$\space},
+  keepspaces=true,columns=fullflexible,tabsize=2,showstringspaces=false,
+  showspaces=false,showtabs=false,captionpos=t,
+  aboveskip=10pt,belowskip=10pt,
+  keywordstyle=\bfseries,commentstyle=\thesiscodefont,stringstyle=\thesiscodefont,
+  literate={,}{{,\allowbreak}}1 {∥}{{$\parallel$}}1
+}
+
+% listings measures a complete physical source line even when it wraps.
+% Bound that bookkeeping width for wrapped listings to avoid TeX dimension
+% overflow on long HTML lines; the original input and line numbers are retained.
+% Activate the Unicode parallel symbol so the listings substitution is used.
+\makeatletter
+\lst@AddToHookAtTop{SelectCharTable}{\catcode`∥=\active}
+% Allow a wrapped physical source line to continue onto the next page.
+\lst@AddToHook{Init}{\lst@ifbreaklines\brokenpenalty=0\relax\fi}
+\lst@AddToHook{PostOutput}{%
+  \lst@ifbreaklines
+    \ifdim\lst@currlwidth>\linewidth
+      \global\lst@currlwidth\linewidth
+    \fi
+  \fi}
+\makeatother

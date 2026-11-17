@@ -1,0 +1,47 @@
+[
+  {
+    "path": "Chapters/01_Introduction/chapter.tex",
+    "before": "A digitally controlled USB-C laboratory supply was developed from a charge-pump PFC resonant converter and supplied planar magnetics. The first prototype, V1, was used for circuit bring-up and control development. V2 integrated the MCU and associated circuitry on the converter PCB. The V3 edge-card layout was then developed to reduce the converter volume.",
+    "after": "The work started with a DTU charge-pump converter and supplied planar magnetics. The hardware and controller were then built around these parts for a USB-C power supply. The main change was the load: it could be absent at startup, draw different amounts of power, or be disconnected while the converter still held energy. That change connects the circuit design, burst-control development, and tests described in this thesis."
+  },
+  {
+    "path": "Frontmatter/Approval.tex",
+    "before": "USB-C laboratory power supply",
+    "after": "USB-C power supply"
+  },
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "before": "USB-C laboratory supply",
+    "after": "USB-C power supply"
+  },
+  {
+    "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+    "before": "USB-C laboratory supply",
+    "after": "USB-C power supply"
+  },
+  {
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "before": "isolated AC--DC laboratory supply",
+    "after": "isolated AC--DC power supply"
+  },
+  {
+    "path": "Chapters/12_Conclusion/chapter.tex",
+    "before": "USB-C laboratory supply",
+    "after": "USB-C power supply"
+  },
+  {
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "before": "USB-C laboratory supply",
+    "after": "USB-C power supply"
+  },
+  {
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "before": "detachable-output laboratory supply",
+    "after": "USB-C power supply"
+  },
+  {
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "before": "Logged \\SI{240}{\\volt}, \\SI{50}{\\hertz} laboratory supply",
+    "after": "AC source at \\SI{240}{\\volt}, \\SI{50}{\\hertz}"
+  }
+]

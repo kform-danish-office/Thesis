@@ -1,0 +1,202 @@
+[
+  {
+    "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+    "old": "test labelled \\SI{95}{\\watt} (\\cref{sec:res-v2-testing}). A continuous\r\noutput rating and an efficiency improvement were not established.",
+    "new": "test labelled \\SI{95}{\\watt} (\\cref{sec:res-v2-testing})."
+  },
+  {
+    "path": "Chapters/01_Introduction/09_V3_Development.tex",
+    "old": "V1 established converter operation and the burst-control method. V2",
+    "new": "The power circuit and burst-control method were developed on V1. V2"
+  },
+  {
+    "path": "Chapters/01_Introduction/09_V3_Development.tex",
+    "old": "arrangement was concentrated near the input bridge. A clear increase in\navailable output power was not established by the board revision alone.",
+    "new": "arrangement was concentrated near the input bridge."
+  },
+  {
+    "path": "Chapters/01_Introduction/09_V3_Development.tex",
+    "old": "V3\ntherefore represents layout development and an identified direction for\nfurther work, rather than a demonstrated increase in continuous power.",
+    "new": "V3\nremained a layout prototype for further magnetic and thermal development."
+  },
+  {
+    "path": "Chapters/10_Results/05_Open_Circuit.tex",
+    "old": "also prevents an absolute-output measurement. These records and\r\nSection~\\ref{sec:res-transient} establish unloaded operation, but protection\r\nmargin requires synchronized absolute peak voltage, active OVP threshold,\r\nand firmware state.",
+    "new": "also prevents an absolute-output measurement. Unloaded operation and load\r\nremoval are described in Section~\\ref{sec:res-transient}. Protection margin\r\nis checked by comparing the peak voltage with the active OVP threshold\r\nduring the same event."
+  },
+  {
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "old": "\\cite{ammar2020chargepump,ammar2021led}. Establishing that behavior here\r\nrequires the incoming device's gate-source transition and drain-source\r\nvoltage on the same calibrated time base.",
+    "new": "\\cite{ammar2020chargepump,ammar2021led}. Turn-on voltage is measured\r\nfrom the incoming device's gate-source transition and drain-source voltage\r\non the same calibrated time base."
+  },
+  {
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "old": "and burst structure limit direct comparison; these tests also do not establish\r\nharmonics-standard compliance.",
+    "new": "and burst structure differ from this prototype."
+  },
+  {
+    "path": "Chapters/10_Results/09_Thermal.tex",
+    "old": "voltage, so its label does not establish regulated \\SI{94}{\\watt} output.",
+    "new": "voltage, so output power for the nominal \\SI{94}{\\watt} point cannot be calculated."
+  },
+  {
+    "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+    "old": "Established switching for low-energy hardware checks",
+    "new": "Enabled switching for low-energy hardware checks"
+  },
+  {
+    "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+    "old": "Establish the physical meaning of each sensed signal before closing the loop",
+    "new": "Match feedback to the physical quantity used by the controller"
+  },
+  {
+    "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+    "old": "Electrical operation alone does not establish a continuous rating",
+    "new": "Follow component temperatures until they settle at the chosen load"
+  },
+  {
+    "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+    "old": "calculated output of \\SI{79.89}{\\watt}; neither a continuous rating nor the\r\n\\SI{100}{\\watt} objective is established.",
+    "new": "calculated output of \\SI{79.89}{\\watt}. Further loading toward the\r\n\\SI{100}{\\watt} objective requires temperature histories as well as electrical readings."
+  },
+  {
+    "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "old": "\\SI{85}{\\watt} point were not recorded. These observations inform the heating investigation, but do not establish\na continuous output rating.",
+    "new": "\\SI{85}{\\watt} point were not recorded. The continuing temperature rise\nshifted the next work toward bridge heating and the secondary windings."
+  },
+  {
+    "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "old": "No defined-duration, stabilized run establishes the continuous criteria",
+    "new": "Run the supply at the specified loads while following temperatures to stabilization"
+  },
+  {
+    "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "old": "No stage-loss allocation, verified switching improvement, controlled limiter diagnosis, or established safe-power ceiling",
+    "new": "Measure individual losses, switching behavior, and the condition that limits further loading"
+  },
+  {
+    "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "old": "Matched dimensions, included hardware, continuous power, and thermal conditions are not established for both revisions",
+    "new": "Measure both assemblies using the same included hardware, power, and cooling conditions"
+  },
+  {
+    "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "old": "limits. The V3 estimate in \\cref{sec:res-v3-design} does not establish\ncomplete-system density. Follow-up methods and controlled changes are given",
+    "new": "limits. The V3 estimate in \\cref{sec:res-v3-design} covers the reduced\nlayout; comparison of the complete supply includes its external USB-PD stage.\nFollow-up methods and controlled changes are given"
+  },
+  {
+    "path": "Chapters/11_Discussion/chapter.tex",
+    "old": "V1 established converter operation and control. V2 integrated the hardware",
+    "new": "The converter and controller were developed and tested on V1. V2 integrated the hardware"
+  },
+  {
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "old": "Chapter~\\ref{ch:results} demonstrates selected fixed outputs",
+    "new": "Chapter~\\ref{ch:results} reports selected fixed outputs"
+  },
+  {
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "old": "remained. Sustained output and the limiting loss mechanisms were not\r\nestablished.",
+    "new": "remained."
+  },
+  {
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "old": "Average USB-C output voltage was maintained across these points. The input--output power difference and surface heating require\r\nsimultaneous stage-power and temperature measurements; VBUS regulation\r\nalone does not establish conversion performance.",
+    "new": "Average USB-C output voltage was maintained across these points. The input--output\r\npower difference and surface heating point to losses within the power path.\r\nSimultaneous stage-power and temperature measurements would locate those losses."
+  },
+  {
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "old": "Higher output from V2 than V1 was not demonstrated. After the tank\r\nchanges, the dominant heating concern shifted to the input bridge. V3\r\naddressed occupied volume by removing the USB-PD section. Moving the hotspot does not show that total loss fell. The smaller layout\r\nalso needs power and thermal tests before sustained-power improvement\r\ncan be claimed.",
+    "new": "V2 output behavior was comparable to V1. After the tank changes, the\r\ndominant heating concern shifted to the input bridge. V3 addressed occupied\r\nvolume by removing the USB-PD section; further work remained on the\r\ntransformer and current paths."
+  },
+  {
+    "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+    "old": "The favorable PF and THD measured at the\r\nhighest loads on the \\SI{20}{\\volt} output do not establish light-load\r\nperformance. Control and hardware changes must therefore be assessed",
+    "new": "The best PF and THD were measured at the highest loads on the\r\n\\SI{20}{\\volt} output. Control and hardware changes must therefore be assessed"
+  },
+  {
+    "path": "Chapters/11_Discussion/06_Reference_Comparison.tex",
+    "old": "The earlier prototypes established the conversion principle under their\r\nreported loads, magnetics, and control.",
+    "new": "The earlier converters used the same conversion principle with their\r\nreported loads, magnetics, and control."
+  },
+  {
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "old": "cannot establish \\SI{94}{\\watt} output. The \\SI{100}{\\watt} target\r\nalso remains unverified over a defined duration.",
+    "new": "has only a nominal \\SI{94}{\\watt} label. Long-duration testing at the\r\n\\SI{100}{\\watt} target remains to be completed."
+  },
+  {
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "old": "uncertainty remain to be established.",
+    "new": "uncertainty need a synchronized repeat with calibrated instruments."
+  },
+  {
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "old": "a laboratory operating range or supply rating.",
+    "new": "a supply rating."
+  },
+  {
+    "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+    "old": "single-via restriction remains unconfirmed, but copper area alone does\r\nnot establish adequate pad and interlayer conduction.",
+    "new": "single-via restriction needs checking because narrow pad connections and\r\ninterlayer paths can still restrict current and heat flow despite a large copper pour."
+  },
+  {
+    "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+    "old": "V2 demonstrated the leakage-only tank without establishing greater output\r\nthan V1.",
+    "new": "V2 operated with the leakage-only tank and gave output behavior comparable\r\nto V1."
+  },
+  {
+    "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+    "old": "as Section~\\ref{sec:method-plan-validation}. Continuous-power claims\r\nrequire continuous tests. Matched dimensions and conditions are still\r\nmissing for V2--V3 comparison.",
+    "new": "as Section~\\ref{sec:method-plan-validation}. The complete assemblies need\r\nto be measured and tested under the same conditions for the V2--V3 comparison."
+  },
+  {
+    "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "old": "The highest measured output also does not establish a safe operating\nceiling.\n",
+    "new": ""
+  },
+  {
+    "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "old": "Establish the actual stage differences before attributing loss.",
+    "new": "Calculate each stage loss from these readings."
+  },
+  {
+    "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "old": "Establish thermal margin and sustained power before increasing load or reducing volume.",
+    "new": "Check temperature margin at a steady load before increasing power or reducing volume."
+  },
+  {
+    "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "old": "Check overshoot, recovery, shutdown, and restart before calling the operating range stable.",
+    "new": "Measure overshoot, recovery, shutdown, and restart."
+  },
+  {
+    "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+    "old": "V2 operation did not establish greater output capability than V1.",
+    "new": "V2 output behavior was comparable to V1."
+  },
+  {
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "old": "and a basis for magnetic and thermal development, without establishing\r\nimproved continuous power or a validated replacement transformer.",
+    "new": "and leaves transformer optimization and thermal testing as the next\r\ndevelopment steps."
+  },
+  {
+    "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+    "old": "Commutation waveforms are also required to establish ZVS.",
+    "new": "Turn-on voltage should be measured together with gate timing and resonant current."
+  },
+  {
+    "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+    "old": "with component temperature histories, should establish loss distribution\r\nand sustained output. Continuous validation should first establish the\r\n\\SI{65}{\\watt} minimum under declared electrical and thermal conditions.",
+    "new": "with component temperature histories, would locate the main losses.\r\nLong-duration tests should start at the \\SI{65}{\\watt} minimum under\r\ndefined electrical and thermal conditions."
+  },
+  {
+    "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+    "old": "and electrical conditions. Estimated size reduction alone establishes\r\nneither power-density nor thermal improvement.",
+    "new": "and electrical conditions."
+  },
+  {
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "old": "Efficiency estimates exclude disputed power rows and\r\ncaptures without absolute DC output voltage; their power boundaries and\r\nuncertainty need a synchronized repeat with calibrated instruments.",
+    "new": "Efficiency estimates exclude disputed power rows and\r\ncaptures without absolute DC output voltage. A synchronized repeat with\r\ncalibrated instruments is needed to measure input, output, and auxiliary\r\npower over the same interval."
+  }
+]

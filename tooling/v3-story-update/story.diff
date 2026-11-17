@@ -1,0 +1,573 @@
+--- before/README.md
++++ revised/README.md
+@@ -125,3 +125,5 @@
+ Its earlier association with the 100 W setting is superseded; whether 95 W is
+ a setpoint or measured output is unspecified. Three original board/setup photos
+ are included in Section 10.15 and retained with the V2 evidence.
++
++Current development narrative: V1 establishes the measured baseline; V2 adds integrated control and tank/thermal observations; V3 is a slimmed edge-card layout with the USB-PD section removed and secondary rectifiers retained. Approximately 8% net volume reduction is a design estimate for the reduced-function layout, not a measured complete-system power-density gain. New planar magnetics were not installed. The 3.3–3.6 A secondary-output region, suspected transformer limit and possible input via bottleneck remain qualitative bench findings. The 100 W target and longer-term 240 W EPR goal are not continuous ratings.
+--- before/Frontmatter/Approval.tex
++++ revised/Frontmatter/Approval.tex
+@@ -7,9 +7,9 @@
+ 
+ The isolated secondary bulk bus is regulated by the controller, while the downstream USB-C stage sets the connector voltage. The feedback and connector voltages therefore refer to different circuit nodes. They are kept separate when describing the hardware, firmware, and measurements.
+ 
+-In V2, the controller was moved onto a four-layer converter PCB. The F410 control connections, power circuit, isolated sensing, and downstream USB-C stage are described in \cref{sec:hw-v2}. The new schematic and PCB print set are included in \cref{sec:app-v2-oct27}. Browser logging and software tools were developed alongside the controller, with the full source in the appendices. The matched measurements from the first prototype, software checks, and preliminary V2 bench observations are reported with their own configurations.
++In V2, the controller was moved onto a four-layer converter PCB. The F410 control connections, power circuit, isolated sensing, and downstream USB-C stage are described in \cref{sec:hw-v2}. The schematic and PCB print set are included in \cref{sec:app-v2-oct27}. Browser logging and software tools were developed alongside the controller, with the full source in the appendices. The matched measurements from the first prototype, software checks, and preliminary V2 bench observations are reported with their own configurations.
+ 
+-The next stage is set out in the revised July--October 2026 plan: the reported V2 baseline is to be repeated, the power limit identified, controlled changes tested, and a V3 edge-card design assessed. In Appendix~\ref{app:revised-plan}, each planned milestone is linked to the relevant technical chapters. The completed hardware, design changes, test results, and remaining work are described in this thesis.
++The work progressed from converter bring-up and G071 control to the integrated F410 V2 board and a reduced V3 edge-card layout. Secondary-winding heating and the later input-bridge hotspot guided the remaining magnetic and layout work. The V3 USB-PD section was removed to reduce volume, but new magnetics were not installed within the project time. Appendix~\ref{app:revised-plan} links the original milestones to the design, test results, and work still needed.
+ 
+ \vfill
+ \begin{center}
+--- before/Frontmatter/Abstract.tex
++++ revised/Frontmatter/Abstract.tex
+@@ -7,6 +7,8 @@
+ 
+ With an AC input recorded as \SI{240}{\volt}, \SI{50}{\hertz}, matched voltage and current readings at the \SI{20}{\volt} setting gave output powers of \SIrange{73.97}{79.89}{\watt} at the load. Average output voltage was \SIrange{19.973}{19.991}{\volt}, with recorded peak-to-peak ripple of \SIrange{0.416}{0.452}{\volt}. Logged power factor was 0.97--0.99 and current total harmonic distortion was \SIrange{2.23}{3.98}{\percent}. An initial efficiency estimate of \SIrange{76.5}{77.1}{\percent} was calculated from the paired input and output measurements. Uncertainty in their timing and calibration limits the accuracy of this estimate. Controller operation was recorded during the tested no-load and load-removal events. A thermal image labeled \SI{20}{\volt}, \SI{4}{\ampere} showed a maximum surface temperature of \SI{90.4}{\celsius}. Further loss measurements, improved heat removal, and protection-timing tests are still needed.
+ 
+-Development continued with V2, in which the STM32F410 controller was integrated on a four-layer PCB with the GaN power stage, isolated feedback, and USB-C output circuit. The V2 schematics and PCB prints, archived PWR-2.0.1 controller, and browser tools are included in the thesis. Preliminary operation was reported with a leakage-only resonant tank. Lower half-bridge heating was observed, while input-bridge heating remained unresolved (\cref{sec:res-v2-testing}). These observations are separate from the matched G071 measurements. V2 input--output measurements and thermal-endurance tests are still needed before the planned V3 comparison.
++Development continued with an F410-based V2 board integrating the controller, GaN stage, isolated feedback, and USB-C circuit on a four-layer PCB. Lower half-bridge heating was observed after the tank and timing changes, but input-bridge heating remained unresolved (\cref{sec:res-v2-testing}). Bench performance was broadly comparable to the first prototype. Secondary-winding loss and a restricted input current path were suspected limitations, but neither was isolated quantitatively.
+ 
+-Digitally controlled operation at approximately \SI{80}{\watt} was demonstrated. In the revised plan, a \SI{100}{\watt} continuous target and a \SI{65}{\watt} continuous minimum are retained. Before either can be claimed as a continuous rating, thermal and stability tests must be run for a defined duration. Full-range zero-voltage switching, USB-PD conformance, safety, and EMC also need dedicated verification. The next step is to identify what limits sustained output, measure the effect of each controlled change, and use those findings to guide V3.
++A slimmer V3 edge-card design was prepared without the USB-PD output section, leaving secondary rectification. Its estimated net volume reduction was about \SI{8}{\percent}. New planar magnetics were not installed within the available time, so higher sustained power was not demonstrated. A complete USB-C supply would also require an external regulated USB-PD stage.
++
++Digitally controlled operation at approximately \SI{80}{\watt} was demonstrated. In the revised plan, a \SI{100}{\watt} continuous target and a \SI{65}{\watt} continuous minimum are retained. Before either can be claimed as a continuous rating, thermal and stability tests must be run for a defined duration. Full-range zero-voltage switching, USB-PD conformance, safety, and EMC also need dedicated verification. The next work is to resolve the magnetic and current-path limits, then evaluate the complete V3 arrangement. Operation toward \SI{240}{\watt} USB-PD Extended Power Range (EPR) remains a longer-term goal.
+--- before/Chapters/10_Results/15_V2_Testing_Update.tex
++++ revised/Chapters/10_Results/15_V2_Testing_Update.tex
+@@ -30,6 +30,23 @@
+ source is described separately
+ in Section~\ref{sec:hw-v2}.
+ 
++\subsection{Secondary Output and Comparison with V1}
++
++Secondary-winding heating was encountered during prototype development.
++The operating region associated with the highest available power was
++observed around \SIrange{3.3}{3.6}{\ampere} at the secondary output.
++Increasing the load further did not give the expected increase in power.
++The corresponding voltage would be needed to express this current range
++as a separate power result. It is not used to replace the matched
++connector voltage/current measurements from the earlier campaign.
++
++The transformer secondary was suspected as a limitation, but its winding
++loss was not measured separately from interconnect, rectifier, resonant,
++or control effects. V2 gave broadly comparable bench performance to V1.
++With the modified V2 tank, the input section became the dominant heating
++concern. This qualitative comparison does not establish identical
++efficiency or temperature at matched operating points.
++
+ \subsection{Input-Bridge Heating}
+ 
+ The input full-bridge rectifier, D4, D5, D9, and D10, continued to heat up.
+@@ -61,10 +78,13 @@
+ \FloatBarrier
+ 
+ Insufficient copper around the input bridge was suspected as a cause of
+-the heating. Narrow traces can add resistive loss, while limited copper
+-area reduces heat spreading from the diode pads. This has not yet been
+-confirmed by current, voltage-drop, or thermal measurements. Replacing
+-the diodes did not resolve the problem.
++the heating. A connection concentrated through a single via was also
++suspected in this area. A large copper pour cannot remove a bottleneck if
++the current still passes through one restricted interlayer connection.
++Narrow traces and vias can add resistive loss, while limited copper area
++reduces heat spreading from the diode pads. The fitted current path and
++its voltage drop still need to be checked before this explanation can be
++confirmed. Replacing the diodes did not resolve the problem.
+ 
+ \subsection{Next Layout Changes and Test Status}
+ 
+--- before/Chapters/10_Results/chapter.tex
++++ revised/Chapters/10_Results/chapter.tex
+@@ -22,3 +22,4 @@
+ \input{Chapters/10_Results/13_Failures_Lessons}
+ \input{Chapters/10_Results/14_Revised_Plan_Status}
+ \input{Chapters/10_Results/15_V2_Testing_Update}
++\input{Chapters/10_Results/16_V3_Design_Outcome}
+--- before/Chapters/10_Results/14_Revised_Plan_Status.tex
++++ revised/Chapters/10_Results/14_Revised_Plan_Status.tex
+@@ -35,12 +35,12 @@
+ \midrule
+ AP-01 & \SI{100}{\watt} target; \SI{65}{\watt} continuous minimum & Highest matched electrical point is \SI{79.8928}{\watt}; earlier tests include points above \SI{75}{\watt} & No defined-duration, stabilized run establishes the continuous criteria\\
+ AP-02 & Repeat the reported approximately \SI{85}{\watt} V2 baseline & The plan reports the point; the retained matched dataset reaches approximately \SI{80}{\watt} on the identified older assembly & Baseline identity, original run, and matched repeat remain unverified here\\
+-AP-03 & Explain the power gap and identify the highest repeatable safe output & Earlier screening, switching, and thermal records; preliminary V2 observations of lower half-bridge heating and persistent input-bridge heating & No stage-loss allocation, verified switching improvement, controlled limiter diagnosis, or established safe-power ceiling\\
++AP-03 & Explain the power gap and identify the highest repeatable safe output & Earlier screening and thermal records; secondary-winding heating and limited power increase; later V2 input-bridge heating with a suspected interlayer bottleneck & No stage-loss allocation, verified switching improvement, controlled limiter diagnosis, or established safe-power ceiling\\
+ AP-04 & Validate supported fixed PDOs and PPS & Electrical results at \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}; qualitative load removal & Negotiation, PPS behavior, defined stability bands, and protection responses need matched tests\\
+ AP-05 & Defined-duration thermal and reliability assessment & Ten labeled surface-temperature images; \SI{90.4}{\celsius} maximum at the labeled \SI{20}{\volt}, \SI{4}{\ampere} condition; later V2 run stopped as heating continued & Dwell time, stabilization, component identities, ambient/airflow, and endurance are incomplete\\
+-AP-06 & V3 design and release package & The plan defines an edge-card revision and its design/release work & A schedule entry or drawing alone does not establish completed release reviews, manufacture, or assembly\\
+-AP-07 & Compare V2/V3 power density using one volume convention & The measured operating points and design material are retained & Matched dimensions, included hardware, continuous power, and thermal conditions are not established for both revisions\\
+-AP-08 & V3 readiness decision or documented fallback & Older tests and preliminary powered V2 observations remain separate from the planned V3 work; wider copper and input-bridge relocation are planned & No matched V3 readiness/test report or completed V2 baseline repeat establishes this decision here\\
++AP-06 & V3 design and release package & A slimmed edge-card layout was prepared with the USB-PD section removed and secondary rectification retained & Release reviews, manufacturing/assembly readiness, and replacement-magnetics validation remain incomplete\\
++AP-07 & Compare V2/V3 power density using one volume convention & Approximately \SI{8}{\percent} net volume reduction was estimated for the reduced-function V3 layout & Matched dimensions, included hardware, continuous power, and thermal conditions are not established for both revisions\\
++AP-08 & V3 readiness decision or documented fallback & V1 and V2 supply the operating results; V3 reached a slimmed layout, with new magnetics not installed & A V3 readiness decision and matched power/thermal tests remain open\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+@@ -49,6 +49,8 @@
+ The next step is to repeat the identified baseline, then measure duration,
+ temperature, stress, and dynamic behavior against declared limits. Average
+ regulation alone cannot answer those questions.
++The V3 design estimate is reported in \cref{sec:res-v3-design}; it does
++not close the complete-system power-density comparison.
+ Section~\ref{sec:method-plan-validation} defines the follow-up tests, and
+ Section~\ref{sec:disc-plan-gap} connects them to controlled changes. These
+ tests are needed to assign a continuous rating and compare revisions; the
+--- before/Chapters/06_Magnetics_Integration/11_Limitations.tex
++++ revised/Chapters/06_Magnetics_Integration/11_Limitations.tex
+@@ -4,3 +4,5 @@
+ The approximately \SI{33}{\micro\henry} pump inductor and \SI{16.5}{\micro\henry} transformer leakage set the starting point for the prototype. These values provided a basis for building and operating the circuit, although the board connections and mounting also affected its installed behavior.
+ 
+ The next step is to identify the fitted variants and winding terminals, remeasure inductance in place, check the complete isolation path, and track temperature during a stabilized run. The assembly could then be reproduced more reliably, and its measured losses could be used to guide another board revision.
++
++Secondary-winding heating and limited power increase at higher load made transformer optimization a priority for the later revisions. The operating prototypes retained the inherited magnetic assemblies. New planar magnetics were not installed within the project time, so a smaller V3 layout did not establish improved magnetic loss or higher continuous output.
+--- before/Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex
++++ revised/Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex
+@@ -142,6 +142,12 @@
+ Using nominal \SI{100}{\watt} for one board and a short measured peak for
+ the other would defeat the comparison required by AP-07.
+ 
++The approximately \SI{8}{\percent} net reduction described for the slimmed
++V3 layout is a design-volume estimate. The USB-PD section was removed, so
++that estimate does not compare two complete supplies with the same output
++function. Any external regulator, PD controller, connector, and necessary
++cooling would need to be included in the system volume.
++
+ Verified assembled dimensions and matched continuous-power runs are still
+ needed for both boards, so there is no V2/V3 density result yet. If V3 does
+ not pass readiness, AP-08 calls for the completed V2 tests as the final
+--- before/Chapters/01_Introduction/05_Contributions_Attribution.tex
++++ revised/Chapters/01_Introduction/05_Contributions_Attribution.tex
+@@ -1,12 +1,14 @@
+ \section{Project Contributions and Earlier Designs}
+ \label{sec:intro-contributions}
+ 
+-The starting point is the charge-pump conversion principle and analytical design method developed by Ammar et al. \cite{ammar2020chargepump,ammar2021led}. The LTspice files and planar-magnetics designs also came from that work. The complete converter was developed from these supplied designs; the conversion principle and magnetics were not redesigned.
++The starting point is the charge-pump conversion principle and analytical design method developed by Ammar et al. \cite{ammar2020chargepump,ammar2021led}. The LTspice files and planar-magnetics designs also came from that work. The operating prototypes were developed from these supplied designs. Their conversion principle and fitted magnetic assemblies came from the earlier work; a replacement planar-magnetic set was not installed.
+ 
+ The PCB was designed and assembled for this project. The supplied inductor and transformer were integrated, and the power, auxiliary, sensing, and output-interface circuits were implemented. The STM32G071 firmware was developed in stages, from open-loop bring-up to the DMA-based PWR-1.9.20 controller, with startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition.
+ 
+-The controller was then ported to the STM32F410CBU6 on V2. The revised board integrates the control, isolated feedback, local supplies, and USB-C output with the power stage. Browser control and logging were added, and the resonant tank was modified during powered testing. The new schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
++The controller was then ported to the STM32F410CBU6 on V2. The revised board integrates the control, isolated feedback, local supplies, and USB-C output with the power stage. Browser control and logging were added, and the resonant tank was modified during powered testing. The schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
+ 
+ The assembled supply was tested to check its behavior in practice. Output voltage, load response, input power quality, conversion loss, and surface temperature were assessed from the measurements at the stated operating points. The schematics, measurement tables, and waveform plots show the circuit and conditions used for those comparisons.
+ 
+-The project contributions are the USB-C adaptation, hardware integration, embedded controller, and experimental evaluation. The converter principle and original magnetic design remain attributed to the earlier work.+The project contributions are the USB-C adaptation, hardware integration, embedded controller, and experimental evaluation. The converter principle and original magnetic design remain attributed to the earlier work.
++
++The V3 contribution was a slimmed edge-card layout with the USB-PD output section removed and secondary rectification retained. The resulting volume reduction was estimated at the design stage. Further magnetic optimization was identified, but no new magnetic set was installed or validated within the project.
+--- before/Chapters/01_Introduction/07_Thesis_Structure.tex
++++ revised/Chapters/01_Introduction/07_Thesis_Structure.tex
+@@ -3,6 +3,6 @@
+ 
+ The thesis follows the path from the inherited circuit to the tested supply. Chapter~\ref{ch:background} explains the conversion principle and what changes with a USB-C load. Chapter~\ref{ch:requirements} turns that application into targets, operating states, and an architecture. Chapter~\ref{ch:analysis} gives the component calculations and explains the interactions between the input and output paths. Chapter~\ref{ch:simulation} then identifies what the inherited models can explain and where a model of the final prototype is still needed.
+ 
+-Chapters~\ref{ch:magnetics} and \ref{ch:hardware} show how the supplied magnetic components were integrated and how the hardware developed from the first prototype to V2. Chapter~\ref{ch:control} follows the G071 controller development, the F410 port, and the operating states used in testing. Chapter~\ref{ch:methods} defines the test setup and measurement methods.
++Chapters~\ref{ch:magnetics} and \ref{ch:hardware} show how the supplied magnetic components were integrated and how the hardware developed from the first prototype through V2 and the reduced V3 layout. Chapter~\ref{ch:control} follows the G071 controller development, the F410 port, and the operating states used in testing. Chapter~\ref{ch:methods} defines the test setup and measurement methods.
+ 
+ Chapter~\ref{ch:results} brings the implementation and measurements together. Chapter~\ref{ch:discussion} examines the performance limits and the next development steps, and Chapter~\ref{ch:conclusion} answers the research questions. The appendices provide the equations, complete schematics, V2 PCB prints, firmware documentation, and measurement tables needed to follow the work.--- before/Chapters/01_Introduction/chapter.tex
++++ revised/Chapters/01_Introduction/chapter.tex
+@@ -1,12 +1,13 @@
+ \chapter{Introduction}
+ \label{ch:introduction}
+ 
+-The starting point was a DTU charge-pump converter and supplied planar magnetics. The hardware and controller were developed around those parts for a USB-C laboratory supply. The first prototype was brought up with an STM32G071 controller. The control and interface functions were then integrated into the F410-based V2 board. In both stages, the load could be absent at startup, draw different amounts of power, or be disconnected while energy remained in the converter. The circuit, burst controller, and tests were developed around these conditions.
++The starting point was a DTU charge-pump converter and supplied planar magnetics. The hardware and controller were developed around those parts for a USB-C laboratory supply. V1 was used for bring-up and G071 controller development. The control and interface functions were then integrated into the F410-based V2 board. Tank and timing changes reduced some local heating, but did not establish a higher sustained power capability. Those findings led to a slimmer V3 edge-card design and further work on the magnetic and thermal limits.
+ 
+ \input{Chapters/01_Introduction/01_Motivation}
+ \input{Chapters/01_Introduction/02_Problem_Statement}
+ \input{Chapters/01_Introduction/03_Aim_Objectives}
+ \input{Chapters/01_Introduction/08_V2_Prototype}
++\input{Chapters/01_Introduction/09_V3_Development}
+ \input{Chapters/01_Introduction/04_Research_Questions}
+ \input{Chapters/01_Introduction/05_Contributions_Attribution}
+ \input{Chapters/01_Introduction/06_Scope_Limitations}
+--- before/Chapters/01_Introduction/03_Aim_Objectives.tex
++++ revised/Chapters/01_Introduction/03_Aim_Objectives.tex
+@@ -16,3 +16,5 @@
+ The component and control requirements are established through analysis. The hardware and firmware implementation is then described. The tests show how the assembled supply behaves and where changes are needed. A calculated operating point alone does not establish a rating.
+ 
+ The revised plan carries this work into V2 evaluation and a V3 edge-card design \cite{projectOctoberPlan}. It calls for the reported \SI{85}{\watt} V2 operating point to be repeated and the \SI{15}{\watt} shortfall to the \SI{100}{\watt} target to be investigated. V2 has since been operated with a modified resonant tank, as described in \cref{sec:res-v2-testing}. Those preliminary observations still need matched power and thermal measurements. The plan also calls for fixed-PDO and PPS tests, thermal and stability tests of defined duration, and a V2--V3 power-density comparison using the same definition of assembly volume. Section~\ref{sec:revised-plan-criteria} sets out these criteria and their current status.
++
++A reduced V3 layout was prepared from these findings. The USB-PD section was removed from the converter card to reduce volume, while the secondary rectifiers were retained. Installation of new planar magnetics and matched V3 tests remained unfinished. The design outcome is described in \cref{sec:hw-v3-plan,sec:res-v3-design}.
+--- before/Chapters/01_Introduction/06_Scope_Limitations.tex
++++ revised/Chapters/01_Introduction/06_Scope_Limitations.tex
+@@ -1,9 +1,9 @@
+ \section{What This Thesis Covers}
+ \label{sec:intro-scope}
+ 
+-The thesis covers the development from the first open-frame laboratory prototype to the integrated V2 board. The manufactured V1.0 board was tested after bring-up modifications, and later corrections were recorded in schematic V1.1. The F410-based V2 design and its preliminary powered tests form the next stage. The hardware chapter identifies the drawing and fitted configuration used at each stage.
++The thesis covers development from the first open-frame laboratory prototype through the integrated V2 board and the reduced V3 edge-card design. The manufactured V1.0 board was tested after bring-up modifications, and later corrections were recorded in schematic V1.1. The F410-based V2 design and its preliminary powered tests form the next stage. The hardware chapter identifies the drawing and fitted configuration used at each stage.
+ 
+-The revised plan identifies the F410 controller and PWR-2 firmware as the V2 development described here. It reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. That measured result is kept separate from the reported V2 point and the later tank and thermal observations. Section~\ref{sec:revised-plan-criteria} also tracks the planned V3 edge-card design, its release checks, and the matched V2--V3 comparison.
++The revised plan identifies the F410 controller and PWR-2 firmware as the V2 development described here. It reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. That measured result is kept separate from the reported V2 point and the later tank and thermal observations. Section~\ref{sec:revised-plan-criteria} also tracks the V3 layout work, its remaining release checks, and the matched V2--V3 comparison.
+ 
+ The output section was tested electrically at fixed settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}. PPS characterization remains part of the revised plan. USB-IF protocol and interoperability tests, product-safety qualification, surge and ESD qualification, conducted and radiated emissions tests, and long-duration reliability tests remain outside the completed test set.
+ 
+--- before/Chapters/01_Introduction/08_V2_Prototype.tex
++++ revised/Chapters/01_Introduction/08_V2_Prototype.tex
+@@ -53,4 +53,4 @@
+ Some component values and feedback scaling also remain unresolved in the
+ drawing, as discussed in \cref{sec:hw-v2}. The next work is to measure the
+ V2 configuration consistently, resolve the bridge heating, and use those
+-results to guide the planned V3 design.
++results to develop and evaluate the V3 edge-card design.
+--- before/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
++++ revised/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
+@@ -39,6 +39,6 @@
+ 
+ A density comparison needs both verified power and complete assembly dimensions. Section~\ref{sec:method-density} uses the same rectangular assembly envelope for both versions, including the identified magnetics, connectors, supports, component height, required spacing, and cooling hardware. This avoids comparing a bare board with a complete supply. The V1.0 outline does not give the V2 or V3 assembly dimensions, so those dimensions are still needed for the density comparison.
+ 
+-The schedule sets V2 testing by September 4, V3 release on September 16, a V3 readiness decision on October 7, final testing by October 14, and submission on October 27, 2026. As of October 20, the included work covers the tested baseline, V2 circuit and firmware, and software checks. A matched repeat near \SI{85}{\watt}, the full PPS and extended-load tests, a completed V3 readiness decision, and the paired V2--V3 density comparison remain open. Chapter~\ref{ch:results} presents the available measurements; Chapters~\ref{ch:discussion} and \ref{ch:conclusion} use them to set out the next steps.
++The completed work includes the measured first-prototype baseline, integrated V2 circuit and firmware, powered tank changes, and a reduced V3 layout. Replacement planar magnetics were not installed. A matched repeat near \SI{85}{\watt}, the full PPS and extended-load tests, a completed V3 readiness decision, and the paired full-system density comparison remain open. Chapter~\ref{ch:results} presents the measurements and design estimate; Chapters~\ref{ch:discussion} and \ref{ch:conclusion} connect them to the next steps.
+ 
+ The plan includes planar-magnetic optimization as a learning objective. The supplied magnetic designs are used here. The assessment covers their installation and effect on converter operation. Section~\ref{sec:intro-contributions} attributes their original electromagnetic design.
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ revised/Chapters/12_Conclusion/03_Contributions.tex
+@@ -16,8 +16,8 @@
+ For V2, the F410 controller was integrated into the converter-board
+ design. Its timer and ADC assignments were adapted, and the flash
+ settings journal and PWR-2.0.1 browser commands and logging were
+-implemented. The four-layer PCB and circuit are documented in the new
+-print set. The complete archived firmware and supporting software are
++implemented. The four-layer PCB and circuit are documented in the
++schematic and PCB prints. The complete archived firmware and supporting software are
+ included with the thesis. The tools have been checked in software.
+ Preliminary powered V2 observations are reported in
+ \cref{sec:res-v2-testing}; the firmware version used for those bench
+@@ -29,3 +29,5 @@
+ and surface temperature of the assembly were also evaluated. The plots and numerical tables show these
+ results. The schematics show the circuit configurations used to interpret
+ them.
++
++A reduced V3 edge-card layout was also prepared. The USB-PD section was removed from the converter card, while the secondary rectifiers were retained. This provided a design-level volume reduction and a basis for the next magnetic and thermal work. It did not establish improved continuous power or a validated replacement transformer.
+--- before/Chapters/12_Conclusion/02_Research_Questions.tex
++++ revised/Chapters/12_Conclusion/02_Research_Questions.tex
+@@ -42,14 +42,7 @@
+ polarity, resonant path, PCB connections, isolation spacing, support,
+ and heat-removal arrangement. The electromagnetic design came from
+ earlier work. Those components were integrated into the working converter as part
+-of this thesis. Fields and windings were not redesigned.
++of this thesis. Secondary-winding heating identified a need for further transformer work, but no replacement magnetic set was installed.
+ 
+ \paragraph{RQ5: Further development.}
+-V2 is operational, but sustained input-bridge heating remains unresolved.
+-The next design decisions require measurements of stage losses,
+-stabilized component temperatures, protection and load-event timing,
+-installed magnetic parameters, and supported fixed-PDO and PPS behavior.
+-Repeating the reported V2 baseline and testing controlled changes should
+-guide V3. Readiness still needs to be checked, and the power-density comparison
+-needs consistent volume definitions and matched power tests. Full-range ZVS, safety, and EMC also need
+-dedicated measurements before a product rating can be assigned.
++V2 is operational, but its bench performance did not establish more available output than V1. Secondary-winding heating, the limited power increase around \SIrange{3.3}{3.6}{\ampere} at the secondary output, and the later input hotspot identify the next measurements. The transformer and a possible single-via restriction remain suspected limitations, rather than confirmed loss allocations. The slimmed V3 layout gives an estimated \SI{8}{\percent} net reduction by removing the USB-PD section, but needs external output hardware for a complete USB-C function. Replacement magnetics, readiness checks, and matched power/thermal tests remain unfinished. The immediate target is \SI{100}{\watt}; \SI{240}{\watt} EPR remains a longer-term goal.--- before/Chapters/12_Conclusion/chapter.tex
++++ revised/Chapters/12_Conclusion/chapter.tex
+@@ -1,12 +1,7 @@
+ \chapter{Conclusion}
+ \label{ch:conclusion}
+ 
+-The inherited converter was built into a working laboratory supply with
+-a detachable output. The controller was developed around the prototype's
+-sensing and energy limits. Development progressed from the G071 test
+-platform to the integrated F410 V2 board. The measured first-prototype
+-results and preliminary V2 operation are summarized here, together with
+-the thermal, protection, and continuous-power tests still needed.
++The inherited converter was built into a working laboratory supply with a detachable output. Development progressed from G071 control and V1 testing to the integrated F410 V2 board, then to a slimmed V3 edge-card layout. The revisions established operation and reduced the occupied design volume, but secondary-winding heating and the later input hotspot remained unresolved. The conclusions distinguish those completed design and test steps from the sustained-power and magnetic improvements still needed.
+ 
+ \input{Chapters/12_Conclusion/01_Project_Summary}
+ \input{Chapters/12_Conclusion/02_Research_Questions}
+--- before/Chapters/12_Conclusion/01_Project_Summary.tex
++++ revised/Chapters/12_Conclusion/01_Project_Summary.tex
+@@ -39,5 +39,14 @@
+ A stabilized run of defined duration is still needed, including at the
+ earlier \SI{75}{\watt} milestone. The reported approximately
+ \SI{85}{\watt} V2 baseline needs to be identified and repeated separately
+-from the \SI{79.89}{\watt} result above. V3 remains a planned revision;
+-readiness checks and a matched V2--V3 density comparison are still needed.
++from the \SI{79.89}{\watt} result above.
++
++V3 was prepared as a slimmer edge-card layout. The USB-PD output section
++was removed, leaving secondary rectification, with an estimated net
++volume reduction of approximately \SI{8}{\percent}. A new planar-magnetic
++set was not installed within the available time. V3 therefore demonstrates
++layout development, while the loss, thermal, and continuous-power
++improvements remain to be tested. A complete USB-C comparison must include
++the external output stage as well.
++
++The main outcome is the development path across the revisions. Converter operation and control were established with V1. V2 integrated those functions and allowed the tank changes to be tested, but its bench behavior did not establish a higher output capability. V3 reduced the layout while exposing how much further reduction depended on the magnetics and on the functions included in the system.
+--- before/Chapters/12_Conclusion/04_Future_Work.tex
++++ revised/Chapters/12_Conclusion/04_Future_Work.tex
+@@ -1,13 +1,7 @@
+ \section{Future Work}
+ \label{sec:concl-future}
+ 
+-The immediate V2 task is to investigate the input-bridge heating under
+-repeatable conditions. The fitted diodes, resonant tank, sensing scales,
+-firmware, and timing settings should be recorded before comparison with
+-the V2 circuit design. The effect of wider current paths, more copper for
+-heat spreading, or diode relocation still needs to be measured.
+-Synchronized switching waveforms are also needed to check the inferred
+-ZVS behavior.
++The immediate task is to separate the magnetic limitation from the input-path heating. Secondary current, winding temperature, rectifier temperature, voltage drops, and corresponding input/output power should be recorded under the same load conditions. The suspected single-via path needs to be checked directly before additional copper or a diode relocation is treated as a solution. Synchronized switching waveforms are also needed to confirm the inferred ZVS behavior.
+ 
+ The original files for the approximately \SI{85}{\watt} V2 result
+ reported in the revised plan should first be recovered. The board and
+@@ -36,15 +30,11 @@
+ commutation. Proposed changes to scheduling, capacitance, layout, and
+ cooling could then be checked before use.
+ 
+-The V3 edge-card design should address the measured limitation.
+-The design would then be reviewed before release and powered up gradually. Readiness must be
+-confirmed by tests, and the V2/V3 comparison needs the same volume
+-convention, continuous-power basis, cooling, and electrical conditions.
+-Efficiency and temperature should be reported with density. The schedule
+-sets dates for this work, but completion and improvement must be confirmed
+-from the resulting designs and tests.
++The prepared V3 layout needs to be completed around the selected magnetics and the required external output stage. The reduced layout should then be reviewed, assembled, and brought up gradually. Both sides of the comparison need the same included functions, volume convention, supported power basis, cooling, and electrical conditions. The estimated size reduction alone does not establish increased power density or improved thermal margin.
+ 
+ Protocol tests for supported USB-PD fixed PDOs and PPS, followed by
+ independent safety and EMC verification, are still needed before a supply
+ rating can be assigned. The measured limits should determine the final
+ range and the next hardware revision.
++
++Reaching the longer-term \SI{240}{\watt} USB-PD EPR goal would require more than a smaller board or a transformer change. The pump charge transfer, switch and capacitor stress, rectification, magnetic current capability, control range, isolation, cooling, and USB-PD output stage would all need to support that operating point. The present work does not demonstrate EPR power delivery.
+--- before/Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex
++++ revised/Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex
+@@ -1,15 +1,47 @@
+-\section{V3 Edge-Card Plan}
++\section{V3 Edge-Card Design}
+ \label{sec:hw-v3-plan}
+ 
+-One V3 edge-card PCB is specified in the revised October plan \cite{projectOctoberPlan}. The V2 loss and hotspot measurements are intended to guide the design toward shorter interconnects, less unused volume, and better heat removal at \SI{100}{\watt}. These are the objectives for the next design. The V3 layout, interface verification, and manufacturing remain unfinished.
++V3 was developed as a slimmer edge-card design based on the V2 converter
++\cite{projectOctoberPlan}. The purpose was to reduce the occupied volume
++and improve the power-path layout while carrying forward the control work.
++The earlier tests had shown that stable output voltage alone did not remove
++the thermal limit. Secondary-winding heating and the later input-bridge
++hotspot therefore became the main concerns for further development.
+ 
+-The V2 controller and schematic in Section~\ref{sec:hw-v2} form the starting circuit. For V3, the power, sensing, control, and auxiliary functions on each side of the connector must first be defined. Moving a function changes its current and return paths as well as its location. The supplied planar cores and windings remain inherited components. The V3 board work is not a new electromagnetic design.
++\subsection{Reduced Output Section and Volume}
+ 
+-\subsection{Electrical and Interface Requirements}
++The USB-PD output section was removed from the converter-card design,
++leaving secondary rectification as its output. A net volume reduction of
++approximately \SI{8}{\percent} was estimated for this slimmed arrangement.
++A separate regulated output and USB-PD interface would be needed to form
++a complete USB-C supply. The reduction therefore describes the smaller
++converter design; it is not a measured reduction in the volume of a
++functionally equivalent complete supply.
+ 
+-Before routing, an interface drawing is needed with each contact, signal direction, reference, voltage/current requirement, and startup state. The primary and isolated secondary connections must be clearly identified. PA1 must still refer to bulk voltage before the USB-C stage, and PA2 to primary current. The selected MCU's gate, enable, UART, and analog functions must also match the interface. The F410 assignments constrain the design but are not a V3 connector pinout.
++The inherited planar magnetics still constrained the available space.
++Further reduction was expected from a revised planar-magnetic design,
++but a new magnetic set was not installed within the available project time.
++A slimmed design variant was therefore prepared without
++establishing its sustained power or thermal performance. The distinction
++between the layout estimate and a complete assembly comparison is explained
++in \cref{sec:method-density,sec:res-v3-design}.
+ 
+-Power contacts and copper must carry the required current without excessive heating. Before board area is reduced, the complete pump, half-bridge, resonant, and rectifier loops need to be reviewed, including gate and sensing returns. Reducing board size would be counterproductive if it increased resistance, ringing, or feedback error.
++\subsection{Power Path and Edge Interface}
++
++The V2 controller and circuit in Section~\ref{sec:hw-v2} formed the starting
++point. The edge interface still needs a verified contact assignment,
++signal reference, voltage/current requirement, and startup state. Primary
++and isolated secondary connections must remain distinct. PA1 remains
++secondary-bulk feedback and PA2 remains a primary half-bridge-current
++signal. The F410 assignments do not by themselves define an edge-connector
++pinout.
++
++Removing the USB-PD section changes the system interface as well as its
++size. The rectified secondary output must be matched to any external
++regulator and its load. Power contacts, copper, and interlayer connections
++must carry that current without creating another local thermal bottleneck.
++The complete pump, half-bridge, resonant, and rectifier loops still need
++to be checked together with the gate and sensing returns.
+ 
+ \begin{table}[H]
+ \centering
+@@ -30,16 +62,38 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The plan gives no connector pin count, dimensions, installed-height limit, or numerical spacing values. These must be defined from the actual interface, operating-voltage assumptions, mechanical fit, and construction, then checked in the release review.
++The smaller layout does not establish connector ratings, insulation
++spacing, assembled fit, or readiness for manufacture. These checks remain
++necessary before the design can be released and evaluated as hardware.
+ 
+-\subsection{Thermal and Mechanical Trade-Offs}
++\subsection{Magnetic and Thermal Development}
+ 
+-V2 measurements should show where V3 needs better heat removal. Losses in the magnetics, pump, GaN stage, rectifier, output stage, and interconnects need to be measured separately before space is allocated for cooling. A surface hotspot helps locate the problem, but component and winding temperatures need more targeted measurements.
++The high-power operating region was observed around
++\SIrange{3.3}{3.6}{\ampere} at the secondary output. Secondary-winding
++heating was encountered, and greater loading did not give a clear increase
++in available power. Transformer optimization was therefore identified as
++a priority. Winding loss, interconnect loss, resonant behavior, and output
++headroom still need to be separated before the transformer can be assigned
++as the limiting component.
+ 
+-The revised layout must leave enough electrical spacing, connector access, and room for assembly. Its height includes installed components and onboard heat sinks. Achieved continuous power and density would be reported alongside efficiency, temperature, cooling, and stress, using the common V2/V3 boundary in Section~\ref{sec:method-plan-validation}.
++The immediate objective remains \SI{100}{\watt}. Operation toward the
++\SI{240}{\watt} USB-PD Extended Power Range (EPR) level is a longer-term
++development goal. That increase would require the complete power path,
++control, thermal design, and external USB-PD output stage to be assessed.
++It is not a capability demonstrated by the reduced V3 layout.
+ 
+-\subsection{V3 Release and Bring-Up Plan}
++\subsection{Release and Bring-Up Status}
+ 
+-Before release, the schematic/layout, design-rule, BOM, and manufacturing reviews must be completed and the approved files identified. After assembly, the planned sequence is optical inspection, continuity and isolation checks, low-voltage subsystem checks, current-limited startup, control/interface verification, and gradual loading \cite{projectOctoberPlan}. These V3 checks remain planned work.
++A slimmed layout was prepared, but the replacement magnetics and matched
++V3 power and thermal tests were not completed. Before manufacture, the
++schematic/layout, design-rule, BOM, and manufacturing reviews must be
++closed. After assembly, the planned sequence remains optical inspection,
++continuity and isolation checks, low-voltage subsystem checks,
++current-limited startup, control/interface verification, and gradual
++loading \cite{projectOctoberPlan}.
+ 
+-Section~\ref{sec:revised-plan-criteria} gives the acceptance criteria. AP-06 and AP-08 require V3 release, assembly, and readiness tests and reviews. If V3 is not ready, the plan calls for completed, identified V2 tests and a statement of the unfinished V3 work. Section~\ref{sec:res-revised-plan} gives the status; Section~\ref{sec:disc-plan-gap} gives the diagnostic measurements.
++Section~\ref{sec:revised-plan-criteria} gives the acceptance criteria.
++AP-06 and AP-08 require release, assembly, and readiness checks. The V1
++measurements and V2 bench observations remain the operating results;
++the V3 reduction remains a design estimate until the complete arrangement
++has been built and tested.
+--- before/Chapters/11_Discussion/05_Magnetics_Integration.tex
++++ revised/Chapters/11_Discussion/05_Magnetics_Integration.tex
+@@ -27,3 +27,7 @@
+ Those measurements would distinguish a limitation in the magnetic design
+ from mounting or interconnection loss. The project contribution is the
+ integration of the supplied magnetics into the working converter.
++
++During prototype development, secondary-winding heating was encountered and the highest-power operating region was observed around \SIrange{3.3}{3.6}{\ampere} at the secondary output. This made the transformer a candidate limitation. Winding resistance, current distribution, leakage, and output headroom need to be measured together before one cause is assigned. Increasing the load without obtaining more useful power does not identify the loss mechanism by itself.
++
++The reduced V3 layout retained the inherited magnetic constraints. New planar magnetics were not installed within the available time. Further winding and transformer optimization may help the \SI{100}{\watt} objective, but the longer-term \SI{240}{\watt} EPR goal would also require review of the pump, switches, tank, rectifiers, control, cooling, and USB-PD output stage.
+--- before/Chapters/11_Discussion/09_Future_Improvements.tex
++++ revised/Chapters/11_Discussion/09_Future_Improvements.tex
+@@ -1,13 +1,7 @@
+ \section{Priorities for the Next Prototype}
+ \label{sec:disc-future}
+ 
+-The powered V2 trials established operation with the leakage-only
+-resonant tank, but input-bridge heating remained unresolved. The next
+-V2 measurements should identify the fitted configuration and track
+-component temperatures over time while input and output power are
+-measured together. The new schematic and four-layer PCB prints document
+-the design (\cref{sec:app-v2-oct27}); they do not establish the fitted
+-values or thermal performance.
++The powered V2 trials established operation with the leakage-only resonant tank, but did not establish more available output than V1. Input-bridge heating remained unresolved, and the earlier secondary-winding observations still need a separate loss assessment. The next measurements should track current paths, winding and rectifier temperatures, and corresponding input/output power under the same conditions.
+ 
+ The records for the approximately \SI{85}{\watt} V2 run reported in
+ the revised plan \cite{projectOctoberPlan} should first be recovered and
+@@ -31,12 +25,7 @@
+ against raw captures for different burst lengths, capacitances, and loop
+ delays.
+ 
+-The V3 edge card should be revised around the measured bottlenecks:
+-switching loops, sensing and gate returns, test access, and heat paths.
+-Release review, assembly inspection, gradual power-up, and a readiness
+-decision still need to be completed and documented. If V3 is not ready,
+-the fallback is an identified, completed V2 test set. The older V1.0
+-results keep their original board identity.
++The prepared V3 edge-card layout removes the USB-PD section and retains secondary rectification. Its estimated size reduction should be checked after the full output function and assembly volume are defined. Transformer optimization and a verified interlayer current path should guide the next revision. Release review, assembly inspection, gradual power-up, and a readiness decision remain necessary before the slimmed design can be assessed as working hardware.
+ 
+ For power density, the same volume definition, included hardware, and
+ clearance/cooling allowance in Section~\ref{sec:method-plan-validation}
+@@ -44,5 +33,5 @@
+ same. Continuous tests are needed for density based on continuous output;
+ a single operating point can only support a power-density value for that point.
+ Dimensions and matched conditions are still needed before claiming a
+-V2--V3 improvement. Supported fixed PDOs and PPS then need protocol tests,
++V2--V3 improvement. Any external USB-PD stage must be included. Supported fixed PDOs and PPS then need protocol tests,
+ followed by formal safety and EMC assessment over the intended range.
+--- before/Chapters/11_Discussion/chapter.tex
++++ revised/Chapters/11_Discussion/chapter.tex
+@@ -1,11 +1,7 @@
+ \chapter{Discussion}
+ \label{ch:discussion}
+ 
+-The inherited converter was adapted to a detachable load and tested with
+-a regulated output. Carrier timing, voltage demand, and no-load energy
+-limits were kept separate. This chapter connects those choices to the
+-measured power and temperature behavior and the work needed for the next
+-revision.
++The revisions addressed different limitations of the same converter. V1 established operation and control, V2 integrated the hardware and allowed the tank changes to be tested, and V3 reduced the layout by removing the USB-PD section. The remaining question is whether the magnetic and current-path losses can be reduced enough to sustain more output. The discussion connects the observed heating, unchanged practical power limit, and smaller V3 design to the work still needed.
+ 
+ \input{Chapters/11_Discussion/01_Key_Findings}
+ \input{Chapters/11_Discussion/02_Topology_Adaptation}
+--- before/Chapters/11_Discussion/08_Lessons_Learned.tex
++++ revised/Chapters/11_Discussion/08_Lessons_Learned.tex
+@@ -17,6 +17,23 @@
+ capacitance. Separate limits, holdoff, and recovery
+ decisions were used to manage that transition.
+ 
++The thermal path has to be reviewed as a complete current path. The V2
++input hotspot remained even after the diode replacement. The suspected
++single-via connection is a reminder that a large copper pour alone cannot
++be assumed to remove a bottleneck. Copper area, pad connections, interlayer
++paths, and the actual current need to be considered together.
++
++The magnetic assemblies also set practical limits on both power and
++size. Secondary-winding heating motivated transformer optimization, but
++the project did not reach an installed replacement magnetic set. A new
++board outline alone could not demonstrate that improvement.
++
++The V3 reduction also showed why the included functions must be stated
++when comparing size. Removing the USB-PD section reduced the converter
++layout, but a complete USB-C supply would still need those functions
++elsewhere. The complete system must be compared before a power-density
++gain can be claimed.
++
+ The complete test configuration also needs to be saved while the setup is
+ still on the bench. Board identity, settings, raw waveforms, power readings,
+ and temperature images need to be saved together so that changes can be
+--- before/Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex
++++ revised/Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex
+@@ -22,6 +22,13 @@
+ have not been fully established, so this difference cannot yet be assigned
+ to component losses. The highest measured output
+ does not define a safe ceiling; a controlled limit test is still needed.
++
++The later bench observations add two candidate limitations: secondary-
++winding heating near the high-power operating region and the V2 input
++hotspot, where a single-via current path was suspected. The former calls
++for winding-current, resistance, and temperature measurements; the latter
++calls for checking the actual interlayer path and voltage drop. Neither
++has yet been isolated as the cause of the power ceiling.
+ 
+ The original \SI{85}{\watt} files should first be recovered, and the
+ test repeated with the identified board and firmware. The
+--- before/Chapters/11_Discussion/01_Key_Findings.tex
++++ revised/Chapters/11_Discussion/01_Key_Findings.tex
+@@ -22,3 +22,5 @@
+ downstream stage. The large input--output power difference and surface heating need to be
+ investigated through simultaneous stage-power and temperature measurements.
+ Further tuning cannot be based on VBUS alone.
++
++The V2 bench comparison did not establish a clear increase in available output over V1. Instead, the dominant heating concern shifted toward the input bridge after the tank changes. V3 then addressed occupied volume by removing the USB-PD section. These are distinct outcomes: a change in hotspot location, an estimated reduction in design volume, and an increase in sustained output are not interchangeable measures of improvement.
+--- before/Backmatter/Appendices/J_Revised_Plan_Integration.tex
++++ revised/Backmatter/Appendices/J_Revised_Plan_Integration.tex
+@@ -25,16 +25,16 @@
+ Objectives and acceptance & Chapter~\ref{ch:introduction} sets the revised scope. Section~\ref{sec:revised-plan-criteria} defines AP-01--AP-08, including the power levels and required completion records.\\
+ Repeat V2 and diagnose the gap & Section~\ref{sec:method-plan-validation} defines the baseline repeat, measurement boundaries, staged loading, and controlled-change method. Section~\ref{sec:disc-plan-gap} ranks the questions the missing tests need to resolve.\\
+ V2 circuit and software & Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} document the F410 hardware and controller. Appendices~\ref{app:firmware} and \ref{app:software-tools} explain the software; the complete source follows in Appendices~\ref{app:full-embedded-source} and \ref{app:full-supporting-source}.\\
+-V3 edge-card implementation & Section~\ref{sec:hw-v3-plan} defines the interface, mechanical, thermal, spacing, manufacturing, and release work. It does not assign unverified dimensions or present a planned board as a completed build.\\
++V3 edge-card implementation & Section~\ref{sec:hw-v3-plan} describes the reduced edge-card layout, removal of the USB-PD section, and the replacement magnetics and hardware checks still needed. Section~\ref{sec:res-v3-design} reports the design outcome.\\
+ PDO/PPS, thermal, and stability tests & Section~\ref{sec:method-plan-validation} identifies the required protocol, dynamic, protection, and defined-duration tests. Section~\ref{sec:res-revised-plan} states which records are available.\\
+-Power density and fallback & Section~\ref{sec:method-density} defines a common assembly-volume and continuous-power basis. Section~\ref{sec:res-revised-plan} reports the missing V2/V3 comparison and the evidence needed for the planned V3 readiness decision.\\
++Power density and fallback & Section~\ref{sec:method-density} defines a common assembly-volume and continuous-power basis. Section~\ref{sec:res-revised-plan} distinguishes the V3 design-volume estimate from the outstanding complete-system power-density comparison and readiness decision.\\
+ \bottomrule
+ \end{longtable}
+ \endgroup
+ 
+ \section{Planned Dates and Required Work}
+ 
+-Table~\ref{tab:plan-milestones} lists the revised plan's technical milestones and submission dates. For this October 20 revision, completion is assessed in Section~\ref{sec:res-revised-plan} from the available designs and tests.
++Table~\ref{tab:plan-milestones} lists the revised plan's technical milestones and submission dates. Completion is assessed in Section~\ref{sec:res-revised-plan} from the available designs and tests.
+ 
+ \begingroup
+ \small
+@@ -63,4 +63,4 @@
+ 
+ After the scheduled September 16 release, the plan limits changes to tuning, firmware, compatible parts, testing, and controlled rework unless a safety problem requires new fabrication files. This keeps the final test period focused on the released design. Further PCB ideas belong in the next revision.
+ 
+-The measurements are from the earlier prototype, while the V2 sections describe the later circuit and software. Repeated V2 tests, followed by the V3 design release, testing, and power-density comparison, are needed to establish sustained output and guide the next hardware change.
++The matched numerical measurements are from the earlier prototype. V2 adds the integrated circuit, software, and later tank and thermal observations. V3 adds a slimmed layout with secondary rectification retained and the USB-PD section removed. A replacement magnetic set was not installed, and a matched complete-system V2--V3 power-density comparison remains unfinished.

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-19",
+  "firmware": "PWR-2.0.1",
+  "source_sha256": "132c60aeeaed5572f294334059a61f6100640861e08b4e0fd2d2a6b4106314b7",
+  "f410_build": {
+    "result": "passed",
+    "program_bytes": 85184,
+    "program_limit_bytes": 98304,
+    "static_ram_bytes": 6820,
+    "ram_bytes": 32768
+  },
+  "g071_build": {
+    "result": "passed",
+    "program_bytes": 127340,
+    "program_limit_bytes": 131072,
+    "static_ram_bytes": 9524,
+    "ram_bytes": 32768
+  },
+  "f410_hex": {
+    "result": "passed",
+    "programmed_bytes": 85668,
+    "valid_vectors": true,
+    "reserved_settings_sector_excluded": true
+  },
+  "firmware_protocol_host_tests": {
+    "result": "passed",
+    "json_frames_checked": 46,
+    "hardware": "mocked"
+  },
+  "node_tests": {
+    "result": "passed",
+    "passed": 38,
+    "failed": 0
+  },
+  "powered_converter_test_performed": false,
+  "firmware_flashing_performed": false,
+  "limits": "Software checks do not verify board population, physical UART, sensing calibration, flash persistence, transistor timing, electrical protection, or output power."
+}

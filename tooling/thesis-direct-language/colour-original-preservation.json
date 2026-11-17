@@ -1,0 +1,22 @@
+[
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V1_0.pdf",
+    "sha256": "27574058e30361629d099ac1a2f692493530b99f286341766177a9dcb691e32e",
+    "matches_before": true
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V1_1.pdf",
+    "sha256": "dd2e0b3dfffa9c0e63a4376a865eb2e2e3d2365a2ac79020117a270db38f1ea7",
+    "matches_before": true
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf",
+    "sha256": "7c2663d7d6780af657d53fcdf9cab8c8eb2d8ed29d1752392ff123f5de080270",
+    "matches_before": true
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf",
+    "sha256": "c2623551c7094d2caa60efbbd3dab674b49553c6a3e39d8407afe83cb36c8ad2",
+    "matches_before": true
+  }
+]

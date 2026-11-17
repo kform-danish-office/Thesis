@@ -1,0 +1,11 @@
+{
+  "original": "Data/measurements/v2_results/evidence/v2_board_overview_original.jpg",
+  "crop_box_xyxy": [
+    274,
+    333,
+    470,
+    738
+  ],
+  "operation": "Rectangular crop only, saved losslessly as PNG; no retouching, enhancement, rotation or generated pixels",
+  "decoded_pixel_equality_verified": true
+}

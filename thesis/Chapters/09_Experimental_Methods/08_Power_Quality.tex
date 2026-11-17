@@ -1,0 +1,24 @@
+\section{Input Power Quality}
+\label{sec:method-pq}
+
+Input-current shaping under burst control was assessed using the SDS824X HD,
+DP10013, and CP2100A. The recorded quantities were RMS voltage/current, real
+input power, true power factor, and input-current THD:
+\begin{equation}
+ \mathrm{PF}=\frac{P_{\mathrm{in}}}
+ {V_{\mathrm{in,rms}}I_{\mathrm{in,rms}}},
+ \label{eq:pf-method}
+\end{equation}
+\begin{equation}
+ \mathrm{THD}_I=
+ \frac{\sqrt{\sum_{h=2}^{N}I_h^2}}{I_1}.
+ \label{eq:thd-method}
+\end{equation}
+The percentage is \(100\,\mathrm{THD}_I\), with the harmonic range set by the
+analyzer's selected value of \(N\).
+
+Steady-state integration must cover several line cycles and representative
+burst activity, excluding startup and load transitions. Source isolation and
+input current limiting remain part of the test configuration. PF, current
+waveform, and THD were compared at the same operating condition; no
+harmonics-standard qualification was performed.

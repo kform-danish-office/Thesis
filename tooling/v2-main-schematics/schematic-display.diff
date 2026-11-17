@@ -1,0 +1,139 @@
+--- before/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
++++ v2-drawings/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
+@@ -1,7 +1,7 @@
+ \section{Power-Stage Structure}
+ \label{sec:analysis-overview}
+ 
+-The reference LED converter's separate pump and isolated resonant paths \cite{ammar2021led} were implemented in the prototype. The bridge provides the rectified input, the pump charges the high-voltage link, and the GaN half bridge drives the isolated output network. Figure~\ref{fig:analysis-v11-power-stage} shows these paths in schematic V1.1.
++The reference LED converter's separate pump and isolated resonant paths \cite{ammar2021led} were implemented in the prototype. The bridge provides the rectified input, the pump charges the high-voltage link, and the GaN half bridge drives the isolated output network. Figure~\ref{fig:analysis-power-stage} shows the common power paths using the V2 schematic.
+ 
+ 
+ 
+@@ -16,8 +16,8 @@
+ \begin{landscape}
+ \begin{figure}[H]
+     \centering
+-    \includegraphics[width=0.97\linewidth,height=0.82\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_power_stage_excerpt.pdf}
+-    \caption{Circuit-region excerpt from V1.1 sheet 3 showing the charge-pump branch, LMG2652 half bridge, resonant and transformer path, secondary rectifier, auxiliary supplies, and isolated sensing. The vector crop removes unused sheet space; the drawing remains revision-specific.}
+-    \label{fig:analysis-v11-power-stage}
++    \includegraphics[width=0.97\linewidth,height=0.82\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_power_stage_excerpt.pdf}
++    \caption{V2 sheet 3 power paths: charge-pump branch, GaN half bridge, resonant tank and transformer, and secondary rectifier. The circuit blocks are connected through their named nets.}
++    \label{fig:analysis-power-stage}
+ \end{figure}
+ \end{landscape}
+--- before/Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex
++++ v2-drawings/Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex
+@@ -23,4 +23,4 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The schematic in \Cref{fig:schematic-v11-power-stage} and assembly in \cref{fig:final-prototype-main-photo} identify the converter integration. A component-specific terminal drawing is still required for reproducible assembly.
++The common converter connections are shown in \Cref{fig:schematic-power-stage}, while \cref{fig:final-prototype-main-photo} shows the tested assembly. A component-specific terminal drawing is still required for reproducible assembly.
+--- before/Chapters/07_Hardware/01_Prototype_Overview.tex
++++ v2-drawings/Chapters/07_Hardware/01_Prototype_Overview.tex
+@@ -15,7 +15,7 @@
+ \midrule
+ V1.0 board & Manufactured and tested, including bring-up modifications & Anchor for prototype photographs, layout, and measurements\\
+ Final fitted state & Two \SI{4.7}{\micro\henry} resonant inductors in series & Configuration used for the final results\\
+-V1.1 schematic & Documentation revision; no separate measured board & Corrected circuit reference and revision comparison\\
++V1.1 schematic & Documentation revision; no separate measured board & Bring-up correction record and revision comparison\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/07_Hardware/02_Input_Filter_Bridge.tex
++++ v2-drawings/Chapters/07_Hardware/02_Input_Filter_Bridge.tex
+@@ -9,16 +9,16 @@
+ \centering
+ \begin{subfigure}[t]{0.97\textwidth}
+ \centering
+-\includegraphics[page=1,width=\textwidth]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_input_excerpt.pdf}
++\includegraphics[page=1,width=\textwidth]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_input_excerpt.pdf}
+ \caption{Input connector, fuse, inrush element, varistor, filter, and discharge circuit.}
+ \end{subfigure}
+ \par\medskip
+ \begin{subfigure}[t]{0.38\textwidth}
+ \centering
+-\includegraphics[page=2,width=\textwidth]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_input_excerpt.pdf}
++\includegraphics[page=2,width=\textwidth]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_input_excerpt.pdf}
+ \caption{Bridge rectifier.}
+ \end{subfigure}
+-\caption{Input filter and bridge from V1.1 sheet 3. L2 and the drawn diode family differ from V1.0; the excerpts show the reference circuit.}
++\caption{V2 sheet 3 input filter and full-bridge rectifier.}
+ \label{fig:hw-input-schematic}
+ \end{figure}
+ 
+--- before/Chapters/07_Hardware/03_Charge_Pump_Network.tex
++++ v2-drawings/Chapters/07_Hardware/03_Charge_Pump_Network.tex
+@@ -1,7 +1,7 @@
+ \subsection{Charge-Pump Branch and DC Link}
+ \label{sec:hw-pump}
+ 
+-The charge-pump branch connects the rectified line to VSW and the high-voltage DC link. In V1.1, C24 is the \SI{2}{\nano\farad} pump capacitor, L3 is the pump-path inductance, and D6--D8 steer charge into the link. The isolated resonant path also starts at VSW, so the same half bridge drives input-current shaping and power transfer.
++The charge-pump branch connects the rectified line to VSW and the high-voltage DC link. In the V2 drawing, C24 is the \SI{2}{\nano\farad} pump capacitor, L3 is the pump-path inductance, and D6--D8 steer charge into the link. The isolated resonant path also starts at VSW, so the same half bridge drives input-current shaping and power transfer.
+ 
+ A KEMET C1206X202FBGACTU pump capacitor was used, rated \SI{2000}{\pico\farad}, \SI{630}{\volt}, \(\pm1\%\), C0G/NP0 \cite{kemetC1206X202FBGACTU}. Its capacitance sets the charge moved in each cycle. The component list specifies PU1JLWH \SI{600}{\volt}, \SI{1}{\ampere} ultrafast pump rectifiers \cite{taiwansemiPU1JLWH} and a Wurth Elektronik 860241478004 \SI{22}{\micro\farad}, \SI{450}{\volt} DC-link capacitor \cite{wurth860241478004}. C25 is specified as \SI{22}{\micro\farad} in V1.0 and \SI{10}{\micro\farad} in V1.1. The component list and V1.0 board value describe the tested link.
+ 
+@@ -10,8 +10,8 @@
+ \begin{landscape}
+ \begin{figure}[htbp]
+ \centering
+-\includegraphics[width=0.98\linewidth,height=0.77\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_power_stage_excerpt.pdf}
+-\caption{Circuit region from V1.1 sheet 3, with unused page space removed. The charge pump, LMG2652 half bridge, resonant path, transformer, secondary rectifier, auxiliary rails, and isolated voltage sensing are shown in their original circuit context. The component values follow this drawing.}
+-\label{fig:schematic-v11-power-stage}
++\includegraphics[width=0.98\linewidth,height=0.77\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_power_stage_excerpt.pdf}
++\caption{V2 sheet 3 charge-pump and resonant power circuit. C24 and D6--D8 form the pump branch, the GaN half bridge drives the tank and transformer, and the secondary bridge supplies the isolated bulk output.}
++\label{fig:schematic-power-stage}
+ \end{figure}
+ \end{landscape}
+--- before/Chapters/07_Hardware/07_USBC_Interface.tex
++++ v2-drawings/Chapters/07_Hardware/07_USBC_Interface.tex
+@@ -1,14 +1,14 @@
+ \section{USB-C Output Stage}
+ \label{sec:hw-usbc}
+ 
+-The isolated bulk supply was connected to the USB-C connector through the MPQ4242GVE-0000-AEC1-P stage. The stage includes the switching inductor, output power path, current-sense element, bulk and ceramic capacitors, CC connections, data-line protection, and VBUS TVS protection. The bulk and connector nodes are named separately as \texttt{V\_PW\_OUTPUT\_BULK} and \texttt{USB\_PD\_OUT} in \Cref{fig:schematic-v11-usbc}.
++The isolated bulk supply was connected to the USB-C connector through the MPQ4242GVE-0000-AEC1-P stage. The stage includes the switching inductor, output power path, current-sense element, bulk and ceramic capacitors, CC connections, data-line protection, and VBUS TVS protection. The bulk and connector nodes are named separately as \texttt{V\_PW\_OUTPUT\_BULK} and \texttt{USB\_PD\_OUT} in \Cref{fig:schematic-usbc}.
+ 
+ \begin{landscape}
+ \begin{figure}[htbp]
+ \centering
+-\includegraphics[width=0.97\linewidth,height=0.76\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_usb_excerpt.pdf}
+-\caption{V1.1 sheet 2: MPQ4242 output stage, USB-C connector, current sensing, capacitors, and interface protection. Page borders and the title block are omitted to improve legibility.}
+-\label{fig:schematic-v11-usbc}
++\includegraphics[width=0.97\linewidth,height=0.76\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_usb_excerpt.pdf}
++\caption{V2 sheet 2: MPQ4242 output stage, USB-C connector, current sensing, capacitors, and interface protection. Page borders and the title block are omitted to improve legibility.}
++\label{fig:schematic-usbc}
+ \end{figure}
+ \end{landscape}
+ 
+--- before/Chapters/07_Hardware/08_Sensing.tex
++++ v2-drawings/Chapters/07_Hardware/08_Sensing.tex
+@@ -1,13 +1,13 @@
+ \section{Analog Feedback and Measurement Nodes}
+ \label{sec:hw-sensing}
+ 
+-The tested controller acquires scaled primary voltage at PA0, isolated secondary-bulk voltage at PA1, and the LMG2652 half-bridge-current signal at PA2. TLV9064 buffers reduce ADC loading of the sensing circuits. The AMC0330 transfers secondary-voltage feedback across the isolation barrier to the primary-side MCU.
++On the V1.0 test platform, the controller acquires scaled primary voltage at PA0, isolated secondary-bulk voltage at PA1, and the LMG2652 half-bridge-current signal at PA2. TLV9064 buffers reduce ADC loading of the sensing circuits. The AMC0330 transfers secondary-voltage feedback across the isolation barrier to the primary-side MCU. V2 retains these measurement functions with direct ADC connections, as shown in \Cref{fig:schematic-mcu}.
+ 
+ \begin{figure}[htbp]
+ \centering
+-\includegraphics[width=\textwidth,height=0.57\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_controller_excerpt.pdf}
+-\caption{V1.1 sheet 4 excerpt showing the analog buffers and corrected PA8/PA9/PA10 command assignment. The MCU and sensing circuitry are referenced to the primary-side domain.}
+-\label{fig:schematic-v11-mcu}
++\includegraphics[width=\textwidth,height=0.57\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_controller_excerpt.pdf}
++\caption{V2 sheet 4 MCU and signal interface. Feedback enters PA0--PA2 directly; PA8/PB13 provide carrier commands and PA11 provides burst enable. The controller is referenced to the primary-side domain.}
++\label{fig:schematic-mcu}
+ \end{figure}
+ 
+ \begin{table}[htbp]
+--- before/Chapters/07_Hardware/chapter.tex
++++ v2-drawings/Chapters/07_Hardware/chapter.tex
+@@ -3,7 +3,7 @@
+ 
+ The power PCB combines the inherited charge-pump resonant circuit and planar magnetics with the input network, auxiliary supplies, isolated feedback, USB-C output stage, and digital control developed in this project. The MCU acquires primary voltage, secondary-bulk voltage, and half-bridge current at PA0--PA2. On the original prototype, carrier commands at PA8/PA9 and burst enable at PA10 control energy transfer. The V2 assignments are given in \cref{sec:hw-v2}.
+ 
+-Bring-up required corrections to the timer connections and changes to the resonant branch. The following sections distinguish the tested assembly, subsequent circuit revisions, and the V3 layout.
++Bring-up required corrections to the timer connections and changes to the resonant branch. The V2 schematic excerpts show the common power circuit; fitted components and controller assignments are identified for each tested board. The following sections distinguish the tested assembly, subsequent circuit revisions, and the V3 layout.
+ 
+ \input{Chapters/07_Hardware/01_Prototype_Overview}
+ \input{Chapters/07_Hardware/02_Input_Filter_Bridge}

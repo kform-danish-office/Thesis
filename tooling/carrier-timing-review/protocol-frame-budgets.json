@@ -1,0 +1,10 @@
+{
+  "frames": 131,
+  "max_bytes_by_type": {
+    "ack": 120,
+    "hello": 194,
+    "event": 81,
+    "telemetry": 913,
+    "timing": 350
+  }
+}

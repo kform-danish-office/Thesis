@@ -1,0 +1,70 @@
+{
+  "method": "Approximate common physical scale using published charger-body height references and visible vertical body edges; photographs retain differing perspectives. AC prongs are retained but excluded from body-height calibration.",
+  "design_units_per_mm": 0.033,
+  "body_bottom_y": 5.7,
+  "captions_y": 6.04,
+  "adapters": [
+    {
+      "id": "5w",
+      "file": "adapter_5w.jpg",
+      "reference_body_height_mm": 25.4,
+      "reference_edge_y_px": [
+        314,
+        695
+      ],
+      "body_bottom_px": 695,
+      "crop_box_px": [
+        170,
+        20,
+        630,
+        725
+      ],
+      "source_urls": [
+        "https://www.righto.com/2012/05/apple-iphone-charger-teardown-quality.html",
+        "https://beetstech.com/product/apple-5w-usb-power-adapter-md810ll-a"
+      ],
+      "source_basis": "Teardown describes the A1265 Apple 5 W housing as inch-cube; MD810 listing maps A1265/A1385. Family-level approximate reference, not an exact caliper measurement of the photographed A1385."
+    },
+    {
+      "id": "20w",
+      "file": "adapter_20w.jpg",
+      "reference_body_height_mm": 41.0,
+      "reference_edge_y_px": [
+        270,
+        698
+      ],
+      "body_bottom_px": 698,
+      "crop_box_px": [
+        160,
+        25,
+        640,
+        725
+      ],
+      "source_urls": [
+        "https://mall.iopenmall.tw/047732/index.php?action=product_detail&prod_no=P4773207149176",
+        "https://beetstech.com/product/usb-c-power-adapter-20w-mhja3am-a"
+      ],
+      "source_basis": "Retailer identifies A2305 body 41 x 40 x 27 mm excluding plug; model mapping includes MWVV3AM/A. Regional SKU differs but model matches; approximate comparison."
+    },
+    {
+      "id": "140w",
+      "file": "adapter_140w.jpg",
+      "reference_body_height_mm": 95.68,
+      "reference_edge_y_px": [
+        67,
+        725
+      ],
+      "body_bottom_px": 725,
+      "crop_box_px": [
+        125,
+        15,
+        675,
+        750
+      ],
+      "source_urls": [
+        "https://www.chargerlab.com/teardown-of-apple-140w-usb-c-power-adapter-a3607/"
+      ],
+      "source_basis": "ChargerLAB measures A3607 body 95.68 x 74.35 x 28.51 mm and explicitly states the main body and dimensions are identical to the earlier A2452 represented by MKFQ4."
+    }
+  ]
+}

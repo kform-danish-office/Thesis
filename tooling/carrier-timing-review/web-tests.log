@@ -1,0 +1,93 @@
+
+> thesis-power-lab@1.0.0 test
+> node --test tests/*.test.mjs
+
+✔ line framer preserves arbitrary chunks and CRLF without empty frames (0.952798ms)
+✔ line framer drops a whole oversized frame and recovers at newline (0.101472ms)
+✔ frame parser handles a UART prompt and ignores text, echo, malformed and unknown frames (1.654729ms)
+✔ telemetry rejects missing, mistyped and nonfinite measurement fields while preserving null diagnostics (0.243595ms)
+✔ telemetry lease must be a finite nonnegative number before it can authorize control (0.334862ms)
+✔ command validation normalizes whitespace and rejects command injection and protocol prefixes (0.44069ms)
+✔ fault gating permits only known clear states (0.111207ms)
+✔ calibration telemetry is validated before presenting running/completed state (0.162814ms)
+✔ dedicated timing frames preserve the request, exact timer ratio and safe quantized readback (0.36045ms)
+✔ malformed, nonnumeric and inconsistent timing frames cannot authorize timing edits (0.576584ms)
+✔ tested thesis preset reproduces the nominal 25.9 uH / 1 nF tank (0.900759ms)
+✔ unvalued C26 and leakage remain unknown in drawing-only presets (4.47178ms)
+✔ borrowed F410 circuit values are explicitly an assumed equivalent (0.218287ms)
+✔ every preset has unique identity and valid source references (0.153531ms)
+✔ transformer references retain measured pairs and source provenance without assigning fitted identity (0.305448ms)
+✔ thesis pump sizing solves the documented 2 nF / 1 MHz example independently of tank resonance (3.97195ms)
+✔ all three triangular/clamped pump solves roundtrip (0.131487ms)
+✔ pump model rejects invalid inputs and out-of-range results (0.216474ms)
+✔ documented nominal Lr includes 9.4 uH discrete plus 16.5 uH leakage (0.097436ms)
+✔ explicit units preserve SI dimensions and reject missing, unknown, or nonfinite values (0.204947ms)
+✔ capacitor banks use their actual series or parallel topology (0.207721ms)
+✔ frequency, capacitance, and inductance solves roundtrip independently (0.123094ms)
+✔ leakage belongs in total series inductance and is subtracted from the discrete solution (0.250836ms)
+✔ a leakage-only series path is valid while adding an Lm property cannot change Lr (0.159649ms)
+✔ worst-case tolerance endpoints are exact and encompass every corner (0.252669ms)
+✔ operating-frequency reactance changes sign around resonance (0.178167ms)
+✔ series-loss Q and half-power bandwidth are consistent (0.187631ms)
+✔ current response peaks at one at fr and is reciprocal symmetric in frequency ratio (1.355521ms)
+✔ analytical half-power endpoints reproduce exact R/(2 pi L) bandwidth (0.291136ms)
+✔ lossless or malformed response requests cannot masquerade as finite current curves (0.149414ms)
+✔ E12 and E24 use tabulated values, bracket decade transitions, and expose real error (0.350886ms)
+✔ invalid component values and numeric overflow fail instead of displaying NaN or Infinity (0.224717ms)
+✔ separate magnetizing branch reproduces supplied A and B comparison values (0.117146ms)
+✔ magnetizing comparison scales physically without changing the series solve (0.097546ms)
+✔ missing operating frequency leaves magnetizing reactance unknown (0.076204ms)
+✔ magnetizing comparison rejects invalid quantities and unsupported numeric results (0.339178ms)
+✔ USB handshake, lease, streaming and snapshots negotiate at 115200 without a physical port (8.763159ms)
+✔ unknown acknowledgments and human UART output do not settle or corrupt a command (4.926631ms)
+✔ board rejections become actionable command errors and the queue recovers (1.592847ms)
+✔ invalid commands are rejected before any bytes are sent (0.643334ms)
+✔ ON is refused after stale telemetry, a fault, or loss of the reported lease (3.138052ms)
+✔ OFF bypasses a pending command and cancels queued ON and parameter changes (1.011996ms)
+✔ disconnect sends OFF then stops streaming and closes the fake port (0.852758ms)
+✔ disconnect immediately blocks a concurrent ON from passing its OFF command (1.004495ms)
+✔ unplug clears readiness and rejects pending control requests (1.573467ms)
+✔ demo remains visibly synthetic and never requests or writes to USB (0.90106ms)
+✔ disconnect cancels a pending port chooser before the chosen port can open (0.156384ms)
+✔ a command acknowledgment timeout is an error and never retries the mutation (2202.138269ms)
+✔ demo settings persistence is explicit and requires output OFF (0.664355ms)
+✔ calibration is capability-gated and never sent to legacy firmware or demo (0.824075ms)
+✔ capable calibration commands require output OFF and reject conflicting commands while running (1.743864ms)
+✔ demo bench settings expose synthetic readback and require explicit save without USB writes (0.704406ms)
+✔ demo tuning maximum follows the device DMAX cap without changing the requested DMAX (0.29346ms)
+✔ legacy boards cannot receive unreported bench settings or load/profile aliases (1.361421ms)
+✔ capability alone cannot authorize settings without verified numeric readback (1.3746ms)
+✔ bench edits validate exact ranges, numeric values and tokens before any wire write (3.122009ms)
+✔ load and tuning changes are refused while output ON, while base live edits and OFF remain usable (0.960599ms)
+✔ carrier timing is capability-gated for legacy and G071 boards without changing generic terminal SET (1.422943ms)
+✔ capable timing edits send one atomic pair and expose verified quantized device readback (0.91409ms)
+✔ TIMING waits for both its ACK and matching id readback, in either order (1.945726ms)
+✔ an ACK cannot confirm missing or mismatched timing readback and mutations are never retried (2202.565161ms)
+✔ carrier timing validates exact integer tokens, independent bounds and the coupled switching-time bound before writing (1.86971ms)
+✔ timing edits require fresh numeric readback, output OFF, and no calibration or device operation (2.805272ms)
+✔ timing readback expires independently of fresh telemetry and a renewed lease (2.182219ms)
+✔ queued timing edits recheck capability, output state, readback, busy state and freshness at execution (8.888576ms)
+✔ OFF retains priority and cancels a queued timing pair (1.223413ms)
+✔ ON intent blocks timing until a later confirmed OFF timing frame, including during queued ON (1.817363ms)
+✔ demo V2 timing quantization is synthetic, OFF-only, paired and saved explicitly without USB access (0.68102ms)
+✔ CSV preserves quoted names, commas, newlines, missing diagnostics, units and column order (1.349812ms)
+✔ CSV prevents spreadsheet formulas while preserving negative numeric readings (1.225596ms)
+✔ every CSV sample retains session provenance and firmware, including synthetic sessions (0.217095ms)
+✔ empty sessions produce only a header (0.099258ms)
+✔ CSV handles absent firmware metadata from an imported session (0.3404ms)
+✔ CSV records each sample timing readback, request, units and independent receive time (0.64092ms)
+✔ CSV leaves legacy, stale and unreported sample timing blank without session fallback (0.185608ms)
+✔ CSV protects timing provenance from spreadsheet formulas and preserves reported zero revision (0.552188ms)
+ℹ tests 76
+ℹ suites 0
+ℹ pass 76
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4578.184517
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

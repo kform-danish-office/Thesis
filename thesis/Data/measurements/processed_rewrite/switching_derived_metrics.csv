@@ -1,0 +1,5 @@
+record_id,median_carrier_period_s,median_carrier_frequency_hz,method
+00006,9.680000000000084e-07,1033057.8512396605,Hysteretic rising transitions below 50 V then above 400 V; 0.35 us refractory interval; median spacing below 2 us
+00007,9.6720004e-07,1033912.281475919,Hysteretic rising transitions below 50 V then above 400 V; 0.35 us refractory interval; median spacing below 2 us
+00008,9.680000000000084e-07,1033057.8512396605,Hysteretic rising transitions below 50 V then above 400 V; 0.35 us refractory interval; median spacing below 2 us
+00010,9.677999750000003e-07,1033271.3637443519,Hysteretic rising transitions below 50 V then above 400 V; 0.35 us refractory interval; median spacing below 2 us

@@ -1,0 +1,14 @@
+{
+  "pages": 432,
+  "source_files": 485,
+  "artifacts": {
+    "Thesis_V1_V2_V3.pdf": {
+      "bytes": 21389934,
+      "sha256": "b9e4776e2eb33ae8e218d607ff369d02e879e514b7cffc7b2b3064453fbcb03e"
+    },
+    "Thesis_V1_V2_V3_Source.zip": {
+      "bytes": 92010846,
+      "sha256": "27c671014b1bfe44eaf2067496a7ca8128155f53c8413dbb02cb81e107d6e67d"
+    }
+  }
+}

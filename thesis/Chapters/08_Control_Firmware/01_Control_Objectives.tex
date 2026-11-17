@@ -1,0 +1,8 @@
+\section{Regulating the Secondary Bulk Voltage}
+\label{sec:ctrl-objectives}
+
+The enable envelope controls secondary precharge, bulk-voltage regulation, load-removal response, and fault inhibition without changing carrier timing.
+
+The baseline regulates secondary-bulk voltage \(V_{\mathrm{sb}}\) using PA1 feedback; the MPQ4242 USB-C PD stage regulates the output voltage to the selected PD level. Primary-voltage feedback at PA0 supports optional line feed-forward duty limiting. Primary half-bridge current at PA2 provides load classification and optional current protection, rather than direct USB-C output-current feedback.
+
+On the original prototype, average energy transfer is adjusted through burst-enable duty \(d_{\mathrm{EN}}\) at PA10. Carrier outputs PA8/PA9 remain fixed at \SI{1}{\mega\hertz}.

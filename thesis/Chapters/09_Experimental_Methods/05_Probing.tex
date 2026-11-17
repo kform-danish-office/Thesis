@@ -1,0 +1,41 @@
+\section{High-Frequency Probing}
+\label{sec:method-probing}
+
+Short local-return connections limited probe pickup and loop inductance.
+Gate-source measurements require a source-referenced probe; switch-node
+measurements require the full primary common-mode rating. Current-probe zero
+and polarity were checked before acquisition. Voltage/current deskew is
+required for switching-energy calculations. The CP2100A bandwidth of
+\SI{800}{\kilo\hertz} is below the nominal \SI{1}{\mega\hertz} carrier,
+limiting its use to input-current behavior rather than fast resonant-current
+transitions.
+
+A turn-on check needs switch-node voltage, the relevant gate or driver command,
+and current direction through dead time to show whether the node reached the
+required rail. The residual voltage at the intended turn-on instant is
+\begin{equation}
+ V_{\mathrm{res}}=
+ \left|V_{\mathrm{SW}}(t_{\mathrm{on}})
+ -V_{\mathrm{rail,target}}\right|.
+ \label{eq:zvs-residual-method}
+\end{equation}
+The original prototype's burst-enable output PA10 marks the switching envelope,
+not individual gate transitions. Enable and switch-node traces alone therefore
+do not locate the ZVS measurement instant.
+
+\begin{table}[htbp]
+\centering
+\caption{Probe and trigger settings needed for each test.}
+\label{tab:probe-role-map}
+\begin{tabularx}{\textwidth}{@{}p{0.27\textwidth}X@{}}
+\toprule
+Test & Probe and acquisition settings\\
+\midrule
+Startup/shutdown & Initial voltage, load, PA10 state, and trigger\\
+Ripple/transient & Output node, probe coupling/bandwidth, sense point, and load event\\
+No load/load removal & Disconnect method, output node, enable signal, and time span\\
+Switching/ZVS & Gate/source reference, current direction, deskew, and bandwidth\\
+Input power quality & Probe ranges, current zero/polarity, integration interval, and harmonic range\\
+\bottomrule
+\end{tabularx}
+\end{table}

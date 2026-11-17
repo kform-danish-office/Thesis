@@ -1,0 +1,54 @@
+{
+  "changed_files": [
+    "Frontmatter/Abstract.tex",
+    "Frontmatter/Approval.tex",
+    "Frontmatter/Nomenclature.tex",
+    "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+    "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "Chapters/01_Introduction/chapter.tex",
+    "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "Chapters/01_Introduction/08_V2_Prototype.tex",
+    "Backmatter/Appendices/B_Hardware_Documentation.tex"
+  ],
+  "checks": [
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "SI_and_math_preserved": true
+    },
+    {
+      "path": "Frontmatter/Approval.tex",
+      "SI_and_math_preserved": true
+    },
+    {
+      "path": "Frontmatter/Nomenclature.tex",
+      "SI_and_math_preserved": true
+    },
+    {
+      "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+      "SI_and_math_preserved": true
+    },
+    {
+      "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+      "SI_and_math_preserved": true
+    },
+    {
+      "path": "Chapters/01_Introduction/chapter.tex",
+      "SI_and_math_preserved": true
+    },
+    {
+      "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+      "SI_and_math_preserved": true
+    },
+    {
+      "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+      "SI_and_math_preserved": true
+    },
+    {
+      "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+      "SI_and_math_preserved": true
+    }
+  ],
+  "pin_assignment_cells_unchanged": true,
+  "colour_master_pages": 4,
+  "latest_appendix_uses_all_colour_sheets": true
+}

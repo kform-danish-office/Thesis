@@ -1,0 +1,26 @@
+[
+  {
+    "id": "opening-01",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": "The earlier plan schedules \\SI{75}{\\watt} continuous validation \\cite{projectEarlierPlan}. The \\SI{75}{\\watt} level remains the intermediate test milestone. The \\SI{65}{\\watt} minimum and \\SI{100}{\\watt} target remain unchanged.",
+    "new": "The earlier plan schedules \\SI{75}{\\watt} continuous validation as an intermediate test milestone \\cite{projectEarlierPlan}.",
+    "reason": "Combines the intermediate milestone with its source and removes an immediate repetition of the minimum and target in the preceding sentence.",
+    "facts_preserved": "The 65 W continuous minimum, 100 W continuous target, and earlier 75 W validation milestone remain stated in context.",
+    "checklist": [
+      "Connected concise prose",
+      "Preserve quantities and citations"
+    ]
+  },
+  {
+    "id": "opening-02",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": " A thermal image alone does not show thermal equilibrium or long-term stability.",
+    "new": "",
+    "reason": "The same table entry already specifies the defined-duration temperature and stability run needed; the negative statement about a thermal image repeats its purpose.",
+    "facts_preserved": "Defined-duration thermal and stability run, operating conditions, temperature development and interruptions remain specified.",
+    "checklist": [
+      "State concrete measurements",
+      "Remove redundant defensive clauses"
+    ]
+  }
+]

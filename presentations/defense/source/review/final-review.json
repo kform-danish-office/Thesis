@@ -1,0 +1,433 @@
+{
+  "decision": "Accept",
+  "reviewer": {
+    "role": "Astra task master and final reviewer",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "ultra"
+  },
+  "writer_configuration": {
+    "model": "gpt-6.1-terra",
+    "reasoning_effort": "ultra",
+    "fresh_dedicated_writers": 20,
+    "one_slide_per_writer": true
+  },
+  "artifacts": {
+    "pptx": {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/Thesis_Defense_Supervisor_Flow.pptx",
+      "sha256": "22f9d63edb2d3d1cdee7200f8c46ca7d9f28e10dd9d488cb437acc8ac720744c"
+    },
+    "pdf": {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/Thesis_Defense_Supervisor_Flow.pdf",
+      "sha256": "afd2d3a4c0e3f82fe734beaaa3d2229a3c1d8184d4bdcd09f8caeaa36917afcd"
+    }
+  },
+  "main_slides": 16,
+  "backup_slides": 4,
+  "timing": {
+    "main_seconds": 1500,
+    "main_minutes": 25,
+    "status": "Estimated speaking allocation, not a timed rehearsal",
+    "notes_words": 2650
+  },
+  "acceptance_rationale": [
+    "The opening now follows the supervisor argument: real adapters and compactness motivate higher frequency, which introduces switching heat, then zero-voltage-switching and regulation requirements.",
+    "The chosen charge-pump and isolated supply is explained before implementation. The user-supplied digest electrical schematic is used directly on s04; native crops carry the charge-transfer and resonant-commutation explanations on s05–s06. The author contribution remains prominent.",
+    "Actual V1 burst and carrier captures precede connector regulation and efficiency. The original APEC harmonic-current panel then compares the approximately 80 W USB-C point with IEC Class A individual-current limits; PF and logged THD are retained as summary readings. The notes keep the comparison local to this operating point.",
+    "The actual V1 thermal image leads into the distinct original-V2 hot-inductor observation and tank change. V2 power transfer is explained as the expected burst-enable throttle response, with power shown before voltage and all measured points retained. Regional secondary and bridge heating motivates winding, rectifier and current/heat-path improvements.",
+    "The conclusion returns to the author integration and secondary-voltage control, 79.89 W connector output and remaining continuous-power limit, without the rejected operating checklist or generic future-measurement slide.",
+    "Displayed equations now use editable native Office Math with correct bars, fractions, radicals and variable/subscript typography. Inline circuit variables and backup-table variables use consistent native formatting; mathematical meaning and measured values are unchanged."
+  ],
+  "visual_review": {
+    "all_slides_inspected": true,
+    "slide_count": 20,
+    "decisions": [
+      {
+        "slide_id": "s01",
+        "decision": "Accept",
+        "reason": "The full title fits in four clear lines on the left, with context and author unobscured. The genuine V2 portrait photograph is prominent on the right, retains its full selected crop and balances the title without a redundant caption.",
+        "rendered_slide": "rendered/s01.png",
+        "render_sha256": "454f40162025289d286f970ef1022cb99a8e0cb8002ee804e4e15e9d38b8a782",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s02",
+        "decision": "Accept",
+        "reason": "The genuine adapter photographs now show clear approximate physical size differences at a common body scale and aligned body bottoms. Full products and prongs remain visible with preserved aspect ratios; captions, targets and the approximate-common-scale note fit cleanly without overlap.",
+        "rendered_slide": "rendered/s02.png",
+        "render_sha256": "9bee1e8243765c11f408bff948cf789c174711872fba274c1dd2e0d9bc274e0d",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s03",
+        "decision": "Accept",
+        "reason": "The causal frequency/size/heat argument remains balanced. The native Office Math switching-loss equation uses regular-weight italic variables and upright subscripts; all symbols are readable without clipping.",
+        "rendered_slide": "rendered/s03.png",
+        "render_sha256": "ebca62ae415b9695822c50fa428d435b9a51e48f996d0c2fd0e9f193b7eaf92f",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s04",
+        "decision": "Accept",
+        "reason": "The original digest Figure 1 is shown directly, with its complete electrical connections and labels. Power stage replaces the board-specific caption; the editable contribution band stays prominent and clear.",
+        "rendered_slide": "rendered/s04.png",
+        "render_sha256": "4213e70df616e53d9e2295672740c56021ba51d5f169dcffbfa67ed6a2db5e23",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s05",
+        "decision": "Accept",
+        "reason": "The unchanged original pump/primary schematic crop stays legible. The native current-envelope equation has a real overbar over i, italic variables and upright rec, s and P subscripts. The local enabled-cycle definition of b fits clearly below it; the conclusion remains separate and clear.",
+        "rendered_slide": "rendered/s05.png",
+        "render_sha256": "e5fe4bd2ea3734a406d655f4e5d1bba759fbd801820f13fc13624a1bb45559d1",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s06",
+        "decision": "Accept",
+        "reason": "The unchanged original half-bridge/resonant/secondary crop retains its complete relevant labels. The separate commutation statement has an italic V and upright SW subscript, fits above the footer and leaves the source schematic untouched.",
+        "rendered_slide": "rendered/s06.png",
+        "render_sha256": "3257c86f7fce15571656d2eb1d54b6e285282491b9c2ffc1f3acdbe372a16984",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s07",
+        "decision": "Accept",
+        "reason": "Real V1 burst capture, feedback loop, packet/idle annotations and scales are visible and support the control explanation.",
+        "rendered_slide": "rendered/s07.png",
+        "render_sha256": "69b5b92808692808a5506d689b713688f0601fc7c57f94f2bf4a14a161aafdd2",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s08",
+        "decision": "Accept",
+        "reason": "Real V1 carrier waveform is in the main talk; switch-node and both AC-coupled output traces retain useful scales and channel identities.",
+        "rendered_slide": "rendered/s08.png",
+        "render_sha256": "02c8fe06a99e7a71a833e0e47722e85fef96e5a236f9d44e64a82ea856a63b2e",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s09",
+        "decision": "Accept",
+        "reason": "Four voltage series, error axis and 79.89 W connector result are distinct; text stays above the footer after chart-height adjustment.",
+        "rendered_slide": "rendered/s09.png",
+        "render_sha256": "08e5049afaee44226c0b7c7f17d77b2bc0ecdb79e9831f5002f68006e114e9ed",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s10",
+        "decision": "Accept",
+        "reason": "Input and connector power, arithmetic, efficiency estimate and difference are clear and consistently styled.",
+        "rendered_slide": "rendered/s10.png",
+        "render_sha256": "681afd2aceef54c8aeece32a418de5cd205cd6ddbd9999cc5047f9f90708c8da",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s11",
+        "decision": "Accept",
+        "reason": "The original APEC harmonic-current panel is shown intact with its complete title, legend, logarithmic RMS-current axis and harmonic orders. The 20 V/4 A test condition, IEC 61000-3-2:2018 Class A label, point-specific result and logged PF/THD callout are readable and unclipped. The measured bars and limit curve are visually distinct.",
+        "rendered_slide": "rendered/s11.png",
+        "render_sha256": "2ef746c31d2ea6f3d42931349d076edbe619344e6537e70e9989cb1b96ba7014",
+        "review_basis": "Current full-size s11 render and original APEC panel inspected by Astra ultra; current notes reopened and matched"
+      },
+      {
+        "slide_id": "s11a",
+        "decision": "Accept",
+        "rendered_slide": "rendered/s11a.png",
+        "render_sha256": "cb893a723b14bcdd34bcfa406e42e8f90f747386cde3df09feac10c755450d28",
+        "reason": "The full original V1 thermal image retains every camera marker and the 102.9 °C maximum. The 20 V, 4.7 A load setting is explicit; the large surface-temperature callout and concise magnetics observation are legible and visually balanced.",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s12",
+        "decision": "Accept",
+        "reason": "The before/after V2 tank equivalents clearly show external-inductor removal. Italic L and C with upright s subscripts are consistent and readable; the approximately 60 ns dead time and observed heat response fit above the footer.",
+        "rendered_slide": "rendered/s12.png",
+        "render_sha256": "62b484503e6525d88b01b49bc5d5da442e4f5816bcf43e6a4709c31012fc78d3",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s13",
+        "decision": "Accept",
+        "reason": "The title states the expected power-control response directly. Rising secondary power is shown first, above the measured voltage curve; both plots retain their current axes, all seven points and exact operating-point callouts. Titles, axes and labels are readable without overlap.",
+        "rendered_slide": "rendered/s13.png",
+        "render_sha256": "2c393b4537eb6677500a7bbe725562b64a8b605812bc5ca8457a8969961a48e1",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s14",
+        "decision": "Accept",
+        "reason": "The intact 70.75 W and 137.08 W thermal photographs are paired with clear power captions and colored temperature callouts. The lower-power photo visibly shows input-bridge R3 heating, while the final photo shows the hotter secondary region. Camera overlays remain complete; all seven chart points, legend, single equilibrium limit and design response remain readable without overlap.",
+        "rendered_slide": "rendered/s14.png",
+        "render_sha256": "81e4d6ab42e8832d53df209468c4212112dc6e1995f993a9462c1494a7b8d3fd",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "s15",
+        "decision": "Accept",
+        "reason": "The shorter conclusion title and continuous-power row now identify thermal limits. Implementation, 79.89 W connector result and the remaining 100 W continuous goal stay clear, with no voltage-fault or magnetic-limit interpretation.",
+        "rendered_slide": "rendered/s15.png",
+        "render_sha256": "ca3700258fae2c4c734ddb485299c8694d9d17495bb32ba96e4c78332849a4ea",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "b01",
+        "decision": "Accept",
+        "reason": "The tank comparison table uses readable native variable/subscript formatting. The native Office Math equation has a proper stacked fraction and a radical spanning the complete LC product; all original values and the estimate note remain clear.",
+        "rendered_slide": "rendered/b01.png",
+        "render_sha256": "476c0f80350e525cbbf3db2ddcaf1d3b3ffc0fe82fcab1793f452e57f23dd6c9",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "b02",
+        "decision": "Accept",
+        "reason": "Seven electrical/thermal rows and all units are legible; direct-secondary location and successive-load condition remain explicit.",
+        "rendered_slide": "rendered/b02.png",
+        "render_sha256": "f8ceca950274deaf9563042e27968f39a549c1080813d30a38327710faca5fd0",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "b03",
+        "decision": "Accept",
+        "reason": "Full V2 schematic overview and scholarly citations are clear as a reference backup. Fine component designators require zoom, as expected for the full drawing.",
+        "rendered_slide": "rendered/b03.png",
+        "render_sha256": "4935739131d5ea54fba78919a2b30545da19eabc0d42533460ac76e2e80a8bda",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      },
+      {
+        "slide_id": "b04",
+        "decision": "Accept",
+        "reason": "Five selected connector operating points fit a clear editable table with signed voltage error and connector power.",
+        "rendered_slide": "rendered/b04.png",
+        "render_sha256": "7d6fc97b626afacefcadae55b66f893ccf6fb8b194fd41c8c5edef82badd1181",
+        "review_basis": "Previous visual acceptance retained; current full page is pixel-identical to the preserved before-iec-comparison PDF"
+      }
+    ],
+    "current_revision_review": "Only s11 changed visually and was inspected at full rendered size. Accepted s10 and s11 notes/transitions were reopened from the current PPTX and matched; package CRC passed. The other 19 complete pages are pixel-identical to the preserved before-iec-comparison PDF and retain their acceptances."
+  },
+  "content_checks": {
+    "all_exact_proposals_judged": true,
+    "notes_reopened_from_pptx": true,
+    "package_crc": "passed",
+    "main_targets_correct": true,
+    "measurement_locations_distinct": true,
+    "scope_mapping_and_coupling_correct": true,
+    "no_measured_zvs_claim": true,
+    "original_v2_hot_inductor_attribution_correct": true,
+    "input_bridge_nonmonotonic_history_preserved": true,
+    "no_continuous_v2_rating_claim": true,
+    "source_numbers_checked_against_csv_and_thesis": true,
+    "original_digest_figure_unchanged": true,
+    "all_20_proposals_accepted": true,
+    "native_office_math_structure_validated": true,
+    "original_v1_thermal_image_unchanged": true,
+    "v1_thermal_load_setting_correct": true,
+    "v1_and_v2_thermal_observations_distinct": true,
+    "no_inferred_94w_connector_claim": true,
+    "genuine_v2_photo_on_title": true,
+    "other_19_slides_unchanged_for_title_photo_update": true,
+    "paired_v2_thermal_images_original_bytes": true,
+    "lower_power_v2_secondary_and_thermal_pairing_correct": true,
+    "expected_v2_voltage_response_correct": true,
+    "burst_enable_pwm_distinguished_from_gate_duty": true,
+    "secondary_measurements_unchanged": true,
+    "continuous_power_limitation_thermal": true,
+    "approximate_adapter_body_scale_checked": true,
+    "adapter_aspect_ratios_preserved": true,
+    "adapter_original_images_preserved": true,
+    "original_iec_graph_and_crop_verified": true,
+    "iec_class_a_individual_harmonic_comparison_correct": true,
+    "pf_thd_not_used_as_standalone_compliance_criterion": true,
+    "logged_and_reconstructed_thd_distinguished": true,
+    "no_full_iec_conformity_claim": true
+  },
+  "root_validation_reference": "review/validation.json",
+  "rendering": {
+    "engine": "LibreOffice",
+    "font_substitution": "Metric-compatible Liberation Sans for Arial",
+    "powerpoint_native_inspection": false,
+    "equations": "Editable native Office Math; final LibreOffice rendering visually inspected"
+  },
+  "accepted_display_constraints": [
+    "The full schematic backup retains the complete drawing; fine component designators require PowerPoint or PDF zoom."
+  ],
+  "unresolved_material_issues": [],
+  "source_replacement": {
+    "scope": [
+      "s04",
+      "s05",
+      "s06"
+    ],
+    "source_pdf": "/workspace/source-archives/APEC_2027_Digest_USB_PD.pdf",
+    "source_pdf_sha256": "07d287ce92e60f816b9e8b9c6a477e8f25351f2114cd986d2ffa32f273d850d4",
+    "source_page": 2,
+    "source_figure": 1,
+    "embedded_image_sha256": "426d2c0b7f45b490504d6ec606119739da7680fbafd993f34402368c23f9e9c2",
+    "method": "Original embedded PNG with PowerPoint-native cropping only; no redrawing, relabeling, or circuit overlays",
+    "same_owners_revised": true,
+    "performance_dataset_unchanged": true,
+    "archive": "review/before-original-digest",
+    "status": "Previously accepted and preserved in current deck",
+    "unaffected_slides_pixel_identical_at_replacement": 16
+  },
+  "typography_and_thermal_update": {
+    "native_equation_slides": [
+      "s03",
+      "s05",
+      "b01"
+    ],
+    "inline_math_slides": [
+      "s06",
+      "s12",
+      "b01"
+    ],
+    "new_thermal_slide": "s11a",
+    "new_slide_position": "Immediately before s12",
+    "thermal_original": "/workspace/thesis/Pictures/Thesis/10_Results/image_001_20v_4p7a.png",
+    "thermal_asset": "assets/v1_thermal_20v_4p7a.png",
+    "thermal_sha256": "8317ab47402282855eec39161f78e80cedcbb7583c870afa581f5ecd74c9a759",
+    "thermal_condition": "V1, 20 V and 4.7 A load setting",
+    "thermal_maximum_surface_temperature_C": 102.9,
+    "original_source_bytes_preserved": true,
+    "narrative_and_results_otherwise_preserved": true,
+    "unaffected_slide_bodies_pixel_identical_excluding_footer": [
+      "s01",
+      "s02",
+      "s04",
+      "s07",
+      "s08",
+      "s09",
+      "s10",
+      "s11",
+      "s13",
+      "s14",
+      "s15",
+      "b02",
+      "b03",
+      "b04"
+    ],
+    "archive": "review/before-equation-typesetting"
+  },
+  "title_photo_update": {
+    "scope": [
+      "s01"
+    ],
+    "visible_caption_added": false,
+    "source": "/workspace/thesis/Pictures/Thesis/frontpage_v2_right_crop.png",
+    "asset": "assets/v2_board.png",
+    "asset_sha256": "ba76433a3c9d05356e519fbec261af4f3f6ee01953e7e5942e740005f2a54ba1",
+    "source_treatment": "Exact crop of original V2 photograph; no retouching or generated pixels",
+    "same_slide_owner_revised": true,
+    "title_notes_and_timing_unchanged": true,
+    "other_19_slides_pixel_identical": true,
+    "s12_preserved": true,
+    "archive": "review/before-v2-photo"
+  },
+  "lower_power_v2_thermal_update": {
+    "scope": [
+      "s14"
+    ],
+    "proposal_revision": 3,
+    "low_image": "assets/thermal_intermediate.jpg",
+    "original_source": "/workspace/thesis/Data/measurements/v2_load_thermal/thermal/Capture 017-thermal.jpg",
+    "image_sha256": "4efb78c7049aef2e463bc57f77718b66166051470c8aeec3a0067bc06d243edf",
+    "camera_clock": "20:25:54",
+    "secondary_power_W": 70.75,
+    "input_bridge_R3_max_C": 83.9,
+    "secondary_R1_max_C": 57.2,
+    "original_image_bytes_preserved": true,
+    "final_image_and_seven_point_chart_retained": true,
+    "successive_nonequilibrium_points": true,
+    "input_power_and_efficiency_not_used": true,
+    "same_slide_owner_revised": true,
+    "duration_seconds": 80,
+    "other_19_slides_pixel_identical": true,
+    "archive": "review/before-v2-low-power-thermal"
+  },
+  "expected_throttle_update": {
+    "scope": [
+      "s13",
+      "s14",
+      "s15",
+      "b02"
+    ],
+    "visually_changed": [
+      "s13",
+      "s15"
+    ],
+    "expected_response": "More burst-enable PWM increases average power transfer; the voltage change across the measured secondary-load sweep was expected.",
+    "power_plot_first": true,
+    "all_seven_measured_points_unchanged": true,
+    "current_axes_preserved": true,
+    "no_pwm_sweep_values_or_fixed_settings_invented": true,
+    "thermal_limit_retained": true,
+    "no_continuous_137w_claim": true,
+    "same_slide_owners_revised": true,
+    "other_18_pages_pixel_identical": true,
+    "archive": "review/before-v2-throttle-wording"
+  },
+  "adapter_scale_update": {
+    "scope": [
+      "s02"
+    ],
+    "proposal_revision": 4,
+    "method": "Native whitespace crops and uniform per-image scaling to an approximate common housing scale; original images and prongs retained",
+    "scale_record": "assets/adapter-scale.json",
+    "scale_record_sha256": "8cad9e3995f329b2112af4c2ccc003f1a7f9f442d4f23cd30cd050cc9208d6c0",
+    "design_units_per_mm": 0.033,
+    "body_bottom_y": 5.7,
+    "reference_heights_mm": {
+      "5w": 25.4,
+      "20w": 41.0,
+      "140w": 95.68
+    },
+    "precision": "Approximate: photographs have differing perspectives; the 5 W reference is an inch-cube family description rather than an exact measurement of the photographed item. No exact dimension labels are presented.",
+    "same_slide_owner_revised": true,
+    "duration_seconds": 85,
+    "other_19_pages_pixel_identical": true,
+    "archive": "review/before-adapter-scale"
+  },
+  "iec_harmonic_comparison_update": {
+    "scope": [
+      "s11",
+      "s10 transition only"
+    ],
+    "source_record": "assets/iec-harmonic-figure.json",
+    "source_record_sha256": "0bb147b522c311df1e9cb8a44e0b0122e30f6406e8be71af1f4381ff7e43cff5",
+    "figure": "Original uploaded APEC digest, page 4, Fig.3(e)",
+    "embedded_image_sha256": "f86e1eef093d7616308e0ac8cb401d0cb6fa2b06c1e37f7e528fd946a540bb2d",
+    "native_crop_pixels": [
+      0,
+      3150,
+      2650,
+      4644
+    ],
+    "source_image_unchanged": true,
+    "standard_reference": "IEC 61000-3-2:2018, Class A individual RMS harmonic-current limits",
+    "standard_source_review": "review/iec-research/source-notes.md",
+    "operating_point": {
+      "hardware": "V1",
+      "input_V_AC": 240,
+      "input_frequency_Hz": 50,
+      "selected_USB_C_voltage_V": 20,
+      "load_current_A": 4,
+      "nominal_USB_C_power_W": 80,
+      "measured_USB_C_power_W": 79.8928
+    },
+    "logged_current_THD_percent": 3.98,
+    "separate_table_reconstruction_THD_percent": 4.53,
+    "full_conformity_claimed": false,
+    "same_slide_owners_revised": true,
+    "durations_seconds": {
+      "s10": 75,
+      "s11": 90
+    },
+    "other_19_pages_pixel_identical": true,
+    "archive": "review/before-iec-comparison"
+  },
+  "editable_objects": {
+    "charts": 4,
+    "tables": 3,
+    "pictures": 14,
+    "text_shapes": 181
+  }
+}

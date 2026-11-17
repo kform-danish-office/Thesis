@@ -1,0 +1,12 @@
+{
+  "checked_before_code_appendices_and_final_appendix": true,
+  "forbidden_reader_facing_file_phrases_absent": true,
+  "dead_time_and_zvs_wording_present": true,
+  "rendered_pages": {
+    "Half-Bridge Heating and Dead Time": 117,
+    "Waveform records, sample counts": 211,
+    "Test status, firmware version": 209,
+    "Magnetic temperature depends": 59,
+    "The revised project plan sets a continuous-output target": 24
+  }
+}

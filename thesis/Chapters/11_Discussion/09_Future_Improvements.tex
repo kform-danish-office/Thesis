@@ -1,0 +1,31 @@
+\section{Prototype Development Priorities}
+\label{sec:disc-future}
+
+V2 operated with the leakage-only tank and showed voltage droop at higher secondary loads. The next tests should separate secondary and winding losses from input-bridge heating using current-path voltage drops, component temperatures, and synchronized input/output power.
+
+The approximately \SI{85}{\watt} V2 result in the revised plan
+\cite{projectOctoberPlan} needs to be repeated with its hardware and settings recorded
+before comparison with the older assembly's
+\SI{79.8928}{\watt} result. Input, secondary-bus, connector, and auxiliary
+power should be measured together, with component temperatures followed
+to equilibrium. Section~\ref{sec:disc-plan-gap} defines the baseline and
+controlled retests.
+
+Startup, attachment, load steps, detachment, and short-circuit recovery
+require synchronized secondary-bus voltage, VBUS, board-specific enable,
+and firmware-state records. These tests should verify protection
+thresholds and guide an independent secondary shutdown or discharge path.
+Measured magnetics, parasitics, USB-C PD stage behavior, and packet
+energy would then support validation of the installed converter model.
+
+The V3 edge-card layout retains secondary rectification and removes the
+USB-PD section. Completion requires the selected transformer, verified
+interlayer current paths, release review, assembly inspection, and gradual
+power-up. Its estimated volume reduction must be checked after including the
+external output stage and all hardware needed by the complete supply.
+
+Power-density comparison requires the same volume convention, included
+hardware, clearance/cooling allowance, and supported output-power basis
+as Section~\ref{sec:method-plan-validation}. The complete assemblies need
+to be measured and tested under the same conditions for the V2--V3 comparison. Fixed PDO/PPS protocol tests and formal
+safety and EMC assessment remain subsequent requirements.

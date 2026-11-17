@@ -1,0 +1,53 @@
+{
+  "source_files": 491,
+  "edited_files": 9,
+  "unchanged_files": 482,
+  "changes": [
+    {
+      "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+      "before_sha256": "21ac5fef208f0b831e7f72c2a081675090d91ca1284ee694c6a012f20383d96f",
+      "sha256": "4082fa4072394a9b8fce9802f97cb3b368b2f451928e79a00521150eabc674a8"
+    },
+    {
+      "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+      "before_sha256": "a3e50453d45cf059b9209f9ffe091eee4ce1cdce3fa062603b8e22b29a2f6de9",
+      "sha256": "8594e404d40d8dea812a5c611857bdd68d71089b83f9029fe6283260d26def2d"
+    },
+    {
+      "path": "Chapters/01_Introduction/chapter.tex",
+      "before_sha256": "256d01bf9da6a173c7a777e2d7be3e34e7200e74dacb0f0849d9f1c007c924cc",
+      "sha256": "79acded3268c17e45a3d544dcc8ed372f9aeb675dd32ca192d7528dd0ac8c55a"
+    },
+    {
+      "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+      "before_sha256": "e987b3f2e86c54682a8b74ff9f09bacc60c244761dd560b2b455885f5bf8f2fd",
+      "sha256": "4a13d9997a061a9b03506816f6863402c68c48f81fc563bc37f1b6be24e0ed44"
+    },
+    {
+      "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+      "before_sha256": "b6b312b087e50e925e7f89185f263b0e5d65f2416b7a57bd48cefc23e38bf349",
+      "sha256": "e7f068f20034b4f839be25dc02555f4633ee40b124e5f187583be19188f22df9"
+    },
+    {
+      "path": "Chapters/12_Conclusion/03_Contributions.tex",
+      "before_sha256": "0aaedf2cd2c7aa5ec2e39ff4bc38c9e9618a985f67cc01cea6ea134fa0c32732",
+      "sha256": "893250adf17c491d4d758a3f689a40d748f393e60dc6ad3c074d56845eefbe91"
+    },
+    {
+      "path": "Chapters/12_Conclusion/chapter.tex",
+      "before_sha256": "0c1227bc9ea4b0e43a9c71d8b4e02afae8db1128a913b44778779a7af1fd2d38",
+      "sha256": "d4291f52bb696618f462feaba24d076f652cbef99f744abae6eff8fa1f643bf7"
+    },
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "before_sha256": "d24e79574cfff74eadd7cd169f71f59a39c266bcc77a93a07b71c7aa131573eb",
+      "sha256": "067307e1ca5b5d4b1961e79daf37a87e4922ae159bfa97ba9e0790414e864781"
+    },
+    {
+      "path": "Frontmatter/Approval.tex",
+      "before_sha256": "e4b2aa7d611ee92e14e8efc680dc0e8b2e73fae855d40ea7be24a94d76e21c9d",
+      "sha256": "0978721d376a2067b6d24d5e8793b764b5a54d57dbe64b627f08d9cc4809629a"
+    }
+  ],
+  "checks": "Exact nine wording replacements only; original load-focused opening restored in established impersonal voice. All numerical quantities, math, citations, labels, inclusions, assets, data and code unchanged. No lab-supply project framing remains in authored TeX."
+}

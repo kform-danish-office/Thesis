@@ -1,0 +1,105 @@
+{
+  "baseline_files": 479,
+  "current_files": 483,
+  "edited_files": 18,
+  "added_files": [
+    "Chapters/01_Introduction/08_V2_Prototype.tex",
+    "Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf",
+    "Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf",
+    "Pictures/Thesis/07_Hardware/V2_2026-10-27_provenance.json"
+  ],
+  "unchanged_files": 461,
+  "changes": [
+    {
+      "path": "Frontmatter/Approval.tex",
+      "before_sha256": "acd7d2c4e871e6c8e3619618c04a4a4add7aa37752e67259a2788ae1cc4ecba4",
+      "sha256": "358b8552dd7abc58cfeb06964731d03fb44fa068448fef57aff5c9f996792636"
+    },
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "before_sha256": "7e25ec4733767e9977b7a8d8d4bb0cb7cc35a3d59be6f14295ad470df1d14a46",
+      "sha256": "f4b8213afffef5f3d3e504d8f59af33bb2dcf428c7ed7800a252f4db8ec67f86"
+    },
+    {
+      "path": "Chapters/01_Introduction/04_Research_Questions.tex",
+      "before_sha256": "7aede76bf1b15ea977712aaf93caa9bde7a96d90c6d6f734d4d9a8f82d771357",
+      "sha256": "bee359d5382c13d739ea9ccefbf5ae84fd6cecc23756f514f3752ded59ea221f"
+    },
+    {
+      "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+      "before_sha256": "92a329964cd4025858b0fee6326d52531685460ab8c21e9ad19fe3392e6d9155",
+      "sha256": "64c5b1d31e66169fbb57503e372657ca1d876d28c8b50ba2aeec7dde6c87d42d"
+    },
+    {
+      "path": "Chapters/01_Introduction/07_Thesis_Structure.tex",
+      "before_sha256": "cb1a77b1d285a0c3d4023010c742ffb8af3c17c1e951acaa98a70bca69081cc3",
+      "sha256": "ec4e0b5f45f024f9a94fa159406f2cf4ef8e5c1508379916623dacbc996da9cb"
+    },
+    {
+      "path": "Chapters/01_Introduction/chapter.tex",
+      "before_sha256": "c6ed07f13e3b464dc3a1d84fb8dc9de6d94eb866c4cdbdbcd187b85c95d9e85c",
+      "sha256": "6ec8b594eed8bd37e321eb558e552705ac643fef6ab5f6c3674b554a51ad811e"
+    },
+    {
+      "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+      "before_sha256": "dddb631956472f7ab42a2380f335ce38ea6ea19a5b7d0b4dee9c516d1497c122",
+      "sha256": "7e261098038ad781d67b851524bf0db416ccbcf95b1b2cce142703f093f53851"
+    },
+    {
+      "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+      "before_sha256": "c3deea6867bedd56220b9d018baca585052ad5990301ec8d8914f291e402742e",
+      "sha256": "253b476dbfd7aa60ea95a08aa73b43d030276cf90cd7e3224168c7c53fdb8741"
+    },
+    {
+      "path": "Chapters/01_Introduction/01_Motivation.tex",
+      "before_sha256": "6aab87356f7d900c08d075a0666d1c87ba25efba46f70f395f204d196aa24ecc",
+      "sha256": "332bde9a12144f509ac117120d5c3960e5af9b417037cce771006efc77f2c894"
+    },
+    {
+      "path": "Chapters/12_Conclusion/03_Contributions.tex",
+      "before_sha256": "d5da30f42146e3ae01000eb2ab747021703760c1c78377bd9a7b340bab739028",
+      "sha256": "52a56997b55407e3e656dd26e7e12b5d3d99a80eacf702e729ed7366ff360296"
+    },
+    {
+      "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+      "before_sha256": "f885f2e1f11e39e924fbc6bc68a5ee291049b7b611235fa4f89ca4b6b6c30b37",
+      "sha256": "2d98b644432da376029aa216019ed176db840ea64a5340e6a48068f55fccaf9d"
+    },
+    {
+      "path": "Chapters/12_Conclusion/chapter.tex",
+      "before_sha256": "1ae3c75a09cb186ff362dee036d8f1fa84ea5fa83c2a8b84491ef7adf69204aa",
+      "sha256": "37fcf7dc4a7ca9f82cf41944b8b0bc7cd3a773b5f092a9b319bcf9ef4005d117"
+    },
+    {
+      "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+      "before_sha256": "22d6a14cbd7efa666093b12dccd3b27e402faa3cf5ae4d5dd74134092fd20d6a",
+      "sha256": "1bf9d4ee365c3c4604af90ca50f697d92a916b9a50bebf49e4eb154835755900"
+    },
+    {
+      "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+      "before_sha256": "93296cf4b6527158189365732aba0d970262698ebf1e4b37588e64fd1997b085",
+      "sha256": "5e063c789f5bacc33dff5120ba42f02756e728a5d2f1e80896c13a3fca3f8826"
+    },
+    {
+      "path": "Chapters/07_Hardware/16_V2_F410.tex",
+      "before_sha256": "9d96e547656c5d92a7c7feb4d4ee64441dbbf14bc17660f6b2c3ef12a51d7a83",
+      "sha256": "f757194553eba2b431100b93a13e8cef5cda81a5040b2fac3b4ad34cb6844a76"
+    },
+    {
+      "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+      "before_sha256": "9ca8c68d02880ca1f7b7facd39b28da2e5be03a58c2165b523d13ada847d0b18",
+      "sha256": "483123217619873732c29445a2db487fe6368aead84037105ad5e055d2796594"
+    },
+    {
+      "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+      "before_sha256": "a5d30011dc48bc2b78a804a4f7dc6f24f67e7f88d6f9fbe940065826a5546838",
+      "sha256": "93fa8b10d910e29260e8f818bc5849306d4abcd6b1dc2791bccba6a0a102f1c1"
+    },
+    {
+      "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+      "before_sha256": "e93213d48b535a165771dc657c16e33fb8a5f82ad37961df281d91fff18019c4",
+      "sha256": "fed7c3d832fcd1d60c6cb420a671dcf234d55f87e65d51713f4c1b3ec12b2b63"
+    }
+  ],
+  "preserved": "All earlier non-TeX assets, equations, labels, tables/figures except the documented AppendixB revision register; all35 new source document pages included exactly once in AppendixB."
+}

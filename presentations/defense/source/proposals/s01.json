@@ -1,0 +1,62 @@
+{
+  "slide_id": "s01",
+  "title": "Design and Implementation of a High-Frequency Charge-Pump PFC Resonant Converter for a USB-C Power Supply",
+  "takeaway": {
+    "text": "A compact USB-C supply must regulate power as devices and their demands change.",
+    "visible": false
+  },
+  "visible_content": {
+    "title": "Design and Implementation of a High-Frequency Charge-Pump PFC Resonant Converter for a USB-C Power Supply",
+    "author": "Richard Xu",
+    "context": "Master’s thesis defense · DTU Electro"
+  },
+  "visual": {
+    "layout": "Title slide using the supplied DTU Blue 16:9 template. Place the full thesis title, author and defense context on the left and the portrait V2 prototype photo on the right.",
+    "assets": [
+      {
+        "path": "/workspace/thesis/Pictures/Thesis/frontpage_v2_right_crop.png",
+        "assembly_copy": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v2_board.png",
+        "sha256": "ba76433a3c9d05356e519fbec261af4f3f6ee01953e7e5942e740005f2a54ba1",
+        "provenance": "/workspace/thesis/Pictures/Thesis/frontpage_v2_right_crop_provenance.json",
+        "treatment": "Genuine prototype photo; original JPEG rectangle (274, 333, 470, 738), lossless crop only and no retouching."
+      }
+    ],
+    "labels": [],
+    "notes": "No visible photo caption or additional body content."
+  },
+  "speaker_notes": "This thesis covers the design and implementation of a USB-C power supply using a high-frequency charge-pump power-factor-correction resonant converter. The aim is a compact supply for a device whose demand can change during operation. The design target is 100 watts continuous, with a 65-watt continuous minimum. A device may be absent at startup, connected later, or removed while energy remains in the converter. The supply therefore needs to control transferred power across changing load conditions.",
+  "transition": "The range of USB-C adapters illustrates the different power and voltage demands behind this design.",
+  "duration_seconds": 45,
+  "sources": [
+    {
+      "claim": "Thesis title, author and department",
+      "reference": "/workspace/thesis/Setup/Statics.tex",
+      "classification": "thesis identification"
+    },
+    {
+      "claim": "Changing load, startup, attachment, disconnection and stored energy",
+      "reference": "/workspace/papers/apec-digest/sections/intro.tex; /workspace/thesis/Chapters/01_Introduction/01_Motivation.tex",
+      "classification": "project scope"
+    },
+    {
+      "claim": "100 W continuous target and 65 W continuous minimum",
+      "reference": "/workspace/papers/apec-digest/sections/intro.tex",
+      "classification": "design targets"
+    },
+    {
+      "claim": "Genuine V2 prototype photograph",
+      "reference": "/workspace/thesis/Pictures/Thesis/frontpage_v2_right_crop_provenance.json",
+      "classification": "photograph provenance"
+    }
+  ],
+  "checks": {
+    "facts_and_units": [
+      "Full thesis title, author and department match thesis metadata.",
+      "100 W and 65 W are design targets, not measured results.",
+      "Load events and stored-energy control are grounded in the introduction."
+    ],
+    "unresolved_questions": [],
+    "visual_or_timing": "About 85 spoken words including transition; approximately 45 seconds at a measured opening pace. Full title remains on the original title layout."
+  },
+  "revision": 2
+}

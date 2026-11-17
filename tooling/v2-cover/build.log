@@ -1,0 +1,27 @@
+Rc files read:
+  /etc/LatexMk
+  latexmkrc
+Latexmk: This is Latexmk, John Collins, 11 Dec. 2024. Version 4.86.
+Latexmk: Nothing to do for 'main.tex'.
+Latexmk: All targets (/workspace/thesis-build/main.xdv /workspace/thesis-build/main.pdf) are up-to-date
+
+Title:           Design and Implementation of a High-Frequency Charge-Pump PFC Resonant Converter for a USB-C Power Supply
+Subject:         Integration of pre-designed planar magnetics and digital control for loaded and no-load operation
+Author:          Richard Xu
+Creator:         LaTeX with hyperref
+Producer:        xdvipdfmx (20240305)
+CreationDate:    Tue Oct 27 01:06:58 2026 UTC
+Custom Metadata: no
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           388
+Encrypted:       no
+Page size:       595.28 x 841.89 pts (A4)
+Page rot:        0
+File size:       14745276 bytes
+Optimized:       no
+PDF version:     1.5

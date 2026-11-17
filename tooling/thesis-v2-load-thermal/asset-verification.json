@@ -1,0 +1,59 @@
+{
+  "release_url": "https://github.com/kform-danish-office/Thesis/releases/tag/thesis-v1-v2-v3-review",
+  "unchanged_release_flags": {
+    "draft": false,
+    "prerelease": true,
+    "target_commitish": "e3c3f6ac36ab1458dcf8e20dbb71da87fd1cf51a"
+  },
+  "assets": [
+    {
+      "name": "Thesis_V1_V2_V3.pdf",
+      "bytes": 20940163,
+      "sha256": "a71aa3b2bf1efffa01bbd92ecb79e911118c04ec562825830cb9eb17ebfe1de9",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/Thesis_V1_V2_V3.pdf",
+      "asset_id": 682785823,
+      "status": "verified"
+    },
+    {
+      "name": "Thesis_V1_V2_V3_Source.zip",
+      "bytes": 94155336,
+      "sha256": "1f4ad0667b277cb5dbd79a8d237ff480bbfa44fcf05c9ae683a391bfa025cd38",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/Thesis_V1_V2_V3_Source.zip",
+      "asset_id": 682785815,
+      "status": "verified"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 179,
+      "sha256": "f353cd755643d4ea6e0817d1b7224f796218fb1ebcbde7a6d1ba33c4a42142f1",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/SHA256SUMS.txt",
+      "asset_id": 682785819,
+      "status": "verified"
+    },
+    {
+      "name": "Thesis_Local_Handoff.zip",
+      "bytes": 298628499,
+      "sha256": "0110ccbb62e793f1d9f72328b6ba567814c275d5ff0ff1e0899b855dba9dbaa0",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/Thesis_Local_Handoff.zip",
+      "asset_id": 682785816,
+      "status": "verified"
+    },
+    {
+      "name": "LOCAL_HANDOFF_SHA256.txt",
+      "bytes": 91,
+      "sha256": "71515612a955250ba3b0e6bd3c26b7689e06bbe0fb2d548c42d84bda8929277c",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/LOCAL_HANDOFF_SHA256.txt",
+      "asset_id": 682785814,
+      "status": "verified"
+    },
+    {
+      "name": "LOCAL_START.md",
+      "bytes": 2775,
+      "sha256": "1daa280cb3a0786687a5dfeafa946c52de553c66093b825652ae4aad2fea11b3",
+      "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/LOCAL_START.md",
+      "asset_id": 682785881,
+      "status": "verified"
+    }
+  ],
+  "reference_checkout_clean": true
+}

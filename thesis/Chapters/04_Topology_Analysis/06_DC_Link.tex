@@ -1,0 +1,30 @@
+\section{DC-Link Energy Storage}
+\label{sec:analysis-dclink}
+
+The pump collects pulsating mains power, while load demand can remain nearly constant. The DC link buffers the difference. With ideal sinusoidal current, unity efficiency, and constant output power,
+\begin{equation}
+p_C(t)=-P_{\mathrm{out}}\cos(2\omega_l t).
+\end{equation}
+The energy variation has amplitude \(P_{\mathrm{out}}/(2\omega_l)\). For small voltage ripple about mean \(\VDC\),
+\begin{equation}
+\widehat{\Delta V}_{\mathrm{DC}}\approx
+\frac{P_{\mathrm{out}}}{2\omega_l\CDC\VDC}.
+\label{eq:analysis-bus-ripple}
+\end{equation}
+The expression gives ripple amplitude; approximate peak-to-peak ripple is twice this value.
+
+Requiring \(\VDC-\widehat{\Delta V}_{\mathrm{DC}}>V_{\mathrm{in,pk}}\) gives the reference minimum-capacitance estimate
+\begin{equation}
+\CDC\geq\frac{P_{\mathrm{out}}}
+{2\omega_l\VDC(\VDC-V_{\mathrm{in,pk}})}.
+\label{eq:cdc-sizing}
+\end{equation}
+The estimate requires \(\VDC>V_{\mathrm{in,pk}}\) and small enough ripple for the linear approximation. It neglects loss, so the actual capacitor-voltage waveform also depends on input/output power imbalance and burst operation \cite{ammar2021led}.
+
+The selected link capacitor is \SI{22}{\micro\farad} with a \SI{450}{\volt} rating. Its stored energy is
+\begin{equation}
+E_{\mathrm{DC}}=\frac{1}{2}\CDC\VDC^2.
+\end{equation}
+Increasing link capacitance reduces line-frequency ripple and improves pump-voltage margin, but increases stored energy during startup, load removal, and abnormal switching.
+
+Measured bus mean, ripple, and maximum are used to calculate capacitor-voltage margin and half-bridge excitation. Control can redistribute the single-phase energy ripple but cannot eliminate its storage requirement.

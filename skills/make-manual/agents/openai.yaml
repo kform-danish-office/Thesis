@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manuals & Documentation"
+  short_description: "Create clear manuals with screenshots and callouts"
+  default_prompt: "Use $make-manual to create a practical guide for this project in my writing style, with verified details, numbered callouts, relevant app screenshots, editable source, and a branded PDF."

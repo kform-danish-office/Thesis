@@ -1,0 +1,114 @@
+{
+  "checked_at": "2026-10-25T05:11:48.131403+00:00",
+  "status": "READY",
+  "deployment_id": "dpl_zw1813ksvrYLVwtvwzYCNXDWBGZw",
+  "production_url": "https://thesis-power-lab.vercel.app",
+  "deployment_url": "https://thesis-power-595hapk7q-danishoffice.vercel.app",
+  "files": [
+    {
+      "path": "app.js",
+      "url": "https://thesis-power-lab.vercel.app/app.js",
+      "bytes": 56872,
+      "sha256": "350f3e00c89499a175d951391a9b1fcebab24c8b69a2c7551792300ade88de7f",
+      "matches_dist": true
+    },
+    {
+      "path": "calculator.css",
+      "url": "https://thesis-power-lab.vercel.app/calculator.css",
+      "bytes": 24856,
+      "sha256": "9d2ff8f6d6233b0680b5d9f19f20f87d149f75968ee0c4c498d50a5a70b64dba",
+      "matches_dist": true
+    },
+    {
+      "path": "calculator.html",
+      "url": "https://thesis-power-lab.vercel.app/calculator.html",
+      "bytes": 21428,
+      "sha256": "c635876d4fdd9d607c59fd1cc6b7a1462496835a9a43d65247c2e27fb62e7489",
+      "matches_dist": true
+    },
+    {
+      "path": "fonts/IBMPlexMono-Medium.ttf",
+      "url": "https://thesis-power-lab.vercel.app/fonts/IBMPlexMono-Medium.ttf",
+      "bytes": 23816,
+      "sha256": "5f460401d03995ca099270707e78662513b5be9d17060eb7c7fffadb4d4d334b",
+      "matches_dist": true
+    },
+    {
+      "path": "fonts/IBMPlexSans-Bold.ttf",
+      "url": "https://thesis-power-lab.vercel.app/fonts/IBMPlexSans-Bold.ttf",
+      "bytes": 46160,
+      "sha256": "5bb3030115b2a8d4494afd9c42c69a659ad80329694f8056d21ba6680612422b",
+      "matches_dist": true
+    },
+    {
+      "path": "fonts/IBMPlexSans-Regular.ttf",
+      "url": "https://thesis-power-lab.vercel.app/fonts/IBMPlexSans-Regular.ttf",
+      "bytes": 46220,
+      "sha256": "b7687a7b11bf4972c2807e6f1701bb55d1837e6957373e6610a81e3bbd4423a9",
+      "matches_dist": true
+    },
+    {
+      "path": "fonts/OFL-IBMPlex.txt",
+      "url": "https://thesis-power-lab.vercel.app/fonts/OFL-IBMPlex.txt",
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "matches_dist": true
+    },
+    {
+      "path": "index.html",
+      "url": "https://thesis-power-lab.vercel.app/",
+      "bytes": 27895,
+      "sha256": "863acd844cc9853b94bf7e62fa6fc2f5af62051d9046ec892937cf68cf66ed41",
+      "matches_dist": true
+    },
+    {
+      "path": "protocol.js",
+      "url": "https://thesis-power-lab.vercel.app/protocol.js",
+      "bytes": 4673,
+      "sha256": "f3571eff542a3c368d5f66c7a0aefc236435edd9bba5bbb66914f19e91d92793",
+      "matches_dist": true
+    },
+    {
+      "path": "resonance-presets.js",
+      "url": "https://thesis-power-lab.vercel.app/resonance-presets.js",
+      "bytes": 8889,
+      "sha256": "4687c77c361bdbae0e707b822a3c23b5403aab9ea074a8270dcf583259ee35fa",
+      "matches_dist": true
+    },
+    {
+      "path": "resonance-ui.js",
+      "url": "https://thesis-power-lab.vercel.app/resonance-ui.js",
+      "bytes": 38475,
+      "sha256": "573c19e5338c9f3e4574b953bf81eae600458cca6eb982a3cc25dd79a08ac749",
+      "matches_dist": true
+    },
+    {
+      "path": "resonance.js",
+      "url": "https://thesis-power-lab.vercel.app/resonance.js",
+      "bytes": 15044,
+      "sha256": "8f31134163faede8358f82da861a1ad4391b8266d7bf1d882c92968cb5876d43",
+      "matches_dist": true
+    },
+    {
+      "path": "serial.js",
+      "url": "https://thesis-power-lab.vercel.app/serial.js",
+      "bytes": 21708,
+      "sha256": "fe5a36451b5112269cf21d5cf32a83f779d132e464db1dfa9fb0a51d0dc88bc6",
+      "matches_dist": true
+    },
+    {
+      "path": "storage.js",
+      "url": "https://thesis-power-lab.vercel.app/storage.js",
+      "bytes": 3661,
+      "sha256": "459fd3d10ed41f383fd8b16350fff407e1c710bafac4ff5016313a12bf12b51d",
+      "matches_dist": true
+    },
+    {
+      "path": "styles.css",
+      "url": "https://thesis-power-lab.vercel.app/styles.css",
+      "bytes": 38813,
+      "sha256": "5e2984e63ce6a50155bf22d62c41b387451cf19f070c86ccbc522e1e4df90645",
+      "matches_dist": true
+    }
+  ]
+}

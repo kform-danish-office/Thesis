@@ -1,0 +1,10 @@
+\section{USB-C Output Stage}
+\label{sec:req-usbc}
+
+The V1.1 MPQ4242GVE-0000-AEC1-P output stage is supplied from \texttt{V\_PW\_OUTPUT\_BULK} and feeds \texttt{USB\_PD\_OUT} and connector VBUS at J1. Configuration channels CC1 and CC2 support attachment detection and power negotiation.
+
+The stage includes local capacitance, current sensing, and VBUS and signal protection. The I2C service header exposes clock \texttt{PD\_SCL} and data \texttt{PD\_SDA}. The MCU does not configure the MPQ4242 over I2C; the fitted controller configuration and sink or trigger determine the tested connector setting.
+
+The MCU regulates the secondary bulk voltage using PA1 feedback. The USB-C PD stage uses this supply to regulate its output voltage, VBUS, to the selected PD level. Bulk-voltage ripple and USB-C output ripple are measured on opposite sides of this stage.
+
+The VBUS settings were tested under load and during changes in demand. Those tests do not cover the full negotiation sequence, policy engine, cable-current advertisement, or interoperability. Chapter~\ref{ch:hardware} describes the circuit that was fitted, and Chapter~\ref{ch:results} shows its measured output behavior.

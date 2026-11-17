@@ -1,0 +1,21 @@
+\section{Charge-Pump Input-Current Shaping}
+\label{sec:bg-chargepump}
+
+The charge pump transfers capacitor charge each switching period so that the averaged input current follows the mains voltage \cite{ammar2020chargepump,ammar2021led}. For a pump-capacitor voltage excursion \(\Delta v_C\), the charge transferred in a period is
+\begin{equation}
+\Delta q=\CP\Delta v_C.
+\end{equation}
+Averaging this charge over the switching period gives
+\begin{equation}
+\overline{i}_{\mathrm{in}}=f_s\CP\Delta v_C.
+\label{eq:bg-charge-pump-average-current}
+\end{equation}
+If the diode and clamp sequence makes \(\Delta v_C\) approximately equal to the rectified line voltage, the input acts like a conductance proportional to \(f_s\CP\).
+
+Complete capacitor charge and discharge are required for this relationship. Low DC-link voltage, incomplete clamping, and interrupted switching reduce or alter the per-cycle charge. The 2021 reference adds an inductor and clamp paths to control these intervals while separating the pump and isolated-output tanks \cite{ammar2021led}.
+
+Capacitance sets the available charge per active cycle; inductance sets current slope, peak current, and clamp timing. Increasing capacitance can increase transfer, with corresponding pump-current and commutation demands on the shared half bridge.
+
+Burst control varies active-cycle density at fixed carrier frequency. Charge transfer follows the pump sequence during each packet; commanded excitation is inhibited between packets. Constant density scales the average input conductance; density varying with line phase or secondary ripple distorts the input-current envelope.
+
+The charge-transfer mechanism provides inherent PFC, while the assembled supply's power factor and current distortion depend on load and burst control.

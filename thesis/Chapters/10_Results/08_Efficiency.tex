@@ -1,0 +1,54 @@
+\FloatBarrier
+\Needspace{14\baselineskip}
+\section{Efficiency and Power Difference}
+\label{sec:res-efficiency}
+
+Output power, initial efficiency, and input--output power difference
+were calculated as
+\begin{align}
+P_\mathrm{out}&=V_\mathrm{BUS,avg}I_\mathrm{out},
+\label{eq:pout-from-vbus-iout}\\
+\eta&=\frac{P_\mathrm{out}}{P_\mathrm{in}}\,100\%,
+\label{eq:efficiency}\\
+P_\mathrm{difference}&=P_\mathrm{in}-P_\mathrm{out}.
+\end{align}
+Average VBUS and external load current were used to calculate output power,
+with analyzer readings for input power. The resulting efficiency estimates
+are preliminary because simultaneous acquisition and the inclusion of all
+auxiliary power paths are not fully documented.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{Pictures/Thesis/10_Results/Rebuilt/efficiency_and_loss.pdf}
+\caption{Initial efficiency estimates and input-minus-output power from eleven tests. Marker shapes identify the fixed output voltage. }
+\label{fig:rebuilt-efficiency-loss}
+\end{figure}
+
+At \SI{5}{\volt}, the calculated value rises from about
+\SI{54.7}{\percent} at \SI{1}{\ampere} to \SI{69.8}{\percent} at
+\SI{3}{\ampere}. The \SI{9}{\volt} points range from
+\SI{83.6}{\percent} to \SI{86.8}{\percent}, the highest of the eleven
+selected rows. The \SI{15}{\volt}, \SI{1}{\ampere} result is
+\SI{86.4}{\percent}. The tests used different instruments and operating histories, so these
+values do not form a calibrated efficiency map.
+
+\Needspace{20\baselineskip}
+\input{Data/measurements/processed_rewrite/efficiency_table}
+
+The \SI{20}{\volt} high-power tests give \SI{77.15}{\percent},
+\SI{76.70}{\percent}, and \SI{76.51}{\percent} at
+\SI{3.7}{\ampere}, \SI{3.8}{\ampere}, and \SI{4.0}{\ampere}.
+Their input--output differences are \SI{21.91}{\watt},
+\SI{23.06}{\watt}, and \SI{24.53}{\watt}. At \SI{4}{\ampere},
+\SI{104.418}{\watt} logged input accompanies \SI{79.8928}{\watt}
+calculated output. The total difference does not allocate loss among the GaN
+stage, inductors, charge pump, output interface, and auxiliary supply;
+intermediate-stage power measurements are required.
+
+No-load, transient, and AC-coupled output rows were excluded, along with the
+\SI{3.9}{\ampere}, \SI{20}{\volt} row with an associated input capture
+and the \SI{15}{\volt}, \SI{2}{\ampere} and \SI{3}{\ampere} rows
+whose notes flag real-power disagreement. Siglent/ITECH disagreement remains in several selected groups; the selected
+workbook entries are used consistently, but the instrument error remains unresolved.
+A matched sweep must synchronize settled input/output readings and account
+for auxiliaries, cable drop, temperature, and propagated uncertainty.

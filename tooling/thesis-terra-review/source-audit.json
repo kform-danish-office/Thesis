@@ -1,0 +1,23 @@
+{
+  "source_files": 541,
+  "changed_files": [
+    "Backmatter/Appendices/E_Experimental_Data.tex",
+    "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+    "Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex",
+    "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+    "Chapters/07_Hardware/16_V2_F410.tex",
+    "Chapters/09_Experimental_Methods/10_Thermal.tex",
+    "Chapters/10_Results/08_Efficiency.tex",
+    "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "Chapters/10_Results/16_V3_Design_Outcome.tex"
+  ],
+  "unchanged_files": 531,
+  "applied_proposals": 11,
+  "accepted": 9,
+  "lead_rewritten": 2,
+  "exact_approved_replacements_only": true,
+  "unique_quantities_units_and_references_preserved": true,
+  "display_equations_preserved": true,
+  "code_data_images_and_layout_unchanged": true
+}

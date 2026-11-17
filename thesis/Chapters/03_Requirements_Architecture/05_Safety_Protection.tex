@@ -1,0 +1,12 @@
+\section{Protection and Bench Operation}
+\label{sec:req-safety}
+
+Controlled energization and rated measurement equipment were used during testing. The high-voltage assembly was checked for remaining charge before handling. Section~\ref{sec:method-safety} describes the bench arrangement. The prototype was intended for supervised laboratory testing.
+
+The V1.1 drawing includes an input fuse, surge suppression, line filtering, and a CAP300DG discharge circuit, along with protection components in the auxiliary and USB-C sections. Chapter~\ref{ch:hardware} explains their roles. These functions support laboratory operation; qualification still requires tests of the complete assembly.
+
+Precharge applies limited excitation to power the isolated feedback circuit. It ends when the feedback threshold or configured attempt limit is reached. High-impedance classification lowers the burst limit and voltage window. Eligible light/no-load overvoltage invokes soft holdoff within the hard margin; other overvoltage conditions latch overvoltage protection (OVP) until the defined clear or reset action. Burst enable (PA10) is held low to inhibit further excitation, without discharging stored energy. Chapter~\ref{ch:control} and Appendix~\ref{app:equations} specify the conditions.
+
+Primary half-bridge-current feedback (PA2) supports load classification and diagnostics. The configurable current trip is disabled by default, and the active voltage loop does not call legacy foldback helpers. Any current-limited test must identify the active limiter: output controller, AC source, electronic load, or explicitly enabled firmware threshold.
+
+Insulation qualification, leakage-current, abnormal-fault, surge/ESD, and thermal-protection tests remain unfinished. The completed checks cover supervised laboratory operation, not product qualification.

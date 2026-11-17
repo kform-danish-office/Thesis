@@ -1,0 +1,49 @@
+\section{Targets and Prototype Values}
+\label{sec:req-electrical}
+
+Table~\ref{tab:req-design-specifications} lists the power targets and the original MCU timing and feedback settings. The fixed carrier is gated into bursts; burst scheduling and sensor/control updates operate on separate time scales. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} describe the V2 implementation, with power-stage enable assigned to PA11.
+
+\begin{table}[H]
+\centering
+\caption{Converter targets and controller settings.}
+\label{tab:req-design-specifications}
+\begin{tabularx}{\textwidth}{@{}L{0.27\textwidth}Y L{0.24\textwidth}@{}}
+\toprule
+Parameter & Target or setting & Check\\
+\midrule
+Input supply & Single-phase AC; voltage and frequency stated with the test & Recorded test condition\\
+Output power & \SI{100}{\watt} continuous target; \SI{65}{\watt} revised minimum; \SI{75}{\watt} earlier validation milestone & Output power, run time, and temperature\\
+Half-bridge carrier & Fixed \SI{1}{\mega\hertz} on PA8/PA9 & Switching timing\\
+Burst-enable pin & PA10 enables bursts of carrier cycles & Enable waveform and firmware state\\
+Burst frequency & \SI{10}{\kilo\hertz} default; configurable \SIrange{1}{50}{\kilo\hertz} & Firmware configuration\\
+Control period & \SI{25}{\micro\second} default; \SI{20}{\micro\second} with \texttt{MAXRATE} & Timing diagnostics\\
+Main feedback & PA1-derived secondary bulk voltage & Calibration and voltage response\\
+Tested output settings & \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, \SI{20}{\volt} & Measured connector VBUS\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The USB-C PD stage regulates the selected output voltage from the secondary bulk supply. The MCU regulates that supply using bulk-voltage feedback at PA1; primary half-bridge current at PA2 is used for load classification. USB-C output voltage and current are measured externally.
+
+\begin{table}[H]
+\centering
+\caption{Performance measurements.}
+\label{tab:req-measured-quantities}
+\begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}Y@{}}
+\toprule
+Quantity & Measurements and test conditions\\
+\midrule
+Output regulation & Mean VBUS, deviation from the selected setting, and ripple with the capture conditions stated\\
+Transient response & Applied load change, voltage excursion, and recovery or fault behavior\\
+No-load operation & Observed voltage and switching response, with the applicable controller thresholds\\
+Input power quality & Real input power, PF, and current distortion at the recorded load\\
+Efficiency & Input and output power under the same conditions, with included stages and auxiliaries stated\\
+Thermal behavior & Surface temperature, load, elapsed time, and available ambient/airflow information\\
+Switching behavior & Switch-node and gate waveforms, time scale, and probe arrangement\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The evaluation covers efficiency, PF, THD, and surface temperature. No numerical acceptance limits were set for these quantities. Comparisons with the reference converters account for their different circuits and power boundaries. Likewise, the input range must come from converter tests rather than the rating of the AC source used to power it.
+
+The revised plan extends the evaluation to the reported V2 baseline, PPS, sustained operation, V3 implementation, and power density. Section~\ref{sec:revised-plan-criteria} lists the work still needed. These tests have not all been completed on the baseline prototype.

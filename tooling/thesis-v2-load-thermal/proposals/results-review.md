@@ -1,0 +1,9 @@
+# V2 load and thermal results review
+
+Reviewed `Chapters/10_Results/15_V2_Testing_Update.tex`, `16_V3_Design_Outcome.tex`, `14_Revised_Plan_Status.tex`, and the relevant instrumentation, test-bench, uncertainty, and revised-plan method references in `Chapters/09_Experimental_Methods`. Read the seven raw captures only for the AC supply and electronic-load device rows, along with the test facts, voice guide, and checklist.
+
+The proposal inserts a distinct subsection before the planned layout changes and leaves the earlier V2 tank, bridge, winding, and 95 W image observations intact. The recorded load voltage and current products round to 48.7–137.1 W; the endpoints are 26.14 V, 1.86 A and 13.69 V, 10.01 A. Camera region readings are based on the supplied transcription and the confirmed region-to-component mapping. The input-bridge maximum is highest at the second point, so the proposed wording describes a tendency rather than a monotonic decrease. Thermal equilibrium was not reached at any point.
+
+The lead should place the generated table and performance figure at the new subsection and arrange the thermal figure when the originals are available. The displayed region maxima use ROI emissivity 0.95; the image footer shows 0.97, so the figure documentation should state the ROI value. Camera and CSV clocks differ by approximately an hour and the paired readings are a few seconds apart; do not describe them as simultaneous. The thermal figure reference is pending image availability.
+
+The revised-plan passage and status table refer to the older V2 run and historical matched V1 connector measurement. Their context may need clarification when the new results are integrated, so they are not mistaken for claims that no measured V2 input/output data exist. V3 comparison remains a prospective matched continuous-power comparison. No thesis source was edited or built.

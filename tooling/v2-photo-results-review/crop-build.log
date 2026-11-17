@@ -1,0 +1,34 @@
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(/workspace/tooling/v2-photo-results-review/documentary-crop.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/share/texlive/texmf-dist/tex/latex/standalone/standalone.cls
+Document Class: standalone 2025/02/22 v1.5a Class to compile TeX sub-files stan
+dalone
+(/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex))))
+(/usr/share/texlive/texmf-dist/tex/latex/standalone/standalone.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.cloFontconfig error: No writable cache directories
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)
+No file documentary-crop.aux.
+
+[1] (/workspace/tooling/v2-photo-results-review/documentary-crop.aux) )
+Output written on /workspace/tooling/v2-photo-results-review/documentary-crop.p
+df (1 page).
+Transcript written on /workspace/tooling/v2-photo-results-review/documentary-cr
+op.log.

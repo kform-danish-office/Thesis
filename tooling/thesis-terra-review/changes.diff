@@ -1,0 +1,115 @@
+--- before/Backmatter/Appendices/E_Experimental_Data.tex
++++ after/Backmatter/Appendices/E_Experimental_Data.tex
+@@ -46,8 +46,7 @@
+ The raw waveform exports were plotted with their original amplitudes
+ and offsets. Uncertainty in channel calibration or the measured circuit
+ node is stated with the result. The source package includes waveform
+-copies, CSV plotting data, checksums, and processing steps. No
+-waveform was rescaled to force a target voltage, current, or power.
++copies, CSV plotting data, checksums, and processing steps.
+ 
+ \section{Electrical Measurements and Calculated Results}
+ The tables list voltages, load, power-quality readings, firmware version,
+--- before/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
++++ after/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex
+@@ -6,7 +6,7 @@
+ \Needspace{10\baselineskip}
+ \subsection{Power Levels and Prototype Versions}
+ 
+-The revised plan sets \SI{65}{\watt} continuous output as the minimum and \SI{100}{\watt} continuous output as the target. The earlier plan schedules \SI{75}{\watt} continuous validation \cite{projectEarlierPlan}. The \SI{75}{\watt} level remains the intermediate test milestone. The \SI{65}{\watt} minimum and \SI{100}{\watt} target remain unchanged. Each continuous level requires a defined run time, stated ambient and cooling conditions, stable electrical operation, and a temperature record over the run.
++The revised plan sets \SI{65}{\watt} continuous output as the minimum and \SI{100}{\watt} continuous output as the target. The earlier plan schedules \SI{75}{\watt} continuous validation as an intermediate test milestone \cite{projectEarlierPlan}. Each continuous level requires a defined run time, stated ambient and cooling conditions, stable electrical operation, and a temperature record over the run.
+ 
+ The plan starts from a reported V2 maximum near \SI{85}{\watt} and calls for repeating that point under defined conditions or explaining the difference. The integrated MCU and its ported firmware are part of this V2 development. An output of \SI{79.89}{\watt} was reached on the modified V1.0 assembly in the matched measurements analyzed here. Those measurements form a separate dataset. Sections~\ref{sec:hw-v2} and \ref{sec:ctrl-pwr2-port} identify the later circuit and firmware needed for a matched V2 test.
+ 
+@@ -27,7 +27,7 @@
+ AP-02 & Repeat the reported approximately \SI{85}{\watt} V2 point, or explain the difference. Record assembly and fitted parts, firmware/exported settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, uncertainty, and raw-file locations.\\
+ AP-03 & Diagnose the \SI{15}{\watt} reported output shortfall using loss calculations, component stress, control limits, and temperatures. Rank candidate changes from these findings and retest one change at a time. If \SI{100}{\watt} is not reached safely, quantify the highest repeatable power and the remaining limit.\\
+ AP-04 & Characterize no load, the supported fixed PDOs, and PPS. At applicable loads, record regulation, corresponding input/output power, efficiency, PF/THD, ripple, switching/device stress, transient response, temperatures, and protection events. The planned V2 points include \SIlist{25;45;65;75;80}{\watt} and approximately \SI{85}{\watt}.\\
+-AP-05 & Complete a defined-duration thermal and stability run at the final supported power and document extended-load reliability observations. State ambient, cooling, run time, temperature development, interruptions, and stop limits. A thermal image alone does not show thermal equilibrium or long-term stability.\\
++AP-05 & Complete a defined-duration thermal and stability run at the final supported power and document extended-load reliability observations. State ambient, cooling, run time, temperature development, interruptions, and stop limits.\\
+ AP-06 & Develop and review the V3 edge-card pinout, outline, component-height limit, current and gate/sense return paths, creepage/clearance, and thermal-spreading arrangement. Record schematic/layout review, DRC, BOM availability, manufacturing review, and release status.\\
+ AP-07 & Compare V2 and V3 power density using the same volume calculation and output-power test conditions. Report dimensions, included parts and cooling allowance, efficiency, thermal margin, and any safety or reliability trade-off.\\
+ AP-08 & Decide whether V3 is ready for testing and list the tests that can be completed. If V3 is not ready, use the completed, identified V2 tests as the hardware results and state the remaining V3 work. Identify which V2 tests have usable matched records.\\
+--- before/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
++++ after/Chapters/04_Topology_Analysis/01_Topology_Overview.tex
+@@ -17,7 +17,7 @@
+ \begin{figure}[H]
+     \centering
+     \includegraphics[width=0.97\linewidth,height=0.82\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_power_stage_excerpt.pdf}
+-    \caption{V2 sheet 3 power paths: charge-pump branch, GaN half bridge, resonant tank and transformer, and secondary rectifier. The circuit blocks are connected through their named nets.}
++    \caption{V2 sheet 3 power paths: charge-pump branch, GaN half bridge, resonant tank and transformer, and secondary rectifier.}
+     \label{fig:analysis-power-stage}
+ \end{figure}
+ \end{landscape}
+--- before/Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex
++++ after/Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex
+@@ -3,4 +3,4 @@
+ 
+ Terminal-link movement and longer winding connections alter resonant-loop impedance. Core alignment, spacing, PCB bending, and contact changes can also affect the installed magnetic path.
+ 
+-Calculations use the values in \cref{tab:mag-inherited-measurements} because inductance was not remeasured after installation and no detailed rework log was kept. Main-board and link parasitics make the calculated resonance an initial estimate; refinement requires measurement at the installed terminals.
++Calculations use the values in \cref{tab:mag-inherited-measurements}; inductance was not remeasured after installation. Main-board and link parasitics make the calculated resonance an initial estimate; refinement requires measurement at the installed terminals.
+--- before/Chapters/06_Magnetics_Integration/11_Limitations.tex
++++ after/Chapters/06_Magnetics_Integration/11_Limitations.tex
+@@ -5,4 +5,4 @@
+ 
+ Further characterization requires fitted-part and terminal identification, in-circuit inductance measurement, complete-path isolation checks, and a stabilized thermal run. These measurements are needed to reproduce the assembly and reduce its losses.
+ 
+-Secondary-winding heating and limited power increase at higher load made transformer optimization a priority. The operating prototypes retained the supplied magnetics; replacement planar parts were not installed within the project time. No reduction in magnetic loss or increase in continuous output was demonstrated with the smaller V3 layout.
++Secondary-winding heating and limited power increase at higher load made transformer optimization a priority. The operating prototypes retained the supplied magnetics; replacement planar parts were not installed within the project time. The smaller V3 layout still needs to be built and tested.
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ after/Chapters/07_Hardware/16_V2_F410.tex
+@@ -24,7 +24,7 @@
+ 
+ \vspace{0.8em}
+ \includegraphics[page=4,width=\linewidth,height=0.33\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
+-\caption{V2 top copper (upper) and bottom copper (lower). Both layers use the same view. Changes made during testing are described in the text.}
++\caption{V2 top copper (upper) and bottom copper (lower), shown in the same orientation.}
+ \label{fig:v2-pcb-layout-overview}
+ \end{figure}
+ \FloatBarrier
+--- before/Chapters/09_Experimental_Methods/10_Thermal.tex
++++ after/Chapters/09_Experimental_Methods/10_Thermal.tex
+@@ -8,4 +8,4 @@
+ copper, winding, and core losses cannot be extracted.
+ 
+ Ambient, airflow, warm-up, and camera setup were not fully recorded.
+-The images locate hotspots for temperature monitoring during longer runs.
++The identified hotspots can be monitored during longer runs.
+--- before/Chapters/10_Results/08_Efficiency.tex
++++ after/Chapters/10_Results/08_Efficiency.tex
+@@ -20,7 +20,7 @@
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\textwidth]{Pictures/Thesis/10_Results/Rebuilt/efficiency_and_loss.pdf}
+-\caption{Initial efficiency estimates and input-minus-output power from eleven tests. Marker shapes identify the fixed output voltage. The points are not an efficiency curve or a breakdown of individual stage losses.}
++\caption{Initial efficiency estimates and input-minus-output power from eleven tests. Marker shapes identify the fixed output voltage. }
+ \label{fig:rebuilt-efficiency-loss}
+ \end{figure}
+ 
+--- before/Chapters/10_Results/14_Revised_Plan_Status.tex
++++ after/Chapters/10_Results/14_Revised_Plan_Status.tex
+@@ -11,10 +11,8 @@
+ 
+ The V1.0 reference test, \sourcefile{PDO20-80W-40A-001}, row 27,
+ gives \SI{19.9732}{\volt} at \SI{4}{\ampere}, or
+-\SI{79.8928}{\watt}, with the baseline voltage-control firmware. The
+-reported \SI{85}{\watt} V2 point requires separate board, firmware,
+-settings, and measurements. The hardware and settings used for that test
+-must be recovered before the reported \SI{85}{\watt} point can be repeated.
++\SI{79.8928}{\watt}, with the baseline voltage-control firmware. Repeating the reported \SI{85}{\watt} V2 point requires its original
++hardware, firmware, and settings.
+ 
+ Section~\ref{sec:res-v2-testing} reports preliminary powered V2 observations.
+ The \SI{100}{\watt} constant-power load setting is a setpoint; measured input
+--- before/Chapters/10_Results/16_V3_Design_Outcome.tex
++++ after/Chapters/10_Results/16_V3_Design_Outcome.tex
+@@ -26,7 +26,7 @@
+ \FloatBarrier
+ 
+ The winding and input-path observations identify priorities for the next
+-prototype, but hotspot relocation does not quantify total loss reduction.
++prototype.
+ A V2--V3 comparison must match continuous power and thermal conditions and
+ include all output hardware required for the same function, following
+ \cref{sec:method-density}.

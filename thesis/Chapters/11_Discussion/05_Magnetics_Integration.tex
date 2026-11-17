@@ -1,0 +1,33 @@
+\section{Planar-Magnetics Integration}
+\label{sec:disc-magnetics}
+
+The supplied planar inductor and transformer were integrated into the
+converter, including terminal assignment, polarity, mounting, and return
+paths. Their proximity to switching nodes also affects parasitics and
+sensing. The electromagnetic design came from earlier DTU work.
+
+The given component measurements in Table~\ref{tab:mag-inherited-measurements}
+are approximately \SI{33}{\micro\henry} for the inductors,
+\SI{16.5}{\micro\henry} transformer leakage,
+\SIrange{140}{151}{\micro\henry} magnetizing inductance, and a turns
+ratio near 8:1 in this thesis's convention. The installed equivalent
+circuit must also account for the final A/B assignment and added series
+resonant inductors.
+
+At \SI{1}{\mega\hertz}, leakage, winding capacitance, and connection
+inductance affect resonance and commutation, while winding proximity and
+interconnect resistance affect loss. Power transfer was demonstrated,
+but transformer, pump-inductor, and added-inductor losses were not
+separated. Resonant current, installed impedances, and component
+temperatures are needed to distinguish magnetic-design limitations from
+mounting and interconnection losses.
+
+Secondary-winding heating was observed in earlier tests around \SIrange{3.3}{3.6}{\ampere} at the secondary output. Later testing exceeded this current, reaching \SI{10.01}{\ampere} at \SI{13.69}{\volt} with voltage droop. Winding resistance, current distribution, leakage, and output headroom have not been measured together, so the causes of heating and droop remain unresolved.
+
+V3 retained these magnetic constraints; replacement planar magnetics were
+not installed within the available time. Transformer optimization may
+support the \SI{100}{\watt} objective.
+
+Feedback on the APEC digest raised the question of whether the converter
+could support higher loads, including \SI{240}{\watt} USB-PD Extended
+Power Range (EPR). Assessing higher-power operation requires the secondary-region and winding heating, input-bridge heating, and output droop to be investigated.

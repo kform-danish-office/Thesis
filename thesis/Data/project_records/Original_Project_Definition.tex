@@ -1,0 +1,348 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{pgfgantt}
+\usepackage{xcolor}
+\geometry{margin=2.5cm}
+\usepackage{unicode-math}
+\setmathfont{Stix Two Math}
+\titleformat{\chapter}{\normalfont\huge\bfseries}{\chaptername\ \thechapter}{20pt}{\huge}
+
+\begin{document}
+
+%------------------------------------------------
+% Title Page
+%------------------------------------------------
+
+\begin{titlepage}
+\centering
+
+{\Large Master of Science in Engineering \par}
+\vspace{0.5cm}
+{\Large Project Definition Report \par}
+
+\vspace{2cm}
+
+{\Huge\bfseries Design and Integration of a Planar Transformer and Charge-Pump--Based PFC for a High-Power-Density USB-PD AC--DC Power Supply \par}
+
+\vspace{2cm}
+
+Start date: 1 February 2026 \\
+End date: 1 July 2026 \\
+ECTS points: 30 \\
+
+\vfill
+
+Technical University of Denmark \\
+DTU Electro \\
+Department of Electrical and Photonics Engineering \\
+
+\vspace{1cm}
+
+Kongens Lyngby, 2026
+
+\end{titlepage}
+
+%------------------------------------------------
+\chapter*{Summary}
+\addcontentsline{toc}{chapter}{Summary}
+
+This thesis investigates the design and integration of a planar transformer and a charge-pump--based power factor correction (PFC) stage for a compact, high-power-density USB Power Delivery (USB-PD) AC--DC power supply. The objective is to develop a converter capable of delivering \textbf{100 W continuous output power}, with a \textbf{minimum acceptable output of 65 W}, while achieving high efficiency, stable thermal performance, and high power factor.
+
+The project combines high-frequency planar magnetic design, wide-bandgap semiconductor devices, and alternative PFC architectures to evaluate whether charge-pump--based PFC can provide competitive power density compared to conventional boost PFC approaches.
+
+The work includes analytical design, component selection, PCB layout for planar magnetics and high-frequency switching, prototype fabrication, and comprehensive experimental validation including efficiency, power factor, transient response, and thermal performance characterization.
+
+\tableofcontents
+\clearpage
+
+%------------------------------------------------
+\chapter{Project Description}
+
+\section{Background}
+
+USB Power Delivery has become a universal high-power interface supporting programmable voltages up to 20 V and currents up to 5 A. The demand for compact adapters capable of powering laptops and embedded systems imposes strict constraints on:
+
+\begin{itemize}
+    \item Power density
+    \item Efficiency across multiple PDOs
+    \item Thermal performance
+    \item Power factor and THD
+\end{itemize}
+
+Conventional AC--DC architectures typically employ a boost PFC stage followed by an isolated DC--DC converter using wound magnetic components. These solutions are often limited in volumetric efficiency and thermal integration.
+
+Planar transformers enable high-frequency operation, reduced height, improved thermal spreading, and manufacturability via PCB integration. Charge-pump--based PFC topologies may offer an alternative to classical boost PFC by reducing magnetic component size and potentially increasing integration density.
+
+This thesis targets a USB-PD supply capable of \textbf{100 W continuous output power}, with a \textbf{minimum guaranteed output of 65 W}, under defined thermal and operational constraints.
+
+\section{Prior Work}
+
+Planar magnetics have been extensively investigated for high-frequency power conversion in telecom and server applications, where low profile and high efficiency are critical.
+
+Boost PFC remains the dominant architecture for single-phase AC--DC conversion. Alternative approaches, including charge-pump and switched-capacitor techniques, have been proposed to reduce magnetic size and improve integration at moderate power levels.
+
+Wide-bandgap devices such as GaN and SiC enable higher switching frequencies and improved efficiency, facilitating further size reduction of passive components. However, integrating planar magnetics with a charge-pump--based PFC in a USB-PD compliant system presents a multi-domain design challenge requiring careful analytical design and experimental validation.
+
+\section{Problem Statement}
+
+How can a planar transformer and a charge-pump--based PFC stage be analytically designed and experimentally validated to deliver \textbf{100 W (≥65 W minimum)} in a compact USB-PD AC--DC power supply while maximizing efficiency, power density, thermal stability, and power quality?
+
+\subsection*{Sub-goals}
+
+\begin{itemize}
+    \item Define electrical and mechanical requirements including:
+    \begin{itemize}
+        \item USB-PD PDO profiles
+        \item Efficiency targets
+        \item Thermal constraints
+        \item Power-factor requirements
+    \end{itemize}
+
+    \item Analyze and compare charge-pump PFC topologies against conventional boost PFC with respect to:
+    \begin{itemize}
+        \item Efficiency
+        \item Component stress
+        \item Power density
+        \item Control complexity
+    \end{itemize}
+
+    \item Integrate and optimize a planar transformer considering:
+    \begin{itemize}
+        \item High-frequency operation
+        \item Controlled leakage inductance
+        \item Winding AC resistance minimization
+        \item Core loss estimation
+        \item Manufacturability and low-profile constraints
+    \end{itemize}
+
+    \item Develop the complete power stage architecture including:
+    \begin{itemize}
+        \item PFC stage
+        \item LLC stage
+        \item Rectification
+        \item Control strategy
+        \item USB-PD interface behavior
+    \end{itemize}
+
+    \item Fabricate and assemble a prototype including:
+    \begin{itemize}
+        \item PCB-integrated planar magnetics
+        \item High-frequency layout practices
+        \item Safety clearances and isolation
+        \item Integrated thermal management
+    \end{itemize}
+
+    \item Experimentally characterize:
+    \begin{itemize}
+        \item Power factor and THD
+        \item Efficiency across PDOs
+        \item Transient response
+        \item Thermal distribution and stability
+        \item Reliability under extended load testing
+    \end{itemize}
+
+    \item Critically evaluate trade-offs and propose improvements in:
+    \begin{itemize}
+        \item Planar magnetic integration
+        \item Wide-bandgap stage optimization
+        \item Manufacturability at scale
+        \item Future USB-PD evolution
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Success Criteria}
+
+\begin{itemize}
+    \item ≥ 65 W continuous output demonstrated in hardware.
+    \item 100 W continuous operation achieved under nominal conditions.
+    \item Stable operation across selected USB-PD PDOs verified.
+    \item Power factor, efficiency, transient response, and thermal performance experimentally validated and documented.
+\end{itemize}
+
+%------------------------------------------------
+\chapter{Intended Learning Objectives}
+
+\begin{itemize}
+    \item Demonstrate the ability to define and structure a high-frequency AC--DC power conversion system integrating magnetics, switching devices, control, and thermal management.
+    \item Apply analytical design methods for planar magnetics and high-frequency power stages.
+    \item Design planar magnetics optimized for electrical performance and manufacturability.
+    \item Integrate wide-bandgap devices into a compact high-power converter.
+    \item Perform rigorous experimental validation of converter performance.
+    \item Critically assess efficiency, density, and thermal trade-offs.
+    \item Communicate technical findings clearly in written and oral form.
+    \item Prove the charge pump based PFC circuit can be used for usb pd applications. 
+    \item Test the power delivery over all the usb pd standard and pps functions. 
+\end{itemize}
+
+%------------------------------------------------
+\chapter{Plan}
+
+\section{Activities}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Phase & Description & Period \\
+\midrule
+1 & Project definition and requirement analysis & W5--W7 \\
+2 & Literature review and topology selection & W6--W9 \\
+3 & Planar transformer design and optimization & W8--W13 \\
+4 & Power stage architecture development & W10--W15 \\
+5 & PCB design and layout & W14--W18 \\
+6 & Prototype fabrication and assembly & W18--W20 \\
+7 & Experimental characterization and refinement & W20--W24 \\
+8 & Thesis writing and documentation & W16--W26 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Milestones}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+\toprule
+Title & Description & Type & Week \\
+\midrule
+Project definition submitted & Approved project definition & TH & 7 \\
+Topology finalized & Architecture frozen & D & 10 \\
+Transformer design freeze & Magnetics finalized & D & 13 \\
+PCB fabrication & Design sent to manufacturer & D & 18 \\
+Prototype assembled & Hardware ready for test & AC & 20 \\
+65 W demo achieved & Continuous output validated & D & 22 \\
+100 W demo achieved & Nominal target validated & D & 24 \\
+Thesis submission & Final report & TH & 26 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Risk Analysis}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{3cm} p{7cm} c}
+\toprule
+Risk & Description & Risk (1--5) \\
+\midrule
+Transformer loss underestimation & Excessive copper or core loss & 4 \\
+Charge-pump PFC instability & Resonance or control issues & 3 \\
+Thermal hotspot formation & Local overheating in planar windings & 3 \\
+Component availability & WBG devices or cores delayed & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{figure}[h]
+\centering
+\begin{ganttchart}[
+    hgrid,
+    vgrid,
+    time slot format=isodate,
+    x unit=0.45cm,
+    y unit chart=0.55cm,
+    y unit title=0.75cm,
+    title height=1,
+    bar height=0.6,
+    bar/.append style={fill=gray!30},
+    bar progress label font=\scriptsize,
+    bar label font=\scriptsize,
+    group label font=\bfseries\scriptsize,
+    milestone label font=\scriptsize,
+    milestone/.append style={fill=black},
+    progress label text={\scriptsize\pgfmathprintnumber[fixed,precision=0]{#1}\%},
+    link/.style={-latex, thick}
+]{2026-01-26}{2026-06-29}
+
+% Weeks 5..26 correspond roughly to dates starting late Jan; labels below are what matters
+\gantttitle{Masters project (Weeks 5--26)}{155} \\
+\gantttitlelist{5,...,26}{7} \\
+
+% -----------------------------
+% Project definition / planning
+% -----------------------------
+\ganttgroup{Project definition and planning}{2026-01-26}{2026-02-15} \\
+\ganttbar[progress=0]{Project description / scope definition}{2026-01-26}{2026-02-15} \\
+\ganttbar[progress=0]{Requirements (USB-PD/PPS, power targets, constraints)}{2026-01-26}{2026-02-08} \\
+\ganttbar[progress=0]{Literature review: charge-pump PFC vs boost PFC}{2026-02-02}{2026-02-22} \\
+
+% -----------------------------
+% Architecture + parts selection
+% -----------------------------
+\ganttgroup{Architecture and key component selection}{2026-02-09}{2026-03-08} \\
+\ganttbar[progress=0]{Architecture freeze (PFC + isolation + control approach)}{2026-02-09}{2026-02-22} \\
+\ganttbar[progress=0]{Planar transformer selection + electrical characterization}{2026-02-16}{2026-03-08} \\
+\ganttbar[progress=0]{WBG device + gate driver selection}{2026-02-16}{2026-03-01} \\
+\ganttbar[progress=0]{USB-PD controller selection + PDO/PPS plan}{2026-02-23}{2026-03-08} \\
+
+% -----------------------------
+% Hardware implementation
+% -----------------------------
+\ganttgroup{Hardware implementation}{2026-03-02}{2026-04-19} \\
+\ganttbar[progress=0]{Charge-pump PFC implementation (schematic + BOM)}{2026-03-02}{2026-03-22} \\
+\ganttbar[progress=0]{Isolation / DC-DC stage implementation (schematic + BOM)}{2026-03-09}{2026-03-29} \\
+\ganttbar[progress=0]{Create BOM + schematics review (design checks)}{2026-03-16}{2026-03-29} \\
+\ganttbar[progress=0]{PCB layout: power stage + planar magnetics integration}{2026-03-23}{2026-04-12} \\
+\ganttbar[progress=0]{DFM + ordering (PCB + parts)}{2026-04-06}{2026-04-19} \\
+
+% -----------------------------
+% Bring-up + integration
+% -----------------------------
+\ganttgroup{Bring-up and integration}{2026-04-20}{2026-05-24} \\
+\ganttbar[progress=0]{Assembly + initial power-up}{2026-04-20}{2026-05-03} \\
+\ganttbar[progress=0]{Closed-loop bring-up + stability checks}{2026-04-27}{2026-05-10} \\
+\ganttbar[progress=0]{USB-PD negotiation bring-up (PDOs)}{2026-05-04}{2026-05-17} \\
+\ganttbar[progress=0]{PPS mode validation (programmable V/I)}{2026-05-11}{2026-05-24} \\
+
+% -----------------------------
+% Measurement campaign
+% -----------------------------
+\ganttgroup{Experimental validation}{2026-05-18}{2026-06-22} \\
+\ganttbar[progress=0]{75 W continuous validation}{2026-05-18}{2026-05-31} \\
+\ganttbar[progress=0]{100 W continuous validation}{2026-05-25}{2026-06-07} \\
+\ganttbar[progress=0]{Efficiency vs PDO/PPS sweep}{2026-05-25}{2026-06-14} \\
+\ganttbar[progress=0]{PF + THD characterization vs load}{2026-06-01}{2026-06-14} \\
+\ganttbar[progress=0]{Transient response testing}{2026-06-01}{2026-06-14} \\
+\ganttbar[progress=0]{Thermal mapping + stability testing}{2026-06-01}{2026-06-22} \\
+\ganttbar[progress=0]{Extended stress / durability testing}{2026-06-08}{2026-06-22} \\
+
+% -----------------------------
+% Thesis writing
+% -----------------------------
+\ganttgroup{Thesis writing}{2026-03-30}{2026-06-29} \\
+\ganttbar[progress=0]{Writing: Introduction}{2026-03-30}{2026-04-12} \\
+\ganttbar[progress=0]{Writing: Related work}{2026-04-06}{2026-04-19} \\
+\ganttbar[progress=0]{Writing: Method / implementation}{2026-04-20}{2026-05-17} \\
+\ganttbar[progress=0]{Writing: Results}{2026-05-18}{2026-06-14} \\
+\ganttbar[progress=0]{Writing: Discussion}{2026-06-01}{2026-06-22} \\
+\ganttbar[progress=0]{Writing: Conclusion + abstract}{2026-06-15}{2026-06-29} \\
+
+% -----------------------------
+% Buffer + hand-in
+% -----------------------------
+\ganttgroup{Buffer and hand-in}{2026-06-15}{2026-06-29} \\
+\ganttbar[progress=0]{Buffer time}{2026-06-15}{2026-06-22} \\
+\ganttbar[progress=0]{Corrections + final hand-in}{2026-06-22}{2026-06-29} \\
+
+% Milestones
+\ganttnewline
+\ganttmilestone{Architecture frozen}{2026-02-22}
+\ganttmilestone{PCB ordered}{2026-04-19}
+\ganttmilestone{Prototype operational}{2026-05-03}
+\ganttmilestone{75 W demo}{2026-05-31}
+\ganttmilestone{100 W demo}{2026-06-07}
+\ganttmilestone{Thesis hand-in}{2026-06-29}
+
+\end{ganttchart}
+\caption{Gantt chart for the MSc. thesis project (Weeks 5--26).}
+\end{figure}
+\end{document}

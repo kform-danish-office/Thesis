@@ -1,0 +1,26 @@
+\section{Electrical and Mechanical Interfaces}
+\label{sec:mag-requirements}
+
+The inductor carries pump current; the transformer transfers isolated resonant power. Component and interconnect resistance and inductance are evaluated as complete outgoing-and-return loops.
+
+Primary-to-secondary separation must be maintained through the winding PCB, solder joints, supports, and adjacent main-board copper. The complete assembly must therefore be checked for insulation spacing.
+
+\begin{table}[htbp]
+\centering
+\caption{Electrical and mechanical requirements for mounting the magnetics.}
+\label{tab:mag-integration-requirements}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}X@{}}
+\toprule
+Interface & Requirement\\
+\midrule
+Electrical terminals & Correct winding polarity, net assignment, and ratio convention\\
+High-frequency loop & Short conductors with adequate copper width and a nearby return path\\
+Mechanical retention & Supported winding boards and terminals, with the original core spacing preserved\\
+Isolation boundary & Separation maintained through the complete mounted assembly\\
+Thermal environment & Access for cooling and observation of core, winding, and joint temperatures\\
+Measurement access & Accessible continuity, voltage, and current measurement locations\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The common converter connections are shown in \Cref{fig:schematic-power-stage}, while \cref{fig:final-prototype-main-photo} shows the tested assembly. A terminal drawing for each component is still needed to reproduce the assembly.

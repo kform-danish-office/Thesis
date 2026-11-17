@@ -1,0 +1,2124 @@
+{
+  "baseline_files": 486,
+  "current_files": 486,
+  "edited_files": 131,
+  "unchanged_files": 355,
+  "before_words_edited_files": 47690,
+  "after_words_edited_files": 38042,
+  "exceptions": {
+    "Chapters/01_Introduction/08_V2_Prototype.tex": {
+      "references": "Removed repeated reference to the superseded beginner primer; compact signal section remains in the introduction."
+    },
+    "Chapters/07_Hardware/chapter.tex": {
+      "references": "Removed repeated reference to the superseded beginner primer; compact signal section remains in the introduction."
+    },
+    "Chapters/08_Control_Firmware/chapter.tex": {
+      "references": "Removed repeated reference to the superseded beginner primer; compact signal section remains in the introduction."
+    },
+    "Chapters/01_Introduction/10_Controller_Basics.tex": {
+      "references": "Removed repeated prose reference to unchanged signal table; first reference retained."
+    },
+    "Chapters/10_Results/12_Compliance_Table.tex": {
+      "protected_environments": "FR-04 evidence wording corrected: removed development photographs are no longer cited; no-load voltage records and implemented burst control remain partly assessed."
+    }
+  },
+  "errors": [],
+  "changes": [
+    {
+      "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+      "before_sha256": "d892ce7c6462401ee422e028612ce6d394b2a8b60ca61bcd9675395e27c28b87",
+      "sha256": "a625049fcc1df0bf9a71f65abe1792a5e7908a215e9347f42c09843f3e6fc88f",
+      "before_words": 5496,
+      "after_words": 5406,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/G_Software_Tools.tex",
+      "before_sha256": "7381ddbd1035981fd4aaf8a5bc53fc726ed0f17e97247fd0a0dca76b4adb3967",
+      "sha256": "b8fb13918ea4c0f6463e2ece7b562daf49c47e0a562e1934a22028cc1664fb59",
+      "before_words": 2294,
+      "after_words": 2186,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/01_Motivation.tex",
+      "before_sha256": "3138070a813cdbec73f8e2fa34ae6048a7323b7c8b2835ab3fb35d609883a34a",
+      "sha256": "afb55fa41a9a1aa5377e7d7be81fd08d9bdcb52c1dd1a030d3acd96ba628ffd4",
+      "before_words": 300,
+      "after_words": 248,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+      "before_sha256": "879118ba63bbd919cfabdf22049ff0de4298f3c7ad2188eb2cefe54932ac71bf",
+      "sha256": "85d1d8a3af0e151ec2c33693cd0da92fb688404615e302e4c26974036644f0af",
+      "before_words": 252,
+      "after_words": 233,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+      "before_sha256": "202fdee2ef48f6882c3b45016b3f423e078e91c1e005aa5ef5435ccc02eb5ba0",
+      "sha256": "a3e50453d45cf059b9209f9ffe091eee4ce1cdce3fa062603b8e22b29a2f6de9",
+      "before_words": 325,
+      "after_words": 313,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+      "before_sha256": "6bba48337c5cfee8e6e552e8784f934a04d50e8fcbf3205412d9304c3ad7ed36",
+      "sha256": "63de79951b1b201deb2bab45e4e4cfdd65edbf3d911f161a62126f59f443312f",
+      "before_words": 432,
+      "after_words": 388,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": false,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+      "before_sha256": "3d869ce19c704631f91ebb65ecb130f37406b63a768f8bcd33a88857cb08c0bf",
+      "sha256": "702618c4c2ee0a3794a6a5443ff0303b7f8a54780039da13e93cd05c4ea9cace",
+      "before_words": 1072,
+      "after_words": 251,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/chapter.tex",
+      "before_sha256": "ad2a59459cc83a8ec61abcb10030ca08ddef19dda089d714f08b3aa8e4dd2e1d",
+      "sha256": "4e29ccf5bda082dc5052e741821ef6534e68072ded4e0cbb4b8714dd01c6f5d0",
+      "before_words": 110,
+      "after_words": 83,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/01_Offline_ACDC_PFC.tex",
+      "before_sha256": "1fe050d6a57cc3cb04d58dcbea81297b40767a2ee80f643cbb58cd1b6eb1f79f",
+      "sha256": "ad13ce1cf76e2fe1182977b7c02c8d5234d826f26737b86cc3c89e9f1dafe051",
+      "before_words": 397,
+      "after_words": 292,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/02_Charge_Pump_Principle.tex",
+      "before_sha256": "63765f70b4437a74350f80aa2b0bdb0cc32d3194d6c69d57e14198a8c17fec42",
+      "sha256": "34e62fd8d40194c5f551e1018701b4fe501b1ab1233898262ca62919985d7ba6",
+      "before_words": 294,
+      "after_words": 222,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/03_ClassDE_Resonant.tex",
+      "before_sha256": "403dd544c2cd4e16f45a15de10a84e4ccc15ffe07f1ae3575d7629f0cece2ded",
+      "sha256": "e4ed585fe75cd6bc41aff4658fc4d3b9170b2e70fd7cc9cb4a38d528d06a2cd8",
+      "before_words": 277,
+      "after_words": 204,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+      "before_sha256": "f2b095b8ec8525f8a9b266bc6de2615bd736c03b103dc22e2d8a2bcd65bc2e85",
+      "sha256": "8673bc3e16cf38e9c5b57a1c7325fcf54a2c00d66133f2879c589e1904979072",
+      "before_words": 282,
+      "after_words": 228,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/05_Reference_2020.tex",
+      "before_sha256": "f5af6fc5d66db5f4bac216cf361dba8ac2ea419e7e7090211ee7577d01e501db",
+      "sha256": "1e04b294aadbe245158607b85ab23a8e0b5def6d3bf7d7a3802047fcdbfc9f98",
+      "before_words": 234,
+      "after_words": 207,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/06_Reference_2021.tex",
+      "before_sha256": "05e08c92b07b8f067ac435d2cefcd33d6841c341314181cfac9609ab07d8469c",
+      "sha256": "149d6f3a79ad1b09085aece63f1c32c1d9bfe1a99a2c447c96b619bd05ce7b99",
+      "before_words": 310,
+      "after_words": 251,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/07_USBC_Context.tex",
+      "before_sha256": "440b3682936aea2127154f49f396bd57281214e646c3999eb4207ad2e6af6236",
+      "sha256": "334d21677f584c342ce9b29f6d647d8e781c0e782a71b3a47e34d2d6dd769ae0",
+      "before_words": 235,
+      "after_words": 147,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/08_Research_Gap.tex",
+      "before_sha256": "3b3a71cf1fb2dc9d3e9ff3d670cacd6b4512d37783b038cde6d40fd87d699a59",
+      "sha256": "0208fea87b14b49c9dde6877d341eb96b80423d1efa572ad7a42bc6527e7e4c2",
+      "before_words": 127,
+      "after_words": 113,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/chapter.tex",
+      "before_sha256": "c60f6827b50b7f38c96e0ff2498a686b06f19ea9f7b07c7d9d3bc6681104c05e",
+      "sha256": "0b3e197356811921b85ae3fe01c6778c345d608de47a18b05be261c120d76bb4",
+      "before_words": 64,
+      "after_words": 48,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/01_Use_Case.tex",
+      "before_sha256": "b7a8316759a3ae1398343ab44ff44d28f0ed5fefdde85bafae4e9bcff28526a2",
+      "sha256": "6fd5cef1ead311065f30dd0d1f32c4db2e7bf7a592c8aa56f6e0f01d50625937",
+      "before_words": 192,
+      "after_words": 166,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex",
+      "before_sha256": "972f447c6205e7f4b08b34688882d442a652fb2f84a08ad75ef8e1131f387d03",
+      "sha256": "d5839512f20f9b04c47c2052c76b6887198a627ff1bce4107d86f5eeff48f097",
+      "before_words": 496,
+      "after_words": 418,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex",
+      "before_sha256": "2636180168f24c3d998685c070b92debd202ba3d7bc7b1b358af00d9598fbff1",
+      "sha256": "d74a1e1e2110712ea78b1b12aba86016088ec6156d2788b91ff46df98a629c00",
+      "before_words": 449,
+      "after_words": 375,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/04_USBC_Interface.tex",
+      "before_sha256": "1bd91bb65c8ebe49589885ae6f6cb376f70dbb40ffc719fad28222ad5e13779a",
+      "sha256": "1359eb18497657b72c6fc5545397a77c59c3cb5c3cd14cd75e969f5189e1eb69",
+      "before_words": 232,
+      "after_words": 149,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+      "before_sha256": "e0af2c93db213592a7f8bdc50186a4d02286412289ece19f4699a1e1620fb52b",
+      "sha256": "1719a06b8da7a44c50ac64ff568a70236c3ba7a2f6384866da6a7287a82f8aa3",
+      "before_words": 271,
+      "after_words": 224,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/06_System_Architecture.tex",
+      "before_sha256": "1755fcfb957e385d2bdcdc68efafdc2770a68240de1492f2778b3893ee8e5cf7",
+      "sha256": "783b9f8d37f58466e11c33fcb3550c9e7cd6d3c7137354c90f15d8e29229d7de",
+      "before_words": 566,
+      "after_words": 490,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+      "before_sha256": "58b19e155f6e9ddbb71b0428df9a58445bf1bd30e3990cdfb750a05c15b8a43f",
+      "sha256": "8af01f91076b2b216efcfce6a626f0927386b93a71d34d1d21877c2e9c2c70c6",
+      "before_words": 364,
+      "after_words": 306,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex",
+      "before_sha256": "a533a40e20348f8c6a14bafa69d15afbd64536c4e7f5c59ed4a026732528d3e6",
+      "sha256": "92a4b8f9ef3f233b0aa9bd38f306524479862185b973789793f6da66c6c83a72",
+      "before_words": 285,
+      "after_words": 277,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+      "before_sha256": "bc181c82b9ce4a3f17adb19246f01b732cc41856680040208782098e10f0e76f",
+      "sha256": "f702aa5fd1bcaf6338f222b03e040b29c926dd0bd187269cc28de4a9f83d00d1",
+      "before_words": 739,
+      "after_words": 675,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/chapter.tex",
+      "before_sha256": "ec900849fb3d11eb135b950c495fb123fc0ffb6039dc65046bc806f77c58c060",
+      "sha256": "3617767f5c8f521d75c284268bad9b9f674f10ba6dfb2cd32aa29eb203813740",
+      "before_words": 66,
+      "after_words": 48,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+      "before_sha256": "53afc3636abd4dae3cca3149e452076065c05e18dc4294fae38b6d22a9c72b0f",
+      "sha256": "4f2b42434f4e114af3a01c731a298e03272cb2e270d0f8b2ec7b0d1f74ea9358",
+      "before_words": 315,
+      "after_words": 244,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+      "before_sha256": "db5bc03804ec502d340c29a53dbbae034194776edfd015d86e63609e48e89b18",
+      "sha256": "9de236deb5dc7d0fa40a161ddbaf4f82fb817c05f201ce30aa96022bd5e873ee",
+      "before_words": 363,
+      "after_words": 285,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+      "before_sha256": "3da8111b01bda8c6f2c68a53f3d8b228260ec87d1fffb71cf4b4efb126800836",
+      "sha256": "7a9fff8b01cf9d1d6754e191b4209e1b767d779bda860905080da58e79383408",
+      "before_words": 242,
+      "after_words": 219,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/04_Pump_Capacitor.tex",
+      "before_sha256": "3c47e65529afcece8c88617d8f6a3c6a85fe4ec875e7d4eb3a3887f65c04b971",
+      "sha256": "59fb638a73ba9adf8f145edcb583700eb82fa1c58e33ee3d84f42bc231888daa",
+      "before_words": 205,
+      "after_words": 147,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+      "before_sha256": "2d118ba514951bc52ad5953417029e22e3df53b8ba988cf8cbc8de5ea3553e6b",
+      "sha256": "bdcf19f47ccbdf1c3e6cb109e1655a18e0e63a03616f67a6a39e2cee28d36ab1",
+      "before_words": 214,
+      "after_words": 152,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/06_DC_Link.tex",
+      "before_sha256": "c51f9a0d71134cf7aa98840e50c3e9293430a1b18e2cb6f441a67a923bd5605a",
+      "sha256": "649668a3d327169675f992986e01d9143a5c7e94e95039409ba97011f4df0b24",
+      "before_words": 231,
+      "after_words": 174,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/07_Resonant_Stage.tex",
+      "before_sha256": "fbaed5fe48fe2f4017425b0909ff071eb8da1f009aa99a6ce07bfb438aed680b",
+      "sha256": "69a7d8d5b4a8a1ba028dab6215bb4b23ee7237b3a52e439bdf96396c3e96f5e2",
+      "before_words": 321,
+      "after_words": 271,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/08_ZVS.tex",
+      "before_sha256": "266fae20d4c5c7568a617e85a716d43d60db6bbedbeebed25399a4397cc7d0fc",
+      "sha256": "a24c508610c5d0ed761b0cc436124d6554ab324e5bb17472c8afb2e95817109a",
+      "before_words": 271,
+      "after_words": 206,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+      "before_sha256": "22a948da2a1df6911e0fdb247feee22692d58ad7d8be660d84d673efdca4121a",
+      "sha256": "170c15e74d6cfa76287fa72aebbec362bcf0395171c62f5c099a72bbc8f407b2",
+      "before_words": 298,
+      "after_words": 215,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex",
+      "before_sha256": "378b5cd1b0d1eca1468c59c0a18cfe212190c9b3dc665bb201fcbd89da83d61d",
+      "sha256": "af366a550ad4e9c798e2c5587c657903c036ee20f15dca153cb2add9a0c5e40c",
+      "before_words": 243,
+      "after_words": 162,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/11_Design_Summary.tex",
+      "before_sha256": "06829ffb86b4540d1625f49ea1fdf8695ce06e93047e2532f196f9a4d54b5228",
+      "sha256": "762df89d66cbffb0ffc1c159ad13e4a6adf5bf1acbd3850d6c64c5d8b4106497",
+      "before_words": 257,
+      "after_words": 230,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/chapter.tex",
+      "before_sha256": "7912b66e246fb2aeb59ea6a7ba75018775dc39d5a1b3047d5bc9580e08e85ff8",
+      "sha256": "3cb2e6ff3176a1be5147f514dc792c4369bc852919f5777449630c5ed1e6af4f",
+      "before_words": 81,
+      "after_words": 53,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+      "before_sha256": "d16371e840cca4b99e4b7cb4b8a0209bbfe8bbd6d1ccd42d886acea8dc892151",
+      "sha256": "955e37e8853f15a2d222959c0b3ccbea31cdaf23dab68d380608498b1cde0981",
+      "before_words": 169,
+      "after_words": 113,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+      "before_sha256": "ade13301a01d4790305f1a34bd6cbbbec8e0b2311095186189491b14681b4f8f",
+      "sha256": "a5327427af9e798fee95bd7cf67e76bd7870ba86b51083c561dd6ad94fde40e6",
+      "before_words": 282,
+      "after_words": 238,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+      "before_sha256": "9309a51c928c6db7b43a611cb9ed163179142a144ae329cd938ba7863996e185",
+      "sha256": "b15b25623cfd66ba66f0e7ce8063d778244cf9d2bef3789fffeefb93752682ca",
+      "before_words": 128,
+      "after_words": 100,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+      "before_sha256": "1b8e799af88691ea661c2e300ff1ca4d780e9073297597e184662f08407cf6d8",
+      "sha256": "783ceddce52ef85bc00aee24e20ec5ee88dc398cb6056cc01bbbd01426d088e3",
+      "before_words": 169,
+      "after_words": 128,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex",
+      "before_sha256": "bd5927b3902af9a2c96293b0fc43de93762df91bebd109bc1c233610ffbd2a30",
+      "sha256": "40a85b8247d1ec0a1497170074f518343d6ebf86a181f0dd6bac2a3a5b2e1211",
+      "before_words": 166,
+      "after_words": 103,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/06_Steady_State.tex",
+      "before_sha256": "c4428a8544135fce5fe5a070eee1f0c898fa286c286bb793aaa0dadf3e28defa",
+      "sha256": "0f17c0c8b9098ee5e6944a40da01724f2ed40dbf5bb4d91fbe649b45d3334a10",
+      "before_words": 163,
+      "after_words": 102,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex",
+      "before_sha256": "c60edf705ef98cd628da91288365120bcad84d4a82445389e1130c796d7bd2ef",
+      "sha256": "984dbb1d7b6523f54e3c46f89b0c4e8324c7741fa639d85de40bb4c8f30f1d8e",
+      "before_words": 233,
+      "after_words": 149,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+      "before_sha256": "f40a7d7f69885d01785c932c70dd1af7c16b2d99e8cc19e6ab6fc4b97f290516",
+      "sha256": "2c540ae85a2274a0335d3f65d878ff5ec0e7b42beae4248cc7804073739d827d",
+      "before_words": 465,
+      "after_words": 350,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+      "before_sha256": "691988d2fae7b12e509c19e9bf48dbfda4b3de5a474659cae9dd2bc310d617f8",
+      "sha256": "dc9bc7528c7d1260f8a12389445f1731f53584e907f63ecd15d185dc39735402",
+      "before_words": 372,
+      "after_words": 288,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/10_Data_Limitations.tex",
+      "before_sha256": "975919df2e4da2636391ab20e2942e6473ab2af3c1859b48174706393b3e580d",
+      "sha256": "eabb2187172ab08afb5549cce47026b8c4df5c65ae7adb7f0d3374f736b644f8",
+      "before_words": 163,
+      "after_words": 93,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/chapter.tex",
+      "before_sha256": "8dedcebb8b753177c7c853afa18b50823a4610c820edd93cf037e838b4f33b9d",
+      "sha256": "23882dc13d919deef44cc91630e100f0269cba98d919566a451988a4772adba6",
+      "before_words": 82,
+      "after_words": 56,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+      "before_sha256": "8d537d191545a5bb3d6766ea31a3edc9d100089b827a6949f184c395a7472acc",
+      "sha256": "2bc9fafe7edcd72d74f2583963a8313a77ff6b9b6730c8c7cdce4253b1cfe892",
+      "before_words": 194,
+      "after_words": 179,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+      "before_sha256": "834fbcc3098e15968b1c6bcfeebd5562603eb3221584e562b72ef3ab57463779",
+      "sha256": "bac11166758ac0993b6c22c29664bda87bf29b0e5c4727ad89915d04d08b4e23",
+      "before_words": 248,
+      "after_words": 216,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+      "before_sha256": "a55b9a989f4043b8809392e2b2abb4ee0b389bc8c8b1516d83d3ab32b91b0cdb",
+      "sha256": "a83d37c556611f30eafd01508b4234fe5d0ef8c499d0e53ab1f2ff95ec44512b",
+      "before_words": 214,
+      "after_words": 165,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/04_Mounting_Concept.tex",
+      "before_sha256": "265d51eb2592808c4377a21bfce98d65bd3f324c9ebaadd21b4af6767272cf50",
+      "sha256": "e91bdbbb726fdd9a06b84a9eeb89f9b1fa33b9c603e2e688c723591e8d7ee0eb",
+      "before_words": 99,
+      "after_words": 58,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/05_Footprint_Interconnection.tex",
+      "before_sha256": "1e76c5d3368d7ef0ee45f693bff05c8c66349334536558dc3804f7ec87b471c0",
+      "sha256": "8df7b265f187586c498a2d4b82c881716214f55e8794f86f5fec31e32701a0b0",
+      "before_words": 105,
+      "after_words": 75,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex",
+      "before_sha256": "9ec63db7d47f8537d09e557089de0e6177f19bee5c94960778797709d92e6aa7",
+      "sha256": "3ec3407e3a7fd0ca180a14c52a94aba464f6e9781224d366c7778e2b59a797a1",
+      "before_words": 91,
+      "after_words": 66,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+      "before_sha256": "a7634cab3798e9b2231f01837416cb3dc1fcf295e9868ee4508a69a3d099fd13",
+      "sha256": "df48aeb8a83a2ae0b3efb7c925633d735347a82f4550d697ed0987172bdd7ac9",
+      "before_words": 109,
+      "after_words": 70,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/08_Parasitics.tex",
+      "before_sha256": "4059803fed02d0d69edfc550ea5396e73b88b197ef5c45c0e414c14b5a6446c3",
+      "sha256": "7d187710001b2664fcf1cd97c39639d1ea4973e728e8a287feb2f3d6667fcddb",
+      "before_words": 202,
+      "after_words": 168,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+      "before_sha256": "656fc1eadeefc2c8d6ce8e510640d8404a5d577a348511deeef74413642b136d",
+      "sha256": "a7f99125cae2e928e99d29f5888379ca7fcad77c2244d178c9c3435986481bd4",
+      "before_words": 107,
+      "after_words": 70,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+      "before_sha256": "1398324bb687748695395ab68faf94e6a31a34b1b1c734c49a7c2e6e2c016b9b",
+      "sha256": "dbbad6c0ff8d1dd8c1fad30c6f06fcfa4f547b784242e7e2b8b734f72f81f66b",
+      "before_words": 172,
+      "after_words": 159,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+      "before_sha256": "59870404c5ccdddbb675957ca54fe9124b1d8cc767b226364a0d38f6f61dfef0",
+      "sha256": "f723498dbe98b9a36f7a75c8f1bb3a6be329978d31c2df97777d4f911404b779",
+      "before_words": 140,
+      "after_words": 98,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/chapter.tex",
+      "before_sha256": "a9a47361550095d739a1ebf31458c20cc11eddd69ea864d9e3c456b9eb92bdb2",
+      "sha256": "07850de8c552f8648e1fb3d3f17b0e79f673cc055d38a4ac4b0236caa5d2783f",
+      "before_words": 112,
+      "after_words": 72,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+      "before_sha256": "4ae27db0274a999ea72f8f1e7264ac0958ba44aaea04344adefef0b3299ad006",
+      "sha256": "22d70373f806728dc51ed566d72183f84b1712f4bb1870521d9180f4b5c6e5f8",
+      "before_words": 429,
+      "after_words": 357,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/05_Gate_Drive.tex",
+      "before_sha256": "e04306f023e5ad08470e489ca4dfd06a32610fcdbf6d80fe067d301b8bf63764",
+      "sha256": "9f28b57fbe8f153c26b3eee5625d0df1c387d171d822ff59131e0435e034350d",
+      "before_words": 185,
+      "after_words": 107,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/08_Sensing.tex",
+      "before_sha256": "e319e55fc220d6756977290d8fa5668fbb2b45ada7dd8a5f563607f173018b90",
+      "sha256": "d472b5ac1e33ab45f66b3f15f86c1d94a604e597678c04227a418b9be45084b3",
+      "before_words": 321,
+      "after_words": 249,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/09_Protection.tex",
+      "before_sha256": "2fc069acf8299a7adbffcd3f6ef47e02d8265cc6ed6d68d190764f7b25631fa0",
+      "sha256": "7fb2b1897f27e9b6a5cf0e86915889e87c56a272ad6533a4eaf9fd3ecf8c9abd",
+      "before_words": 179,
+      "after_words": 156,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/10_Auxiliary_Power.tex",
+      "before_sha256": "09dbef85b2713707d50c912e28910496e3d5b7cb5b42d74431d12b6372ab7978",
+      "sha256": "084df1ed82568132ba0ab81a780ed8326b29c0bd9d2fc988c602ba21c94d140e",
+      "before_words": 165,
+      "after_words": 140,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+      "before_sha256": "0e31a77174eb3da9aa714fdbe1de2d1123fa70e767f8a3a1613e95c4f694ec82",
+      "sha256": "fcfcc2ba9f1cf9f123511069bf706aa2d7fe52694f36e12840346e53b542ec0c",
+      "before_words": 322,
+      "after_words": 299,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/16_V2_F410.tex",
+      "before_sha256": "690193a6aaa20353a4d4cd6266c560429e6b9e52702bdf94dbf079edca6d1e9b",
+      "sha256": "5af0d6a9d74318d09ce2a6918b511560049313ae8b86f9f14f1c73f396c626f0",
+      "before_words": 1447,
+      "after_words": 1137,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+      "before_sha256": "61d67779c4a378122823ebecc2bdb7a267359c6aca758d0b727fbe066a37295b",
+      "sha256": "1f556622d68e19c1a03e70fbc459534ecf1abbb95871b644bc26563dc0ea395f",
+      "before_words": 755,
+      "after_words": 654,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/chapter.tex",
+      "before_sha256": "195d832bbefe9b8f01edf5584326c1ce5131e94f83bd0fb5a3af3a67294dbd7b",
+      "sha256": "9564fb4b697782f7e5ba89d4a0fc5e58002cfb2c66904afb9554e229db4d094a",
+      "before_words": 206,
+      "after_words": 134,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": false,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/01_Control_Objectives.tex",
+      "before_sha256": "9168b47788b41b695d2e03d8d8f329f2d8c3de42985f2296e4ccc427b5f65004",
+      "sha256": "be6a6e9ce9524cf6a67277673c6f766c8ce56f7e16d410d20491aed0cc1419f4",
+      "before_words": 187,
+      "after_words": 88,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+      "before_sha256": "168c8c5b3b9a4db3f3ae27d5429d52f0c059819b31f0c537622287eaa87000af",
+      "sha256": "f93d5798495f62d04618429cb66a1767805401f81f9e60d4f10b6d4666b9e0b3",
+      "before_words": 630,
+      "after_words": 462,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+      "before_sha256": "fee05303343645cbcb551aa45be33203b1641f9884f89a264819fdcb67da148b",
+      "sha256": "6b9de43adaba432eb49f98040d71711f20ce86f5635fb09e87461f53629c9a5d",
+      "before_words": 328,
+      "after_words": 252,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/04_V0_Open_Loop.tex",
+      "before_sha256": "db999957bd2a85849aab4488c6e636c3e040f69d272a5e7d747f498cf3657c6e",
+      "sha256": "72cbcdb80eb5b0ede294da9e2fa5c5aca55ca1382f096d3fd367b5340f3fea31",
+      "before_words": 86,
+      "after_words": 39,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex",
+      "before_sha256": "9223e857ed2091193216615e97139e2d07c7cf9c154d832839948fdef1e0a9ec",
+      "sha256": "8a533fe4660cf7ee58b2cfd764dc25e5ce811bd10a2670b80faef08ee91dfcae",
+      "before_words": 64,
+      "after_words": 34,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/06_Blocking_Limitations.tex",
+      "before_sha256": "9890da2b96bc9696992b3df581bc59312e4ba3ca166e4901cfaa3d14b2e5493e",
+      "sha256": "ebc56c89aad9262d0e31b21778933accaacad5d163124ad47af552dd2748e4b3",
+      "before_words": 64,
+      "after_words": 34,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+      "before_sha256": "48323fcbbb19985c72bf807e3e11799b5f39668c6c698508deec46ecd81cee63",
+      "sha256": "151031c2c93a67242c2e9aaeabf0ebca4ff42c51ba4469d859a03345f9adf27c",
+      "before_words": 162,
+      "after_words": 137,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/08_Control_Law.tex",
+      "before_sha256": "9e2392bc813c6186a578425049a678f7d616cbf61dd3b6832ceb10aba99554ca",
+      "sha256": "f413cca027365a3e34d03ec7bb3b5bd65335fe4b5c865ece999c99445552f11b",
+      "before_words": 513,
+      "after_words": 431,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex",
+      "before_sha256": "758464865f6e71f2b2bbe226286851fc3ab861218dd7d4d963b3a4ed0fb61eb2",
+      "sha256": "f615bdb9841752b690816aebdc2b433eab3b42b82076ffa6a488db7cea1e7ca6",
+      "before_words": 227,
+      "after_words": 209,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+      "before_sha256": "237fc6b672322b1849349655ec8a235222a397983666753b0196669b54ca5f02",
+      "sha256": "b9a2023ae52af4f777f0e1f8cb994dbc5df33ab18aeef8e8cd13dc529eab30c1",
+      "before_words": 504,
+      "after_words": 489,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/12_Fault_Handling.tex",
+      "before_sha256": "12f0e6d454842416b26ce7beae104bd1c818082c3962e1e6a6d8096c503b5e91",
+      "sha256": "98c65332cba05762ac7b706600b1849a8f10c8e7acdbd69187e071bd69216146",
+      "before_words": 309,
+      "after_words": 293,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+      "before_sha256": "e6ec3a915a06b04d4fc2dbf9ac1216b4da5c40b5651a38dae6ef564e7bbae0e5",
+      "sha256": "281c266fcb0c4dbb97e80a0ad97840e886f0530114718980c68c692b91b3c09e",
+      "before_words": 147,
+      "after_words": 135,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+      "before_sha256": "1bd15932b79aeeaf1c6f3a317bc1855e935cf49e23efd15dfa355728cb485bd2",
+      "sha256": "1e41c28ca861e12df343346b3711cbd44286ef053b1b289d4c5ea8448bcf079d",
+      "before_words": 164,
+      "after_words": 134,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+      "before_sha256": "762a2715c225c9acaad77ce551f972888c6d9dfa84a0cd3ac963c6d68390c72a",
+      "sha256": "f72e197996242128f07e5abd34a3e9285315aad9587a7257d957fce541ea7774",
+      "before_words": 968,
+      "after_words": 752,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/chapter.tex",
+      "before_sha256": "0b2d72b121d324a43708efd33fcb976127eaa161c0519f884ddf51f064fcf60c",
+      "sha256": "69a69dbe261ae15e5bfbff944120a720873ef001f5c8e07fcd273e56d302ad6e",
+      "before_words": 481,
+      "after_words": 293,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": false,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/01_Objectives.tex",
+      "before_sha256": "da3b61ac88db0bbb4141501ba695947f83b26ad246da00ac9b6f08818775caf1",
+      "sha256": "de4a97bacaec4877a5db923cbc3f4d5316b1a12352b3fb4c04d598eed8836f02",
+      "before_words": 242,
+      "after_words": 205,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/02_Safety_Arrangements.tex",
+      "before_sha256": "55a50411aec2e158ccac10cd8ce5f0208714184eddce59b019ed8a309373fefc",
+      "sha256": "479fe33e094dd5e2a8d550547b7dfc93a6f0229baa00800e193d6f77ca3bd73a",
+      "before_words": 253,
+      "after_words": 183,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/03_Test_Bench.tex",
+      "before_sha256": "084515827a257fc0fcc2ecf465364e8e578aed22208464a1d089a4a998397c5f",
+      "sha256": "a2d0d1fd33eaef1eb43deaf85e3d08a21bdf8e24aaed4aa4745c53c1bad32306",
+      "before_words": 311,
+      "after_words": 283,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+      "before_sha256": "d24677e851e2e2513c95311d191e73136bbd6505a56e8ee48deac53a24d25765",
+      "sha256": "6ec2a0b810adc75e0c35f5493382bed01d44c1b261feae10c4e4883951c9c283",
+      "before_words": 312,
+      "after_words": 264,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/05_Probing.tex",
+      "before_sha256": "292376a5ae9dde8d3913aa502fb8102f98fac374e33bde7894eafceb29ad00a8",
+      "sha256": "1390d8b01974e40b4b1aaa29c5c13e398080681a406aa71630c49d6a87e9bfc4",
+      "before_words": 257,
+      "after_words": 207,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+      "before_sha256": "5fff043599ac548dde3675b609a4802442df194f10d6ca5357bd2dd9f03735a6",
+      "sha256": "bb7784da15be58c4b4576e122b462edd951a39406330281c9b22beb24630c026",
+      "before_words": 266,
+      "after_words": 220,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/07_Control_Tests.tex",
+      "before_sha256": "a981adc8b2428ccf15be5dc419279ed12cacc31c9bf60e833960ce7f96252488",
+      "sha256": "c1de9bb9039a1a25af5fb3b84b96c3b4855a6843d1448279f93e4a09f1b8a9e1",
+      "before_words": 262,
+      "after_words": 183,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/08_Power_Quality.tex",
+      "before_sha256": "6df894d9effc7e07beb91181c2c7b68ee19739e2d2bb3a01c546f560b9dcbde2",
+      "sha256": "8a7f5176754a2373beddecd41c7bdf8cc06221611a3092555324026394cefc26",
+      "before_words": 165,
+      "after_words": 104,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/09_Efficiency.tex",
+      "before_sha256": "4883f0f3b72c9176b97a3b558283cd7c2706575b73979585df9404a01c2b5b9d",
+      "sha256": "165868ac1d4b82f9893e0941b0592e2d1c98f7c8b497faf3a41642f6f5d6e4a3",
+      "before_words": 149,
+      "after_words": 112,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/10_Thermal.tex",
+      "before_sha256": "5f7c1d86f8d6b023c856ff3c3ea990ff451c018311dd082c9420c4a226526054",
+      "sha256": "36706b21ab193081808c879bbf3b742d92370fe10fe168dc26d03af676e93f93",
+      "before_words": 111,
+      "after_words": 71,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/11_Uncertainty.tex",
+      "before_sha256": "52ced6abbbf46ce2b26c05461e205988a8676294dc9c3ff63df584b27ec2c5e2",
+      "sha256": "d7ad70198e060a49d56d72bf7911699031e7b0f5f112147d381aec1eec8c654d",
+      "before_words": 209,
+      "after_words": 151,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+      "before_sha256": "c909d06f0caf220a2ff2a2c60f6126d5009f55f7b29de03467d0815c2fb8991d",
+      "sha256": "c135950dde927ae41e191b3d952ba00c4874a125ab3fcdde22cb0b517bf497e7",
+      "before_words": 1155,
+      "after_words": 789,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+      "before_sha256": "d362aab1558e52f7ac24468b07e319edfd3a8c00791097aceafaba513982dc69",
+      "sha256": "aeccd8f313a06d0245fffbf1d93b38b0a27fb6393db4ac28f5d3344d09ef2339",
+      "before_words": 394,
+      "after_words": 303,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/02_Startup_Shutdown.tex",
+      "before_sha256": "324aafdc9d8290bd5758ccf0739915a171274945e43f1bb9001eb6d393fef792",
+      "sha256": "279e8294ba5620c9b5615358a79b1e75015c4f2098ed6ce2c80529d62db78d9d",
+      "before_words": 93,
+      "after_words": 48,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/03_Steady_State.tex",
+      "before_sha256": "00689fc601b165468f7148476db4f477eb3afbd543ea781895a82e6705d5be83",
+      "sha256": "053e21611afd81fa6faf21c4856264c40dd8655bffb504db0fc638ee5227c222",
+      "before_words": 668,
+      "after_words": 585,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/04_Load_Transients.tex",
+      "before_sha256": "c0e28acc77c113ddad30cd69823718593084b19bbc6607756e0743ab53d49494",
+      "sha256": "65a9e8a7aa8509f53207d05be1649f93a72e2321e18116c61958dd00538e3362",
+      "before_words": 276,
+      "after_words": 213,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/05_Open_Circuit.tex",
+      "before_sha256": "1b66c8e6b0e1afa5f49df61b65d3cd9ab582856ad4e3272f944dc6323fa77393",
+      "sha256": "370203930f75af9edaab1c14a0f610df0324c69d6e51f12c8f3344936eb00fed",
+      "before_words": 213,
+      "after_words": 169,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/06_ZVS.tex",
+      "before_sha256": "d496ef85beeff5ec6523e9317f73c870636ad5cbe53f8101bcf931de1c89d827",
+      "sha256": "171ef240a445d92f1d51c033a5456ac3adb3ede5131847a7ecc5e25c78f45f36",
+      "before_words": 346,
+      "after_words": 295,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+      "before_sha256": "d024acc52874d11f159224af1e85920d5b7d04affcf3b7d8f02b33dc964665d2",
+      "sha256": "32d445b945f0535d09c04b91a702d0a3aa60aecd89185222ff6be9c30fed9607",
+      "before_words": 530,
+      "after_words": 443,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/08_Efficiency.tex",
+      "before_sha256": "3d40370e184a668c33c24b62ae5a86f0de3b372d86e2e22c54f6ab6fb777c9f8",
+      "sha256": "279524da5f2853efc8d9311aa34b769b9ebd0694019f3238fa744f3852b99ee8",
+      "before_words": 356,
+      "after_words": 282,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/09_Thermal.tex",
+      "before_sha256": "3c04e98e2aa87456ca96d5e18f869f447142471ff9210c561ab0359791f31e49",
+      "sha256": "88f79b3efa4f9eec5d28be57497299f14f4cbc242deb849b1e082b12cb3fa30d",
+      "before_words": 293,
+      "after_words": 219,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+      "before_sha256": "4d35faeb27cb8a94660c78048a41c8e6308e1f39eba21800977a466b7034b4e5",
+      "sha256": "06f7704b0bd67b3ec24e52a7e238723aa31e8a1e04c7d16f7b5c539bca218832",
+      "before_words": 308,
+      "after_words": 234,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/11_Simulation_Hardware.tex",
+      "before_sha256": "0243242ea1b57797fff267ba6e4cd8a467625abcaadd240900bf73910b1f0447",
+      "sha256": "e3d4ee2bc3f6357a3cc6635a7b29497fc076acccb8077d92ba833172ee415ad4",
+      "before_words": 204,
+      "after_words": 180,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/12_Compliance_Table.tex",
+      "before_sha256": "202c396c8157bc193b0bdeb6326836f27bcca2adbe28b8e6d2fd2aa51a4ecf00",
+      "sha256": "9a2d5bd4e2bf37dacb1b10fbdbf64ec668756de555fbd729d8e3c18015a21a63",
+      "before_words": 471,
+      "after_words": 457,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+      "before_sha256": "eb5634ead6cfbbce7f419279ff8fc2dcb6cd9aef28a51bad74e569e0bf890ac6",
+      "sha256": "4e22998ec5a01f768868161e62b29926dbfc7768a145bc68d72f94a018afb434",
+      "before_words": 386,
+      "after_words": 308,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+      "before_sha256": "657e5888f4ce57fb044eb2ee6c04c46a9e9fdda366e64c9860d659f228ec824c",
+      "sha256": "2842de78da20941f01ed8305895a0e487e7f14c646ce564aa87f76415c4e2e78",
+      "before_words": 592,
+      "after_words": 532,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+      "before_sha256": "efc8e031dbac1bea65b42874c33fadd58634c1b419f4e0eda842c0e79e025901",
+      "sha256": "63030e4b897039652d0f7bfdf43544a5d77fb942561753bf74f36b9781662f37",
+      "before_words": 845,
+      "after_words": 571,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/16_V3_Design_Outcome.tex",
+      "before_sha256": "445f46d680c7a03e181918f8e176d84b3455aed40d79873391bef4d8c480d0cc",
+      "sha256": "62b3a4c2426867c481baec7de0ba878ef0c180c26538360319745df5038c2c0b",
+      "before_words": 289,
+      "after_words": 212,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+      "before_sha256": "4c449f411f28cc63726129342a95651c1d13b25a6f9907d219ab3d7231fb6117",
+      "sha256": "d7bf7b8d58a6de6eea0b7302bbfe3220759253384a46d410c496bc60c2d69d5a",
+      "before_words": 237,
+      "after_words": 172,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+      "before_sha256": "d24e358584c67583a08d9952ff37f34cad7aae46951dd4438c6ff52713b88f23",
+      "sha256": "e12c0992897a18333296bfd332e7c2031730b03d6b1a4691e5a93e8d898ade6c",
+      "before_words": 238,
+      "after_words": 160,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/03_Control_Contribution.tex",
+      "before_sha256": "cb92583e5432322c8516ddd57bb2611faa4cc6833b3b4eddcd7328ffc3cccd02",
+      "sha256": "4f3f210cdb32d94ae42d272735785e88d674c238a0d85a92ca89feea532be0c5",
+      "before_words": 309,
+      "after_words": 207,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/04_Open_Circuit_Safety.tex",
+      "before_sha256": "823af96b095131e186937ca6fae2db297f1af6296cf34bc3b16362356b63542f",
+      "sha256": "5f7d8d58e907c9c94bc7b9aceda7e1fe206acc4bef2a2970b5f2bf705234e162",
+      "before_words": 228,
+      "after_words": 147,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/05_Magnetics_Integration.tex",
+      "before_sha256": "ce641ca06712ca89edb1031bc1b04ded9f5b12ae20d53ea05dbb7442e9104f34",
+      "sha256": "d15995a098908467118f56d2cc1c7d8857a7f19e75309c003ba2ad4502181eba",
+      "before_words": 326,
+      "after_words": 218,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/06_Reference_Comparison.tex",
+      "before_sha256": "483133fc92d6042bb7af893e93371c99060fde4097d2004bd74caaa4dd51a8ec",
+      "sha256": "a324ae8a29501d564d40496d3ba182d72f5610d072bc434672eff042e208513b",
+      "before_words": 275,
+      "after_words": 220,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/07_Limitations.tex",
+      "before_sha256": "e64be63bacb6bc5f44b87a3a609e0c0fcfca882d84683de63d9b3ea2767e8b21",
+      "sha256": "4fda88b551c417576eb9f12037f2346ed9e68093341fcb768611c45e7bd5da29",
+      "before_words": 198,
+      "after_words": 135,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+      "before_sha256": "7d59493282ad71f0356aa43d45cb2ee3a734bb80241c2f3733ef1c1081654f36",
+      "sha256": "6e1661ac38cc412f49d2c95c963371fa69c08b12ce9ec5decfa1dde9b7ae51dd",
+      "before_words": 357,
+      "after_words": 180,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+      "before_sha256": "3f4160878235c446c558a7c9721ee9f4800def041635d61dcb343a10757c31a7",
+      "sha256": "cce69f0a4821c60d3c8eda4e06a28a187feaf4cf6a477dc6baa615d160b1643c",
+      "before_words": 389,
+      "after_words": 224,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+      "before_sha256": "1fa2bfe663cc0be21bc41ecddcd0ce6df532dc1e69515b04003af561e0a23bc7",
+      "sha256": "50ac74189f5a65cc716a2c8679348aa9be98e4e2e859942471fdd972ad7d0d36",
+      "before_words": 716,
+      "after_words": 588,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/chapter.tex",
+      "before_sha256": "e672ec7a4d1e57b25b1cb57f34fca06be9de4a5ee32aa38b6d7050d859090fa6",
+      "sha256": "9464799c638b9e22982e822882053c8f284718a23265fb0eccfc8ee86ecf03e7",
+      "before_words": 85,
+      "after_words": 50,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+      "before_sha256": "dcfdd004d42e316a7aa2d84959c40a56da6e6ba2afb509a70be8f3613128b912",
+      "sha256": "0c93303a2a1535ae251042e0b9b8c98d7d5bcf6106d97d7564577d9d389f21bc",
+      "before_words": 429,
+      "after_words": 295,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+      "before_sha256": "b8de1541876ec8d4f9e71d9dd2c0e2dfe40ce1a7ef80fa63d6afb0efceb8e2db",
+      "sha256": "3ec0cb090a40ae88062aeefc0ffe7b925d9c68b2e1a15bd55bfe6e1a7958e357",
+      "before_words": 473,
+      "after_words": 354,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/03_Contributions.tex",
+      "before_sha256": "373985d84d93995bdaae22046c1a9430af02dba599abf2c3be870f76921aabe6",
+      "sha256": "2f509bd96096172e39eea70819d7d12a3d53d2358fdf7f807fbb02258cc48b0d",
+      "before_words": 262,
+      "after_words": 215,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+      "before_sha256": "9677d8969320db2d79845a01f57e3c3f73bba0144bcdec387e3a3db65a54b694",
+      "sha256": "48e18e457a52e216fc405f162d9c1cb217e641868242abe8ecc3b5fea575e00a",
+      "before_words": 437,
+      "after_words": 278,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/chapter.tex",
+      "before_sha256": "8ca030faab878cb51aed5fc3442c67005bfd92fc07b7f1a712af16d333f0833a",
+      "sha256": "a22ce4d57e3d111d23d69da2711dee70bc6fdafcddbe0df67909c2c2590132d5",
+      "before_words": 77,
+      "after_words": 43,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    },
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "before_sha256": "7c6b46184d17ff9c6da3cadfe8752c1dae86e74508621d19908f2842ffffb151",
+      "sha256": "b17a0379be20f99a540789b593abda0162f23e261c0e6628420b2e8973682ba8",
+      "before_words": 468,
+      "after_words": 296,
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels": true,
+        "citations": true,
+        "paths": true,
+        "references": true,
+        "protected_environments": true
+      }
+    }
+  ]
+}

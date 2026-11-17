@@ -1,0 +1,50 @@
+\section{Voltage Control Logic}
+\label{sec:ctrl-law}
+
+Light/no-load operation uses hysteretic high/low duty, while loaded operation trims a stored duty command from bulk-voltage error. The hysteretic relationship is
+\begin{equation}
+ s_k=
+ \begin{cases}
+  1, & \widehat V_{\mathrm{sb}}\leq V_{\mathrm{on}},\\
+  0, & \widehat V_{\mathrm{sb}}\geq V_{\mathrm{release}},\\
+  s_{k-1}, & \text{otherwise},
+ \end{cases}
+ \qquad
+ d_k=
+ \begin{cases}
+  d_{\mathrm{high}}, & s_k=1,\\
+  d_{\mathrm{low}}, & s_k=0.
+ \end{cases}
+ \label{eq:ctrl-hysteresis}
+\end{equation}
+This decision also accounts for the latest and filtered readings, dwell times, and any demand caused by undervoltage. With the no-load guard active, the operating band is from \(V_{\mathrm{set}}-V_{\mathrm{NLdrop}}\) to \(V_{\mathrm{set}}\) within the threshold limits.
+
+On entry to loaded operation, bounded duty is initialized from \texttt{LDUTY} or the current command. Below \texttt{VON}, a voltage-dependent step increases transfer and sets the reported state to \texttt{LBOOST}. Stored duty is reduced above \texttt{VSET} by more than \SI{0.4}{\volt} and can remain unchanged inside that region.
+
+\texttt{SLEW} sets the base step, scaled by actual elapsed time. The correction is increased for larger voltage droop, using multipliers with defined limits. When the fresh or filtered secondary-voltage reading from PA1 reaches \texttt{VMAX}, the low command is selected immediately and stored duty is reduced. \texttt{LDUTY} sets a floor for the stored value; it is not a measurement of average output duty.
+
+Loaded operation is identified using a threshold on the primary-current reading from PA2 and apparent resistance, with a hold time before the loaded state is released. The default threshold is \SI{0.15}{\ampere} in the configured current scale. A quiet, high-voltage condition must persist for \SI{500}{\milli\second} before release. Since the current signal comes from the primary half bridge, apparent resistance is used to classify load rather than measure external load resistance.
+
+Optional \texttt{LINEFF} adds a duty cap as primary voltage rises. The ratio \(V_{\mathrm{pri,ref}}/\widehat V_{\mathrm{pri}}\) is used within the configured scale bounds. The primary-voltage reading from PA0 therefore limits the high command, while the secondary-voltage reading from PA1 determines the voltage state and error.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=C,basicstyle=\ttfamily\small,caption={Baseline voltage-control sequence. Fault handling is described in Section~\ref{sec:ctrl-faults}.},label={lst:ctrl-pwr1920-summary}]
+read and filter PA0, PA1, PA2 from the circular DMA buffer;
+update loaded-state classification;
+service soft no-load overvoltage holdoff;
+evaluate DMA, enabled current, and enabled OVP faults;
+if fault: force PA10 low and return;
+if active holdoff: keep BLOW command (default zero) and return;
+
+update no-load escape and undervoltage demand;
+if loaded steady is eligible:
+    trim the bounded duty memory from PA1 voltage;
+    select low duty immediately at VMAX;
+else:
+    retain the hysteretic high/low state within its band;
+    apply the no-load cap or permitted escape demand;
+
+apply optional PA0 line feed-forward and duty bounds;
+send the requested duty to the PA10 scheduler with sync polling;
+\end{lstlisting}
+\end{minipage}

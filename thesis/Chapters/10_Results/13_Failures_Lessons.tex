@@ -1,0 +1,39 @@
+\section{Bring-Up Problems and Changes}
+\label{sec:res-failures}
+
+Bring-up required the circuit, sensing, and firmware to be corrected together.
+Blocking ADC reads delayed feedback, the initial PA2 interpretation used the
+wrong current for output power, and unloaded operation needed a tighter
+energy limit. Those problems shaped the final control structure.
+
+\begin{table}[htbp]
+\centering
+\caption{Bring-up problems, corrections, and design lessons.}
+\label{tab:failure-log}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.36\textwidth}X@{}}
+\toprule
+Issue & Corrective action & Resulting lesson\\
+\midrule
+Blocking feedback acquisition & Adopted circular ADC DMA & Acquisition timing must remain compatible with the live control loop\\
+PA2 interpreted as output current & Removed PA2-based output-power control; retained PA1 voltage regulation & Match feedback to the physical quantity used by the controller\\
+Irregular no-load pulse structure & Revised minimum-cycle handling and no-load duty logic & Schedule complete carrier cycles and limit residual energy explicitly\\
+Energy after load removal & Added no-load guarding, voltage windows, and sag recovery paths & Loaded and unloaded operation require distinct control behavior\\
+Ambiguous output detail fields & Kept DC, AC detail, and acquisition statistics separate & A range of average readings is not instantaneous output ripple\\
+Disagreeing power instruments & Kept the original readings and calculated initial efficiency estimates & State the measurement boundary and synchronization before interpreting losses\\
+High-load temperature rise & Recorded camera maxima and the stated test conditions & Follow component temperatures until they settle at the chosen load\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+PA1 voltage regulation replaced the incorrect power feedback, while PA2
+was retained for load classification. Complete-cycle scheduling addressed
+irregular pulses, and no-load guarding limited charging after load removal.
+The highest calculated V1.0 output was \SI{79.89}{\watt}; further loading toward
+the \SI{100}{\watt} objective requires temperature histories alongside the
+electrical readings.
+
+The remaining tests must pair input and output power, capture ripple with
+known coupling and bandwidth, follow identified temperatures to stabilization,
+and record controller state during load and protection events.

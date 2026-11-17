@@ -1,0 +1,60 @@
+\subsection{Channel Definitions and Scaling}
+\label{sec:method-instruments}
+
+External instruments measured delivered voltage, current, and power.
+ADC readings and UART data were used to diagnose controller sensing and
+command handling.
+
+\begin{table}[htbp]
+\centering
+\caption{Instruments and recorded measurements.}
+\label{tab:instrument-role-map}
+\begin{tabularx}{\textwidth}{@{}p{0.29\textwidth}p{0.30\textwidth}X@{}}
+\toprule
+Quantity & Instrument & Recorded output\\
+\midrule
+Input voltage/current and power quality & SDS824X HD with DP10013/CP2100A & Waveforms and power-analysis readings\\
+Switching and load events & MSO9254A & Time-domain captures\\
+Output loading & IT8512+ or USB-C sink & Load setting and voltage/current readings\\
+Controller state & UART terminal & Version, settings, timing, and fault status\\
+Temperature & Thermal camera & Screenshot markers and hotspot location\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+In Table~\ref{tab:channel-definitions}, CH1--CH4 label the oscilloscope inputs.
+
+\begin{table}[htbp]
+\centering
+\caption{Typical oscilloscope channel assignments.}
+\label{tab:channel-definitions}
+\begin{tabularx}{\textwidth}{@{}p{0.13\textwidth}p{0.31\textwidth}X@{}}
+\toprule
+Channel & Quantity & Connection/scaling\\
+\midrule
+CH1 & Switch-node voltage & 100:1 high-voltage channel referenced to the measured circuit\\
+CH2 & Secondary-bulk voltage & 10:1 voltage probe at the bulk node\\
+CH3 & Connector VBUS & 10:1 probe at the output node\\
+CH4 & PA10, current, or event marker & Assigned according to the event\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Oscilloscope channels for input-power measurements.}
+\label{tab:power-analysis-channel-definitions}
+\begin{tabularx}{\textwidth}{@{}p{0.13\textwidth}p{0.30\textwidth}X@{}}
+\toprule
+Channel & Quantity & Connection\\
+\midrule
+CH1 & Input voltage & DP10013 across the DUT input\\
+CH2 & Input current & CP2100A around the input conductor\\
+Power application & Derived quantities & Channel scaling, polarity, averaging, and harmonic settings\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Waveform interpretation requires the node assignments, probe attenuation,
+range, coupling, bandwidth, trigger, and timebase for each capture. Channel
+color and number alone do not identify the measurement.

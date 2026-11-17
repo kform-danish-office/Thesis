@@ -1,0 +1,20 @@
+{
+  "Thesis_V1_V2_V3.pdf": {
+    "bytes": 20673495,
+    "sha256": "9c297f69a8ecf52bf5b747c4855049b4a178d9334d6de036a4a7127397352910",
+    "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/Thesis_V1_V2_V3.pdf",
+    "verified": true
+  },
+  "Thesis_V1_V2_V3_Source.zip": {
+    "bytes": 93756708,
+    "sha256": "cb4ef7b4c1e2b86c38f399ff87ba9c315fcc594807a2b0fcd76a0689dc090694",
+    "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/Thesis_V1_V2_V3_Source.zip",
+    "verified": true
+  },
+  "SHA256SUMS.txt": {
+    "bytes": 179,
+    "sha256": "2e618bf22c783b2c764e72768f625f6c55da4efd3321a4918f20d38d09428ced",
+    "url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/SHA256SUMS.txt",
+    "verified": true
+  }
+}

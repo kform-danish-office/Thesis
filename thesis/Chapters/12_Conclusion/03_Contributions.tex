@@ -1,0 +1,33 @@
+\section{Original Contributions}
+\label{sec:concl-contributions}
+
+The charge-pump PFC principle and planar-magnetic design from earlier DTU
+work were integrated into a USB-C power supply. The work covered
+the offline input, charge pump, GaN stage, magnetic connections, output
+interface, sensing, auxiliaries, and hardware rework during bring-up.
+
+The control firmware uses continuous DMA acquisition and fixed-carrier
+burst scheduling to regulate the secondary voltage. Loaded duty adjustment,
+startup precharge, and separate no-load behavior address the different
+operating conditions. The current-sense interpretation was corrected to
+match the installed hardware.
+
+V2 integrated the MCU onto the converter board, requiring adapted timer and
+ADC assignments. A flash settings journal, browser commands, and logging
+were implemented. Browser calibration and editable reference-load settings
+were then added to repeat the duty search for connected test loads. Carrier
+frequency and dead time can be set together with output disabled, allowing
+switching conditions to be varied without rebuilding the firmware. The four-layer circuit and layout integrate these functions on V2.
+The firmware and supporting software passed software checks.
+Preliminary powered observations appear in \cref{sec:res-v2-testing};
+powered tests of the later adjustable firmware and comparable power and
+thermal-endurance measurements are still needed.
+
+The prototype was evaluated for output settings, high-power operation,
+input-current quality, initial efficiency, load removal, no-load behavior,
+and surface temperature.
+
+A reduced V3 edge-card layout retained secondary rectification while
+removing the USB-PD section. It provides a design-level volume reduction
+and leaves transformer optimization and thermal testing as the next
+development steps.

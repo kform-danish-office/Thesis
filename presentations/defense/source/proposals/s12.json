@@ -1,0 +1,76 @@
+{
+  "slide_id": "s12",
+  "revision": 2,
+  "title": "V2 removes the hot series inductor",
+  "takeaway": {
+    "text": "The hot V2 external inductor was removed and the tank retuned to transformer leakage; half-bridge heating decreased after the combined tank and timing changes, while input-bridge heating remained.",
+    "visible": false
+  },
+  "visible_content": {
+    "before_label": "V2 before tank change",
+    "before_switch_node": "SW",
+    "before_capacitor": "Cₛ",
+    "before_external_inductor": "External Lₛ ≈ 9.4 µH",
+    "before_leakage": "Transformer leakage",
+    "before_transformer": "Ideal transformer",
+    "before_secondary": "Isolated secondary",
+    "after_label": "V2 after tank change",
+    "after_switch_node": "SW",
+    "after_capacitor": "Cₛ ≈ 1.66 nF",
+    "after_leakage": "Transformer leakage",
+    "after_transformer": "Ideal transformer",
+    "after_secondary": "Isolated secondary",
+    "body_1": "Software dead time ≈ 60 ns",
+    "body_2": "Half-bridge heating fell; input bridge remained hot",
+    "phase_label": "Results"
+  },
+  "visual": {
+    "type": "editable_before_after_resonant_equivalents",
+    "layout": "Two aligned horizontal circuit equivalents, before above after. Draw the switch node, series capacitor, transformer leakage equivalent, ideal transformer and isolated secondary in each. The upper path includes the external series inductor; the lower path connects the capacitor to the leakage equivalent. Highlight the removed inductor and changed capacitor; place the two brief observations below.",
+    "circuit_definition": "Each equivalent is SW → series capacitor → [external series inductor before only] → transformer leakage inductance equivalent → ideal transformer → isolated secondary. Show primary return and secondary terminals. Represent leakage as a primary-referred transformer equivalent, not an additional physical component. Do not attach a numeric value to the before capacitor. Both diagrams represent V2.",
+    "implementation": "Native editable shapes and text. All visible labels are listed in visible_content. Use the schematic as a topology source, not a depiction of the modified board.",
+    "source_schematic": "/workspace/thesis/Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf"
+  },
+  "speaker_notes": "In the original V2 tank, the external series inductor became hot during operation. It was therefore removed, and the series capacitor was changed to approximately 1.66 nanofarads so that transformer leakage provided the tank inductance. In these equivalents the leakage is shown as a primary-referred part of the transformer. The two given leakage measurements were 16.42 and 16.50 microhenries. Their mean, 16.46 microhenries, with the new capacitance gives an ideal resonance of about 0.963 megahertz, close to the nominal carrier frequency. The software dead time was also set to approximately 60 nanoseconds. After these combined tank and timing changes, half-bridge heating decreased. Heating remained at the input bridge, so removing one hot component did not resolve the full thermal problem.",
+  "transition": "The modified V2 tank was then loaded directly at the secondary to see how much power reached the load and how the secondary voltage changed.",
+  "duration_seconds": 100,
+  "sources": [
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex",
+      "passage": "V2 Testing and Resonant-Tank Changes; Half-Bridge Heating and Dead Time; Input-Bridge Heating",
+      "supports": "Original V2 9.4 µH inductor heated and was removed; 1.66 nF capacitance, leakage-only operation, approximately 60 ns software dead time, decreased half-bridge heating and persistent input-bridge heating."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+      "passage": "Supplied Magnetic Measurements",
+      "supports": "Given transformer leakage measurements 16.42 and 16.50 µH; 16.46 µH mean used as estimate."
+    },
+    {
+      "path": "/workspace/papers/apec-digest/sections/topology.tex",
+      "passage": "Isolated resonant branch",
+      "supports": "Ideal leakage-based resonance near 0.96 MHz; original 1 nF was a design calculation."
+    },
+    {
+      "path": "/workspace/papers/apec-digest/sections/results.tex",
+      "passage": "V2 tank and secondary loading",
+      "supports": "Sequence of tank change, software dead time and observed half-bridge heating."
+    },
+    {
+      "path": "/workspace/thesis/Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf",
+      "passage": "Resonant branch and transformer",
+      "supports": "Source topology for editable local circuit equivalents."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "Both diagrams represent stages of V2. The hot external inductor observation is not attributed to V1.",
+      "The earlier capacitance is left without a value; 1 nF is a design calculation, not a verified fitted predecessor.",
+      "The 16.46 µH mean is from measurements of two transformer variants. It and 1.66 nF yield an ideal 0.963 MHz; this is not a measured in-circuit resonance.",
+      "Decreased half-bridge heating is associated with combined tank and software dead-time changes; it is not attributed to either change alone.",
+      "Input-bridge heating remained. The software dead time is a setting rather than measured gate timing.",
+      "The complete visible_content uses the manifest keys and Results phase; the prior equivalent retains its component and annotation coverage."
+    ],
+    "unresolved_questions": [],
+    "timing": "100 seconds including transition, with time to trace the two tank equivalents."
+  }
+}

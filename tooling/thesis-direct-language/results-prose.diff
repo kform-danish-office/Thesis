@@ -1,0 +1,1019 @@
+--- before/Chapters/09_Experimental_Methods/01_Objectives.tex
++++ direct/Chapters/09_Experimental_Methods/01_Objectives.tex
+@@ -7,14 +7,14 @@
+ priorities for the next revision.
+ 
+ The V1.0 PCB was tested with two series resonant inductors. V1.1 is the corrected
+-schematic reference. The baseline firmware used for the identified final runs is described in Section~\ref{sec:ctrl-firmware-identities}. Where available,
++schematic reference. The baseline voltage-control firmware is described in Section~\ref{sec:ctrl-firmware-identities}. Where available,
+ UART \texttt{VER}, \texttt{STATUS}, and \texttt{EXPORT} output identify the
+ active version, mode, calibration, and thresholds for comparisons of burst
+ operation.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Experimental questions and their primary observations.}
++\caption{Prototype tests and measurement objectives.}
+ \label{tab:method-objectives}
+ \begin{tabularx}{\textwidth}{@{}p{0.31\textwidth}X@{}}
+ \toprule
+--- before/Chapters/09_Experimental_Methods/02_Safety_Arrangements.tex
++++ direct/Chapters/09_Experimental_Methods/02_Safety_Arrangements.tex
+@@ -16,11 +16,11 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Safety and connection metadata relevant to an energized test.}
++\caption{Connections and settings needed for powered tests.}
+ \label{tab:method-safety-metadata}
+ \begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}X@{}}
+ \toprule
+-Item & Information required to interpret the test\\
++Item & Settings and connections\\
+ \midrule
+ Input source & Voltage, frequency, current limit, and isolation/reference arrangement\\
+ Probe connection & Node pair, attenuation/range, and voltage/common-mode rating\\
+--- before/Chapters/09_Experimental_Methods/03_Test_Bench.tex
++++ direct/Chapters/09_Experimental_Methods/03_Test_Bench.tex
+@@ -30,12 +30,12 @@
+ DP10013 differential voltage probe and CP2100A current probe. Switching and
+ output-voltage events were captured with the Keysight MSO9254A. The project
+ notes list February 2, 2026 as the calibration date for the main source, load,
+-oscilloscopes, and listed probes. Serial numbers and certificate identifiers
+-are missing from the thesis files.
++oscilloscopes, and listed probes. Instrument serial numbers and calibration certificates
++were not available.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Principal experimental equipment.}
++\caption{Test equipment.}
+ \label{tab:bench-equipment}
+ \small
+ \begin{tabularx}{\textwidth}{@{}p{0.23\textwidth}p{0.34\textwidth}X@{}}
+--- before/Chapters/09_Experimental_Methods/04_Instrumentation.tex
++++ direct/Chapters/09_Experimental_Methods/04_Instrumentation.tex
+@@ -7,11 +7,11 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Instrument roles and retained outputs.}
++\caption{Instruments and recorded measurements.}
+ \label{tab:instrument-role-map}
+ \begin{tabularx}{\textwidth}{@{}p{0.29\textwidth}p{0.30\textwidth}X@{}}
+ \toprule
+-Quantity & Instrument & Evidence\\
++Quantity & Instrument & Recorded output\\
+ \midrule
+ Input voltage/current and power quality & SDS824X HD with DP10013/CP2100A & Waveforms and power-analysis readings\\
+ Switching and load events & MSO9254A & Time-domain captures\\
+@@ -26,13 +26,13 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Typical channel assignments in the time-domain tests. The capture-specific assignment takes precedence.}
++\caption{Typical oscilloscope channel assignments.}
+ \label{tab:channel-definitions}
+ \begin{tabularx}{\textwidth}{@{}p{0.13\textwidth}p{0.31\textwidth}X@{}}
+ \toprule
+ Channel & Quantity & Connection/scaling\\
+ \midrule
+-CH1 & Switch-node voltage & 100:1 high-voltage channel with the declared local reference\\
++CH1 & Switch-node voltage & 100:1 high-voltage channel referenced to the measured circuit\\
+ CH2 & Secondary-bulk voltage & 10:1 voltage probe at the bulk node\\
+ CH3 & Connector VBUS & 10:1 probe at the output node\\
+ CH4 & PA10, current, or event marker & Assigned according to the event\\
+@@ -42,7 +42,7 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Input power-analysis channel definitions.}
++\caption{Oscilloscope channels for input-power measurements.}
+ \label{tab:power-analysis-channel-definitions}
+ \begin{tabularx}{\textwidth}{@{}p{0.13\textwidth}p{0.30\textwidth}X@{}}
+ \toprule
+@@ -55,5 +55,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-Capture-specific node assignments, attenuation, range, coupling, bandwidth,
+-trigger, and timebase take precedence over channel color or number.
++Waveform interpretation requires the node assignments, probe attenuation,
++range, coupling, bandwidth, trigger, and timebase for each capture. Channel
++color and number alone do not identify the measurement.
+--- before/Chapters/09_Experimental_Methods/05_Probing.tex
++++ direct/Chapters/09_Experimental_Methods/05_Probing.tex
+@@ -25,11 +25,11 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Setup information needed for waveform interpretation.}
++\caption{Probe and trigger settings needed for each test.}
+ \label{tab:probe-role-map}
+ \begin{tabularx}{\textwidth}{@{}p{0.27\textwidth}X@{}}
+ \toprule
+-Waveform class & Relevant metadata\\
++Test & Probe and acquisition settings\\
+ \midrule
+ Startup/shutdown & Initial voltage, load, PA10 state, and trigger\\
+ Ripple/transient & Output node, probe coupling/bandwidth, sense point, and load event\\
+--- before/Chapters/09_Experimental_Methods/06_Test_Matrix.tex
++++ direct/Chapters/09_Experimental_Methods/06_Test_Matrix.tex
+@@ -7,7 +7,7 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Test classes used to characterize the prototype.}
++\caption{Prototype test program.}
+ \label{tab:master-test-matrix}
+ \begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}p{0.31\textwidth}X@{}}
+ \toprule
+@@ -27,7 +27,7 @@
+ \end{table}
+ 
+ Workbook entries, screenshots, waveform exports, firmware, and photographs
+-were retained. Numerical exports preserve their original precision; missing
+-setup details and peak markers limit derived quantities as discussed in
+-\cref{sec:method-uncertainty}. Plot lines connect measured points without
+-implying intermediate measurements or a fitted converter model.
++are included with the test data. Numerical exports keep the original
++precision. Missing setup details and peak markers limit the calculations,
++as discussed in \cref{sec:method-uncertainty}. Plot lines connect measured
++points; they are not fitted converter characteristics.
+--- before/Chapters/09_Experimental_Methods/07_Control_Tests.tex
++++ direct/Chapters/09_Experimental_Methods/07_Control_Tests.tex
+@@ -2,8 +2,8 @@
+ \label{sec:method-control}
+ 
+ The final baseline controller acquired secondary-bulk voltage at PA1 through
+-continuous ADC DMA and controlled switching intervals through burst-enable
+-output PA10. Saved UART settings, where available, identified the active
++continuous ADC DMA and controlled switching intervals through the MCU burst-enable
++pin PA10. Saved UART settings, where available, identified the active
+ configuration rather than source-code defaults.
+ 
+ Loaded tests checked delivered voltage and burst structure at a fixed output
+@@ -18,7 +18,7 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Observations used in control-response assessment.}
++\caption{Signals needed for control-response tests.}
+ \label{tab:control-tests}
+ \begin{tabularx}{\textwidth}{@{}p{0.27\textwidth}X@{}}
+ \toprule
+--- before/Chapters/09_Experimental_Methods/11_Uncertainty.tex
++++ direct/Chapters/09_Experimental_Methods/11_Uncertainty.tex
+@@ -33,9 +33,8 @@
+ independent-input expressions.
+ 
+ Incomplete setup records and repeat measurements prevent a numerical
+-uncertainty budget at every point. Workbook precision is preserved for
+-reproducibility rather than claimed accuracy; unsupported error bars are
+-omitted. Worst-case transients require repeated events and a defined
++uncertainty budget at every point. The workbook values are shown at their original precision. Error bars are
++omitted because the required uncertainty data are incomplete. Worst-case transients require repeated events and a defined
+ acceptance band, thermal equilibrium requires a temperature history, and
+ jitter requires measured timing. These limits apply throughout
+ Chapter~\ref{ch:results}.
+--- before/Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex
++++ direct/Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex
+@@ -6,7 +6,7 @@
+ in Section~\ref{sec:revised-plan-criteria}; current results are summarized in
+ Section~\ref{sec:res-revised-plan}.
+ 
+-\subsection{Identify and Repeat the V2 Baseline}
++\subsection{Repeat the V2 Baseline}
+ 
+ The reported approximately \SI{85}{\watt} V2 point must be repeated with
+ identified hardware, rework, magnetics, resonant values, controller target,
+@@ -19,7 +19,7 @@
+ and zero must be checked. If the original \SI{85}{\watt} configuration cannot
+ be reconstructed, a new baseline must state the known differences.
+ 
+-The measurement record must include analyzer identity, ranges and accuracy,
++The measurements must identify the analyzer, ranges and accuracy,
+ probe positions, bandwidth, averaging and timing, and thermal sensing method.
+ Protocol tests must identify advertised capabilities and requested/accepted
+ sink settings.
+@@ -52,11 +52,11 @@
+ \begin{table}[H]
+ \centering
+ \small
+-\caption[Planned power sequence for validation.]{Planned power sequence from the revised project plan. No row adds a measured result.}
++\caption[Planned load sequence.]{Planned load sequence for the remaining tests.}
+ \label{tab:method-revised-load-sequence}
+ \begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}Y@{}}
+ \toprule
+-Stage & Purpose and condition for proceeding\\
++Stage & Test and condition for increasing load\\
+ \midrule
+ \SI{25}{\watt}, \SI{45}{\watt}, \SI{65}{\watt} & Establish regulation, power quality, efficiency, stress, and heating at increasing load under an applicable output setting.\\
+ \SI{75}{\watt}, \SI{80}{\watt}, approximately \SI{85}{\watt} & Repeat the upper baseline range and document whether the plan's V2 point is reproduced.\\
+--- before/Chapters/10_Results/01_Prototype_Verification.tex
++++ direct/Chapters/10_Results/01_Prototype_Verification.tex
+@@ -4,25 +4,24 @@
+ The highest output calculated from DC-coupled connector voltage and load
+ current was \SI{79.89}{\watt}. The prototype was also tested at the
+ \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}
+-fixed settings with a \SI{240}{\volt}, \SI{50}{\hertz} input. Regulation was
+-obtained at the tested loads; the electrical and thermal records below
+-characterize these points without establishing a continuous rating.
++fixed settings with a \SI{240}{\volt}, \SI{50}{\hertz} input. Output voltage was
++regulated at the tested loads. A continuous-power rating still needs a
++defined-duration test at thermal equilibrium.
+ 
+-The identified final records used the baseline voltage-control firmware.
+-The high-load record used an earlier revision, while several intermediate-
+-voltage records do not identify a revision. The configurations are listed
+-in Table~\ref{tab:prototype-identity}; the software stages are explained in
+-\cref{sec:ctrl-firmware-identities}.
++The high-load test used an earlier firmware revision; several intermediate-
++voltage tests did not record the firmware version. Table~\ref{tab:prototype-identity}
++lists the hardware and firmware used in the tests, and
++\cref{sec:ctrl-firmware-identities} describes the development stages.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Hardware and control configuration of the final measurement campaign.}
++\caption{Test hardware and firmware.}
+ \label{tab:prototype-identity}
+ \begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}X@{}}
+ \toprule
+-Item & Recorded configuration\\
++Item & Test configuration\\
+ \midrule
+-Manufactured board & V1.0 PCB; V1.1 is the corrected schematic reference, not a second manufactured PCB\\
++Manufactured board & V1.0 PCB with rework; V1.1 documents the corrected circuit\\
+ Power stage & LMG2652RFBR GaN half bridge; nominal \SI{1}{\mega\hertz} carrier and charge-pump resonant stage\\
+ Resonant inductance & Two 7443640470B \SI{4.7}{\micro\henry} inductors in series\\
+ Output interface & MPQ4242GVE-0000-AEC1-P and USB-C connector\\
+@@ -36,12 +35,14 @@
+ Calculations use completed rows of the \texttt{Load Data} sheet in
+ \sourcefile{Data/measurements/Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx}.
+ Test identifiers link rows to oscilloscope and analyzer screenshots;
+-\emph{Planned} rows are excluded. The appendix retains complete tables and
+-source rows, and processed CSVs retain original and calculated values.
++\emph{Planned} rows are excluded. Complete tables and
++source rows are included in the appendix; processed CSVs include both
++original readings and calculated values.
+ 
+-DC-coupled captures establish absolute mean output; AC-coupled captures
+-provide detail and acquisition statistics. Thermal images locate labeled
+-surface heating. Additional raw waveform exports preserve original samples
+-but have incomplete load identification and probe calibration. Graphs show
+-measured points only. Insufficient uncertainty records preclude error bars;
+-instrument and measurement-field discrepancies are stated with the results.
++DC-coupled captures show mean output voltage; AC-coupled captures show
++small-signal detail and acquisition statistics. Thermal images show surface
++hotspots. The raw waveform exports include the original samples, but some
++lack load and probe-calibration details. Graphs show measured points only.
++Error bars are omitted because the uncertainty data are incomplete.
++Instrument disagreements and ambiguous measurement fields are discussed
++with the affected results.
+--- before/Chapters/10_Results/02_Startup_Shutdown.tex
++++ direct/Chapters/10_Results/02_Startup_Shutdown.tex
+@@ -1,8 +1,8 @@
+ \section{Startup and Shutdown}
+ \label{sec:res-startup}
+ 
+-The converter reached regulation at all four tested settings. The retained
+-records begin after startup and lack synchronized command, burst-enable
++The converter reached regulation at all four tested settings. The available
++captures begin after startup and lack synchronized command, burst-enable
+ PA10, output-voltage, and firmware-state traces. Startup delay, inrush,
+ overshoot, shutdown delay, and discharge time therefore remain unquantified.
+ The implemented sequences are described in Chapter~\ref{ch:control}.
+--- before/Chapters/10_Results/03_Steady_State.tex
++++ direct/Chapters/10_Results/03_Steady_State.tex
+@@ -15,7 +15,7 @@
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\textwidth]{Pictures/Thesis/10_Results/Rebuilt/regulation_and_logged_ripple.pdf}
+-\caption{Output regulation and original scope entries from the completed DC-coupled records. The right panel uses a logarithmic axis and reproduces the workbook VBUS peak-to-peak field, including anomalous values. It does not combine these values with AC-detail statistics.}
++\caption{Measured output-voltage error and the workbook VBUS peak-to-peak readings. The right panel uses a logarithmic scale and includes the anomalous workbook values. AC-coupled statistics are plotted separately.}
+ \label{fig:rebuilt-regulation}
+ \end{figure}
+ 
+@@ -28,7 +28,7 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Representative maximum-load and high-power DC records. Output power is calculated from the recorded average VBUS and load current; the pp column reproduces the original workbook field.}
++\caption{Maximum-load and high-power measurements. Output power is calculated from average VBUS and load current. The pp column contains the original workbook readings.}
+ \label{tab:steady-state-results}
+ \small
+ \begin{tabular}{@{}rrrrrr@{}}
+@@ -52,7 +52,7 @@
+ \SI{79.89}{\watt}. The test name ``75 W'' identifies a row whose actual
+ calculated output is \SI{73.97}{\watt}; the \SI{3.8}{\ampere} point
+ exceeds \SI{75}{\watt} electrically. Comparisons use calculated output;
+-original test names retain traceability.
++the original test names are kept so each point can be found in the workbook.
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -66,7 +66,7 @@
+ \includegraphics[width=\linewidth]{Data/measurements/evidence/PDO20_80W_40A/keysight_sw_secondary_vbus_20v_40a.png}
+ \caption{\SI{20}{\volt}, \SI{4}{\ampere}; \sourcefile{PDO20-80W-40A-001}.}
+ \end{subfigure}
+-\caption{Representative original DC-coupled screenshots. Yellow is the switch node, green is the secondary intermediate bus, and blue is USB-C VBUS according to the source notes. The complete screenshot groups remain in the measurement archive.}
++\caption{DC-coupled voltage captures. The source notes identify yellow as the switch node, green as the secondary bulk voltage, and blue as USB-C VBUS. The complete capture groups are included with the test data.}
+ \label{fig:pdo5-load-sweep-scope}
+ \label{fig:pdo20-high-power-scope}
+ \end{figure}
+@@ -74,15 +74,15 @@
+ Long-window ripple fields remain unresolved. At \SI{20}{\volt} and
+ \SI{0.25}{\ampere}, VBUS is listed as \SI{12.6564}{\volt}
+ ``amplitude/ripple.'' Several other pp entries are anomalously large.
+-Incomplete probe, measurement-selection, and window records preclude a
+-correction; the entries are retained but require remeasurement.
++The probe, selected measurement, and acquisition window were not fully
++recorded, so these values cannot be corrected reliably and must be remeasured.
+ 
+ \subsection{AC-coupled detail captures}
+ 
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.95\textwidth]{Pictures/Thesis/10_Results/Rebuilt/ac_detail_statistics.pdf}
+-\caption{Logged output-channel detail ranges from the AC-coupled captures. Several numbers represent the range of the oscilloscope's averaged-voltage statistics across acquisitions. They are not validated instantaneous peak-to-peak output ripple.}
++\caption{Output-channel statistics from the AC-coupled captures. Several readings are the range of average voltage across acquisitions, rather than instantaneous peak-to-peak ripple.}
+ \label{fig:rebuilt-ac-detail}
+ \end{figure}
+ 
+@@ -105,7 +105,7 @@
+ \includegraphics[width=\linewidth]{Data/measurements/evidence/PDO20_80W_4A_AC/keysight_20v_4a_ac_coupled_secondary_vbus.png}
+ \caption{\SI{20}{\volt}, \SI{4}{\ampere}; AC-coupled output detail.}
+ \end{subfigure}
+-\caption{Original AC-coupled detail screenshots. CH1 remains DC-coupled; CH2 and CH3 cannot establish absolute secondary-bus or VBUS voltage.}
++\caption{AC-coupled output-detail captures. CH1 is DC-coupled; CH2 and CH3 do not show absolute secondary-bus or VBUS voltage.}
+ \label{fig:ac-coupled-ripple-scope}
+ \end{figure}
+ 
+--- before/Chapters/10_Results/04_Load_Transients.tex
++++ direct/Chapters/10_Results/04_Load_Transients.tex
+@@ -28,14 +28,14 @@
+ \includegraphics[width=\linewidth]{Data/measurements/evidence/PDO20_80W_to_NoLoad/keysight_80w_to_no_load_secondary_vbus.png}
+ \caption{\SI{20}{\volt}: nominal \SI{80}{\watt} load removal.}
+ \end{subfigure}
+-\caption{Retained load-removal screenshots. The traces document the response around the event, but do not include a simultaneous terminal-current measurement and firmware-state log.}
++\caption{Voltage response during load removal. Load current and firmware state were not recorded simultaneously with these traces.}
+ \label{fig:load-transient-scope-evidence}
+ \label{fig:load-removal-scope-evidence}
+ \end{figure}
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Numerical fields retained for load-removal events. The acquisition-wide average and pp field are not the overshoot relative to the pre-step output.}
++\caption{Load-removal voltage readings. Average and peak-to-peak values cover the full acquisition and do not give the overshoot from the pre-step voltage.}
+ \label{tab:load-transient-results}
+ \small
+ \begin{tabularx}{\textwidth}{@{}L{0.26\textwidth}L{0.19\textwidth}L{0.16\textwidth}X@{}}
+@@ -53,7 +53,8 @@
+ \Delta V_\mathrm{over}=V_\mathrm{max}-V_\mathrm{pre},
+ \end{equation}
+ using the pre-step mean and a synchronized event marker. Recovery requires
+-a declared regulation band. Neither result can be derived from the retained
+-acquisition-wide pp fields. Missing synchronized burst-enable PA10 and UART
+-state also prevent attribution to \texttt{LBOOST}, voltage-window, or no-load
+-guarding. Repeated, event-marked steps are required to separate these responses.
++a specified regulation band. Neither result can be calculated from the
++acquisition-wide pp readings. Burst-enable PA10 and UART state were not
++recorded at the same time, so the response cannot be assigned to
++\texttt{LBOOST}, the voltage window, or no-load guarding. Repeated steps
++with event markers are needed to measure each response.
+--- before/Chapters/10_Results/05_Open_Circuit.tex
++++ direct/Chapters/10_Results/05_Open_Circuit.tex
+@@ -6,17 +6,17 @@
+ \SI{9.02697}{\volt}, and \SI{15.0537}{\volt} at the
+ \SI{5}{\volt}, \SI{9}{\volt}, and \SI{15}{\volt} settings,
+ approximately \SI{0.145}{\percent}, \SI{0.300}{\percent}, and
+-\SI{0.358}{\percent} above their targets. These means establish near-setpoint
+-no-load regulation.
++\SI{0.358}{\percent} above their targets. These averages show that the output stayed close to its setpoint
++without a load.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Completed no-load observations. The pp column retains the original workbook field; the \SI{20}{\volt} detail entry is a different measurement category.}
++\caption{No-load voltage readings. The pp column contains the workbook values; the \SI{20}{\volt} entry instead gives AC-coupled statistics.}
+ \label{tab:open-circuit-results}
+ \small
+ \begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}L{0.18\textwidth}L{0.19\textwidth}X@{}}
+ \toprule
+-Record & VBUS avg (V) & Logged pp/detail (V) & Evidence type\\
++Test & VBUS avg (V) & Logged pp/detail (V) & Capture type\\
+ \midrule
+ \sourcefile{PDO5-NL-001} & 5.00727 & 1.396 & DC-coupled\\
+ \sourcefile{PDO9-NL-001} & 9.02697 & 1.517 & DC-coupled\\
+--- before/Chapters/10_Results/06_ZVS.tex
++++ direct/Chapters/10_Results/06_ZVS.tex
+@@ -1,15 +1,15 @@
+ \section{Switching Waveforms and ZVS}
+ \label{sec:res-zvs}
+ 
+-The MCU burst-enable output PA10 groups the nominal \SI{1}{\mega\hertz}
+-carrier into packets. Figure~\ref{fig:pdo20-high-power-scope} records the
+-switch node and output-side voltages at identified high-power points; the
+-raw C2 exports resolve burst structure and carrier transitions.
++The MCU burst-enable pin PA10 groups the nominal \SI{1}{\mega\hertz}
++carrier into packets. Figure~\ref{fig:pdo20-high-power-scope} shows the
++switch-node and output voltages in the high-power tests. The raw C2
++waveforms show burst structure and individual switching transitions.
+ 
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\textwidth]{Pictures/Thesis/10_Results/Rebuilt/raw_switching_records.pdf}
+-\caption{Replotted raw C2 exports: overview records 00006 and 00008, and carrier-detail records 00007 and 00010 from \sourcefile{Waveforms_Richard}. Samples retain their original amplitude and time scale. The records illustrate different burst activity, but are not assigned to a workbook load point because matched operating metadata are incomplete.}
++\caption{Raw C2 waveforms: overview records 00006 and 00008, and carrier-detail records 00007 and 00010 from \sourcefile{Waveforms_Richard}. The original amplitude and time scales are unchanged. Load and setup details are incomplete, so these captures cannot be linked to individual workbook tests.}
+ \label{fig:switching-waveform-evidence}
+ \label{fig:rebuilt-raw-switching}
+ \end{figure}
+@@ -34,15 +34,15 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{What the retained switching evidence establishes.}
++\caption{Switching-waveform observations and missing measurements.}
+ \label{tab:zvs-results}
+ \begin{tabularx}{\textwidth}{@{}L{0.31\textwidth}X@{}}
+ \toprule
+-Evidence & Supported interpretation\\
++Capture & Observation or missing measurement\\
+ \midrule
+-Main DC-coupled screenshots & Switching and output-bus behavior at identified loads\\
++Main DC-coupled captures & Switching and output-bus behavior at identified loads\\
+ Raw overview and detail records & Burst structure and approximately \SI{1.03}{\mega\hertz} carrier activity in the exported records\\
+-Missing gate-source/deskew data & Residual turn-on voltage and actual dead time cannot be quantified\\
++Gate-source timing and deskew missing & Residual turn-on voltage and actual dead time cannot be measured from these captures\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/10_Results/07_Input_Power_Quality.tex
++++ direct/Chapters/10_Results/07_Input_Power_Quality.tex
+@@ -9,7 +9,7 @@
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\textwidth]{Pictures/Thesis/10_Results/Rebuilt/power_quality.pdf}
+-\caption{Logged input PF and current THD versus load. Filled markers identify DC output records; the open marker identifies the \SI{4.7}{\ampere} high-load record with AC-coupled output channels. PF and THD originate from different instruments in some rows. No line is drawn through unmeasured loads.}
++\caption{Measured input PF and current THD versus load. Filled markers use DC-coupled output measurements; the open marker is the \SI{4.7}{\ampere} test with AC-coupled output channels. Some PF and THD readings come from different instruments. Only measured points are shown.}
+ \label{fig:rebuilt-pq}
+ \end{figure}
+ 
+@@ -62,7 +62,7 @@
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\textwidth]{Pictures/Thesis/10_Results/Rebuilt/raw_line_records.pdf}
+-\caption{Original LeCroy line-timescale exports from captures 7 and 8. Channels retain their recorded offset and amplitude scale. The two C3 source files are byte-identical and do not constitute independent bus measurements. Undocumented probe scaling prevents quantitative input-power or PF extraction.}
++\caption{LeCroy line-timescale waveforms from captures 7 and 8, with the original offsets and amplitude scales. The two C3 files contain identical data. Probe scaling was not recorded, so input power and PF cannot be calculated from these traces.}
+ \label{fig:rebuilt-raw-line}
+ \end{figure}
+ 
+--- before/Chapters/10_Results/08_Efficiency.tex
++++ direct/Chapters/10_Results/08_Efficiency.tex
+@@ -3,8 +3,8 @@
+ \section{Efficiency and Power Difference}
+ \label{sec:res-efficiency}
+ 
+-Usable steady-state rows give output power, initial efficiency estimates,
+-and input--output power difference as
++Output power, initial efficiency, and input--output power difference
++were calculated as
+ \begin{align}
+ P_\mathrm{out}&=V_\mathrm{BUS,avg}I_\mathrm{out},
+ \label{eq:pout-from-vbus-iout}\\
+@@ -20,7 +20,7 @@
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\textwidth]{Pictures/Thesis/10_Results/Rebuilt/efficiency_and_loss.pdf}
+-\caption{Row-level efficiency and input-minus-output power calculated from eleven selected records. The marker shape identifies the fixed output voltage. The figures retain discrete observations and do not imply an interpolated efficiency characteristic or a separated power-stage loss model.}
++\caption{Initial efficiency estimates and input-minus-output power from eleven tests. Marker shapes identify the fixed output voltage. The points are not an efficiency curve or a breakdown of individual stage losses.}
+ \label{fig:rebuilt-efficiency-loss}
+ \end{figure}
+ 
+@@ -29,8 +29,8 @@
+ \SI{3}{\ampere}. The \SI{9}{\volt} points range from
+ \SI{83.6}{\percent} to \SI{86.8}{\percent}, the highest of the eleven
+ selected rows. The \SI{15}{\volt}, \SI{1}{\ampere} result is
+-\SI{86.4}{\percent}. Different instruments and operating histories prevent interpretation as one
+-calibrated efficiency map.
++\SI{86.4}{\percent}. The tests used different instruments and operating histories, so these
++values do not form a calibrated efficiency map.
+ 
+ \Needspace{20\baselineskip}
+ \input{Data/measurements/processed_rewrite/efficiency_table}
+@@ -48,7 +48,7 @@
+ No-load, transient, and AC-coupled output rows were excluded, along with the
+ \SI{3.9}{\ampere}, \SI{20}{\volt} row with an associated input capture
+ and the \SI{15}{\volt}, \SI{2}{\ampere} and \SI{3}{\ampere} rows
+-whose notes flag real-power disagreement. Siglent/ITECH disagreement remains in several selected groups; the workbook
+-choice preserves reproducibility rather than resolving instrument error.
++whose notes flag real-power disagreement. Siglent/ITECH disagreement remains in several selected groups; the selected
++workbook entries are used consistently, but the instrument error remains unresolved.
+ A matched sweep must synchronize settled input/output readings and account
+ for auxiliaries, cable drop, temperature, and propagated uncertainty.
+--- before/Chapters/10_Results/09_Thermal.tex
++++ direct/Chapters/10_Results/09_Thermal.tex
+@@ -5,12 +5,12 @@
+ and \SI{20}{\volt} image groups. The image labeled \SI{20}{\volt},
+ \SI{4}{\ampere} shows a \SI{90.4}{\celsius} maximum. At the labeled
+ \SI{20}{\volt}, \SI{4.7}{\ampere} condition, the maximum is
+-\SI{102.9}{\celsius}, the highest retained surface reading.
++\SI{102.9}{\celsius}, the highest recorded surface reading.
+ 
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.95\textwidth]{Pictures/Thesis/10_Results/Rebuilt/thermal_observations.pdf}
+-\caption{Maximum surface-temperature readings from the ten labeled thermal screenshots. The conditions follow the image labels. The markers do not establish a stabilized temperature-versus-load characteristic because dwell time and airflow were not recorded.}
++\caption{Maximum surface temperatures in the ten thermal images, using the load conditions written on each image. Run duration and airflow were not recorded, so thermal equilibrium cannot be checked.}
+ \label{fig:rebuilt-thermal}
+ \end{figure}
+ 
+@@ -36,7 +36,7 @@
+ \includegraphics[width=\linewidth,height=0.27\textheight,keepaspectratio]{Pictures/Thesis/10_Results/image_001_20v_4p7a.png}
+ \caption{\SI{20}{\volt}, \SI{4.7}{\ampere}.}
+ \end{subfigure}
+-\caption{Representative original thermal images, preserving the visible marker readings and supplied operating labels.}
++\caption{Thermal images with their camera readings and test labels.}
+ \label{fig:thermal-9v-2a-hotspot}
+ \end{figure}
+ 
+@@ -44,8 +44,8 @@
+ 
+ Hotspot components are incompletely identified, junction temperatures were
+ not measured, and lower reference markers are not ambient readings. Missing
+-duration, airflow, camera-distance, and plateau criteria preclude a thermal
+-steady-state result. The \SI{4.7}{\ampere} record also lacks DC output
++duration, airflow, camera distance, and temperature histories prevent a
++steady-state thermal comparison. The \SI{4.7}{\ampere} record also lacks DC output
+ voltage, so its label does not establish regulated \SI{94}{\watt} output.
+ 
+ The matched electrical results reach approximately \SIrange{74}{80}{\watt}.
+--- before/Chapters/10_Results/10_Firmware_Comparison.tex
++++ direct/Chapters/10_Results/10_Firmware_Comparison.tex
+@@ -3,12 +3,12 @@
+ 
+ The final controller regulates secondary-bulk voltage through PA1, classifies
+ load from primary current at PA2, and controls average energy transfer through
+-burst-enable output PA10. Carrier outputs PA8/PA9 retain nominal switching
++the MCU burst-enable pin PA10. Carrier outputs PA8/PA9 retain nominal switching
+ frequency. Both acquisition timing and feedback interpretation were revised.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Control-development stages and their experimental role.}
++\caption{Firmware changes during development.}
+ \label{tab:firmware-comparison}
+ \small
+ \begin{tabularx}{\textwidth}{@{}L{0.20\textwidth}L{0.33\textwidth}X@{}}
+@@ -18,7 +18,7 @@
+ Manual bring-up & Open-loop or manually commanded PA10 with fixed carrier & Established switching for low-energy hardware checks\\
+ Early closed loop & Blocking acquisition and voltage/current-product experiments & Exposed unsuitable acquisition timing and incorrect interpretation of PA2 as output current\\
+ DMA voltage control & Circular PA0/PA1/PA2 acquisition and PA1 bang-bang regulation & Removed blocking conversion from the active loop and selected secondary voltage as the feedback variable\\
+-Final voltage control & Loaded averaged duty, \texttt{LBOOST}, no-load guarding, and optional PA0 duty cap & Final documented control family used in the identified main \SI{5}{\volt} and \SI{20}{\volt} rows\\
++Final voltage control & Loaded averaged duty, \texttt{LBOOST}, no-load guarding, and optional PA0 duty cap & Controller used in the main identified \SI{5}{\volt} and \SI{20}{\volt} tests\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+@@ -28,7 +28,8 @@
+ PA1 voltage regulation, with PA2 retained for load classification and
+ diagnostics. Optional PA0 feed-forward caps PA10 duty.
+ 
+-Loaded and load-removal records demonstrate the combined controller, but
+-unmatched configurations prevent attribution to individual changes. For
++Loaded and load-removal tests show the combined controller response.
++The tests did not hold all other settings fixed while changing one feature,
++so the contribution of each change was not measured. For
+ example, \texttt{MAXRATE} requests a \SI{20}{\micro\second} period;
+ the achieved period and jitter require measured timing.
+--- before/Chapters/10_Results/11_Simulation_Hardware.tex
++++ direct/Chapters/10_Results/11_Simulation_Hardware.tex
+@@ -8,13 +8,13 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Scope of the comparison between inherited simulation and hardware.}
++\caption{Comparison of the inherited models with the prototype measurements.}
+ \label{tab:simulation-hardware}
+ \begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.34\textwidth}X@{}}
+ \toprule
+-Quantity & Experimental evidence & Comparison supported\\
++Quantity & Measurements & Model comparison\\
+ \midrule
+-Carrier and resonant switching & Identified scope captures and additional raw exports & Qualitative topology-level interpretation\\
++Carrier and resonant switching & Oscilloscope captures and raw waveform exports & Shows circuit operation; no numerical match\\
+ Switch-node ringing & Selected screenshots and raw node records & Qualitative only; layout and probe parasitics are not matched\\
+ Output regulation and detail & DC records and separate AC-detail captures & Experimental results; no matching final model\\
+ Input current and harmonics & Logged analyzer entries and transcribed spectra & Experimental results; filter, source impedance, and controller are not matched\\
+@@ -23,6 +23,6 @@
+ \end{tabularx}
+ \end{table}
+ 
+-Hardware is assessed against requirements at the recorded test conditions.
++The prototype results are compared with the requirements at the tested loads.
+ A predictive model comparison requires measured magnetics, component/layout
+ parasitics, the implemented controller, and matched input and load.
+--- before/Chapters/10_Results/12_Compliance_Table.tex
++++ direct/Chapters/10_Results/12_Compliance_Table.tex
+@@ -6,44 +6,43 @@
+ operation is a separate requirement: the \SI{100}{\watt} target, revised
+ \SI{65}{\watt} minimum, and earlier \SI{75}{\watt} validation criterion
+ still need a stabilized run of defined duration.
+-Section~\ref{sec:revised-plan-criteria} defines these criteria. The requirement
+-identifiers from Chapter~\ref{ch:requirements} distinguish implementation,
+-measured behavior at tested points, and remaining validation.
++Section~\ref{sec:revised-plan-criteria} defines these criteria. The measured behavior is compared with the requirements in
++Chapter~\ref{ch:requirements}.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Evidence-based assessment of the prototype requirements.}
++\caption{Prototype requirements and test results.}
+ \label{tab:requirements-compliance}
+ \scriptsize
+ \begin{tabularx}{\textwidth}{@{}L{0.08\textwidth}L{0.25\textwidth}X L{0.17\textwidth}@{}}
+ \toprule
+-ID & Requirement & Experimental or implementation basis & Assessment\\
++ID & Requirement & Measurements or implementation & Status\\
+ \midrule
+-FR-01 & Controlled startup & Implemented precharge; no synchronized startup capture & Partly assessed\\
++FR-01 & Controlled startup & Implemented precharge; no synchronized startup capture & Incomplete\\
+ FR-02 & Fixed carrier and PA10 control & Firmware signal structure and carrier/burst captures & Implemented and observed\\
+-FR-03 & PA1 voltage regulation & Loaded operation at the four fixed settings & Demonstrated at logged points\\
+-FR-04 & Reduced no-load energy & No-load voltage records; burst control implemented in firmware & Partly assessed\\
+-FR-05 & Recovery after load changes & Retained load-removal screenshots; recovery band and timing absent & Qualitative evidence\\
+-FR-06 & Latched secondary OVP & Function present in source; controlled trip event absent & Not experimentally verified\\
++FR-03 & PA1 voltage regulation & Loaded operation at the four fixed settings & Met at tested points\\
++FR-04 & Reduced no-load energy & No-load voltage records; burst control implemented in firmware & Incomplete\\
++FR-05 & Recovery after load changes & Load-removal captures; recovery band and timing missing & Response recorded\\
++FR-06 & Latched secondary OVP & Implemented in firmware; no measured trip event & Trip not measured\\
+ FR-07 & ADC DMA acquisition & Circular ADC DMA in the baseline firmware; live timing logs incomplete & Implemented\\
+ FR-08 & UART configuration and diagnostics & Commands present in source; complete run logs absent & Implemented\\
+ \midrule
+ PR-01 & \SI{100}{\watt} continuous target; revised \SI{65}{\watt} minimum; earlier \SI{75}{\watt} validation criterion & \SI{79.89}{\watt} maximum DC-derived point; thermal images without stabilization record & Continuous criteria unverified; \SI{100}{\watt} not demonstrated\\
+ PR-02 & State tested AC input & Logged \SI{240}{\volt}, \SI{50}{\hertz} condition & One input condition tested\\
+-PR-03 & State tested output modes & \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} loaded records & Demonstrated at logged points\\
+-PR-04 & Report mean, ripple, and transients & Mean established; pp/statistic ambiguity and transient timing gaps identified & Partly assessed\\
++PR-03 & State tested output modes & \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} loaded records & Met at tested points\\
++PR-04 & Report mean, ripple, and transients & Average voltage measured; ripple definitions and transient timing incomplete & Incomplete\\
+ PR-05 & Maximum no-load voltage and OVP margin & No-load captures without complete peak/threshold pair & Unresolved\\
+-PR-06 & PF and current THD & Logged analyzer entries and current spectra & Recorded; no standards determination\\
+-PR-07 & Efficiency with stated boundary & Eleven transparent screening calculations; boundary uncertainty retained & Screening result\\
++PR-06 & PF and current THD & Logged analyzer entries and current spectra & Measured; standard compliance not tested\\
++PR-07 & Efficiency at defined input/output points & Eleven initial estimates; included supplies and timing remain uncertain & Initial estimate\\
+ PR-08 & Thermal condition and temperature & Ten labeled images; \SI{90.4}{\celsius} at \SI{4}{\ampere}; dwell/airflow absent & Surface observations\\
+-PR-09 & Link results to configuration & Test IDs, source rows, archived screenshots and raw-file checksums & Traceable; metadata incomplete\\
+-PR-10 & Identify active overload limiter & No controlled isolation of limiting mechanism & Unresolved\\
++PR-09 & Link results to configuration & Test IDs, source rows, archived screenshots and raw-file checksums & Linked; setup details incomplete\\
++PR-10 & Identify active overload limiter & The component or control action limiting power was not isolated & Unresolved\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+ \FloatBarrier
+ 
+-Average-voltage regulation is established at the logged points. A rated
++Average output voltage stayed near the selected level at the tested loads. A rated
+ operating range still requires synchronized power/ripple measurements,
+ thermal endurance, transient/protection timing, and gate-referenced switching
+ captures. USB-PD, safety, harmonic-standard, and EMI qualification remain open.
+--- before/Chapters/10_Results/13_Failures_Lessons.tex
++++ direct/Chapters/10_Results/13_Failures_Lessons.tex
+@@ -8,7 +8,7 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Issues that shaped the final implementation and interpretation.}
++\caption{Bring-up problems, corrections, and design lessons.}
+ \label{tab:failure-log}
+ \small
+ \begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.36\textwidth}X@{}}
+@@ -20,8 +20,8 @@
+ Irregular no-load pulse structure & Revised minimum-cycle handling and no-load duty logic & Schedule complete carrier cycles and limit residual energy explicitly\\
+ Energy after load removal & Added no-load guarding, voltage windows, and sag recovery paths & Loaded and unloaded operation require distinct control behavior\\
+ Ambiguous output detail fields & Kept DC, AC detail, and acquisition statistics separate & A range of average readings is not instantaneous output ripple\\
+-Disagreeing power instruments & Preserved source entries and used qualified screening calculations & State the measurement boundary and synchronization before interpreting losses\\
+-High-load temperature rise & Retained camera maxima and their labeled conditions & Electrical operation alone does not establish a continuous rating\\
++Disagreeing power instruments & Kept the original readings and calculated initial efficiency estimates & State the measurement boundary and synchronization before interpreting losses\\
++High-load temperature rise & Recorded camera maxima and the stated test conditions & Electrical operation alone does not establish a continuous rating\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/10_Results/14_Revised_Plan_Status.tex
++++ direct/Chapters/10_Results/14_Revised_Plan_Status.tex
+@@ -9,13 +9,12 @@
+ \cite{projectOctoberPlan}. Section~\ref{sec:revised-plan-criteria} gives
+ the acceptance criteria used below.
+ 
+-The retained V1.0 baseline, \sourcefile{PDO20-80W-40A-001}, row 27,
++The V1.0 reference test, \sourcefile{PDO20-80W-40A-001}, row 27,
+ gives \SI{19.9732}{\volt} at \SI{4}{\ampere}, or
+ \SI{79.8928}{\watt}, with the baseline voltage-control firmware. The
+ reported \SI{85}{\watt} V2 point requires separate board, firmware,
+-settings, and measurement identification. The revision name does not establish
+-which assembly was tested; the earlier configuration must be reconstructed
+-before the reported \SI{85}{\watt} serves as a change baseline.
++settings, and measurements. The hardware and settings used for that test
++must be recovered before the reported \SI{85}{\watt} point can be repeated.
+ 
+ Section~\ref{sec:res-v2-testing} reports preliminary powered V2 observations.
+ The \SI{100}{\watt} constant-power load setting is a setpoint; measured input
+@@ -25,19 +24,19 @@
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption[Status of revised-plan deliverables.]{Revised-plan deliverables and their status in the results reported here. Scheduled dates are not completion records.}
++\caption[Progress against the revised plan.]{Progress against the revised project plan and remaining tests.}
+ \label{tab:revised-plan-results-status}
+ \scriptsize
+ \begin{tabularx}{\textwidth}{@{}L{0.07\textwidth}L{0.24\textwidth}Y L{0.23\textwidth}@{}}
+ \toprule
+-ID & Required deliverable & Available result & Remaining assessment\\
++ID & Planned work & Result & Remaining work\\
+ \midrule
+ AP-01 & \SI{100}{\watt} target; \SI{65}{\watt} continuous minimum & Highest matched electrical point is \SI{79.8928}{\watt}; earlier tests include points above \SI{75}{\watt} & No defined-duration, stabilized run establishes the continuous criteria\\
+-AP-02 & Repeat the reported approximately \SI{85}{\watt} V2 baseline & The plan reports the point; the retained matched dataset reaches approximately \SI{80}{\watt} on the identified older assembly & Baseline identity, original run, and matched repeat remain unverified here\\
++AP-02 & Repeat the reported approximately \SI{85}{\watt} V2 baseline & The plan reports the point; the retained matched dataset reaches approximately \SI{80}{\watt} on the identified older assembly & Original hardware/settings and a repeat test are still needed\\
+ AP-03 & Explain the power gap and identify the highest repeatable safe output & Earlier screening and thermal records; secondary-winding heating and limited power increase; later V2 input-bridge heating with a suspected interlayer bottleneck & No stage-loss allocation, verified switching improvement, controlled limiter diagnosis, or established safe-power ceiling\\
+ AP-04 & Validate supported fixed PDOs and PPS & Electrical results at \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}; qualitative load removal & Negotiation, PPS behavior, defined stability bands, and protection responses need matched tests\\
+ AP-05 & Defined-duration thermal and reliability assessment & Ten labeled surface-temperature images; \SI{90.4}{\celsius} maximum at the labeled \SI{20}{\volt}, \SI{4}{\ampere} condition; later V2 run stopped as heating continued & Dwell time, stabilization, component identities, ambient/airflow, and endurance are incomplete\\
+-AP-06 & V3 design and release package & A slimmed edge-card layout was prepared with the USB-PD section removed and secondary rectification retained & Release reviews, manufacturing/assembly readiness, and replacement-magnetics validation remain incomplete\\
++AP-06 & V3 design and release package & A slimmed edge-card layout was prepared with the USB-PD section removed and secondary rectification retained & Design review, fabrication/assembly checks, and replacement-magnetics tests remain incomplete\\
+ AP-07 & Compare V2/V3 power density using one volume convention & Approximately \SI{8}{\percent} net volume reduction was estimated for the reduced-function V3 layout & Matched dimensions, included hardware, continuous power, and thermal conditions are not established for both revisions\\
+ AP-08 & V3 readiness decision or documented fallback & V1 and V2 supply the operating results; V3 reached a slimmed layout, with new magnetics not installed & A V3 readiness decision and matched power/thermal tests remain open\\
+ \bottomrule
+--- before/Chapters/10_Results/15_V2_Testing_Update.tex
++++ direct/Chapters/10_Results/15_V2_Testing_Update.tex
+@@ -18,22 +18,22 @@
+ The reported software dead-time setting was approximately
+ \SI{60}{\nano\second}. Half-bridge heating decreased after the tank and
+ timing changes, but this observation does not verify ZVS. Synchronized
+-switch-voltage, gate-command, and current captures are required. Firmware
+-identity, timing readback, and effective switch dead time were not recorded;
++switch-voltage, gate-command, and current captures are required. The firmware
++version, timing readback, and effective switch dead time were not recorded;
+ archived-source timing is described in Section~\ref{sec:hw-v2}.
+ 
+ \subsection{Secondary Output and Comparison with V1}
+ 
+ Secondary-winding heating and limited power increase were observed near
+ \SIrange{3.3}{3.6}{\ampere} at the secondary output. No corresponding
+-voltage was retained, so this range is not converted into a power result
++voltage was recorded, so this range is not converted into a power result
+ or substituted for the earlier matched connector measurements.
+ 
+ The secondary winding was suspected as a limit, without separate loss
+ measurements to distinguish magnetic, interconnect, rectifier, resonant,
+ and control effects. V2 performance was qualitatively comparable to V1,
+ while the modified tank shifted the main heating concern to the input
+-section. Matched efficiency and temperature equivalence was not established.
++section. A quantitative efficiency and temperature comparison still requires matched tests.
+ 
+ \subsection{Input-Bridge Heating}
+ 
+@@ -55,7 +55,7 @@
+ \begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.80\linewidth]{Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg}
+-\caption{V2 thermal image from a run reported as \SI{95}{\watt}. The camera reports a regional surface maximum of \SI{70.0}{\celsius} in R3 and \SI{61.5}{\celsius} in R1. These are displayed surface-region values, not diode-junction temperatures. The image was not mapped to individual diodes or to a specific stage of the later diode-replacement and timing changes.}
++\caption{V2 thermal image during the reported \SI{95}{\watt} run. The displayed surface maxima are \SI{70.0}{\celsius} in R3 and \SI{61.5}{\celsius} in R1. The image does not identify individual diode junctions or show which diode and timing changes were fitted.}
+ \label{fig:v2-bridge-thermal-observation}
+ \end{figure}
+ \FloatBarrier
+@@ -65,7 +65,7 @@
+ but the fitted path and voltage drop were not measured. Persistence after
+ diode replacement leaves the loss mechanism unresolved.
+ 
+-\subsection{Next Layout Changes and Test Status}
++\subsection{Next Layout Changes}
+ 
+ The next layout will widen current paths and increase heat-spreading copper;
+ rectifier relocation is also under consideration. Matched tests are required
+@@ -89,7 +89,7 @@
+ 
+ \vspace{0.8em}
+ \includegraphics[width=0.86\linewidth]{Data/measurements/v2_results/evidence/v2_board_detail_original.jpg}
+-\caption{V2 assembly overview (upper left), thermal-camera bench arrangement (upper right), and component-side detail (lower). The photographs show the V2 hardware and test setup; a common test configuration across all images has not been verified.}
++\caption{V2 assembly overview (upper left), thermal-camera setup (upper right), and component-side detail (lower).}
+ \label{fig:v2-board-test-photos}
+ \end{figure}
+ \FloatBarrier
+--- before/Chapters/10_Results/16_V3_Design_Outcome.tex
++++ direct/Chapters/10_Results/16_V3_Design_Outcome.tex
+@@ -11,11 +11,11 @@
+ \begin{table}[htbp]
+ \centering
+ \small
+-\caption{Development outcomes across the prototype revisions.}
++\caption{Main changes and results for each prototype.}
+ \label{tab:revision-development-outcomes}
+ \begin{tabularx}{\textwidth}{@{}L{0.14\textwidth}L{0.34\textwidth}Y@{}}
+ \toprule
+-Revision & Main development & Outcome and remaining limit\\
++Revision & Main change & Result and remaining work\\
+ \midrule
+ V1.0/G071 & Converter integration and DMA-based burst control with the downstream USB-C stage & Matched electrical measurements and load-event records; thermal and loss limitations remained\\
+ V2/F410 & Integrated controller, browser interface, and leakage-only tank trial & Comparable qualitative bench performance; input-bridge heating remained, with copper and a possible via bottleneck under investigation\\
+--- before/Chapters/11_Discussion/01_Key_Findings.tex
++++ direct/Chapters/11_Discussion/01_Key_Findings.tex
+@@ -1,4 +1,4 @@
+-\section{Measured Performance and Revision Outcomes}
++\section{Measured Performance and Prototype Changes}
+ \label{sec:disc-findings}
+ 
+ The charge-pump PFC resonant topology from the earlier AC--DC and LED-driver
+@@ -20,8 +20,8 @@
+ simultaneous stage-power and temperature measurements; VBUS regulation
+ alone does not establish conversion performance.
+ 
+-V2 did not establish greater available output than V1. After the tank
++Higher output from V2 than V1 was not demonstrated. After the tank
+ changes, the dominant heating concern shifted to the input bridge. V3
+-addressed occupied volume by removing the USB-PD section. Hotspot
+-relocation, estimated design-volume reduction, and sustained-power
+-improvement therefore remain separate outcomes.
++addressed occupied volume by removing the USB-PD section. Moving the hotspot does not show that total loss fell. The smaller layout
++also needs power and thermal tests before sustained-power improvement
++can be claimed.
+--- before/Chapters/11_Discussion/03_Control_Contribution.tex
++++ direct/Chapters/11_Discussion/03_Control_Contribution.tex
+@@ -2,7 +2,7 @@
+ \label{sec:disc-control}
+ 
+ The \SI{1}{\mega\hertz} carrier is generated by the MCU carrier timer,
+-TIM1, while the burst-enable output PA10 controls transfer intervals.
++TIM1, while the MCU burst-enable pin PA10 controls transfer intervals.
+ ADC measurements set average demand without shifting the active carrier
+ away from the selected resonant region.
+ 
+@@ -18,7 +18,7 @@
+ firmware, secondary-voltage feedback PA1 closes the voltage loop, while
+ PA2 supports load classification and diagnostics.
+ 
+-Loaded demand is initialized from retained average duty and trimmed by
++Loaded demand is initialized from the stored average duty and trimmed by
+ voltage error. Voltage sag invokes additional duty; the upper threshold
+ suppresses transfer. Separate no-load caps and holdoff thresholds reduce
+ charging after detachment. Optional primary-voltage feed-forward caps
+--- before/Chapters/11_Discussion/06_Reference_Comparison.tex
++++ direct/Chapters/11_Discussion/06_Reference_Comparison.tex
+@@ -8,7 +8,7 @@
+ \small
+ \begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.23\textwidth}Y@{}}
+ \toprule
+-System & Operating context & Reported performance\\
++System & Test conditions & Reported performance\\
+ \midrule
+ Ammar et al. (2020) \cite{ammar2020chargepump} & \SI{1}{\mega\hertz}, \SI{50}{\watt} resonant AC--DC converter & PF 0.99; THD 8.6\%; efficiency up to approximately 88\%\\
+ Ammar et al. (2021) \cite{ammar2021led} & \SI{1}{\mega\hertz}, up to \SI{42}{\watt}, isolated LED driver & PF 0.99; THD 6\%; full-load efficiency approximately 90\%\\
+--- before/Chapters/11_Discussion/08_Lessons_Learned.tex
++++ direct/Chapters/11_Discussion/08_Lessons_Learned.tex
+@@ -22,7 +22,7 @@
+ power-density comparison must include the equivalent external output
+ functions.
+ 
+-Board identity, settings, raw waveforms, power readings, and temperature
+-records must be retained together. Screenshots alone can omit coupling,
+-averaging, and firmware state; the data appendix and rebuilt plots show
+-where these differences affect interpretation.
++Each test needs the board version, settings, waveforms, power readings,
++and temperatures recorded together. Screenshots can omit coupling,
++averaging, and firmware state, which limits what can be calculated from
++them. The data appendix and replotted measurements show these gaps.
+--- before/Chapters/11_Discussion/09_Future_Improvements.tex
++++ direct/Chapters/11_Discussion/09_Future_Improvements.tex
+@@ -7,10 +7,10 @@
+ temperatures, and synchronized input/output power.
+ 
+ The approximately \SI{85}{\watt} V2 result in the revised plan
+-\cite{projectOctoberPlan} requires its original records and an identified
+-repeat before comparison with the older assembly's
++\cite{projectOctoberPlan} needs to be repeated with its hardware and settings recorded
++before comparison with the older assembly's
+ \SI{79.8928}{\watt} result. Input, secondary-bus, connector, and auxiliary
+-power should be measured together, with identified temperatures tracked
++power should be measured together, with component temperatures followed
+ to equilibrium. Section~\ref{sec:disc-plan-gap} defines the baseline and
+ controlled retests.
+ 
+@@ -24,8 +24,8 @@
+ The V3 edge-card layout retains secondary rectification and removes the
+ USB-PD section. Completion requires the selected transformer, verified
+ interlayer current paths, release review, assembly inspection, and gradual
+-power-up. Its estimated volume reduction must be checked with the
+-external output function and complete assembly defined.
++power-up. Its estimated volume reduction must be checked after including the
++external output stage and all hardware needed by the complete supply.
+ 
+ Power-density comparison requires the same volume convention, included
+ hardware, clearance/cooling allowance, and supported output-power basis
+--- before/Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex
++++ direct/Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex
+@@ -31,18 +31,18 @@
+ The original \SI{85}{\watt} records should be recovered and repeated
+ with identified hardware and firmware. The \SI{79.8928}{\watt} result
+ belongs to the older assembly. Each hardware or MCU-port change requires
+-a matched baseline and test identity.
++a comparison test with the board and settings recorded.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption[Measurements for controlled converter changes.]{Measurements needed before and after a controlled converter change. The existing observations define questions, rather than a ranked component-loss result.}
++\caption[Measurements for diagnosing the power limit.]{Measurements needed before and after each change to diagnose the power limit.}
+ \label{tab:plan-gap-diagnostic-matrix}
+ \small
+ \begin{tabularx}{\textwidth}{@{}L{0.20\textwidth}L{0.26\textwidth}Y@{}}
+ \toprule
+-Question & Existing indication & Matched baseline/retest record and resulting decision\\
++Question & Current result & Measurements needed\\
+ \midrule
+-Power boundary and instrument agreement & Selected readings give the screening difference above; instruments disagree & Measure AC input, secondary-bus, connector, and auxiliary powers together, including cable drops and uncertainty. Establish the actual stage differences before attributing loss.\\
++Power readings and measurement points & Selected readings give the screening difference above; instruments disagree & Measure AC input, secondary-bus, connector, and auxiliary powers together, including cable drops and uncertainty. Establish the actual stage differences before attributing loss.\\
+ Magnetic and interconnect loss & The installed magnetic path transfers power, but its individual losses are not measured & Identify the fitted assemblies and equivalent circuit; capture resonant current, winding/interconnect resistance, flux-related waveforms, and temperature. Use these to choose a magnetic, connection, or thermal change.\\
+ Semiconductor stress and commutation & Switching and ringing are visible; gate timing and calibrated commutation current are missing & Capture matched device voltage/current and gate timing, including burst starts and ends. Check peak/RMS stress and turn-on behavior before changing frequency, dead time, or drive settings.\\
+ Output stage and control limit & VBUS average remains regulated near the highest recorded load; the active limiter is unidentified & Record secondary bus, VBUS, external load current, board-specific EN, commanded duty, and firmware state. Distinguish lost headroom, a duty limit, protection, and an output-stage limit.\\
+@@ -56,9 +56,9 @@
+ Controlled retests should vary one component or parameter at fixed input,
+ output setting, load, cooling, and initial temperature. Board and firmware,
+ changed values, synchronized power, waveforms, and temperatures should be
+-retained together. A reduced hotspot is useful only if regulation and all
+-other stress limits remain acceptable. The existing records do not yet
+-support a ranked component-loss allocation.
++retained together. Lower temperature at one hotspot is useful only if regulation and all
++other stress limits remain acceptable. Individual component losses have
++not yet been separated.
+ 
+ Once the baseline meets its declared limits, the planned
+ \SI{90}{\watt}, \SI{95}{\watt}, and \SI{100}{\watt} steps can be
+--- before/Chapters/12_Conclusion/01_Project_Summary.tex
++++ direct/Chapters/12_Conclusion/01_Project_Summary.tex
+@@ -24,13 +24,13 @@
+ Later bench tests removed the external series inductor and used
+ transformer leakage with approximately \SI{1.66}{\nano\farad}.
+ Lower half-bridge heating was reported after the tank and timing changes, while
+-input-bridge heating persisted. The thermal image was identified as a
+-\SI{95}{\watt} run without a continuous-rating record. These qualitative
+-V2 observations remain separate from the matched V1.0 measurements.
++input-bridge heating persisted. The thermal image was reported as a
++\SI{95}{\watt} run, with no duration or thermal-equilibrium record. These
++V2 observations cannot be compared quantitatively with the V1.0 measurements.
+ 
+ The revised plan retains \SI{100}{\watt} continuous as the target and
+ \SI{65}{\watt} continuous as the minimum \cite{projectOctoberPlan}.
+-Neither is established by a stabilized, defined-duration run, including
++No stabilized run of defined duration has verified these levels or
+ the earlier \SI{75}{\watt} milestone. The reported approximately
+ \SI{85}{\watt} V2 baseline requires an identified repeat, separate from
+ the \SI{79.89}{\watt} result above.
+@@ -38,7 +38,6 @@
+ V3 was prepared as a slimmer edge-card layout with secondary rectification
+ and the USB-PD output section removed. The estimated net volume reduction
+ is approximately \SI{8}{\percent}. Replacement planar magnetics were
+-not installed within the available time. V3 therefore establishes layout
+-development; its loss, thermal, and continuous-power performance remain
+-untested. Equivalent USB-C functionality requires the external output
++not installed within the available time. V3 reached the layout stage; its losses, temperatures,
++and continuous output were not tested. Equivalent USB-C functionality requires the external output
+ stage to be included in the comparison.
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ direct/Chapters/12_Conclusion/03_Contributions.tex
+@@ -18,8 +18,8 @@
+ the schematic and PCB prints. Archived firmware and supporting software
+ are included with the thesis and have been checked in software.
+ Preliminary powered observations appear in \cref{sec:res-v2-testing};
+-the bench firmware identity was not recorded, and matched power and
+-thermal-endurance tests remain outstanding.
++the firmware version used on the bench was not recorded, and comparable
++power and thermal-endurance tests are still needed.
+ 
+ The prototype was evaluated for output settings, high-power operation,
+ input-current quality, initial efficiency, load removal, no-load behavior,
+--- before/Chapters/12_Conclusion/04_Future_Work.tex
++++ direct/Chapters/12_Conclusion/04_Future_Work.tex
+@@ -7,8 +7,8 @@
+ verified before additional copper or diode relocation is selected.
+ Commutation waveforms are also required to establish ZVS.
+ 
+-The approximately \SI{85}{\watt} V2 result requires recovery of the
+-original records and an identified repeat \cite{projectOctoberPlan}.
++The approximately \SI{85}{\watt} V2 result needs to be repeated using the
++original hardware and settings \cite{projectOctoberPlan}.
+ The \SI{79.8928}{\watt} result belongs to the older assembly.
+ Synchronized input, secondary-bus, connector, and auxiliary power,
+ with component temperature histories, should establish loss distribution
+--- before/Chapters/12_Conclusion/chapter.tex
++++ direct/Chapters/12_Conclusion/chapter.tex
+@@ -1,10 +1,10 @@
+ \chapter{Conclusion}
+ \label{ch:conclusion}
+ 
+-A detachable-output laboratory supply was developed from the inherited
+-converter through V1 testing, V2 integration, and a reduced V3 edge-card
+-layout. The conclusions separate demonstrated operating points and layout
+-changes from unresolved loss mechanisms and continuous-power performance.
++A USB-C laboratory supply was developed from the inherited converter
++through V1 testing, V2 integration, and a reduced V3 edge-card layout.
++The tests demonstrated output regulation and identified magnetic and
++input-path heating as priorities for further development.
+ 
+ \input{Chapters/12_Conclusion/01_Project_Summary}
+ \input{Chapters/12_Conclusion/02_Research_Questions}

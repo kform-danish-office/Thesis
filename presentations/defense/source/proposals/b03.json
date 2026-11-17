@@ -1,0 +1,65 @@
+{
+  "slide_id": "b03",
+  "section": "backup",
+  "position": 18,
+  "purpose": "Answer questions about the complete V2 power circuit and attribution of the earlier topology and magnetic designs.",
+  "title": "V2 power circuit and earlier work",
+  "takeaway": "The V2 power circuit integrates the earlier charge-pump topology and supplied planar magnetics. Planning only; not a visible text block.",
+  "visible_content": {
+    "body": [],
+    "caption": "V2 schematic before the tank change",
+    "citation_1": "Ammar et al., IEEE JESTPE, 2020 · doi: 10.1109/JESTPE.2020.2966143",
+    "citation_2": "Ammar et al., IEEE JESTPE, 2021 · doi: 10.1109/JESTPE.2021.3083404",
+    "phase_label": "Backup"
+  },
+  "visual": {
+    "layout": "Figure-led backup. Maximize the complete colour power-circuit schematic within the usable width, preserving aspect ratio and all blocks. Put the caption and two compact citation lines below. The drawing is an embedded asset: retain all its original headings, component designators, values and net labels without rewriting or changing connections.",
+    "asset": "/workspace/presentations/defense/dtu-supervisor-story/assets/v2_complete_power_schematic.png",
+    "vector_asset": "/workspace/presentations/defense/dtu-supervisor-story/assets/v2_complete_power_schematic.pdf",
+    "original": "/workspace/thesis/Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf",
+    "asset_owned_labels": "All text printed in the schematic is part of the approved embedded drawing and remains unchanged.",
+    "interpretation": "L4 is shown as the external series inductor before it was removed during the later V2 tank change."
+  },
+  "speaker_notes": "The V2 circuit combines the input filter and rectifier, charge-pump and resonant branches, GaN half bridge, transformer, and secondary rectifier. The drawing shows the circuit before the tank change, with the external series inductor L4 still present. The charge-pump conversion principle and analytical design method came from earlier work by Ahmed M. Ammar, Frederik M. Spliid, Yasser Nour, and Arnold Knott. Their papers are “Analysis and Design of a Charge-Pump-Based Resonant AC–DC Converter With Inherent PFC Capability,” IEEE Journal of Emerging and Selected Topics in Power Electronics, 2020, DOI 10.1109/JESTPE.2020.2966143, and “A 1-MHz Resonant LED Driver With Charge-Pump-Based Power Factor Correction,” the same journal, 2021, DOI 10.1109/JESTPE.2021.3083404. The planar inductor and transformer came from earlier DTU work by Bima Nugraha Sanusi and the DTU Power Electronics group; component measurements were made by Máni Gautason. This project integrated the supplied magnetics and developed the hardware, control, sensing, local supplies and USB-C interface, then tested the assembled supply.",
+  "transition": null,
+  "duration_seconds": 90,
+  "sources": [
+    {
+      "type": "drawing",
+      "reference": "/workspace/presentations/defense/dtu-supervisor-story/assets/v2_complete_power_schematic.pdf",
+      "supports": "Complete colour V2 power circuit; L4 is present before the tank modification."
+    },
+    {
+      "type": "schematic master",
+      "reference": "/workspace/thesis/Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf",
+      "supports": "Current V2 colour schematic master."
+    },
+    {
+      "type": "bibliography",
+      "reference": "/workspace/thesis/bibliography.bib",
+      "supports": "Authors, full titles, journal, years and DOIs for the two Ammar papers; metadata independently checked against Crossref DOI records."
+    },
+    {
+      "type": "magnetics attribution",
+      "reference": "/workspace/thesis/Chapters/06_Magnetics_Integration/01_Provenance.tex",
+      "supports": "Bima Nugraha Sanusi and DTU Power Electronics group supplied magnetic designs; Máni Gautason made component measurements."
+    },
+    {
+      "type": "contributions",
+      "reference": "/workspace/thesis/Chapters/01_Introduction/05_Contributions_Attribution.tex",
+      "supports": "Earlier charge-pump principle and analytical method, author integration and control, testing, and tank change."
+    }
+  ],
+  "checks": {
+    "verified": [
+      "The 2020 and 2021 article titles, author lists, journal and DOIs match the thesis bibliography and Crossref metadata.",
+      "The V2 drawing shows L4 before its later removal; its original printed labels are retained as embedded-asset content.",
+      "The attribution of planar magnetics and component measurements matches the thesis.",
+      "The visible_content keys exactly match the manifest, including phase_label Backup."
+    ],
+    "unresolved": [
+      "Check the full-width schematic at projected size after rendering; the embedded component text is small."
+    ],
+    "assembly": "Backup, approximately 90 seconds if called. Preserve the full original drawing and use the vector asset where feasible; do not alter its labels or connections."
+  }
+}

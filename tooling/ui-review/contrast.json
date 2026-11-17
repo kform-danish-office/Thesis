@@ -1,0 +1,46 @@
+[
+  {
+    "url": "/",
+    "text": [
+      {
+        "tag": "SPAN",
+        "id": "output-symbol",
+        "classes": "output-symbol",
+        "text": "●",
+        "ratio": 2.689076772599385,
+        "color": "rgb(143, 162, 155)",
+        "bg": "rgb(255, 255, 255)",
+        "size": "14px"
+      }
+    ],
+    "boundaries": [],
+    "missingLabels": []
+  },
+  {
+    "url": "/calculator.html",
+    "text": [
+      {
+        "tag": "SPAN",
+        "id": "",
+        "classes": "",
+        "text": "/",
+        "ratio": 2.7947041790888028,
+        "color": "rgb(142, 158, 155)",
+        "bg": "rgb(255, 255, 255)",
+        "size": "11px"
+      },
+      {
+        "tag": "SPAN",
+        "id": "",
+        "classes": "",
+        "text": "µH",
+        "ratio": 2.895389300794926,
+        "color": "rgb(126, 145, 158)",
+        "bg": "rgb(237, 242, 245)",
+        "size": "12px"
+      }
+    ],
+    "boundaries": [],
+    "missingLabels": []
+  }
+]

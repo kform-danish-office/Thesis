@@ -1,0 +1,203 @@
+[
+  {
+    "slide_id": "s01",
+    "proposal_revision": 2,
+    "decision": "Accept",
+    "reasons": [
+      "The genuine V2 prototype photograph is added on the right of the title slide. The original crop and provenance are verified; existing title, visible text, notes, transition and 45 s allocation are unchanged. No visible caption is added."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s01.json"
+  },
+  {
+    "slide_id": "s02",
+    "proposal_revision": 4,
+    "decision": "Accept",
+    "reasons": [
+      "The adapter photos use an approximate common body scale calibrated from published housing dimensions. The 5 W family reference and differing perspectives are treated as approximate; the concise visible scale note and one spoken sentence replace the former different-scale wording. All other audience text and 85 s remain unchanged."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s02.json"
+  },
+  {
+    "slide_id": "s03",
+    "proposal_revision": 3,
+    "decision": "Accept",
+    "reasons": [
+      "Restores supervisor causal chain from frequency and size to switching heat, explicit ZVS mechanism and regulation; principle is conditionally explained."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s03.json"
+  },
+  {
+    "slide_id": "s04",
+    "proposal_revision": 5,
+    "decision": "Accept",
+    "reasons": [
+      "Original uploaded digest Fig. 1 replaces the redrawn HV-link circuit. Full source image is retained unchanged; caption is Power stage rather than a board revision. Notes identify C_DC and C_DC1 correctly; contribution, duration and transition remain intact."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s04.json"
+  },
+  {
+    "slide_id": "s05",
+    "proposal_revision": 4,
+    "decision": "Accept",
+    "reasons": [
+      "Approved math typography uses a real current overbar, italic variables and upright descriptive subscripts; C_P matches the original figure. The b definition is phrased clearly without changing its meaning."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s05.json"
+  },
+  {
+    "slide_id": "s06",
+    "proposal_revision": 3,
+    "decision": "Accept",
+    "reasons": [
+      "The original half-bridge, resonant branch and secondary rectifier replace the redrawn master. Notes use C_RES and L_RES, treat L_RES as series tank inductance including leakage, and retain the signed-current commutation explanation without adopting new performance claims."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s06.json"
+  },
+  {
+    "slide_id": "s07",
+    "proposal_revision": 1,
+    "decision": "Accept",
+    "reasons": [
+      "Real V1 burst capture explains control action, both control roles and actual author firmware improvements without operating checklist."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s07.json"
+  },
+  {
+    "slide_id": "s08",
+    "proposal_revision": 3,
+    "decision": "Accept",
+    "reasons": [
+      "Speaking allocation revised to 95 seconds; accepted content is unchanged."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s08.json"
+  },
+  {
+    "slide_id": "s09",
+    "proposal_revision": 3,
+    "decision": "Accept",
+    "reasons": [
+      "Speaking allocation revised to 80 seconds; accepted content is unchanged."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s09.json"
+  },
+  {
+    "slide_id": "s10",
+    "proposal_revision": 2,
+    "decision": "Accept",
+    "reasons": [
+      "Only the transition changes to introduce the IEC harmonic-current comparison at the same operating point; efficiency values, visible content, notes and duration are unchanged."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s10.json"
+  },
+  {
+    "slide_id": "s11",
+    "proposal_revision": 4,
+    "decision": "Accept",
+    "reasons": [
+      "The user-requested original APEC Fig.3(e) is used unchanged with complete axes and legend. Its Class A curve matches the published individual-harmonic limits; the comparison is confined to the recorded approximately 80 W point. Notes identify Class A as the reference for this general-purpose supply, distinguish harmonic limits from summary PF/THD, and retain one local test qualification and the logged-versus-reconstructed THD difference."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s11.json"
+  },
+  {
+    "slide_id": "s11a",
+    "proposal_revision": 2,
+    "decision": "Accept",
+    "reasons": [
+      "The intact V1 thermal image and displayed 102.9 °C maximum agree with the source table and image. Load setting is explicit, no 94 W output is inferred, and the following V2 inductor observation stays distinct."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s11a.json"
+  },
+  {
+    "slide_id": "s12",
+    "proposal_revision": 2,
+    "decision": "Accept",
+    "reasons": [
+      "The repeated V1 recap is removed because the new thermal slide directly precedes the V2 response; physical changes and measured results remain unchanged."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s12.json"
+  },
+  {
+    "slide_id": "s13",
+    "proposal_revision": 5,
+    "decision": "Accept",
+    "reasons": [
+      "The expected throttle response is stated directly: more burst-enable PWM increases transfer, while the charts retain the measured secondary-current axes and all seven original points. The voltage change is explicitly described as expected. No numeric PWM sweep, duty setting, linearity or control mode is inferred.",
+      "Power is placed above voltage so the visual order follows the expected transfer response; plot data and axis values remain unchanged."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s13.json"
+  },
+  {
+    "slide_id": "s14",
+    "proposal_revision": 4,
+    "decision": "Accept",
+    "reasons": [
+      "The thermal images, chart, captions and values are unchanged. Notes now motivate winding, rectifier and current-path changes from observed heating, without treating the expected secondary-voltage response as an unexpected fault or magnetic limit."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s14.json"
+  },
+  {
+    "slide_id": "s15",
+    "proposal_revision": 4,
+    "decision": "Accept",
+    "reasons": [
+      "The conclusion preserves the integration and 79.89 W connector result while naming heating as the continuous-power limit. Expected V2 voltage behavior is described correctly; the 100 W continuous target and absence of thermal equilibrium are retained."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/s15.json"
+  },
+  {
+    "slide_id": "b01",
+    "proposal_revision": 1,
+    "decision": "Accept",
+    "reasons": [
+      "Approved stacked fraction and complete radical preserve the LC model; table labels use real formatted variable/subscript notation, with all numerical values unchanged."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/b01.json"
+  },
+  {
+    "slide_id": "b02",
+    "proposal_revision": 3,
+    "decision": "Accept",
+    "reasons": [
+      "The planning takeaway uses falling secondary voltage rather than droop. The unchanged notes and table describe measured values and successive nonequilibrium readings without interpreting the expected response as a fault."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/b02.json"
+  },
+  {
+    "slide_id": "b03",
+    "proposal_revision": 1,
+    "decision": "Accept",
+    "reasons": [
+      "Current full-color V2 circuit preserved; full references and topology/magnetics/component-measurement attribution verified against bibliography and thesis."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/b03.json"
+  },
+  {
+    "slide_id": "b04",
+    "proposal_revision": 1,
+    "decision": "Accept",
+    "reasons": [
+      "Compact selected connector table checked against source CSV and calculated powers; separate 4.7 A scope and 4 A connector endpoint distinguished."
+    ],
+    "required_corrections": [],
+    "accepted_proposal": "proposals/b04.json"
+  }
+]

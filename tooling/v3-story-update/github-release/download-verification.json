@@ -1,0 +1,28 @@
+{
+  "release_url": "https://github.com/kform-danish-office/Thesis/releases/tag/thesis-v1-v2-v3-review",
+  "release_id": 425033239,
+  "draft": false,
+  "prerelease": true,
+  "assets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 179,
+      "sha256": "e9f9a28597fa3dc57b0671cadde5acdbfdeb7f518495030c3a4a39e3d3061491",
+      "download_url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/SHA256SUMS.txt"
+    },
+    {
+      "name": "Thesis_V1_V2_V3.pdf",
+      "bytes": 21389934,
+      "sha256": "b9e4776e2eb33ae8e218d607ff369d02e879e514b7cffc7b2b3064453fbcb03e",
+      "download_url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/Thesis_V1_V2_V3.pdf"
+    },
+    {
+      "name": "Thesis_V1_V2_V3_Source.zip",
+      "bytes": 92010846,
+      "sha256": "27c671014b1bfe44eaf2067496a7ca8128155f53c8413dbb02cb81e107d6e67d",
+      "download_url": "https://github.com/kform-danish-office/Thesis/releases/download/thesis-v1-v2-v3-review/Thesis_V1_V2_V3_Source.zip"
+    }
+  ],
+  "source_zip_crc": "PASS",
+  "source_files": 485
+}

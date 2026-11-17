@@ -1,0 +1,4 @@
+interface:
+  display_name: "Playwright Interactive"
+  short_description: "Persistent browser and Electron debugging with QA"
+  default_prompt: "Use $playwright-interactive to debug this app and verify its behavior and layout."

@@ -1,0 +1,6 @@
+\subsection{Logic Commands and Dead Time}
+\label{sec:hw-gatedrive}
+
+On the original prototype, center-aligned TIM1 generates the fixed \SI{1}{\mega\hertz} carrier on MCU pins PA8/PA9. The separate burst-enable output at PA10 drives the integrated driver's EN input, adjusting average transfer without changing carrier frequency. A dead interval is programmed at both carrier transitions to prevent simultaneous switch commands.
+
+The original V1.0 pin assignment did not provide the intended carrier pair. The PA8/PA9/PA10 correction was recorded in V1.1, with a nominal \SI{40}{\nano\second} interval used during development. The available switch-node traces show switching behavior, but matched gate-timing and commutation-current captures are needed to measure effective dead time and check ZVS over the input and load range.

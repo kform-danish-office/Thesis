@@ -1,0 +1,1 @@
+PASS: production V2 flash journal; 471-byte legacy payload / 472-byte stride migration, 488-byte timing wrappers, coherent calibration/timing reboot, integrity and range rejection, torn occupancy, all 122 interrupted append word boundaries, OFF-only wrap and flash guards.

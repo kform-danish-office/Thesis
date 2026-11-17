@@ -1,0 +1,2320 @@
+{
+  "baseline_files": 467,
+  "changed_files": 154,
+  "unchanged_files": 313,
+  "authorized_heading_changes": [],
+  "errors": [],
+  "remaining_pronoun_candidates": {},
+  "changes": [
+    {
+      "path": "Backmatter/Appendices/A_Analytical_Equations.tex",
+      "sha256": "217bc883b8cd4cb52d8a91e0b64806abc8f446d5ea24cf31b3312d73c39c9c63",
+      "baseline_sha256": "0f4aeb03df5bd300eced1f78a5418d9123ed24b857075b7e6757dc71581d7654",
+      "bytes_before": 4713,
+      "bytes_after": 4444,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+      "sha256": "7819fd5cfc31c7317f2bada3c647a5f761291b6be41929f189a137f575aa0788",
+      "baseline_sha256": "0b2ba154f04ac4ed05b76b40ce69ed738c4db597b1fb4f872083eadb9cd4451a",
+      "bytes_before": 8222,
+      "bytes_after": 8109,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+      "sha256": "e994ec807c895143f46e8ab47c053952a2e7576eaafab40761625f517ade2bc1",
+      "baseline_sha256": "ebb80897575cf98af83268589a0caa7e81e4d5c4d7b54e8a452f6f8d112800ae",
+      "bytes_before": 48005,
+      "bytes_after": 46571,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+      "sha256": "c45630ff040c9837eeab7901d1ce57a77e079567e6b348e79510c85d48e90807",
+      "baseline_sha256": "cbaebb0fe37e1ee4a8d3e3f044317bb9adc7a822454e3fbdd8851a9c068283c8",
+      "bytes_before": 2739,
+      "bytes_after": 2611,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+      "sha256": "18d98683912b9871073c7bd6f90fcdea9d5544fae199f8de859246d90b6f2f37",
+      "baseline_sha256": "75587b29d10e13fc66a2d0e622f6c95cc4d5d752087f2998de68198c963faf23",
+      "bytes_before": 3593,
+      "bytes_after": 3426,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/F_Contribution_Provenance.tex",
+      "sha256": "b5cabbd965e996f4c897bca716ec3644f73a749b39de00f1d94a88bc1b5303ff",
+      "baseline_sha256": "74f7b3a430669a1ff15205475d79df9dc36151236074933cb3f7973f05fa9e0e",
+      "bytes_before": 2486,
+      "bytes_after": 2476,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/G_Software_Tools.tex",
+      "sha256": "121b098930827b47ac617897f2b462dd57b70fafb5eec2a9558fa31bc6621895",
+      "baseline_sha256": "f345f0e836cd4b97a6f969dc37967e5e7e22e16a12cb5ea36e18f0cd0de4ed54",
+      "bytes_before": 19976,
+      "bytes_after": 18499,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+      "sha256": "fc241186e4621b12fbe776357d758aa3e49a45d3df79f1512b4a9456c3086406",
+      "baseline_sha256": "386440db9d7398f9ad9427f2bc4f85dd56393dfc62d85b74849b71153a1c7a5a",
+      "bytes_before": 1923,
+      "bytes_after": 1829,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+      "sha256": "ea2c563245a08bd0899f2481ce397bc91ccc95ed40f5a4f57b93ac647cf395ec",
+      "baseline_sha256": "f6e4c6ec94ebbc2f0f14f9257ad0c16374683e57a1e1e51eb8809c830d4dd7c2",
+      "bytes_before": 8103,
+      "bytes_after": 8072,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+      "sha256": "c05e89998796472b849b806f291d66f9e52aa887cf5840421fad8b01cd16dd57",
+      "baseline_sha256": "7399cff618a49f6a1adaa81ccba35d71304ab81830d9da71ec9e6a40ab1df925",
+      "bytes_before": 6391,
+      "bytes_after": 6263,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/01_Motivation.tex",
+      "sha256": "bc69e1cbe6de610c6d3bd3c3e48837d5eed61cea30cc5b79bdbfb3075e6f3f90",
+      "baseline_sha256": "24447a9145a9f47ab21eac1cf60106dea97abf8e084c93add3ea2c2b39adf697",
+      "bytes_before": 2020,
+      "bytes_after": 1943,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+      "sha256": "407af044d89714fe217fa12f9207b5e41ed2b2d405619ff3abdc50d6f4a5a232",
+      "baseline_sha256": "6d2b8c0a9d1667b4eec57c4be739e573773f8d8b5d54c78df17ab764ce4937a1",
+      "bytes_before": 1887,
+      "bytes_after": 1791,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+      "sha256": "9826a2d72b1e1456602df0ed1e0d2049a02222530622effd7425d47116d0dbee",
+      "baseline_sha256": "fe169683b6831c9bf74d4334ae0184a4120d6060d45b567edf531f9a93a11fc9",
+      "bytes_before": 1999,
+      "bytes_after": 1939,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/04_Research_Questions.tex",
+      "sha256": "6ead4cdade1d3987884f90dcdc682343b05af52a96de2ba4b7e97651a7122801",
+      "baseline_sha256": "969cee80695328a9e1962f7edeeb42f7f43e113a7c9346dc957db9617269c5b5",
+      "bytes_before": 1616,
+      "bytes_after": 1583,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+      "sha256": "92a329964cd4025858b0fee6326d52531685460ab8c21e9ad19fe3392e6d9155",
+      "baseline_sha256": "e0a87594a2e6863424d55954512da50addc401a73dadc4e28b48dab3caf2f81b",
+      "bytes_before": 1532,
+      "bytes_after": 1428,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+      "sha256": "d3382a468ed4c4220d6817b4a83a509da32b97bd1bb6fbdd6dc3016c471606c4",
+      "baseline_sha256": "0902be888b0fc820dc8580fc2520b5694def56218d693d0a66e67f4a27ef91c5",
+      "bytes_before": 2197,
+      "bytes_after": 2118,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/07_Thesis_Structure.tex",
+      "sha256": "cb1a77b1d285a0c3d4023010c742ffb8af3c17c1e951acaa98a70bca69081cc3",
+      "baseline_sha256": "7356a4bab8d09801bcc25fd20a1ad0d8c5c68e860579d62650a755a9d927dbe1",
+      "bytes_before": 1282,
+      "bytes_after": 1293,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/01_Introduction/chapter.tex",
+      "sha256": "f6fc49f6927c259c572e12c57c3edc264cf9ca59044d802a5bd2e7b1c412f06a",
+      "baseline_sha256": "03bd2ce2894bc78cace9c090e5aa34320b37314c47dc3c8fe2c49b08e0f16abb",
+      "bytes_before": 860,
+      "bytes_after": 863,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/01_Offline_ACDC_PFC.tex",
+      "sha256": "25fe9b740d21a268bf3f17d4763f6072c51f6cc5d953ef257eddac34fe2b08a5",
+      "baseline_sha256": "27e2b20ee4f372bcfb6258b5c29b0ad48eb903b0b3253c345c959f14a244aa8b",
+      "bytes_before": 3140,
+      "bytes_after": 3158,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/02_Charge_Pump_Principle.tex",
+      "sha256": "9e2a25af5119bbee946e849838aec867fca04b2084bd28fbce96cbd9bf2cb834",
+      "baseline_sha256": "6d8119481a5b0a4ed13a738d65a8a36a25acee498091e4acb768c2a1f6feb841",
+      "bytes_before": 2226,
+      "bytes_after": 2176,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/03_ClassDE_Resonant.tex",
+      "sha256": "ebbb8e83d7f37dff877f2bad3964afd6cbb24242d57a9701883e3bfa7ac4430c",
+      "baseline_sha256": "8712a1b46f6e852603bad39cb02ef26b03d93339ac7060bcb9dced42aef01bd7",
+      "bytes_before": 2033,
+      "bytes_after": 2042,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+      "sha256": "83b432f88e3e150186d263f425aa14caa3e4e5506250c0ba689be517c30545d6",
+      "baseline_sha256": "077838a485c5370b44c1b98eea2c3a72eba754f5e645f8b1f55dcb9dce1ebc06",
+      "bytes_before": 2187,
+      "bytes_after": 2157,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/05_Reference_2020.tex",
+      "sha256": "e236a2c0244015a39cf0990611677960e3aa8a151d5beb5c6b2d013941abc0d9",
+      "baseline_sha256": "78a9d075c31e06c0d098c57705c8df20cec3878ec07594138f2f4e9f5b08196e",
+      "bytes_before": 1857,
+      "bytes_after": 1819,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/06_Reference_2021.tex",
+      "sha256": "05e08c92b07b8f067ac435d2cefcd33d6841c341314181cfac9609ab07d8469c",
+      "baseline_sha256": "e11b21e91674ba5ef3d215cce3db76a1223a28cb7bb2dffc536f6cb9ca28c681",
+      "bytes_before": 2307,
+      "bytes_after": 2296,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/07_USBC_Context.tex",
+      "sha256": "42215fa7e814d1f55beea1e59310a37ccc43ff0b93227240c210611c2f29673a",
+      "baseline_sha256": "46af267c6da14b5a5a8e9f18cd7c58b4e7670fc5e418e9d669096ea91fec5717",
+      "bytes_before": 1504,
+      "bytes_after": 1482,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/08_Research_Gap.tex",
+      "sha256": "40a0714bfee0fe6f665779fb7afd9cb378c9b93f8de69952ffb400b5e38319a8",
+      "baseline_sha256": "1e6a6731e85b0a06fb1f55071bef32829de43376bebeb2ef47f51439b2d5dcad",
+      "bytes_before": 983,
+      "bytes_after": 942,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/02_Background/chapter.tex",
+      "sha256": "c60f6827b50b7f38c96e0ff2498a686b06f19ea9f7b07c7d9d3bc6681104c05e",
+      "baseline_sha256": "8ce1dbfe679c2d86387db006d7b356332db519cb74223524e8f41f764eb64d4d",
+      "bytes_before": 865,
+      "bytes_after": 846,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/01_Use_Case.tex",
+      "sha256": "4c14d1071b5731ad5da2328d14d2887855abf9ad70e634be2ec6e1bbc5092190",
+      "baseline_sha256": "65837777d80f6f2bb9366dbb89e138b7c182c2682c6df29b03efd8bc368063d0",
+      "bytes_before": 1558,
+      "bytes_after": 1499,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex",
+      "sha256": "3131c1ee7302c34b7dc9452e1e72a991ed3bcca51a45a4b73e5f0d7fb01c4b8f",
+      "baseline_sha256": "65b484921ac939ad475910295e156884b906fd306f56bf89eec6ca0b4bb3ebc5",
+      "bytes_before": 3778,
+      "bytes_after": 3771,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex",
+      "sha256": "15f817a3d0edb09fa27dbcdf6bf198ab75da83ef1815ee15835250fb7aef5a1e",
+      "baseline_sha256": "ecbcec3074bac250f8b15ecfc3f244196a24e7b33aaba793520941418bf0140a",
+      "bytes_before": 3190,
+      "bytes_after": 3044,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/04_USBC_Interface.tex",
+      "sha256": "835a9bdd4aa45ba421e2fddceb857761ad2a9b451c949ed04892ebbedea9db08",
+      "baseline_sha256": "8dc1e7f6f77c392780c29df5c61979b8dffd4a5328e9f0b2e3f9f1301988637f",
+      "bytes_before": 1437,
+      "bytes_after": 1431,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+      "sha256": "11e32c868948116348c9146865fb021d8f4964fc3fc51ed7f7d8360b4704d471",
+      "baseline_sha256": "d514877ba9e90cb93e589f009023adb0377c94f21c45ce764a0ce7da2a4fae12",
+      "bytes_before": 1810,
+      "bytes_after": 1832,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/06_System_Architecture.tex",
+      "sha256": "aeac5432d9b6f3f85c980a7f66409ac13538c07a82058437bba4e4d93c827b2d",
+      "baseline_sha256": "7fa2bf973c05f1f9149d5a3cf5db5bd49cfb0c3648117ca493b4924608c47668",
+      "bytes_before": 5739,
+      "bytes_after": 5648,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+      "sha256": "9471bebc2fcaa8d5d9d4e92c81f054d8ca3c12d8c454241b41d6f827ce0326a6",
+      "baseline_sha256": "a173c25f2f8a2d565cd10e9438db8bf5ef91df62a87eb9709ad2de09f427b206",
+      "bytes_before": 2282,
+      "bytes_after": 2301,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex",
+      "sha256": "f265929040318e8aed59e20b4bbd67ded8312660181f6eedff52174ee9d5742c",
+      "baseline_sha256": "5a9e0e7aa08eedda9f1796543622d471a4e024288d85430cbcea9fedbe6db044",
+      "bytes_before": 2835,
+      "bytes_after": 2759,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+      "sha256": "421eeb9a4082f609c2202c2c40410e48c3526c13f31185d95cf91a599c7f243b",
+      "baseline_sha256": "57a7e33fa8da0080a73dd26bb25fa6521117b502d8c22b0fdae08294421ae212",
+      "bytes_before": 6020,
+      "bytes_after": 5946,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/chapter.tex",
+      "sha256": "aaeaa3e77f3a5752037b92ee923d9015109f6d0b5b4f718707098cfe5fb8a374",
+      "baseline_sha256": "386adb021f8554457cfd2fa8b5edb3798695f5a5340d82f9e862d19806b22216",
+      "bytes_before": 1094,
+      "bytes_after": 1035,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+      "sha256": "22e61a6972f9309a0905445665f5ed482912dbb6706b9c3a4df12ff7ead52ee4",
+      "baseline_sha256": "50872af70b32a05294209d2abe553befbe23a65b768f35e62d29a7b1cf3c434e",
+      "bytes_before": 2495,
+      "bytes_after": 2406,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+      "sha256": "a9353d94c43e29645939d53899d40a501a64de7c0ce5b46100398abfa5c9200a",
+      "baseline_sha256": "6720baf5f19c0b281dfeb00adf99461abc66193997a9b7e38e7a785acf603feb",
+      "bytes_before": 2602,
+      "bytes_after": 2532,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+      "sha256": "86e0f67d2b2064b8f7eb628728ce45540d58e8a6321c1f8b2d4dd727013f7d2d",
+      "baseline_sha256": "4b26d9df95a79095512d355e159349d1302f83619b5b13147d714115fd96ef01",
+      "bytes_before": 2311,
+      "bytes_after": 2267,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/04_Pump_Capacitor.tex",
+      "sha256": "3c47e65529afcece8c88617d8f6a3c6a85fe4ec875e7d4eb3a3887f65c04b971",
+      "baseline_sha256": "dd4b42ae7ee303f0a4a8986fa82d26c38ca74be0e38ab89206767c76e5e3d009",
+      "bytes_before": 1531,
+      "bytes_after": 1522,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+      "sha256": "fd2ab21f72c133299670edc4f451e38a73ae9f371e7ebb16ff9d8bc0ac8f5f78",
+      "baseline_sha256": "41416d2786012d68063170bdf471aad9c1f3d0cbbfa98f669501276580ef399b",
+      "bytes_before": 1934,
+      "bytes_after": 1901,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/06_DC_Link.tex",
+      "sha256": "a4260808ca9a634657d49af06393d7eba4f832a3231b7dc3e5033c1c1b4150e6",
+      "baseline_sha256": "68cddd36ea1aa8517e3b9a1760d80e270f50b9d109923c8747f2eb1bee0d6e4a",
+      "bytes_before": 2125,
+      "bytes_after": 2067,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/07_Resonant_Stage.tex",
+      "sha256": "3d8ae0a88cbd800ae6bd93af46feaf68b31094cee8ce4b9b666d809a98987907",
+      "baseline_sha256": "88532de2a4946559aed12326f00d6a18b7d217f4ee8121141d71d141ebb9e252",
+      "bytes_before": 3154,
+      "bytes_after": 3127,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/08_ZVS.tex",
+      "sha256": "266fae20d4c5c7568a617e85a716d43d60db6bbedbeebed25399a4397cc7d0fc",
+      "baseline_sha256": "d621b785888badd28c4b1bc63dbe5ab631ed4d30faf8772f6e79a50b963d6fe0",
+      "bytes_before": 2168,
+      "bytes_after": 2160,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+      "sha256": "b637130497cfee6f3488e7aa34a2a4e383538c75ab5d6233d9170c0ccfbe2eb5",
+      "baseline_sha256": "e2b14b560237c560f9e1295816c6fbeeb7936d340ff693abd3e1cd714957b053",
+      "bytes_before": 2231,
+      "bytes_after": 2200,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex",
+      "sha256": "b12cf96c13bc24bd1af0833d9efcaa28422e48fdc999a211256244d2f9a588fa",
+      "baseline_sha256": "f595512c1c840405e64fc25f530b93ed06ed2f5faeaf73b1cd7b9a0121276d94",
+      "bytes_before": 1741,
+      "bytes_after": 1679,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/11_Design_Summary.tex",
+      "sha256": "c47c2978b00b106e7320ef2cb43742109da75944a1050f9b28b28c09f3ffa079",
+      "baseline_sha256": "2a01f7a1f7e0a8c2bda4e1acab05abea10814d83e5591361fa2637fbdc73a209",
+      "bytes_before": 2379,
+      "bytes_after": 2356,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/chapter.tex",
+      "sha256": "d69341cb926721944d4ad5d7ebeda1799d2e9fd4e64f96bbb6a43bdfe3d32694",
+      "baseline_sha256": "2473efced6b8d397329940e8b7ef0be2f6004f2d9ea52495f1569e0ced2b1f9a",
+      "bytes_before": 1096,
+      "bytes_after": 1074,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+      "sha256": "caff081c0b4862b3a7bd7792c6b9aeeb0db521e379d062c4eda05c8c541510fa",
+      "baseline_sha256": "fc9a9675580c5645a46369ccd1f2de6c09b36f821a1725d063252cdded3d47ee",
+      "bytes_before": 1187,
+      "bytes_after": 1115,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+      "sha256": "bd4422d73527883a094325050909e4656b5d7a61302ab256ab4752fc1a657f92",
+      "baseline_sha256": "f1bfbfb1f9fb2b32aa8ee1e50cb6bb107c1fe310e1b4f8f82dc4ab612de69b37",
+      "bytes_before": 2512,
+      "bytes_after": 2439,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+      "sha256": "78d367d5b710172dc050403f7267a9050b22599ac2a0f58e733294536dee1ce8",
+      "baseline_sha256": "75254da375c9942b7f9d400aee3794d8ac918badcb33108408c4f0fe33ca9286",
+      "bytes_before": 883,
+      "bytes_after": 910,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+      "sha256": "ece16fdb6b9c5eaeba37429bbca3133347fd5ce35fb715ca146fe9705f98f087",
+      "baseline_sha256": "faf3188e44c1421bef3ea58f40259e64ff115d391db83dbe94bc1aaa4abccb19",
+      "bytes_before": 1253,
+      "bytes_after": 1214,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex",
+      "sha256": "2aeba9cf4a6e607846034f61d737381bec4d80790c9d205e88bef23c1a0d868b",
+      "baseline_sha256": "9c24344b112c33352a822637459c81b1f2fcfde6c35e642554f29ba7cf590367",
+      "bytes_before": 1151,
+      "bytes_after": 1124,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/06_Steady_State.tex",
+      "sha256": "147558dcb125053fb9aa22762a95d3aa46c149c2bf915201f179a7ab508db445",
+      "baseline_sha256": "b2b322589f964468ccdb524c1f408b6c30f876e553a8e15979727183132fce4d",
+      "bytes_before": 1058,
+      "bytes_after": 1024,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex",
+      "sha256": "152da7d0c91af75bb870e16a97708d0a114b3a404f61400191b61ff6f942b9e7",
+      "baseline_sha256": "4586d52eeccd3a9e8d7bf53b5d8951ce331e838e3e1b64d4b6cfdde154bc4033",
+      "bytes_before": 1748,
+      "bytes_after": 1755,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+      "sha256": "a6eea797aa95355b06a437c8804370e96d6e1584ffb56bb6a2189176fbfda68b",
+      "baseline_sha256": "d81a9f090f737298eafaf7cf40f7acb1abff7189f95e0478a0af5da99c364986",
+      "bytes_before": 3977,
+      "bytes_after": 3869,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+      "sha256": "21c964bd486f4983a642e5812c86419be877cdf825f2e0b05407b0d50872a9a0",
+      "baseline_sha256": "c8c71c72adbb1a2e9214fda7487e5c1fa12a1d28df68f941bdbf5d2e716fb68e",
+      "bytes_before": 2551,
+      "bytes_after": 2548,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/10_Data_Limitations.tex",
+      "sha256": "b6197703e78bf1bd56392a02218365dec43e2556807ba7c48d114372e03b358c",
+      "baseline_sha256": "a37ec895da742c281af4c4b4ce1139fd4d00677133dd7c698535a8da57cc2653",
+      "bytes_before": 1113,
+      "bytes_after": 1122,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/chapter.tex",
+      "sha256": "bf2cc2d9364e73cc7c1656c1b46f4316fa59a7287bf99741d316750037109b96",
+      "baseline_sha256": "4bda0dd9e7ebb4e5f457c55bcf764595826f994da4515317f6e0139caae249aa",
+      "bytes_before": 1065,
+      "bytes_after": 1061,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+      "sha256": "f4148346af7cf8e6225b0c7fc6eee3667e659a20bb48b563564868c150b49290",
+      "baseline_sha256": "32a80d17d30d855d1b34d48e85fc978f92650b59b3438d87b1609fb5a64c77a4",
+      "bytes_before": 1572,
+      "bytes_after": 1587,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+      "sha256": "04bcb2b85f165521b0deebe596dfe243b8b6a74e01728ff6144bfb113baa9ff9",
+      "baseline_sha256": "4de7e51a53a4132d81f8704bc8f29962ef1e72db6d392085c74d9d41a93ae322",
+      "bytes_before": 2229,
+      "bytes_after": 2160,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+      "sha256": "55ba4dd7fab33f280930ac7b4fc55ac31e0aaf1297765f1b4bb5859e9d287616",
+      "baseline_sha256": "96781d0e824f8756ab8af0e55b21347975fadf73516151278082599aab91d041",
+      "bytes_before": 1906,
+      "bytes_after": 1899,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/04_Mounting_Concept.tex",
+      "sha256": "8e394820b47dbdba634465108a721417ef29766d20972eb914d342dc7754bc4c",
+      "baseline_sha256": "a4339227c71fee0268c51567ae42dd87d2bbe02bc40e62dea206c2035f04e995",
+      "bytes_before": 716,
+      "bytes_after": 695,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/05_Footprint_Interconnection.tex",
+      "sha256": "1d50961b72e93dc23d0fd3702fd5ac933d31a88dc0db20de9643cd673eb74124",
+      "baseline_sha256": "177add897168a012b9bcf00d69f20c97314efc82f67f61e8455805d0de468fc3",
+      "bytes_before": 724,
+      "bytes_after": 709,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex",
+      "sha256": "34043a2b4a8e2a5b7187ddbb5495299426131a892843817c1b792d44a34648e2",
+      "baseline_sha256": "3af7d675abe4151551cd39a9939c960f075d5fdbafe3b483343f0562719108b5",
+      "bytes_before": 701,
+      "bytes_after": 704,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+      "sha256": "b94856b630fba24e35d85187d036487d79d740795a93fefce4df4f5340f6eb86",
+      "baseline_sha256": "757965164c3717029afb9b9ccd58d13df8d914889800832a0fca6bef94d2613f",
+      "bytes_before": 825,
+      "bytes_after": 832,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/08_Parasitics.tex",
+      "sha256": "1a1276760e2753d2f58954977d2340bbe1fa398081bd7cdef5da851adf264898",
+      "baseline_sha256": "aa5aab5ecd85a7d9b98f2661832b406a3777bab017e50b581a1b480abc3ef599",
+      "bytes_before": 1875,
+      "bytes_after": 1870,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+      "sha256": "4838eff313c4ff2c6ee328ae23fae758127d7400f4385e41aa4b0726748c7b6e",
+      "baseline_sha256": "1baa76c3a7d89bd59da601d06522efc7e8ef2104dc9cfb17da093a1d39adcf85",
+      "bytes_before": 770,
+      "bytes_after": 768,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+      "sha256": "1398324bb687748695395ab68faf94e6a31a34b1b1c734c49a7c2e6e2c016b9b",
+      "baseline_sha256": "6e8f9451a599521a3a59c10dff31f8911f86cade110bfd9d344bc05f01367200",
+      "bytes_before": 1710,
+      "bytes_after": 1665,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+      "sha256": "d140cf0f4f9d08908d1bd9d6a8b0f002f4f61b28c00398d07a5c324bdf60db8e",
+      "baseline_sha256": "e3c586e5e13de6d871a6db91f83ab434c92d93f45901c820bcaad9f1496abe7a",
+      "bytes_before": 644,
+      "bytes_after": 643,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/chapter.tex",
+      "sha256": "1093ea29f1581d427051314c9a4873da76352950692a4e82649821031f97040b",
+      "baseline_sha256": "b20d8f1a61eb7fd812d8546d217c842c523615271245b86f19b395aab7f3fa59",
+      "bytes_before": 1565,
+      "bytes_after": 1538,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+      "sha256": "b7496d239c0e6dc5a0ca6d9bacb9d7b8f72c8f0c80b3fad1e7949d486155aa74",
+      "baseline_sha256": "1af1ad54d7bb0e477610a4e5560ff353f3ef2f4a38a9161bb1577791bdb31e8d",
+      "bytes_before": 2111,
+      "bytes_after": 2041,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/02_Input_Filter_Bridge.tex",
+      "sha256": "3b50382f8fd8f26967b183945c6fb2075dd6324fa65a2cb55d6b2369fe386977",
+      "baseline_sha256": "fc00e642a04be332f2192a67a1859cf833bd2d50ade5d3c16a8091fd84a8e062",
+      "bytes_before": 2078,
+      "bytes_after": 1998,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/03_Charge_Pump_Network.tex",
+      "sha256": "d3494b9c1800e93f3a8ff10c1c7fd3b13a921288822f47694a215d16d1e43705",
+      "baseline_sha256": "aabf75389fe06affe4d276cef2b88561bfe26f982a124bc1780849afac0ca818",
+      "bytes_before": 1936,
+      "bytes_after": 1845,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+      "sha256": "d12cadd60455ee01731159bdcfb3564f60e569aeba15b82a22980262c17909ee",
+      "baseline_sha256": "0b6c67b056bf9f892f2840adbae4a5268ac7d09af64f3a34652e720cb3d7bef3",
+      "bytes_before": 3461,
+      "bytes_after": 3434,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/05_Gate_Drive.tex",
+      "sha256": "db476ab6c5b7132dcfe27c7985b2b8d7ad42f91602ea5860ad30fb2a8d3c5d11",
+      "baseline_sha256": "51d97a4d9b6969407ef37fe44691d6340455e67495d1ab4bac914672f0fd1a5c",
+      "bytes_before": 895,
+      "bytes_after": 861,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/06_Resonant_Output.tex",
+      "sha256": "f8fe2f066aa576ad4833e5089eb87c808928abb015142810c8ca9b8797bea031",
+      "baseline_sha256": "95c0225cb94ed6f8909cfb33f3069258fec003677696878fb242996c7938c4b6",
+      "bytes_before": 2268,
+      "bytes_after": 2191,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/07_USBC_Interface.tex",
+      "sha256": "2e4bc51eb89bca7b5b1b8b34ab50c3e7c8f49718f53d9a3c54ede072c91704f3",
+      "baseline_sha256": "7f21cc28ed772517cad78a80ed8bb2f918ae3af16e102aadac8ae86a1a719910",
+      "bytes_before": 1600,
+      "bytes_after": 1549,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/08_Sensing.tex",
+      "sha256": "01dfbf78c17a625e49b372f0e49688ab0927b1ca0fea6a0266133b04834def90",
+      "baseline_sha256": "c2772314a478f3508eee594fa6729f6ad85c11ddaff1f004e59984d5a81635a5",
+      "bytes_before": 2320,
+      "bytes_after": 2275,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/09_Protection.tex",
+      "sha256": "e7e128eb6b9e09d06a6658882c671895cde5c6bdae570021e0320c1fff4be40f",
+      "baseline_sha256": "52c986defdabe615fba674d7ce33a206f19783ae6e432c9d7bc1fb4ea69c63a6",
+      "bytes_before": 1219,
+      "bytes_after": 1158,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/10_Auxiliary_Power.tex",
+      "sha256": "3786801b84f578b09cfc1e1fc940c08dba2c923a109ce0d07095ca6f7b94ebe0",
+      "baseline_sha256": "6d0798076eb7c60f4f1dcc75e81ca5fabaee6686daee1d40dd384e34d83c19cd",
+      "bytes_before": 1152,
+      "bytes_after": 1061,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/11_PCB_Layout.tex",
+      "sha256": "d37903ddd204d987b9afceade33a28b67f716086e1a5e928f258bfab302b0738",
+      "baseline_sha256": "6b75906e5f7fdf751432ebd243dcc6e17a5861277689ae86d52542864175da80",
+      "bytes_before": 2814,
+      "bytes_after": 2709,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/12_EMI.tex",
+      "sha256": "d80ce8efe1e8d3d2ea066f373d4e5c0cc670c7dbc370adb5f0e7505decf1b186",
+      "baseline_sha256": "1393845596eaad2b560640a1ea2a489e7d7235c4a25d18a6b98f910269352572",
+      "bytes_before": 809,
+      "bytes_after": 753,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/13_Thermal.tex",
+      "sha256": "fab1dfefb36235c3471242bf962c4f492df2a5bdb1301f9ab92cee7c03340d4e",
+      "baseline_sha256": "39b31c45cc3c48743c58fd4a7a678f465e41c48d890251da3f9dceff706bdf7b",
+      "bytes_before": 1033,
+      "bytes_after": 971,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+      "sha256": "e91641852d3867be5784dc06d1c85900c6e2d69cae0a2830e2501f7d1971256c",
+      "baseline_sha256": "0f3944ca1cc30ad1f9d1177d8b2385b53b0dbc12ae23a75ad26d45cb7c481e47",
+      "bytes_before": 2862,
+      "bytes_after": 2793,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/15_Unmanufactured_Revisions.tex",
+      "sha256": "d020fdcf6ab6742dfe6ffe7e7ac8bd6ef8c1d5c8cf1999020c00801d49eee253",
+      "baseline_sha256": "904f70098ad3654921135f776cbac31bc8293e4153c6ce0b09327ad4b2fcb79d",
+      "bytes_before": 1008,
+      "bytes_after": 968,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/16_V2_F410.tex",
+      "sha256": "a0c3e88757a813f10ca7c29a046594bfa649783c0416e065b70c9332d8235d5d",
+      "baseline_sha256": "7959712a3e1562aaf658286b831f074f1a372918c1da9216654fe6d91458f943",
+      "bytes_before": 7297,
+      "bytes_after": 6918,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+      "sha256": "2689d38f68a7edbeeacb488462c086ed8341ab736c98604b1f6455297436019f",
+      "baseline_sha256": "dff695287fd8bcb3a5d0cb1af337d91ad3a35ad80bf93c17f4cdbf3231f0019b",
+      "bytes_before": 5154,
+      "bytes_after": 4977,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/07_Hardware/chapter.tex",
+      "sha256": "4faa5ee4bd4d4e61c25047d7626c9bb01174411bbda9110b16ef030ffe442b59",
+      "baseline_sha256": "b0c26e000ecb98e4604ada1e3fc649820d9df6d5bcb1be5bdc15bc278a1b79ee",
+      "bytes_before": 1502,
+      "bytes_after": 1436,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/01_Control_Objectives.tex",
+      "sha256": "49fcf41d4bb365eb69f39febd34f9b6b1ee2622b48212855c2fb30f67f643229",
+      "baseline_sha256": "2a939a907debd463be02bc851ae9672a99c434bcdba4a8c95fe807e071b8b05e",
+      "bytes_before": 996,
+      "bytes_after": 942,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+      "sha256": "d890cc961a09d467a1fc9d6edaf052c2a9febd7d11094acc47561e682b15326f",
+      "baseline_sha256": "335bbd6acb350a9a2004bd5bf45554d9804f4c5c12254af1894dd2517b5165e6",
+      "bytes_before": 4500,
+      "bytes_after": 4373,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+      "sha256": "20cac6580e860453a924a1cdd05973fa4942a3fbb4008a3f1c4d8a70f019c8fd",
+      "baseline_sha256": "bb18bf6197361e662c37df10cae9140d39fdb4a725253de7612a2416f25ccfc6",
+      "bytes_before": 2722,
+      "bytes_after": 2616,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/04_V0_Open_Loop.tex",
+      "sha256": "2f890448723f2d8e4c1f2e7ed03a7363f6b985ff0234b5a6e9f715a68678e14c",
+      "baseline_sha256": "40b6719da9dd50004e8bd8f7e0f6c96ff72436020262e74e81a61b875bc8dc95",
+      "bytes_before": 486,
+      "bytes_after": 465,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex",
+      "sha256": "984ee5d03149843da1ba53cc241a62eb7b187a79b110354567f0fdfea793dfde",
+      "baseline_sha256": "cc28319e175758acda671f49dad975c3c7299d5540fc7517c25039c62131d74e",
+      "bytes_before": 460,
+      "bytes_after": 423,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/06_Blocking_Limitations.tex",
+      "sha256": "6ae44d2d76fc656c0b0a2cbb1a3aa7e8c0a47a7706285fcb47a9b4ca4d924c64",
+      "baseline_sha256": "0053584a9b7e527507c1854fc378cc76e4842ca85fe27bf088e17c3c6224bff1",
+      "bytes_before": 427,
+      "bytes_after": 401,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+      "sha256": "66f3f1ce4d00866bcd79b3f77e7f3f1613a2dfb5f9db9cb2aa68a5efe4ff9b42",
+      "baseline_sha256": "bc6f2d445da21d6b91362556471a2a97aa907f33b502701e7442dff1ebf30b01",
+      "bytes_before": 1175,
+      "bytes_after": 1131,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/08_Control_Law.tex",
+      "sha256": "76f214b2980f1823b757fe2a66974c3c0a83a31a47fb060ef1e10b47cc4f0ca1",
+      "baseline_sha256": "cc9ae073176001fe19914b7f70796b254cd51a142db0e8c3d2f38899d10f96eb",
+      "bytes_before": 3391,
+      "bytes_after": 3284,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/09_Limits_Antiwindup.tex",
+      "sha256": "2137ed95c0f1b3cb79a296a8819095c32ad72fd5ff7939e74a9b3cea2e1c4940",
+      "baseline_sha256": "e1f376e65bdb59e95edf6c7fe0cbc663b2ab2717c23da44c2400ae5f7892b25c",
+      "bytes_before": 1522,
+      "bytes_after": 1364,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex",
+      "sha256": "1e99c8229a5dc8e7327317455f66a2c8b589189194bb07ae928bce8c96a4239b",
+      "baseline_sha256": "31ee71768b848854ccb5966da426018b4bcb85b300008ed9db56f39a7b6fe5ee",
+      "bytes_before": 1667,
+      "bytes_after": 1548,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+      "sha256": "388a315aa0b002a7649a14403f6e43edcb3a9df35f4623aa103fe60904a7fea1",
+      "baseline_sha256": "3d43ac4eca026c2972290c80118ef6a331a3505375d5d021aa9ff6797de36cdc",
+      "bytes_before": 5133,
+      "bytes_after": 5035,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/12_Fault_Handling.tex",
+      "sha256": "8572b133adada3cbaaf2bd3ccfe582017ec12bffb95ac764937f22bea6e66146",
+      "baseline_sha256": "9df9e071c05f57403c12b58d814f56a3781b03e394c2b0ac595ce17e2637bb96",
+      "bytes_before": 2174,
+      "bytes_after": 2055,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+      "sha256": "5fd4f1c6f0481e38f88250c92806adcea8f876406491cbccac528a97c4ceb020",
+      "baseline_sha256": "628d53171ba35583ddf7c78e1c804f39243bf450721b92a4fb9822ef7a1955f2",
+      "bytes_before": 1334,
+      "bytes_after": 1224,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+      "sha256": "c974bd52443a5ff9ff267737f2c630f40772fd8373f0c33ff7511243d44a073e",
+      "baseline_sha256": "433c380837bacfe05c9563df31c4895cc2987afec2bd4de8c5dbdbc37ed77cef",
+      "bytes_before": 1405,
+      "bytes_after": 1377,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+      "sha256": "5ecc9c10f5042bef2f4d97f1e6a083141818bf70124936900ea650eae9716c95",
+      "baseline_sha256": "c435b9ce64afa87ebcfb12e0899f0fd557fcc6ecdec2f97187ce6e2f9380ebb5",
+      "bytes_before": 6403,
+      "bytes_after": 6008,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/chapter.tex",
+      "sha256": "b761acd2283b8561d7f874b68fa5388aa1db98d7a7f949994ed78246d928859c",
+      "baseline_sha256": "09c766520b9ee1c4ee04c8327f404bc2ebc0eed640f87a57eb4df9d0890ff700",
+      "bytes_before": 1790,
+      "bytes_after": 1711,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/01_Objectives.tex",
+      "sha256": "4bf4f69c6608846ca19625d78748f6a0139aef8c982568ad39ce1328c955fffd",
+      "baseline_sha256": "d436a0cd7a5a8d3c71cd1ad5bcc72b5f17952ecca545c9323f0541096facf8a5",
+      "bytes_before": 1932,
+      "bytes_after": 1906,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/02_Safety_Arrangements.tex",
+      "sha256": "94cee7356d923f9d2ef4472dcce203b1998e5831846414810b55d810515e7087",
+      "baseline_sha256": "44e76e5550ef4b7e6130fc49585f8066b660d06cb41977b3bec6c8c86be72ba3",
+      "bytes_before": 1990,
+      "bytes_after": 1944,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/03_Test_Bench.tex",
+      "sha256": "e31c0f4432495608d1fc62d2cc3d80c0e8dc066268b8786f21723fe2f71a4b15",
+      "baseline_sha256": "e4b8f02698f5accdc35d9976764a299554ca6dd614f036a7fa2f09fe342e145b",
+      "bytes_before": 2834,
+      "bytes_after": 2790,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+      "sha256": "3a1a193364bcb43e4d5dd887b5a7e0f8efeb7ef15a99cc002a8d4e1ec6d12eb0",
+      "baseline_sha256": "841dfe6227d5617f3e7229b47d2d83e415c9bfcca3954e0ec7a610bb72845c75",
+      "bytes_before": 2550,
+      "bytes_after": 2483,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/05_Probing.tex",
+      "sha256": "efee88760d596d54e02a788a41867fb6ef8314b45da79e0dc58c852d9ec75e2c",
+      "baseline_sha256": "e0212ee739ce4644335fb990609cd3a966446328d3f1fb0c7c95555d627576a7",
+      "bytes_before": 2075,
+      "bytes_after": 2061,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+      "sha256": "0636dbeb865de9df4949828801014e6102c20193ccfff54a41e15776d9f1ea4b",
+      "baseline_sha256": "1fbccfab97d4b89a31d03e0446f7c4941950b0a281630506a3a1d0acbfd6c19d",
+      "bytes_before": 2081,
+      "bytes_after": 1999,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/07_Control_Tests.tex",
+      "sha256": "34234f95f8523c53effbca29b6226d035a0077ec1629ef7fce912aeecc817006",
+      "baseline_sha256": "9a5f10228571a4a1307f864deb6398aa279d54332fd1b42c011119bb7c425e68",
+      "bytes_before": 1753,
+      "bytes_after": 1686,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/08_Power_Quality.tex",
+      "sha256": "697ffd25b21ba772db95a2276daa1ef9a20496c533c124b1b9a3e3208f212c69",
+      "baseline_sha256": "ad6e403c4a3ffcbcbd3a8c99877bb477f7aedd1ede8622e2327632b9fd6356db",
+      "bytes_before": 1392,
+      "bytes_after": 1355,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/09_Efficiency.tex",
+      "sha256": "857155b14665488205634b1c1ae238e9f0e99da1c52d311ecda9fdfdaaf07a28",
+      "baseline_sha256": "41d81ae57eeb3e590db7a971bbd9efcc2f2d66b1e8acdb897018a790fee0f57b",
+      "bytes_before": 1327,
+      "bytes_after": 1264,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/10_Thermal.tex",
+      "sha256": "4dcc3b516f38a38d03a3e2655795d0ab0f15c3c03e5feebecd647a60b549666c",
+      "baseline_sha256": "df1b1adbeacf4bd5fec4c8ca14f478e477e37c325aa2667161b290aa0874e2d7",
+      "bytes_before": 854,
+      "bytes_after": 838,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/11_Uncertainty.tex",
+      "sha256": "2c50674d00b6ac7e70a481bd65be4eec722b3f81e7c94e004186ddad1cd4ccc4",
+      "baseline_sha256": "d9f05e662ecdde5afaf13ad4903c51536c168fa89d84101114ec160b6cb116ec",
+      "bytes_before": 1977,
+      "bytes_after": 1964,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+      "sha256": "98c575d3f327f39d8749158b92b25b506c04adfc1e536e74cf36c02e76d7b601",
+      "baseline_sha256": "6b11e5e556165168a0b9afe13a0b87b9b89101662c6e43df482a09c1891bf5e1",
+      "bytes_before": 8314,
+      "bytes_after": 8249,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/chapter.tex",
+      "sha256": "fb7fffbebe8e75c0e9d4c2fcf7bbc6657a00cacc7ada27c0c5669de6d483a293",
+      "baseline_sha256": "a277a29e2be9ce88142e8dc9cd570954ceee3b269bb70942afbcf38ec29941ea",
+      "bytes_before": 1364,
+      "bytes_after": 1282,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+      "sha256": "43fd74c6f4dc69783dd031bad7d6099275d333db3997def7a7b362b2838da313",
+      "baseline_sha256": "bfcb3daaf9524ad4d613945abfba4fc4ec4c65fd360430e672796f6dc5cdb33f",
+      "bytes_before": 2858,
+      "bytes_after": 2827,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/02_Startup_Shutdown.tex",
+      "sha256": "f2513e149cfb92d28ee49ebe9f06d39bd224f00ed75cb5fc283377b8cb2c99e9",
+      "baseline_sha256": "31bb732aaf5ea243c4ca1c6b62f0b476032d7c07bda42c3d0abcc841b88be965",
+      "bytes_before": 696,
+      "bytes_after": 690,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/03_Steady_State.tex",
+      "sha256": "0bb948ceb494bd1a1acc346f027fa6c06db6daaefb8f00d3034cb02187045a05",
+      "baseline_sha256": "c522a92e931c52f11f6b7de0c669af4938fadbbf3f872ea83ce7d9775a8c6675",
+      "bytes_before": 6435,
+      "bytes_after": 6321,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/04_Load_Transients.tex",
+      "sha256": "c08e10ee457317635fbfd0d3650fc29bf5ec0e467d4f607550d1841266d78caa",
+      "baseline_sha256": "04bc1d80ea210430f86098df9539b6f60cbf0bcc1a855f697d63106df92b542a",
+      "bytes_before": 3133,
+      "bytes_after": 3109,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/05_Open_Circuit.tex",
+      "sha256": "227e9c6d846e24b20cde3cc68b7eba460dca1a124430d861ea4106b0cdad8241",
+      "baseline_sha256": "76657897d4128f65d276df3aa58256d14d82914258b85f55569bc6e548e443d4",
+      "bytes_before": 2735,
+      "bytes_after": 2685,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/06_ZVS.tex",
+      "sha256": "6cd2e282f0a73b033c75e6c704b5a96d805281d4ba037c97fddb02fc7e3a6145",
+      "baseline_sha256": "d048a96df1853f099abb397cc4cde99797909837f39329e42f5668c96cc88a6a",
+      "bytes_before": 3119,
+      "bytes_after": 3053,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+      "sha256": "c3116d03a7ac70df44bad26c64ebcea0da65e2cb7594f0bee7cee22eabe10b71",
+      "baseline_sha256": "5e86d88c7ba6614ceb74531864282897b78996447b34918a237ca44c60f4bb31",
+      "bytes_before": 4655,
+      "bytes_after": 4663,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/08_Efficiency.tex",
+      "sha256": "845c4930d6560d40c795990495d737b49b16defdf2282b07c48407c6398d384f",
+      "baseline_sha256": "ccfebd88dfa2bf37ef21809edc463ad04b3261b36c4a014744a53ba14908fa34",
+      "bytes_before": 3258,
+      "bytes_after": 3284,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/09_Thermal.tex",
+      "sha256": "2916311eb9d636f3ddee8b1827013dde573517ff64b210a60236293f3f6934f5",
+      "baseline_sha256": "75402d6c087cb9a7fb20825a60cd234865e94ca177c048be8b22d4f507416b30",
+      "bytes_before": 3059,
+      "bytes_after": 3082,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+      "sha256": "b8937d4e8f61086cc58e4f590b0d6f45121ee107159c6d8ad449eb9a297c44ce",
+      "baseline_sha256": "35417649c518f8163c0edd5ea26cee373538c217169e91246b043c7eb9bb4cd1",
+      "bytes_before": 2316,
+      "bytes_after": 2277,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/11_Simulation_Hardware.tex",
+      "sha256": "0243242ea1b57797fff267ba6e4cd8a467625abcaadd240900bf73910b1f0447",
+      "baseline_sha256": "cebe54a756e9344dbef6aba294fc4605281e313b51152d060be9cfb297f1e559",
+      "bytes_before": 1703,
+      "bytes_after": 1666,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/12_Compliance_Table.tex",
+      "sha256": "7d05f3019912fe6448603e367975d13c90f6f5e073efbb4ba709568a47732964",
+      "baseline_sha256": "9fef61b916f158ba40987270e78eb0c2ee04e435426fc846f4cc9d07a102a746",
+      "bytes_before": 3803,
+      "bytes_after": 3814,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+      "sha256": "626143ab8f06470f63d385d791194d59f7bec90673a287021e631181da775776",
+      "baseline_sha256": "7ee6f9e1e9b5cab42fa3d2c91ed8d360fef9eeaaf3f8293043c28ee1ce14b7df",
+      "bytes_before": 3031,
+      "bytes_after": 2920,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+      "sha256": "780b0c3faf3e15eddc755de4f9fab73f6c57dc42c2d154dc02b4a8d150799c13",
+      "baseline_sha256": "93aae710366b85216a77919bf29cdd0794fa543e1d827895ffb436812c134041",
+      "bytes_before": 4035,
+      "bytes_after": 4033,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/chapter.tex",
+      "sha256": "8b126a639fbca714af7adcb70ea7379dd8b945320b1cf5c0745ca4a8ada1c283",
+      "baseline_sha256": "c2f653d1885247168446b8e3d5b94e2bdc99536370ce9b9e750c5896ec79c24b",
+      "bytes_before": 1097,
+      "bytes_after": 1076,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+      "sha256": "3a68fd8ce1cb8362363038600e3b96f1b5e0cfcbba8102bb5a5f81f591b71029",
+      "baseline_sha256": "61fcb6b1dc339807207550d1719ea99516d1a3a8c8c08cc110fc2a199485b403",
+      "bytes_before": 1283,
+      "bytes_after": 1303,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+      "sha256": "562cf7b35d420d1143cb68730e9d00312e83586ceeb5562a03bcaa72f64642ce",
+      "baseline_sha256": "3779e73b79109a5e495395a75089dbad679ec477e007ad33381a553ebac60fe6",
+      "bytes_before": 1671,
+      "bytes_after": 1561,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/03_Control_Contribution.tex",
+      "sha256": "e6d28d2f688680ee8e4975d5f3082d9bb1f4c9ad91838821bf0e61294ec8eba5",
+      "baseline_sha256": "1a1a6b49c61b32e885aaa804d78b8b00208f85f0294b73a6e76e36c4cdcb88ad",
+      "bytes_before": 2188,
+      "bytes_after": 1989,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/04_Open_Circuit_Safety.tex",
+      "sha256": "0b63085cb596e8465cbffb8901ef5688020685367688754fc30f41193fd7ffa4",
+      "baseline_sha256": "a73e14565614fa559b661732d8c12009fc2af21d8cba9832f1a5b003fc75114b",
+      "bytes_before": 1729,
+      "bytes_after": 1662,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/05_Magnetics_Integration.tex",
+      "sha256": "4e350617791af470a5155ada13443b149a7ce2da21fd0ab59d7af7894a3b91cb",
+      "baseline_sha256": "84c8c4682b6a3f7f3656e3eb06f05506a9a9177eb349f3695d03e34fd35d9ef5",
+      "bytes_before": 1649,
+      "bytes_after": 1642,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/06_Reference_Comparison.tex",
+      "sha256": "cab02f45a925d41eeba07ed93120c3e8666b3e5e6afa0d4c91dd9d943a07a852",
+      "baseline_sha256": "c7f7528d5d835f5f10671e782b1162a0656ce744a6c656c7d3a219f69147de08",
+      "bytes_before": 2271,
+      "bytes_after": 2229,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/07_Limitations.tex",
+      "sha256": "0979d4c7b5c31479813cb31a43d381166f6d426f034fef08c7eb1e221f8caf0c",
+      "baseline_sha256": "fc6eeed4df677d2f5683006b8027acc8f3ced12eaed25c910732bfa5ace1a736",
+      "bytes_before": 1553,
+      "bytes_after": 1458,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+      "sha256": "b50e7821d3e05da7733c0e15ed762d24416f252ee384bb25518ab512f9bcc420",
+      "baseline_sha256": "71341f6228db61dc5f2dba264901c3910ae1bd553fc1374dfbfc89c756b5f520",
+      "bytes_before": 1488,
+      "bytes_after": 1392,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+      "sha256": "e87558885581875aef26bcf434149283d5f0d7af5c407bfaed1901d9f08362e8",
+      "baseline_sha256": "718e1caef2ddaf3a1fc854c570f251fa70402db6e3bb54c28960e2962c065df5",
+      "bytes_before": 2330,
+      "bytes_after": 2280,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+      "sha256": "ba8e2ae93744e418332101429643f35acf5376463323072e79336c9be3db23c4",
+      "baseline_sha256": "99d021481ee5a84fa020cfe513ffb82327de5a83025fd1c439d11aead3e13e79",
+      "bytes_before": 5039,
+      "bytes_after": 5066,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/chapter.tex",
+      "sha256": "78719d33b425125ad036a60375ccdac28ed5f0006b2c38e64fc7be36629764ee",
+      "baseline_sha256": "e8ac00e553534b61927509f58fdef0b1084b7c79dbb6e2ae89bd824b345f2b75",
+      "bytes_before": 959,
+      "bytes_after": 866,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+      "sha256": "9c052461dec352c637aab5f4b8c351ea6ae468d154e8cac68b37f392aae0e380",
+      "baseline_sha256": "af17adb5a0dd927da1e08d3d5cd9f75270cfd092062423d0ea0b104ddc39e99c",
+      "bytes_before": 1787,
+      "bytes_after": 1695,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+      "sha256": "6ba89cb93dee5a923fd03d3621c70f2c8ce2643bb207e0630865239c515dd8fa",
+      "baseline_sha256": "ba4b4475825309be7ec16be785c06b62f11d3d2a967c7eae8456f9658a4a3c0d",
+      "bytes_before": 2761,
+      "bytes_after": 2814,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/03_Contributions.tex",
+      "sha256": "c2d0ab0b0e1666727200fa0ec6e93ca76642e1cce6875a64c61c210d5b2c588b",
+      "baseline_sha256": "742df5ad73d2eaff394c67d5e159c16d44f02bcd415c4c2ab6beaf27ad0a1ce4",
+      "bytes_before": 1350,
+      "bytes_after": 1296,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+      "sha256": "c8efa968d4e2b8a4649169363c49651a7897c4bf7a23f9b83f5999874fd49779",
+      "baseline_sha256": "2f0460df613c66e8b202eb5a08052af0b43bf25f969d9913d5ee3855f42689a9",
+      "bytes_before": 2238,
+      "bytes_after": 2292,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/chapter.tex",
+      "sha256": "289dc8162ef3bf31aa021c3e85e1ed4c446cfc1d544ad6f54ca8fc0d40a92aae",
+      "baseline_sha256": "1f68c03d8fdc7b56c1f74a13d5c634b54a53850027af59f5b2aeab0921d1b5ca",
+      "bytes_before": 608,
+      "bytes_after": 543,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "sha256": "d22e7bd5fb8fbaf152ff8a4154918f8e3c95b61c34d76e5aac9406f15f2210b7",
+      "baseline_sha256": "1d1634eab4062d59b0e3b488cd7dd3c6b0056099e5c1b1943cd1f7308c564072",
+      "bytes_before": 3005,
+      "bytes_after": 3065,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Frontmatter/Acknowledgements.tex",
+      "sha256": "ca2a7b0c99f63789381e42c0cef715a5975370061473f8dd5372d948efc787d5",
+      "baseline_sha256": "9f51bdb727d5658c26a6fe36a1a0f766f08132106a5d9e0bb349d85f0281f4e4",
+      "bytes_before": 1142,
+      "bytes_after": 1103,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "Frontmatter/Approval.tex",
+      "sha256": "4b071f7bdf8922797e0c50e31fb87a1187018c3106081c853a81464f177e635b",
+      "baseline_sha256": "2343d13fddaf94645ac53fe098d2e44509373eb13f1c6e6183c0d183a3f9a104",
+      "bytes_before": 1987,
+      "bytes_after": 1965,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    },
+    {
+      "path": "README.md",
+      "sha256": "9517c4b83e5a03b21b5e44ab1cf3758d1df59589d71906a938f1ffef86bb6337",
+      "baseline_sha256": "4275896ee7292396db747a3a432718ffbbb19e94df191cef30a9039bc06e6dbc",
+      "bytes_before": 6127,
+      "bytes_after": 6345,
+      "checks": {
+        "numeric_sequence": true,
+        "math": true,
+        "protected_environments": true,
+        "latex_commands_and_arguments_except_authorized_headings": true,
+        "newline_style": true,
+        "final_newline": true
+      }
+    }
+  ]
+}

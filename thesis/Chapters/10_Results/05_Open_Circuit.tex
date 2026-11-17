@@ -1,0 +1,34 @@
+\section{Open-Circuit Operation}
+\label{sec:res-open}
+
+With the connector unloaded, average VBUS remained close to the selected
+output. The DC-coupled means were \SI{5.00727}{\volt},
+\SI{9.02697}{\volt}, and \SI{15.0537}{\volt} at the
+\SI{5}{\volt}, \SI{9}{\volt}, and \SI{15}{\volt} settings,
+respectively. These values were approximately \SI{0.145}{\percent},
+\SI{0.300}{\percent}, and \SI{0.358}{\percent} above their targets.
+
+\begin{table}[htbp]
+\centering
+\caption{No-load voltage readings. The pp column contains the workbook values; the \SI{20}{\volt} entry instead gives AC-coupled statistics.}
+\label{tab:open-circuit-results}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}L{0.18\textwidth}L{0.19\textwidth}X@{}}
+\toprule
+Test & VBUS avg (V) & Logged pp/detail (V) & Capture type\\
+\midrule
+\sourcefile{PDO5-NL-001} & 5.00727 & 1.396 & DC-coupled\\
+\sourcefile{PDO9-NL-001} & 9.02697 & 1.517 & DC-coupled\\
+\sourcefile{PDO15-NL-001} & 15.0537 & 1.092 & DC-coupled\\
+\sourcefile{PDO20-NL-AC-001} & Unavailable & 0.0762184 & AC detail/statistics\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Steady-state no-load input power remains undetermined: the \SI{5}{\volt}
+and \SI{9}{\volt} screens include transient or statistical history, and the
+\SI{15}{\volt} record lacks settled input power. At \SI{20}{\volt}, AC coupling
+also prevents an absolute-output measurement. Unloaded operation and load
+removal are described in Section~\ref{sec:res-transient}. Protection margin
+is checked by comparing the peak voltage with the active OVP threshold
+during the same event.

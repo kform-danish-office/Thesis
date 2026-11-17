@@ -1,0 +1,38 @@
+\section{Control Architecture and MCU Pins}
+\label{sec:intro-controller-basics}
+
+The microcontroller (MCU) regulates the isolated secondary bulk voltage through
+burst modulation of the half bridge. The bulk supply feeds
+the downstream USB-C PD stage, which regulates the USB-C output voltage
+to the selected PD level.
+
+Primary-voltage feedback is connected to MCU pin PA0, secondary-bulk
+feedback to PA1, and half-bridge-current sensing to PA2. The current signal
+is used for load classification and optional protection. ADC sampling runs
+continuously through circular DMA without synchronization to the carrier.
+
+Table~\ref{tab:intro-controller-signals} lists the MCU pins used on the
+original STM32G071 controller and the STM32F410 V2 board. The original
+controller uses PA10 for burst enable. On V2, PA10 is the UART receive pin,
+and PA11 provides burst enable.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{MCU pin assignments for the original controller and V2.}
+\label{tab:intro-controller-signals}
+\begin{tabularx}{\textwidth}{@{}L{0.52\textwidth}L{0.22\textwidth}Y@{}}
+\toprule
+Function & Original controller & V2\\
+\midrule
+Primary-voltage feedback & PA0 & PA0\\
+Secondary-bulk voltage feedback & PA1 & PA1\\
+Half-bridge current sensing & PA2 & PA2\\
+Half-bridge carrier outputs & PA8 / PA9 & PA8 / PB13\\
+Burst enable output & PA10 & PA11\\
+UART transmit (TX) & PC4 & PA9\\
+UART receive (RX) & PC5 & PA10\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier

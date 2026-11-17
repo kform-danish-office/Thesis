@@ -1,0 +1,2 @@
+$pdf_mode = 5; # XeLaTeX
+$max_repeat = 5;

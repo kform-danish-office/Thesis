@@ -1,0 +1,187 @@
+{
+  "files": [
+    {
+      "path": "Backmatter/Appendices/A_Analytical_Equations.tex",
+      "before_words": 431,
+      "after_words": 432,
+      "sha256": "846176f4234efbdcd2d0ba29b26eb6f6178e96e285ce1452d161a8c540dabf42",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+      "before_words": 264,
+      "after_words": 255,
+      "sha256": "89ec488825863926877f761661b67be3702897a187e48379dd3f965aab4e9b72",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/chapter.tex",
+      "before_words": 89,
+      "after_words": 94,
+      "sha256": "621a8f3ae92a506d746c0700cdc9c74d9369712a1ce823a23990892f40832ad1",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/10_Results/03_Steady_State.tex",
+      "before_words": 585,
+      "after_words": 599,
+      "sha256": "55c0cc4e5e858490d8664636b9a45a357adb2e4c34b2b02d44f5b28c029c56f4",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+      "before_words": 172,
+      "after_words": 171,
+      "sha256": "dfa8fc3689431e4e3b6b8075dbafe5a41411d9179b74f55bec2bf5390e4cd977",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+      "before_words": 160,
+      "after_words": 172,
+      "sha256": "f25b91fde5a4803e0c80eaf74b5404eaa871f21bc81c36eb0ba180a24c5f741c",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/03_Control_Contribution.tex",
+      "before_words": 207,
+      "after_words": 210,
+      "sha256": "e0efa8f2a451cad8f81a4fdc1f69166305c6d1ffe90a3c8cefcb3d3a0eb4446e",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/04_Open_Circuit_Safety.tex",
+      "before_words": 147,
+      "after_words": 155,
+      "sha256": "51e7ae8de7bc6a1c8470a3a17d65634decdd044baaa8e8889fc740386e130263",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+      "before_words": 224,
+      "after_words": 226,
+      "sha256": "f1d702c10836d5220b662a92cfb4b869cf4a3b9737045526d40d1789e787adba",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/11_Discussion/chapter.tex",
+      "before_words": 50,
+      "after_words": 56,
+      "sha256": "f0e0f91f4656f02e529357c6b76921829c7ce9b1b47e6d576adfea618cc6a5aa",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+      "before_words": 295,
+      "after_words": 297,
+      "sha256": "7c6d70a6157b406db1869d99a32b3003dae98fe8e84b6b8e22a36e92bf2bbf7d",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+      "before_words": 354,
+      "after_words": 356,
+      "sha256": "b0bf81816c0ed2c035cb9ececc46787ca241b83af8528accd00ff08810f049b1",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    },
+    {
+      "path": "Chapters/12_Conclusion/03_Contributions.tex",
+      "before_words": 215,
+      "after_words": 215,
+      "sha256": "59bed0b1d150af8e7dc6fe9614db3dd91029475ed730fe36f7c145b9d5b0669f",
+      "checks": {
+        "math": true,
+        "quantities": true,
+        "labels_refs_cites_paths": true,
+        "numbers": true,
+        "protected_environments": true,
+        "line_ending_style": true
+      }
+    }
+  ],
+  "all_checks_pass": true
+}

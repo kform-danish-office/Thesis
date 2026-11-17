@@ -1,0 +1,8 @@
+\section{What the Prototype Model Needs}
+\label{sec:sim-cases}
+
+The prototype model requires the pump inductor and clamp sequence; separate transformer leakage and magnetizing branches; turns ratio, rectifier conduction, and storage; and the controller's sampling, burst timing, and isolated-feedback startup delay.
+
+An output resistor alone does not model the USB-C PD stage's input demand as its output voltage and load change. Attachment and removal also change connected capacitance. The assumed power, impedance, and load dynamics must therefore be specified.
+
+Model calibration should start with steady bursts at a known load, followed by line-cycle buffering, load transients, and high-impedance operation. The prototype simulation remains unfinished; the following calculations predict trends to check in testing.

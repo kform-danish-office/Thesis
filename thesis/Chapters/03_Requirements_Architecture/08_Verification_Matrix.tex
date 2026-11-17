@@ -1,0 +1,48 @@
+\section{Test and Design Checks}
+\label{sec:req-matrix}
+
+Tables~\ref{tab:req-functional-verification} and \ref{tab:req-performance-verification} list the tests and measurements needed to check each requirement.
+
+\begin{table}[H]
+\centering
+\caption{Checks for the functional requirements.}
+\label{tab:req-functional-verification}
+\begin{tabularx}{\textwidth}{@{}L{0.10\textwidth}Y L{0.27\textwidth}@{}}
+\toprule
+ID & Test or measurement & Results section\\
+\midrule
+FR-01 & Startup sequence, output rise, and transition to valid feedback & \cref{sec:res-startup}\\
+FR-02 & Carrier frequency and enable timing & \cref{sec:res-bringup}\\
+FR-03 & Secondary and connector voltage under load & \cref{sec:res-steady}\\
+FR-04 & No-load and load-removal response & \cref{sec:res-open}\\
+FR-05 & Applied load step, voltage excursion, and recovery & \cref{sec:res-transient}\\
+FR-06 & Enabled OVP threshold, inhibit action, and fault recovery & \cref{sec:res-open,sec:res-fwcompare}\\
+FR-07 & DMA and loop-timing implementation & \cref{sec:res-fwcompare}\\
+FR-08 & Command, configuration, and status access & \cref{sec:res-fwcompare}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Checks for the performance requirements.}
+\label{tab:req-performance-verification}
+\begin{tabularx}{\textwidth}{@{}L{0.10\textwidth}Y L{0.27\textwidth}@{}}
+\toprule
+ID & Test or measurement & Results section\\
+\midrule
+PR-01 & Measured power together with available duration and thermal record & \cref{sec:res-steady,sec:res-thermal}\\
+PR-02 & Stated source voltage and frequency & \cref{sec:res-steady}\\
+PR-03 & Selected output mode, load, and measured VBUS & \cref{sec:res-bringup,sec:res-steady}\\
+PR-04 & DC voltage, ripple capture, and load response & \cref{sec:res-steady,sec:res-transient}\\
+PR-05 & No-load voltage observations and control thresholds & \cref{sec:res-open}\\
+PR-06 & Corresponding power, PF, and current-distortion record & \cref{sec:res-pq}\\
+PR-07 & Input/output power measured under the same conditions and at stated circuit points & \cref{sec:res-efficiency}\\
+PR-08 & Surface-temperature record and operating condition & \cref{sec:res-thermal}\\
+PR-09 & Hardware, firmware, and source measurements for each result & \cref{sec:res-compliance}\\
+PR-10 & Active limiter and observed overload response & \cref{sec:res-transient,sec:res-compliance}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Section~\ref{sec:res-compliance} compares requirements with completed measurements; Section~\ref{sec:revised-plan-criteria} extends the scope to V2/V3 development. Source code shows which functions were implemented; measurements show how the circuit responded.

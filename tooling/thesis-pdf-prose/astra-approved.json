@@ -1,0 +1,2916 @@
+[
+  {
+    "id": "front-01",
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "old": "A planar inductor and transformer from earlier DTU work were used in this converter. The \\texttt{Planar\\_ChargePump\\_2025 (5)} package contains the calculations and manufacturing information: MATLAB files, COMSOL models, component plots, PCB designs, and Gerber files. Its headers and presentation identify Bima Nugraha Sanusi and the DTU Power Electronics group. The components were measured by M\\'ani Gautason.\n",
+    "new": "A planar inductor and transformer from earlier DTU work by Bima Nugraha Sanusi and the DTU Power Electronics group were used in this converter. The components were measured by M\\'ani Gautason.\n",
+    "reason": "Retains attribution and measurements while removing a package inventory. Lead revision: Retain earlier-work attribution without turning package identification into a stronger sole-design claim.",
+    "facts_preserved": [
+      "Earlier DTU design attribution",
+      "Mán​​i Gautason measured components"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-02",
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "old": "The supplied \\sourcefile{Simplified_for_journal_revision.asc} and \\sourcefile{Simplified_for_journal_revision_2.asc} circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.\r\n",
+    "new": "The two supplied LTspice circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.\r\n",
+    "reason": "Describes models directly without filenames in the narrative. Lead revision: Retain explicit two-circuit count while removing filenames.",
+    "facts_preserved": [
+      "Two supplied reference circuits",
+      "Topology differences retained"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-03",
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "old": "The \\sourcefile{Power_loss_breakdown.asc} variants and device libraries describe the predecessor's loss calculations. Prototype efficiency is estimated from measured input and output power. The measurement locations and timing uncertainties are described with the results. Appendix~\\ref{app:modeling} identifies the supplied files and their roles.\r\n",
+    "new": "The predecessor loss calculations use a different circuit and device set. Prototype efficiency is estimated from measured input and output power, with measurement locations and timing uncertainties discussed alongside the results.\r\n",
+    "reason": "Replaces filename and appendix inventory with the technical comparison.",
+    "facts_preserved": [
+      "Predecessor loss calculations",
+      "Measured prototype efficiency and timing uncertainty"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-04",
+    "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+    "old": "The supplied \\sourcefile{GaN_LTspice_GS66502B_L1V2.lib} is a GaN Systems Level 1 Version 2.0 library intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded from the model, as stated in its header \\cite{gansystemsGS66502Bmodel}. It can represent the electrical device used in the supplied model, but it does not represent the complete LMG2652 package and PCB implementation.\r\n",
+    "new": "The supplied GaN Systems GS66502B Level 1 Version 2.0 model is intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded \\cite{gansystemsGS66502Bmodel}. It represents the electrical device in the supplied circuit rather than the complete LMG2652 package and PCB implementation.\r\n",
+    "reason": "Identifies the electrical model and its limits without a library filename.",
+    "facts_preserved": [
+      "Model and version",
+      "Excluded thermal, leakage and package effects",
+      "Prototype device distinction"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-05",
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "old": "Fourier and measurement directives calculate input current, RMS voltage/current, power, efficiency, and PF. The saved logs and RAW files are results from the supplied circuits. No simulation of the final board was completed.\r\n",
+    "new": "Fourier and measurement directives calculate input current, RMS voltage and current, power, efficiency, and PF. The supplied simulations describe the reference circuits; the final board was not simulated.\r\n",
+    "reason": "Removes the file inventory while preserving the scope of simulation.",
+    "facts_preserved": [
+      "Calculated quantities",
+      "Final board not simulated"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-06",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": "AP-02 & Repeat the reported approximately \\SI{85}{\\watt} V2 point, or explain the difference. Record assembly and fitted parts, firmware/exported settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, uncertainty, and raw-file locations.\\\\\n",
+    "new": "AP-02 & Repeat the reported approximately \\SI{85}{\\watt} V2 point, or explain the difference. State the assembly and fitted parts, firmware settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, and uncertainty.\\\\\n",
+    "reason": "Removes raw-file location inventory while retaining conditions for a reproducible test. Lead revision: Keep assembly identification as well as fitted components; these are test conditions, not archival clutter.",
+    "facts_preserved": [
+      "Reported V2 power",
+      "Operating, instrumentation and uncertainty conditions"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-08",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": "AP-08 & Decide whether V3 is ready for testing and list the tests that can be completed. If V3 is not ready, use the completed, identified V2 tests as the hardware results and state the remaining V3 work. Identify which V2 tests have usable matched records.\\\\\n",
+    "new": "AP-08 & Determine whether V3 is ready for testing, identify the tests that can be completed, and state the remaining work. If V3 is not ready, use the completed V2 tests with matched operating conditions as the hardware results.\\\\\n",
+    "reason": "Removes administrative instructions while preserving V2 and V3 evaluation. Lead revision: Preserve conditional V2 fallback and scope of feasible V3 tests; original proposal shortened substantive requirements.",
+    "facts_preserved": [
+      "V3 readiness and remaining work",
+      "Matched V2 tests"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-09",
+    "path": "Frontmatter/Approval.tex",
+    "old": "In V2, the controller was moved onto a four-layer converter PCB. The MCU control connections, power circuit, isolated sensing, and downstream USB-C stage are described in \\cref{sec:hw-v2}. The schematic and PCB print set are included in \\cref{sec:app-v2-oct27}. Browser logging and software tools were developed alongside the controller, with the full source in the appendices. \r\n",
+    "new": "In V2, the controller was moved onto a four-layer converter PCB with the power circuit, isolated sensing, and downstream USB-C stage (\\cref{sec:hw-v2}). Browser logging and software tools were developed alongside the controller.\r\n",
+    "reason": "Connects the integration work and removes an appendix inventory from the preface.",
+    "facts_preserved": [
+      "V2 four-layer integration",
+      "Browser logging and software tools"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-10",
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "old": "\\item measure output voltage, load response, switching behavior, input power quality, efficiency, and temperature using the available laboratory records; and\r\n",
+    "new": "\\item measure output voltage, load response, switching behavior, input power quality, efficiency, and temperature; and\r\n",
+    "reason": "States the measurement objective without record-keeping language.",
+    "facts_preserved": [
+      "All measurement objectives retained"
+    ],
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "remove administrative inventory"
+    ]
+  },
+  {
+    "id": "front-11",
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "old": "The revised plan extends the work to V2 evaluation and a V3 edge-card design \\cite{projectOctoberPlan}. It calls for a repeat of the reported \\SI{85}{\\watt} V2 operating point and an investigation of the \\SI{15}{\\watt} shortfall to the \\SI{100}{\\watt} target. V2 was subsequently operated with a modified resonant tank and reached \\SI{137.1}{\\watt} at the secondary output, with voltage droop and continued heating (\\cref{sec:res-v2-testing}). Defined-duration thermal tests remain necessary. The plan also calls for fixed-PDO and PPS tests and thermal and stability runs of defined duration. A V2--V3 power-density comparison requires the same definition of assembly volume for both designs. Section~\\ref{sec:revised-plan-criteria} gives the criteria and their current status.\r\n",
+    "new": "The revised plan extends the work to V2 evaluation and a V3 edge-card design \\cite{projectOctoberPlan}. It calls for a repeat of the reported \\SI{85}{\\watt} V2 operating point and an investigation of the \\SI{15}{\\watt} shortfall to the \\SI{100}{\\watt} target. With a modified resonant tank, V2 later reached \\SI{137.1}{\\watt} at the secondary output, with voltage droop and continued heating (\\cref{sec:res-v2-testing}). Fixed-PDO, PPS, and defined-duration thermal and stability tests remain necessary. A V2--V3 power-density comparison also requires a common assembly-volume definition. Section~\\ref{sec:revised-plan-criteria} gives the criteria and their current status.\r\n",
+    "reason": "Removes repeated duration requirement and connects the V2 observation to outstanding tests.",
+    "facts_preserved": [
+      "Reported 85 W, 15 W gap, target",
+      "137.1 W secondary with droop and heating",
+      "Thermal duration and comparison remain open"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific engineering work"
+    ]
+  },
+  {
+    "id": "front-12",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "old": "The plan starts from a reported V2 maximum near \\SI{85}{\\watt} and calls for repeating that point under defined conditions or explaining the difference. The integrated MCU and its ported firmware are part of this V2 development. An output of \\SI{79.89}{\\watt} was reached on the modified V1.0 assembly in the matched measurements analyzed here. Those measurements form a separate dataset. Sections~\\ref{sec:hw-v2} and \\ref{sec:ctrl-pwr2-port} identify the later circuit and firmware needed for a matched V2 test.\n",
+    "new": "The plan calls for a repeat of the reported V2 maximum near \\SI{85}{\\watt} under defined conditions, or an explanation of the difference. The integrated MCU and its ported firmware form part of the V2 development described in Sections~\\ref{sec:hw-v2} and \\ref{sec:ctrl-pwr2-port}. The separate matched measurements on the modified V1.0 assembly reached \\SI{79.89}{\\watt}.\n",
+    "reason": "Connects the reported V2 point, its development context and the separate V1 measurement without choppy dataset narration.",
+    "facts_preserved": [
+      "Reported V2 85 W",
+      "V1 measured 79.89 W separate",
+      "V2 hardware and firmware references"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific engineering work"
+    ]
+  },
+  {
+    "id": "front-13",
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "old": "A 5\\% increase in either series parameter gives an approximately 2.5\\% first-order resonance reduction. These are first-order calculations, not measured or simulated results. Near-carrier operation makes the corresponding phase shift relevant to commutation.\r\n",
+    "new": "A 5\\% increase in either series parameter gives an approximately 2.5\\% first-order resonance reduction. Near-carrier operation makes the corresponding phase shift relevant to commutation.\r\n",
+    "reason": "Removes a redundant disclaimer immediately following a first-order equation.",
+    "facts_preserved": [
+      "First-order calculation, not a measurement",
+      "5 percent and 2.5 percent values"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific engineering work"
+    ]
+  },
+  {
+    "id": "front-14",
+    "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+    "old": "Magnetic temperature depends on winding, core, and terminal losses, as well as heat transferred from the GaN devices, rectifiers, auxiliary supplies, and copper and removed by airflow. The images in \\cref{sec:method-thermal,sec:res-thermal} compare surface-temperature patterns at tested outputs, but do not separate core and winding losses or resolve internal winding maxima. Temperatures must be recorded over time on the tested assembly to check continuous output.\n",
+    "new": "Magnetic temperature depends on winding, core, and terminal losses, heat transferred from the GaN devices, rectifiers, auxiliary supplies, and copper, and heat removed by airflow. The images in \\cref{sec:method-thermal,sec:res-thermal} show surface-temperature patterns at the tested outputs. Internal winding temperatures and temperature over time on the assembled converter are needed to assess continuous operation.\n",
+    "reason": "Replaces a list of what images cannot resolve with the measurements needed for continuous operation.",
+    "facts_preserved": [
+      "Thermal coupling and airflow",
+      "Images are surface temperatures",
+      "Continuous rating needs temperature history"
+    ],
+    "checklist": [
+      "connected prose",
+      "technical fidelity",
+      "specific engineering work"
+    ]
+  },
+  {
+    "id": "front-15",
+    "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+    "old": "The revised project plan sets a continuous-output target of \\SI{100}{\\watt} and a continuous minimum of \\SI{65}{\\watt} \\cite{projectOctoberPlan}. The earlier schedule sets a \\SI{75}{\\watt} continuous validation milestone \\cite{projectEarlierPlan}. The minimum is the revised acceptance requirement, the milestone is an intermediate test, and the target is the intended capability. Each requires a stated load, duration, and thermal condition. Reaching a power level briefly does not show that the converter can hold it as its temperature settles.\r\n",
+    "new": "The revised project plan sets a continuous-output target of \\SI{100}{\\watt} and a continuous minimum of \\SI{65}{\\watt} \\cite{projectOctoberPlan}; the earlier schedule sets a \\SI{75}{\\watt} continuous validation milestone \\cite{projectEarlierPlan}. Each level must be tested at a stated load and duration while temperature is tracked as it settles.\r\n",
+    "reason": "Combines the three power levels and their common thermal test requirement without repeating their administrative labels.",
+    "facts_preserved": [
+      "100 W target, 65 W minimum, 75 W earlier milestone",
+      "Continuous duration and temperature conditions"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "front-16",
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "old": "The circuit relationships and approximate component values could be checked against the supplied analysis and LTspice files. These do not form a validated simulation of the final board and firmware. Chapter~\\ref{ch:simulation} explains the useful analytical results, the model differences, and the comparisons still needed.\r\n",
+    "new": "The supplied analysis and LTspice circuits allow circuit relationships and approximate component values to be checked. Chapter~\\ref{ch:simulation} describes the calculations and the changes needed to model the final board and firmware.\r\n",
+    "reason": "States how the supplied models were used and what development remains in connected prose. Lead revision: Preserve the original scope of what can be checked; do not turn conditional capability into a newly claimed completed validation.",
+    "facts_preserved": [
+      "Approximate checks against supplied analysis",
+      "No validated final-board simulation implied"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "front-17",
+    "path": "Chapters/02_Background/02_Charge_Pump_Principle.tex",
+    "old": "Inherent PFC describes the charge-transfer mechanism. Assembled-supply PF and THD remain dependent on load and burst control and require measurement.\r\n",
+    "new": "The charge-transfer mechanism provides inherent PFC, while the assembled supply's power factor and current distortion depend on load and burst control.\r\n",
+    "reason": "Connects the mechanism to the practical effect of load and control without repeating a generic measurement requirement.",
+    "facts_preserved": [
+      "Load and burst control affect PF and THD"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "front-18",
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "old": "The supplied loss files use a different circuit and device set, so their efficiency cannot be transferred to the USB-C supply. The GS66502B model also omits thermal and package behavior needed to predict the assembly's surface or junction temperatures.\r\n",
+    "new": "The supplied loss calculations use a different circuit and device set from the USB-C supply. The GS66502B model also omits the thermal and package behavior needed to predict the assembly's surface or junction temperatures.\r\n",
+    "reason": "Uses engineering context instead of a file reference and preserves the reason the model cannot predict prototype heating.",
+    "facts_preserved": [
+      "Predecessor circuit and device differ",
+      "Thermal and package model omissions"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "front-19",
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "old": "The revised plan asks why the reported \\SI{85}{\\watt} V2 result falls \\SI{15}{\\watt} short of the \\SI{100}{\\watt} target \\cite{projectOctoberPlan}. That is a gap in output capability, not a measured \\SI{15}{\\watt} loss. The matched \\SI{79.89}{\\watt} V1.0 baseline is \\SI{20.11}{\\watt} below the target and must be diagnosed using its own configuration and test conditions.\r\n",
+    "new": "The revised plan asks why the reported \\SI{85}{\\watt} V2 result falls \\SI{15}{\\watt} short of the \\SI{100}{\\watt} target \\cite{projectOctoberPlan}. This output-power gap is not a measured loss. The matched V1.0 baseline reached \\SI{79.89}{\\watt}, or \\SI{20.11}{\\watt} below the target, under a different configuration and test conditions.\r\n",
+    "reason": "Clarifies the two operating points and the meaning of the power gap in connected prose.",
+    "facts_preserved": [
+      "Reported V2 85 W and gap",
+      "Measured V1 79.89 W and gap",
+      "Output shortfall is not measured loss"
+    ],
+    "checklist": [
+      "engineering rationale",
+      "connected prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "ch79-01",
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "old": "Switching and power transfer were checked during bring-up, followed by loaded and\r\nno-load characterization. Workbook rows and instrument captures supplied the\r\nnumerical results and plots.",
+    "new": "Switching and power transfer were checked during bring-up, followed by loaded and\r\nno-load characterization.",
+    "reason": "Removes a data-container inventory from the method introduction.",
+    "facts_preserved": "Bring-up and loaded/no-load test sequence.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-02",
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "old": "Workbook entries, screenshots, waveform exports, firmware, and photographs\r\nare included with the test data. Numerical exports keep the original\r\nprecision. Missing setup details and peak markers limit the calculations,\r\nas discussed in \\cref{sec:method-uncertainty}. Plot lines connect measured\r\npoints; they are not fitted converter characteristics.",
+    "new": "Missing setup details and peak markers limit the calculations, as discussed in\r\n\\cref{sec:method-uncertainty}. Plot lines connect measured points and are not\r\nfitted converter characteristics.",
+    "reason": "Removes the file inventory while retaining limits relevant to interpretation.",
+    "facts_preserved": "Missing setup details and peak markers; plot interpolation.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-03",
+    "path": "Chapters/09_Experimental_Methods/11_Uncertainty.tex",
+    "old": "The setup information and repeated measurements needed for a numerical uncertainty budget are incomplete. Values are therefore kept at the workbook precision, and no error bars are given. Characterizing worst-case transients requires repeated events with a defined acceptance band; thermal equilibrium requires a temperature history, and jitter requires timing measurements. These limits apply throughout Chapter~\\ref{ch:results}.",
+    "new": "The setup information and repeated measurements needed for a numerical uncertainty budget are incomplete, so no error bars are given. Characterizing worst-case transients requires repeated events with a defined acceptance band; thermal equilibrium requires a temperature history, and jitter requires timing measurements. These limits apply throughout Chapter~\\ref{ch:results}.",
+    "reason": "Removes spreadsheet processing detail and keeps the uncertainty and required measurements.",
+    "facts_preserved": "No numerical uncertainty budget or error bars; transient, thermal and jitter measurement requirements.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-04",
+    "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+    "old": "Older supporting notes name a different revision from the archived baseline. Each test therefore needs the source version, runtime \\texttt{VER} response, and \\texttt{EXPORT} saved together. Calibration, thresholds, loaded/no-load settings, and timing are saved in the export for each run. Appendix~\\ref{app:firmware} gives the command reference. The available waveforms and logs are discussed in Chapter~\\ref{ch:results}.",
+    "new": "Firmware version, calibration, thresholds, loaded/no-load settings, and timing affect the control response and should be recorded with each test. Appendix~\\ref{app:firmware} gives the command reference.",
+    "reason": "Replaces source-record administration with the settings that affect the test. Lead revision: Preserve firmware identification as a relevant test variable while removing contradictory-note administration and generic results navigation.",
+    "facts_preserved": "Calibration, thresholds, loaded/no-load settings, timing and existing references.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-06",
+    "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+    "old": "The reported approximately \\SI{85}{\\watt} V2 point must be repeated with\nidentified hardware, rework, magnetics, resonant values, controller target,\nfirmware source, saved settings, and live mode. Version, status, and\nconfiguration exports are recorded with the test.\n\nThe baseline record must identify AC input, output setting and negotiation,\nload/cable, auxiliary supplies, cooling, ambient, and duration. Probe scaling\nand zero must be checked. If the original \\SI{85}{\\watt} configuration cannot\nbe reconstructed, a new baseline must state the known differences.",
+    "new": "The reported V2 operating point near \\SI{85}{\\watt} must be repeated with\nthe hardware, rework, magnetics, resonant values, controller target, firmware version, settings and mode\nidentified. AC input, output setting and negotiation, load and cable, auxiliary\nsupplies, cooling, ambient and duration must also be recorded. Probe scaling\nand zero must be checked. If the original configuration cannot be reconstructed,\nthe known differences must be stated.",
+    "reason": "Connects the baseline condition to the measurements and removes a list of configuration exports. Lead revision: Preserve firmware version and controller target as test variables without requiring export-file inventory.",
+    "facts_preserved": "Reported approximately 85 W point remains unverified; operating configuration and differences must be identified.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-07",
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "Commands and functions are listed in Appendix~\\ref{app:firmware}. The full firmware sources are in Appendix~\\ref{app:full-embedded-source}, and their versions are listed in \\cref{sec:ctrl-firmware-identities}.",
+    "new": "Commands and functions are listed in Appendix~\\ref{app:firmware}.",
+    "reason": "Retains the useful command reference and removes repeated source and version navigation.",
+    "facts_preserved": "Command reference remains; full source and version information remain elsewhere.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-08",
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "The V2 firmware, protocol tests, settings-storage tests, and browser tests were built and checked. These checks cover timer rounding and pair rejection, application with output disabled, learned-profile clearing, calibration cancellation, and saved-settings recovery after interrupted writes. The complete source and build results are included in Appendices~\\ref{app:firmware} and \\ref{app:full-embedded-source}.",
+    "new": "The V2 firmware, protocol tests, settings-storage tests, and browser tests were built and checked. These checks cover timer rounding and pair rejection, application with output disabled, learned-profile clearing, calibration cancellation, and saved-settings recovery after interrupted writes.",
+    "reason": "Keeps the actual verification and removes a repeated source and build inventory.",
+    "facts_preserved": "Software checks and their scope; powered validation remains in the following paragraph.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-09",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "V2 integrates the MCU, power stage, sensing, local supplies, and USB-C output on a four-layer PCB \\cite{ststm32f410ds}. The circuit and PCB design are documented in Section~\\ref{sec:app-v2-oct27}.",
+    "new": "V2 integrates the MCU, power stage, sensing, local supplies, and USB-C output on a four-layer PCB \\cite{ststm32f410ds}.",
+    "reason": "Removes repeated appendix navigation; the later PCB paragraph retains the detailed drawing reference.",
+    "facts_preserved": "Four-layer V2 integration and citation; detailed drawing reference retained.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-10",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "The matched \\SI{79.89}{\\watt} tests on the modified V1.0 assembly provide a connector-output baseline (\\cref{ch:results}). Later V2 secondary-output tests reached higher power with voltage droop and continued heating (\\cref{sec:res-v2-testing}); thermal-endurance tests remain incomplete. The V1.0 outline is \\SI{202.77}{\\milli\\metre} by \\SI{72.77}{\\milli\\metre}; V2 assembly dimensions must be measured separately before calculating its power density. The earlier reported \\SI{85}{\\watt} V2 point remains a plan reference.",
+    "new": "The matched \\SI{79.89}{\\watt} tests on the modified V1.0 assembly provide a connector-output baseline (\\cref{ch:results}). Later V2 secondary-output tests reached higher power with voltage droop and continued heating (\\cref{sec:res-v2-testing}); thermal-endurance tests remain incomplete. The V1.0 outline is \\SI{202.77}{\\milli\\metre} by \\SI{72.77}{\\milli\\metre}; V2 assembly dimensions must be measured separately before calculating its power density.",
+    "reason": "Removes a repeated 85 W attribution already explained immediately above.",
+    "facts_preserved": "79.89 W connector baseline, V2 secondary measurements, droop, heating, incomplete endurance and dimensions; reported 85 W point retained in preceding paragraph.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-11",
+    "path": "Chapters/07_Hardware/02_Input_Filter_Bridge.tex",
+    "old": "Bridge commutation, diode capacitance, charge-pump current, and loop inductance couple this path to the half bridge. Filter attenuation must therefore be measured in the installed circuit. The assembly's input behavior was assessed from the input-current measurements in Chapter~\\ref{ch:results}. Measurements on both sides of the filter are still needed to determine how much noise it attenuates.",
+    "new": "Bridge commutation, diode capacitance, charge-pump current, and loop inductance couple this path to the half bridge. The assembly's input behavior was assessed from the input-current measurements in Chapter~\\ref{ch:results}; measurements on both sides of the installed filter are still needed to determine its noise attenuation.",
+    "reason": "Combines the repeated filter measurement requirement with its reason.",
+    "facts_preserved": "Input-current assessment and need for measurements on both sides of installed filter.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "ch79-12",
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "old": "The conversion scales must match the installed circuit. V1.0 includes an external \\SI{2.5}{\\volt} reference, omitted in V1.1, while the final firmware defaults to a \\SI{3.3}{\\volt} ADC reference. Divider ratios, amplifier scale, buffers, gain, and offset all affect the conversion. The conversion scales still need to be checked against measured circuit and ADC-pin voltages. The calibration settings are given in \\Cref{sec:ctrl-feedback}.",
+    "new": "V1.0 includes an external \\SI{2.5}{\\volt} reference, omitted in V1.1, while the final firmware defaults to a \\SI{3.3}{\\volt} ADC reference. Divider ratios, amplifier scale, buffers, gain, and offset also affect the conversion, so the scales must be checked against measured circuit and ADC-pin voltages. The calibration settings are given in \\Cref{sec:ctrl-feedback}.",
+    "reason": "Connects the scale check to its circuit causes and removes repeated instruction.",
+    "facts_preserved": "Reference values and revision distinction; scale verification and calibration reference.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "ch79-13",
+    "path": "Chapters/07_Hardware/10_Auxiliary_Power.tex",
+    "old": "The local supply rails, UART communication, inhibited burst-enable output PA10, carrier outputs, and analog feedback were checked during bring-up before the loop was closed. The LMG2652 bias must be within its operating range, and a valid secondary-voltage reading from input PA1 requires power to the isolated sensing circuit.",
+    "new": "The local supply rails, UART communication, inhibited burst-enable output PA10, carrier outputs, and analog feedback were checked during bring-up before the loop was closed. The LMG2652 bias must be within its operating range before switching.",
+    "reason": "Removes the repeated explanation of isolated sensing power, already stated in the preceding paragraph and linked to precharge below.",
+    "facts_preserved": "Bring-up checks and bias requirement; isolated feedback startup remains described.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "ch79-15",
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "old": "The exported settings are kept with each test because calibration or threshold changes can alter the response without changing the firmware version. Connector voltage, load current, and AC input power are measured with external instruments for performance calculations. These measurements also provide an independent check on the controller readings.",
+    "new": "Calibration and threshold changes can alter the response without changing the firmware version, so the settings must be recorded with each test. External measurements of connector voltage, load current, and AC input power provide the performance calculations and a check on the controller readings.",
+    "reason": "States the engineering reason for retaining settings and joins the external measurement roles.",
+    "facts_preserved": "Settings affect response without a version change; external measurements support performance calculations and check controller readings.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "10-01",
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "old": "Calculations use completed rows of the \\texttt{Load Data} sheet in\r\n\\sourcefile{Data/measurements/Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx}.\r\nTest identifiers link rows to oscilloscope and analyzer screenshots;\r\n\\emph{Planned} rows are excluded. Complete tables and\r\nsource rows are included in the appendix; processed CSVs include both\r\noriginal readings and calculated values.",
+    "new": "Calculations use completed measurements from the load tests. The complete\r\nresults are included in the appendix.",
+    "reason": "Removes file and processing inventory from the results introduction.",
+    "facts_preserved": "Completed measurements only; complete results in appendix.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-02",
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "old": "The test name ``75 W'' identifies a row whose actual\r\ncalculated output is \\SI{73.97}{\\watt}; the \\SI{3.8}{\\ampere} point\r\nexceeds \\SI{75}{\\watt} electrically. Comparisons use calculated output;\r\nthe original test names are kept so each point can be found in the workbook.",
+    "new": "The \\SI{3.8}{\\ampere} point exceeded \\SI{75}{\\watt} calculated output.",
+    "reason": "Retains meaningful output threshold and removes row-name bookkeeping.",
+    "facts_preserved": "73.97 W and 79.89 W remain in preceding sentence; 3.8 A exceeds 75 W.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-03",
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "old": "\\caption{Raw C2 waveforms: overview records 00006 and 00008, and carrier-detail records 00007 and 00010 from \\sourcefile{Waveforms_Richard}. The original amplitude and time scales are unchanged. Load and setup details are incomplete, so these captures cannot be linked to individual workbook tests.}",
+    "new": "\\caption{C2 waveforms showing burst overviews (00006 and 00008) and carrier detail (00007 and 00010).}",
+    "reason": "Describes the displayed waveforms without archive and scale inventory. Lead revision: Place incomplete setup attribution once in the adjacent frequency discussion, not again in the caption. Lead revision: Place incomplete setup attribution once in the adjacent frequency discussion, not again in the caption.",
+    "facts_preserved": "Capture identifiers and incomplete load and setup details retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-04",
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "old": "approximately \\SI{1.03}{\\mega\\hertz}. Detection thresholds and source checksums are retained. This frequency\r\ncharacterizes the exports rather than the main campaign's timer clock.",
+    "new": "approximately \\SI{1.03}{\\mega\\hertz}. This is the frequency measured in the C2\r\nwaveforms; the configured timer frequency and test conditions were not recorded.",
+    "reason": "Replaces checksum and export narration with the measurement limitation. Lead revision: Keep waveform-derived frequency separate from timer configuration, with the missing setup stated locally. Lead revision: Keep waveform-derived frequency separate from timer configuration, with the missing setup stated locally.",
+    "facts_preserved": "Measured transition spacing and approximate frequency remain; test attribution remains uncertain.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-05",
+    "path": "Chapters/10_Results/12_Compliance_Table.tex",
+    "old": "PR-09 & Link results to configuration & Test IDs, source rows, archived screenshots and raw-file checksums & Linked; setup details incomplete\\\\",
+    "new": "PR-09 & Link results to configuration & Test identifiers and instrument readings & Setup details incomplete\\\\",
+    "reason": "Replaces archive inventory with the practical configuration result. Lead revision: Avoid inventing full identification of hardware/test conditions from the original archive linkage statement. Lead revision: Avoid inventing full identification of hardware/test conditions from the original archive linkage statement.",
+    "facts_preserved": "Setup details incomplete; identified main-test configuration retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-06",
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "The reported software dead-time setting was approximately\n\\SI{60}{\\nano\\second}. Half-bridge heating decreased after the tank and\ntiming changes. ZVS still needs to be checked from switch voltage and current\nat turn-on. The earlier controller timing is described in\nSection~\\ref{sec:hw-v2}.",
+    "new": "After the tank was modified and the software dead time was set to about\n\\SI{60}{\\nano\\second}, half-bridge heating decreased. Turn-on voltage\nand current measurements are still needed to check ZVS.",
+    "reason": "Connects setting, observation and remaining measurement without a redundant cross-reference. Lead revision: Use direct authorial test wording requested by root; retain approximate software setting and unverified ZVS. Lead revision: Use direct authorial test wording requested by root; retain approximate software setting and unverified ZVS.",
+    "facts_preserved": "Reported approximately 60 ns software setting; reduced heating after both changes; ZVS unverified.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "11-01",
+    "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+    "old": "Each test needs the board version, settings, waveforms, power readings,\r\nand temperatures recorded together. Screenshots can omit coupling,\r\naveraging, and firmware state, which limits what can be calculated from\r\nthem. The data appendix and replotted measurements show these gaps.",
+    "new": "Recording the board version, settings, waveforms, power readings, and\r\ntemperatures together allows each result to be interpreted against its test\r\nconditions. Coupling, averaging, and firmware state are also needed when\r\ncalculating results from captures.",
+    "reason": "Closes with the practical test lesson rather than describing the appendix.",
+    "facts_preserved": "Need for board, settings, waveforms, power, temperature, coupling, averaging and firmware state retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "12-01",
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "old": "The four-layer circuit and layout are documented in\r\nthe schematic and PCB prints. Archived firmware and supporting software\r\nare included with the thesis and have been checked in software.\r\nPreliminary powered observations appear in \\cref{sec:res-v2-testing};\r\npowered tests of the later adjustable firmware and comparable power and\r\nthermal-endurance measurements are still needed.",
+    "new": "The four-layer circuit and layout integrate these functions on V2.\r\nThe firmware and supporting software passed software checks.\r\nPreliminary powered observations appear in \\cref{sec:res-v2-testing};\r\npowered tests of the later adjustable firmware and comparable power and\r\nthermal-endurance measurements are still needed.",
+    "reason": "Removes file inventory and keeps the work and testing status. Lead revision: Preserve completed software-check status while removing archive inventory. Lead revision: Preserve completed software-check status while removing archive inventory.",
+    "facts_preserved": "V2 integration and lack of powered tests for later adjustable firmware retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "12-02",
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "old": "The prototype was evaluated for output settings, high-power operation,\r\ninput-current quality, initial efficiency, load removal, no-load behavior,\r\nand surface temperature. Numerical tables, reconstructed plots, and\r\nschematics document the results and circuit configurations.",
+    "new": "The prototype was evaluated for output settings, high-power operation,\r\ninput-current quality, initial efficiency, load removal, no-load behavior,\r\nand surface temperature.",
+    "reason": "Removes documentation inventory from the contribution.",
+    "facts_preserved": "All evaluation categories retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-07",
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "old": "\\caption{LeCroy line-timescale waveforms from captures 7 and 8, with the original offsets and amplitude scales. The two C3 files contain identical data. Probe scaling was not recorded, so input power and PF cannot be calculated from these traces.}",
+    "new": "\\caption{LeCroy line-timescale waveforms from captures 7 and 8. The two C3 records contain identical data.}",
+    "reason": "Removes scale bookkeeping while retaining the identical C3 data, which affects interpretation of the records.",
+    "facts_preserved": "Capture identifiers and identical C3 data retained; probe-scaling limitation follows in the text.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-08",
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "old": "Raw line-timescale exports retain original amplitudes and offsets. Missing\r\nworkbook test links and incomplete probe calibration preclude additional\r\ncalibrated PF or real-power calculations.",
+    "new": "The line-timescale traces show the input waveform, but incomplete probe\r\ncalibration prevents calculation of PF or real power from them.",
+    "reason": "Makes the waveform role and measurement limit direct.",
+    "facts_preserved": "Probe calibration incomplete; PF and real power cannot be calculated from traces.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-09",
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "old": "DC-coupled captures show mean output voltage; AC-coupled captures show\r\nsmall-signal detail and acquisition statistics. Thermal images show surface\r\nhotspots. The raw waveform exports include the original samples, but some\r\nlack load and probe-calibration details. Graphs show measured points only.\r\nError bars are omitted because the uncertainty data are incomplete.\r\nInstrument disagreements and ambiguous measurement fields are discussed\r\nwith the affected results.",
+    "new": "DC-coupled captures give mean output voltage, while AC-coupled captures\r\nshow small-signal detail and acquisition statistics. Thermal images show\r\nsurface hotspots. Error bars are omitted because the uncertainty data are\r\nincomplete; instrument disagreements and ambiguous measurement fields are\r\ndiscussed with the affected results.",
+    "reason": "Removes a raw-file inventory and plotting narration while retaining the measurement interpretation.",
+    "facts_preserved": "DC and AC capture roles, surface temperatures, incomplete uncertainty and local disagreements retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-10",
+    "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+    "old": "Loaded and load-removal tests show the combined controller response. The\r\nindividual changes were not tested at fixed settings, so their separate\r\ncontributions remain unmeasured. For example, \\texttt{MAXRATE} requests a\r\n\\SI{20}{\\micro\\second} period; the achieved period and jitter require\r\nmeasured timing.",
+    "new": "Loaded and load-removal tests show the response of the combined controller;\r\nthe contributions of individual changes were not measured separately. The\r\nrequested \\texttt{MAXRATE} period is \\SI{20}{\\micro\\second}; the achieved\r\nperiod and jitter have not been measured.",
+    "reason": "Focuses on the concrete timing measurement rather than repeating the lack of isolated feature tests. Lead revision: Keep the local attribution limit: combined response must not imply individually measured gains. Lead revision: Keep the local attribution limit: combined response must not imply individually measured gains.",
+    "facts_preserved": "Combined response and 20 microsecond requested period retained; achieved timing and jitter unmeasured.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-11",
+    "path": "Chapters/10_Results/08_Efficiency.tex",
+    "old": "Average VBUS and external load current come from the same row. Input power\r\nis the analyzer entry selected in the workbook. These calculations give\r\ninitial estimates because simultaneous acquisition and the inclusion of all\r\nauxiliary power paths are not fully documented.",
+    "new": "Average VBUS and external load current were used to calculate output power,\r\nwith analyzer readings for input power. The resulting efficiency estimates\r\nare preliminary because simultaneous acquisition and the inclusion of all\r\nauxiliary power paths are not fully documented.",
+    "reason": "Connects measurement choices directly to the preliminary estimate without spreadsheet narration.",
+    "facts_preserved": "Matching output voltage and current, analyzer input and incomplete synchronization and auxiliary boundaries retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "10-12",
+    "path": "Chapters/10_Results/09_Thermal.tex",
+    "old": "The ten open-load and loaded images use emissivity 0.95. The plot uses camera\r\nmaxima rather than cursor/reference values: at \\SI{9}{\\volt},\r\n\\SI{2}{\\ampere}, these are \\SI{56.8}{\\celsius} and\r\n\\SI{39.7}{\\celsius}, respectively, with the workbook retaining the latter.",
+    "new": "The ten no-load and loaded images use an emissivity of 0.95. At\r\n\\SI{9}{\\volt} and \\SI{2}{\\ampere}, the camera maximum was\r\n\\SI{56.8}{\\celsius}, while the cursor read\r\n\\SI{39.7}{\\celsius}. The plotted temperatures are camera maxima.",
+    "reason": "Clarifies the physical readings and removes workbook bookkeeping. Lead revision: Correct 39.7 degrees C to cursor temperature: the reference value in the table is 24.9 degrees C.",
+    "facts_preserved": "Emissivity, both temperatures, load condition and camera-maximum basis retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "10-13",
+    "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+    "old": "The control changes addressed the problems found during bring-up. PA1\r\nvoltage regulation replaced the incorrect power feedback, with PA2 retained\r\nfor load classification. Complete-cycle scheduling addressed irregular\r\npulses, and no-load guarding limited charging after load removal. Measurement review separated waveform ripple from the\r\nspread of acquisition averages. The original readings give a maximum\r\ncalculated output of \\SI{79.89}{\\watt}; further loading toward the\r\n\\SI{100}{\\watt} objective requires temperature histories alongside the\r\nelectrical readings.",
+    "new": "PA1 voltage regulation replaced the incorrect power feedback, while PA2\r\nwas retained for load classification. Complete-cycle scheduling addressed\r\nirregular pulses, and no-load guarding limited charging after load removal.\r\nThe highest calculated V1.0 output was \\SI{79.89}{\\watt}; further loading toward\r\nthe \\SI{100}{\\watt} objective requires temperature histories alongside the\r\nelectrical readings.",
+    "reason": "Connects the implemented corrections and removes repetition of the ripple-statistics distinction already explained in steady-state results. Lead revision: Name V1.0 so its 79.89 W maximum cannot be confused with later 137.1 W secondary-output tests.",
+    "facts_preserved": "PA1, PA2, complete-cycle scheduling, no-load guarding, 79.89 W and 100 W target retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "11-03",
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "old": "Chapter~\\ref{ch:results} reports selected fixed outputs and matched\r\nmeasurements near \\SI{80}{\\watt}. Average voltage regulation was maintained,\r\nbut ripple, load-dependent input-current quality, and surface heating\r\nremained.\r\n\r\nThe most complete high-power measurements cover \\SI{20}{\\volt} at\r\n\\SIrange{3.7}{4.0}{\\ampere}, giving \\SIrange{73.97}{79.89}{\\watt}\r\nand an initial efficiency estimate of \\SIrange{76.5}{77.1}{\\percent}.\r\nAverage USB-C output voltage was maintained across these points. The input--output\r\npower difference and surface heating point to losses within the power path.\r\nSimultaneous stage-power and temperature measurements would locate those losses.",
+    "new": "At \\SI{20}{\\volt} and \\SIrange{3.7}{4.0}{\\ampere}, the most complete\r\nV1.0 high-power measurements gave \\SIrange{73.97}{79.89}{\\watt} and an initial\r\nefficiency estimate of \\SIrange{76.5}{77.1}{\\percent}. Average USB-C output\r\nvoltage remained regulated, while ripple, load-dependent input-current quality,\r\nand surface heating remained. The input--output power difference and heating\r\npoint to losses in the power path; simultaneous stage-power and temperature\r\nmeasurements would help locate them.",
+    "reason": "Combines overlapping descriptions of the same results and links the remaining loss measurement to the observation. Lead revision: Keep the high-power electrical/efficiency result explicitly attached to V1.0.",
+    "facts_preserved": "20 V, 3.7–4.0 A, 73.97–79.89 W, initial efficiency and unresolved losses retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "11-04",
+    "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+    "old": "Mean output voltage was maintained at the tested loads, while ripple and\r\ninput-current quality remained load-dependent. Burst spacing and fixed\r\nlosses influence performance at low demand; current stress and heating become more\r\nsignificant at high demand. The best PF and THD were measured at the highest loads on the\r\n\\SI{20}{\\volt} output. Control and hardware changes must therefore be assessed\r\nacross the charge pump, burst schedule, secondary bulk supply, USB-C PD\r\noutput stage, and thermal path.",
+    "new": "Mean output voltage was maintained at the tested loads, while ripple and\r\ninput-current quality varied with load. Burst spacing and fixed losses affect\r\nlow-demand performance, while current stress and heating become more significant\r\nat high demand. The best PF and THD were measured at the highest loads on the\r\n\\SI{20}{\\volt} output. Changes to the charge pump or burst schedule should\r\ntherefore be assessed together with their effects on the secondary bulk supply, USB-C PD stage, and heating.",
+    "reason": "Connects the operating trade-off to the reason for assessing hardware and control changes together. Lead revision: Name the secondary bulk supply and USB-C PD stage instead of the ambiguous both output stages.",
+    "facts_preserved": "Load-dependent ripple and current quality, best PF and THD at highest 20 V loads, and thermal implications retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "12-03",
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "old": "The revised plan retains \\SI{100}{\\watt} continuous as the target and\r\n\\SI{65}{\\watt} continuous as the minimum \\cite{projectOctoberPlan}.\r\nDefined-duration tests with temperature histories are still needed at these\r\nlevels and at the earlier \\SI{75}{\\watt} milestone. The reported\r\napproximately \\SI{85}{\\watt} V2 point should be repeated with the board,\r\nfirmware, settings, power readings, and temperatures recorded together.\r\nThis earlier V2 point is separate from the calculated \\SI{79.89}{\\watt}\r\nV1.0 result above.",
+    "new": "The target remains \\SI{100}{\\watt} continuous, with a minimum of\r\n\\SI{65}{\\watt} \\cite{projectOctoberPlan}. Defined-duration tests with\r\ntemperature histories are needed to assess sustained operation at these\r\nlevels.",
+    "reason": "Focuses the conclusion on the target and the measurements needed for sustained operation; detailed V1 and V2 comparisons appear in the results and discussion.",
+    "facts_preserved": "100 W target and 65 W minimum retained; earlier 75 W milestone and approximately 85 W V2 result remain in the results and discussion.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "back-001",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "The complete sketches are Listings~\\ref{lst:full-pwr1920} and \\ref{lst:full-pwr204} in Appendix~\\ref{app:full-embedded-source}. The editable files are \\sourcefile{Code/thesi_power_control_PWR_1_9_20.ino} and \\sourcefile{Code/PWR_2_0_4/thesi_power_control.ino}. The source manifest, \\sourcefile{Code/source_manifest.json}, lists file sizes, line counts, and SHA-256 hashes. PWR-1.9.20 contains 4207 lines; the current V2 sketch contains 5348 lines. The earlier V2 port is retained under \\sourcefile{Code/PWR_2_0_1}.\n",
+    "new": "The complete sketches are Listings~\\ref{lst:full-pwr1920} and \\ref{lst:full-pwr204} in Appendix~\\ref{app:full-embedded-source}.\n",
+    "reason": "Remove source inventory while retaining both complete listings.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-002",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "old": "\\section{Measurement Sources}\r\n\r\nThe electrical results were calculated from the \\texttt{Load Data} sheet\r\nof \\sourcefile{Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx}. The original\r\nworkbooks and test-specific instrument images are included under\r\n\\sourcefile{Data/measurements}. The tables list the worksheet row and instrument readings for each\r\ncompleted test. Blank fields mark missing measurements.\r\n\r\nSeven V2 secondary-output load captures are stored under\r\n\\sourcefile{Data/measurements/v2_load_thermal/raw}. The AC supply and\r\nelectronic-load readings were used to calculate secondary power and estimate\r\nefficiency as described in \\cref{sec:method-efficiency}. The associated\r\nthermal-region readings are described in \\cref{sec:method-thermal}.\r\n\r\n\\begin{table}[htbp]\r\n\\centering\r\n\\caption{Measurement workbooks.}\r\n\\begin{tabularx}{\\textwidth}{@{}L{0.46\\textwidth}Y@{}}\r\n\\toprule\r\nWorkbook & Role\\\\\r\n\\midrule\r\n\\sourcefile{Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx} & Completed fixed-output and extended-load measurements\\\\\r\n\\sourcefile{Thesis_USB_PDO_MultiVoltage_Test_Plan.xlsx} & Earlier multi-voltage measurements and test planning\\\\\r\n\\sourcefile{Thesis_75_80W_USB_PDO_Test_Plan.xlsx} & High-power test planning and capture log\\\\\r\n\\sourcefile{Thesis_Final_Measurement_Checklist.xlsx} & Laboratory checklist and measurement index\\\\\r\n\\bottomrule\r\n\\end{tabularx}\r\n\\end{table}\r\n\r\n",
+    "new": "\\section{Measurements}\r\n\r\nThe electrical tables give instrument readings for completed fixed-output and extended-load tests. Blank fields mark missing measurements.\r\n\r\nSeven V2 secondary-output load captures provide AC-supply and electronic-load readings used to calculate secondary power and estimate efficiency as described in \\cref{sec:method-efficiency}. The associated thermal-region readings are described in \\cref{sec:method-thermal}.\r\n\r\n",
+    "reason": "Replace workbook inventory with the measurement context and retain seven V2 captures.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-003",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "old": "The source package includes waveform\r\ncopies, CSV plotting data, checksums, and processing steps.",
+    "new": "",
+    "reason": "Remove archive bookkeeping from the measurement explanation.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-004",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "old": "\\section{Raw Waveform Files}",
+    "new": "\\section{Waveform Acquisition}",
+    "reason": "Name the acquisition information rather than files.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-005",
+    "path": "Data/measurements/processed_rewrite/raw_waveform_source_table.tex",
+    "old": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.1558\\linewidth} L{0.4583\\linewidth} L{0.1192\\linewidth} L{0.1467\\linewidth}@{}}\r\n\\caption{Waveform files, sample counts, and intervals. SHA-256 checksums and acquisition details are listed in \\sourcefile{raw_waveform_index.csv}.}\\label{tab:raw-waveform-sources}\\\\\r\n\\toprule\r\nRecord & Archived file & Samples & Interval (s)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nRecord & Archived file & Samples & Interval (s)\\\\\r\n\\midrule\r\n\\endhead\r\n\\sourcefile{00006} & \\sourcefile{C2i725 32.4W00006.csv} & 500002 & 4e-09\\\\\r\n\\sourcefile{00007} & \\sourcefile{C2i725 32.4W00007.csv} & 12502 & 4e-10\\\\\r\n\\sourcefile{00008} & \\sourcefile{C2i725 32.4W00008.csv} & 500002 & 2e-09\\\\\r\n\\sourcefile{00010} & \\sourcefile{C2i725 32.4W00010.csv} & 50002 & 4e-10\\\\\r\n\\sourcefile{lecory 7 C1} & \\sourcefile{lecory_7_C1.txt} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 7 C2} & \\sourcefile{lecory_7_C2.txt} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 7 C3} & \\sourcefile{lecory_7_C3-low.txt} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C1} & \\sourcefile{lecory_8_C1.txt} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C2} & \\sourcefile{lecory_8_C2.txt} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C3} & \\sourcefile{lecory_8_C3-high.txt} & 10001 & 1e-05\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.25\\linewidth} L{0.25\\linewidth}@{}}\r\n\\caption{Waveform records, sample counts, and sampling intervals.}\\label{tab:raw-waveform-sources}\\\\\r\n\\toprule\r\nRecord & Samples & Interval (s)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nRecord & Samples & Interval (s)\\\\\r\n\\midrule\r\n\\endhead\r\n\\sourcefile{00006} & 500002 & 4e-09\\\\\r\n\\sourcefile{00007} & 12502 & 4e-10\\\\\r\n\\sourcefile{00008} & 500002 & 2e-09\\\\\r\n\\sourcefile{00010} & 50002 & 4e-10\\\\\r\n\\sourcefile{lecory 7 C1} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 7 C2} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 7 C3} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C1} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C2} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C3} & 10001 & 1e-05\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "reason": "Remove filenames and checksum reference while retaining all record IDs, sample counts and sample intervals.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-006",
+    "path": "Data/measurements/processed_rewrite/appendix_thermal_complete_table.tex",
+    "old": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.2200\\linewidth} L{0.1100\\linewidth} L{0.1100\\linewidth} L{0.1100\\linewidth} L{0.3300\\linewidth}@{}}\r\n\\caption{Temperature readings from ten thermal images, using emissivity 0.95. The lower reference marker was not confirmed as ambient temperature.}\\label{tab:thermal-results-complete}\\\\\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C) & Source image\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C) & Source image\\\\\r\n\\midrule\r\n\\endhead\r\nImage \\#1 / 20 V, 4.7 A & 102.9 & 27.9 & 25.2 & \\sourcefile{image_001_20v_4p7a.png}\\\\\r\nImage \\#2 / 20 V, 1 A & 60.3 & 30.8 & 24.9 & \\sourcefile{image_002_20v_1a.png}\\\\\r\nImage \\#3 / 20 V, 3 A & 82.9 & 30.6 & 25.2 & \\sourcefile{image_003_20v_3a.png}\\\\\r\nImage \\#4 / 5 V, 1 A & 47.8 & 29.1 & 24.7 & \\sourcefile{image_004_5v_1a.png}\\\\\r\nImage \\#5 / 20 V, no load & 38.0 & 29.2 & 25.4 & \\sourcefile{image_005_20v_no_load.png}\\\\\r\nImage \\#6 / 20 V, 4 A & 90.4 & 31.5 & 24.5 & \\sourcefile{image_006_20v_4a.png}\\\\\r\nImage \\#7 / 5 V, open & 37.5 & 34.9 & 25.5 & \\sourcefile{image_007_5v_open.png}\\\\\r\nImage \\#8 / 9 V, 1 A & 49.9 & 29.6 & 25.0 & \\sourcefile{image_008_9v_1a.png}\\\\\r\nImage \\#9 / 9 V, 2 A & 56.8 & 39.7 & 24.9 & \\sourcefile{image_009_9v_2a.png}\\\\\r\nImage \\#10 / 9 V, 3 A & 78.0 & 32.1 & 25.3 & \\sourcefile{image_010_9v_3a.png}\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth}@{}}\r\n\\caption{Temperature readings from ten thermal images, using emissivity 0.95. The lower reference marker was not confirmed as ambient temperature.}\\label{tab:thermal-results-complete}\\\\\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endhead\r\nImage \\#1 / 20 V, 4.7 A & 102.9 & 27.9 & 25.2\\\\\r\nImage \\#2 / 20 V, 1 A & 60.3 & 30.8 & 24.9\\\\\r\nImage \\#3 / 20 V, 3 A & 82.9 & 30.6 & 25.2\\\\\r\nImage \\#4 / 5 V, 1 A & 47.8 & 29.1 & 24.7\\\\\r\nImage \\#5 / 20 V, no load & 38.0 & 29.2 & 25.4\\\\\r\nImage \\#6 / 20 V, 4 A & 90.4 & 31.5 & 24.5\\\\\r\nImage \\#7 / 5 V, open & 37.5 & 34.9 & 25.5\\\\\r\nImage \\#8 / 9 V, 1 A & 49.9 & 29.6 & 25.0\\\\\r\nImage \\#9 / 9 V, 2 A & 56.8 & 39.7 & 24.9\\\\\r\nImage \\#10 / 9 V, 3 A & 78.0 & 32.1 & 25.3\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "reason": "The image number and condition identify each observation; remove the redundant filename column.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-007",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": " Source: \\texttt{Load Data} in \\sourcefile{Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx}.",
+    "new": "",
+    "reason": "Remove spreadsheet filename from caption.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-008",
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "old": "The listings include every function, comment, and source line. Line numbers restart at 1 for each file; a\ncontinuation arrow marks a printed line wrap. The original UTF-8 files are\nincluded in the editable package. Their SHA-256 checksums are recorded in\n\\sourcefile{Code/source_manifest.json}. Appendix~\\ref{app:firmware} explains\nthe controller and commands. The compiler core and external libraries\nare dependencies, rather than project-authored source reproduced here.\n\n",
+    "new": "Line numbers restart at 1 for each listing; a continuation arrow marks a printed line wrap. Appendix~\\ref{app:firmware} explains the controller and commands.\n\n",
+    "reason": "Remove archive manifest details while retaining listing navigation.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-009",
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "old": "The complete file contains 4,207 physical lines.",
+    "new": "",
+    "reason": "Remove line-count bookkeeping.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-010",
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "old": "The complete file contains 5,348 physical lines.",
+    "new": "",
+    "reason": "Remove line-count bookkeeping.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-011",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "Generated build outputs, duplicate deployment copies, third-party libraries,\nand intermediate sketches are omitted. The two full firmware versions are in Appendix~\\ref{app:full-embedded-source}.\nThe editable package includes the original files and checksums.",
+    "new": "The two complete firmware versions are in Appendix~\\ref{app:full-embedded-source}.",
+    "reason": "Remove archive bookkeeping.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-012",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/firmware/build.ps1}; 42 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-013",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/firmware/stm32f410.ld}; 121 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-014",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/firmware/verify_f410_hex.py}; 76 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-015",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/firmware/test_web_protocol.py}; 517 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-016",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/app.js}; 900 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-017",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/build.mjs}; 19 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-018",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/calculator.css}; 312 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-019",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/calculator.html}; 154 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-020",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/index.html}; 126 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-021",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/protocol.js}; 70 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-022",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/resonance.js}; 254 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-023",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/serial.js}; 268 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-024",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/server.mjs}; 15 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-025",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/storage.js}; 57 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-026",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/styles.css}; 511 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-027",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/package.json}; 12 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-028",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/vercel.json}; 16 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-029",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/tests/protocol.test.mjs}; 76 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-030",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/tests/resonance.test.mjs}; 251 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-031",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/tests/serial.test.mjs}; 387 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-032",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/tests/storage.test.mjs}; 86 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-033",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Data/analysis/rebuild_results.py}; 335 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-034",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Data/analysis/inspect_measurements.py}; 47 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-035",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/firmware/test_carrier_storage.py}; 287 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-036",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/resonance-ui.js}; 606 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-037",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/resonance-presets.js}; 112 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-038",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "old": "\\noindent\\sourcefile{Code/PWR_2_0_4/web/tests/resonance-presets.test.mjs}; 55 physical lines.",
+    "new": "",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-039",
+    "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+    "old": "The revised source and its 14-page PDF are \\sourcefile{Data/project_records/V2_October_2026_Project_Definition.tex} and \\sourcefile{Data/project_records/V2_October_2026_Project_Definition.pdf}. The earlier draft, \\sourcefile{Data/project_records/Original_Project_Definition.tex}, includes the \\SI{75}{\\watt} continuous-validation milestone \\cite{projectEarlierPlan}.\n",
+    "new": "The earlier plan included a \\SI{75}{\\watt} continuous-validation milestone \\cite{projectEarlierPlan}.\n",
+    "reason": "Retain the earlier milestone and citation without file paths.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-040",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\path{Simplified_for_journal_revision.asc}",
+    "new": "Variant 1",
+    "reason": "Describe the model purpose without an external filename.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-041",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\path{Simplified_for_journal_revision_2.asc}",
+    "new": "Variant 2",
+    "reason": "Describe the model purpose without an external filename.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-042",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\path{Power_loss_breakdown.asc}; \\path{Power_loss_breakdown_2.asc}",
+    "new": "Loss-analysis models",
+    "reason": "Describe the model purpose without an external filename.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-043",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\path{GaN_LTspice_GS66502B_L1V2.lib}",
+    "new": "GS66502B model",
+    "reason": "Describe the model purpose without an external filename.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-044",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\path{design_trans.m}",
+    "new": "Transformer design",
+    "reason": "Describe the model purpose without an external filename.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-045",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\path{def_params_sim.m}",
+    "new": "Simulation parameters",
+    "reason": "Describe the model purpose without an external filename.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-046",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\path{*.mph}",
+    "new": "Finite-element models",
+    "reason": "Describe the model purpose without an external filename.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-047",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\path{*.mat}",
+    "new": "Numerical data",
+    "reason": "Describe the model purpose without an external filename.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-048",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "The software builds the controller, runs the V2 browser interface, and\nprocesses measurements into the thesis figures. Chapter~\\ref{ch:results} uses earlier-assembly measurements;\nthe current V2 interface adds calibration, reference-load setup, and carrier timing. Complete source is\nincluded in Appendix~\\ref{app:full-supporting-source}. The current PWR-2.0.4\nfiles are under \\sourcefile{Code/PWR_2_0_4}, with measurement-processing\nscripts under \\sourcefile{Data/analysis}.",
+    "new": "The software builds the controller, runs the V2 browser interface, and processes measurements into thesis figures. Chapter~\\ref{ch:results} presents measurements from the earlier assembly and later V2 tests. The V2 interface adds calibration, reference-load setup, and carrier timing. Complete source is included in Appendix~\\ref{app:full-supporting-source}.",
+    "reason": "Remove source directory inventory.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-049",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "\\section{Checking Measurements and Rebuilding Results}\n\\label{sec:app-analysis-tools}\n\n\\sourcefile{Data/analysis/inspect_measurements.py} provides\n\\texttt{read\\_xlsx}. Workbook ZIP/XML parts are read with Python's\nstandard library, shared and inline strings are resolved, and sheet\nnames, source row numbers, and cell addresses are returned. Excel is\nnot run, and workbook formulas are not recalculated. Running the script\ndirectly exports the workbook contents as JSON for inspection. Row\nand cell identifiers link processed values to the original worksheet.\n\n\\sourcefile{Data/analysis/rebuild_results.py} uses that reader to select\ncompleted records and calculate output power, voltage error, initial\nefficiency estimates, and input-minus-output power difference. Original readings are\nkept and exclusions are recorded; missing values are not filled, and\ninstrument disagreements are not resolved by assumption. Harmonic percentages\nare explicitly transcribed arrays tied to source screenshots. Thermal\nmarkers come from \\sourcefile{Data/analysis/thermal_image_reference_table.md}.\nNeither is an automatic instrument extraction or a new calibration.\n\nThe supplied switching and line-time-scale exports are also replotted.\nThe original local acquisition paths are tried first, with the included\nraw copies used when those paths are unavailable. Exported amplitudes,\noffsets, and times are kept. Switching period is estimated from\nstated hysteretic thresholds and median edge spacing. The scripts save source and\noutput checksums, CSV data, file lists, figure descriptions, and processing\nnotes beside the results. Assertions check that the expected records were processed.\n\nThe scripts are run from the thesis root with\nPython, NumPy, and Matplotlib available:\n\n\\begin{lstlisting}[caption={Commands to inspect the supplied workbooks and rebuild the thesis results.},label={lst:app-analysis-reproduce}]\npython Data/analysis/inspect_measurements.py\npython Data/analysis/rebuild_results.py\n\\end{lstlisting}\n\nThe rebuild produces the eight result figures and the\ntables used in Chapter~\\ref{ch:results} and\nAppendix~\\ref{app:data}. Instrument synchronization, calibration,\nAC-coupled readings, and thermal dwell time still limit the measurements.",
+    "new": "\\section{Measurement Processing}\n\\label{sec:app-analysis-tools}\n\nCompleted measurements were used to calculate output power, voltage error,\ninitial efficiency estimates, and input-minus-output power difference. Missing\nvalues were not filled, and instrument disagreements were not resolved by\nassumption. Harmonic percentages were transcribed from instrument screens, and\nthe thermal readings were taken from image markers.\n\nThe switching and line-time-scale waveforms were plotted with their recorded\namplitudes, offsets, and times. Switching period was estimated using hysteretic\nthresholds and median edge spacing. Instrument synchronization, calibration,\nAC-coupled readings, and thermal dwell time limit the measurements.\n",
+    "reason": "Explain calculation and measurement treatment without file paths, checksums or rebuild instructions.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-050",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "\\caption{Browser application files. Paths are relative to \\sourcefile{Code/PWR_2_0_4/web}.}",
+    "new": "\\caption{Browser application modules and functions.}",
+    "reason": "Describe functions and test coverage without directory navigation.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-051",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "File & Function",
+    "new": "Module & Function",
+    "reason": "Describe functions and test coverage without directory navigation.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-052",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "\\caption{Software test files.}",
+    "new": "\\caption{Software test coverage.}",
+    "reason": "Describe functions and test coverage without directory navigation.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-053",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "File & Tests",
+    "new": "Test & Coverage",
+    "reason": "Describe functions and test coverage without directory navigation.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-061",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "Serve an explicit file allowlist locally or copy that list to \\sourcefile{dist}. Both use paths relative to their own module.",
+    "new": "Serve the application locally or prepare a static build using an explicit list of application files.",
+    "reason": "Describe the service function without a build-directory path. Lead revision: Retain the explicit allowlist behavior, a software design fact, while removing directory narration.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-064",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "\\sourcefile{Code/PWR_2_0_4/firmware/build.ps1}",
+    "new": "the build script",
+    "reason": "Replace directory path with the functional name.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-065",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "\\sourcefile{firmware/stm32f410.ld}",
+    "new": "linker layout",
+    "reason": "Replace directory path with its function.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-066",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "\\sourcefile{firmware/verify_f410_hex.py}",
+    "new": "The HEX verifier",
+    "reason": "Replace directory path with its function.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-067",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "\\sourcefile{firmware/test_web_protocol.py}",
+    "new": "The firmware protocol test",
+    "reason": "Replace directory path with its function.",
+    "facts_preserved": "Technical values, citations, labels and source assets retained.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "direct engineering prose"
+    ]
+  },
+  {
+    "id": "back-068",
+    "path": "Data/measurements/processed_rewrite/thermal_complete_table.tex",
+    "old": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.2200\\linewidth} L{0.1100\\linewidth} L{0.1100\\linewidth} L{0.1100\\linewidth} L{0.3300\\linewidth}@{}}\r\n\\caption{Temperature readings from ten thermal images, using emissivity 0.95. The lower reference marker was not confirmed as ambient temperature.}\\label{tab:thermal-results}\\\\\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C) & Source image\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C) & Source image\\\\\r\n\\midrule\r\n\\endhead\r\nImage \\#1 / 20 V, 4.7 A & 102.9 & 27.9 & 25.2 & \\sourcefile{image_001_20v_4p7a.png}\\\\\r\nImage \\#2 / 20 V, 1 A & 60.3 & 30.8 & 24.9 & \\sourcefile{image_002_20v_1a.png}\\\\\r\nImage \\#3 / 20 V, 3 A & 82.9 & 30.6 & 25.2 & \\sourcefile{image_003_20v_3a.png}\\\\\r\nImage \\#4 / 5 V, 1 A & 47.8 & 29.1 & 24.7 & \\sourcefile{image_004_5v_1a.png}\\\\\r\nImage \\#5 / 20 V, no load & 38.0 & 29.2 & 25.4 & \\sourcefile{image_005_20v_no_load.png}\\\\\r\nImage \\#6 / 20 V, 4 A & 90.4 & 31.5 & 24.5 & \\sourcefile{image_006_20v_4a.png}\\\\\r\nImage \\#7 / 5 V, open & 37.5 & 34.9 & 25.5 & \\sourcefile{image_007_5v_open.png}\\\\\r\nImage \\#8 / 9 V, 1 A & 49.9 & 29.6 & 25.0 & \\sourcefile{image_008_9v_1a.png}\\\\\r\nImage \\#9 / 9 V, 2 A & 56.8 & 39.7 & 24.9 & \\sourcefile{image_009_9v_2a.png}\\\\\r\nImage \\#10 / 9 V, 3 A & 78.0 & 32.1 & 25.3 & \\sourcefile{image_010_9v_3a.png}\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth}@{}}\r\n\\caption{Temperature readings from ten thermal images, using emissivity 0.95. The lower reference marker was not confirmed as ambient temperature.}\\label{tab:thermal-results}\\\\\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endhead\r\nImage \\#1 / 20 V, 4.7 A & 102.9 & 27.9 & 25.2\\\\\r\nImage \\#2 / 20 V, 1 A & 60.3 & 30.8 & 24.9\\\\\r\nImage \\#3 / 20 V, 3 A & 82.9 & 30.6 & 25.2\\\\\r\nImage \\#4 / 5 V, 1 A & 47.8 & 29.1 & 24.7\\\\\r\nImage \\#5 / 20 V, no load & 38.0 & 29.2 & 25.4\\\\\r\nImage \\#6 / 20 V, 4 A & 90.4 & 31.5 & 24.5\\\\\r\nImage \\#7 / 5 V, open & 37.5 & 34.9 & 25.5\\\\\r\nImage \\#8 / 9 V, 1 A & 49.9 & 29.6 & 25.0\\\\\r\nImage \\#9 / 9 V, 2 A & 56.8 & 39.7 & 24.9\\\\\r\nImage \\#10 / 9 V, 3 A & 78.0 & 32.1 & 25.3\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "reason": "Keep the duplicate generated thermal table consistent with the displayed appendix table.",
+    "facts_preserved": "Measurements, labels and test identifiers remain unchanged.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-069",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": " Row numbers refer to the original \\texttt{Load Data} sheet.",
+    "new": "",
+    "reason": "Remove sheet reference; row identifiers remain in the table.",
+    "facts_preserved": "Measurements, labels and test identifiers remain unchanged.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-070",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "old": "\\toprule File & Circuit settings\\\\\\midrule\r\n\\endfirsthead\r\n\\toprule File & Circuit settings\\\\\\midrule\r\n",
+    "new": "\\toprule Model & Circuit settings\\\\\\midrule\r\n\\endfirsthead\r\n\\toprule Model & Circuit settings\\\\\\midrule\r\n",
+    "reason": "Name both repeated table headings consistently with model descriptions.",
+    "facts_preserved": "Measurements, labels and test identifiers remain unchanged.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-071",
+    "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+    "old": "The board, controller, settings, and raw files must be recorded together when the V2 test is repeated.",
+    "new": "The board, controller, and settings must be recorded with the measurements when the V2 test is repeated.",
+    "reason": "Describe the test configuration alongside measurements without directing the reader to files.",
+    "facts_preserved": "Board, controller and settings remain associated with the repeated V2 measurement.",
+    "checklist": [
+      "direct engineering prose",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-072",
+    "path": "Backmatter/Appendices/A_Analytical_Equations.tex",
+    "old": "The steady-load workbook calculations are based on",
+    "new": "For steady-load measurements, output power and efficiency are calculated from",
+    "reason": "Introduce the calculations directly.",
+    "facts_preserved": "Existing measurements, quantities, limitations, references and implementation behavior retained.",
+    "checklist": [
+      "connected engineering prose",
+      "technical fidelity",
+      "PDF-only reader"
+    ]
+  },
+  {
+    "id": "back-073",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "In \\texttt{autoTunePower()}, output is started, precharge is run, and duty is scanned at fixed frequency in coarse and fine steps. The score uses secondary voltage, with unsuitable points rejected. Measured USB-C efficiency is not optimized. The result becomes the no-load duty reference. High voltage-control demand is limited by \\texttt{DMAX}. Three profiles store frequency, duty, readings, and older PI metadata. Terminal tuning uses blocking measurement windows and service delays; it is a bench procedure, not a fixed-period task.",
+    "new": "In \\texttt{autoTunePower()}, the converter is started and precharged before duty is scanned at fixed frequency in coarse and fine steps. A score based on secondary voltage selects the no-load duty reference after unsuitable points are rejected; the scan does not optimize measured USB-C efficiency. High voltage-control demand is limited by \\texttt{DMAX}. Three profiles store frequency, duty, readings, and older PI metadata. Terminal tuning uses blocking measurement windows and service delays, so it is performed as a bench procedure.",
+    "reason": "Connect the tuning sequence to the selected reference and preserve its actual objective.",
+    "facts_preserved": "Existing measurements, quantities, limitations, references and implementation behavior retained.",
+    "checklist": [
+      "connected engineering prose",
+      "technical fidelity",
+      "PDF-only reader"
+    ]
+  },
+  {
+    "id": "back-074",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "The tables give canonical \\texttt{SET} names, input units, parser bounds, and V2 defaults. An accepted configuration is not an electrical operating rating. A flag is false below 0.5 and true at or above 0.5. Duty is stored in tenths of a percent. Inputs for integer timing and count fields are converted to integers before validation. The full parser and paste-ready \\texttt{EXPORT} include alternate names.",
+    "new": "The tables give canonical \\texttt{SET} names, input units, parser bounds, and V2 defaults. These bounds are software limits, not electrical operating ratings. A flag is false below 0.5 and true at or above 0.5. Duty is stored in tenths of a percent, and integer timing and count inputs are converted before validation. The parser accepts alternate names, and the paste-ready \\texttt{EXPORT} includes them.",
+    "reason": "Clarify the function and limit of the parameter tables.",
+    "facts_preserved": "Existing measurements, quantities, limitations, references and implementation behavior retained.",
+    "checklist": [
+      "connected engineering prose",
+      "technical fidelity",
+      "PDF-only reader"
+    ]
+  },
+  {
+    "id": "back-075",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "The calculator is included in the local server and static build. \\sourcefile{resonance-ui.js} connects the page controls to the numerical routines; \\sourcefile{resonance-presets.js} supplies nominal component sets and the transformer A/B measurements used for comparison.",
+    "new": "The resonant-tank and pump calculator connects the page controls to numerical routines and supplies nominal component sets and the transformer A/B measurements for comparison.",
+    "reason": "Introduce the calculator by its engineering function instead of its deployment location.",
+    "facts_preserved": "Existing measurements, quantities, limitations, references and implementation behavior retained.",
+    "checklist": [
+      "connected engineering prose",
+      "technical fidelity",
+      "PDF-only reader"
+    ]
+  },
+  {
+    "id": "back-076",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "old": "AC-coupled detail captures and DC operating-point measurements\r\nare listed separately because they describe different quantities. Several workbook fields describe the spread of\r\n\\texttt{Vavg} statistics. Ripple requires an instantaneous peak-to-peak voltage\r\nfrom a defined capture. The maximum surface temperature displayed by the camera is used for the\r\nthermal results. A junction-temperature estimate or continuous rating would\r\nalso need component identification, a thermal model, and a stabilized run.",
+    "new": "AC-coupled detail captures and DC operating-point measurements are listed separately. The spread of \\texttt{Vavg} statistics describes variation between average readings; ripple requires an instantaneous peak-to-peak voltage from a defined capture. The thermal results use the maximum surface temperature displayed by the camera. A junction-temperature estimate or continuous rating would also need component identification, a thermal model, and a stabilized run.",
+    "reason": "Explain the distinction between average variation and ripple directly and retain thermal limits.",
+    "facts_preserved": "Existing measurements, quantities, limitations, references and implementation behavior retained.",
+    "checklist": [
+      "connected engineering prose",
+      "technical fidelity",
+      "PDF-only reader"
+    ]
+  },
+  {
+    "id": "back-077",
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begin{landscape}\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.2604\\linewidth} L{0.1347\\linewidth} L{0.2155\\linewidth} L{0.2694\\linewidth}@{}}\r\n\\caption{Test status, firmware version, and use in the calculations. A dash means the firmware was not recorded. AC-coupled statistics are not used to calculate DC power.}\\label{tab:appendix-record-metadata}\\\\\r\n\\toprule\r\nTest ID / row & Recorded status & Firmware field & Use in calculations\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID / row & Recorded status & Firmware field & Use in calculations\\\\\r\n\\midrule\r\n\\endhead\r\n\\sourcefile{PDO5-NL-001} / 5 & Measured & PWR\\_1\\_9\\_20 & no nonzero measured DC output/input power\\\\\r\n\\sourcefile{PDO5-5W-001} / 6 & Measured & PWR\\_1\\_9\\_20 & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO5-10W-2A-001} / 7 & Measured & PWR\\_1\\_9\\_20 & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO5-MAX3A-001} / 8 & Measured & PWR\\_1\\_9\\_20 & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO9-NL-001} / 9 & Measured & -- & no nonzero measured DC output/input power\\\\\r\n\\sourcefile{PDO15-NL-001} / 17 & Measured & -- & no nonzero measured DC output/input power\\\\\r\n\\sourcefile{PDO20-5W-001} / 22 & Measured & PWR\\_1\\_9\\_20 & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO20-75W-001} / 24 & Measured & PWR\\_1\\_9\\_20 & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO20-76W-38A-001} / 25 & Measured & PWR\\_1\\_9\\_20 & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO20-80W-001} / 26 & Measured & PWR\\_1\\_9\\_20 & associated input-power record\\\\\r\n\\sourcefile{PDO20-80W-40A-001} / 27 & Measured & PWR\\_1\\_9\\_20 & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO9-9W-1A-001} / 28 & Measured & -- & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO9-18W-2A-001} / 29 & Measured & -- & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO9-27W-3A-001} / 30 & Measured & -- & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO9-3A-TO-NL-001} / 31 & Captured & -- & transient\\\\\r\n\\sourcefile{PDO15-15W-1A-001} / 32 & Measured & -- & Included in row-level screening; instrument boundary unresolved\\\\\r\n\\sourcefile{PDO15-30W-2A-001} / 33 & Captured & -- & instrument power disagreement\\\\\r\n\\sourcefile{PDO15-45W-3A-001} / 34 & Recorded & -- & instrument power disagreement\\\\\r\n\\sourcefile{PDO15-3A-TO-NL-001} / 35 & Recorded & -- & transient\\\\\r\n\\sourcefile{PDO15-NL-AC-001} / 36 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO15-15W-1A-AC-001} / 37 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO9-18W-2A-THERM-001} / 38 & Thermal screenshot only & -- & no nonzero measured DC output/input power\\\\\r\n\\sourcefile{PDO15-30W-2A-AC-001} / 39 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO15-45W-3A-AC-001} / 40 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO5-5W-1A-AC-001} / 41 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO5-10W-2A-AC-001} / 42 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO5-15W-3A-AC-001} / 43 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-NL-AC-001} / 44 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-40W-2A-AC-001} / 45 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-60W-3A-AC-001} / 46 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-80W-4A-AC-001} / 47 & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-94W-47A-AC-001} / 48 & Recorded & PWR-1.9.10 DMA bang-bang controller & AC-coupled: no DC output\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n\\end{landscape}\r\n",
+    "new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begin{landscape}\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.2604\\linewidth} L{0.1347\\linewidth} L{0.2155\\linewidth} L{0.2694\\linewidth}@{}}\r\n\\caption{Test status, firmware version, and use in the calculations. A dash means the firmware was not recorded. Efficiency estimates are preliminary because acquisition timing and inclusion of auxiliary power were not fully documented. AC-coupled statistics are not used to calculate DC power.}\\label{tab:appendix-record-metadata}\\\\\r\n\\toprule\r\nTest ID & Recorded status & Firmware & Treatment\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID & Recorded status & Firmware & Treatment\\\\\r\n\\midrule\r\n\\endhead\r\n\\sourcefile{PDO5-NL-001} & Measured & PWR\\_1\\_9\\_20 & No nonzero DC input/output power pair\\\\\r\n\\sourcefile{PDO5-5W-001} & Measured & PWR\\_1\\_9\\_20 & Power comparison\\\\\r\n\\sourcefile{PDO5-10W-2A-001} & Measured & PWR\\_1\\_9\\_20 & Power comparison\\\\\r\n\\sourcefile{PDO5-MAX3A-001} & Measured & PWR\\_1\\_9\\_20 & Power comparison\\\\\r\n\\sourcefile{PDO9-NL-001} & Measured & -- & No nonzero DC input/output power pair\\\\\r\n\\sourcefile{PDO15-NL-001} & Measured & -- & No nonzero DC input/output power pair\\\\\r\n\\sourcefile{PDO20-5W-001} & Measured & PWR\\_1\\_9\\_20 & Power comparison\\\\\r\n\\sourcefile{PDO20-75W-001} & Measured & PWR\\_1\\_9\\_20 & Power comparison\\\\\r\n\\sourcefile{PDO20-76W-38A-001} & Measured & PWR\\_1\\_9\\_20 & Power comparison\\\\\r\n\\sourcefile{PDO20-80W-001} & Measured & PWR\\_1\\_9\\_20 & associated input-power record\\\\\r\n\\sourcefile{PDO20-80W-40A-001} & Measured & PWR\\_1\\_9\\_20 & Power comparison\\\\\r\n\\sourcefile{PDO9-9W-1A-001} & Measured & -- & Power comparison\\\\\r\n\\sourcefile{PDO9-18W-2A-001} & Measured & -- & Power comparison\\\\\r\n\\sourcefile{PDO9-27W-3A-001} & Measured & -- & Power comparison\\\\\r\n\\sourcefile{PDO9-3A-TO-NL-001} & Captured & -- & transient\\\\\r\n\\sourcefile{PDO15-15W-1A-001} & Measured & -- & Power comparison\\\\\r\n\\sourcefile{PDO15-30W-2A-001} & Captured & -- & instrument power disagreement\\\\\r\n\\sourcefile{PDO15-45W-3A-001} & Recorded & -- & instrument power disagreement\\\\\r\n\\sourcefile{PDO15-3A-TO-NL-001} & Recorded & -- & transient\\\\\r\n\\sourcefile{PDO15-NL-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO15-15W-1A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO9-18W-2A-THERM-001} & Thermal screenshot only & -- & No nonzero DC input/output power pair\\\\\r\n\\sourcefile{PDO15-30W-2A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO15-45W-3A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO5-5W-1A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO5-10W-2A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO5-15W-3A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-NL-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-40W-2A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-60W-3A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-80W-4A-AC-001} & Recorded & -- & AC-coupled: no DC output\\\\\r\n\\sourcefile{PDO20-94W-47A-AC-001} & Recorded & PWR-1.9.10 DMA bang-bang controller & AC-coupled: no DC output\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n\\end{landscape}\r\n",
+    "reason": "State the measurement limit once in the caption and describe row-level power comparisons without implying verified efficiency.",
+    "facts_preserved": "All test IDs, row numbers, statuses, firmware values, exclusions and measurement uncertainty remain.",
+    "checklist": [
+      "direct table labels",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-head-ac_complete_table",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "Test ID / row & Setting (V) & Load (A) & VBUS detail (mV) & Secondary detail (V) & Interpretation\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID / row & Setting (V) & Load (A) & VBUS detail (mV) & Secondary detail (V) & Interpretation\\\\\r\n\\midrule\r\n",
+    "new": "Test ID & Setting (V) & Load (A) & VBUS detail (mV) & Secondary detail (V) & Interpretation\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID & Setting (V) & Load (A) & VBUS detail (mV) & Secondary detail (V) & Interpretation\\\\\r\n\\midrule\r\n",
+    "reason": "Keep test IDs without spreadsheet row references in both repeated headings.",
+    "facts_preserved": "All measurement columns and test IDs remain.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-head-appendix_ac_complete_table",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "Test ID / row & Setting (V) & Load (A) & VBUS detail (mV) & Secondary detail (V) & Interpretation\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID / row & Setting (V) & Load (A) & VBUS detail (mV) & Secondary detail (V) & Interpretation\\\\\r\n\\midrule\r\n",
+    "new": "Test ID & Setting (V) & Load (A) & VBUS detail (mV) & Secondary detail (V) & Interpretation\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID & Setting (V) & Load (A) & VBUS detail (mV) & Secondary detail (V) & Interpretation\\\\\r\n\\midrule\r\n",
+    "reason": "Keep test IDs without spreadsheet row references in both repeated headings.",
+    "facts_preserved": "All measurement columns and test IDs remain.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-head-appendix_efficiency_table",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "Test ID / row & $I_\\mathrm{out}$ (A) & $P_\\mathrm{out}$ (W) & $P_\\mathrm{in}$ (W) & $\\eta$ (\\%) & Difference (W)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID / row & $I_\\mathrm{out}$ (A) & $P_\\mathrm{out}$ (W) & $P_\\mathrm{in}$ (W) & $\\eta$ (\\%) & Difference (W)\\\\\r\n\\midrule\r\n",
+    "new": "Test ID & $I_\\mathrm{out}$ (A) & $P_\\mathrm{out}$ (W) & $P_\\mathrm{in}$ (W) & $\\eta$ (\\%) & Difference (W)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID & $I_\\mathrm{out}$ (A) & $P_\\mathrm{out}$ (W) & $P_\\mathrm{in}$ (W) & $\\eta$ (\\%) & Difference (W)\\\\\r\n\\midrule\r\n",
+    "reason": "Keep test IDs without spreadsheet row references in both repeated headings.",
+    "facts_preserved": "All measurement columns and test IDs remain.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-head-dc_complete_table",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "Test ID / row & $V_\\mathrm{set}$ (V) & $I_\\mathrm{out}$ (A) & $V_\\mathrm{BUS}$ (V) & Logged pp (V) & $V_\\mathrm{sec}$ (V) & Sec. pp (V) & $P_\\mathrm{in}$ (W) & $P_\\mathrm{out}$ (W) & Error (\\%)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID / row & $V_\\mathrm{set}$ (V) & $I_\\mathrm{out}$ (A) & $V_\\mathrm{BUS}$ (V) & Logged pp (V) & $V_\\mathrm{sec}$ (V) & Sec. pp (V) & $P_\\mathrm{in}$ (W) & $P_\\mathrm{out}$ (W) & Error (\\%)\\\\\r\n\\midrule\r\n",
+    "new": "Test ID & $V_\\mathrm{set}$ (V) & $I_\\mathrm{out}$ (A) & $V_\\mathrm{BUS}$ (V) & Logged pp (V) & $V_\\mathrm{sec}$ (V) & Sec. pp (V) & $P_\\mathrm{in}$ (W) & $P_\\mathrm{out}$ (W) & Error (\\%)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID & $V_\\mathrm{set}$ (V) & $I_\\mathrm{out}$ (A) & $V_\\mathrm{BUS}$ (V) & Logged pp (V) & $V_\\mathrm{sec}$ (V) & Sec. pp (V) & $P_\\mathrm{in}$ (W) & $P_\\mathrm{out}$ (W) & Error (\\%)\\\\\r\n\\midrule\r\n",
+    "reason": "Keep test IDs without spreadsheet row references in both repeated headings.",
+    "facts_preserved": "All measurement columns and test IDs remain.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-head-efficiency_table",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "Test ID / row & $I_\\mathrm{out}$ (A) & $P_\\mathrm{out}$ (W) & $P_\\mathrm{in}$ (W) & $\\eta$ (\\%) & Difference (W)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID / row & $I_\\mathrm{out}$ (A) & $P_\\mathrm{out}$ (W) & $P_\\mathrm{in}$ (W) & $\\eta$ (\\%) & Difference (W)\\\\\r\n\\midrule\r\n",
+    "new": "Test ID & $I_\\mathrm{out}$ (A) & $P_\\mathrm{out}$ (W) & $P_\\mathrm{in}$ (W) & $\\eta$ (\\%) & Difference (W)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID & $I_\\mathrm{out}$ (A) & $P_\\mathrm{out}$ (W) & $P_\\mathrm{in}$ (W) & $\\eta$ (\\%) & Difference (W)\\\\\r\n\\midrule\r\n",
+    "reason": "Keep test IDs without spreadsheet row references in both repeated headings.",
+    "facts_preserved": "All measurement columns and test IDs remain.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-head-pq_complete_table",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "Test ID / row & Setting / load & $P_\\mathrm{in}$ (W) & PF & Current THD (\\%) & Instrument / record\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID / row & Setting / load & $P_\\mathrm{in}$ (W) & PF & Current THD (\\%) & Instrument / record\\\\\r\n\\midrule\r\n",
+    "new": "Test ID & Setting / load & $P_\\mathrm{in}$ (W) & PF & Current THD (\\%) & Instrument / record\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID & Setting / load & $P_\\mathrm{in}$ (W) & PF & Current THD (\\%) & Instrument / record\\\\\r\n\\midrule\r\n",
+    "reason": "Keep test IDs without spreadsheet row references in both repeated headings.",
+    "facts_preserved": "All measurement columns and test IDs remain.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-head-transient_complete_table",
+    "path": "Data/measurements/processed_rewrite/transient_complete_table.tex",
+    "old": "Test ID / row & Setting (V) & VBUS avg (V) & VBUS pp (V) & Secondary avg (V) & Secondary pp (V)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID / row & Setting (V) & VBUS avg (V) & VBUS pp (V) & Secondary avg (V) & Secondary pp (V)\\\\\r\n\\midrule\r\n",
+    "new": "Test ID & Setting (V) & VBUS avg (V) & VBUS pp (V) & Secondary avg (V) & Secondary pp (V)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nTest ID & Setting (V) & VBUS avg (V) & VBUS pp (V) & Secondary avg (V) & Secondary pp (V)\\\\\r\n\\midrule\r\n",
+    "reason": "Keep test IDs without spreadsheet row references in both repeated headings.",
+    "facts_preserved": "All measurement columns and test IDs remain.",
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "back-main-efficiency-caption",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": " Row numbers refer to the original \\texttt{Load Data} sheet.",
+    "new": "",
+    "reason": "Remove spreadsheet reference from the main table caption.",
+    "facts_preserved": "Test IDs and measurements remain.",
+    "checklist": [
+      "PDF-only reader"
+    ]
+  },
+  {
+    "id": "back-measurement-appendix-intro",
+    "path": "Data/measurements/processed_rewrite/measurement_appendix.tex",
+    "old": "The workbook source is \\sourcefile{Data/measurements/Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx},\r\nsheet \\texttt{Load Data}; each electrical record carries its original row number.\r\nPlanned rows are retained in \\sourcefile{Data/measurements/processed_rewrite/all_workbook_rows.csv}\r\nand are not treated as measurements. A blank field is unavailable, not zero.\r\nThe source waveforms are retained in \\sourcefile{Data/measurements/processed_rewrite/raw_waveforms}.\r\n",
+    "new": "A blank field indicates an unavailable measurement.\r\n",
+    "reason": "Remove external file and worksheet directions while preserving the meaning of blank entries.",
+    "facts_preserved": "All measurement tables remain included.",
+    "checklist": [
+      "PDF-only reader"
+    ]
+  },
+  {
+    "id": "cross-01",
+    "path": "Backmatter/References.tex",
+    "old": "Source and PDF supplied in \\sourcefile{Data/project_records}.",
+    "new": "",
+    "reason": "Remove a reader-facing directory unavailable in the standalone PDF.",
+    "facts_preserved": [
+      "Author, project title, and report or draft identification"
+    ],
+    "checklist": [
+      "standalone PDF",
+      "retain attribution"
+    ]
+  },
+  {
+    "id": "cross-02",
+    "path": "Backmatter/References.tex",
+    "old": "Earlier working project-plan draft, retained as \\sourcefile{Data/project_records/Original_Project_Definition.tex}.",
+    "new": "Earlier working project-plan draft.",
+    "reason": "Retain the draft identification without directing the reader to a source file.",
+    "facts_preserved": [
+      "Author, project title, and report or draft identification"
+    ],
+    "checklist": [
+      "standalone PDF",
+      "retain attribution"
+    ]
+  },
+  {
+    "id": "back-cell-001",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO15-NL-AC-001} / 36",
+    "new": "\\sourcefile{PDO15-NL-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-002",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO15-15W-1A-AC-001} / 37",
+    "new": "\\sourcefile{PDO15-15W-1A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-003",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO15-30W-2A-AC-001} / 39",
+    "new": "\\sourcefile{PDO15-30W-2A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-004",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO15-45W-3A-AC-001} / 40",
+    "new": "\\sourcefile{PDO15-45W-3A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-005",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO5-5W-1A-AC-001} / 41",
+    "new": "\\sourcefile{PDO5-5W-1A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-006",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO5-10W-2A-AC-001} / 42",
+    "new": "\\sourcefile{PDO5-10W-2A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-007",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO5-15W-3A-AC-001} / 43",
+    "new": "\\sourcefile{PDO5-15W-3A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-008",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-NL-AC-001} / 44",
+    "new": "\\sourcefile{PDO20-NL-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-009",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-40W-2A-AC-001} / 45",
+    "new": "\\sourcefile{PDO20-40W-2A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-010",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-60W-3A-AC-001} / 46",
+    "new": "\\sourcefile{PDO20-60W-3A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-011",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-80W-4A-AC-001} / 47",
+    "new": "\\sourcefile{PDO20-80W-4A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-012",
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-94W-47A-AC-001} / 48",
+    "new": "\\sourcefile{PDO20-94W-47A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-013",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO15-NL-AC-001} / 36",
+    "new": "\\sourcefile{PDO15-NL-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-014",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO15-15W-1A-AC-001} / 37",
+    "new": "\\sourcefile{PDO15-15W-1A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-015",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO15-30W-2A-AC-001} / 39",
+    "new": "\\sourcefile{PDO15-30W-2A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-016",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO15-45W-3A-AC-001} / 40",
+    "new": "\\sourcefile{PDO15-45W-3A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-017",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO5-5W-1A-AC-001} / 41",
+    "new": "\\sourcefile{PDO5-5W-1A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-018",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO5-10W-2A-AC-001} / 42",
+    "new": "\\sourcefile{PDO5-10W-2A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-019",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO5-15W-3A-AC-001} / 43",
+    "new": "\\sourcefile{PDO5-15W-3A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-020",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-NL-AC-001} / 44",
+    "new": "\\sourcefile{PDO20-NL-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-021",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-40W-2A-AC-001} / 45",
+    "new": "\\sourcefile{PDO20-40W-2A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-022",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-60W-3A-AC-001} / 46",
+    "new": "\\sourcefile{PDO20-60W-3A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-023",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-80W-4A-AC-001} / 47",
+    "new": "\\sourcefile{PDO20-80W-4A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-024",
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old": "\\sourcefile{PDO20-94W-47A-AC-001} / 48",
+    "new": "\\sourcefile{PDO20-94W-47A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-025",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO5-5W-001} / 6",
+    "new": "\\sourcefile{PDO5-5W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-026",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new": "\\sourcefile{PDO5-10W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-027",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new": "\\sourcefile{PDO5-MAX3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-028",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO20-5W-001} / 22",
+    "new": "\\sourcefile{PDO20-5W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-029",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO20-75W-001} / 24",
+    "new": "\\sourcefile{PDO20-75W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-030",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new": "\\sourcefile{PDO20-76W-38A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-031",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new": "\\sourcefile{PDO20-80W-40A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-032",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new": "\\sourcefile{PDO9-9W-1A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-033",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new": "\\sourcefile{PDO9-18W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-034",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new": "\\sourcefile{PDO9-27W-3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-035",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new": "\\sourcefile{PDO15-15W-1A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-036",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO5-NL-001} / 5",
+    "new": "\\sourcefile{PDO5-NL-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-037",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO5-5W-001} / 6",
+    "new": "\\sourcefile{PDO5-5W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-038",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new": "\\sourcefile{PDO5-10W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-039",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new": "\\sourcefile{PDO5-MAX3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-040",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO9-NL-001} / 9",
+    "new": "\\sourcefile{PDO9-NL-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-041",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO15-NL-001} / 17",
+    "new": "\\sourcefile{PDO15-NL-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-042",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO20-5W-001} / 22",
+    "new": "\\sourcefile{PDO20-5W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-043",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO20-75W-001} / 24",
+    "new": "\\sourcefile{PDO20-75W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-044",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new": "\\sourcefile{PDO20-76W-38A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-045",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO20-80W-001} / 26",
+    "new": "\\sourcefile{PDO20-80W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-046",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new": "\\sourcefile{PDO20-80W-40A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-047",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new": "\\sourcefile{PDO9-9W-1A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-048",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new": "\\sourcefile{PDO9-18W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-049",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new": "\\sourcefile{PDO9-27W-3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-050",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new": "\\sourcefile{PDO15-15W-1A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-051",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO15-30W-2A-001} / 33",
+    "new": "\\sourcefile{PDO15-30W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-052",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old": "\\sourcefile{PDO15-45W-3A-001} / 34",
+    "new": "\\sourcefile{PDO15-45W-3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-053",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO5-5W-001} / 6",
+    "new": "\\sourcefile{PDO5-5W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-054",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new": "\\sourcefile{PDO5-10W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-055",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new": "\\sourcefile{PDO5-MAX3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-056",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO20-5W-001} / 22",
+    "new": "\\sourcefile{PDO20-5W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-057",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO20-75W-001} / 24",
+    "new": "\\sourcefile{PDO20-75W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-058",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new": "\\sourcefile{PDO20-76W-38A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-059",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new": "\\sourcefile{PDO20-80W-40A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-060",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new": "\\sourcefile{PDO9-9W-1A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-061",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new": "\\sourcefile{PDO9-18W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-062",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new": "\\sourcefile{PDO9-27W-3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-063",
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new": "\\sourcefile{PDO15-15W-1A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-064",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO5-5W-001} / 6",
+    "new": "\\sourcefile{PDO5-5W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-065",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new": "\\sourcefile{PDO5-10W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-066",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new": "\\sourcefile{PDO5-MAX3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-067",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO20-5W-001} / 22",
+    "new": "\\sourcefile{PDO20-5W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-068",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO20-75W-001} / 24",
+    "new": "\\sourcefile{PDO20-75W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-069",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new": "\\sourcefile{PDO20-76W-38A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-070",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO20-80W-001} / 26",
+    "new": "\\sourcefile{PDO20-80W-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-071",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new": "\\sourcefile{PDO20-80W-40A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-072",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new": "\\sourcefile{PDO9-9W-1A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-073",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new": "\\sourcefile{PDO9-18W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-074",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new": "\\sourcefile{PDO9-27W-3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-075",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new": "\\sourcefile{PDO15-15W-1A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-076",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO15-30W-2A-001} / 33",
+    "new": "\\sourcefile{PDO15-30W-2A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-077",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO15-45W-3A-001} / 34",
+    "new": "\\sourcefile{PDO15-45W-3A-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-078",
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old": "\\sourcefile{PDO20-94W-47A-AC-001} / 48",
+    "new": "\\sourcefile{PDO20-94W-47A-AC-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-111",
+    "path": "Data/measurements/processed_rewrite/transient_complete_table.tex",
+    "old": "\\sourcefile{PDO9-3A-TO-NL-001} / 31",
+    "new": "\\sourcefile{PDO9-3A-TO-NL-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  },
+  {
+    "id": "back-cell-112",
+    "path": "Data/measurements/processed_rewrite/transient_complete_table.tex",
+    "old": "\\sourcefile{PDO15-3A-TO-NL-001} / 35",
+    "new": "\\sourcefile{PDO15-3A-TO-NL-001}",
+    "reason": "Remove spreadsheet row number from the PDF while retaining its test identifier.",
+    "facts_preserved": [
+      "Test identifier and every numerical measurement cell unchanged."
+    ],
+    "checklist": [
+      "PDF-only reader",
+      "technical fidelity",
+      "meaningful table labels"
+    ]
+  }
+]

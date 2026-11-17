@@ -1,0 +1,8 @@
+\subsection{Simulation Settings}
+\label{sec:sim-setup}
+
+The first schematic runs to \SI{40}{\milli\second}, with data saved from \SI{20}{\milli\second}. The second runs to \SI{100}{\milli\second}, with data saved from \SI{80}{\milli\second}. Both save the final \SI{20}{\milli\second} interval, or one \SI{50}{\hertz} line period. Their ideal gate pulses have 40\% command duty and half-period displacement. These settings belong to the supplied simulations. The dead time of the final half bridge cannot be determined from them.
+
+Fourier and measurement directives calculate input current, RMS voltage and current, power, efficiency, and PF. The supplied simulations describe the reference circuits; the final board was not simulated.
+
+A final switched-model comparison requires settling, an evaluation interval spanning line and burst behavior, and a time step resolving commutation. Time-step convergence and energy balance must be checked before comparison with measured waveforms.

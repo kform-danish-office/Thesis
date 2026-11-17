@@ -1,0 +1,172 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "caa82148b8569582d26606bf3fa5b12beb2c5947b24323106c97d16b315a1780",
+    "original_sha256": "b683fc52ae9b417fa4de65e49c307b375affef84c7d3bef37c947ba9a36bd6ad"
+  },
+  {
+    "path": "docs/calculator-evidence.md",
+    "sha256": "57e164ca7120f096146a53e580318c6066483d05dd67e007ef1a6e0bd4058120",
+    "original_sha256": "c0837a092806cb2a78862872ea5eaee9a4f1fd0ee896a122841d4e99f42ba4de"
+  },
+  {
+    "path": "docs/stm32f410-port.md",
+    "sha256": "c601786ee5ae4669d0991ef35689359324b104f83f92e15c3dbe075d60310a37",
+    "original_sha256": "4505fb94bcd6f7469084c6b85d4d3491536ffd5e9ea19fe6e2243f2582deaa7b"
+  },
+  {
+    "path": "docs/web-protocol.md",
+    "sha256": "224fb9157317a88d32ae988f7c2b547b92059ddfdd93f90d37f1ee62a6f9cff8",
+    "original_sha256": "aec6c801f9432c96741682f94a647271a8e7072cea5ebfe6ba3a9aa6da2de867"
+  },
+  {
+    "path": "firmware/README.md",
+    "sha256": "5392d954ff68fbe4f4be0e3d43bd91e2be179a44a46e7bbcca2c96fad4cb55d2",
+    "original_sha256": "9b674e6deaccc712eb6a627a3956edf009aced2c4edb6b6348d4948f17eae908"
+  },
+  {
+    "path": "firmware/test_web_protocol.py",
+    "sha256": "e647fb1987a5fe163b69c8c097be2e9f8b66ca5ee37d7bea98e8a5f3d619c1c7",
+    "original_sha256": "424e0682b49d6177bde643f02ebdb48f59274e4466fcdb392f2da1f085be7eac"
+  },
+  {
+    "path": "thesi_power_control.ino",
+    "sha256": "fa9d842ce7787d37501701379a66b97807969d3a9064f8d03fa372b3842b30ad",
+    "original_sha256": "132c60aeeaed5572f294334059a61f6100640861e08b4e0fd2d2a6b4106314b7"
+  },
+  {
+    "path": "web/README.md",
+    "sha256": "16e696b206940f44ef40ae2a8210c3bfac51abbf95685ebb74c26c3783126611",
+    "original_sha256": "96d172cb23aebe6d9d5df59684f4d3ec5282c40f0172d5073e037eae704c3904"
+  },
+  {
+    "path": "web/app.js",
+    "sha256": "350f3e00c89499a175d951391a9b1fcebab24c8b69a2c7551792300ade88de7f",
+    "original_sha256": "b5f3139229f7d96f1e4705a810920a2e0ecafac26e010dd7707dccc2e0e80034"
+  },
+  {
+    "path": "web/build.mjs",
+    "sha256": "2dbd284c20aea608e9c98ee6f66023b5e14eb9bfba61562a147111855d1a0ec5",
+    "original_sha256": "5cb2e691414c581466780b338a735d71c6b983eb1bf58d8fc5bfa5743b02920f"
+  },
+  {
+    "path": "web/calculator.css",
+    "sha256": "9d2ff8f6d6233b0680b5d9f19f20f87d149f75968ee0c4c498d50a5a70b64dba",
+    "original_sha256": "71c5ff2907f598b73e8b6d94157c40aeed9a82531b9424b2d46b8d575209915f"
+  },
+  {
+    "path": "web/calculator.html",
+    "sha256": "c635876d4fdd9d607c59fd1cc6b7a1462496835a9a43d65247c2e27fb62e7489",
+    "original_sha256": "2d787320d030d69bd15388df6357e60cf47bba27b8e6f1518fbd9f1c000c6063"
+  },
+  {
+    "path": "web/index.html",
+    "sha256": "863acd844cc9853b94bf7e62fa6fc2f5af62051d9046ec892937cf68cf66ed41",
+    "original_sha256": "0f452979132cd155b673633d7cf9cadb1075d7ca94243e6c8f378b004a4cf18c"
+  },
+  {
+    "path": "web/protocol.js",
+    "sha256": "f3571eff542a3c368d5f66c7a0aefc236435edd9bba5bbb66914f19e91d92793",
+    "original_sha256": "0254f0e9fb34d5892bd9cacca1f392430cd222f4beb4e46544e489395c85b0fb"
+  },
+  {
+    "path": "web/resonance-presets.js",
+    "sha256": "4687c77c361bdbae0e707b822a3c23b5403aab9ea074a8270dcf583259ee35fa",
+    "original_sha256": "5f4052c4740489bc07b06fb8cfcf57871717be5f6f9093742428c4c6c6853dd5"
+  },
+  {
+    "path": "web/resonance-ui.js",
+    "sha256": "573c19e5338c9f3e4574b953bf81eae600458cca6eb982a3cc25dd79a08ac749",
+    "original_sha256": "6fcad62f96c2231ce01425a9c7c67295eb3eb871b8693e37fe2bc10a789e31fa"
+  },
+  {
+    "path": "web/resonance.js",
+    "sha256": "8f31134163faede8358f82da861a1ad4391b8266d7bf1d882c92968cb5876d43",
+    "original_sha256": "9eb03e5e001088dffbcde52294871c246276d0ddf06f00262aa9cf93f8c7c0a3"
+  },
+  {
+    "path": "web/serial.js",
+    "sha256": "fe5a36451b5112269cf21d5cf32a83f779d132e464db1dfa9fb0a51d0dc88bc6",
+    "original_sha256": "a27971d5452b39538bb1799faa74b4480aadef460d0f4a38f1a25247b5c80d67"
+  },
+  {
+    "path": "web/server.mjs",
+    "sha256": "2e60f787432a3016e367da126b6062acd3fdf50679a6b569c05c55a5a61b87ba",
+    "original_sha256": "5f212657caceaa75f31483ce7e1339fed427cc486ddafe9f9a298eb7c2afdc24"
+  },
+  {
+    "path": "web/storage.js",
+    "sha256": "459fd3d10ed41f383fd8b16350fff407e1c710bafac4ff5016313a12bf12b51d",
+    "original_sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5"
+  },
+  {
+    "path": "web/styles.css",
+    "sha256": "5e2984e63ce6a50155bf22d62c41b387451cf19f070c86ccbc522e1e4df90645",
+    "original_sha256": "48151d6ae84d1f8210cdb2c46f1f92437bee344955909b53ce0612295bfdc85c"
+  },
+  {
+    "path": "web/tests/protocol.test.mjs",
+    "sha256": "05847ad9313abbaf11bb06f025164fb29539adb9b202b934b2ad4e40db8c683e",
+    "original_sha256": "a9bfd90ecef436ecf4a1c0b8f3858bdfc96cbbb381d55e195b886b48d4325401"
+  },
+  {
+    "path": "web/tests/resonance-presets.test.mjs",
+    "sha256": "fe359a8cb01d59939d8211a996a70d336f3b21efc7a30be930051c169671f880",
+    "original_sha256": "49ca8a476d666402f66a266109e061efd5bbeb5260f953ee67e225c7897bfeb1"
+  },
+  {
+    "path": "web/tests/resonance.test.mjs",
+    "sha256": "3c009e5194d50671a16d71b53f45f98865eb9b5faf3af0c8a4e128597dc061a4",
+    "original_sha256": "53704e20d819b364d70e57925920ce4631e081c93f8ae3f29ec66210fa397dc6"
+  },
+  {
+    "path": "web/tests/serial.test.mjs",
+    "sha256": "efd932215e0f89dbeaacc6b766658a59a42686fe9eb83c912998d58d0a0d8818",
+    "original_sha256": "2cc0f59b469c39791f531af101eba2aa566ca2bb9f2d22caebbcbccb215a2de1"
+  },
+  {
+    "path": "web/tests/storage.test.mjs",
+    "sha256": "370fd90948daa83128696b915a4f5fe335f153349d8eeade889cb2efd854e085",
+    "original_sha256": "5d1b9470ffd907d6a933fa456e02093a7651d44902d7de129d371f7f18ab7cf3"
+  },
+  {
+    "path": "web/fonts/IBMPlexMono-Medium.ttf",
+    "sha256": "5f460401d03995ca099270707e78662513b5be9d17060eb7c7fffadb4d4d334b",
+    "original_sha256": null
+  },
+  {
+    "path": "web/fonts/IBMPlexSans-Bold.ttf",
+    "sha256": "5bb3030115b2a8d4494afd9c42c69a659ad80329694f8056d21ba6680612422b",
+    "original_sha256": null
+  },
+  {
+    "path": "web/fonts/IBMPlexSans-Regular.ttf",
+    "sha256": "b7687a7b11bf4972c2807e6f1701bb55d1837e6957373e6610a81e3bbd4423a9",
+    "original_sha256": null
+  },
+  {
+    "path": "web/fonts/OFL-IBMPlex.txt",
+    "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+    "original_sha256": null
+  },
+  {
+    "path": "firmware/releases/pwr-2.0.2.md",
+    "sha256": "c8284fa5787336b148e9585e32cc8b98e754a21286cab44c7543c91b8c530426",
+    "original_sha256": null
+  },
+  {
+    "path": "firmware/releases/pwr-2.0.3.md",
+    "sha256": "0254b36b1eb99ce086da525e95afa7fee03dc1c062381ba4fa496c2d73ada441",
+    "original_sha256": null
+  },
+  {
+    "path": "firmware/releases/pwr-2.0.4.md",
+    "sha256": "225e3ce71f5428eff25b044b58643f8cd7447a6483c20056bcc4811ec3c08013",
+    "original_sha256": null
+  },
+  {
+    "path": "firmware/test_carrier_storage.py",
+    "sha256": "6d1899125afe5b4e0424483fe802a903c93a80345b01f157c27d3e1a3c99de5b",
+    "original_sha256": null
+  }
+]

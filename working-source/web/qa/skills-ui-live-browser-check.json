@@ -1,0 +1,21 @@
+{
+  "deploymentId": "dpl_A7MtyB1g2BG2ez49kqRLsKCHqAtD",
+  "url": "https://thesis-power-lab.vercel.app",
+  "solves": {
+    "frequency": "988.9 kHz",
+    "inductance": "8.83 µH",
+    "capacitance": "978 pF"
+  },
+  "mobile": {
+    "pageWidth": 305,
+    "selected": "988.9kHz",
+    "stripVisible": "flex",
+    "width": 320
+  },
+  "monitorDemoStopped": true,
+  "warningsAndErrors": {
+    "monitor": [],
+    "calculator": []
+  },
+  "physicalUsbVerified": false
+}

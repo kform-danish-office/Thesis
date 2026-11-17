@@ -1,0 +1,23 @@
+[
+  {
+    "id": "v2-secondary-load-results",
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "\\subsection{Next Layout Changes}",
+    "new": "\\subsection{Secondary-Output Load and Thermal Tests}\n\nThe electronic load was connected directly to the V2 secondary output.\nAt approximately \\SI{240}{\\volt} AC and \\SI{50}{\\hertz}, the measured\noutput power increased from \\SI{48.7}{\\watt} to \\SI{137.1}{\\watt} as the\nload current rose from \\SI{1.86}{\\ampere} to \\SI{10.01}{\\ampere}. Over\nthese points the output voltage fell from \\SI{26.14}{\\volt} to\n\\SI{13.69}{\\volt}, as shown in Table~\\ref{tab:v2-secondary-load} and\nFigure~\\ref{fig:v2-secondary-load-performance}.\n\nThe thermal images in Figure~\\ref{fig:v2-secondary-load-thermal} show\nhigher input-bridge region temperatures at the lower-power points and\nincreasing secondary-region temperatures as loading increased. The\ninput-bridge region maximum peaked at \\SI{83.9}{\\celsius}, while the\nsecondary region reached \\SI{98.3}{\\celsius} at the highest load point.\nNone of the points reached thermal equilibrium. Diode selection and the\nassociated design require further work, followed by temperature tests at\nfixed loads to establish sustained operation.\n\n\\subsection{Next Layout Changes}",
+    "reason": "Adds the new secondary-output electrical and thermal observations alongside the earlier V2 results, with the voltage droop and unresolved heating stated directly.",
+    "facts_preserved": [
+      "Electronic load connected directly to secondary output, not USB-C connector.",
+      "AC supply approximately 240 V and 50 Hz; output powers are calculated from recorded load voltage and current.",
+      "R3 is input bridge and R1 secondary; camera readings are region maxima, and images and instrument captures are not exactly simultaneous.",
+      "No point reached thermal equilibrium; maximum output is a transient test point, not a continuous rating.",
+      "The input-bridge maximum is not monotonically decreasing and no cause is assigned.",
+      "Earlier V2 observations remain separate."
+    ],
+    "checklist": [
+      "Concrete circuit and observations",
+      "Measured quantities and thermal uncertainty retained",
+      "Specific remaining work",
+      "No unsupported cause or rating"
+    ]
+  }
+]

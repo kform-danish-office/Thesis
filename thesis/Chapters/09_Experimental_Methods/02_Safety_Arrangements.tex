@@ -1,0 +1,32 @@
+\section{Power-Up and Test Precautions}
+\label{sec:method-safety}
+
+Bring-up used a controlled, current-limited source, rated probes, separation
+from exposed conductors, and an external input disconnect. Hardware, source,
+load, and probe references were checked with the burst-enable output PA10
+inhibited; UART and oscilloscope connections were completed before energizing.
+Probe differential and common-mode ratings were observed, and grounded
+passive-probe clips were excluded from line-referenced nodes. Source isolation
+did not remove shared-reference constraints.
+
+Shutdown removed input power and the enable command. Residual DC-link and
+output-capacitor voltages were checked before handling. PA10 inhibition stops
+commanded transfer but does not discharge stored energy. The external
+disconnect provided an emergency stop independent of UART communication.
+
+\begin{table}[htbp]
+\centering
+\caption{Connections and settings needed for powered tests.}
+\label{tab:method-safety-metadata}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}X@{}}
+\toprule
+Item & Settings and connections\\
+\midrule
+Input source & Voltage, frequency, current limit, and isolation/reference arrangement\\
+Probe connection & Node pair, attenuation/range, and voltage/common-mode rating\\
+Output load & Load mode, setpoint, selected output setting, and connection state\\
+Shutdown & External disconnect and PA10 inhibit state\\
+Stored energy & Discharge interval and verified residual voltage at accessible nodes\\
+\bottomrule
+\end{tabularx}
+\end{table}

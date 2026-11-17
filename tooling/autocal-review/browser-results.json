@@ -1,0 +1,13 @@
+{
+  "legacyFirmwareBlocked": true,
+  "explicitConfirmation": true,
+  "loadSlot2": true,
+  "stopAndSave": true,
+  "disabledConflicts": true,
+  "responsive": [
+    1440,
+    390,
+    320
+  ],
+  "pageErrors": []
+}

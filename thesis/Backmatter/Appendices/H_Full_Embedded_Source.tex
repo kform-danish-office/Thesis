@@ -1,0 +1,29 @@
+\chapter{Complete Embedded Source Code}
+\label{app:full-embedded-source}
+
+The two controller programs are listed in full below. Their development is described in \cref{sec:ctrl-firmware-identities}. PWR-1.9.20 is the
+archived baseline controller for V1.0. PWR-2.0.4 is
+the later V2 controller source with browser calibration, reference-load settings,
+and adjustable carrier timing. The same file builds the G071 target as
+PWR-2.0.3 with its fixed carrier.
+
+Line numbers restart at 1 for each listing; a continuation arrow marks a printed line wrap. Appendix~\ref{app:firmware} explains the controller and commands.
+
+\section{Measured-Prototype Controller: PWR-1.9.20}
+\label{sec:source-pwr1920}
+
+
+
+\lstinputlisting[language={},style=fullsource,caption={Complete PWR-1.9.20 controller source.},label={lst:full-pwr1920}]{Code/thesi_power_control_PWR_1_9_20.ino}
+
+\clearpage
+\section{V2 Controller: PWR-2.0.4}
+\label{sec:source-pwr204}
+
+The conditional board definitions specify the MCU pins, timer,
+ADC/DMA path, and settings store. The shared voltage controller
+follows those definitions.
+
+
+
+\lstinputlisting[language={},style=fullsource,caption={Complete V2 controller source: PWR-2.0.4 for F410 and PWR-2.0.3 for G071.},label={lst:full-pwr204}]{Code/PWR_2_0_4/thesi_power_control.ino}

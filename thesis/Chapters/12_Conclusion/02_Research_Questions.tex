@@ -1,0 +1,45 @@
+\section{Answers to the Research Questions}
+\label{sec:concl-rq}
+
+\paragraph{RQ1: Topology implementation.}
+The original charge-pump branch, GaN half bridge, resonant path, supplied
+magnetics, USB-C PD output stage, sensing, and digital control were integrated
+in the tested V1.0 USB-C assembly. V1.1 is a corrected schematic revision
+without a separately manufactured and tested board. V2 integrated the
+MCU, GaN stage, sensing, auxiliaries, and USB-C circuit on a four-layer PCB.
+It was operated with the leakage-only tank; its preliminary observations
+are reported separately in \cref{sec:res-v2-testing}.
+
+\paragraph{RQ2: Control of loaded and unloaded operation.}
+Fixed-carrier burst control regulates average transfer from secondary-
+voltage feedback PA1, with half-bridge current sensing PA2 used for load
+classification. Startup precharge provides limited excitation for the isolated feedback supply. Loaded
+duty adjustment, no-load limits, and soft overvoltage holdoff manage demand
+and load removal. Loaded, no-load, and load-removal behavior was captured on V1.0; timed startup captures remain unavailable. The control
+law was retained in the V2 port with revised carrier, enable, ADC/DMA, and
+UART assignments. Matched V2 transients, startup timing, and worst-case
+excursions still require synchronized event records.
+
+\paragraph{RQ3: Measured performance.}
+For V1.0 at \SI{20}{\volt}, matched measurements give
+\SIrange{73.97}{79.89}{\watt}, including points at and above
+\SI{75}{\watt}. Average VBUS remains within approximately
+\SI{0.14}{\percent} of \SI{20}{\volt}, with logged ripple of
+\SIrange{0.416}{0.452}{\volt}. Logged PF is 0.97--0.99 and current THD
+is \SIrange{2.23}{3.98}{\percent}; initial efficiency estimates are
+\SIrange{76.5}{77.1}{\percent}. These are operating-point results,
+not a continuous thermal rating. The \SI{100}{\watt} objective and
+\SI{65}{\watt} continuous minimum require defined-duration validation.
+
+\paragraph{RQ4: Planar-magnetics integration.}
+The supplied planar magnetics were integrated through terminal and
+polarity assignment, resonant connections, isolation spacing, mechanical
+support, and thermal arrangement. Secondary-winding heating motivated
+transformer optimization, but no replacement magnetic set was installed.
+
+\paragraph{RQ5: Further development.}
+Earlier secondary-winding heating around \SIrange{3.3}{3.6}{\ampere} and later higher-current secondary-output operation with voltage droop identify the need for further magnetic, secondary, and input-path tests. The transformer and suspected single-via restriction remain candidate limitations. V3 provides an
+estimated \SI{8}{\percent} net volume reduction by removing the USB-PD
+section, requiring external hardware for equivalent USB-C function.
+Replacement magnetics, readiness checks, and matched power/thermal tests
+remain unfinished. The objective is \SI{100}{\watt}.

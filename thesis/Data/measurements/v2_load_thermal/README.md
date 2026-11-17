@@ -1,0 +1,9 @@
+# V2 secondary-output load and thermal tests
+
+The electronic load was connected to the secondary output. `raw/` contains seven unmodified instrument captures. `process.py` selects only the AC supply and electronic-load device rows before numeric conversion. Every scope row is excluded from the calculations, tables and plots. Historical V1 oscilloscope records elsewhere are unrelated to this exclusion.
+
+`summary.csv` and `summary.json` contain the extracted supply/load readings, calculated load power, estimated input-to-load efficiency and thermal-region readings. Thermal temperatures were read from the seven supplied screenshots. R3 covers the input bridge; R1 covers the secondary area. Region emissivity is 0.95; the display footer separately shows 0.97. No load point reached thermal equilibrium. The image clock sequence matches the CSV sequence with a one-hour offset and approximately 2.67–4.24 seconds between each image and its following capture. Per-load dwell times were not recorded. These are successive operating points, not independent stabilized measurements.
+
+Capture 017 has inconsistent AC readings: recorded real power is95.142 W, above239.99 V times0.39 A =93.5961 VA. Its reported real power is retained and the associated efficiency is flagged for checking. No power factor is reported from these captures. Input-to-load efficiency uses load-terminal power, so any output-cable loss is included with converter losses. No cable-loss correction or scope-derived quantity is applied.
+
+The original image files are retained unchanged in `thermal/`. The ZIP contains eight entries: two byte-identical copies of capture 022; seven unique images are used in the thesis. The image filenames confirm the capture pairing. Re-run with `MPLCONFIGDIR=/tmp/thesis-mpl python3 process.py` to regenerate the derived summary, table and performance plot. The original CSV hashes are in `source_manifest.json`.

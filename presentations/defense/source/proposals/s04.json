@@ -1,0 +1,110 @@
+{
+  "slide_id": "s04",
+  "title": "One half bridge drives both power paths",
+  "takeaway": {
+    "text": "A shared half bridge drives charge-pump current shaping and isolated resonant conversion; this project integrated the control, hardware and USB-C output.",
+    "visible": false
+  },
+  "visible_content": {
+    "concept": "Power stage",
+    "contribution_heading": "Project contribution",
+    "contribution_1": "Sensing, local supplies and USB-C integration",
+    "contribution_2": "Secondary-voltage burst control and prototype tests",
+    "phase_label": "Circuit",
+    "embedded_figure_labels": [
+      "V_IN",
+      "I_IN",
+      "L_IN",
+      "C_IN",
+      "D_B1",
+      "D_B2",
+      "D_B3",
+      "D_B4",
+      "D_P",
+      "I_P",
+      "C_P",
+      "V_P",
+      "D_C1",
+      "D_C2",
+      "L_P",
+      "I_LP",
+      "Q_HS",
+      "Q_LS",
+      "V_SW",
+      "C_DC",
+      "V_DC",
+      "I_RES_PRI",
+      "C_RES",
+      "L_RES",
+      "V_RES",
+      "I_RES_SEC",
+      "D_R1",
+      "D_R2",
+      "D_R3",
+      "D_R4",
+      "C_DC1",
+      "Q_H1",
+      "Q_L1",
+      "L3",
+      "1 mH",
+      "Q_H2",
+      "Q_L2",
+      "VUSB",
+      "C_DC2",
+      "USB PORT",
+      "Input filter",
+      "Input Rectification",
+      "Charge Pump",
+      "Power Stage",
+      "USB–PD buck–boost",
+      "USB–C",
+      "+",
+      "−"
+    ]
+  },
+  "visual": {
+    "layout": "Place the original embedded power-stage figure as a dominant full native-cropped raster. The large editable bottom contribution band uses the full y=7.2–8.35 band at 25–27 pt.",
+    "assets": [
+      {
+        "id": "original_digest_power_stage",
+        "path": "/workspace/presentations/defense/dtu-supervisor-flow/assets/original-digest-power-stage.png",
+        "role": "Directly extracted original digest Figure 1, page 2; preserve original diagram and labels."
+      }
+    ],
+    "crop": "Approximately x=25–1965, y=115–650 in the 2035 × 773 source; assembler to choose exact crop preserving all diagram and section labels.",
+    "labels": "embedded_figure_labels records text inside the source raster; it is metadata and should not be overlaid or redrawn. The concept, contribution and phase labels are separate editable text.",
+    "notes": "Do not redraw, retouch or relabel the figure. MCU, isolation feedback and burst enable are not drawn; explain those roles in speaker notes. Do not identify L_RES as solely an external inductor. Give the contribution band visual priority while maintaining figure legibility."
+  },
+  "speaker_notes": "The chosen supply combines current shaping and isolated power transfer around one GaN half bridge. Following the power path from the AC input, the input bridge feeds the charge pump, which transfers charge to the high-voltage-link capacitor, C_DC. Its switching action gives an input-current envelope that follows the rectified line voltage, without a separate PFC current-control loop. The link buffers the difference between pulsating input power and secondary demand.\n\nThe half bridge is supplied by that link. Its switch-node voltage, V_SW, excites both the charge pump and the resonant path. The resonant tank transfers energy through the transformer, and the secondary rectifier supplies C_DC1, the secondary bulk capacitor. The USB-C Power Delivery stage then regulates the selected connector voltage from that bulk supply.\n\nThe secondary bulk voltage is sent across the isolation barrier to the MCU. The MCU regulates it by enabling groups of switching cycles, so both power paths respond to the same switching activity. In this project the power stage was integrated with sensing, local supplies and the USB-C output; the secondary-voltage burst control was developed and the prototypes tested. The charge-pump topology and design method were developed by Ammar and colleagues in earlier DTU work. The planar magnetics were supplied from earlier DTU work by Bima Nugraha Sanusi and the DTU Power Electronics group.",
+  "transition": "The charge pump shows how that shared switching action shapes the input current.",
+  "duration_seconds": 145,
+  "sources": [
+    {
+      "claim": "Shared half bridge, pump current shaping, high-voltage link and isolated resonant power path",
+      "reference": "/workspace/source-archives/APEC_2027_Digest_USB_PD.pdf, Figure 1, page 2; /workspace/papers/apec-digest/sections/topology.tex",
+      "classification": "circuit topology and physical explanation"
+    },
+    {
+      "claim": "Bulk-voltage feedback, MCU burst control and selected USB-C output voltage",
+      "reference": "/workspace/papers/apec-digest/sections/control.tex; /workspace/thesis/Chapters/01_Introduction/05_Contributions_Attribution.tex",
+      "classification": "control and power-stage roles"
+    },
+    {
+      "claim": "Earlier topology and magnetics attribution; project integration, firmware and tests",
+      "reference": "/workspace/thesis/Chapters/01_Introduction/05_Contributions_Attribution.tex; /workspace/papers/apec-digest/sections/topology.tex",
+      "classification": "contribution and attribution"
+    }
+  ],
+  "checks": {
+    "facts_and_units": [
+      "Shared switch node V_SW drives the charge-pump and isolated resonant paths; pump transfers charge from rectified input to the DC link.",
+      "Input-current shaping arises from pump charge transfer; no separate PFC current-control loop is claimed.",
+      "MCU regulates secondary bulk voltage with isolated feedback and burst enable; USB-C PD stage regulates selected connector voltage.",
+      "Original digest Figure 1 is directly extracted; its C_RES and L_RES are retained without assigning L_RES solely to an external inductor. MCU feedback is not drawn.",
+      "Earlier topology and supplied magnetics are credited separately from the author’s integration, control and testing."
+    ],
+    "unresolved_questions": [],
+    "visual_or_timing": "Approximately 220 spoken words including transition; 145 seconds allows diagram pointing. Preserve all embedded figure labels during cropping and check raster and contribution-band legibility in the assembled slide."
+  },
+  "revision": 5
+}

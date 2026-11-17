@@ -1,0 +1,12 @@
+\section{How the USB-C Load Changes Operation}
+\label{sec:analysis-usbc}
+
+The resonant converter supplies the USB-C PD stage through the secondary bulk capacitor. The MCU regulates this bulk voltage, while the PD stage regulates the USB-C output voltage to the selected level. The power drawn from the bulk supply depends on USB-C output voltage and load current.
+
+Burst enable varies active-interval duration and spacing at fixed carrier and tank values. Each omitted cycle also removes pump charge transfer, coupling secondary regulation to the input-current envelope.
+
+Bulk-voltage depletion calls for increased transfer under load. At no load, a lower voltage window and burst cap limit accumulation. Repeated low voltage temporarily relaxes the cap for load attachment. The overvoltage logic selects soft holdoff or latched inhibition according to the voltage and operating state.
+
+Secondary capacitance supports load transients and absorbs residual tank energy. Increasing it reduces packet-induced voltage steps but increases startup energy and slows voltage-based load detection. Chapter~\ref{ch:control} applies this tradeoff to storage, command limits, and state logic.
+
+This interaction is evaluated using secondary-control waveforms and connector measurements at the fixed settings obtained during testing. USB-PD protocol and interoperability need a separate test sequence.

@@ -1,0 +1,179 @@
+{
+  "slide_id": "b02",
+  "section": "backup",
+  "position": 17,
+  "purpose": "Provide the seven V2 direct-secondary load and thermal readings for questions.",
+  "title": "V2 secondary-load measurements",
+  "takeaway": "The loaded sequence shows falling secondary voltage and rising secondary-region temperature; it did not reach thermal equilibrium. Planning only, not visible.",
+  "visible_content": {
+    "caption": "V2 · direct secondary load · 240 V AC, 50 Hz",
+    "table_headers": [
+      "Point",
+      "Secondary voltage (V)",
+      "Secondary current (A)",
+      "Secondary power (W)",
+      "R1 secondary max (°C)",
+      "R3 input bridge max (°C)"
+    ],
+    "table_row_1": [
+      "1",
+      "26.14",
+      "1.86",
+      "48.68",
+      "50.3",
+      "65.1"
+    ],
+    "table_row_2": [
+      "2",
+      "21.36",
+      "3.31",
+      "70.75",
+      "57.2",
+      "83.9"
+    ],
+    "table_row_3": [
+      "3",
+      "20.07",
+      "4.29",
+      "86.17",
+      "59.7",
+      "68.2"
+    ],
+    "table_row_4": [
+      "4",
+      "18.46",
+      "5.27",
+      "97.35",
+      "69.4",
+      "73.2"
+    ],
+    "table_row_5": [
+      "5",
+      "16.87",
+      "6.51",
+      "109.87",
+      "81.6",
+      "74.5"
+    ],
+    "table_row_6": [
+      "6",
+      "14.92",
+      "8.51",
+      "127.05",
+      "88.7",
+      "75.6"
+    ],
+    "table_row_7": [
+      "7",
+      "13.69",
+      "10.01",
+      "137.08",
+      "98.3",
+      "73.7"
+    ],
+    "condition": "Successive load points; no thermal equilibrium",
+    "phase_label": "Backup"
+  },
+  "visual": {
+    "layout": "Dominant editable seven-row, six-column table in measurement order; native PowerPoint table with editable text. Place the condition caption above and the thermal-equilibrium line below. No body points.",
+    "table_source": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v2_summary.csv",
+    "table_column_order": [
+      "sequence point 1–7",
+      "secondary_voltage_V",
+      "secondary_current_A",
+      "secondary_power_W",
+      "secondary_R1_max_C",
+      "bridge_R3_max_C"
+    ],
+    "exact_data": [
+      {
+        "capture": "015",
+        "secondary_voltage_V": "26.1412",
+        "secondary_current_A": "1.86232",
+        "secondary_power_W": "48.683279584",
+        "secondary_R1_max_C": "50.3",
+        "bridge_R3_max_C": "65.1"
+      },
+      {
+        "capture": "017",
+        "secondary_voltage_V": "21.3642",
+        "secondary_current_A": "3.31168",
+        "secondary_power_W": "70.751393856",
+        "secondary_R1_max_C": "57.2",
+        "bridge_R3_max_C": "83.9"
+      },
+      {
+        "capture": "018",
+        "secondary_voltage_V": "20.0656",
+        "secondary_current_A": "4.29422",
+        "secondary_power_W": "86.166100832",
+        "secondary_R1_max_C": "59.7",
+        "bridge_R3_max_C": "68.2"
+      },
+      {
+        "capture": "019",
+        "secondary_voltage_V": "18.4619",
+        "secondary_current_A": "5.27284",
+        "secondary_power_W": "97.346644796",
+        "secondary_R1_max_C": "69.4",
+        "bridge_R3_max_C": "73.2"
+      },
+      {
+        "capture": "020",
+        "secondary_voltage_V": "16.8668",
+        "secondary_current_A": "6.51369",
+        "secondary_power_W": "109.865106492",
+        "secondary_R1_max_C": "81.6",
+        "bridge_R3_max_C": "74.5"
+      },
+      {
+        "capture": "021",
+        "secondary_voltage_V": "14.9242",
+        "secondary_current_A": "8.51315",
+        "secondary_power_W": "127.05195323",
+        "secondary_R1_max_C": "88.7",
+        "bridge_R3_max_C": "75.6"
+      },
+      {
+        "capture": "022",
+        "secondary_voltage_V": "13.6934",
+        "secondary_current_A": "10.0103",
+        "secondary_power_W": "137.07504202",
+        "secondary_R1_max_C": "98.3",
+        "bridge_R3_max_C": "73.7"
+      }
+    ],
+    "rounding": "Secondary voltage, current and power to two decimals; thermal maxima to one decimal. Number points 1–7 in acquisition order; the original capture IDs are retained in exact_data."
+  },
+  "speaker_notes": "The electronic load was connected directly to the V2 secondary, before the USB-C PD stage. The table shows secondary power calculated from measured voltage and current. As current increased from 1.86 to 10.01 amperes, voltage fell from 26.14 to 13.69 volts and power rose from 48.68 to 137.08 watts. R3 is the input-bridge surface region and R1 is the secondary surface region. The highest R3 reading, 83.9 degrees Celsius, occurred at the intermediate point of 70.75 watts; later readings were lower, so the bridge temperatures are not monotonic with load. The R1 maximum increased from 50.3 to 98.3 degrees. These are successive load points without thermal equilibrium: the temperature changes reflect the load changes and continued heating during the sequence, rather than a settled temperature curve.",
+  "transition": null,
+  "duration_seconds": 90,
+  "sources": [
+    {
+      "type": "primary processed measurements",
+      "reference": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v2_summary.csv",
+      "supports": "Seven successive points, exact measured secondary voltage and current, calculated power, and R1/R3 regional maxima; input approximately 240 V AC at 50 Hz."
+    },
+    {
+      "type": "thesis results",
+      "reference": "/workspace/thesis/Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+      "supports": "Direct secondary load, voltage droop, calculated secondary power, region identities, 83.9 °C R3 peak at 70.75 W, 98.3 °C final R1, and absence of thermal equilibrium."
+    },
+    {
+      "type": "thesis results table",
+      "reference": "/workspace/thesis/Data/measurements/v2_load_thermal/load_table.tex",
+      "supports": "The seven capture identifiers and independently displayed rounded values."
+    }
+  ],
+  "checks": {
+    "verified": [
+      "Seven source records in acquisition order, identified on the slide as points 1–7; source capture IDs 015, 017, 018, 019, 020, 021 and 022 are retained in metadata. Table shows secondary quantities and regional maxima only.",
+      "Verified each power as measured secondary voltage multiplied by current, rounded from the unrounded result; all displayed values match the thesis results table.",
+      "R3 peaks at 83.9 °C for 70.751393856 W (70.75 W displayed); final R1 is 98.3 °C. Subsequent R3 maxima range from 68.2 to 75.6 °C.",
+      "Measurements are taken at the secondary output before the PD stage; temperatures are surface-region maxima, not junction temperatures. No load point reached thermal equilibrium."
+    ],
+    "unresolved": [],
+    "assembly": "Backup only, position 17, 90 seconds if called during questions; exclude from main timing. Keep all seven rows, six column headings, both text lines and the phase label legible and editable."
+  },
+  "revision": 3
+}

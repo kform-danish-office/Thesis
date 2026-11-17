@@ -1,0 +1,184 @@
+[
+  {
+    "id": "ch79-01",
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "old": "Switching and power transfer were checked during bring-up, followed by loaded and\r\nno-load characterization. Workbook rows and instrument captures supplied the\r\nnumerical results and plots.",
+    "new": "Switching and power transfer were checked during bring-up, followed by loaded and\r\nno-load characterization.",
+    "reason": "Removes a data-container inventory from the method introduction.",
+    "facts_preserved": "Bring-up and loaded/no-load test sequence.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-02",
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "old": "Workbook entries, screenshots, waveform exports, firmware, and photographs\r\nare included with the test data. Numerical exports keep the original\r\nprecision. Missing setup details and peak markers limit the calculations,\r\nas discussed in \\cref{sec:method-uncertainty}. Plot lines connect measured\r\npoints; they are not fitted converter characteristics.",
+    "new": "Missing setup details and peak markers limit the calculations, as discussed in\r\n\\cref{sec:method-uncertainty}. Plot lines connect measured points and are not\r\nfitted converter characteristics.",
+    "reason": "Removes the file inventory while retaining limits relevant to interpretation.",
+    "facts_preserved": "Missing setup details and peak markers; plot interpolation.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-03",
+    "path": "Chapters/09_Experimental_Methods/11_Uncertainty.tex",
+    "old": "The setup information and repeated measurements needed for a numerical uncertainty budget are incomplete. Values are therefore kept at the workbook precision, and no error bars are given. Characterizing worst-case transients requires repeated events with a defined acceptance band; thermal equilibrium requires a temperature history, and jitter requires timing measurements. These limits apply throughout Chapter~\\ref{ch:results}.",
+    "new": "The setup information and repeated measurements needed for a numerical uncertainty budget are incomplete, so no error bars are given. Characterizing worst-case transients requires repeated events with a defined acceptance band; thermal equilibrium requires a temperature history, and jitter requires timing measurements. These limits apply throughout Chapter~\\ref{ch:results}.",
+    "reason": "Removes spreadsheet processing detail and keeps the uncertainty and required measurements.",
+    "facts_preserved": "No numerical uncertainty budget or error bars; transient, thermal and jitter measurement requirements.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-04",
+    "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+    "old": "Older supporting notes name a different revision from the archived baseline. Each test therefore needs the source version, runtime \\texttt{VER} response, and \\texttt{EXPORT} saved together. Calibration, thresholds, loaded/no-load settings, and timing are saved in the export for each run. Appendix~\\ref{app:firmware} gives the command reference. The available waveforms and logs are discussed in Chapter~\\ref{ch:results}.",
+    "new": "Calibration, thresholds, loaded/no-load settings, timing, and firmware version affect the control response and should be recorded with each test. Appendix~\\ref{app:firmware} gives the command reference.",
+    "reason": "Replaces source-record administration with the settings that affect the test.",
+    "facts_preserved": "Calibration, thresholds, loaded/no-load settings, timing and existing references.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-06",
+    "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+    "old": "The reported approximately \\SI{85}{\\watt} V2 point must be repeated with\nidentified hardware, rework, magnetics, resonant values, controller target,\nfirmware source, saved settings, and live mode. Version, status, and\nconfiguration exports are recorded with the test.\n\nThe baseline record must identify AC input, output setting and negotiation,\nload/cable, auxiliary supplies, cooling, ambient, and duration. Probe scaling\nand zero must be checked. If the original \\SI{85}{\\watt} configuration cannot\nbe reconstructed, a new baseline must state the known differences.",
+    "new": "The reported V2 operating point near \\SI{85}{\\watt} must be repeated with\nthe hardware, rework, magnetics, resonant values, controller target, firmware version, settings and mode\nidentified. AC input, output setting and negotiation, load and cable, auxiliary\nsupplies, cooling, ambient and duration must also be recorded. Probe scaling\nand zero must be checked. If the original configuration cannot be reconstructed,\nthe known differences must be stated.",
+    "reason": "Connects the baseline condition to the measurements and removes a list of configuration exports.",
+    "facts_preserved": "Reported approximately 85 W point remains unverified; operating configuration and differences must be identified.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-07",
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "Commands and functions are listed in Appendix~\\ref{app:firmware}. The full firmware sources are in Appendix~\\ref{app:full-embedded-source}, and their versions are listed in \\cref{sec:ctrl-firmware-identities}.",
+    "new": "Commands and functions are listed in Appendix~\\ref{app:firmware}.",
+    "reason": "Retains the useful command reference and removes repeated source and version navigation.",
+    "facts_preserved": "Command reference remains; full source and version information remain elsewhere.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-08",
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "The V2 firmware, protocol tests, settings-storage tests, and browser tests were built and checked. These checks cover timer rounding and pair rejection, application with output disabled, learned-profile clearing, calibration cancellation, and saved-settings recovery after interrupted writes. The complete source and build results are included in Appendices~\\ref{app:firmware} and \\ref{app:full-embedded-source}.",
+    "new": "The V2 firmware, protocol tests, settings-storage tests, and browser tests were built and checked. These checks cover timer rounding and pair rejection, application with output disabled, learned-profile clearing, calibration cancellation, and saved-settings recovery after interrupted writes.",
+    "reason": "Keeps the actual verification and removes a repeated source and build inventory.",
+    "facts_preserved": "Software checks and their scope; powered validation remains in the following paragraph.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-09",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "V2 integrates the MCU, power stage, sensing, local supplies, and USB-C output on a four-layer PCB \\cite{ststm32f410ds}. The circuit and PCB design are documented in Section~\\ref{sec:app-v2-oct27}.",
+    "new": "V2 integrates the MCU, power stage, sensing, local supplies, and USB-C output on a four-layer PCB \\cite{ststm32f410ds}.",
+    "reason": "Removes repeated appendix navigation; the later PCB paragraph retains the detailed drawing reference.",
+    "facts_preserved": "Four-layer V2 integration and citation; detailed drawing reference retained.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-10",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "The matched \\SI{79.89}{\\watt} tests on the modified V1.0 assembly provide a connector-output baseline (\\cref{ch:results}). Later V2 secondary-output tests reached higher power with voltage droop and continued heating (\\cref{sec:res-v2-testing}); thermal-endurance tests remain incomplete. The V1.0 outline is \\SI{202.77}{\\milli\\metre} by \\SI{72.77}{\\milli\\metre}; V2 assembly dimensions must be measured separately before calculating its power density. The earlier reported \\SI{85}{\\watt} V2 point remains a plan reference.",
+    "new": "The matched \\SI{79.89}{\\watt} tests on the modified V1.0 assembly provide a connector-output baseline (\\cref{ch:results}). Later V2 secondary-output tests reached higher power with voltage droop and continued heating (\\cref{sec:res-v2-testing}); thermal-endurance tests remain incomplete. The V1.0 outline is \\SI{202.77}{\\milli\\metre} by \\SI{72.77}{\\milli\\metre}; V2 assembly dimensions must be measured separately before calculating its power density.",
+    "reason": "Removes a repeated 85 W attribution already explained immediately above.",
+    "facts_preserved": "79.89 W connector baseline, V2 secondary measurements, droop, heating, incomplete endurance and dimensions; reported 85 W point retained in preceding paragraph.",
+    "checklist": [
+      "connected practical prose",
+      "technical fidelity",
+      "retain necessary uncertainty"
+    ]
+  },
+  {
+    "id": "ch79-11",
+    "path": "Chapters/07_Hardware/02_Input_Filter_Bridge.tex",
+    "old": "Bridge commutation, diode capacitance, charge-pump current, and loop inductance couple this path to the half bridge. Filter attenuation must therefore be measured in the installed circuit. The assembly's input behavior was assessed from the input-current measurements in Chapter~\\ref{ch:results}. Measurements on both sides of the filter are still needed to determine how much noise it attenuates.",
+    "new": "Bridge commutation, diode capacitance, charge-pump current, and loop inductance couple this path to the half bridge. The assembly's input behavior was assessed from the input-current measurements in Chapter~\\ref{ch:results}; measurements on both sides of the installed filter are still needed to determine its noise attenuation.",
+    "reason": "Combines the repeated filter measurement requirement with its reason.",
+    "facts_preserved": "Input-current assessment and need for measurements on both sides of installed filter.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "ch79-12",
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "old": "The conversion scales must match the installed circuit. V1.0 includes an external \\SI{2.5}{\\volt} reference, omitted in V1.1, while the final firmware defaults to a \\SI{3.3}{\\volt} ADC reference. Divider ratios, amplifier scale, buffers, gain, and offset all affect the conversion. The conversion scales still need to be checked against measured circuit and ADC-pin voltages. The calibration settings are given in \\Cref{sec:ctrl-feedback}.",
+    "new": "V1.0 includes an external \\SI{2.5}{\\volt} reference, omitted in V1.1, while the final firmware defaults to a \\SI{3.3}{\\volt} ADC reference. Divider ratios, amplifier scale, buffers, gain, and offset also affect the conversion, so the scales must be checked against measured circuit and ADC-pin voltages. The calibration settings are given in \\Cref{sec:ctrl-feedback}.",
+    "reason": "Connects the scale check to its circuit causes and removes repeated instruction.",
+    "facts_preserved": "Reference values and revision distinction; scale verification and calibration reference.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "ch79-13",
+    "path": "Chapters/07_Hardware/10_Auxiliary_Power.tex",
+    "old": "The local supply rails, UART communication, inhibited burst-enable output PA10, carrier outputs, and analog feedback were checked during bring-up before the loop was closed. The LMG2652 bias must be within its operating range, and a valid secondary-voltage reading from input PA1 requires power to the isolated sensing circuit.",
+    "new": "The local supply rails, UART communication, inhibited burst-enable output PA10, carrier outputs, and analog feedback were checked during bring-up before the loop was closed. The LMG2652 bias must be within its operating range before switching.",
+    "reason": "Removes the repeated explanation of isolated sensing power, already stated in the preceding paragraph and linked to precharge below.",
+    "facts_preserved": "Bring-up checks and bias requirement; isolated feedback startup remains described.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "ch79-14",
+    "path": "Chapters/07_Hardware/06_Resonant_Output.tex",
+    "old": "Changing the resonant branch affects tank current, gain, and the charge available to change VSW during commutation. Waveform comparisons therefore need the fitted inductor arrangement. The installed path must be measured before the model is used to select another change.",
+    "new": "Changing the resonant branch affects tank current, gain, and the charge available to change VSW during commutation. The fitted inductor arrangement must therefore be accounted for when comparing waveforms, and the installed path measured before selecting another change with the model.",
+    "reason": "Connects the component arrangement and measurement requirements to the physical effects.",
+    "facts_preserved": "Tank current, gain, commutation charge, fitted arrangement and need to measure installed path.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  },
+  {
+    "id": "ch79-15",
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "old": "The exported settings are kept with each test because calibration or threshold changes can alter the response without changing the firmware version. Connector voltage, load current, and AC input power are measured with external instruments for performance calculations. These measurements also provide an independent check on the controller readings.",
+    "new": "Calibration and threshold changes can alter the response without changing the firmware version, so the settings must be recorded with each test. External measurements of connector voltage, load current, and AC input power provide the performance calculations and a check on the controller readings.",
+    "reason": "States the engineering reason for retaining settings and joins the external measurement roles.",
+    "facts_preserved": "Settings affect response without a version change; external measurements support performance calculations and check controller readings.",
+    "checklist": [
+      "connected practical prose",
+      "engineering function",
+      "technical fidelity"
+    ]
+  }
+]

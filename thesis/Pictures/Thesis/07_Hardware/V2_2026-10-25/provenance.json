@@ -1,0 +1,37 @@
+{
+  "uploaded_filename": "1000048075.jpg",
+  "subject_generation": "V2",
+  "generation_source": "User explicitly identified the board as V2 in the upload request.",
+  "board_identifier": null,
+  "mcu_fitted": null,
+  "firmware_running": null,
+  "capture_date": null,
+  "uploaded_on": "2026-10-25",
+  "measurement_values_supplied": false,
+  "crop_rectangle_source_pixels_top_left": [
+    15,
+    333,
+    510,
+    655
+  ],
+  "original": {
+    "path": "v2_board_original.jpg",
+    "sha256": "0ca0e42a90be805e7854421ac385da3fdaaa08c4c43c68c9dd58b9afb005d4aa",
+    "pixels": [
+      591,
+      1280
+    ]
+  },
+  "documentary_crop": {
+    "path": "v2_board_documentary_crop.pdf",
+    "method": "LaTeX graphic placement with trim+clip; embedded JPEG decoded RGB pixels match original exactly; JPEG container metadata can differ",
+    "sha256": "565c7764cb631670d60e8d7f4bc8c3ebba48c8ac1369c11339630f54136a51a2",
+    "retouching": false
+  },
+  "illustration": {
+    "path": "v2_board_cleaned_illustration.png",
+    "method": "Built-in imagegen editing from the original; generated cleanup redraws fine PCB detail",
+    "use": "Illustration only. Do not identify fitted components, pins, traces, or settings from this version.",
+    "sha256": "c609bee3b9f6566d6f19cfa459141df075e5216592808675f7a308460cec4317"
+  }
+}

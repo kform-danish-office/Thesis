@@ -1,0 +1,674 @@
+[
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-NL-AC-001} / 36",
+    "new_cell": "\\sourcefile{PDO15-NL-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-15W-1A-AC-001} / 37",
+    "new_cell": "\\sourcefile{PDO15-15W-1A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-30W-2A-AC-001} / 39",
+    "new_cell": "\\sourcefile{PDO15-30W-2A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-45W-3A-AC-001} / 40",
+    "new_cell": "\\sourcefile{PDO15-45W-3A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-5W-1A-AC-001} / 41",
+    "new_cell": "\\sourcefile{PDO5-5W-1A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-10W-2A-AC-001} / 42",
+    "new_cell": "\\sourcefile{PDO5-10W-2A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-15W-3A-AC-001} / 43",
+    "new_cell": "\\sourcefile{PDO5-15W-3A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-NL-AC-001} / 44",
+    "new_cell": "\\sourcefile{PDO20-NL-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-40W-2A-AC-001} / 45",
+    "new_cell": "\\sourcefile{PDO20-40W-2A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-60W-3A-AC-001} / 46",
+    "new_cell": "\\sourcefile{PDO20-60W-3A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-4A-AC-001} / 47",
+    "new_cell": "\\sourcefile{PDO20-80W-4A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-94W-47A-AC-001} / 48",
+    "new_cell": "\\sourcefile{PDO20-94W-47A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-NL-AC-001} / 36",
+    "new_cell": "\\sourcefile{PDO15-NL-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-15W-1A-AC-001} / 37",
+    "new_cell": "\\sourcefile{PDO15-15W-1A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-30W-2A-AC-001} / 39",
+    "new_cell": "\\sourcefile{PDO15-30W-2A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-45W-3A-AC-001} / 40",
+    "new_cell": "\\sourcefile{PDO15-45W-3A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-5W-1A-AC-001} / 41",
+    "new_cell": "\\sourcefile{PDO5-5W-1A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-10W-2A-AC-001} / 42",
+    "new_cell": "\\sourcefile{PDO5-10W-2A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-15W-3A-AC-001} / 43",
+    "new_cell": "\\sourcefile{PDO5-15W-3A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-NL-AC-001} / 44",
+    "new_cell": "\\sourcefile{PDO20-NL-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-40W-2A-AC-001} / 45",
+    "new_cell": "\\sourcefile{PDO20-40W-2A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-60W-3A-AC-001} / 46",
+    "new_cell": "\\sourcefile{PDO20-60W-3A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-4A-AC-001} / 47",
+    "new_cell": "\\sourcefile{PDO20-80W-4A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-94W-47A-AC-001} / 48",
+    "new_cell": "\\sourcefile{PDO20-94W-47A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO5-5W-001} / 6",
+    "new_cell": "\\sourcefile{PDO5-5W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new_cell": "\\sourcefile{PDO5-10W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new_cell": "\\sourcefile{PDO5-MAX3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO20-5W-001} / 22",
+    "new_cell": "\\sourcefile{PDO20-5W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO20-75W-001} / 24",
+    "new_cell": "\\sourcefile{PDO20-75W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new_cell": "\\sourcefile{PDO20-76W-38A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new_cell": "\\sourcefile{PDO20-80W-40A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new_cell": "\\sourcefile{PDO9-9W-1A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new_cell": "\\sourcefile{PDO9-18W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new_cell": "\\sourcefile{PDO9-27W-3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new_cell": "\\sourcefile{PDO15-15W-1A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-NL-001} / 5",
+    "new_cell": "\\sourcefile{PDO5-NL-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-5W-001} / 6",
+    "new_cell": "\\sourcefile{PDO5-5W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new_cell": "\\sourcefile{PDO5-10W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new_cell": "\\sourcefile{PDO5-MAX3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO9-NL-001} / 9",
+    "new_cell": "\\sourcefile{PDO9-NL-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-NL-001} / 17",
+    "new_cell": "\\sourcefile{PDO15-NL-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-5W-001} / 22",
+    "new_cell": "\\sourcefile{PDO20-5W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-75W-001} / 24",
+    "new_cell": "\\sourcefile{PDO20-75W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new_cell": "\\sourcefile{PDO20-76W-38A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-001} / 26",
+    "new_cell": "\\sourcefile{PDO20-80W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new_cell": "\\sourcefile{PDO20-80W-40A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new_cell": "\\sourcefile{PDO9-9W-1A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new_cell": "\\sourcefile{PDO9-18W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new_cell": "\\sourcefile{PDO9-27W-3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new_cell": "\\sourcefile{PDO15-15W-1A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-30W-2A-001} / 33",
+    "new_cell": "\\sourcefile{PDO15-30W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-45W-3A-001} / 34",
+    "new_cell": "\\sourcefile{PDO15-45W-3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO5-5W-001} / 6",
+    "new_cell": "\\sourcefile{PDO5-5W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new_cell": "\\sourcefile{PDO5-10W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new_cell": "\\sourcefile{PDO5-MAX3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO20-5W-001} / 22",
+    "new_cell": "\\sourcefile{PDO20-5W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO20-75W-001} / 24",
+    "new_cell": "\\sourcefile{PDO20-75W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new_cell": "\\sourcefile{PDO20-76W-38A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new_cell": "\\sourcefile{PDO20-80W-40A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new_cell": "\\sourcefile{PDO9-9W-1A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new_cell": "\\sourcefile{PDO9-18W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new_cell": "\\sourcefile{PDO9-27W-3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "old_cell": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new_cell": "\\sourcefile{PDO15-15W-1A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-5W-001} / 6",
+    "new_cell": "\\sourcefile{PDO5-5W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new_cell": "\\sourcefile{PDO5-10W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new_cell": "\\sourcefile{PDO5-MAX3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-5W-001} / 22",
+    "new_cell": "\\sourcefile{PDO20-5W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-75W-001} / 24",
+    "new_cell": "\\sourcefile{PDO20-75W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new_cell": "\\sourcefile{PDO20-76W-38A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-001} / 26",
+    "new_cell": "\\sourcefile{PDO20-80W-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new_cell": "\\sourcefile{PDO20-80W-40A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new_cell": "\\sourcefile{PDO9-9W-1A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new_cell": "\\sourcefile{PDO9-18W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new_cell": "\\sourcefile{PDO9-27W-3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new_cell": "\\sourcefile{PDO15-15W-1A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-30W-2A-001} / 33",
+    "new_cell": "\\sourcefile{PDO15-30W-2A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-45W-3A-001} / 34",
+    "new_cell": "\\sourcefile{PDO15-45W-3A-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO20-94W-47A-AC-001} / 48",
+    "new_cell": "\\sourcefile{PDO20-94W-47A-AC-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO5-NL-001} / 5",
+    "new_cell": "\\sourcefile{PDO5-NL-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO5-5W-001} / 6",
+    "new_cell": "\\sourcefile{PDO5-5W-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO5-10W-2A-001} / 7",
+    "new_cell": "\\sourcefile{PDO5-10W-2A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO5-MAX3A-001} / 8",
+    "new_cell": "\\sourcefile{PDO5-MAX3A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO9-NL-001} / 9",
+    "new_cell": "\\sourcefile{PDO9-NL-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-NL-001} / 17",
+    "new_cell": "\\sourcefile{PDO15-NL-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-5W-001} / 22",
+    "new_cell": "\\sourcefile{PDO20-5W-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-75W-001} / 24",
+    "new_cell": "\\sourcefile{PDO20-75W-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-76W-38A-001} / 25",
+    "new_cell": "\\sourcefile{PDO20-76W-38A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-001} / 26",
+    "new_cell": "\\sourcefile{PDO20-80W-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-40A-001} / 27",
+    "new_cell": "\\sourcefile{PDO20-80W-40A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO9-9W-1A-001} / 28",
+    "new_cell": "\\sourcefile{PDO9-9W-1A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO9-18W-2A-001} / 29",
+    "new_cell": "\\sourcefile{PDO9-18W-2A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO9-27W-3A-001} / 30",
+    "new_cell": "\\sourcefile{PDO9-27W-3A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO9-3A-TO-NL-001} / 31",
+    "new_cell": "\\sourcefile{PDO9-3A-TO-NL-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-15W-1A-001} / 32",
+    "new_cell": "\\sourcefile{PDO15-15W-1A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-30W-2A-001} / 33",
+    "new_cell": "\\sourcefile{PDO15-30W-2A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-45W-3A-001} / 34",
+    "new_cell": "\\sourcefile{PDO15-45W-3A-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-3A-TO-NL-001} / 35",
+    "new_cell": "\\sourcefile{PDO15-3A-TO-NL-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-NL-AC-001} / 36",
+    "new_cell": "\\sourcefile{PDO15-NL-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-15W-1A-AC-001} / 37",
+    "new_cell": "\\sourcefile{PDO15-15W-1A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO9-18W-2A-THERM-001} / 38",
+    "new_cell": "\\sourcefile{PDO9-18W-2A-THERM-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-30W-2A-AC-001} / 39",
+    "new_cell": "\\sourcefile{PDO15-30W-2A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO15-45W-3A-AC-001} / 40",
+    "new_cell": "\\sourcefile{PDO15-45W-3A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO5-5W-1A-AC-001} / 41",
+    "new_cell": "\\sourcefile{PDO5-5W-1A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO5-10W-2A-AC-001} / 42",
+    "new_cell": "\\sourcefile{PDO5-10W-2A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO5-15W-3A-AC-001} / 43",
+    "new_cell": "\\sourcefile{PDO5-15W-3A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-NL-AC-001} / 44",
+    "new_cell": "\\sourcefile{PDO20-NL-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-40W-2A-AC-001} / 45",
+    "new_cell": "\\sourcefile{PDO20-40W-2A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-60W-3A-AC-001} / 46",
+    "new_cell": "\\sourcefile{PDO20-60W-3A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-80W-4A-AC-001} / 47",
+    "new_cell": "\\sourcefile{PDO20-80W-4A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "old_cell": "\\sourcefile{PDO20-94W-47A-AC-001} / 48",
+    "new_cell": "\\sourcefile{PDO20-94W-47A-AC-001}",
+    "merged_into": "back-077"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/transient_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO9-3A-TO-NL-001} / 31",
+    "new_cell": "\\sourcefile{PDO9-3A-TO-NL-001}",
+    "merged_into": null
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/transient_complete_table.tex",
+    "old_cell": "\\sourcefile{PDO15-3A-TO-NL-001} / 35",
+    "new_cell": "\\sourcefile{PDO15-3A-TO-NL-001}",
+    "merged_into": null
+  }
+]

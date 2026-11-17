@@ -1,0 +1,70 @@
+{
+  "baseline_files": 467,
+  "current_files": 471,
+  "edited_files": 7,
+  "added_files": 4,
+  "unchanged_files": 460,
+  "authorized_status_row_updates": [
+    "AP-03",
+    "AP-05",
+    "AP-08"
+  ],
+  "errors": [],
+  "changes": [
+    {
+      "path": "Chapters/07_Hardware/16_V2_F410.tex",
+      "baseline_sha256": "a0c3e88757a813f10ca7c29a046594bfa649783c0416e065b70c9332d8235d5d",
+      "sha256": "76bea1797a0ded6c505a6815644106ded3baec194ccf2699fdcd2c15fc883782"
+    },
+    {
+      "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+      "baseline_sha256": "780b0c3faf3e15eddc755de4f9fab73f6c57dc42c2d154dc02b4a8d150799c13",
+      "sha256": "1ed560bc6b99acbb1a18332fc2ae3e2a599774f7f063a35dce3a19480afa3d54"
+    },
+    {
+      "path": "Chapters/10_Results/chapter.tex",
+      "baseline_sha256": "8b126a639fbca714af7adcb70ea7379dd8b945320b1cf5c0745ca4a8ada1c283",
+      "sha256": "488b0fea067a4d8ff58304512082bf9cb547b651d5604cbbe95bf3859cc606df"
+    },
+    {
+      "path": "Chapters/12_Conclusion/03_Contributions.tex",
+      "baseline_sha256": "c2d0ab0b0e1666727200fa0ec6e93ca76642e1cce6875a64c61c210d5b2c588b",
+      "sha256": "236c30b2a9383519db681e71e6c1d5af9006357768f117e0343bfe1674cf83af"
+    },
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "baseline_sha256": "d22e7bd5fb8fbaf152ff8a4154918f8e3c95b61c34d76e5aac9406f15f2210b7",
+      "sha256": "c7680c6b1b6a02ec72aedc31881992354bf8178eae198875aa3f1cbfa182369d"
+    },
+    {
+      "path": "Frontmatter/Approval.tex",
+      "baseline_sha256": "4b071f7bdf8922797e0c50e31fb87a1187018c3106081c853a81464f177e635b",
+      "sha256": "338adf6c76ba9df5519929c4d39fd8c4e6a0569ca19301c6d47a060017ad7efd"
+    },
+    {
+      "path": "README.md",
+      "baseline_sha256": "9517c4b83e5a03b21b5e44ab1cf3758d1df59589d71906a938f1ffef86bb6337",
+      "sha256": "d205a7cc5fcedc5a2bc51cbfd19a115d83222e55f2ccaa4e1a5652be98418f65"
+    },
+    {
+      "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+      "baseline_sha256": null,
+      "sha256": "d80d8e3216fdca667c567ce9b87165c8d91988e25e0173809c8e982b7d4ba5d8"
+    },
+    {
+      "path": "Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg",
+      "baseline_sha256": null,
+      "sha256": "438822989a33edf82e9cd67b63ce873352336291b3bd0c3b23af0dae77ab0bd5"
+    },
+    {
+      "path": "Data/measurements/v2_results/evidence/v2_bridge_thermal_provenance.json",
+      "baseline_sha256": null,
+      "sha256": "8da46fc84f28d30e5935ad3172ec3a3a3ba7d0380eb8d4125e9d1f9a4a55226f"
+    },
+    {
+      "path": "Data/project_records/V2_Testing_Update.txt",
+      "baseline_sha256": null,
+      "sha256": "941cf83077cbcb60e9837f7f4b11f88e95bb09cca2a8334474b071847f1093dc"
+    }
+  ]
+}

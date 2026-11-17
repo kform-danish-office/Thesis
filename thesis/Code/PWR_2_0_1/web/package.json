@@ -1,0 +1,12 @@
+{
+  "name": "thesis-power-lab",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build": "node build.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

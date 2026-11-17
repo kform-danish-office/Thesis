@@ -1,0 +1,50 @@
+\section{Development of the V2 Prototype}
+\label{sec:intro-v2}
+
+The first prototype was used to develop the power circuit and burst
+controller. V2 was then designed with the MCU on the converter board in place of
+the separate controller platform. The charge-pump
+PFC and isolated resonant paths were retained, together with the supplied
+planar magnetics and downstream USB-C output stage.
+
+The main V2 design specifications are summarized in
+Table~\ref{tab:intro-v2-specs}. The circuit connections and controller
+timing are described in \cref{sec:hw-v2}; the complete schematic and PCB
+print set are included in \cref{sec:app-v2-oct27}.
+
+\begin{table}[htbp]
+\centering
+\caption{V2 design specifications.}
+\label{tab:intro-v2-specs}
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}X@{}}
+\toprule
+Function & V2 implementation\\
+\midrule
+Controller & STM32F410CBU6 integrated on the converter PCB\\
+Power stage & LMG2652RFBR GaN half bridge shared by the charge-pump and resonant paths\\
+Feedback & Scaled primary-voltage input (PA0), isolated secondary-bulk voltage feedback through AMC0330 (PA1), and primary half-bridge-current sensing (PA2)\\
+USB-C output & MPQ4242 output stage downstream of the isolated secondary bulk bus\\
+Local supplies & BAC1S12SC bias supply and separate LMR54410 regulators for primary and secondary local supplies\\
+PCB & Four copper layers, including internal GND and PWR layers\\
+Carrier timing & Default \SI{1}{\mega\hertz} carrier and \SI{40}{\nano\second} programmed dead time; both adjustable with output disabled (\cref{sec:ctrl-v2-adjustable-timing})\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+On V2, carrier commands use PA8/PB13, burst enable uses PA11, and UART
+TX/RX use PA9/PA10. The MCU continues to regulate the secondary bulk supply,
+which feeds the USB-C PD output stage.
+
+During later powered V2 tests, heating was observed in the external
+series resonant inductor. It was removed, and the tank was changed to use
+transformer leakage with approximately \SI{1.66}{\nano\farad} resonant
+capacitance. The software dead-time setting was approximately
+\SI{60}{\nano\second}. The input bridge continued to heat up during the
+test labelled \SI{95}{\watt} (\cref{sec:res-v2-testing}).
+
+The V2 drawings show the resonant branch before the external inductor was
+removed. Some component values and feedback scales still need checking
+against the assembled board (\cref{sec:hw-v2}). Further tests are needed
+to resolve the bridge heating and compare the fitted V2 converter with
+the V3 edge-card design.

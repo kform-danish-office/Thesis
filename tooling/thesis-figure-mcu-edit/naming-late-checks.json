@@ -1,0 +1,20 @@
+{
+  "files": [
+    "Chapters/10_Results/06_ZVS.tex",
+    "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "Chapters/12_Conclusion/chapter.tex",
+    "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "Chapters/12_Conclusion/02_Research_Questions.tex",
+    "Chapters/12_Conclusion/03_Contributions.tex",
+    "Backmatter/Appendices/A_Analytical_Equations.tex",
+    "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "Backmatter/Appendices/F_Contribution_Provenance.tex",
+    "Backmatter/Appendices/G_Software_Tools.tex",
+    "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "Backmatter/Appendices/J_Revised_Plan_Integration.tex"
+  ],
+  "protected_content": "PASS"
+}

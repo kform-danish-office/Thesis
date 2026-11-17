@@ -1,0 +1,62 @@
+[
+  {
+    "id": "thermal-repetition",
+    "path": "Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+    "old": "The thermal images in \\cref{fig:v2-secondary-load-thermal} show the two regions.\nThe input-bridge region R3 reached",
+    "new": "In the thermal images in \\cref{fig:v2-secondary-load-thermal}, the input-bridge\nregion R3 reached",
+    "reason": "Introduces the actual observation directly.",
+    "facts_preserved": [
+      "R3 identifies the input-bridge region."
+    ],
+    "checklist": [
+      "Concrete observations",
+      "Preserve technical uncertainty",
+      "Connected engineering prose"
+    ]
+  },
+  {
+    "id": "thermal-summary",
+    "path": "Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+    "old": "This sequence shows the lower bridge temperatures\nobserved at higher loads alongside increasing secondary heating.\n\n",
+    "new": "",
+    "reason": "Repeats the immediately preceding numerical observations without adding interpretation.",
+    "facts_preserved": [
+      "The reported bridge and secondary region values remain in place."
+    ],
+    "checklist": [
+      "Concrete observations",
+      "Preserve technical uncertainty",
+      "Connected engineering prose"
+    ]
+  },
+  {
+    "id": "sustained-operation",
+    "path": "Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+    "old": "\\SI{100}{\\watt} to a secondary load; voltage droop and heating still limit\nsustained operation.",
+    "new": "\\SI{100}{\\watt} to a secondary load. Voltage droop and heating require\nfurther investigation and sustained-load testing.",
+    "reason": "The transient sequence did not establish the operating limit for sustained operation; state the observed concerns and remaining test.",
+    "facts_preserved": [
+      "Transfer above 100 W is at the secondary load; none of the points reached thermal equilibrium."
+    ],
+    "checklist": [
+      "Concrete observations",
+      "Preserve technical uncertainty",
+      "Connected engineering prose"
+    ]
+  },
+  {
+    "id": "v3-comparison-row",
+    "path": "Chapters/10_Results/16_V3_Design_Outcome.tex",
+    "old": "Comparable qualitative bench performance; input-bridge heating remained, with copper and a possible via bottleneck under investigation",
+    "new": "Secondary-load tests reached \\SI{137.1}{\\watt} with voltage droop; input-bridge and secondary-region heating require further investigation",
+    "reason": "Updates the revision comparison with the later measured secondary-load result and both heating regions.",
+    "facts_preserved": [
+      "Power refers to secondary load, with droop; the copper and possible via hypothesis remains in the V2 results."
+    ],
+    "checklist": [
+      "Concrete observations",
+      "Preserve technical uncertainty",
+      "Connected engineering prose"
+    ]
+  }
+]

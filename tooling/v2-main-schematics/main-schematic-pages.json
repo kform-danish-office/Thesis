@@ -1,0 +1,22 @@
+{
+  "analysis-power": {
+    "page": 45,
+    "caption_prefix": "V2 sheet 3 power paths"
+  },
+  "input-bridge": {
+    "page": 64,
+    "caption_prefix": "V2 sheet 3 input filter and full-bridge rectifier"
+  },
+  "charge-pump": {
+    "page": 65,
+    "caption_prefix": "V2 sheet 3 charge-pump and resonant power circuit"
+  },
+  "usb-c": {
+    "page": 69,
+    "caption_prefix": "V2 sheet 2: MPQ4242 output stage"
+  },
+  "controller": {
+    "page": 70,
+    "caption_prefix": "V2 sheet 4 MCU and signal interface"
+  }
+}

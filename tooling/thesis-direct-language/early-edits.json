@@ -1,0 +1,482 @@
+[
+  {
+    "path": "Chapters/02_Background/01_Offline_ACDC_PFC.tex",
+    "replacements": [
+      {
+        "before": "A numerical comparison requires matched operating points and power boundaries, measured device stress, and complete assembly volumes at verified continuous output.",
+        "after": "A numerical comparison needs the same operating conditions and measurement points, measured device stress, and complete assembly volumes at verified continuous output.",
+        "occurrences": 1
+      },
+      {
+        "before": "Only the charge-pump supply was tested; a matched boost-PFC benchmark remains outstanding.",
+        "after": "Only the charge-pump supply was tested; boost-PFC comparison tests remain to be done.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/02_Background/03_ClassDE_Resonant.tex",
+    "replacements": [
+      {
+        "before": "The series approximation is used for initial sizing; the magnetizing branch and burst dynamics are retained when interpreting prototype switching and transients.",
+        "after": "The series approximation is used for initial sizing; magnetizing current and burst dynamics are also considered when analyzing prototype switching and transients.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+    "replacements": [
+      {
+        "before": "They establish operating principles; measurements establish switching behavior in the assembled stage.",
+        "after": "These models describe the operating principle, but the assembled stage needs its own switching measurements.",
+        "occurrences": 1
+      },
+      {
+        "before": "A ZVS assessment requires switch-node voltage aligned with the incoming gate command or device turn-on time, with adequate bandwidth and controlled probe loading, loop area, and common-mode error.",
+        "after": "ZVS must be checked from switch-node voltage and the incoming gate command or device turn-on time on the same time base, with adequate bandwidth and controlled probe loading, loop area, and common-mode error.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/02_Background/05_Reference_2020.tex",
+    "replacements": [
+      {
+        "before": "These results establish a working example of the principle and provide a starting point for the design calculations.",
+        "after": "These results demonstrate the principle and provide a starting point for the design calculations.",
+        "occurrences": 1
+      },
+      {
+        "before": "The prototype adds different magnetics, isolation, a downstream regulator, and sampled burst control; its complete-system performance is therefore measured independently.",
+        "after": "The prototype uses different magnetics, isolation, a downstream regulator, and sampled burst control, so the reference efficiency cannot be assumed for this supply.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/02_Background/06_Reference_2021.tex",
+    "replacements": [
+      {
+        "before": "Relationship between the reference converters and the present project.",
+        "after": "Reference converters and the USB-C prototype.",
+        "occurrences": 1
+      },
+      {
+        "before": "Work & Principal architecture & Relevance",
+        "after": "Work & Circuit & Use in this project",
+        "occurrences": 1
+      },
+      {
+        "before": "Closest circuit and burst-control precedent",
+        "after": "Circuit and burst-control starting point",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/chapter.tex",
+    "replacements": [
+      {
+        "before": "These states define the hardware interfaces and verification requirements. Power targets are distinguished from implemented controller settings and measured capability.",
+        "after": "These operating states determine the hardware interfaces and tests. The following sections give the power targets, controller settings, and measurements needed to check the supply.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/01_Use_Case.tex",
+    "replacements": [
+      {
+        "before": "A short capture at a nominal load only establishes that operating point.",
+        "after": "A short capture shows operation at that load, but not continuous performance.",
+        "occurrences": 1
+      },
+      {
+        "before": "Residual resonant and capacitive energy after removal makes no-load control and overvoltage response explicit design requirements.",
+        "after": "Residual resonant and capacitive energy after load removal must be handled by no-load control and overvoltage protection.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex",
+    "replacements": [
+      {
+        "before": "distinguishes power criteria from the original MCU timing and feedback parameters.",
+        "after": "lists the power targets and the original MCU timing and feedback settings.",
+        "occurrences": 1
+      },
+      {
+        "before": "Principal targets and parameters of the laboratory converter.",
+        "after": "Converter targets and controller settings.",
+        "occurrences": 1
+      },
+      {
+        "before": "Quantity & Target or implemented value & Assessment",
+        "after": "Parameter & Target or setting & Check",
+        "occurrences": 1
+      },
+      {
+        "before": "Matched electrical, duration, and thermal records",
+        "after": "Output power, run time, and temperature",
+        "occurrences": 1
+      },
+      {
+        "before": "Power actuator & PA10 enables bursts of carrier cycles",
+        "after": "Burst-enable pin & PA10 enables bursts of carrier cycles",
+        "occurrences": 1
+      },
+      {
+        "before": "Quantities used to characterize performance.",
+        "after": "Performance measurements.",
+        "occurrences": 1
+      },
+      {
+        "before": "Quantity & Required interpretation",
+        "after": "Quantity & Measurements and test conditions",
+        "occurrences": 1
+      },
+      {
+        "before": "Mean VBUS and its deviation from the selected setting; ripple identified by capture conditions",
+        "after": "Mean VBUS, deviation from the selected setting, and ripple with the capture conditions stated",
+        "occurrences": 1
+      },
+      {
+        "before": "Corresponding input/output power values and the stated power boundary",
+        "after": "Input and output power under the same conditions, with included stages and auxiliaries stated",
+        "occurrences": 1
+      },
+      {
+        "before": "Measured node, time scale, probe arrangement, and evidence relevant to commutation",
+        "after": "Switch-node and gate waveforms, time scale, and probe arrangement",
+        "occurrences": 1
+      },
+      {
+        "before": "Section~\\ref{sec:revised-plan-criteria} gives those criteria and their status. These are requirements for the next tests, rather than demonstrated capabilities of the tested baseline.",
+        "after": "Section~\\ref{sec:revised-plan-criteria} lists the work still needed. These tests have not all been completed on the baseline prototype.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex",
+    "replacements": [
+      {
+        "before": "Requirement identifiers connect the implemented control functions and measured performance to the results assessment.",
+        "after": "The FR labels identify control functions, and the PR labels identify performance tests in the results chapter.",
+        "occurrences": 1
+      },
+      {
+        "before": "Controller interfaces are introduced in \\cref{sec:intro-controller-basics}. On the original prototype, PA10 gates switching bursts, PA1 senses secondary bulk voltage, PA0 senses primary voltage, and PA2 senses half-bridge current.",
+        "after": "MCU pin assignments are listed in \\cref{sec:intro-controller-basics}. On the original prototype, pin PA10 controls switching bursts, PA1 senses secondary bulk voltage, PA0 senses primary voltage, and PA2 senses half-bridge current.",
+        "occurrences": 1
+      },
+      {
+        "before": "Direct memory access (DMA) buffers the ADC scan; the universal asynchronous receiver-transmitter (UART) carries commands and status.",
+        "after": "DMA transfers ADC readings to memory, and UART carries commands and status.",
+        "occurrences": 1
+      },
+      {
+        "before": "Performance and reporting requirements.",
+        "after": "Performance tests and measurement conditions.",
+        "occurrences": 1
+      },
+      {
+        "before": "ID & Required assessment",
+        "after": "ID & Measurement or test",
+        "occurrences": 1
+      },
+      {
+        "before": "Calculate efficiency only from corresponding input/output power records with a defined boundary.",
+        "after": "Calculate efficiency from input and output power measured under the same conditions, with the included circuit stages stated.",
+        "occurrences": 1
+      },
+      {
+        "before": "Interpret temperature observations together with load, duration, ambient condition, and airflow information.",
+        "after": "Report temperature together with load, run time, ambient condition, and airflow information.",
+        "occurrences": 1
+      },
+      {
+        "before": "Associate numerical results with their assembly, firmware, operating condition, and measurement source.",
+        "after": "Record the assembly, firmware, operating conditions, and source measurements for each numerical result.",
+        "occurrences": 1
+      },
+      {
+        "before": "assigns AP identifiers to the additional V2/V3 development criteria, separate from the baseline functions.",
+        "after": "lists the additional V2/V3 design and test tasks under AP labels.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/04_USBC_Interface.tex",
+    "replacements": [
+      {
+        "before": "USB-C Interface and Voltage Nodes",
+        "after": "USB-C Output Stage",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+    "replacements": [
+      {
+        "before": "The protection assessment covers laboratory behavior. Product qualification remains separate work.",
+        "after": "The completed checks cover supervised laboratory operation, not product qualification.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/06_System_Architecture.tex",
+    "replacements": [
+      {
+        "before": "The power and sensing barriers serve different functions.",
+        "after": "",
+        "occurrences": 1
+      },
+      {
+        "before": "On the original prototype, PA8 and PA9 generate complementary carrier commands and PA10 gates average transfer through burst enable.",
+        "after": "On the original prototype, MCU pins PA8 and PA9 generate complementary carrier commands, while PA10 enables switching bursts.",
+        "occurrences": 1
+      },
+      {
+        "before": "Bring-up therefore establishes these rails and the inhibited carrier before feedback calibration and low-power transfer. Closed-loop operation follows once isolated feedback is valid.",
+        "after": "These rails must be checked with the carrier inhibited before feedback calibration and low-power transfer. Closed-loop regulation requires valid isolated feedback.",
+        "occurrences": 1
+      },
+      {
+        "before": "Functional architecture of the tested V1.0 assembly, interpreted with the V1.1 schematic corrections. Charge-pump transfer and resonant transfer use the shared GaN stage. PA1 senses the secondary bulk bus before the USB-C output stage; PA0 and PA2 indicate primary voltage and half-bridge current. The transformer and AMC0330 blocks span their functional isolation boundary.",
+        "after": "Power and control architecture of the V1.0 prototype with the V1.1 circuit corrections. The transformer carries power across the isolation barrier, and the AMC0330 returns secondary-bulk feedback to the MCU. PA1 measures this feedback; PA0 and PA2 measure primary voltage and half-bridge current.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+    "replacements": [
+      {
+        "before": "The original prototype uses PA10 as the active-high burst-enable GPIO.",
+        "after": "The original prototype uses MCU pin PA10 as the active-high burst-enable output.",
+        "occurrences": 1
+      },
+      {
+        "before": "Applies a limited burst command to establish secondary power and valid feedback before normal regulation.",
+        "after": "Applies limited bursts to power the secondary-side feedback circuit before normal regulation.",
+        "occurrences": 1
+      },
+      {
+        "before": "Full-demand escape &",
+        "after": "Load-recovery override &",
+        "occurrences": 1
+      },
+      {
+        "before": "The resulting low-frequency envelope depends on load state and settings, including line feed-forward and \\texttt{MAXRATE}. Each waveform is interpreted with the applicable configuration.",
+        "after": "The burst envelope depends on load state and settings, including line feed-forward and \\texttt{MAXRATE}.",
+        "occurrences": 1
+      },
+      {
+        "before": "Reaching the attempt limit ends precharge without guaranteeing valid feedback.",
+        "after": "The attempt limit can be reached before feedback becomes valid.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex",
+    "replacements": [
+      {
+        "before": "connect each requirement to an assessment. The behavior implemented in the firmware is checked against the electrical measurements.",
+        "after": "list the tests and measurements needed to check each requirement.",
+        "occurrences": 1
+      },
+      {
+        "before": "Assessment of functional requirements.",
+        "after": "Checks for the functional requirements.",
+        "occurrences": 1
+      },
+      {
+        "before": "Assessment of performance and reporting requirements.",
+        "after": "Checks for the performance requirements.",
+        "occurrences": 1
+      },
+      {
+        "before": "ID & Assessment & Results section",
+        "after": "ID & Test or measurement & Results section",
+        "occurrences": 2
+      },
+      {
+        "before": "Consistent input/output power and measurement boundary",
+        "after": "Input/output power measured under the same conditions and at stated circuit points",
+        "occurrences": 1
+      },
+      {
+        "before": "Consistency of test identity and source records",
+        "after": "Hardware, firmware, and source measurements for each result",
+        "occurrences": 1
+      },
+      {
+        "before": "Firmware implementation establishes the commanded function, while measurements establish its electrical response.",
+        "after": "Source code shows which functions were implemented; measurements show how the circuit responded.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "replacements": [
+      {
+        "before": "The criteria below cover V2 baseline repetition, diagnosis of the output-power limit, controlled design changes, and readiness for final evaluation.",
+        "after": "The plan calls for repeating the V2 tests, finding the output-power limit, testing controlled design changes, and preparing the final evaluation.",
+        "occurrences": 1
+      },
+      {
+        "before": "Table~\\ref{tab:req-revised-plan-criteria} defines the additional design and test criteria, including thermal, stability, and volume measurements required beyond output power.",
+        "after": "Table~\\ref{tab:req-revised-plan-criteria} lists the additional design work and tests, including temperature, stability, and volume measurements.",
+        "occurrences": 1
+      },
+      {
+        "before": "Revised-plan acceptance and reporting criteria.",
+        "after": "Tests and design work in the revised plan.",
+        "occurrences": 1
+      },
+      {
+        "before": "Acceptance and reporting criteria carried forward from the revised project plan.",
+        "after": "Tests and design work in the revised project plan.",
+        "occurrences": 1
+      },
+      {
+        "before": "Required work and acceptance record",
+        "after": "Planned test or design work",
+        "occurrences": 2
+      },
+      {
+        "before": "using matched electrical measurements and defined-duration thermal/stability records.",
+        "after": "using simultaneous electrical measurements and defined-duration thermal and stability runs.",
+        "occurrences": 1
+      },
+      {
+        "before": "A single thermal image does not close this criterion.",
+        "after": "A thermal image alone does not show thermal equilibrium or long-term stability.",
+        "occurrences": 1
+      },
+      {
+        "before": "using the same stated volume convention and supported power basis.",
+        "after": "using the same volume calculation and output-power test conditions.",
+        "occurrences": 1
+      },
+      {
+        "before": "Record the V3 readiness decision and resulting test scope.",
+        "after": "Decide whether V3 is ready for testing and list the tests that can be completed.",
+        "occurrences": 1
+      },
+      {
+        "before": "a completed V3 readiness decision, and the paired full-system density comparison remain open.",
+        "after": "a decision on V3 testing, and the full-system power-density comparison remain open.",
+        "occurrences": 1
+      },
+      {
+        "before": "Original electromagnetic design is attributed in Section~\\ref{sec:intro-contributions}.",
+        "after": "The original electromagnetic design came from the earlier work described in Section~\\ref{sec:intro-contributions}.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+    "replacements": [
+      {
+        "before": "Throughout the analysis, \\(V_{\\mathrm{sec}}\\) denotes bulk voltage and VBUS denotes connector voltage.",
+        "after": "\\(V_{\\mathrm{sec}}\\) is the secondary bulk voltage, and VBUS is the USB-C output voltage.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+    "replacements": [
+      {
+        "before": "Ideal pump-branch intervals in the modified charge-pump topology. Device names refer to functional paths in the reference analysis.",
+        "after": "Ideal charge-pump intervals during one switching cycle.",
+        "occurrences": 1
+      },
+      {
+        "before": "Burst restart begins from the inductor currents and capacitor voltages left by the idle interval. It therefore requires separate assessment from the periodic sequence, particularly during sparse no-load packets.",
+        "after": "Each burst restarts with the inductor currents and capacitor voltages left by the idle interval. The first cycles can therefore differ from steady switching, particularly during sparse no-load packets.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+    "replacements": [
+      {
+        "before": "Power quality must therefore be assessed with the final controller.",
+        "after": "PF and current THD must therefore be measured with the final controller.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+    "replacements": [
+      {
+        "before": "in-circuit current and clamp timing determine agreement with the assumed sequence.",
+        "after": "in-circuit current waveforms and clamp timing are needed to check the triangular-current assumption.",
+        "occurrences": 1
+      }
+    ]
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/11_Design_Summary.tex",
+    "replacements": [
+      {
+        "before": "Table~\\ref{tab:analysis-design-summary} lists the values used to connect the reference equations to the prototype. It separates nominal circuit values, supplied magnetic measurements, and calculated estimates.",
+        "after": "Table~\\ref{tab:analysis-design-summary} summarizes the prototype parameters used in the calculations.",
+        "occurrences": 1
+      },
+      {
+        "before": "Quantity & Value & Interpretation",
+        "after": "Parameter & Value & Notes",
+        "occurrences": 1
+      },
+      {
+        "before": "Nominal implementation value",
+        "after": "Nominal circuit value",
+        "occurrences": 2
+      },
+      {
+        "before": "Inherited A/B measurements",
+        "after": "Supplied measurements for inductors A and B",
+        "occurrences": 1
+      },
+      {
+        "before": "Final discrete series contribution",
+        "after": "External series inductance",
+        "occurrences": 1
+      },
+      {
+        "before": "Inherited primary-referred measurement",
+        "after": "Supplied primary-referred leakage measurement",
+        "occurrences": 1
+      },
+      {
+        "before": "Sum if the stated contributions act in series",
+        "after": "Discrete inductance plus leakage, assuming series connection",
+        "occurrences": 1
+      },
+      {
+        "before": "Inherited transformer-variant range",
+        "after": "Range of supplied transformer measurements",
+        "occurrences": 1
+      },
+      {
+        "before": "Primary-to-secondary step-down convention",
+        "after": "Primary-to-secondary turns ratio",
+        "occurrences": 1
+      }
+    ]
+  }
+]

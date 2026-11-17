@@ -1,0 +1,77 @@
+\section{V2 Testing and Resonant-Tank Changes}
+\label{sec:res-v2-testing}
+
+The original V2 tank showed excessive heating in the approximately
+\SI{9.4}{\micro\henry} external series inductor. The inductor was removed
+and the resonant capacitance changed to approximately
+\SI{1.66}{\nano\farad}, allowing operation with transformer leakage alone.
+
+The measured leakage values in Table~\ref{tab:mag-inherited-measurements}
+give an ideal series resonance near \SI{0.96}{\mega\hertz}. The in-circuit
+resonance still needs to be measured.
+
+\subsection{Half-Bridge Heating and Dead Time}
+
+After the tank was modified and the software dead time was set to about
+\SI{60}{\nano\second}, half-bridge heating decreased. Turn-on voltage
+and current measurements are still needed to check ZVS.
+
+\subsection{Secondary Output and Comparison with V1}
+
+During earlier V2 tests, secondary-winding heating and limited power increase were observed near
+\SIrange{3.3}{3.6}{\ampere} at the secondary output, and the winding was
+suspected to limit further power increase. Output behavior was comparable
+to V1. After the tank change, the main heating concern shifted to the
+input bridge.
+
+\subsection{Input-Bridge Heating}
+
+Heating persisted around input-bridge diodes D4, D5, D9, and D10 after
+diode replacement.
+
+In a test at \SI{240}{\volt} AC, \SI{50}{\hertz}, and a
+\SI{100}{\watt} constant-power load setting, output voltage remained steady while bridge
+surface temperature rose to approximately \SI{80}{\celsius} within seconds,
+then more slowly toward \SI{90}{\celsius}, where testing was stopped.
+
+Figure~\ref{fig:v2-bridge-thermal-observation} shows the bridge heating
+during a \SI{95}{\watt} run.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\linewidth]{Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg}
+\caption{V2 thermal image during the \SI{95}{\watt} run. The displayed surface maxima are \SI{70.0}{\celsius} in R3 and \SI{61.5}{\celsius} in R1.}
+\label{fig:v2-bridge-thermal-observation}
+\end{figure}
+\FloatBarrier
+
+Limited bridge copper and a possible single-via connection between layers
+were suspected to contribute to the heating. Narrow current paths add
+resistance and restrict heat spreading.
+
+\input{Chapters/10_Results/17_V2_Secondary_Load_Tests}
+
+\subsection{Next Layout Changes}
+
+Wider current paths and more heat-spreading copper are planned for the next
+layout. Moving the rectifiers is also being considered to reduce local
+heating.
+
+
+\subsection{V2 Board and Test-Setup Photographs}
+
+The V2 board and thermal-camera setup are shown in
+Figure~\ref{fig:v2-board-test-photos}.
+
+\begin{figure}[p]
+\centering
+\includegraphics[height=0.34\textheight]{Data/measurements/v2_results/evidence/v2_board_overview_original.jpg}
+\hspace{0.03\linewidth}
+\includegraphics[height=0.34\textheight]{Data/measurements/v2_results/evidence/v2_thermal_setup_original.jpg}
+
+\vspace{0.8em}
+\includegraphics[width=0.86\linewidth]{Data/measurements/v2_results/evidence/v2_board_detail_original.jpg}
+\caption{V2 assembly overview (upper left), thermal-camera setup (upper right), and component-side detail (lower).}
+\label{fig:v2-board-test-photos}
+\end{figure}
+\FloatBarrier

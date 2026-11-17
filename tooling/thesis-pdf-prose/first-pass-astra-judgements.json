@@ -1,0 +1,1276 @@
+[
+  {
+    "id": "front-01",
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "judgment": "Revise",
+    "reason": "Retain earlier-work attribution without turning package identification into a stronger sole-design claim.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "A planar inductor and transformer designed by Bima Nugraha Sanusi and the DTU Power Electronics group were used in this converter. The components were measured by M\\'ani Gautason.\n",
+    "final_new": "A planar inductor and transformer from earlier DTU work by Bima Nugraha Sanusi and the DTU Power Electronics group were used in this converter. The components were measured by M\\'ani Gautason.\n"
+  },
+  {
+    "id": "front-02",
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "judgment": "Revise",
+    "reason": "Retain explicit two-circuit count while removing filenames.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The supplied LTspice circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.\r\n",
+    "final_new": "The two supplied LTspice circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.\r\n"
+  },
+  {
+    "id": "front-03",
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "judgment": "Accept",
+    "reason": "Replaces filename and appendix inventory with the technical comparison.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The predecessor loss calculations use a different circuit and device set. Prototype efficiency is estimated from measured input and output power, with measurement locations and timing uncertainties discussed alongside the results.\r\n",
+    "final_new": "The predecessor loss calculations use a different circuit and device set. Prototype efficiency is estimated from measured input and output power, with measurement locations and timing uncertainties discussed alongside the results.\r\n"
+  },
+  {
+    "id": "front-04",
+    "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+    "judgment": "Accept",
+    "reason": "Identifies the electrical model and its limits without a library filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The supplied GaN Systems GS66502B Level 1 Version 2.0 model is intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded \\cite{gansystemsGS66502Bmodel}. It represents the electrical device in the supplied circuit rather than the complete LMG2652 package and PCB implementation.\r\n",
+    "final_new": "The supplied GaN Systems GS66502B Level 1 Version 2.0 model is intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded \\cite{gansystemsGS66502Bmodel}. It represents the electrical device in the supplied circuit rather than the complete LMG2652 package and PCB implementation.\r\n"
+  },
+  {
+    "id": "front-05",
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "judgment": "Accept",
+    "reason": "Removes the file inventory while preserving the scope of simulation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Fourier and measurement directives calculate input current, RMS voltage and current, power, efficiency, and PF. The supplied simulations describe the reference circuits; the final board was not simulated.\r\n",
+    "final_new": "Fourier and measurement directives calculate input current, RMS voltage and current, power, efficiency, and PF. The supplied simulations describe the reference circuits; the final board was not simulated.\r\n"
+  },
+  {
+    "id": "front-06",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "judgment": "Revise",
+    "reason": "Keep assembly identification as well as fitted components; these are test conditions, not archival clutter.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "AP-02 & Repeat the reported approximately \\SI{85}{\\watt} V2 point, or explain the difference. State the fitted parts, firmware settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, and uncertainty.\\\\\n",
+    "final_new": "AP-02 & Repeat the reported approximately \\SI{85}{\\watt} V2 point, or explain the difference. State the assembly, fitted parts, firmware settings, input/output conditions, instrument and probe settings, ambient, cooling, duration, and uncertainty.\\\\\n"
+  },
+  {
+    "id": "front-07",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "judgment": "Reject",
+    "reason": "DRC, schematic/layout review and release status are substantive design verification requirements, not PDF archive clutter; proposed shortening drops them.",
+    "scores": {
+      "voice": 1,
+      "technical_fidelity": 0,
+      "flow": 1
+    },
+    "proposed_new": "AP-06 & Develop and review the V3 edge-card pinout, outline, component-height limit, current and gate/sense return paths, creepage/clearance, and thermal-spreading arrangement. Check the design for manufacturing and component availability.\\\\\n",
+    "final_new": null
+  },
+  {
+    "id": "front-08",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "judgment": "Revise",
+    "reason": "Preserve conditional V2 fallback and scope of feasible V3 tests; original proposal shortened substantive requirements.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "AP-08 & Determine whether V3 is ready for testing and identify the remaining work. Evaluate V2 using the completed matched tests.\\\\\n",
+    "final_new": "AP-08 & Determine whether V3 is ready for testing, identify the tests that can be completed, and state the remaining work. If V3 is not ready, use the completed V2 tests with matched operating conditions as the hardware results.\\\\\n"
+  },
+  {
+    "id": "front-09",
+    "path": "Frontmatter/Approval.tex",
+    "judgment": "Accept",
+    "reason": "Connects the integration work and removes an appendix inventory from the preface.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "In V2, the controller was moved onto a four-layer converter PCB with the power circuit, isolated sensing, and downstream USB-C stage (\\cref{sec:hw-v2}). Browser logging and software tools were developed alongside the controller.\r\n",
+    "final_new": "In V2, the controller was moved onto a four-layer converter PCB with the power circuit, isolated sensing, and downstream USB-C stage (\\cref{sec:hw-v2}). Browser logging and software tools were developed alongside the controller.\r\n"
+  },
+  {
+    "id": "front-10",
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "judgment": "Accept",
+    "reason": "States the measurement objective without record-keeping language.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\item measure output voltage, load response, switching behavior, input power quality, efficiency, and temperature; and\r\n",
+    "final_new": "\\item measure output voltage, load response, switching behavior, input power quality, efficiency, and temperature; and\r\n"
+  },
+  {
+    "id": "front-11",
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "judgment": "Accept",
+    "reason": "Removes repeated duration requirement and connects the V2 observation to outstanding tests.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The revised plan extends the work to V2 evaluation and a V3 edge-card design \\cite{projectOctoberPlan}. It calls for a repeat of the reported \\SI{85}{\\watt} V2 operating point and an investigation of the \\SI{15}{\\watt} shortfall to the \\SI{100}{\\watt} target. With a modified resonant tank, V2 later reached \\SI{137.1}{\\watt} at the secondary output, with voltage droop and continued heating (\\cref{sec:res-v2-testing}). Fixed-PDO, PPS, and defined-duration thermal and stability tests remain necessary. A V2--V3 power-density comparison also requires a common assembly-volume definition. Section~\\ref{sec:revised-plan-criteria} gives the criteria and their current status.\r\n",
+    "final_new": "The revised plan extends the work to V2 evaluation and a V3 edge-card design \\cite{projectOctoberPlan}. It calls for a repeat of the reported \\SI{85}{\\watt} V2 operating point and an investigation of the \\SI{15}{\\watt} shortfall to the \\SI{100}{\\watt} target. With a modified resonant tank, V2 later reached \\SI{137.1}{\\watt} at the secondary output, with voltage droop and continued heating (\\cref{sec:res-v2-testing}). Fixed-PDO, PPS, and defined-duration thermal and stability tests remain necessary. A V2--V3 power-density comparison also requires a common assembly-volume definition. Section~\\ref{sec:revised-plan-criteria} gives the criteria and their current status.\r\n"
+  },
+  {
+    "id": "front-12",
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "judgment": "Accept",
+    "reason": "Connects the reported V2 point, its development context and the separate V1 measurement without choppy dataset narration.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The plan calls for a repeat of the reported V2 maximum near \\SI{85}{\\watt} under defined conditions, or an explanation of the difference. The integrated MCU and its ported firmware form part of the V2 development described in Sections~\\ref{sec:hw-v2} and \\ref{sec:ctrl-pwr2-port}. The separate matched measurements on the modified V1.0 assembly reached \\SI{79.89}{\\watt}.\n",
+    "final_new": "The plan calls for a repeat of the reported V2 maximum near \\SI{85}{\\watt} under defined conditions, or an explanation of the difference. The integrated MCU and its ported firmware form part of the V2 development described in Sections~\\ref{sec:hw-v2} and \\ref{sec:ctrl-pwr2-port}. The separate matched measurements on the modified V1.0 assembly reached \\SI{79.89}{\\watt}.\n"
+  },
+  {
+    "id": "front-13",
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "judgment": "Accept",
+    "reason": "Removes a redundant disclaimer immediately following a first-order equation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "A 5\\% increase in either series parameter gives an approximately 2.5\\% first-order resonance reduction. Near-carrier operation makes the corresponding phase shift relevant to commutation.\r\n",
+    "final_new": "A 5\\% increase in either series parameter gives an approximately 2.5\\% first-order resonance reduction. Near-carrier operation makes the corresponding phase shift relevant to commutation.\r\n"
+  },
+  {
+    "id": "front-14",
+    "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+    "judgment": "Accept",
+    "reason": "Replaces a list of what images cannot resolve with the measurements needed for continuous operation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Magnetic temperature depends on winding, core, and terminal losses, heat transferred from the GaN devices, rectifiers, auxiliary supplies, and copper, and heat removed by airflow. The images in \\cref{sec:method-thermal,sec:res-thermal} show surface-temperature patterns at the tested outputs. Internal winding temperatures and temperature over time on the assembled converter are needed to assess continuous operation.\n",
+    "final_new": "Magnetic temperature depends on winding, core, and terminal losses, heat transferred from the GaN devices, rectifiers, auxiliary supplies, and copper, and heat removed by airflow. The images in \\cref{sec:method-thermal,sec:res-thermal} show surface-temperature patterns at the tested outputs. Internal winding temperatures and temperature over time on the assembled converter are needed to assess continuous operation.\n"
+  },
+  {
+    "id": "ch79-01",
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "judgment": "Accept",
+    "reason": "Removes a data-container inventory from the method introduction.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Switching and power transfer were checked during bring-up, followed by loaded and\r\nno-load characterization.",
+    "final_new": "Switching and power transfer were checked during bring-up, followed by loaded and\r\nno-load characterization."
+  },
+  {
+    "id": "ch79-02",
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "judgment": "Accept",
+    "reason": "Removes the file inventory while retaining limits relevant to interpretation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Missing setup details and peak markers limit the calculations, as discussed in\r\n\\cref{sec:method-uncertainty}. Plot lines connect measured points and are not\r\nfitted converter characteristics.",
+    "final_new": "Missing setup details and peak markers limit the calculations, as discussed in\r\n\\cref{sec:method-uncertainty}. Plot lines connect measured points and are not\r\nfitted converter characteristics."
+  },
+  {
+    "id": "ch79-03",
+    "path": "Chapters/09_Experimental_Methods/11_Uncertainty.tex",
+    "judgment": "Accept",
+    "reason": "Removes spreadsheet processing detail and keeps the uncertainty and required measurements.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The setup information and repeated measurements needed for a numerical uncertainty budget are incomplete, so no error bars are given. Characterizing worst-case transients requires repeated events with a defined acceptance band; thermal equilibrium requires a temperature history, and jitter requires timing measurements. These limits apply throughout Chapter~\\ref{ch:results}.",
+    "final_new": "The setup information and repeated measurements needed for a numerical uncertainty budget are incomplete, so no error bars are given. Characterizing worst-case transients requires repeated events with a defined acceptance band; thermal equilibrium requires a temperature history, and jitter requires timing measurements. These limits apply throughout Chapter~\\ref{ch:results}."
+  },
+  {
+    "id": "ch79-04",
+    "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+    "judgment": "Revise",
+    "reason": "Preserve firmware identification as a relevant test variable while removing contradictory-note administration and generic results navigation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Calibration, thresholds, loaded/no-load settings, and timing affect the control response and should be recorded with each test. Appendix~\\ref{app:firmware} gives the command reference, and Chapter~\\ref{ch:results} discusses the measured behavior.",
+    "final_new": "Firmware version, calibration, thresholds, loaded/no-load settings, and timing affect the control response and should be recorded with each test. Appendix~\\ref{app:firmware} gives the command reference."
+  },
+  {
+    "id": "ch79-06",
+    "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+    "judgment": "Revise",
+    "reason": "Preserve firmware version and controller target as test variables without requiring export-file inventory.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The reported V2 operating point near \\SI{85}{\\watt} must be repeated with\nthe hardware, rework, magnetics, resonant values, controller settings and mode\nidentified. AC input, output setting and negotiation, load and cable, auxiliary\nsupplies, cooling, ambient and duration must also be recorded. Probe scaling\nand zero must be checked. If the original configuration cannot be reconstructed,\nthe known differences must be stated.",
+    "final_new": "The reported V2 operating point near \\SI{85}{\\watt} must be repeated with\nthe hardware, rework, magnetics, resonant values, controller target, firmware version, settings and mode\nidentified. AC input, output setting and negotiation, load and cable, auxiliary\nsupplies, cooling, ambient and duration must also be recorded. Probe scaling\nand zero must be checked. If the original configuration cannot be reconstructed,\nthe known differences must be stated."
+  },
+  {
+    "id": "ch79-07",
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "judgment": "Accept",
+    "reason": "Retains the useful command reference and removes repeated source and version navigation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Commands and functions are listed in Appendix~\\ref{app:firmware}.",
+    "final_new": "Commands and functions are listed in Appendix~\\ref{app:firmware}."
+  },
+  {
+    "id": "ch79-08",
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "judgment": "Accept",
+    "reason": "Keeps the actual verification and removes a repeated source and build inventory.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The V2 firmware, protocol tests, settings-storage tests, and browser tests were built and checked. These checks cover timer rounding and pair rejection, application with output disabled, learned-profile clearing, calibration cancellation, and saved-settings recovery after interrupted writes.",
+    "final_new": "The V2 firmware, protocol tests, settings-storage tests, and browser tests were built and checked. These checks cover timer rounding and pair rejection, application with output disabled, learned-profile clearing, calibration cancellation, and saved-settings recovery after interrupted writes."
+  },
+  {
+    "id": "ch79-09",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "judgment": "Accept",
+    "reason": "Removes repeated appendix navigation; the later PCB paragraph retains the detailed drawing reference.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "V2 integrates the MCU, power stage, sensing, local supplies, and USB-C output on a four-layer PCB \\cite{ststm32f410ds}.",
+    "final_new": "V2 integrates the MCU, power stage, sensing, local supplies, and USB-C output on a four-layer PCB \\cite{ststm32f410ds}."
+  },
+  {
+    "id": "ch79-10",
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "judgment": "Accept",
+    "reason": "Removes a repeated 85 W attribution already explained immediately above.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The matched \\SI{79.89}{\\watt} tests on the modified V1.0 assembly provide a connector-output baseline (\\cref{ch:results}). Later V2 secondary-output tests reached higher power with voltage droop and continued heating (\\cref{sec:res-v2-testing}); thermal-endurance tests remain incomplete. The V1.0 outline is \\SI{202.77}{\\milli\\metre} by \\SI{72.77}{\\milli\\metre}; V2 assembly dimensions must be measured separately before calculating its power density.",
+    "final_new": "The matched \\SI{79.89}{\\watt} tests on the modified V1.0 assembly provide a connector-output baseline (\\cref{ch:results}). Later V2 secondary-output tests reached higher power with voltage droop and continued heating (\\cref{sec:res-v2-testing}); thermal-endurance tests remain incomplete. The V1.0 outline is \\SI{202.77}{\\milli\\metre} by \\SI{72.77}{\\milli\\metre}; V2 assembly dimensions must be measured separately before calculating its power density."
+  },
+  {
+    "id": "10-01",
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "judgment": "Accept",
+    "reason": "Removes file and processing inventory from the results introduction.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Calculations use completed measurements from the load tests. The complete\r\nresults are included in the appendix.",
+    "final_new": "Calculations use completed measurements from the load tests. The complete\r\nresults are included in the appendix."
+  },
+  {
+    "id": "10-02",
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "judgment": "Accept",
+    "reason": "Retains meaningful output threshold and removes row-name bookkeeping.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The \\SI{3.8}{\\ampere} point exceeded \\SI{75}{\\watt} calculated output.",
+    "final_new": "The \\SI{3.8}{\\ampere} point exceeded \\SI{75}{\\watt} calculated output."
+  },
+  {
+    "id": "10-03",
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "judgment": "Revise",
+    "reason": "Place incomplete setup attribution once in the adjacent frequency discussion, not again in the caption.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\caption{C2 waveforms showing burst overviews (00006 and 00008) and carrier detail (00007 and 00010). Load and setup details are incomplete.}",
+    "final_new": "\\caption{C2 waveforms showing burst overviews (00006 and 00008) and carrier detail (00007 and 00010).}"
+  },
+  {
+    "id": "10-04",
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "judgment": "Revise",
+    "reason": "Keep waveform-derived frequency separate from timer configuration, with the missing setup stated locally.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "approximately \\SI{1.03}{\\mega\\hertz}. The load and setup were not\r\nfully recorded, so this frequency cannot be assigned to a specific test.",
+    "final_new": "approximately \\SI{1.03}{\\mega\\hertz}. This is the frequency measured in the C2\r\nwaveforms; the configured timer frequency and test conditions were not recorded."
+  },
+  {
+    "id": "10-05",
+    "path": "Chapters/10_Results/12_Compliance_Table.tex",
+    "judgment": "Revise",
+    "reason": "Avoid inventing full identification of hardware/test conditions from the original archive linkage statement.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "PR-09 & Link results to configuration & Test conditions and hardware identified for main measurements & Setup details incomplete\\\\",
+    "final_new": "PR-09 & Link results to configuration & Test identifiers and instrument readings & Setup details incomplete\\\\"
+  },
+  {
+    "id": "10-06",
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "judgment": "Revise",
+    "reason": "Use direct authorial test wording requested by root; retain approximate software setting and unverified ZVS.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "With the modified tank and a reported software dead-time setting of about\n\\SI{60}{\\nano\\second}, half-bridge heating decreased. Switch voltage and\ncurrent at turn-on are needed to determine whether ZVS was achieved.",
+    "final_new": "After the tank was modified and the software dead time was set to about\n\\SI{60}{\\nano\\second}, half-bridge heating decreased. Turn-on voltage\nand current measurements are still needed to check ZVS."
+  },
+  {
+    "id": "11-01",
+    "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+    "judgment": "Accept",
+    "reason": "Closes with the practical test lesson rather than describing the appendix.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Recording the board version, settings, waveforms, power readings, and\r\ntemperatures together allows each result to be interpreted against its test\r\nconditions. Coupling, averaging, and firmware state are also needed when\r\ncalculating results from captures.",
+    "final_new": "Recording the board version, settings, waveforms, power readings, and\r\ntemperatures together allows each result to be interpreted against its test\r\nconditions. Coupling, averaging, and firmware state are also needed when\r\ncalculating results from captures."
+  },
+  {
+    "id": "12-01",
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "judgment": "Revise",
+    "reason": "Preserve completed software-check status while removing archive inventory.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The four-layer circuit and layout integrate these functions on V2.\r\nPreliminary powered observations appear in \\cref{sec:res-v2-testing};\r\npowered tests of the later adjustable firmware and comparable power and\r\nthermal-endurance measurements are still needed.",
+    "final_new": "The four-layer circuit and layout integrate these functions on V2.\r\nThe firmware and supporting software passed software checks.\r\nPreliminary powered observations appear in \\cref{sec:res-v2-testing};\r\npowered tests of the later adjustable firmware and comparable power and\r\nthermal-endurance measurements are still needed."
+  },
+  {
+    "id": "12-02",
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "judgment": "Accept",
+    "reason": "Removes documentation inventory from the contribution.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The prototype was evaluated for output settings, high-power operation,\r\ninput-current quality, initial efficiency, load removal, no-load behavior,\r\nand surface temperature.",
+    "final_new": "The prototype was evaluated for output settings, high-power operation,\r\ninput-current quality, initial efficiency, load removal, no-load behavior,\r\nand surface temperature."
+  },
+  {
+    "id": "10-07",
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "judgment": "Accept",
+    "reason": "Removes scale bookkeeping while retaining the identical C3 data, which affects interpretation of the records.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\caption{LeCroy line-timescale waveforms from captures 7 and 8. The two C3 records contain identical data.}",
+    "final_new": "\\caption{LeCroy line-timescale waveforms from captures 7 and 8. The two C3 records contain identical data.}"
+  },
+  {
+    "id": "10-08",
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "judgment": "Accept",
+    "reason": "Makes the waveform role and measurement limit direct.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The line-timescale traces show the input waveform, but incomplete probe\r\ncalibration prevents calculation of PF or real power from them.",
+    "final_new": "The line-timescale traces show the input waveform, but incomplete probe\r\ncalibration prevents calculation of PF or real power from them."
+  },
+  {
+    "id": "10-09",
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "judgment": "Accept",
+    "reason": "Removes a raw-file inventory and plotting narration while retaining the measurement interpretation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "DC-coupled captures give mean output voltage, while AC-coupled captures\r\nshow small-signal detail and acquisition statistics. Thermal images show\r\nsurface hotspots. Error bars are omitted because the uncertainty data are\r\nincomplete; instrument disagreements and ambiguous measurement fields are\r\ndiscussed with the affected results.",
+    "final_new": "DC-coupled captures give mean output voltage, while AC-coupled captures\r\nshow small-signal detail and acquisition statistics. Thermal images show\r\nsurface hotspots. Error bars are omitted because the uncertainty data are\r\nincomplete; instrument disagreements and ambiguous measurement fields are\r\ndiscussed with the affected results."
+  },
+  {
+    "id": "10-10",
+    "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+    "judgment": "Revise",
+    "reason": "Keep the local attribution limit: combined response must not imply individually measured gains.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Loaded and load-removal tests show the response of the combined controller.\r\nThe requested \\texttt{MAXRATE} period is \\SI{20}{\\micro\\second}; measuring\r\nthe achieved period and jitter would establish the control-loop timing.",
+    "final_new": "Loaded and load-removal tests show the response of the combined controller;\r\nthe contributions of individual changes were not measured separately. The\r\nrequested \\texttt{MAXRATE} period is \\SI{20}{\\micro\\second}; the achieved\r\nperiod and jitter have not been measured."
+  },
+  {
+    "id": "back-001",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "judgment": "Accept",
+    "reason": "Remove source inventory while retaining both complete listings.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The complete sketches are Listings~\\ref{lst:full-pwr1920} and \\ref{lst:full-pwr204} in Appendix~\\ref{app:full-embedded-source}.\n",
+    "final_new": "The complete sketches are Listings~\\ref{lst:full-pwr1920} and \\ref{lst:full-pwr204} in Appendix~\\ref{app:full-embedded-source}.\n"
+  },
+  {
+    "id": "back-002",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "judgment": "Accept",
+    "reason": "Replace workbook inventory with the measurement context and retain seven V2 captures.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\section{Measurements}\r\n\r\nThe electrical tables give instrument readings for completed fixed-output and extended-load tests. Blank fields mark missing measurements.\r\n\r\nSeven V2 secondary-output load captures provide AC-supply and electronic-load readings used to calculate secondary power and estimate efficiency as described in \\cref{sec:method-efficiency}. The associated thermal-region readings are described in \\cref{sec:method-thermal}.\r\n\r\n",
+    "final_new": "\\section{Measurements}\r\n\r\nThe electrical tables give instrument readings for completed fixed-output and extended-load tests. Blank fields mark missing measurements.\r\n\r\nSeven V2 secondary-output load captures provide AC-supply and electronic-load readings used to calculate secondary power and estimate efficiency as described in \\cref{sec:method-efficiency}. The associated thermal-region readings are described in \\cref{sec:method-thermal}.\r\n\r\n"
+  },
+  {
+    "id": "back-003",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "judgment": "Accept",
+    "reason": "Remove archive bookkeeping from the measurement explanation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-004",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "judgment": "Accept",
+    "reason": "Name the acquisition information rather than files.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\section{Waveform Acquisition}",
+    "final_new": "\\section{Waveform Acquisition}"
+  },
+  {
+    "id": "back-005",
+    "path": "Data/measurements/processed_rewrite/raw_waveform_source_table.tex",
+    "judgment": "Accept",
+    "reason": "Remove filenames and checksum reference while retaining all record IDs, sample counts and sample intervals.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.25\\linewidth} L{0.25\\linewidth}@{}}\r\n\\caption{Waveform records, sample counts, and sampling intervals.}\\label{tab:raw-waveform-sources}\\\\\r\n\\toprule\r\nRecord & Samples & Interval (s)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nRecord & Samples & Interval (s)\\\\\r\n\\midrule\r\n\\endhead\r\n\\sourcefile{00006} & 500002 & 4e-09\\\\\r\n\\sourcefile{00007} & 12502 & 4e-10\\\\\r\n\\sourcefile{00008} & 500002 & 2e-09\\\\\r\n\\sourcefile{00010} & 50002 & 4e-10\\\\\r\n\\sourcefile{lecory 7 C1} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 7 C2} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 7 C3} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C1} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C2} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C3} & 10001 & 1e-05\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "final_new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.25\\linewidth} L{0.25\\linewidth}@{}}\r\n\\caption{Waveform records, sample counts, and sampling intervals.}\\label{tab:raw-waveform-sources}\\\\\r\n\\toprule\r\nRecord & Samples & Interval (s)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nRecord & Samples & Interval (s)\\\\\r\n\\midrule\r\n\\endhead\r\n\\sourcefile{00006} & 500002 & 4e-09\\\\\r\n\\sourcefile{00007} & 12502 & 4e-10\\\\\r\n\\sourcefile{00008} & 500002 & 2e-09\\\\\r\n\\sourcefile{00010} & 50002 & 4e-10\\\\\r\n\\sourcefile{lecory 7 C1} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 7 C2} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 7 C3} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C1} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C2} & 10001 & 1e-05\\\\\r\n\\sourcefile{lecory 8 C3} & 10001 & 1e-05\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n"
+  },
+  {
+    "id": "back-006",
+    "path": "Data/measurements/processed_rewrite/appendix_thermal_complete_table.tex",
+    "judgment": "Accept",
+    "reason": "The image number and condition identify each observation; remove the redundant filename column.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth}@{}}\r\n\\caption{Temperature readings from ten thermal images, using emissivity 0.95. The lower reference marker was not confirmed as ambient temperature.}\\label{tab:thermal-results-complete}\\\\\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endhead\r\nImage \\#1 / 20 V, 4.7 A & 102.9 & 27.9 & 25.2\\\\\r\nImage \\#2 / 20 V, 1 A & 60.3 & 30.8 & 24.9\\\\\r\nImage \\#3 / 20 V, 3 A & 82.9 & 30.6 & 25.2\\\\\r\nImage \\#4 / 5 V, 1 A & 47.8 & 29.1 & 24.7\\\\\r\nImage \\#5 / 20 V, no load & 38.0 & 29.2 & 25.4\\\\\r\nImage \\#6 / 20 V, 4 A & 90.4 & 31.5 & 24.5\\\\\r\nImage \\#7 / 5 V, open & 37.5 & 34.9 & 25.5\\\\\r\nImage \\#8 / 9 V, 1 A & 49.9 & 29.6 & 25.0\\\\\r\nImage \\#9 / 9 V, 2 A & 56.8 & 39.7 & 24.9\\\\\r\nImage \\#10 / 9 V, 3 A & 78.0 & 32.1 & 25.3\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "final_new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth}@{}}\r\n\\caption{Temperature readings from ten thermal images, using emissivity 0.95. The lower reference marker was not confirmed as ambient temperature.}\\label{tab:thermal-results-complete}\\\\\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endhead\r\nImage \\#1 / 20 V, 4.7 A & 102.9 & 27.9 & 25.2\\\\\r\nImage \\#2 / 20 V, 1 A & 60.3 & 30.8 & 24.9\\\\\r\nImage \\#3 / 20 V, 3 A & 82.9 & 30.6 & 25.2\\\\\r\nImage \\#4 / 5 V, 1 A & 47.8 & 29.1 & 24.7\\\\\r\nImage \\#5 / 20 V, no load & 38.0 & 29.2 & 25.4\\\\\r\nImage \\#6 / 20 V, 4 A & 90.4 & 31.5 & 24.5\\\\\r\nImage \\#7 / 5 V, open & 37.5 & 34.9 & 25.5\\\\\r\nImage \\#8 / 9 V, 1 A & 49.9 & 29.6 & 25.0\\\\\r\nImage \\#9 / 9 V, 2 A & 56.8 & 39.7 & 24.9\\\\\r\nImage \\#10 / 9 V, 3 A & 78.0 & 32.1 & 25.3\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n"
+  },
+  {
+    "id": "back-007",
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "judgment": "Accept",
+    "reason": "Remove spreadsheet filename from caption.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-008",
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "judgment": "Accept",
+    "reason": "Remove archive manifest details while retaining listing navigation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Line numbers restart at 1 for each listing; a continuation arrow marks a printed line wrap. Appendix~\\ref{app:firmware} explains the controller and commands.\n\n",
+    "final_new": "Line numbers restart at 1 for each listing; a continuation arrow marks a printed line wrap. Appendix~\\ref{app:firmware} explains the controller and commands.\n\n"
+  },
+  {
+    "id": "back-009",
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "judgment": "Accept",
+    "reason": "Remove line-count bookkeeping.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-010",
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "judgment": "Accept",
+    "reason": "Remove line-count bookkeeping.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-011",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Remove archive bookkeeping.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The two complete firmware versions are in Appendix~\\ref{app:full-embedded-source}.",
+    "final_new": "The two complete firmware versions are in Appendix~\\ref{app:full-embedded-source}."
+  },
+  {
+    "id": "back-012",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-013",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-014",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-015",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-016",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-017",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-018",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-019",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-020",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-021",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-022",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-023",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-024",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-025",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-026",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-027",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-028",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-029",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-030",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-031",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-032",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-033",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-034",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-035",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-036",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-037",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-038",
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "judgment": "Accept",
+    "reason": "Section heading and listing caption already identify the function; remove path and line count.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-039",
+    "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+    "judgment": "Accept",
+    "reason": "Retain the earlier milestone and citation without file paths.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The earlier plan included a \\SI{75}{\\watt} continuous-validation milestone \\cite{projectEarlierPlan}.\n",
+    "final_new": "The earlier plan included a \\SI{75}{\\watt} continuous-validation milestone \\cite{projectEarlierPlan}.\n"
+  },
+  {
+    "id": "back-040",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Describe the model purpose without an external filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Variant 1",
+    "final_new": "Variant 1"
+  },
+  {
+    "id": "back-041",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Describe the model purpose without an external filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Variant 2",
+    "final_new": "Variant 2"
+  },
+  {
+    "id": "back-042",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Describe the model purpose without an external filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Loss-analysis models",
+    "final_new": "Loss-analysis models"
+  },
+  {
+    "id": "back-043",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Describe the model purpose without an external filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "GS66502B model",
+    "final_new": "GS66502B model"
+  },
+  {
+    "id": "back-044",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Describe the model purpose without an external filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Transformer design",
+    "final_new": "Transformer design"
+  },
+  {
+    "id": "back-045",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Describe the model purpose without an external filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Simulation parameters",
+    "final_new": "Simulation parameters"
+  },
+  {
+    "id": "back-046",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Describe the model purpose without an external filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Finite-element models",
+    "final_new": "Finite-element models"
+  },
+  {
+    "id": "back-047",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Describe the model purpose without an external filename.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Numerical data",
+    "final_new": "Numerical data"
+  },
+  {
+    "id": "back-048",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "judgment": "Accept",
+    "reason": "Remove source directory inventory.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The software builds the controller, runs the V2 browser interface, and processes measurements into thesis figures. Chapter~\\ref{ch:results} presents measurements from the earlier assembly and later V2 tests. The V2 interface adds calibration, reference-load setup, and carrier timing. Complete source is included in Appendix~\\ref{app:full-supporting-source}.",
+    "final_new": "The software builds the controller, runs the V2 browser interface, and processes measurements into thesis figures. Chapter~\\ref{ch:results} presents measurements from the earlier assembly and later V2 tests. The V2 interface adds calibration, reference-load setup, and carrier timing. Complete source is included in Appendix~\\ref{app:full-supporting-source}."
+  },
+  {
+    "id": "back-049",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "judgment": "Accept",
+    "reason": "Explain calculation and measurement treatment without file paths, checksums or rebuild instructions.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\section{Measurement Processing}\n\\label{sec:app-analysis-tools}\n\nCompleted measurements were used to calculate output power, voltage error,\ninitial efficiency estimates, and input-minus-output power difference. Missing\nvalues were not filled, and instrument disagreements were not resolved by\nassumption. Harmonic percentages were transcribed from instrument screens, and\nthe thermal readings were taken from image markers.\n\nThe switching and line-time-scale waveforms were plotted with their recorded\namplitudes, offsets, and times. Switching period was estimated using hysteretic\nthresholds and median edge spacing. Instrument synchronization, calibration,\nAC-coupled readings, and thermal dwell time limit the measurements.\n",
+    "final_new": "\\section{Measurement Processing}\n\\label{sec:app-analysis-tools}\n\nCompleted measurements were used to calculate output power, voltage error,\ninitial efficiency estimates, and input-minus-output power difference. Missing\nvalues were not filled, and instrument disagreements were not resolved by\nassumption. Harmonic percentages were transcribed from instrument screens, and\nthe thermal readings were taken from image markers.\n\nThe switching and line-time-scale waveforms were plotted with their recorded\namplitudes, offsets, and times. Switching period was estimated using hysteretic\nthresholds and median edge spacing. Instrument synchronization, calibration,\nAC-coupled readings, and thermal dwell time limit the measurements.\n"
+  },
+  {
+    "id": "back-050",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "judgment": "Accept",
+    "reason": "Describe functions and test coverage without directory navigation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\caption{Browser application modules and functions.}",
+    "final_new": "\\caption{Browser application modules and functions.}"
+  },
+  {
+    "id": "back-051",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "judgment": "Accept",
+    "reason": "Describe functions and test coverage without directory navigation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Module & Function",
+    "final_new": "Module & Function"
+  },
+  {
+    "id": "back-052",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "judgment": "Accept",
+    "reason": "Describe functions and test coverage without directory navigation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\caption{Software test coverage.}",
+    "final_new": "\\caption{Software test coverage.}"
+  },
+  {
+    "id": "back-053",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "judgment": "Accept",
+    "reason": "Describe functions and test coverage without directory navigation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Test & Coverage",
+    "final_new": "Test & Coverage"
+  },
+  {
+    "id": "back-061",
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "judgment": "Revise",
+    "reason": "Retain the explicit allowlist behavior, a software design fact, while removing directory narration.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "Serve the application locally or prepare a static build.",
+    "final_new": "Serve the application locally or prepare a static build using an explicit list of application files."
+  },
+  {
+    "id": "back-064",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "judgment": "Accept",
+    "reason": "Replace directory path with the functional name.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "the build script",
+    "final_new": "the build script"
+  },
+  {
+    "id": "back-065",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "judgment": "Accept",
+    "reason": "Replace directory path with its function.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "linker layout",
+    "final_new": "linker layout"
+  },
+  {
+    "id": "back-066",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "judgment": "Accept",
+    "reason": "Replace directory path with its function.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The HEX verifier",
+    "final_new": "The HEX verifier"
+  },
+  {
+    "id": "back-067",
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "judgment": "Accept",
+    "reason": "Replace directory path with its function.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The firmware protocol test",
+    "final_new": "The firmware protocol test"
+  },
+  {
+    "id": "back-068",
+    "path": "Data/measurements/processed_rewrite/thermal_complete_table.tex",
+    "judgment": "Accept",
+    "reason": "Keep the duplicate generated thermal table consistent with the displayed appendix table.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth}@{}}\r\n\\caption{Temperature readings from ten thermal images, using emissivity 0.95. The lower reference marker was not confirmed as ambient temperature.}\\label{tab:thermal-results}\\\\\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endhead\r\nImage \\#1 / 20 V, 4.7 A & 102.9 & 27.9 & 25.2\\\\\r\nImage \\#2 / 20 V, 1 A & 60.3 & 30.8 & 24.9\\\\\r\nImage \\#3 / 20 V, 3 A & 82.9 & 30.6 & 25.2\\\\\r\nImage \\#4 / 5 V, 1 A & 47.8 & 29.1 & 24.7\\\\\r\nImage \\#5 / 20 V, no load & 38.0 & 29.2 & 25.4\\\\\r\nImage \\#6 / 20 V, 4 A & 90.4 & 31.5 & 24.5\\\\\r\nImage \\#7 / 5 V, open & 37.5 & 34.9 & 25.5\\\\\r\nImage \\#8 / 9 V, 1 A & 49.9 & 29.6 & 25.0\\\\\r\nImage \\#9 / 9 V, 2 A & 56.8 & 39.7 & 24.9\\\\\r\nImage \\#10 / 9 V, 3 A & 78.0 & 32.1 & 25.3\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n",
+    "final_new": "% Automatically rebuilt from original records by rebuild_results.py.\r\n\\begingroup\r\n\\scriptsize\r\n\\setlength{\\tabcolsep}{3pt}\r\n\\renewcommand{\\arraystretch}{1.12}\r\n\\begin{longtable}{@{}L{0.34\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth} L{0.18\\linewidth}@{}}\r\n\\caption{Temperature readings from ten thermal images, using emissivity 0.95. The lower reference marker was not confirmed as ambient temperature.}\\label{tab:thermal-results}\\\\\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endfirsthead\r\n\\toprule\r\nImage / condition & Maximum (°C) & Cursor (°C) & Reference (°C)\\\\\r\n\\midrule\r\n\\endhead\r\nImage \\#1 / 20 V, 4.7 A & 102.9 & 27.9 & 25.2\\\\\r\nImage \\#2 / 20 V, 1 A & 60.3 & 30.8 & 24.9\\\\\r\nImage \\#3 / 20 V, 3 A & 82.9 & 30.6 & 25.2\\\\\r\nImage \\#4 / 5 V, 1 A & 47.8 & 29.1 & 24.7\\\\\r\nImage \\#5 / 20 V, no load & 38.0 & 29.2 & 25.4\\\\\r\nImage \\#6 / 20 V, 4 A & 90.4 & 31.5 & 24.5\\\\\r\nImage \\#7 / 5 V, open & 37.5 & 34.9 & 25.5\\\\\r\nImage \\#8 / 9 V, 1 A & 49.9 & 29.6 & 25.0\\\\\r\nImage \\#9 / 9 V, 2 A & 56.8 & 39.7 & 24.9\\\\\r\nImage \\#10 / 9 V, 3 A & 78.0 & 32.1 & 25.3\\\\\r\n\\bottomrule\r\n\\end{longtable}\r\n\\endgroup\r\n"
+  },
+  {
+    "id": "back-069",
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "judgment": "Accept",
+    "reason": "Remove sheet reference; row identifiers remain in the table.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "",
+    "final_new": ""
+  },
+  {
+    "id": "back-070",
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "judgment": "Accept",
+    "reason": "Name both repeated table headings consistently with model descriptions.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "\\toprule Model & Circuit settings\\\\\\midrule\r\n\\endfirsthead\r\n\\toprule Model & Circuit settings\\\\\\midrule\r\n",
+    "final_new": "\\toprule Model & Circuit settings\\\\\\midrule\r\n\\endfirsthead\r\n\\toprule Model & Circuit settings\\\\\\midrule\r\n"
+  },
+  {
+    "id": "back-071",
+    "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+    "judgment": "Accept",
+    "reason": "Describe the test configuration alongside measurements without directing the reader to files.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    },
+    "proposed_new": "The board, controller, and settings must be recorded with the measurements when the V2 test is repeated.",
+    "final_new": "The board, controller, and settings must be recorded with the measurements when the V2 test is repeated."
+  }
+]

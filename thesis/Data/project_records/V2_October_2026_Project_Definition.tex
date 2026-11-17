@@ -1,0 +1,429 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{pgfgantt}
+\usepackage{xcolor}
+\usepackage{pdflscape}
+\usepackage{float}
+\geometry{margin=2.5cm}
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}
+    {\chaptername\ \thechapter}
+    {0.5em}
+    {\Huge}
+\titleformat{\section}
+    {\normalfont\Large\bfseries}
+    {\thesection}
+    {0.75em}
+    {}
+\titleformat{\subsection}
+    {\normalfont\large\bfseries}
+    {\thesubsection}
+    {0.75em}
+    {}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+%------------------------------------------------
+% Title Page
+%------------------------------------------------
+
+\begin{titlepage}
+\centering
+
+{\Large Master of Science in Engineering \par}
+\vspace{0.5cm}
+{\Large Project Definition Report \par}
+
+\vspace{2cm}
+
+{\Huge\bfseries Design and Integration of a Planar Transformer and Charge-Pump--Based PFC for a High-Power-Density USB-PD AC--DC Power Supply \par}
+
+\vspace{2cm}
+
+Start date: 27 July 2026 \\
+Submission date: 27 October 2026 \\
+Reason for revised schedule: Extension following the unsuccessful thesis defense \\
+ECTS points: 30 \\
+
+\vfill
+
+Technical University of Denmark \\
+DTU Electro \\
+Department of Electrical and Photonics Engineering \\
+
+\vspace{1cm}
+
+Kongens Lyngby, 2026
+
+\end{titlepage}
+\hypersetup{pageanchor=true}
+
+%------------------------------------------------
+\chapter*{Summary}
+\addcontentsline{toc}{chapter}{Summary}
+
+This thesis investigates the design and integration of a planar transformer and a charge-pump--based power factor correction (PFC) stage for a compact, high-power-density USB Power Delivery (USB-PD) AC--DC power supply. The target remains \textbf{100 W continuous output power}; \textbf{65 W is the minimum acceptable hardware result}. Efficiency, temperature, and power factor must also be measured.
+
+Previous V2 tests recorded a maximum output of approximately \textbf{85 W}. In the revised plan, 85 W is the measured starting point rather than the final specification. The remaining technical work will repeat and document that result, identify the causes of the 15 W shortfall, adjust the converter, and implement a V3 edge-card PCB intended to support the 100 W target and the highest practical power density consistent with thermal, electrical-safety, and reliability constraints.
+
+The project combines high-frequency planar magnetic design, wide-bandgap semiconductor devices, and alternative PFC architectures to evaluate whether charge-pump--based PFC can provide competitive power density compared to conventional boost PFC approaches.
+
+The work includes analytical design, component selection, PCB layout for planar magnetics and high-frequency switching, prototype fabrication, and comprehensive experimental validation including efficiency, power factor, transient response, and thermal performance characterization.
+
+\tableofcontents
+\clearpage
+
+%------------------------------------------------
+\chapter{Project Description}
+
+\section{Background}
+
+USB Power Delivery has become a universal high-power interface supporting programmable voltages up to 20 V and currents up to 5 A. The demand for compact adapters capable of powering laptops and embedded systems imposes strict constraints on:
+
+\begin{itemize}
+    \item Power density
+    \item Efficiency across multiple PDOs
+    \item Thermal performance
+    \item Power factor and THD
+\end{itemize}
+
+Conventional AC--DC architectures typically employ a boost PFC stage followed by an isolated DC--DC converter using wound magnetic components. These solutions are often limited in volumetric efficiency and thermal integration.
+
+Planar transformers enable high-frequency operation, reduced height, improved thermal spreading, and manufacturability via PCB integration. Charge-pump--based PFC topologies may offer an alternative to classical boost PFC by reducing magnetic component size and potentially increasing integration density.
+
+This thesis targets a USB-PD supply capable of \textbf{100 W continuous output power}. At least \textbf{65 W continuous output} must be demonstrated under defined thermal and operating conditions.
+
+\section{Prior Work}
+
+Planar magnetics have been extensively investigated for high-frequency power conversion in telecom and server applications, where low profile and high efficiency are critical.
+
+Boost PFC remains the dominant architecture for single-phase AC--DC conversion. Alternative approaches, including charge-pump and switched-capacitor techniques, have been proposed to reduce magnetic size and improve integration at moderate power levels.
+
+Wide-bandgap devices such as GaN and SiC enable higher switching frequencies and improved efficiency, facilitating further size reduction of passive components. However, integrating planar magnetics with a charge-pump--based PFC in a USB-PD compliant system presents a multi-domain design challenge requiring careful analytical design and experimental validation.
+
+\section{Problem Statement}
+
+How can a planar transformer and a charge-pump--based PFC stage be designed and tested for a \textbf{100 W continuous target}, with at least \textbf{65 W demonstrated in hardware}, while maintaining efficiency, power density, thermal stability, and power quality in a compact USB-PD AC--DC supply?
+
+\subsection*{Sub-goals}
+
+\begin{itemize}
+    \item Define electrical and mechanical requirements including:
+    \begin{itemize}
+        \item USB-PD PDO profiles
+        \item Efficiency targets
+        \item Thermal constraints
+        \item Power-factor requirements
+    \end{itemize}
+
+    \item Analyze and compare charge-pump PFC topologies against conventional boost PFC with respect to:
+    \begin{itemize}
+        \item Efficiency
+        \item Component stress
+        \item Power density
+        \item Control complexity
+    \end{itemize}
+
+    \item Integrate and optimize a planar transformer considering:
+    \begin{itemize}
+        \item High-frequency operation
+        \item Controlled leakage inductance
+        \item Winding AC resistance minimization
+        \item Core loss estimation
+        \item Manufacturability and low-profile constraints
+    \end{itemize}
+
+    \item Develop the complete power stage architecture including:
+    \begin{itemize}
+        \item PFC stage
+        \item LLC stage
+        \item Rectification
+        \item Control strategy
+        \item USB-PD interface behavior
+    \end{itemize}
+
+    \item Fabricate and assemble a prototype including:
+    \begin{itemize}
+        \item PCB-integrated planar magnetics
+        \item High-frequency layout practices
+        \item Safety clearances and isolation
+        \item Integrated thermal management
+    \end{itemize}
+
+    \item Experimentally characterize:
+    \begin{itemize}
+        \item Power factor and THD
+        \item Efficiency across PDOs
+        \item Transient response
+        \item Thermal distribution and stability
+        \item Reliability under extended load testing
+    \end{itemize}
+
+    \item Critically evaluate trade-offs and propose improvements in:
+    \begin{itemize}
+        \item Planar magnetic integration
+        \item Wide-bandgap stage optimization
+        \item Manufacturability at scale
+        \item Future USB-PD evolution
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Success Criteria}
+
+\begin{itemize}
+    \item The previously recorded V2 maximum of approximately 85 W is reproduced under defined test conditions, with raw data, instrument settings, and uncertainty documented.
+    \item At least 65 W continuous output is demonstrated in hardware.
+    \item The 15 W difference between the measured V2 result and the 100 W target is explained using calculated losses, measured component stress, control limits, and temperature data.
+    \item 100 W continuous operation achieved under defined nominal and thermal conditions.
+    \item Stable operation across selected USB-PD PDOs verified.
+    \item Power factor, efficiency, transient response, and thermal performance experimentally validated and documented.
+    \item V2 and V3 power density are calculated using the same stated volume convention, and the improvement is reported without compromising clearance, temperature, or component ratings.
+    \item If the 100 W target is not reached, the highest repeatable safe output power and the remaining limiting mechanisms are quantified transparently.
+\end{itemize}
+
+%------------------------------------------------
+\chapter{Intended Learning Objectives}
+
+\begin{itemize}
+    \item Demonstrate the ability to define and structure a high-frequency AC--DC power conversion system integrating magnetics, switching devices, control, and thermal management.
+    \item Apply analytical design methods for planar magnetics and high-frequency power stages.
+    \item Design planar magnetics optimized for electrical performance and manufacturability.
+    \item Integrate wide-bandgap devices into a compact high-power converter.
+    \item Perform rigorous experimental validation of converter performance.
+    \item Critically assess efficiency, density, and thermal trade-offs.
+    \item Communicate technical findings clearly in written and oral form.
+    \item Demonstrate that the charge-pump--based PFC circuit can be used for USB-PD applications.
+    \item Validate power delivery across the supported USB-PD fixed PDOs and PPS functions.
+\end{itemize}
+
+%------------------------------------------------
+\chapter{Plan}
+
+\section{Updated Schedule and Technical Starting Point}
+
+This schedule covers 27 July--27 October 2026. The submission deadline was extended following the unsuccessful thesis defense. The work in this period covers review of the existing V2 hardware and measurements, completion of V2 testing, converter changes, a V3 edge-card PCB, final measurements, and thesis revision.
+
+The technical starting point is:
+
+\begin{itemize}
+    \item The final technical target remains \textbf{100 W continuous output}. V2 previously reached approximately \textbf{85 W}, which is 15 W below the target.
+    \item V2 prototype testing will be completed by \textbf{Friday, 4 September 2026}.
+    \item V3 is planned as one edge-card PCB revision. Its design must be released early enough to allow fabrication, assembly, initial power-up, and testing before final testing ends.
+    \item Changes that affect the V3 PCB must be final by 11 September. The design-rule and manufacturing checks will then be completed before the board is released on 16 September. After release, work is limited to parameter tuning, firmware, testing, or rework that does not require new fabrication files, unless a safety problem is found.
+    \item Thesis writing and figure preparation run in parallel with technical work. No major new test is planned after 14 October, leaving time for corrections and final checks.
+    \item The highest practical power density is pursued only within component ratings, isolation and clearance requirements, thermal limits, and reliable operation.
+\end{itemize}
+
+\clearpage
+\section{Activities}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{1.1cm} >{\raggedright\arraybackslash}p{9.1cm} >{\raggedright\arraybackslash}p{3.1cm}}
+\toprule
+Task & Description & Period \\
+\midrule
+1 & Update the plan after the defense; review the V2 hardware and earlier measurements; define the tests, safety limits, instruments, and method for saving results. & 27 Jul--7 Aug \\
+2 & Check the V2 hardware and test bench, then repeat the previously recorded operating point of approximately 85 W. & 3--21 Aug \\
+3 & Complete V2 prototype testing across the required USB-PD operating points and load range. & 10 Aug--4 Sep \\
+4 & Check previous and new measurements; calculate uncertainty, losses, component stress, thermal behavior, and the 15 W gap to 100 W. & 10 Aug--11 Sep \\
+5 & Adjust and retest the converter based on measured results; finish changes that affect the V3 PCB by 11 September. & 7--25 Sep \\
+6 & Design, review, and release the V3 edge-card PCB with defined electrical, mechanical, thermal, and power-density requirements. & 27 Jul--16 Sep \\
+7 & Order critical components, fabricate the released V3 PCB, and complete firmware and test preparation in parallel. Target board arrival is 30 September; the latest planned arrival is 2 October. & 31 Aug--2 Oct \\
+8 & Assemble and inspect V3, power it up gradually with current limiting, and correct assembly or interface problems. & 30 Sep--7 Oct \\
+9 & Decide whether V3 is ready for final testing, then test toward 100 W and complete the PDO/PPS, efficiency, PF/THD, transient, thermal, stress, and power-density measurements. & 7--14 Oct \\
+10 & Write and revise the thesis continuously, including the method, V2 analysis, V3 design, results, discussion, and limitations. & 27 Jul--16 Oct \\
+11 & Incorporate supervisor feedback, verify references and technical claims, check the final PDF, and submit. & 15--27 Oct \\
+\bottomrule
+\end{tabular}
+\caption{Test, design, writing, and submission schedule.}
+\end{table}
+
+\section{Technical Work}
+
+\subsection*{Planning and test setup: 27 July--7 August}
+    Review the defense feedback, the V2 hardware, and all earlier measurement files. Write a repeatable test procedure with the required operating points, instrument connections, file names, and electrical-stress and temperature stop limits. Define one volume calculation that will be used for both V2 and V3 power-density results.
+
+\subsection*{V2 hardware check and 85 W baseline: 3--21 August}
+    Inspect the assembled V2 converter and test bench before further high-power operation. Check continuity, isolation, probe setup, sensor and current calibration, protection thresholds, firmware version, cooling arrangement, and spare parts. Repeat the earlier operating point of approximately 85 W under recorded input, output, ambient, and run-time conditions. Save the raw data and explain any difference from the earlier result.
+
+\subsection*{V2 tests: 10 August--4 September}
+    Complete the agreed measurements before making major converter changes. The tests will cover no-load behavior, the supported USB-PD fixed PDOs and PPS operation, and power levels of 25, 45, 65, 75, 80, and approximately 85 W. For each applicable operating point, record output regulation, input and output power, efficiency, power factor, THD, switching and device-stress waveforms, transient response, and component temperatures. Record the converter configuration, instruments, probe locations, ambient conditions, run duration, protection events, and raw-file locations. This work is complete when the full test set has been recorded and the 85 W result can be repeated or the difference from the earlier result has been clearly explained.
+
+\subsection*{Measurement and loss analysis: 10 August--11 September}
+    Compare all recorded input/output power values and test conditions. Keep the original files and note why any run is excluded from comparison. Estimate measurement uncertainty and plot efficiency, loss, temperature, ripple, PF, THD, and device stress against output power. Calculate the losses and limits of the transformer, charge-pump network, GaN stage, rectifier, interconnects, control, and thermal path. Use these results to rank the causes of the 15 W shortfall and choose the converter changes to test.
+
+\subsection*{Converter changes and gradual power increase: 7--25 September}
+    Make one controlled change at a time so its effect can be understood. Candidate adjustments include feedback and current calibration, switching frequency and dead time, control limits and compensation, charge-pump or resonant-network values, gate-drive behavior, transformer and conductor loss, rectification loss, and local thermal management. Repeat the relevant starting test after each change. Changes that affect the V3 fabrication files must be final by 11 September; after that date, complete the design-rule and manufacturing checks for release on 16 September. Later work is limited to parameter tuning, firmware, compatible component variants, controlled rework, and verification. Increase the load only while the electrical-stress and temperature limits remain satisfied, moving from the repeated 85 W result toward 90, 95, and 100 W. A sustained 100 W test under documented nominal conditions is the target; if a hard limit is reached, report the highest power that can be repeated safely.
+
+\subsection*{V3 edge-card design: 27 July--16 September}
+    Define the edge-card pinout, mechanical outline, component-height limit, current paths, sensing and gate-return paths, creepage and clearance, and thermal-spreading method. Complete the interface and schematic work in August, then use the V2 loss and hotspot measurements to finish the PCB layout and reduce loop area, interconnect loss, unused volume, and thermal bottlenecks. Finish all PCB-changing work by 11 September. Complete the schematic and layout review, design-rule checks, BOM availability review, and manufacturing review before release on 16 September. Use the same stated volume calculation for V2 and V3 so their power densities can be compared fairly.
+
+\subsection*{V3 parts, fabrication, and power-up: 31 August--7 October}
+    Order critical and long-lead components from 31 August and send the released V3 board for fabrication on 17 September. The target arrival date is 30 September, with 2 October as the latest planned delivery date. While the board is being made, finalize firmware limits, power-up checklists, result tables, and thesis methods. After receipt, perform optical inspection, continuity and isolation checks, low-voltage subsystem checks, current-limited startup, control/interface verification, and gradual load testing. Use 6--7 October to correct problems and decide whether V3 is ready for final testing; the schedule does not assume time for another complete PCB revision.
+
+\subsection*{Final V3 tests and power-density comparison: 7--14 October}
+    On 7 October, decide whether V3 is stable enough for final testing to finish by 14 October. If it is not, use the completed V2 tests as the final hardware results and clearly explain the status and limitations of V3. For a working V3, repeat the agreed tests under conditions matched to V2, verify supported PDO/PPS behavior, and increase the load gradually toward 100 W at the applicable output setting. At the final stable power, complete the defined-duration thermal and stability run, efficiency measurement, PF/THD assessment, ripple and transient measurements, device-stress review, and protection checks. Report both achieved output power and power density, together with the volume definition, thermal margin, efficiency, and any reliability trade-offs.
+
+\subsection*{Thesis writing: 27 July--16 October}
+    Start the experimental-method section and update the background from 27 July. Write the V2 findings while V3 is being designed and fabricated. Add the V3 design and implementation chapter by 7 October, finish the plots and tables after final testing on 14 October, and complete the full draft by 16 October.
+
+\subsection*{Final checks and submission: 19--27 October}
+    Use 19--26 October for supervisor corrections, cross-reference and bibliography checks, checking each technical claim against the measurements, formatting, final LaTeX compilation, and archive verification. Submit on 27 October 2026.
+
+\section{Milestones}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.1cm} >{\raggedright\arraybackslash}p{8.1cm} >{\raggedright\arraybackslash}p{2.2cm}}
+\toprule
+Milestone & What must be completed & Target date \\
+\midrule
+Updated plan and test procedure & Work plan, safety limits, tests, instruments, result-file locations, and V2/V3 volume calculation agreed. & 7 Aug \\
+85 W baseline confirmed & V2 hardware and test bench checked; the previous approximately 85 W operating point repeated or the difference explained. & 21 Aug \\
+V2 testing complete & Raw files saved; previous approximately 85 W maximum repeated or the difference explained. & 4 Sep \\
+15 W gap and board changes defined & Measurement uncertainty, loss calculations, component limits, and all changes affecting the V3 PCB completed. & 11 Sep \\
+V3 design released & Schematic/layout review, DRC, BOM, manufacturing files, size target, and power-density calculation complete. & 16 Sep \\
+Adjusted V2 retest complete & Effects of the selected converter changes measured and recorded. & 25 Sep \\
+V3 readiness decision & V3 is ready for final testing, or the completed V2 results are used and the V3 limitation is documented. & 7 Oct \\
+100 W target and V3 tests complete & 100 W sustained under the stated test conditions, or the highest repeatable safe power and remaining shortfall documented. & 14 Oct \\
+Full thesis draft complete & All technical chapters, figures, tables, limitations, and conclusions integrated. & 16 Oct \\
+Final submission files ready & Final PDF visually checked; references, source files, and required submission files verified. & 26 Oct \\
+Thesis submitted & Final thesis handed in. & 27 Oct \\
+\bottomrule
+\end{tabular}
+\caption{Milestones and completion criteria for the revised plan.}
+\end{table}
+
+\clearpage
+\section{Risk Analysis}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.2cm} >{\raggedright\arraybackslash}p{1.2cm} >{\raggedright\arraybackslash}p{9.8cm}}
+\toprule
+Risk & Score (1--5) & How it will be handled \\
+\midrule
+100 W cannot be reached safely & 5 & Start from the measured 85 W V2 result and use the loss calculations to choose each change. Stop at predefined component, waveform, protection, or temperature limits; report the highest repeatable safe power and the measurements that show the remaining limitation. \\
+V3 fabrication or component delay & 4 & Order critical parts from 31 August, release the board on 16 September, send it for fabrication on 17 September, and target receipt by 30 September. Continue V2 tuning and writing while waiting. Use the completed V2 results if V3 is not ready for final testing by 7 October. \\
+Power-stage damage during high-power tests & 4 & Increase load gradually with current limiting, complete pre-power checks, verify protection thresholds, monitor temperature, allow controlled cooldowns, and keep spare critical parts available. \\
+Previous measurements are not comparable & 4 & Keep the original measurement files and test notes, check the instruments and test bench, and repeat the approximately 85 W operating point by 21 August. Match input/output timing and state measurement uncertainty. \\
+Density changes worsen thermal or safety margin & 4 & Make clearance, isolation, component ratings, and temperature limits hard constraints. Compare density together with efficiency and temperature rather than as an isolated number. \\
+Late results compress thesis revision & 4 & Write in parallel, finish final testing on 14 October, complete the draft by 16 October, and keep 19--26 October for corrections and compilation. \\
+New work is added after V3 release & 3 & Use the ranked change list and keep the released interfaces unchanged. Move non-critical ideas for another PCB revision to future work unless they are required for safe operation. \\
+\bottomrule
+\end{tabular}
+\caption{Risks for the remaining hardware work and thesis submission.}
+\end{table}
+
+\clearpage
+\begin{landscape}
+\begin{figure}[p]
+\centering
+\begin{ganttchart}[
+    hgrid,
+    vgrid,
+    time slot format=isodate,
+    x unit=0.17cm,
+    y unit chart=0.32cm,
+    y unit title=0.48cm,
+    title height=1,
+    title label font=\scriptsize,
+    bar height=0.52,
+    group height=0.60,
+    bar/.append style={fill=gray!35},
+    group/.append style={fill=gray!70},
+    bar label font=\scriptsize,
+    group label font=\bfseries\scriptsize,
+    milestone label font=\scriptsize,
+    milestone/.append style={fill=black},
+    bar label node/.append style={text width=6.8cm,align=right},
+    group label node/.append style={text width=6.8cm,align=right}
+]{2026-07-27}{2026-10-30}
+
+\gantttitle{July}{5}
+\gantttitle{August}{31}
+\gantttitle{September}{30}
+\gantttitle{October}{30} \\
+\gantttitle{W1}{7}
+\gantttitle{W2}{7}
+\gantttitle{W3}{7}
+\gantttitle{W4}{7}
+\gantttitle{W5}{7}
+\gantttitle{W6}{7}
+\gantttitle{W7}{7}
+\gantttitle{W8}{7}
+\gantttitle{W9}{7}
+\gantttitle{W10}{7}
+\gantttitle{W11}{7}
+\gantttitle{W12}{7}
+\gantttitle{W13}{7}
+\gantttitle{W14}{5} \\
+
+\ganttgroup{Planning and V2 setup}{2026-07-27}{2026-08-21} \\
+\ganttbar{Write plan and test procedure}{2026-07-27}{2026-08-07} \\
+\ganttbar{Review V2 hardware and old data}{2026-07-27}{2026-08-14} \\
+\ganttbar{Check test bench and repeat 85 W}{2026-08-03}{2026-08-21} \\
+
+\ganttgroup{V2 testing and analysis}{2026-08-10}{2026-09-11} \\
+\ganttbar{Complete V2 measurements}{2026-08-10}{2026-09-04} \\
+\ganttbar{Organize data and test notes}{2026-08-10}{2026-09-04} \\
+\ganttbar{Check previous and new measurements}{2026-08-17}{2026-09-08} \\
+\ganttbar{Calculate losses and explain the 15 W gap}{2026-08-24}{2026-09-11} \\
+
+\ganttgroup{Converter adjustment}{2026-09-07}{2026-09-25} \\
+\ganttbar{Control and firmware tuning}{2026-09-07}{2026-09-25} \\
+\ganttbar{Finish changes that affect the V3 PCB}{2026-09-07}{2026-09-11} \\
+\ganttbar{Retest from 85 to 100 W}{2026-09-14}{2026-09-25} \\
+
+\ganttgroup{V3 edge-card PCB}{2026-07-27}{2026-10-07} \\
+\ganttbar{Requirements, outline, and size target}{2026-07-27}{2026-08-14} \\
+\ganttbar{Schematic and interface design}{2026-08-10}{2026-08-28} \\
+\ganttbar{PCB layout}{2026-08-17}{2026-09-11} \\
+\ganttbar{Order critical parts}{2026-08-31}{2026-09-11} \\
+\ganttbar{Review, DRC/DFM, BOM, and release}{2026-09-14}{2026-09-16} \\
+\ganttbar{PCB fabrication and delivery}{2026-09-17}{2026-10-02} \\
+\ganttbar{Assembly, bring-up, and controlled rework}{2026-09-30}{2026-10-07} \\
+
+\ganttgroup{Final tests}{2026-10-07}{2026-10-14} \\
+\ganttbar{V3 load sweep and 100 W target test}{2026-10-08}{2026-10-12} \\
+\ganttbar{Efficiency, power-quality, stress, and thermal tests}{2026-10-08}{2026-10-14} \\
+\ganttbar{V2--V3 power-density comparison}{2026-10-10}{2026-10-14} \\
+
+\ganttgroup{Thesis revision and resubmission}{2026-07-27}{2026-10-27} \\
+\ganttbar{Method and background}{2026-07-27}{2026-08-28} \\
+\ganttbar{V2 findings}{2026-08-17}{2026-09-18} \\
+\ganttbar{V3 design and implementation}{2026-08-10}{2026-10-07} \\
+\ganttbar{Results, discussion, limitations, and conclusion}{2026-09-14}{2026-10-16} \\
+\ganttbar{Complete full draft}{2026-10-05}{2026-10-16} \\
+\ganttbar{Supervisor corrections and final checks}{2026-10-15}{2026-10-26} \\
+
+\ganttmilestone{Plan and test procedure complete}{2026-08-07} \\
+\ganttmilestone{85 W baseline confirmed}{2026-08-21} \\
+\ganttmilestone{V2 testing complete}{2026-09-04} \\
+\ganttmilestone{15 W gap and PCB changes defined}{2026-09-11} \\
+\ganttmilestone{V3 released}{2026-09-16} \\
+\ganttmilestone{V3 readiness decision}{2026-10-07} \\
+\ganttmilestone{Final tests complete}{2026-10-14} \\
+\ganttmilestone{Full draft complete}{2026-10-16} \\
+\ganttmilestone{Submission files ready}{2026-10-26} \\
+\ganttmilestone{Thesis hand-in}{2026-10-27}
+
+\end{ganttchart}
+\caption{Revised work schedule from 27 July to the extended hand-in on 27 October 2026.}
+\end{figure}
+\end{landscape}
+
+\end{document}

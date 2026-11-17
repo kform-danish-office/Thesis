@@ -1,0 +1,81 @@
+\section{V3 Edge-Card Design}
+\label{sec:hw-v3-plan}
+
+V3 was developed from V2 as a slimmer edge-card design to reduce volume
+and improve the power-path layout while retaining the controller
+\cite{projectOctoberPlan}. Secondary-winding heating and the later
+input-bridge hotspot guided the redesign: regulated output had been
+obtained, but sustained power remained thermally limited.
+
+\subsection{Reduced Output Section and Volume}
+
+Removing the USB-PD output section leaves secondary rectification on the
+converter card and gives an estimated \SI{8}{\percent} net volume reduction.
+A complete USB-C supply would still require external regulation and a
+USB-PD interface; the complete supply must be compared with those parts included.
+
+The supplied planar magnetics continued to constrain the layout. A revised
+magnetic design was expected to permit further reduction, but no new set
+was installed within the project. Sustained power and thermal performance
+of the slimmed layout remain untested
+(\cref{sec:method-density,sec:res-v3-design}).
+
+\subsection{Power Path and Edge Interface}
+
+The V2 circuit and controller (Section~\ref{sec:hw-v2}) formed the starting
+point. Edge-contact assignments, signal references, electrical ratings,
+and startup states remain to be defined across the primary and isolated
+secondary domains. Secondary-bulk feedback at PA1 and primary-current
+sensing at PA2 are retained controller functions; the edge-connector
+pinout remains unverified.
+
+Removing the USB-PD section changes the system interface as well as its
+size. The rectified secondary output must be matched to any external
+regulator and its load. Power contacts, copper, and interlayer connections
+must carry that current without creating another local thermal bottleneck.
+The complete pump, half-bridge, resonant, and rectifier loops still need
+to be checked together with the gate and sensing returns.
+
+\begin{table}[H]
+\centering
+\small
+\caption[V3 design and release requirements.]{V3 design checks needed before manufacture.}
+\label{tab:hw-v3-design-brief}
+\begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}Y@{}}
+\toprule
+Area & Design work and check\\
+\midrule
+Electrical loading & Identify voltage, current, ripple, and dissipation requirements for contacts, copper, magnetics, capacitors, switching devices, and rectification. Compare them with the chosen parts and measured V2 limits.\\
+Control interface & Define signal references, gate/enable states, sensing scales, auxiliary sequencing, and firmware configuration. Check the edge interface against both schematic and layout.\\
+Mechanical fit & Define the outline, edge-contact geometry, mating connector, insertion direction, retention, keep-outs, and maximum component height on both sides. Check the assembled fit.\\
+Isolation and spacing & Define working-voltage assumptions and required creepage/clearance before layout. Check the barrier through copper, contacts, mounting features, and any heat-spreading hardware.\\
+Thermal path & Use the loss ranking and hotspot locations to choose copper spreading, component placement, and heat-sink attachment. Leave access for temperature measurements and repeatable cooling.\\
+Manufacturing & Review schematic/layout consistency, design rules, assembly access, BOM availability, and fabrication files before sending the design for manufacture.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Connector ratings, insulation spacing, and assembled fit must still be
+checked before manufacture and hardware testing.
+
+\subsection{Magnetic and Thermal Development}
+
+In earlier tests, further loading around \SIrange{3.3}{3.6}{\ampere} secondary-output current did not clearly increase available power, and secondary-winding heating made transformer optimization a priority. Later V2 tests exceeded this current with voltage droop. Winding and interconnect losses, tank gain, and output headroom have not been separated sufficiently to identify the transformer as the limiting component.
+
+The objective remains \SI{100}{\watt}. Transformer optimization and
+matched power and thermal tests are needed to assess whether the revised
+converter can reach this output continuously.
+
+\subsection{Release and Bring-Up Status}
+
+A slimmed layout was prepared, but the replacement magnetics and matched
+V3 power and thermal tests were not completed. Before manufacture, the
+schematic, layout, design rules, BOM, and manufacturing details must be
+checked. After assembly, the planned sequence remains optical inspection,
+continuity and isolation checks, low-voltage subsystem checks,
+current-limited startup, control/interface verification, and gradual
+loading \cite{projectOctoberPlan}.
+
+The release, assembly, and readiness criteria AP-06 and AP-08 are given
+in Section~\ref{sec:revised-plan-criteria}. V3 remains an untested layout;
+operating results come from the V1 measurements and V2 bench tests.

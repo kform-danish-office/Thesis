@@ -1,0 +1,248 @@
+\chapter{Software Tools and Data Processing}
+\label{app:software-tools}
+
+The software builds the controller, runs the V2 browser interface, and processes measurements into thesis figures. Chapter~\ref{ch:results} presents measurements from the earlier assembly and later V2 tests. The V2 interface adds calibration, reference-load setup, and carrier timing. Complete source is included in Appendix~\ref{app:full-supporting-source}.
+
+\section{Browser Architecture and Data Flow}
+\label{sec:app-browser-architecture}
+
+The browser connects to the command UART through the bench computer and a
+USB-to-UART adapter. A local server or static host serves the files; serial
+access remains on the bench computer and control remains in the MCU. Desktop
+Chrome or Edge with Web Serial in a secure context is required. A
+primary-referenced controller also requires an isolated UART connection;
+USB-to-UART conversion and web hosting provide no electrical isolation.
+
+\begin{table}[htbp]
+\centering
+\caption{Browser application modules and functions.}
+\label{tab:app-browser-modules}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.24\textwidth}Y@{}}
+\toprule
+Module & Function\\
+\midrule
+\sourcefile{index.html}, \sourcefile{styles.css} & Monitor, Setup, Calibration, and Sessions views, global OFF controls, status labels, and responsive layout.\\
+\sourcefile{app.js} & Connects controls to the device link, updates the chart, records sessions, and displays command acknowledgments and device readings.\\
+\sourcefile{serial.js} & Implements \texttt{DeviceLink}: connection, command ordering, acknowledgments, readiness checks, and the synthetic Demo.\\
+\sourcefile{protocol.js} & Implements \texttt{LineFramer}, \texttt{parseFrame}, \texttt{validateCommand}, and \texttt{faultActive}.\\
+\sourcefile{storage.js} & Stores sessions locally and provides CSV and download helpers, including per-sample carrier timing.\\
+\sourcefile{resonance.js}, \sourcefile{resonance-ui.js}, \sourcefile{resonance-presets.js} & Tank and pump calculations, calculator controls, and component presets.\\
+\sourcefile{server.mjs}, \sourcefile{build.mjs} & Serve the application locally or prepare a static build using an explicit list of application files.\\
+\sourcefile{package.json}, \sourcefile{vercel.json} & Define the Node commands and static-host configuration, including response headers. The package specifies Node 20 or later and has no third-party application dependencies.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+For each received sample, an event is emitted by \texttt{DeviceLink}. In
+\sourcefile{app.js}, the sample is copied into the display, chart history,
+and active recording. \texttt{queueChart} schedules \texttt{drawChart}
+through \texttt{requestAnimationFrame} to avoid redundant draws when
+several updates arrive. The chart keeps at most \SI{60}{\second} or 1200
+samples and breaks the line across gaps longer than \SI{3}{\second}.
+Primary and secondary voltages have separate scales. Telemetry trends are displayed; the chart does not capture the \SI{1}{\mega\hertz} carrier.
+
+Telemetry fields follow the firmware definitions. The secondary-bulk-voltage
+input PA1 senses the bus upstream of the USB-C output stage. The
+primary-current input PA2 carries the half-bridge-current sensing signal. The scaled current and voltage--current
+product are used for diagnostics. They do not measure connector load current
+or delivered USB-C power. The results in Chapter~\ref{ch:results} use external
+load-current and VBUS measurements.
+
+\section{Serial Framing, Commands, and Link Loss}
+\label{sec:app-browser-transport}
+
+\texttt{LineFramer.push} collects text across arbitrary UART chunks,
+with lines ending on CR or LF. Oversized lines are discarded through
+the next delimiter, so the remainder cannot become a new frame.
+\texttt{parseFrame} accepts the supported JSON frame types, checks required
+field types and finite numbers, and keeps unavailable measurements as
+\texttt{null}. Human UART output is not read as telemetry.
+\texttt{validateCommand} limits each request to one bounded command and rejects
+a caller-supplied \texttt{WEB} prefix; the transport adds that wrapper.
+
+\texttt{DeviceLink.connect} opens the selected port at 115200 baud,
+8 data bits, no parity, and one stop bit. After \texttt{WEB HELLO}
+is sent and the handshake is received, \texttt{LEASE 5000} is armed,
+followed by requests for \texttt{STREAM 500} and a \texttt{SNAPSHOT}.
+No \texttt{ON} or preset settings are sent when connecting.
+
+\begin{table}[htbp]
+\centering
+\caption{Serial commands and link handling.}
+\label{tab:app-link-behavior}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.26\textwidth}Y@{}}
+\toprule
+Action & Behavior\\
+\midrule
+Command acknowledgments & \texttt{\#request} assigns an ID and matches the returned acknowledgment to its pending command. A rejection or \SI{2.2}{\second} timeout becomes an error; a timed-out mutation is not automatically retried.\\
+Command queue & \texttt{command} serializes ordinary requests and bounds queued work. This prevents overlapping form submissions from silently interleaving settings.\\
+Priority OFF & An \texttt{OFF} request invalidates queued ordinary work and bypasses that command queue. It still depends on a working serial path and firmware execution.\\
+Readiness & \texttt{DeviceLink.isReady} checks the handshake, telemetry and lease freshness, remaining lease, and feedback-valid flag. The link checks freshness against \SI{2.5}{\second}; the UI separately marks displayed data stale after \SI{3}{\second}.\\
+Enable checks & \texttt{command} rejects \texttt{ON} when the reported fault is active. \texttt{updateControls} also restricts UI controls when data are stale or an operation is pending.\\
+Heartbeat & A \SI{1}{\second} timer sends \texttt{PING} to renew the armed lease. Stale telemetry stops that renewal and requests \texttt{OFF}.\\
+Disconnect & \texttt{disconnect} invalidates queued work, attempts \texttt{OFF} and \texttt{STREAM 0}, then closes the port. \texttt{abandon} makes a best-effort OFF write when the page is left.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+The requested \SI{5}{\second} lease is checked in the firmware main loop,
+so shutdown depends on continued MCU execution. Browser suspension, cable
+loss, or closure can prevent a final OFF message; lease expiry provides a
+second software stop path. It is not an independent hardware interlock,
+and its shutdown behavior requires powered validation.
+
+\section{Controls and Recorded Sessions}
+\label{sec:app-browser-recording}
+
+In \sourcefile{app.js}, \texttt{runCommand} records each request, waits
+for its acknowledgment, and reports rejection or timeout. The settings
+form sends only edited values from \texttt{VSET}, \texttt{VON}, \texttt{VMAX},
+\texttt{OVP}, \texttt{DMAX}, \texttt{OD}, and \texttt{FEN}. Mode
+selection sends \texttt{OPEN}, \texttt{VSBONLY}, or \texttt{LINEFF}.
+Applying a value changes the running configuration; \texttt{SAVE}
+separately requests nonvolatile storage with output OFF. Command acceptance,
+limits, and returned telemetry values remain under firmware control.
+
+The Setup view adds physical reference-load resistance entries, profile selection, no-load duty, tuning steps and waits, and precharge timing. The resistances describe loads attached by the operator; they do not command or switch the load. These settings require output OFF and the \texttt{bench\_settings\_v1} capability.
+
+The Calibration view queues precharge, no-load, individual load-slot, current-zero, and line-reference routines. Progress and completion come from MCU telemetry. Each reference load is connected with output OFF before its slot is started. OFF cancels the run, and successful calibration still requires an explicit save. The firmware's \texttt{calibration\_v1} capability and fresh state determine whether these controls are available.
+
+V2 carrier controls apply switching frequency and dead time as one OFF-state pair. The draft preview is kept separate from actual device readback. The interface confirms the change only after receiving both its acknowledgment and matching timing frame; stale or mismatched readback leaves the operation unconfirmed. The timer limits and quantization are given in \cref{sec:app-fw-carrier-timing}. A timing change invalidates learned load profiles, which must be retuned.
+
+\texttt{DeviceLink.startDemo} uses a separate synthetic device
+state. No USB port is opened or written. The firmware identifier is
+\texttt{SIMULATED}, and recorded sessions have the source \texttt{demo}.
+The display, basic controls, synthetic timing, and exports can be checked without a connected board. Demo cannot run physical calibration.
+
+\texttt{openStore} creates the IndexedDB database \texttt{thesis-power-lab}
+with a \texttt{sessions} object store. A recording contains a
+unique ID, name, notes, source, firmware handshake, start and
+end times, samples, and operator events. Samples keep device
+uptime and host receipt time. Both clocks help trace a run, but
+host receipt time is not a synchronized instrument timestamp.
+
+\texttt{checkpointRecording} saves a snapshot every \SI{5}{\second}
+when possible. \texttt{stopRecording} saves the completed run;
+if storage fails, an in-memory copy is kept for export. A run
+stops at 20000 samples, and the event list marks truncation
+after 2000 ordinary events. These limits prevent indefinite
+growth. Storage is tied to the browser and site origin and
+may be cleared, so a copy of each session also needs to be exported.
+
+\texttt{toCSV} writes one row per sample, with units in the field
+names, session source, settings, and diagnostic-current/power
+labels. Text is quoted, embedded quotes are escaped, and missing values
+are kept. Text fields are prevented from becoming spreadsheet formulas.
+Each sample includes only fresh verified carrier timing. The CSV adds requested/actual carrier and dead time, timer clock, period and dead-time ticks, timing revision, receipt time, and source. Stale or missing timing fields remain blank; later metadata is not copied back into earlier samples. JSON export keeps the complete session, including events and metadata
+not repeated in CSV. \texttt{exportSession} prefixes filenames
+with \texttt{DEMO-} or \texttt{USB-}; \texttt{download} creates
+the browser download without uploading the recording to a server.
+
+\section{Running and Building the Browser App}
+\label{sec:app-browser-build}
+
+\sourcefile{server.mjs} binds to the loopback interface and serves only
+the listed application files. Response headers are read from
+\sourcefile{vercel.json}. The server is not a serial bridge or data-collection
+API. \sourcefile{build.mjs} checks and copies 15 application and font
+files to \sourcefile{dist}. That list excludes firmware, thesis
+documents, and experiment recordings from the static build. The current
+interface can be checked from \sourcefile{Code/PWR_2_0_4/web} with:
+
+\begin{lstlisting}[caption={Commands to test, build, and serve the browser app.},label={lst:app-web-reproduce}]
+node --test tests/*.test.mjs
+node build.mjs
+node server.mjs
+\end{lstlisting}
+
+The local server defaults to \texttt{http://localhost:4173}. Static builds verify file
+availability; board UART communication requires separate validation.
+
+\section{Resonant-Tank and Pump Calculator}
+\label{sec:app-calculator-snapshot}
+
+The resonant-tank and pump calculator connects the page controls to numerical routines and supplies nominal component sets and the transformer A/B measurements for comparison.
+
+\texttt{toSI} and \texttt{fromSI} handle explicit units. \texttt{equivalentCapacitance} combines series and parallel banks, and \texttt{equivalentSeriesInductance} sums uncoupled series inductors. \texttt{analyzeTank} solves the ideal series-LC frequency, inductance, or capacitance, with reactance, characteristic impedance, tolerance corners, and optional series-loss quantities. Leakage is referred to the resonant side and included once.
+
+Magnetizing inductance is treated as a separate branch. \texttt{analyzeMagnetizingBranch} calculates its reactance, the magnetizing-to-series inductance ratio, and an ideal open-secondary resonance. Magnetizing inductance is therefore not added to the loaded series-resonance calculation. The pump calculator uses the approximate triangular-current sizing relationship \(L_p=1/(16C_p f_s^2)\), separately from the series-LC resonance equation.
+
+\texttt{preferredCandidates} returns E12/E24 values, and \texttt{generateFrequencyResponse} plots the normalized series-RLC current for an entered series resistance. These models support component and operating-point comparisons; complete-converter gain, loss, and ZVS still require the full circuit and measurements. Calculator edits do not change MCU settings.
+
+\section{Firmware Builds and HEX Checks}
+\label{sec:app-firmware-build-tools}
+
+\sourcefile{firmware/build.ps1} copies the canonical
+\sourcefile{thesi_power_control.ino} into the generated Arduino sketch
+folder and selects the F410 or G071 board configuration. That copy is
+a build input, not a separate maintained version. The documented toolchain
+uses Arduino CLI and STM32 Arduino core 2.8.1. The \texttt{-ArduinoCli},
+\texttt{-BuildDirectory}, and \texttt{-Clean} arguments allow an
+explicit tool path and a fresh build without editing the source.
+
+For V2, \sourcefile{firmware/stm32f410.ld} places vectors in flash
+sector 0, reserves sector 1 for settings, and starts application
+code at \texttt{0x08008000}. \texttt{build.ps1} supplies this
+linker script and the application-size limit. This keeps ordinary
+application sections out of the settings sector. The layout is
+required for the V2 build; the stock linker layout is different.
+
+In \sourcefile{firmware/verify_f410_hex.py}, \texttt{load\_hex} checks
+Intel HEX record lengths, checksums, address records, and EOF. \texttt{verify}
+checks flash bounds, the absence of data in the settings sector, application
+start, initial stack pointer, and Thumb reset vector. A sparse HEX image
+is used for flashing because a flat BIN spans the reserved gap. These
+checks do not test flash persistence or electrical pin behavior. Build
+and image checks can be run from \sourcefile{Code/PWR_2_0_4} with:
+
+\begin{lstlisting}[caption={Firmware build and HEX-check commands.},label={lst:app-firmware-reproduce}]
+.\firmware\build.ps1 -Target F410
+.\firmware\build.ps1 -Target G071
+python firmware/verify_f410_hex.py arduino-build-f410/thesi_power_control.ino.hex
+\end{lstlisting}
+
+\Needspace{12\baselineskip}
+\section{Software Tests and Their Limits}
+\label{sec:app-software-tests}
+
+\begin{table}[htbp]
+\centering
+\caption{Software test coverage.}
+\label{tab:app-software-test-scope}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.32\textwidth}Y@{}}
+\toprule
+Test & Coverage\\
+\midrule
+\sourcefile{web/tests/protocol.test.mjs} & Partial chunks, CR/LF framing, oversized-line recovery, frame validation, command validation, and fault interpretation.\\
+\sourcefile{web/tests/serial.test.mjs} & Handshake, acknowledgments, timeouts, stale/fault/lease interlocks, OFF priority, disconnect races, port cancellation, unplug, and separation of Demo and serial state, using an in-memory serial device.\\
+\sourcefile{web/tests/storage.test.mjs} & CSV quoting, missing fields, units, session source, formula-like text, and empty sessions. These tests exercise export formatting, not physical storage endurance.\\
+\sourcefile{web/tests/resonance.test.mjs}, \sourcefile{web/tests/resonance-presets.test.mjs} & Unit conversion, bank topology, inverse LC solves, leakage and magnetizing branches, pump sizing, tolerance corners, preferred values, and presets.\\
+\sourcefile{firmware/test_web_protocol.py} & Production dispatcher, timing math and application, scheduler, calibration cancellation, lease and queue behavior with mocked hardware.\\
+\sourcefile{firmware/test_carrier_storage.py} & Production journal loader/writer, legacy records, corruption, torn writes, and interrupted appends with mocked flash.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+All 76 Node tests passed, including protocol, timing/readback, calibration transport, session export, and calculator checks. The firmware harness extracts production code and runs it with mocked hardware. Its 131 JSON frames cover command dispatch, timing-pair quantization and rejection, OFF/busy conditions, calibration cancellation and rollback, lease expiry, bounded transmission, and readback failure. Journal tests cover legacy migration and all 122 interrupted-append word boundaries. The Linux host checks were run with a native C++ compiler; the Windows/MSVC runner was not executed.
+
+Powered tests must check UART wiring, sensing gains, gate and enable timing, calibration response, on-board persistence, and link-loss stop behavior.
+
+\section{Measurement Processing}
+\label{sec:app-analysis-tools}
+
+Completed measurements were used to calculate output power, voltage error,
+initial efficiency estimates, and input-minus-output power difference. Missing
+values were not filled, and instrument disagreements were not resolved by
+assumption. Harmonic percentages were transcribed from instrument screens, and
+the thermal readings were taken from image markers.
+
+The switching and line-time-scale waveforms were plotted with their recorded
+amplitudes, offsets, and times. Switching period was estimated using hysteretic
+thresholds and median edge spacing. Instrument synchronization, calibration,
+AC-coupled readings, and thermal dwell time limit the measurements.

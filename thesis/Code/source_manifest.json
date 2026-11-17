@@ -1,0 +1,398 @@
+{
+  "firmware": "PWR-2.0.4 (F410); PWR-2.0.3 (G071 target)",
+  "historical_manifest": "Code/PWR_2_0_1/source_manifest.json",
+  "files": [
+    {
+      "source": "README.md",
+      "copy": "Code/PWR_2_0_4/README.md",
+      "bytes": 7335,
+      "lines": 148,
+      "sha256": "caa82148b8569582d26606bf3fa5b12beb2c5947b24323106c97d16b315a1780",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/README.md",
+      "copy": "Code/PWR_2_0_4/docs/README.md",
+      "bytes": 1024,
+      "lines": 13,
+      "sha256": "f47c79792cffce0f8d29c0c46378012fafb2f2cf17bbcb606ad943b712df517a",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/calculator-evidence.md",
+      "copy": "Code/PWR_2_0_4/docs/calculator-evidence.md",
+      "bytes": 9237,
+      "lines": 164,
+      "sha256": "57e164ca7120f096146a53e580318c6066483d05dd67e007ef1a6e0bd4058120",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/firmware-flow-distilled.md",
+      "copy": "Code/PWR_2_0_4/docs/firmware-flow-distilled.md",
+      "bytes": 1648,
+      "lines": 37,
+      "sha256": "b515e507c7dd2d1c37e62ce15b371f7f6cb9534ebc9a5d2a2381f629e0d72971",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/firmware-flow-distilled.png",
+      "copy": "Code/PWR_2_0_4/docs/firmware-flow-distilled.png",
+      "bytes": 80105,
+      "lines": null,
+      "sha256": "9fb5bfce5a0d9ee2a42bb74652914849f004595cae97eba3063c95accc51cbe9",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/firmware-flow-distilled.svg",
+      "copy": "Code/PWR_2_0_4/docs/firmware-flow-distilled.svg",
+      "bytes": 4601,
+      "lines": 92,
+      "sha256": "ac39eff7db28ffebe910cbdf3cb293f75f8b2921c93d8183aed18c084868d178",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/firmware-flow.md",
+      "copy": "Code/PWR_2_0_4/docs/firmware-flow.md",
+      "bytes": 6363,
+      "lines": 122,
+      "sha256": "82216c2e30f2238f7c7c7a2274a89fbb6e7b51cc3c0985bfb5990af46a5cf93b",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/firmware-flow.png",
+      "copy": "Code/PWR_2_0_4/docs/firmware-flow.png",
+      "bytes": 685191,
+      "lines": null,
+      "sha256": "90e6f933c3bd3f7f9e43668fe0040855e806d5d5c760c41843c07d8ae3e83d12",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/power-control.md",
+      "copy": "Code/PWR_2_0_4/docs/power-control.md",
+      "bytes": 25541,
+      "lines": 360,
+      "sha256": "02c85aa57dd0856e5d8ab4d66f2e66f832781bb6d06a8c344c84dd697f4b6d67",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/stm32f410-port.md",
+      "copy": "Code/PWR_2_0_4/docs/stm32f410-port.md",
+      "bytes": 11670,
+      "lines": 244,
+      "sha256": "c601786ee5ae4669d0991ef35689359324b104f83f92e15c3dbe075d60310a37",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/uart-commands.md",
+      "copy": "Code/PWR_2_0_4/docs/uart-commands.md",
+      "bytes": 5485,
+      "lines": 130,
+      "sha256": "40c416128d0f347ca6de734f95c450bd7661f63b63f27d03ded681472eed0a64",
+      "kind": "reference"
+    },
+    {
+      "source": "docs/web-protocol.md",
+      "copy": "Code/PWR_2_0_4/docs/web-protocol.md",
+      "bytes": 21615,
+      "lines": 365,
+      "sha256": "224fb9157317a88d32ae988f7c2b547b92059ddfdd93f90d37f1ee62a6f9cff8",
+      "kind": "reference"
+    },
+    {
+      "source": "firmware/README.md",
+      "copy": "Code/PWR_2_0_4/firmware/README.md",
+      "bytes": 4545,
+      "lines": 71,
+      "sha256": "5392d954ff68fbe4f4be0e3d43bd91e2be179a44a46e7bbcca2c96fad4cb55d2",
+      "kind": "reference"
+    },
+    {
+      "source": "firmware/build.ps1",
+      "copy": "Code/PWR_2_0_4/firmware/build.ps1",
+      "bytes": 1926,
+      "lines": 42,
+      "sha256": "806e87f8e3638c27ac91b297a99817ff18ffb41a3f52077b4f224dcb30ce6691",
+      "kind": "source"
+    },
+    {
+      "source": "firmware/releases/pwr-2.0.1.md",
+      "copy": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.1.md",
+      "bytes": 4308,
+      "lines": 92,
+      "sha256": "3760e0683a66cc8cd71f5371428941ba64986224ed358d7141923d2836fe7ff8",
+      "kind": "reference"
+    },
+    {
+      "source": "firmware/releases/pwr-2.0.2.md",
+      "copy": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.2.md",
+      "bytes": 2276,
+      "lines": 39,
+      "sha256": "c8284fa5787336b148e9585e32cc8b98e754a21286cab44c7543c91b8c530426",
+      "kind": "reference"
+    },
+    {
+      "source": "firmware/releases/pwr-2.0.3.md",
+      "copy": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.3.md",
+      "bytes": 3555,
+      "lines": 57,
+      "sha256": "0254b36b1eb99ce086da525e95afa7fee03dc1c062381ba4fa496c2d73ada441",
+      "kind": "reference"
+    },
+    {
+      "source": "firmware/releases/pwr-2.0.4.md",
+      "copy": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.4.md",
+      "bytes": 6858,
+      "lines": 108,
+      "sha256": "225e3ce71f5428eff25b044b58643f8cd7447a6483c20056bcc4811ec3c08013",
+      "kind": "reference"
+    },
+    {
+      "source": "firmware/stm32f410.ld",
+      "copy": "Code/PWR_2_0_4/firmware/stm32f410.ld",
+      "bytes": 2489,
+      "lines": 121,
+      "sha256": "400597cca105a2037c828658e55252bbccfd4285efbe65dece11d364e28299aa",
+      "kind": "source"
+    },
+    {
+      "source": "firmware/test_carrier_storage.py",
+      "copy": "Code/PWR_2_0_4/firmware/test_carrier_storage.py",
+      "bytes": 15623,
+      "lines": 287,
+      "sha256": "6d1899125afe5b4e0424483fe802a903c93a80345b01f157c27d3e1a3c99de5b",
+      "kind": "source"
+    },
+    {
+      "source": "firmware/test_web_protocol.py",
+      "copy": "Code/PWR_2_0_4/firmware/test_web_protocol.py",
+      "bytes": 30724,
+      "lines": 517,
+      "sha256": "e647fb1987a5fe163b69c8c097be2e9f8b66ca5ee37d7bea98e8a5f3d619c1c7",
+      "kind": "source"
+    },
+    {
+      "source": "firmware/verify_f410_hex.py",
+      "copy": "Code/PWR_2_0_4/firmware/verify_f410_hex.py",
+      "bytes": 3062,
+      "lines": 76,
+      "sha256": "bc4f5c74812ed8ba478da0b1410cc7480f36ef26184e40307af50a5987ce7f75",
+      "kind": "source"
+    },
+    {
+      "source": "thesi_power_control.ino",
+      "copy": "Code/PWR_2_0_4/thesi_power_control.ino",
+      "bytes": 209211,
+      "lines": 5348,
+      "sha256": "fa9d842ce7787d37501701379a66b97807969d3a9064f8d03fa372b3842b30ad",
+      "kind": "source"
+    },
+    {
+      "source": "web/README.md",
+      "copy": "Code/PWR_2_0_4/web/README.md",
+      "bytes": 13397,
+      "lines": 228,
+      "sha256": "16e696b206940f44ef40ae2a8210c3bfac51abbf95685ebb74c26c3783126611",
+      "kind": "reference"
+    },
+    {
+      "source": "web/app.js",
+      "copy": "Code/PWR_2_0_4/web/app.js",
+      "bytes": 56872,
+      "lines": 900,
+      "sha256": "350f3e00c89499a175d951391a9b1fcebab24c8b69a2c7551792300ade88de7f",
+      "kind": "source"
+    },
+    {
+      "source": "web/build.mjs",
+      "copy": "Code/PWR_2_0_4/web/build.mjs",
+      "bytes": 804,
+      "lines": 19,
+      "sha256": "2dbd284c20aea608e9c98ee6f66023b5e14eb9bfba61562a147111855d1a0ec5",
+      "kind": "source"
+    },
+    {
+      "source": "web/calculator.css",
+      "copy": "Code/PWR_2_0_4/web/calculator.css",
+      "bytes": 24856,
+      "lines": 312,
+      "sha256": "9d2ff8f6d6233b0680b5d9f19f20f87d149f75968ee0c4c498d50a5a70b64dba",
+      "kind": "source"
+    },
+    {
+      "source": "web/calculator.html",
+      "copy": "Code/PWR_2_0_4/web/calculator.html",
+      "bytes": 21428,
+      "lines": 154,
+      "sha256": "c635876d4fdd9d607c59fd1cc6b7a1462496835a9a43d65247c2e27fb62e7489",
+      "kind": "source"
+    },
+    {
+      "source": "web/fonts/IBMPlexMono-Medium.ttf",
+      "copy": "Code/PWR_2_0_4/web/fonts/IBMPlexMono-Medium.ttf",
+      "bytes": 23816,
+      "lines": null,
+      "sha256": "5f460401d03995ca099270707e78662513b5be9d17060eb7c7fffadb4d4d334b",
+      "kind": "reference"
+    },
+    {
+      "source": "web/fonts/IBMPlexSans-Bold.ttf",
+      "copy": "Code/PWR_2_0_4/web/fonts/IBMPlexSans-Bold.ttf",
+      "bytes": 46160,
+      "lines": null,
+      "sha256": "5bb3030115b2a8d4494afd9c42c69a659ad80329694f8056d21ba6680612422b",
+      "kind": "reference"
+    },
+    {
+      "source": "web/fonts/IBMPlexSans-Regular.ttf",
+      "copy": "Code/PWR_2_0_4/web/fonts/IBMPlexSans-Regular.ttf",
+      "bytes": 46220,
+      "lines": null,
+      "sha256": "b7687a7b11bf4972c2807e6f1701bb55d1837e6957373e6610a81e3bbd4423a9",
+      "kind": "reference"
+    },
+    {
+      "source": "web/fonts/OFL-IBMPlex.txt",
+      "copy": "Code/PWR_2_0_4/web/fonts/OFL-IBMPlex.txt",
+      "bytes": 4456,
+      "lines": 93,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "kind": "reference"
+    },
+    {
+      "source": "web/index.html",
+      "copy": "Code/PWR_2_0_4/web/index.html",
+      "bytes": 27895,
+      "lines": 126,
+      "sha256": "863acd844cc9853b94bf7e62fa6fc2f5af62051d9046ec892937cf68cf66ed41",
+      "kind": "source"
+    },
+    {
+      "source": "web/package.json",
+      "copy": "Code/PWR_2_0_4/web/package.json",
+      "bytes": 251,
+      "lines": 12,
+      "sha256": "f08d5f4d0a4aba3aa7f503756ea2b8b1e857970b493341614c49556f01079cb6",
+      "kind": "source"
+    },
+    {
+      "source": "web/protocol.js",
+      "copy": "Code/PWR_2_0_4/web/protocol.js",
+      "bytes": 4673,
+      "lines": 70,
+      "sha256": "f3571eff542a3c368d5f66c7a0aefc236435edd9bba5bbb66914f19e91d92793",
+      "kind": "source"
+    },
+    {
+      "source": "web/resonance-presets.js",
+      "copy": "Code/PWR_2_0_4/web/resonance-presets.js",
+      "bytes": 8889,
+      "lines": 112,
+      "sha256": "4687c77c361bdbae0e707b822a3c23b5403aab9ea074a8270dcf583259ee35fa",
+      "kind": "source"
+    },
+    {
+      "source": "web/resonance-ui.js",
+      "copy": "Code/PWR_2_0_4/web/resonance-ui.js",
+      "bytes": 38475,
+      "lines": 606,
+      "sha256": "573c19e5338c9f3e4574b953bf81eae600458cca6eb982a3cc25dd79a08ac749",
+      "kind": "source"
+    },
+    {
+      "source": "web/resonance.js",
+      "copy": "Code/PWR_2_0_4/web/resonance.js",
+      "bytes": 15044,
+      "lines": 254,
+      "sha256": "8f31134163faede8358f82da861a1ad4391b8266d7bf1d882c92968cb5876d43",
+      "kind": "source"
+    },
+    {
+      "source": "web/serial.js",
+      "copy": "Code/PWR_2_0_4/web/serial.js",
+      "bytes": 21708,
+      "lines": 268,
+      "sha256": "fe5a36451b5112269cf21d5cf32a83f779d132e464db1dfa9fb0a51d0dc88bc6",
+      "kind": "source"
+    },
+    {
+      "source": "web/server.mjs",
+      "copy": "Code/PWR_2_0_4/web/server.mjs",
+      "bytes": 1345,
+      "lines": 15,
+      "sha256": "2e60f787432a3016e367da126b6062acd3fdf50679a6b569c05c55a5a61b87ba",
+      "kind": "source"
+    },
+    {
+      "source": "web/storage.js",
+      "copy": "Code/PWR_2_0_4/web/storage.js",
+      "bytes": 3661,
+      "lines": 57,
+      "sha256": "459fd3d10ed41f383fd8b16350fff407e1c710bafac4ff5016313a12bf12b51d",
+      "kind": "source"
+    },
+    {
+      "source": "web/styles.css",
+      "copy": "Code/PWR_2_0_4/web/styles.css",
+      "bytes": 38813,
+      "lines": 511,
+      "sha256": "5e2984e63ce6a50155bf22d62c41b387451cf19f070c86ccbc522e1e4df90645",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/protocol.test.mjs",
+      "copy": "Code/PWR_2_0_4/web/tests/protocol.test.mjs",
+      "bytes": 5857,
+      "lines": 76,
+      "sha256": "05847ad9313abbaf11bb06f025164fb29539adb9b202b934b2ad4e40db8c683e",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/resonance-presets.test.mjs",
+      "copy": "Code/PWR_2_0_4/web/tests/resonance-presets.test.mjs",
+      "bytes": 3055,
+      "lines": 55,
+      "sha256": "fe359a8cb01d59939d8211a996a70d336f3b21efc7a30be930051c169671f880",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/resonance.test.mjs",
+      "copy": "Code/PWR_2_0_4/web/tests/resonance.test.mjs",
+      "bytes": 16469,
+      "lines": 251,
+      "sha256": "3c009e5194d50671a16d71b53f45f98865eb9b5faf3af0c8a4e128597dc061a4",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/serial.test.mjs",
+      "copy": "Code/PWR_2_0_4/web/tests/serial.test.mjs",
+      "bytes": 30470,
+      "lines": 387,
+      "sha256": "efd932215e0f89dbeaacc6b766658a59a42686fe9eb83c912998d58d0a0d8818",
+      "kind": "source"
+    },
+    {
+      "source": "web/tests/storage.test.mjs",
+      "copy": "Code/PWR_2_0_4/web/tests/storage.test.mjs",
+      "bytes": 5973,
+      "lines": 86,
+      "sha256": "370fd90948daa83128696b915a4f5fe335f153349d8eeade889cb2efd854e085",
+      "kind": "source"
+    },
+    {
+      "source": "web/vercel.json",
+      "copy": "Code/PWR_2_0_4/web/vercel.json",
+      "bytes": 642,
+      "lines": 16,
+      "sha256": "9927baba1ec548c86f6bafaef0577d127368be5d7b0aafa97f9883fa652c40f9",
+      "kind": "source"
+    },
+    {
+      "source": "baseline PWR-1.9.20",
+      "copy": "Code/thesi_power_control_PWR_1_9_20.ino",
+      "bytes": 161712,
+      "lines": 4207,
+      "sha256": "39c2769a4a597e9e70cc0a8ee11dbc221aab084e2eb082b5b60e41b28f2de70a",
+      "kind": "source"
+    }
+  ]
+}

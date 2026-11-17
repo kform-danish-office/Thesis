@@ -1,0 +1,187 @@
+{
+  "slide_id": "s14",
+  "title": "Secondary and bridge heating guide the redesign",
+  "takeaway": {
+    "text": "Secondary and input-bridge heating motivate lower winding and rectifier losses and wider current and heat paths.",
+    "visible": false
+  },
+  "visible_content": {
+    "condition": "V2 · Electronic load at secondary output",
+    "body_1": "Input bridge R3: 83.9 °C",
+    "body_2": "Secondary R1: 98.3 °C",
+    "chart_title": "Maximum surface temperature by region",
+    "chart_y_axis": "Temperature (°C)",
+    "chart_y_ticks": [
+      "40",
+      "60",
+      "80",
+      "100"
+    ],
+    "chart_x_axis": "Successive load point",
+    "chart_x_ticks": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "chart_legend": [
+      "Secondary R1",
+      "Input bridge R3"
+    ],
+    "image_caption": "137.08 W at secondary",
+    "equilibrium_caption": "No load point reached thermal equilibrium",
+    "embedded_camera_text": [
+      "Infrared",
+      "2026/10/27 20:28:17",
+      "85.1",
+      "23.7",
+      "R3",
+      "H: 73.7",
+      "L: 27.0",
+      "M: 48.5",
+      "e=0.95",
+      "R1",
+      "H: 98.3",
+      "L: 27.4",
+      "M: 52.0",
+      "e=0.95",
+      "°C",
+      "e=0.97"
+    ],
+    "design_response": "Design direction: reduce winding and rectifier loss; widen bridge current and heat paths",
+    "phase_label": "Results",
+    "low_image_caption": "70.75 W at secondary",
+    "low_embedded_camera_text": [
+      "Infrared",
+      "2026/10/27 20:25:54",
+      "76.8",
+      "23.7",
+      "R3",
+      "H: 83.9",
+      "L: 26.1",
+      "M: 42.5",
+      "e=0.95",
+      "R1",
+      "H: 57.2",
+      "L: 26.1",
+      "M: 40.7",
+      "e=0.95",
+      "°C",
+      "e=0.97"
+    ]
+  },
+  "visual": {
+    "type": "two_thermal_images_and_editable_two_series_chart",
+    "layout": "Place the lower-power thermal image on the left, the final image in the middle, and the editable regional chart on the right. Preserve both images intact with their original camera overlays and colour scales. Retain all seven measured chart points, the peak readings, the equilibrium statement and the proposed design direction.",
+    "image": "/workspace/presentations/defense/dtu-focused-story/assets/thermal_final.jpg",
+    "image_description": "Original final thermal frame, showing R3 and R1 surface regions. The displayed camera colour-scale endpoints are 23.7 and 85.1 °C; region maximum readouts are R3 73.7 °C and R1 98.3 °C. Preserve the real colours and scale, including the apparent range saturation.",
+    "chart_style": "Use a linear vertical axis from 40 to 105 °C, with ticks at 40, 60, 80 and 100 °C. Plot measured markers at successive point numbers 1–7 and connect adjacent points with straight segments. Use distinct colours and marker shapes, and a compact legend. The readings show the load sequence, not elapsed time or equilibrium at each point.",
+    "chart_data": [
+      {
+        "point": 1,
+        "secondary_load_power_w": 48.68,
+        "secondary_r1_max_c": 50.3,
+        "input_bridge_r3_max_c": 65.1
+      },
+      {
+        "point": 2,
+        "secondary_load_power_w": 70.75,
+        "secondary_r1_max_c": 57.2,
+        "input_bridge_r3_max_c": 83.9
+      },
+      {
+        "point": 3,
+        "secondary_load_power_w": 86.17,
+        "secondary_r1_max_c": 59.7,
+        "input_bridge_r3_max_c": 68.2
+      },
+      {
+        "point": 4,
+        "secondary_load_power_w": 97.35,
+        "secondary_r1_max_c": 69.4,
+        "input_bridge_r3_max_c": 73.2
+      },
+      {
+        "point": 5,
+        "secondary_load_power_w": 109.87,
+        "secondary_r1_max_c": 81.6,
+        "input_bridge_r3_max_c": 74.5
+      },
+      {
+        "point": 6,
+        "secondary_load_power_w": 127.05,
+        "secondary_r1_max_c": 88.7,
+        "input_bridge_r3_max_c": 75.6
+      },
+      {
+        "point": 7,
+        "secondary_load_power_w": 137.08,
+        "secondary_r1_max_c": 98.3,
+        "input_bridge_r3_max_c": 73.7
+      }
+    ],
+    "low_image": "/workspace/presentations/defense/dtu-supervisor-flow/assets/thermal_intermediate.jpg",
+    "low_image_description": "Original Capture 017 frame at 70.75 W secondary load, camera clock 20:25:54. Camera colour-scale endpoints are 23.7 and 76.8 °C; regional maxima are R3 83.9 °C and R1 57.2 °C. Preserve all original overlays, colours and scale."
+  },
+  "speaker_notes": "The images show the 70.75-watt and final 137.08-watt points in the same direct secondary-load sequence. R3 covers the input bridge and R1 the secondary area. These are maximum surface readings within each region, not junction temperatures. The input bridge peaked at 83.9 degrees Celsius at the intermediate point and then varied at the higher loads. The secondary region rose to 98.3 degrees at the final point, showing substantial heating in the secondary area.\n\nThe bridge diodes were replaced, but the heating remained. Limited copper and a possible restriction through a single interlayer via could contribute. Wider bridge copper and via paths would improve current distribution and heat spreading. On the secondary side, the observed heating motivates reducing winding and rectifier losses and improving their current paths. These are proposed design changes.",
+  "transition": "Together, these results define the contribution and the present limit of the supply.",
+  "duration_seconds": 80,
+  "sources": [
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex",
+      "passage": "Input-Bridge Heating",
+      "supports": "Heating persisted after diode replacement; limited copper and a possible single-via connection were suspected, not confirmed."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+      "passage": "Secondary-Output Load and Thermal Tests",
+      "supports": "Direct secondary loading, region identities, peak R3 and final R1, voltage droop and absence of thermal equilibrium."
+    },
+    {
+      "path": "/workspace/presentations/defense/dtu-supervisor-story/assets/v2_summary.csv",
+      "passage": "Captures 015, 017–022",
+      "supports": "Seven measured secondary load powers and R1/R3 maximum surface temperatures."
+    },
+    {
+      "path": "/workspace/presentations/defense/dtu-focused-story/assets/thermal_final.jpg",
+      "passage": "Final thermal image",
+      "supports": "Camera region labels, surface maximum readouts, actual colours and scale at the 137.08 W point."
+    },
+    {
+      "path": "/workspace/thesis/Data/measurements/v2_load_thermal/thermal_figures.tex",
+      "passage": "Capture 022",
+      "supports": "Final image corresponds to 137.08 W secondary loading."
+    },
+    {
+      "path": "/workspace/thesis/Data/measurements/v2_load_thermal/thermal/Capture 017-thermal.jpg",
+      "passage": "Capture 017 thermal image, 20:25:54",
+      "supports": "Lower-power camera image and R3 83.9 °C and R1 57.2 °C regional surface maxima at 70.75 W secondary load."
+    },
+    {
+      "path": "/workspace/thesis/Data/measurements/v2_load_thermal/README.md",
+      "passage": "Thermal image and capture pairing",
+      "supports": "Region assignments, image and measurement pairing, and successive nonequilibrium load points."
+    },
+    {
+      "path": "User bench clarification",
+      "passage": "V2 higher-load voltage response",
+      "supports": "The higher-load voltage response was expected throttle behavior and should not be presented as an unexpected fault or a hard magnetic limit."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "All seven paired region maxima and rounded secondary powers match the V2 summary; R3 peaks at point 2, 83.9 °C and 70.75 W; R1 reaches 98.3 °C at point 7, 137.08 W.",
+      "R3 and R1 are regional surface maxima, not junction temperatures; the camera scale tops at 85.1 °C although the R1 readout is 98.3 °C. The original scale and readout are retained.",
+      "No load point reached equilibrium; the footer states this once, and the chart joins successive readings only.",
+      "Bridge diode replacement did not resolve the heating. A copper or via restriction is a suspected cause, while the proposed winding, rectifier and current-path changes are engineering directions rather than completed changes.",
+      "All original camera labels and the unchanged chart data are retained; the design_response and phase_label are added for the current layout.",
+      "The lower-power photo is the unchanged Capture 017 image, paired by timestamp to secondary power 70.751393856 W; R3 is 83.9 °C and R1 is 57.2 °C. Input power and efficiency for this capture are not used."
+    ],
+    "unresolved_questions": [],
+    "timing": "80 seconds including transition; 147 spoken words, approximately 110 words per minute."
+  },
+  "proposal_revision": 4
+}

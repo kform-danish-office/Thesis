@@ -1,0 +1,63 @@
+
+> thesis-power-lab@1.0.0 test
+> node --test tests/*.test.mjs
+
+✔ line framer preserves arbitrary chunks and CRLF without empty frames (2.585178ms)
+✔ line framer drops a whole oversized frame and recovers at newline (0.198431ms)
+✔ frame parser handles a UART prompt and ignores text, echo, malformed and unknown frames (1.347007ms)
+✔ telemetry rejects missing, mistyped and nonfinite measurement fields while preserving null diagnostics (6.67944ms)
+✔ telemetry lease must be a finite nonnegative number before it can authorize control (0.438336ms)
+✔ command validation normalizes whitespace and rejects command injection and protocol prefixes (0.895992ms)
+✔ fault gating permits only known clear states (0.173754ms)
+✔ tested thesis preset reproduces the nominal 25.9 uH / 1 nF tank (1.06612ms)
+✔ unvalued C26 and leakage remain unknown in drawing-only presets (0.633602ms)
+✔ borrowed F410 circuit values are explicitly an assumed equivalent (0.920689ms)
+✔ every preset has unique identity and valid source references (0.356071ms)
+✔ thesis pump sizing solves the documented 2 nF / 1 MHz example independently of tank resonance (2.972807ms)
+✔ all three triangular/clamped pump solves roundtrip (0.227065ms)
+✔ pump model rejects invalid inputs and out-of-range results (0.63837ms)
+✔ documented nominal Lr includes 9.4 uH discrete plus 16.5 uH leakage (0.274066ms)
+✔ explicit units preserve SI dimensions and reject missing, unknown, or nonfinite values (0.342901ms)
+✔ capacitor banks use their actual series or parallel topology (0.353958ms)
+✔ frequency, capacitance, and inductance solves roundtrip independently (0.261838ms)
+✔ leakage belongs in total series inductance and is subtracted from the discrete solution (0.43403ms)
+✔ a leakage-only series path is valid while adding an Lm property cannot change Lr (0.293766ms)
+✔ worst-case tolerance endpoints are exact and encompass every corner (0.420099ms)
+✔ operating-frequency reactance changes sign around resonance (0.301718ms)
+✔ series-loss Q and half-power bandwidth are consistent (0.212674ms)
+✔ current response peaks at one at fr and is reciprocal symmetric in frequency ratio (0.440779ms)
+✔ analytical half-power endpoints reproduce exact R/(2 pi L) bandwidth (0.3156ms)
+✔ lossless or malformed response requests cannot masquerade as finite current curves (4.134443ms)
+✔ E12 and E24 use tabulated values, bracket decade transitions, and expose real error (0.614043ms)
+✔ invalid component values and numeric overflow fail instead of displaying NaN or Infinity (0.426208ms)
+✔ USB handshake, lease, streaming and snapshots negotiate at 115200 without a physical port (10.386123ms)
+✔ unknown acknowledgments and human UART output do not settle or corrupt a command (8.095122ms)
+✔ board rejections become actionable command errors and the queue recovers (2.568232ms)
+✔ invalid commands are rejected before any bytes are sent (0.994331ms)
+✔ ON is refused after stale telemetry, a fault, or loss of the reported lease (3.140192ms)
+✔ OFF bypasses a pending command and cancels queued ON and parameter changes (2.298012ms)
+✔ disconnect sends OFF then stops streaming and closes the fake port (2.944704ms)
+✔ disconnect immediately blocks a concurrent ON from passing its OFF command (1.399457ms)
+✔ unplug clears readiness and rejects pending control requests (1.666963ms)
+✔ demo remains visibly synthetic and never requests or writes to USB (1.373687ms)
+✔ disconnect cancels a pending port chooser before the chosen port can open (0.298524ms)
+✔ a command acknowledgment timeout is an error and never retries the mutation (2202.061157ms)
+✔ demo settings persistence is explicit and requires output OFF (2.840436ms)
+✔ CSV preserves quoted names, commas, newlines, missing diagnostics, units and column order (1.138581ms)
+✔ CSV prevents spreadsheet formulas while preserving negative numeric readings (1.331683ms)
+✔ every CSV sample retains session provenance and firmware, including synthetic sessions (0.213404ms)
+✔ empty sessions produce only a header (0.123508ms)
+✔ CSV handles absent firmware metadata from an imported session (0.365115ms)
+ℹ tests 46
+ℹ suites 0
+ℹ pass 46
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2359.894148
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

@@ -1,0 +1,294 @@
+{
+  "changed_files": 21,
+  "appendix_files_changed": 8,
+  "generated_table_files_changed": 12,
+  "generator_files_changed": 1,
+  "errors": [],
+  "changes": [
+    {
+      "path": "Backmatter/Appendices/A_Analytical_Equations.tex",
+      "before_sha256": "846176f4234efbdcd2d0ba29b26eb6f6178e96e285ce1452d161a8c540dabf42",
+      "sha256": "a1ca640e9c0a35e9f809a3580b68e604e55cbb17508262378ccdbc739747a664",
+      "checks": {
+        "math": true,
+        "SI quantities": true,
+        "numeric tokens": true,
+        "labels/refs/cites/paths": true,
+        "equation": true,
+        "equation*": true,
+        "align": true,
+        "align*": true,
+        "tikzpicture": true,
+        "verbatim": true,
+        "Verbatim": true,
+        "listing bodies": true,
+        "listed sources and noncaption options": true,
+        "newline style": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+      "before_sha256": "3717fec06ab347aa106240ec4cba7c3d7a07db8948237942e15d00791bfe7e94",
+      "sha256": "2f9d9eb6b85315a53f60435a844c86ff566d2cefd9108e37ca97f42a854dfac5",
+      "checks": {
+        "math": true,
+        "SI quantities": true,
+        "numeric tokens": true,
+        "labels/refs/cites/paths": true,
+        "equation": true,
+        "equation*": true,
+        "align": true,
+        "align*": true,
+        "tikzpicture": true,
+        "verbatim": true,
+        "Verbatim": true,
+        "listing bodies": true,
+        "listed sources and noncaption options": true,
+        "newline style": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+      "before_sha256": "1b09c57241ad91a36a2036a7c8a863568899c7c39b821663b3ef891e5827d500",
+      "sha256": "6b9617047d3893774f93a9e89bf358c7ada9c6e2015c4bbffb880efd312caa22",
+      "checks": {
+        "math": true,
+        "SI quantities": true,
+        "numeric tokens": true,
+        "labels/refs/cites/paths": true,
+        "equation": true,
+        "equation*": true,
+        "align": true,
+        "align*": true,
+        "tikzpicture": true,
+        "verbatim": true,
+        "Verbatim": true,
+        "listing bodies": true,
+        "listed sources and noncaption options": true,
+        "newline style": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/F_Contribution_Provenance.tex",
+      "before_sha256": "2f59015ef2f385c3efd1d89d7c74403c1fbeafcb62e818f31083f318eae5d91f",
+      "sha256": "241c2873d185e930260a54057e37be09e34cd4a349fca3d22ea46667ab6f7e78",
+      "checks": {
+        "math": true,
+        "SI quantities": true,
+        "numeric tokens": true,
+        "labels/refs/cites/paths": true,
+        "equation": true,
+        "equation*": true,
+        "align": true,
+        "align*": true,
+        "tikzpicture": true,
+        "verbatim": true,
+        "Verbatim": true,
+        "listing bodies": true,
+        "listed sources and noncaption options": true,
+        "newline style": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/G_Software_Tools.tex",
+      "before_sha256": "6b3a65e25e6747d7edda7378fc574992cd1eb78c9cf7385f7d77060603f9c091",
+      "sha256": "123398d1190427a3e1e1a31e5ac829711df1043c40101cd03139be9d910da062",
+      "checks": {
+        "math": true,
+        "SI quantities": true,
+        "numeric tokens": true,
+        "labels/refs/cites/paths": true,
+        "equation": true,
+        "equation*": true,
+        "align": true,
+        "align*": true,
+        "tikzpicture": true,
+        "verbatim": true,
+        "Verbatim": true,
+        "listing bodies": true,
+        "listed sources and noncaption options": true,
+        "newline style": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+      "before_sha256": "1f9bdece8df41166089b956d917f9a623139f4e9033dea55e8654970759b2997",
+      "sha256": "fa31488d7023c86c6bc3f2fc7a36774348b69f33ca07eee97cee9527f1d396d6",
+      "checks": {
+        "math": true,
+        "SI quantities": true,
+        "numeric tokens": true,
+        "labels/refs/cites/paths": true,
+        "equation": true,
+        "equation*": true,
+        "align": true,
+        "align*": true,
+        "tikzpicture": true,
+        "verbatim": true,
+        "Verbatim": true,
+        "listing bodies": true,
+        "listed sources and noncaption options": true,
+        "newline style": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+      "before_sha256": "77ce7269cfaa6be5b748e25bf7a6d692591ba8160a0dea12f6679854a6840f75",
+      "sha256": "2544a1808638df3c4ce35603ab2b1ee42055275bc9d50d0b882f7e8c4aa09fd4",
+      "checks": {
+        "math": true,
+        "SI quantities": true,
+        "numeric tokens": true,
+        "labels/refs/cites/paths": true,
+        "equation": true,
+        "equation*": true,
+        "align": true,
+        "align*": true,
+        "tikzpicture": true,
+        "verbatim": true,
+        "Verbatim": true,
+        "listing bodies": true,
+        "listed sources and noncaption options": true,
+        "newline style": true
+      }
+    },
+    {
+      "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+      "before_sha256": "f38da1b61a9a09c3c759d7632b39e3d1dffa0b32aa1fa050e118e24833172b21",
+      "sha256": "df1fa3735938cbcd0a1593868071d732682f2dc3e8116b8d5c0da1f6eaf6dea8",
+      "checks": {
+        "math": true,
+        "SI quantities": true,
+        "numeric tokens": true,
+        "labels/refs/cites/paths": true,
+        "equation": true,
+        "equation*": true,
+        "align": true,
+        "align*": true,
+        "tikzpicture": true,
+        "verbatim": true,
+        "Verbatim": true,
+        "listing bodies": true,
+        "listed sources and noncaption options": true,
+        "newline style": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+      "before_sha256": "9c3f1e054dcb5402304f479a0241c824500088356af1788c627ca880b4c827a2",
+      "sha256": "995cc98e024219bbd17f28e059b7328c24c37acc1619babf5b791baa12bcdd19",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+      "before_sha256": "4a5febebdf955df0b1200888d4227df33a12030aabda6f6e2988f7156fc3a53d",
+      "sha256": "c5aa2174aa350704bd93d6d422fdecb6d24a06b8bc16add4cfc44ca88766e5eb",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+      "before_sha256": "c3c1dd41add452cf17fa9a3906465eca9e82cf5129269cf480c6a2a50ffa8de1",
+      "sha256": "ec13975286f3875ca6eaf27f382f7339256fbc1657505697e08f55c6fc63ee08",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/appendix_thermal_complete_table.tex",
+      "before_sha256": "ddcd021ccd4dbc22af32640bfc0e4fca3903244e85582ccc3aec0930d1cba3ca",
+      "sha256": "9a1ceb8e4dffa2e88c060fde1cf6ed2196260ab9c4ca834b774a08acdeb43032",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+      "before_sha256": "aee402cbb581005ea3724d4359ac5cf0de186ff56cbf80711228a61bd89d3dc0",
+      "sha256": "1a7c3b3d03da9c6b421c647e824b7c4091f00144dcc9827481d73b5c52360eec",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+      "before_sha256": "0ac60c33de15ee21a0dd7e0b34135921333ee155c21c4dcbeba503b0cd8f23b4",
+      "sha256": "57bf41fa683091da7fa402ee6b6abd7d9011f97d6ca172ba477753c05eac51fb",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/harmonics_complete_table.tex",
+      "before_sha256": "ac8fbdc6f9fb4030219388554ee910200a82139aaf7c0c83487369a1c471ca16",
+      "sha256": "8727b7c8cf5049ec035d58f5fb8d681c300183c139d38c33c50feaef3cefe574",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+      "before_sha256": "7e9db1e3eaa31f0848f8ab2ea30ddd0a787bbf79445b93bd857bd4ade5929530",
+      "sha256": "1bfc5e8c2b39a2942656e0bd6da1ba00dde7bcf5160b3b6801b648f323682b83",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/raw_waveform_source_table.tex",
+      "before_sha256": "241ef36cbddbaefc07d833be745f3fe324e853e5d43832cab75a5b1204159913",
+      "sha256": "e2245c4f1432e2735185d190cb7e933dd2eea40b64dc5a1f8737aa4dd87369e0",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+      "before_sha256": "eb244541d7cd4e99d68fe4b8dfec1e53120e235d2353c785e0ed494c24dabb51",
+      "sha256": "7726aa043cb84a22d68bdfc52439246bb3386f8de138d090417a6c3ef8ca8222",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/thermal_complete_table.tex",
+      "before_sha256": "9a75bf8eec524cea5bd647a54752473f415c13fff5f9acfb4ee546cfff795146",
+      "sha256": "5727d38e2c300febd3e731b7392b55fa7d2319bc5ddcdc294740a1661506d2dd",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/measurements/processed_rewrite/transient_complete_table.tex",
+      "before_sha256": "928bc4b9eedbda0399d2d3720c23e878abfd53b17b8cb707e0f4e5ebb48e2a87",
+      "sha256": "8b909f70498285b684694e75a35f5adc0129b0057e946bdb29ec72c32e486903",
+      "checks": {
+        "only_caption_and_approved_header_strings_changed": true,
+        "all_data_rows_byte_identical": true
+      }
+    },
+    {
+      "path": "Data/analysis/rebuild_results.py",
+      "before_sha256": "9ba727aa340832f6d9aea7e998b2b17f82c799bbfbcf1c75ecc0b3b8f965e076",
+      "sha256": "f9f1bfcfa3088b26b39e9c10485fac35fb9419495cc61e8ea59e5bfafc3a46b0",
+      "checks": {
+        "AST_identical_outside_approved_presentation_strings": true,
+        "line_count_unchanged": true
+      }
+    }
+  ]
+}

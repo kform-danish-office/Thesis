@@ -1,0 +1,1870 @@
+[
+  {
+    "path": ".gitignore",
+    "sha256": "abf8b81af5af73eff892ca1905ac9a4e6aa7fcaf14cf4fa6bbe502b93a83bc01"
+  },
+  {
+    "path": "Backmatter/Appendices/A_Analytical_Equations.tex",
+    "sha256": "0f4aeb03df5bd300eced1f78a5418d9123ed24b857075b7e6757dc71581d7654"
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "sha256": "0b2ba154f04ac4ed05b76b40ce69ed738c4db597b1fb4f872083eadb9cd4451a"
+  },
+  {
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "sha256": "ebb80897575cf98af83268589a0caa7e81e4d5c4d7b54e8a452f6f8d112800ae"
+  },
+  {
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "sha256": "cbaebb0fe37e1ee4a8d3e3f044317bb9adc7a822454e3fbdd8851a9c068283c8"
+  },
+  {
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "sha256": "75587b29d10e13fc66a2d0e622f6c95cc4d5d752087f2998de68198c963faf23"
+  },
+  {
+    "path": "Backmatter/Appendices/F_Contribution_Provenance.tex",
+    "sha256": "74f7b3a430669a1ff15205475d79df9dc36151236074933cb3f7973f05fa9e0e"
+  },
+  {
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "sha256": "f345f0e836cd4b97a6f969dc37967e5e7e22e16a12cb5ea36e18f0cd0de4ed54"
+  },
+  {
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "sha256": "386440db9d7398f9ad9427f2bc4f85dd56393dfc62d85b74849b71153a1c7a5a"
+  },
+  {
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "sha256": "f6e4c6ec94ebbc2f0f14f9257ad0c16374683e57a1e1e51eb8809c830d4dd7c2"
+  },
+  {
+    "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+    "sha256": "7399cff618a49f6a1adaa81ccba35d71304ab81830d9da71ec9e6a40ab1df925"
+  },
+  {
+    "path": "Backmatter/Backpage.tex",
+    "sha256": "fcfdc66184f3392390443549dbff2c7a2b0f68e7085353f75d5641a3ed6d194b"
+  },
+  {
+    "path": "Backmatter/References.tex",
+    "sha256": "a2dbe9668fdcaea84d45f92e4edac03b29a9a926fbfc61b3bcea6aa9818dc3be"
+  },
+  {
+    "path": "Chapters/01_Introduction/01_Motivation.tex",
+    "sha256": "24447a9145a9f47ab21eac1cf60106dea97abf8e084c93add3ea2c2b39adf697"
+  },
+  {
+    "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+    "sha256": "6d2b8c0a9d1667b4eec57c4be739e573773f8d8b5d54c78df17ab764ce4937a1"
+  },
+  {
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "sha256": "fe169683b6831c9bf74d4334ae0184a4120d6060d45b567edf531f9a93a11fc9"
+  },
+  {
+    "path": "Chapters/01_Introduction/04_Research_Questions.tex",
+    "sha256": "969cee80695328a9e1962f7edeeb42f7f43e113a7c9346dc957db9617269c5b5"
+  },
+  {
+    "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+    "sha256": "e0a87594a2e6863424d55954512da50addc401a73dadc4e28b48dab3caf2f81b"
+  },
+  {
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "sha256": "0902be888b0fc820dc8580fc2520b5694def56218d693d0a66e67f4a27ef91c5"
+  },
+  {
+    "path": "Chapters/01_Introduction/07_Thesis_Structure.tex",
+    "sha256": "7356a4bab8d09801bcc25fd20a1ad0d8c5c68e860579d62650a755a9d927dbe1"
+  },
+  {
+    "path": "Chapters/01_Introduction/chapter.tex",
+    "sha256": "03bd2ce2894bc78cace9c090e5aa34320b37314c47dc3c8fe2c49b08e0f16abb"
+  },
+  {
+    "path": "Chapters/02_Background/01_Offline_ACDC_PFC.tex",
+    "sha256": "27e2b20ee4f372bcfb6258b5c29b0ad48eb903b0b3253c345c959f14a244aa8b"
+  },
+  {
+    "path": "Chapters/02_Background/02_Charge_Pump_Principle.tex",
+    "sha256": "6d8119481a5b0a4ed13a738d65a8a36a25acee498091e4acb768c2a1f6feb841"
+  },
+  {
+    "path": "Chapters/02_Background/03_ClassDE_Resonant.tex",
+    "sha256": "8712a1b46f6e852603bad39cb02ef26b03d93339ac7060bcb9dced42aef01bd7"
+  },
+  {
+    "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+    "sha256": "077838a485c5370b44c1b98eea2c3a72eba754f5e645f8b1f55dcb9dce1ebc06"
+  },
+  {
+    "path": "Chapters/02_Background/05_Reference_2020.tex",
+    "sha256": "78a9d075c31e06c0d098c57705c8df20cec3878ec07594138f2f4e9f5b08196e"
+  },
+  {
+    "path": "Chapters/02_Background/06_Reference_2021.tex",
+    "sha256": "e11b21e91674ba5ef3d215cce3db76a1223a28cb7bb2dffc536f6cb9ca28c681"
+  },
+  {
+    "path": "Chapters/02_Background/07_USBC_Context.tex",
+    "sha256": "46af267c6da14b5a5a8e9f18cd7c58b4e7670fc5e418e9d669096ea91fec5717"
+  },
+  {
+    "path": "Chapters/02_Background/08_Research_Gap.tex",
+    "sha256": "1e6a6731e85b0a06fb1f55071bef32829de43376bebeb2ef47f51439b2d5dcad"
+  },
+  {
+    "path": "Chapters/02_Background/chapter.tex",
+    "sha256": "8ce1dbfe679c2d86387db006d7b356332db519cb74223524e8f41f764eb64d4d"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/01_Use_Case.tex",
+    "sha256": "65837777d80f6f2bb9366dbb89e138b7c182c2682c6df29b03efd8bc368063d0"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex",
+    "sha256": "65b484921ac939ad475910295e156884b906fd306f56bf89eec6ca0b4bb3ebc5"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex",
+    "sha256": "ecbcec3074bac250f8b15ecfc3f244196a24e7b33aaba793520941418bf0140a"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/04_USBC_Interface.tex",
+    "sha256": "8dc1e7f6f77c392780c29df5c61979b8dffd4a5328e9f0b2e3f9f1301988637f"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+    "sha256": "d514877ba9e90cb93e589f009023adb0377c94f21c45ce764a0ce7da2a4fae12"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/06_System_Architecture.tex",
+    "sha256": "7fa2bf973c05f1f9149d5a3cf5db5bd49cfb0c3648117ca493b4924608c47668"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+    "sha256": "a173c25f2f8a2d565cd10e9438db8bf5ef91df62a87eb9709ad2de09f427b206"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex",
+    "sha256": "5a9e0e7aa08eedda9f1796543622d471a4e024288d85430cbcea9fedbe6db044"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "sha256": "57a7e33fa8da0080a73dd26bb25fa6521117b502d8c22b0fdae08294421ae212"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/chapter.tex",
+    "sha256": "386adb021f8554457cfd2fa8b5edb3798695f5a5340d82f9e862d19806b22216"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+    "sha256": "50872af70b32a05294209d2abe553befbe23a65b768f35e62d29a7b1cf3c434e"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+    "sha256": "6720baf5f19c0b281dfeb00adf99461abc66193997a9b7e38e7a785acf603feb"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+    "sha256": "4b26d9df95a79095512d355e159349d1302f83619b5b13147d714115fd96ef01"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/04_Pump_Capacitor.tex",
+    "sha256": "dd4b42ae7ee303f0a4a8986fa82d26c38ca74be0e38ab89206767c76e5e3d009"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+    "sha256": "41416d2786012d68063170bdf471aad9c1f3d0cbbfa98f669501276580ef399b"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/06_DC_Link.tex",
+    "sha256": "68cddd36ea1aa8517e3b9a1760d80e270f50b9d109923c8747f2eb1bee0d6e4a"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/07_Resonant_Stage.tex",
+    "sha256": "88532de2a4946559aed12326f00d6a18b7d217f4ee8121141d71d141ebb9e252"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/08_ZVS.tex",
+    "sha256": "d621b785888badd28c4b1bc63dbe5ab631ed4d30faf8772f6e79a50b963d6fe0"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+    "sha256": "e2b14b560237c560f9e1295816c6fbeeb7936d340ff693abd3e1cd714957b053"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex",
+    "sha256": "f595512c1c840405e64fc25f530b93ed06ed2f5faeaf73b1cd7b9a0121276d94"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/11_Design_Summary.tex",
+    "sha256": "2a01f7a1f7e0a8c2bda4e1acab05abea10814d83e5591361fa2637fbdc73a209"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/chapter.tex",
+    "sha256": "2473efced6b8d397329940e8b7ef0be2f6004f2d9ea52495f1569e0ced2b1f9a"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+    "sha256": "fc9a9675580c5645a46369ccd1f2de6c09b36f821a1725d063252cdded3d47ee"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "sha256": "f1bfbfb1f9fb2b32aa8ee1e50cb6bb107c1fe310e1b4f8f82dc4ab612de69b37"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+    "sha256": "75254da375c9942b7f9d400aee3794d8ac918badcb33108408c4f0fe33ca9286"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "sha256": "faf3188e44c1421bef3ea58f40259e64ff115d391db83dbe94bc1aaa4abccb19"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex",
+    "sha256": "9c24344b112c33352a822637459c81b1f2fcfde6c35e642554f29ba7cf590367"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/06_Steady_State.tex",
+    "sha256": "b2b322589f964468ccdb524c1f408b6c30f876e553a8e15979727183132fce4d"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex",
+    "sha256": "4586d52eeccd3a9e8d7bf53b5d8951ce331e838e3e1b64d4b6cfdde154bc4033"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "sha256": "d81a9f090f737298eafaf7cf40f7acb1abff7189f95e0478a0af5da99c364986"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "sha256": "c8c71c72adbb1a2e9214fda7487e5c1fa12a1d28df68f941bdbf5d2e716fb68e"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/10_Data_Limitations.tex",
+    "sha256": "a37ec895da742c281af4c4b4ce1139fd4d00677133dd7c698535a8da57cc2653"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/chapter.tex",
+    "sha256": "4bda0dd9e7ebb4e5f457c55bcf764595826f994da4515317f6e0139caae249aa"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "sha256": "32a80d17d30d855d1b34d48e85fc978f92650b59b3438d87b1609fb5a64c77a4"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+    "sha256": "4de7e51a53a4132d81f8704bc8f29962ef1e72db6d392085c74d9d41a93ae322"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+    "sha256": "96781d0e824f8756ab8af0e55b21347975fadf73516151278082599aab91d041"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/04_Mounting_Concept.tex",
+    "sha256": "a4339227c71fee0268c51567ae42dd87d2bbe02bc40e62dea206c2035f04e995"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/05_Footprint_Interconnection.tex",
+    "sha256": "177add897168a012b9bcf00d69f20c97314efc82f67f61e8455805d0de468fc3"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex",
+    "sha256": "3af7d675abe4151551cd39a9939c960f075d5fdbafe3b483343f0562719108b5"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+    "sha256": "757965164c3717029afb9b9ccd58d13df8d914889800832a0fca6bef94d2613f"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/08_Parasitics.tex",
+    "sha256": "aa5aab5ecd85a7d9b98f2661832b406a3777bab017e50b581a1b480abc3ef599"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+    "sha256": "1baa76c3a7d89bd59da601d06522efc7e8ef2104dc9cfb17da093a1d39adcf85"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "sha256": "6e8f9451a599521a3a59c10dff31f8911f86cade110bfd9d344bc05f01367200"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+    "sha256": "e3c586e5e13de6d871a6db91f83ab434c92d93f45901c820bcaad9f1496abe7a"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/chapter.tex",
+    "sha256": "b20d8f1a61eb7fd812d8546d217c842c523615271245b86f19b395aab7f3fa59"
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "sha256": "1af1ad54d7bb0e477610a4e5560ff353f3ef2f4a38a9161bb1577791bdb31e8d"
+  },
+  {
+    "path": "Chapters/07_Hardware/02_Input_Filter_Bridge.tex",
+    "sha256": "fc00e642a04be332f2192a67a1859cf833bd2d50ade5d3c16a8091fd84a8e062"
+  },
+  {
+    "path": "Chapters/07_Hardware/03_Charge_Pump_Network.tex",
+    "sha256": "aabf75389fe06affe4d276cef2b88561bfe26f982a124bc1780849afac0ca818"
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "sha256": "0b6c67b056bf9f892f2840adbae4a5268ac7d09af64f3a34652e720cb3d7bef3"
+  },
+  {
+    "path": "Chapters/07_Hardware/05_Gate_Drive.tex",
+    "sha256": "51d97a4d9b6969407ef37fe44691d6340455e67495d1ab4bac914672f0fd1a5c"
+  },
+  {
+    "path": "Chapters/07_Hardware/06_Resonant_Output.tex",
+    "sha256": "95c0225cb94ed6f8909cfb33f3069258fec003677696878fb242996c7938c4b6"
+  },
+  {
+    "path": "Chapters/07_Hardware/07_USBC_Interface.tex",
+    "sha256": "7f21cc28ed772517cad78a80ed8bb2f918ae3af16e102aadac8ae86a1a719910"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "sha256": "c2772314a478f3508eee594fa6729f6ad85c11ddaff1f004e59984d5a81635a5"
+  },
+  {
+    "path": "Chapters/07_Hardware/09_Protection.tex",
+    "sha256": "52c986defdabe615fba674d7ce33a206f19783ae6e432c9d7bc1fb4ea69c63a6"
+  },
+  {
+    "path": "Chapters/07_Hardware/10_Auxiliary_Power.tex",
+    "sha256": "6d0798076eb7c60f4f1dcc75e81ca5fabaee6686daee1d40dd384e34d83c19cd"
+  },
+  {
+    "path": "Chapters/07_Hardware/11_PCB_Layout.tex",
+    "sha256": "6b75906e5f7fdf751432ebd243dcc6e17a5861277689ae86d52542864175da80"
+  },
+  {
+    "path": "Chapters/07_Hardware/12_EMI.tex",
+    "sha256": "1393845596eaad2b560640a1ea2a489e7d7235c4a25d18a6b98f910269352572"
+  },
+  {
+    "path": "Chapters/07_Hardware/13_Thermal.tex",
+    "sha256": "39b31c45cc3c48743c58fd4a7a678f465e41c48d890251da3f9dceff706bdf7b"
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "sha256": "0f3944ca1cc30ad1f9d1177d8b2385b53b0dbc12ae23a75ad26d45cb7c481e47"
+  },
+  {
+    "path": "Chapters/07_Hardware/15_Unmanufactured_Revisions.tex",
+    "sha256": "904f70098ad3654921135f776cbac31bc8293e4153c6ce0b09327ad4b2fcb79d"
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "sha256": "7959712a3e1562aaf658286b831f074f1a372918c1da9216654fe6d91458f943"
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "sha256": "dff695287fd8bcb3a5d0cb1af337d91ad3a35ad80bf93c17f4cdbf3231f0019b"
+  },
+  {
+    "path": "Chapters/07_Hardware/chapter.tex",
+    "sha256": "b0c26e000ecb98e4604ada1e3fc649820d9df6d5bcb1be5bdc15bc278a1b79ee"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/01_Control_Objectives.tex",
+    "sha256": "2a939a907debd463be02bc851ae9672a99c434bcdba4a8c95fe807e071b8b05e"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "sha256": "335bbd6acb350a9a2004bd5bf45554d9804f4c5c12254af1894dd2517b5165e6"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "sha256": "bb18bf6197361e662c37df10cae9140d39fdb4a725253de7612a2416f25ccfc6"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/04_V0_Open_Loop.tex",
+    "sha256": "40b6719da9dd50004e8bd8f7e0f6c96ff72436020262e74e81a61b875bc8dc95"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex",
+    "sha256": "cc28319e175758acda671f49dad975c3c7299d5540fc7517c25039c62131d74e"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/06_Blocking_Limitations.tex",
+    "sha256": "0053584a9b7e527507c1854fc378cc76e4842ca85fe27bf088e17c3c6224bff1"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+    "sha256": "bc6f2d445da21d6b91362556471a2a97aa907f33b502701e7442dff1ebf30b01"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/08_Control_Law.tex",
+    "sha256": "cc9ae073176001fe19914b7f70796b254cd51a142db0e8c3d2f38899d10f96eb"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/09_Limits_Antiwindup.tex",
+    "sha256": "e1f376e65bdb59e95edf6c7fe0cbc663b2ab2717c23da44c2400ae5f7892b25c"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex",
+    "sha256": "31ee71768b848854ccb5966da426018b4bcb85b300008ed9db56f39a7b6fe5ee"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+    "sha256": "3d43ac4eca026c2972290c80118ef6a331a3505375d5d021aa9ff6797de36cdc"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/12_Fault_Handling.tex",
+    "sha256": "9df9e071c05f57403c12b58d814f56a3781b03e394c2b0ac595ce17e2637bb96"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+    "sha256": "628d53171ba35583ddf7c78e1c804f39243bf450721b92a4fb9822ef7a1955f2"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+    "sha256": "433c380837bacfe05c9563df31c4895cc2987afec2bd4de8c5dbdbc37ed77cef"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "sha256": "c435b9ce64afa87ebcfb12e0899f0fd557fcc6ecdec2f97187ce6e2f9380ebb5"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "sha256": "09c766520b9ee1c4ee04c8327f404bc2ebc0eed640f87a57eb4df9d0890ff700"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/01_Objectives.tex",
+    "sha256": "d436a0cd7a5a8d3c71cd1ad5bcc72b5f17952ecca545c9323f0541096facf8a5"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/02_Safety_Arrangements.tex",
+    "sha256": "44e76e5550ef4b7e6130fc49585f8066b660d06cb41977b3bec6c8c86be72ba3"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/03_Test_Bench.tex",
+    "sha256": "e4b8f02698f5accdc35d9976764a299554ca6dd614f036a7fa2f09fe342e145b"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+    "sha256": "841dfe6227d5617f3e7229b47d2d83e415c9bfcca3954e0ec7a610bb72845c75"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/05_Probing.tex",
+    "sha256": "e0212ee739ce4644335fb990609cd3a966446328d3f1fb0c7c95555d627576a7"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "sha256": "1fbccfab97d4b89a31d03e0446f7c4941950b0a281630506a3a1d0acbfd6c19d"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/07_Control_Tests.tex",
+    "sha256": "9a5f10228571a4a1307f864deb6398aa279d54332fd1b42c011119bb7c425e68"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/08_Power_Quality.tex",
+    "sha256": "ad6e403c4a3ffcbcbd3a8c99877bb477f7aedd1ede8622e2327632b9fd6356db"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/09_Efficiency.tex",
+    "sha256": "41d81ae57eeb3e590db7a971bbd9efcc2f2d66b1e8acdb897018a790fee0f57b"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/10_Thermal.tex",
+    "sha256": "df1b1adbeacf4bd5fec4c8ca14f478e477e37c325aa2667161b290aa0874e2d7"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/11_Uncertainty.tex",
+    "sha256": "d9f05e662ecdde5afaf13ad4903c51536c168fa89d84101114ec160b6cb116ec"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+    "sha256": "6b11e5e556165168a0b9afe13a0b87b9b89101662c6e43df482a09c1891bf5e1"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/chapter.tex",
+    "sha256": "a277a29e2be9ce88142e8dc9cd570954ceee3b269bb70942afbcf38ec29941ea"
+  },
+  {
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "sha256": "bfcb3daaf9524ad4d613945abfba4fc4ec4c65fd360430e672796f6dc5cdb33f"
+  },
+  {
+    "path": "Chapters/10_Results/02_Startup_Shutdown.tex",
+    "sha256": "31bb732aaf5ea243c4ca1c6b62f0b476032d7c07bda42c3d0abcc841b88be965"
+  },
+  {
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "sha256": "c522a92e931c52f11f6b7de0c669af4938fadbbf3f872ea83ce7d9775a8c6675"
+  },
+  {
+    "path": "Chapters/10_Results/04_Load_Transients.tex",
+    "sha256": "04bc1d80ea210430f86098df9539b6f60cbf0bcc1a855f697d63106df92b542a"
+  },
+  {
+    "path": "Chapters/10_Results/05_Open_Circuit.tex",
+    "sha256": "76657897d4128f65d276df3aa58256d14d82914258b85f55569bc6e548e443d4"
+  },
+  {
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "sha256": "d048a96df1853f099abb397cc4cde99797909837f39329e42f5668c96cc88a6a"
+  },
+  {
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "sha256": "5e86d88c7ba6614ceb74531864282897b78996447b34918a237ca44c60f4bb31"
+  },
+  {
+    "path": "Chapters/10_Results/08_Efficiency.tex",
+    "sha256": "ccfebd88dfa2bf37ef21809edc463ad04b3261b36c4a014744a53ba14908fa34"
+  },
+  {
+    "path": "Chapters/10_Results/09_Thermal.tex",
+    "sha256": "75402d6c087cb9a7fb20825a60cd234865e94ca177c048be8b22d4f507416b30"
+  },
+  {
+    "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+    "sha256": "35417649c518f8163c0edd5ea26cee373538c217169e91246b043c7eb9bb4cd1"
+  },
+  {
+    "path": "Chapters/10_Results/11_Simulation_Hardware.tex",
+    "sha256": "cebe54a756e9344dbef6aba294fc4605281e313b51152d060be9cfb297f1e559"
+  },
+  {
+    "path": "Chapters/10_Results/12_Compliance_Table.tex",
+    "sha256": "9fef61b916f158ba40987270e78eb0c2ee04e435426fc846f4cc9d07a102a746"
+  },
+  {
+    "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+    "sha256": "7ee6f9e1e9b5cab42fa3d2c91ed8d360fef9eeaaf3f8293043c28ee1ce14b7df"
+  },
+  {
+    "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "sha256": "93aae710366b85216a77919bf29cdd0794fa543e1d827895ffb436812c134041"
+  },
+  {
+    "path": "Chapters/10_Results/chapter.tex",
+    "sha256": "c2f653d1885247168446b8e3d5b94e2bdc99536370ce9b9e750c5896ec79c24b"
+  },
+  {
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "sha256": "61fcb6b1dc339807207550d1719ea99516d1a3a8c8c08cc110fc2a199485b403"
+  },
+  {
+    "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+    "sha256": "3779e73b79109a5e495395a75089dbad679ec477e007ad33381a553ebac60fe6"
+  },
+  {
+    "path": "Chapters/11_Discussion/03_Control_Contribution.tex",
+    "sha256": "1a1a6b49c61b32e885aaa804d78b8b00208f85f0294b73a6e76e36c4cdcb88ad"
+  },
+  {
+    "path": "Chapters/11_Discussion/04_Open_Circuit_Safety.tex",
+    "sha256": "a73e14565614fa559b661732d8c12009fc2af21d8cba9832f1a5b003fc75114b"
+  },
+  {
+    "path": "Chapters/11_Discussion/05_Magnetics_Integration.tex",
+    "sha256": "84c8c4682b6a3f7f3656e3eb06f05506a9a9177eb349f3695d03e34fd35d9ef5"
+  },
+  {
+    "path": "Chapters/11_Discussion/06_Reference_Comparison.tex",
+    "sha256": "c7f7528d5d835f5f10671e782b1162a0656ce744a6c656c7d3a219f69147de08"
+  },
+  {
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "sha256": "fc6eeed4df677d2f5683006b8027acc8f3ced12eaed25c910732bfa5ace1a736"
+  },
+  {
+    "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+    "sha256": "71341f6228db61dc5f2dba264901c3910ae1bd553fc1374dfbfc89c756b5f520"
+  },
+  {
+    "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+    "sha256": "718e1caef2ddaf3a1fc854c570f251fa70402db6e3bb54c28960e2962c065df5"
+  },
+  {
+    "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "sha256": "99d021481ee5a84fa020cfe513ffb82327de5a83025fd1c439d11aead3e13e79"
+  },
+  {
+    "path": "Chapters/11_Discussion/chapter.tex",
+    "sha256": "e8ac00e553534b61927509f58fdef0b1084b7c79dbb6e2ae89bd824b345f2b75"
+  },
+  {
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "sha256": "af17adb5a0dd927da1e08d3d5cd9f75270cfd092062423d0ea0b104ddc39e99c"
+  },
+  {
+    "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+    "sha256": "ba4b4475825309be7ec16be785c06b62f11d3d2a967c7eae8456f9658a4a3c0d"
+  },
+  {
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "sha256": "742df5ad73d2eaff394c67d5e159c16d44f02bcd415c4c2ab6beaf27ad0a1ce4"
+  },
+  {
+    "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+    "sha256": "2f0460df613c66e8b202eb5a08052af0b43bf25f969d9913d5ee3855f42689a9"
+  },
+  {
+    "path": "Chapters/12_Conclusion/chapter.tex",
+    "sha256": "1f68c03d8fdc7b56c1f74a13d5c634b54a53850027af59f5b2aeab0921d1b5ca"
+  },
+  {
+    "path": "Code/PWR_2_0_1/docs/README.md",
+    "sha256": "a159fdd984de794167d56bd3dce8e3a38ce9a484ca6ff2680b66c3536a51225e"
+  },
+  {
+    "path": "Code/PWR_2_0_1/docs/firmware-flow-distilled.md",
+    "sha256": "b515e507c7dd2d1c37e62ce15b371f7f6cb9534ebc9a5d2a2381f629e0d72971"
+  },
+  {
+    "path": "Code/PWR_2_0_1/docs/firmware-flow.md",
+    "sha256": "82216c2e30f2238f7c7c7a2274a89fbb6e7b51cc3c0985bfb5990af46a5cf93b"
+  },
+  {
+    "path": "Code/PWR_2_0_1/docs/power-control.md",
+    "sha256": "02c85aa57dd0856e5d8ab4d66f2e66f832781bb6d06a8c344c84dd697f4b6d67"
+  },
+  {
+    "path": "Code/PWR_2_0_1/docs/stm32f410-port.md",
+    "sha256": "33057ee8d9658ecb32e8d5a921092a0d971152366eeda5d1ab552353a89ebc6f"
+  },
+  {
+    "path": "Code/PWR_2_0_1/docs/uart-commands.md",
+    "sha256": "40c416128d0f347ca6de734f95c450bd7661f63b63f27d03ded681472eed0a64"
+  },
+  {
+    "path": "Code/PWR_2_0_1/docs/web-protocol.md",
+    "sha256": "aec6c801f9432c96741682f94a647271a8e7072cea5ebfe6ba3a9aa6da2de867"
+  },
+  {
+    "path": "Code/PWR_2_0_1/firmware/build.ps1",
+    "sha256": "806e87f8e3638c27ac91b297a99817ff18ffb41a3f52077b4f224dcb30ce6691"
+  },
+  {
+    "path": "Code/PWR_2_0_1/firmware/stm32f410.ld",
+    "sha256": "400597cca105a2037c828658e55252bbccfd4285efbe65dece11d364e28299aa"
+  },
+  {
+    "path": "Code/PWR_2_0_1/firmware/test_web_protocol.py",
+    "sha256": "424e0682b49d6177bde643f02ebdb48f59274e4466fcdb392f2da1f085be7eac"
+  },
+  {
+    "path": "Code/PWR_2_0_1/firmware/verify_f410_hex.py",
+    "sha256": "bc4f5c74812ed8ba478da0b1410cc7480f36ef26184e40307af50a5987ce7f75"
+  },
+  {
+    "path": "Code/PWR_2_0_1/thesi_power_control.ino",
+    "sha256": "132c60aeeaed5572f294334059a61f6100640861e08b4e0fd2d2a6b4106314b7"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/app.js",
+    "sha256": "044954a48312711abb2cf0e08de6c80a08850e2637c3df87f3fff92a28929ae2"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/build.mjs",
+    "sha256": "cc652e66a87631a045502caf01a1a668d18ab4c5ee09281cf06bff46b6931b37"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/calculator.css",
+    "sha256": "4c9051ffdaaea49a56c9545da53924a0d5da22654be864920a3dc24bff20126b"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/calculator.html",
+    "sha256": "cd4caf9a60402fc039040551cacc78ffba159d8b922bbdf858f248b914375290"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/index.html",
+    "sha256": "2f4b587117d3478665186552184b637077d1451098fbdb5e3d0f89a04c5dbb44"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/package.json",
+    "sha256": "f08d5f4d0a4aba3aa7f503756ea2b8b1e857970b493341614c49556f01079cb6"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/protocol.js",
+    "sha256": "0254f0e9fb34d5892bd9cacca1f392430cd222f4beb4e46544e489395c85b0fb"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/resonance.js",
+    "sha256": "fbdbcb1e97a6155cb7ba00101f7408f8697b6848675717d381a7d8fcb7597691"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/serial.js",
+    "sha256": "a27971d5452b39538bb1799faa74b4480aadef460d0f4a38f1a25247b5c80d67"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/server.mjs",
+    "sha256": "dbfb0cfa99592d75442cf4ba50785c39bc0a88d351f9a04bce12773fc6fb4d82"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/storage.js",
+    "sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/styles.css",
+    "sha256": "5d648d261e47f2eef2c744a9a10aa4d93d360fe4d4b0b094def894c8e5b4e822"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/tests/protocol.test.mjs",
+    "sha256": "a9bfd90ecef436ecf4a1c0b8f3858bdfc96cbbb381d55e195b886b48d4325401"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/tests/resonance.test.mjs",
+    "sha256": "5e019e3cf5acc3f343c494dc4d62bc44b63a9fe44f94219b243b14d24f38f289"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/tests/serial.test.mjs",
+    "sha256": "2cc0f59b469c39791f531af101eba2aa566ca2bb9f2d22caebbcbccb215a2de1"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/tests/storage.test.mjs",
+    "sha256": "5d1b9470ffd907d6a933fa456e02093a7651d44902d7de129d371f7f18ab7cf3"
+  },
+  {
+    "path": "Code/PWR_2_0_1/web/vercel.json",
+    "sha256": "9927baba1ec548c86f6bafaef0577d127368be5d7b0aafa97f9883fa652c40f9"
+  },
+  {
+    "path": "Code/README.md",
+    "sha256": "e0cdc054fcc90c5e6a087f154d4e609c7c439a167cc05c85441646f12465af94"
+  },
+  {
+    "path": "Code/software_verification.json",
+    "sha256": "23b82188a92276d9635d590fa4ff15eeb89a120584088e18d571ca35eb6068a0"
+  },
+  {
+    "path": "Code/source_manifest.json",
+    "sha256": "8692a5ccc6482cd53cab3f1285dedec972490b571139803a3af983ac93b88cfa"
+  },
+  {
+    "path": "Code/thesi_power_control_PWR_1_9_20.ino",
+    "sha256": "39c2769a4a597e9e70cc0a8ee11dbc221aab084e2eb082b5b60e41b28f2de70a"
+  },
+  {
+    "path": "Data/README.md",
+    "sha256": "2a542d0a97c85b2c21e83e8ed3b58ed4ee4de8132ba1b53529a0ef03b310d364"
+  },
+  {
+    "path": "Data/analysis/inspect_measurements.py",
+    "sha256": "9832429c1d17e5252f36ec19542fd7b782e685d43c9be4c5db2b294bde38bfed"
+  },
+  {
+    "path": "Data/analysis/rebuild_results.py",
+    "sha256": "9ba727aa340832f6d9aea7e998b2b17f82c799bbfbcf1c75ecc0b3b8f965e076"
+  },
+  {
+    "path": "Data/analysis/thermal_image_reference_table.md",
+    "sha256": "aab33be54b0b745af0cafebdd5e9e7d73406d2bdaca9e946ab2c8c20ce513f65"
+  },
+  {
+    "path": "Data/measurements/Thesis_75_80W_USB_PDO_Test_Plan.xlsx",
+    "sha256": "604e590a28913fafccf662eb0d34ac912ccad85b8a1e11527d76bffab4077cd1"
+  },
+  {
+    "path": "Data/measurements/Thesis_Final_Measurement_Checklist.xlsx",
+    "sha256": "18a6a1c6486e2bd8d719855b56cac62aa6a3edee2ace2e725af898fe237311ea"
+  },
+  {
+    "path": "Data/measurements/Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx",
+    "sha256": "9c4116ab9c267cdfe4b93a62490ecdca8cbb722edf27dff04684ba1ef27aaea2"
+  },
+  {
+    "path": "Data/measurements/Thesis_USB_PDO_MultiVoltage_Test_Plan.xlsx",
+    "sha256": "b812cf65ee74d75afb772124edd753d0c36164c1a9a99a396015f238e54411c4"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_15W_1A/itech_current_harmonics_15v_1a.png",
+    "sha256": "f46380c33e5d67f534729d796c0ce486b7fa1c6a142d5fd7e58ccb40cca3a988"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_15W_1A/itech_input_15v_1a.png",
+    "sha256": "902b3a06a86b166933ab77e3e93b28f1403a00a2df89b7b6199e261fe2e18453"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_15W_1A/itech_pf_detail_15v_1a.png",
+    "sha256": "8b5357dbe4d1cd72d7664c62ffe4a3e46b743ad9943bea3692da0f98944e8f0b"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_15W_1A/itech_power_detail_15v_1a.png",
+    "sha256": "d575af28c60f22b188dd9111d7a75f0b1ac08d4cb2405bcb96de2987dd5025bc"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_15W_1A/itech_voltage_harmonics_15v_1a.png",
+    "sha256": "22c8b181b015953fec218f211497d8fad4a76f1f8f76b65abdafaa96d452bdb1"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_15W_1A/keysight_15v_1a_sw_secondary_vbus.png",
+    "sha256": "a93a3992c1bd6e0e5b4f38b3e59b6d09efec5591d5cbe65c64e4c02d1bf70265"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_15W_1A/siglent_power_15v_1a.png",
+    "sha256": "4200bcbc509de0962b4d3b7b1a21d296793abe49e9e1738b81aa34c41889cdc3"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_15W_1A_AC_COUPLED/keysight_15v_1a_ac_coupled_secondary_vbus.png",
+    "sha256": "96ae435bb09d5b19d7b0348731ca543d8572960cb7992691015640486271477b"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_30W_2A/itech_current_harmonics_15v_2a.png",
+    "sha256": "691c57641e751c59b782a234b544da3d8bbbab89676d71648df024961ef47b9e"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_30W_2A/itech_input_15v_2a.png",
+    "sha256": "ed7e7c1de01ce6897036cb85ec6f27bbffed245f1e2d355e8596bcaaf2970b39"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_30W_2A/itech_pf_detail_15v_2a.png",
+    "sha256": "090693a1f6b174e9eb68eb1c2b6f5bbd26e0294746ac583b14a801ee4de07ef1"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_30W_2A/itech_power_detail_15v_2a.png",
+    "sha256": "ab8b000c723db0f6294e5b670909205135232af8b41f3ce4c935a805ff3440c0"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_30W_2A/itech_voltage_harmonics_15v_2a.png",
+    "sha256": "464ab0652245eb75eec38211661c21557d1f0a216af40f897997cd9cd4db9ba5"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_30W_2A/keysight_15v_2a_sw_secondary_vbus.png",
+    "sha256": "ab76d5fa9379990898b74c2f6cb8257f42efff8fe8b205981312738611638705"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_30W_2A/siglent_power_15v_2a.png",
+    "sha256": "08be6b964707aa93c5c65339a5264d9468bc87532886c10db7fa02e5ffe3b030"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_30W_2A_AC/keysight_15v_2a_ac_coupled_secondary_vbus.png",
+    "sha256": "5990410906aed54036a422692a1f92cad9a3f8b6029916eac9797a003c4bd116"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_3A_TO_NL/keysight_15v_3a_to_0a_transient_sw_secondary_vbus.png",
+    "sha256": "b834a02ed56b57376a1d4cb380dd7fc092c6eb4f40f62297986f21c56c88ff5d"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_45W_3A/itech_current_harmonics_chart_15v_3a.png",
+    "sha256": "f5494cccef684e8b666d8b6e7710564b68a56a5915736b73a189b6565b164d7e"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_45W_3A/itech_input_15v_3a.png",
+    "sha256": "5c0cd3cfba853a3ea4eeb08951981c08c191c87f12890beb8125ccf8223895c8"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_45W_3A/itech_pf_detail_15v_3a.png",
+    "sha256": "d5d8a627304fb48883ce965cb22ce1d4900097706514dc0a4ca6f635156fd4ca"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_45W_3A/itech_power_15v_3a.png",
+    "sha256": "81ad190591f5315050239ba97b068eb059a38b6d73c21a2bdd9ae19d5bcf0c6d"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_45W_3A/itech_voltage_harmonics_15v_3a.png",
+    "sha256": "4c231313bf74404673be384f82c219531673bcab034b088e86bf2f9623bda669"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_45W_3A/keysight_15v_3a_sw_secondary_vbus.png",
+    "sha256": "0ff208f86e872aba724ceb8e0f668a622d9ed05fa032fb9f93d0911628a339e7"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_45W_3A/siglent_power_15v_3a.png",
+    "sha256": "613a69649b4845419e14edbb795dbb7d7f9281484019043ec926299a1af7e156"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_45W_3A_AC/keysight_15v_3a_ac_coupled_secondary_vbus.png",
+    "sha256": "709b76549e09235f398b3539f9441da43b1999d6acd03a2a6fc7f01478c5e3dd"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_NL_AC_COUPLED/keysight_15v_no_load_ac_coupled_secondary_vbus.png",
+    "sha256": "2398fac0a9f001d12ad724e832a4a0afc11b3d49634c8f5796dc67c2b68f1147"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO15_NoLoad/keysight_15v_no_load_sw_secondary_vbus.png",
+    "sha256": "9ab5a0f50b0aa20dc54f90d5fc4864f0a85fa64b175fcce178815aee246bd4a6"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_40W_2A_AC/keysight_20v_2a_ac_coupled_secondary_vbus.png",
+    "sha256": "d5b63276744a5f39f8caaa547df7d51aceade2fdecb80248744a08a28ea2fe82"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_5W_025A/itech_input_vac_iac_20v_025a.png",
+    "sha256": "c787e9f19e43936cfcc6a1e344d68ab8b18272027113a0e92d81a368905b449b"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_5W_025A/itech_pf_20v_025a.png",
+    "sha256": "18aafb91b273357c7f5288ca52de64a49158bfe43e2ebd54ff9222841f98d74e"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_5W_025A/itech_power_thd_20v_025a.png",
+    "sha256": "9a80a791ced091bbfbb70479a3030299b6f2ab85706fbf43af40fbef8b46ac84"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_5W_025A/scope_vbus_secondary_20v_025a.png",
+    "sha256": "4bfc02ee6f362bd2af77fc35870053d1cca1f1c407f3399464af54cab1a4f98c"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_5W_025A/siglent_power_quality_20v_025a.png",
+    "sha256": "a0d998523e3648ff1be8d1ea1b2e6a0d4bb19a24f2a286dd2f10e763164cb8b9"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_60W_3A_AC/keysight_20v_3a_ac_coupled_secondary_vbus.png",
+    "sha256": "9bc72cfe616896da1e4539d4216ce320a0fb6e9d445425b454ce444b9a1a8596"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_36A/itech_input_vac_iac_20v_36a.png",
+    "sha256": "fc81521f4d38aa10dfadd510665e04c4bff37adbe387786eb99ad0d3d863cc9b"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_36A/itech_pf_20v_36a.png",
+    "sha256": "6aad747c80a0c3404975f4f9789cbe9242b7556c7452797eeca2cc8ba7a15112"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_36A/itech_power_thd_20v_36a.png",
+    "sha256": "9bfea7b340238ce66f79c5993327dc4f4b0bdabcb2dbb0c3450a2ec05a0f95ff"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_36A/keysight_sw_secondary_vbus_20v_36a.png",
+    "sha256": "52e57300dc11cb02f06d21f6e318e97cb651c456d342bc1c21db34fd2cec3d65"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_36A/siglent_power_quality_20v_36a.png",
+    "sha256": "44cdc8ff3ef9efc0f82bb3db4c05cae95c4dd9b74c22f52f63539d23eb05bba4"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_36A/ti_pd_analyzer_20v_36a.png",
+    "sha256": "65e3644e4b3ed70a12957bebeaba7b0fdca4c4f5ff90ac6b27d72fbb5efa1a36"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_37A/itech_input_vac_iac_20v_37a.png",
+    "sha256": "7f3958f172942cc42ac747e047a44b8702e534e1a950d9d56c71added541ed79"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_37A/itech_pf_20v_37a.png",
+    "sha256": "6a1607daf0254e2dd477840f3212026269f851c7893aa57a9b49e31ed614dd5f"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_37A/itech_power_thd_20v_37a.png",
+    "sha256": "16442c5120dac4729128a3ee1493ffc8204bfcc057880680b5f686a8b10b9fc8"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_37A/keysight_sw_secondary_vbus_20v_37a.png",
+    "sha256": "f493243cd9bbbe3ff253614c81b7a7543820d640b9a3ae1cfdb41f669c02eff8"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_75W_37A/siglent_power_quality_20v_37a.png",
+    "sha256": "95c073ce7374a6e866a059f435fe881fbec6d1aca52e5328ee04ed1e9ec74385"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_76W_38A/itech_harmonic_current_20v_38a.png",
+    "sha256": "0d00d1b51e67c52b9c46647375ca551689008fa5d4c0772f225e9fa1e80ca21d"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_76W_38A/itech_harmonic_voltage_20v_38a.png",
+    "sha256": "1f50adba1d3124eee9db485ffaf8ab233349c4591417e7c8f4e9936c0c3ff2ba"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_76W_38A/itech_input_vac_iac_20v_38a.png",
+    "sha256": "9c8b7643be87f3e5d85073e0362a35d85118aefbd4cebf451afc241951e68a49"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_76W_38A/itech_pf_20v_38a.png",
+    "sha256": "1cc951ad5747aff7ae39db1257d28e87494e034855eb9deb42dc42b68ad344cc"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_76W_38A/itech_power_thd_20v_38a.png",
+    "sha256": "f384343eafc61ed6c2a516e515ceef5584c656af0e5ff2a26a480099d91a9928"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_76W_38A/keysight_sw_secondary_vbus_20v_38a.png",
+    "sha256": "a01ffc7c71d4016eaafe808851789984ea65195219bd649bfc65f585ca0aca15"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_76W_38A/siglent_power_quality_20v_38a.png",
+    "sha256": "f090ff1ef6194601d8f10c133d991b815cbe737ae88d7385b52f0e2f92018413"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_39A/itech_harmonic_current_20v_39a.png",
+    "sha256": "42dae4f00df721b925dc93437488b0e01ad150920a70f42c42bcfc57e07ea751"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_39A/itech_harmonic_voltage_20v_39a.png",
+    "sha256": "88ff2f4b19194583d6e6936c3621f7d21ac1059e555a9e682fdb86215db80b5f"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_39A/itech_input_vac_iac_20v_39a.png",
+    "sha256": "7abd390d0894241d54c43925774a215c41e651549de7ab9f02fac082b2d66daa"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_39A/keysight_sw_secondary_vbus_20v_39a.png",
+    "sha256": "35a2bf123a95063dd9b5fba6306b847e073829cde3ef04d3a92406d22c31ae95"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_39A/siglent_power_quality_20v_39a.png",
+    "sha256": "d13902083c99baebe338c06ece5c80d98cb20553131c8bd7dac2f0759f91b2b2"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_40A/itech_harmonic_current_20v_40a.png",
+    "sha256": "ae71f10b8dd1f8603b337de81970f24b1985e30e75a69c6f0dd826fdffcd5936"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_40A/itech_harmonic_voltage_20v_40a.png",
+    "sha256": "a1e668b16a56fdaa81e6df96416076734ddb4c895655be5a8bbb7680af6763bf"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_40A/itech_input_vac_iac_20v_40a.png",
+    "sha256": "49c47cea9adabef159f9e65ba0f9a264ed94acefd3735e8ff6283dc0ea0a3c11"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_40A/itech_pf_20v_40a.png",
+    "sha256": "eae39fa8815d7c4f68a454f303175020e7a8df9c0a2671d5b2fbfa172be531c3"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_40A/itech_power_thd_20v_40a.png",
+    "sha256": "c3b4794b0eafb4da9a00e97d2ff6acbee54f1c3ed149614150e9534a548b9bcc"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_40A/keysight_sw_secondary_vbus_20v_40a.png",
+    "sha256": "b8ce6feec1f64034218747f89fab3becf826313b01faa7f5f25bbc7b57285828"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_40A/siglent_power_quality_20v_40a.png",
+    "sha256": "dbaaeafd51ec07d269427066d150a3b22fc6f6bc36a3737ea79a112f8dfd1b4b"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_4A_AC/keysight_20v_4a_ac_coupled_secondary_vbus.png",
+    "sha256": "10eaf1eec9319a245e8f2ae715a4ab43732a31d1e254c60e2044446f8e8a9948"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_80W_to_NoLoad/keysight_80w_to_no_load_secondary_vbus.png",
+    "sha256": "96b4f89c2bb64cf5fcb0f1e47056331636466f58a3e2c0b99d68fe2cb184eec0"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_94W_47A_AC/itech_current_harmonics_20v_4p7a.png",
+    "sha256": "7cf472ed4c22840e046d6547e2a99af417744c56bc7d712577d1e9b8721c5caa"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_94W_47A_AC/itech_input_overview_20v_4p7a.png",
+    "sha256": "331c64ec9444fa5034d0082b26c938c173715925fc9e2b2e3dc176879b20f92d"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_94W_47A_AC/itech_input_power_20v_4p7a.png",
+    "sha256": "371237cb548ce8086b5e6d8e69eb83091bdb7956bf3f76c73e2f2515898b8ebd"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_94W_47A_AC/itech_pf_20v_4p7a.png",
+    "sha256": "9cb0fba2de42d409f90efd2fec647f190514bb7fa856147275e591eddcc471d4"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_94W_47A_AC/itech_voltage_harmonics_20v_4p7a.png",
+    "sha256": "c18b927bd214ea8b6236c90e512392148d758d960ddbb43040bf05077770cebe"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_94W_47A_AC/keysight_20v_4p7a_ac_coupled_secondary_vbus.png",
+    "sha256": "10eaf1eec9319a245e8f2ae715a4ab43732a31d1e254c60e2044446f8e8a9948"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_94W_47A_AC/siglent_power_20v_4p7a.png",
+    "sha256": "ca3c6b5d589d8c44293a0ec2aa4c74dd976f953d23dbc6a7d21b70710887898a"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO20_NL_AC/keysight_20v_no_load_ac_coupled_secondary_vbus.png",
+    "sha256": "3c5b1cdf14436f2a1d9b253576a60fa97ecfadb90c8a5d8f8105287329489fdf"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_10W_2A/itech_input_vac_iac_5v_2a.png",
+    "sha256": "2cb3e9b6d3ed97d1040d30840627e3e8e3ff62685c1554a7eb5a3d0848bfc35b"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_10W_2A/itech_pf_5v_2a.png",
+    "sha256": "b7d6b2589ca8316b2fabccb8b19a9df4949404aa702d01e4269edaf6a0a03d7f"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_10W_2A/itech_power_thd_5v_2a.png",
+    "sha256": "f10f5720368ccad3caeda37668e6e5e5ec812c02dcadb86d527da7dd5b4a775c"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_10W_2A/keysight_5v_2a_sw_secondary_vbus.png",
+    "sha256": "5c6496fe0879faa49c7b4870a64e0af25e43f9cab96164701f362f0c4161a954"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_10W_2A/siglent_power_quality_5v_2a.png",
+    "sha256": "8dc96a104eb20ab7bb139be717d499a7c2ab245785765bef4eec2b38ab31230d"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_10W_2A_AC/keysight_5v_2a_ac_coupled_secondary_vbus.png",
+    "sha256": "fac33647e8d227962a7220bf039005e984e18668710795cf962cfc3030e409f7"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_15W_3A/itech_harmonic_current_5v_3a.png",
+    "sha256": "35581dcb75c372f0e0df36383f2882e0ab670fe99ba908c63742d4c0207f70dc"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_15W_3A/itech_harmonic_voltage_5v_3a.png",
+    "sha256": "259e72c9cf7df6ec16fe073f88b44dc58ef78c40270a42a96c963e589a958427"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_15W_3A/itech_input_vac_iac_5v_3a.png",
+    "sha256": "057996b28da0c79007ad786c3407b0583b111edc49bdb3f496105e94ccdaafc2"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_15W_3A/itech_power_thd_5v_3a.png",
+    "sha256": "b1e6287468865a292ec8b3f7b00e3409788d7f3b7af9bb07eb6e0d4c4b2c236f"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_15W_3A/keysight_5v_3a_sw_secondary_vbus.png",
+    "sha256": "21af144c633c93a98fd8f055eabad65520e0e6a9f01f1efd6d0144f141d0ecaf"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_15W_3A/siglent_power_quality_5v_3a.png",
+    "sha256": "7edf858943cd7118ccf98a71a5dbc18643076684df14ce0bc8dc065f859f0d6e"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_15W_3A_AC/keysight_5v_3a_ac_coupled_secondary_vbus.png",
+    "sha256": "6c282246b6dcce7e0dcb3d49f11d5ed2842fe5fe4e9226853a85cccb17c54813"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_3A_to_NoLoad/keysight_5v_3a_to_no_load_sw_secondary_vbus.png",
+    "sha256": "9bd58a716b72fa5d97836afd51497daefcd9482c43c1aa03d90bd93dbb5175a8"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_5W_1A/itech_harmonic_current_5v_1a.png",
+    "sha256": "5e8280002fda669e3386beb196cea6ea336a1a3b912a10f7ef1c2c46b04864a8"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_5W_1A/itech_harmonic_voltage_5v_1a.png",
+    "sha256": "d95bc06916af678378af017b1e5a8e94b47656c3090aa0196c5d99e2be8f4561"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_5W_1A/itech_input_vac_iac_5v_1a.png",
+    "sha256": "9ee25f4a343f71d80bb9771559949e26426bc81d3480765d42636b2317291aae"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_5W_1A/itech_power_thd_5v_1a.png",
+    "sha256": "e7329b24af66ee428deb231c2c84dbc156a4a896481c089f4777a779620cbf0d"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_5W_1A/keysight_5v_1a_sw_secondary_vbus.png",
+    "sha256": "d0ca07944325898cc636180b7f563e764a585988e35e94f311a930c409f8efc7"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_5W_1A/siglent_power_quality_5v_1a.png",
+    "sha256": "d84dd42ae7a59bf57a99975bd585b0ab3696f096bc1a74869b9a1c33e66c4c32"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_5W_1A_AC/keysight_5v_1a_ac_coupled_secondary_vbus.png",
+    "sha256": "a743b8b0cabb1a8ee9241055b22a93a3a21442cf627d384c1420ad2215be3640"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_NoLoad/itech_input_vac_iac_5v_no_load.png",
+    "sha256": "495d5ad549f596d4b0638480db0e4fe37169e00f702c6728b3996b730fbd1ac1"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_NoLoad/keysight_5v_no_load_sw_secondary_vbus.png",
+    "sha256": "b04ab6cdc0e9a1e2a56f3c471250a9789c4d4b945baa48a93b2afa1d11c44618"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO5_NoLoad/siglent_power_quality_5v_no_load.png",
+    "sha256": "ed984bdda9c9f21d1941f9b26f4dda990a74c3ad620bd7918b891d09ad668467"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_18W_2A/itech_current_harmonics_9v_2a.png",
+    "sha256": "62c411e174dd055eb730583e03704cd2dc06651973e2ea3a09f7096d780a97fa"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_18W_2A/itech_input_9v_2a.png",
+    "sha256": "515beef705f55c939739b1a4bc58bfed1176ffcf919e45ef448e51ed318b22c7"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_18W_2A/itech_input_power_detail_9v_2a.png",
+    "sha256": "683e5eb4304cceeab851baef2db70f06fa8aea5eb194889e4eba26cf2a01beaf"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_18W_2A/itech_voltage_harmonics_9v_2a.png",
+    "sha256": "4c28a7d34439c948f91611fb50120a4826a35ddefa4c875f452e9499d0c50f77"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_18W_2A/keysight_9v_2a_sw_secondary_vbus.png",
+    "sha256": "1bc1b44d3c8267f7253040c302fa17b2b967e9978aad3c31ef994f54bc848a74"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_18W_2A/siglent_power_9v_2a.png",
+    "sha256": "aaa7ef81a75b18d62f5bee060638a55aedbdd6f8c0e6ff1b9fdc8b0d5ff88920"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_18W_2A_THERMAL/thermal_9v_2a_hotspot.jpg",
+    "sha256": "480d6b6d69e7964c4f4cb1545cb44dd911e82a7dde1ad758ec214ed610c59bff"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_27W_3A/itech_current_harmonics_9v_3a.png",
+    "sha256": "195c66d604689a771573524d8743413060d420f026e608f3b8ba38e33aee860d"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_27W_3A/itech_input_9v_3a.png",
+    "sha256": "f7c0af8e6cccb254bfe7fe82bcdedf1b97a557c6dd55f0fb9679aec814f75f7f"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_27W_3A/itech_input_power_detail_9v_3a.png",
+    "sha256": "3a20ecbc3da6eb423f679e6c4ce458fac048d529c6bb2fb555fcf8cc8a6e7c2a"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_27W_3A/itech_voltage_harmonics_9v_3a.png",
+    "sha256": "6c866c349ae9baf56d5a29da7507c4ff15f4beedf35a493aae811258aadab257"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_27W_3A/keysight_9v_3a_sw_secondary_vbus.png",
+    "sha256": "bc3aaf7b1cac3ffdd4257e1a0027cc81f844ebd5cd1f2e700acb4f203eecab69"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_27W_3A/siglent_power_9v_3a.png",
+    "sha256": "a778912810190457145fc2645946feba5d1d851cbd822291454704dea22dca34"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_3A_to_NoLoad/keysight_9v_3a_to_0a_transient.png",
+    "sha256": "ce0137672aeb366e3a3b98b668c218c149b3f93a56485bd496609a818855a46f"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_9W_1A/itech_current_harmonics_9v_1a.png",
+    "sha256": "d1caa23aec1c8c2b4c3083892948204064ebfa725ebe75709a453568322dde73"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_9W_1A/itech_input_9v_1a.png",
+    "sha256": "26dc6969218dcf4e9f8190a29ef8e94184173606170f6b04ee9d8eef331b7eda"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_9W_1A/itech_power_detail_9v_1a.png",
+    "sha256": "d0783f6d9631d0be067d0dd6e827947939b57962af7e363fb667161804a767a2"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_9W_1A/itech_voltage_harmonics_9v_1a.png",
+    "sha256": "d30645904d7ca9d71ea4c37abf1bd1184628ccc39bbbd30a809a84c62db5985f"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_9W_1A/keysight_9v_1a_sw_secondary_vbus.png",
+    "sha256": "d0a22e6d94826fc4dc4b78f84810bbbc90cd115b248f7b6063a65c9c49086a37"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_9W_1A/siglent_power_9v_1a.png",
+    "sha256": "02cdf47263d13e6a35855347ec8486ba5b736574f4b51a2898438060d04c3bf2"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_NoLoad/itech_input_vac_iac_9v_no_load.png",
+    "sha256": "c4b4da0a5544685e37fe4d0c323c09d1ede12a57d4439b141825b3cb3bde3592"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_NoLoad/keysight_9v_no_load_sw_secondary_vbus.png",
+    "sha256": "3e0340ee327f54e1302253817d38fbbab091cf629799f788626419f04d08b5b4"
+  },
+  {
+    "path": "Data/measurements/evidence/PDO9_NoLoad/siglent_power_quality_9v_no_load.png",
+    "sha256": "78580b67aed63a5db97354ea74775539b09dbf902b8390e6a2d682c365d88a51"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "sha256": "9c3f1e054dcb5402304f479a0241c824500088356af1788c627ca880b4c827a2"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_detail_statistics.csv",
+    "sha256": "827869cb204e759faa1119ccc0eff41c06397d77b51ed725b13930b473d56d52"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/all_workbook_rows.csv",
+    "sha256": "39205b506b522b4ccf6f1cca89a8696f88399a08117310de811c24e0061d44ab"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "sha256": "4a5febebdf955df0b1200888d4227df33a12030aabda6f6e2988f7156fc3a53d"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "sha256": "c3c1dd41add452cf17fa9a3906465eca9e82cf5129269cf480c6a2a50ffa8de1"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_electrical_tables.tex",
+    "sha256": "7da88290ab7af9f5a79c5086cf0f8a2821f750fc94046eb35ee70971f1e6df80"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_harmonic_tables.tex",
+    "sha256": "923ee5a9d11a6f1171fedc3110e186b1bcbb73a1e4c7efb687dff2c7761ac8c2"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_thermal_complete_table.tex",
+    "sha256": "ddcd021ccd4dbc22af32640bfc0e4fca3903244e85582ccc3aec0930d1cba3ca"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_thermal_tables.tex",
+    "sha256": "92ee146933dfe131e4d639f2201963f9f6e3261b5d8d3fcfe50d810e3d7509d8"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/current_harmonic_spectrum.csv",
+    "sha256": "244a3f61c9622d31ec4dd9e71587ccca484a7f5ddfca3be68d324a47ed21e51b"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "sha256": "aee402cbb581005ea3724d4359ac5cf0de186ff56cbf80711228a61bd89d3dc0"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_operating_points.csv",
+    "sha256": "f3697dd20b0be5d3a8287d03ce66b64eab568924446b84cd358897dbc42cc397"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_screening.csv",
+    "sha256": "ebfa09326d7958d71f2e1207b1eaf72e77965264b147958b924b9cea72647c47"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "sha256": "0ac60c33de15ee21a0dd7e0b34135921333ee155c21c4dcbeba503b0cd8f23b4"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/figure_manifest.json",
+    "sha256": "cda1be7fb9bfbdce1d815b62b61a3ffe5b1903b6b9e54f88f30439f827ce126d"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/generated_output_checksums.csv",
+    "sha256": "90bc251d2a3d00f54f22f072b341dae2410ce977901e6410ef035071eea70fa4"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/harmonic_thd_consistency.csv",
+    "sha256": "df1e4b6fa021cb27f6d3b62b2bf7bec418f56d69d3197a75efb589b716b75a69"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/harmonics_complete_table.tex",
+    "sha256": "ac8fbdc6f9fb4030219388554ee910200a82139aaf7c0c83487369a1c471ca16"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/headline_metrics.json",
+    "sha256": "37378596524029454f23f0eb44a945f20005c4b86881ce53dec6781a300205ee"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/line_waveform_plot_data.csv",
+    "sha256": "f7a9796494cbee09a2d2beefa79891240223d0fe9b6827068ff5f34ea7d908aa"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/measurement_appendix.tex",
+    "sha256": "20c70568e870e54eee11e5d4590b4398071320303949c98b6789714d319fc4d4"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/power_quality_logged.csv",
+    "sha256": "ad8b4b15cc43b07e121b7ef74dff2843303d99a39d00e23a51465ce0c21ec48b"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "sha256": "7e9db1e3eaa31f0848f8ab2ea30ddd0a787bbf79445b93bd857bd4ade5929530"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/processing_provenance.txt",
+    "sha256": "f2fda80d1a8efaf9ecfad2c171615ae00f2fb6d1e7be9a7ea4ef86532c4ffcec"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveform_index.csv",
+    "sha256": "b108fbd7e2fe0f55a189321273671e60bfb19b5b926f46df434a3928b00ebbae"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveform_source_table.tex",
+    "sha256": "241ef36cbddbaefc07d833be745f3fe324e853e5d43832cab75a5b1204159913"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/C2i725 32.4W00006.csv",
+    "sha256": "c94150955c615132b80c0248ea6e3cc8a275f5c22d3d34efed339665d4f98edf"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/C2i725 32.4W00007.csv",
+    "sha256": "52a90a816cf93ad7bf25c20a0c70c0850b501dd9e0d9205cbbab00c820558e58"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/C2i725 32.4W00008.csv",
+    "sha256": "02dd82d569e2486b2d813949439cde891bbdd63186da22fdc263f1f85bae2014"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/C2i725 32.4W00010.csv",
+    "sha256": "33fb087ccf1d0888239520f297c4716acca917a64b1c9b04caa43a90579acbb2"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/lecory_7_C1.txt",
+    "sha256": "b5c0e39135f7fb5499f83e4b4680eebafcc01a4fac771743ffc2f01a7f1b3681"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/lecory_7_C2.txt",
+    "sha256": "728cd70c2e1d8cd4ef5ab080609e14841cd34f39003736881cae2aab87ef80ee"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/lecory_7_C3-low.txt",
+    "sha256": "9dc31daea57fc82419ca47f94e80410101d15f2dcb793d7aa97101bb7007d903"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/lecory_8_C1.txt",
+    "sha256": "9d2532f12471b4dc5acc9549486a25bc3e2d6059a793c0fa2c5d4237043bdf57"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/lecory_8_C2.txt",
+    "sha256": "d77ee3159931d9841e5e77903006acee5788027a2069e467e89cef3b3b77cdef"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveforms/lecory_8_C3-high.txt",
+    "sha256": "9dc31daea57fc82419ca47f94e80410101d15f2dcb793d7aa97101bb7007d903"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "sha256": "eb244541d7cd4e99d68fe4b8dfec1e53120e235d2353c785e0ed494c24dabb51"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/source_checksums.csv",
+    "sha256": "de53e1dc581d4a5f455eec0ffbe32b14f2c2842c24010ffb95af8d9e77263b97"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/switching_derived_metrics.csv",
+    "sha256": "76aa8261632fddf58e1dd8a45a544e251bdff95ae654eb56a1301714ffec2d4f"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/thermal_camera_readings.csv",
+    "sha256": "5392177871ca3a7bee5ebb278d1ebe7b07a0469e183cd73de71cc81a19606e27"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/thermal_complete_table.tex",
+    "sha256": "9a75bf8eec524cea5bd647a54752473f415c13fff5f9acfb4ee546cfff795146"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/transient_complete_table.tex",
+    "sha256": "928bc4b9eedbda0399d2d3720c23e878abfd53b17b8cb707e0f4e5ebb48e2a87"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/transient_recorded_fields.csv",
+    "sha256": "1ce037169f443f551effbfc7ec32e24cdf0d04d6de4c2a2fd2d8e420aa927a3c"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/verification_results.json",
+    "sha256": "dd71ec74abcad2e173064a3224ea222ecbb71ea4a405eb5db2938d8a1ae2e893"
+  },
+  {
+    "path": "Data/measurements/v2_results/DATA_DICTIONARY.md",
+    "sha256": "1d0b666f50fc8aafe01776b9ee190624dff93d61a3733e73d28fa704752634f8"
+  },
+  {
+    "path": "Data/measurements/v2_results/README.md",
+    "sha256": "a8a29fc8fb89412c76eec1c51df46f594b2327b4aab5c72c9fc4741cb6543550"
+  },
+  {
+    "path": "Data/measurements/v2_results/V2_Results_Entry.xlsx",
+    "sha256": "bc53c2aea6c7191229734002448189d3764c10e935fcc8f6a8620a15dba0f245"
+  },
+  {
+    "path": "Data/measurements/v2_results/events.csv",
+    "sha256": "854d810439edd8a0fc2034fab5305f8364b413b5dadec69aab95864f1345a60e"
+  },
+  {
+    "path": "Data/measurements/v2_results/evidence.csv",
+    "sha256": "1fecea32dd4e235b199ec130b06e972b0ecb88f0fc7c6c15e9dbb3f83e51290d"
+  },
+  {
+    "path": "Data/measurements/v2_results/instruments.csv",
+    "sha256": "4cbe645273970133324c7ec41c9ecfe4711bd361df504ad24f4d4f7ad4246f2c"
+  },
+  {
+    "path": "Data/measurements/v2_results/steady_state.csv",
+    "sha256": "2cebb545592fcb85789187fcfe1f0dd754d362bdacf6bf893fa102b3edaaa33b"
+  },
+  {
+    "path": "Data/measurements/v2_results/test_setup.csv",
+    "sha256": "0703efb9c912c5004dccef3bcbb0cb8c8445e94cb3968edb43e48b0471333348"
+  },
+  {
+    "path": "Data/measurements/v2_results/thermal.csv",
+    "sha256": "3753edf0ec65c77281567c9251c1f74142f7ff2ef067b216dd8c1bf10582065f"
+  },
+  {
+    "path": "Data/project_records/Original_Project_Definition.tex",
+    "sha256": "c1f1d8ae3d828be3db5f37abde4c7b05ad24b015b2cb5043c45cc1ffb5d11aeb"
+  },
+  {
+    "path": "Data/project_records/V2_October_2026_Project_Definition.pdf",
+    "sha256": "5d887920dabc149802ee6484ef21a1b26eeae9eb9ef1247f0b09699439a76379"
+  },
+  {
+    "path": "Data/project_records/V2_October_2026_Project_Definition.tex",
+    "sha256": "893d01fa266f9f161f09c0222382c6666d57c6b409bbb0d5301f9e0ec193720c"
+  },
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "sha256": "1d1634eab4062d59b0e3b488cd7dd3c6b0056099e5c1b1943cd1f7308c564072"
+  },
+  {
+    "path": "Frontmatter/Acknowledgements.tex",
+    "sha256": "9f51bdb727d5658c26a6fe36a1a0f766f08132106a5d9e0bb349d85f0281f4e4"
+  },
+  {
+    "path": "Frontmatter/Approval.tex",
+    "sha256": "2343d13fddaf94645ac53fe098d2e44509373eb13f1c6e6183c0d183a3f9a104"
+  },
+  {
+    "path": "Frontmatter/Copyright.tex",
+    "sha256": "dde72415aa7ee8c222a884c960050c3521c3f7997dccc99088691f4295d2c6c5"
+  },
+  {
+    "path": "Frontmatter/Frontpage.tex",
+    "sha256": "864235a1edd56c174431260f1fe1df21465ce41c8ed75a32a2dc924aae300d2c"
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "sha256": "815849adbe983e1218e79d7fcdfe23bde80bf52afac57a8ed6c261081b1a17ba"
+  },
+  {
+    "path": "Pictures/DTU_stock_photo.jpg",
+    "sha256": "cc4d75f350a7fec47fc8f970cb6da33c1588e904b2e6010b92a59fa26388f32a"
+  },
+  {
+    "path": "Pictures/Logos/black_cmyk.pdf",
+    "sha256": "22e1d422171cb80ca27381fa9b3a8f24083692723226e319f57473f361a967bc"
+  },
+  {
+    "path": "Pictures/Logos/black_rgb.pdf",
+    "sha256": "82ec72acea7a90234f29af4dce81ff3b56465a0e92c40fdf3f2213f78d5d5acd"
+  },
+  {
+    "path": "Pictures/Logos/dtured_cmyk.pdf",
+    "sha256": "940c84874957dd1124e194b7f7e15d3133241f874589e63961a6b2322fb058a0"
+  },
+  {
+    "path": "Pictures/Logos/dtured_rgb.pdf",
+    "sha256": "03ef9f796b9fb03b12062b87380b5e32cf371b3cfca93271a24ea603c1006851"
+  },
+  {
+    "path": "Pictures/Logos/white_cmyk.pdf",
+    "sha256": "02ca755858c2506ccbccedd71fb5a69d1b0bf64099cc74d2ca019cc688247d6b"
+  },
+  {
+    "path": "Pictures/Logos/white_rgb.pdf",
+    "sha256": "2a189b5f1a84792c16c89701d735d9cc0709099eea10c4181dde337d1ae255ea"
+  },
+  {
+    "path": "Pictures/Thesis/01_Introduction/README.md",
+    "sha256": "de6d5f7879a02bce4d25af223e74efb1d6c7baadec7363ef17a2d7f44bfdda06"
+  },
+  {
+    "path": "Pictures/Thesis/02_Background/README.md",
+    "sha256": "02d88dfd29dd4b3f5aa9742e00ef4db8a905047cded065326832091669451914"
+  },
+  {
+    "path": "Pictures/Thesis/03_Requirements/README.md",
+    "sha256": "dfd8109f6e785c4b1def4aedf889278ceb340327267ef3b654c89c76c7b154cf"
+  },
+  {
+    "path": "Pictures/Thesis/04_Analysis/README.md",
+    "sha256": "86aed85270f618c738bd04006c26436709b12b36ee50ddfd5ed4eb8f2820aedb"
+  },
+  {
+    "path": "Pictures/Thesis/05_Simulation/README.md",
+    "sha256": "70866025cf2fe811d5e1c5d44dfcecca12b679206e3339fd3efafe04546714aa"
+  },
+  {
+    "path": "Pictures/Thesis/06_Magnetics/README.md",
+    "sha256": "696d5ee753b0116b4965e9a58d0b3ea91601d2e4721ec80dbda7e731871e8481"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/README.md",
+    "sha256": "7bacba53b03d9021129e6bcdeb91b8cb6c3e506f03b5a780d63ab6b90d3d1bab"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_controller_excerpt.pdf",
+    "sha256": "0b079beae366570eb10996fe784d97603d06108dbd67eedbdb4c20c4fdbbe087"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_input_excerpt.pdf",
+    "sha256": "aed4634027038b47c31b32f87b4379efea4f964b1807e24b7fb932f1671903d8"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_power_stage_excerpt.pdf",
+    "sha256": "ae6f44b079c6989b71a66f6c9e4df288a28348470f8195391eff1d482461c4e7"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v11_usb_excerpt.pdf",
+    "sha256": "e66ce941071ab8ea952018eb9748de3c40620dc8be59adefca012766c880dada"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V1_0.pdf",
+    "sha256": "27574058e30361629d099ac1a2f692493530b99f286341766177a9dcb691e32e"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V1_1.pdf",
+    "sha256": "dd2e0b3dfffa9c0e63a4376a865eb2e2e3d2365a2ac79020117a270db38f1ea7"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf",
+    "sha256": "7c2663d7d6780af657d53fcdf9cab8c8eb2d8ed29d1752392ff123f5de080270"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/README.md",
+    "sha256": "d08b7bf0a610cc6b1943d1656147bbef5e83305b6ee8565f064fe648e31f9a1b"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/figure_v2_board.tex",
+    "sha256": "838d38a8fcf14f4fccc48552050ea81c265f664fefd5ba22dfa4131485387e7c"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/image-edit-prompt.txt",
+    "sha256": "9de17ce275597d2bb431b3fb57020a203e11d81cd693053eef3589aa1adfd3dd"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/provenance.json",
+    "sha256": "a09ce73a9b975287ed50b746afdb2e7c290b98ebb8a5cd039d55e6ecae7912b3"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_cleaned_illustration.png",
+    "sha256": "c609bee3b9f6566d6f19cfa459141df075e5216592808675f7a308460cec4317"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_documentary_crop.pdf",
+    "sha256": "565c7764cb631670d60e8d7f4bc8c3ebba48c8ac1369c11339630f54136a51a2"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_original.jpg",
+    "sha256": "0ca0e42a90be805e7854421ac385da3fdaaa08c4c43c68c9dd58b9afb005d4aa"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/final_prototype_main_photo.png",
+    "sha256": "3e8ef27783be1222943428970da0f02596761e51fcf9c1a8ad65ee90f4c2f058"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/final_resonant_inductor_usb_pdo.png",
+    "sha256": "ff40cd7d90a5ab875d37e3d34abc5f4f25dcc54abd020adaf00b8899c100e5bc"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/pcb_v1_0_bottom_return_overview.png",
+    "sha256": "a67d1bceea562b1bf2a060153297daaed94ab35f4ba666dd38ed08341deacb4b"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/pcb_v1_0_bottom_return_overview_annotated_v2.png",
+    "sha256": "a67d1bceea562b1bf2a060153297daaed94ab35f4ba666dd38ed08341deacb4b"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/pcb_v1_0_component_placement_reference.png",
+    "sha256": "736c2779ba28ab3cb53ca78d531c19c4fcd658c0360b6725e24f2c3dd7353e75"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/pcb_v1_0_layer_contact_sheet.png",
+    "sha256": "794a93c566eb4beba7fd90e6db96066c6b2d234c230222f0d0d4a85e7e5c7261"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/pcb_v1_0_top_assembly_reference.png",
+    "sha256": "890c77fead0b345e9583482dff0183068c7a13536cda51206ec42d361e8e87c2"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/pcb_v1_0_top_copper_overview.png",
+    "sha256": "a80d4f538b002ad79538310ed496bf2f4379f551912cbd39cd73caa749164c84"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/pcb_v1_0_top_copper_overview_annotated_v2.png",
+    "sha256": "a80d4f538b002ad79538310ed496bf2f4379f551912cbd39cd73caa749164c84"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/resonant_inductor_test_variants.png",
+    "sha256": "4dbfaf135266e5523374a9baa79a509620f834bfe28837899df2fd997b7cff56"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/schematic_v1_0_mcu_timer_pin_assignment.png",
+    "sha256": "562ff7945cfc5f7cb3befbf10bde79c574b4b4c4c767c668a514434e9c12be8f"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/schematic_v1_0_mcu_timer_pin_assignment_crop.png",
+    "sha256": "16fdcb39a55ccf5b418160e4afcb84b743b3c6f1f4d338e23d36f271e8724055"
+  },
+  {
+    "path": "Pictures/Thesis/08_Control/README.md",
+    "sha256": "72506d413f1217e69d1000e5e21ddabec273142294a4951655f4c6e1d710e5db"
+  },
+  {
+    "path": "Pictures/Thesis/09_Methods/README.md",
+    "sha256": "b2f15d811a2bddb80bed77469034c157e0b493258290cc8f31c2fd393eecf77b"
+  },
+  {
+    "path": "Pictures/Thesis/09_Methods/dut_probe_closeup_photo.png",
+    "sha256": "de566a467ed8c0ec6521d0a971a2395672c081a25ed41804bb5e96a2182308d6"
+  },
+  {
+    "path": "Pictures/Thesis/09_Methods/test_bench_overview_photo.png",
+    "sha256": "498b3aefbcc54d485d883ba836e11c51f6a451e7a53037411210933b3118b751"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/README.md",
+    "sha256": "97459b407c6b41ccba61cec7954585317797b50d7fbad71ac2055e587a82d29a"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/ac_detail_statistics.pdf",
+    "sha256": "e7c95d5944ec78c6a03b90a35c59180ccf0e6154d8c83afe7900d0040a53f1e3"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/ac_detail_statistics.png",
+    "sha256": "c6654d6f1b86c85de1c4ae4c2b5acb0d94c6e1bbbcd2d6e1a778c9e6a8cc7137"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/current_harmonic_spectrum.pdf",
+    "sha256": "9d4f75a181d9d202f94c736aeeaf2220c2ff5c17ce2f113a1bf69db37972c1c3"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/current_harmonic_spectrum.png",
+    "sha256": "daa0307bf5724ddd86ad2fff013ca15e8812005acc0158ff69fcb9c7aec7bc45"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/efficiency_and_loss.pdf",
+    "sha256": "e8576b10de1b7af9cc0b3198fea126ae1c3077d320c90ca26f9057041596321e"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/efficiency_and_loss.png",
+    "sha256": "c3f0b5dea6845984ca622e2e93d778606dac606eb7255058b3dbef6e7e2f943d"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/power_quality.pdf",
+    "sha256": "ba169ed3f56cdaab48c98a748f20f3d1d786413f3fdbf1845d7f2a601ddc38c7"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/power_quality.png",
+    "sha256": "1335b446b534a28e7dc7e61ca520858a386429a784f333353e3e5aaef9418efd"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/raw_line_records.pdf",
+    "sha256": "61c78b480579c9142b7afd2a573ea92749992050a89c5367d11e6b699524f646"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/raw_line_records.png",
+    "sha256": "8f8e4f2ca3e91ad23b99e42dd8e1918e9f5d74488ba6fd8cb38e6a7c8db81c24"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/raw_switching_records.pdf",
+    "sha256": "6e06410de53c35ddc66a758f41c5ed11e96dee496a181d52f591d40b76684258"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/raw_switching_records.png",
+    "sha256": "d564f51e438a2c979f1c06182c6619d4fe1b2b1518b9fb639b13091c09002495"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/regulation_and_logged_ripple.pdf",
+    "sha256": "5ac3c13d1f567f58334d9244b4b32581023a2fbedd3bedc60d996447f7f0b6e8"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/regulation_and_logged_ripple.png",
+    "sha256": "6e2e7374a23528a949e50e279019d4dc8055b82ddafb4877414c3734ed3e997f"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/thermal_observations.pdf",
+    "sha256": "0f7c77c4442660846482000229ec8e21f88c6dad41b15fbfda902cdf2e3b5b86"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/Rebuilt/thermal_observations.png",
+    "sha256": "de127b72db5a4fd2ca4cb3850f118c899c4400fd1cf625ca40474197ed556df5"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_001_20v_4p7a.png",
+    "sha256": "8317ab47402282855eec39161f78e80cedcbb7583c870afa581f5ecd74c9a759"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_002_20v_1a.png",
+    "sha256": "0d99c91b2a30a9f04a2666cde47ad7d5fdb32f5021f9e27baee47206ffedb034"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_003_20v_3a.png",
+    "sha256": "31242425bf2a7b5720d23e535ce3d5ec35ef3d8518753d0496dee221e51bf417"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_004_5v_1a.png",
+    "sha256": "5e4c4c6b4bb9b6af1f1bd66f14ea102e7498b9405672318e7966f51bb09d53b7"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_005_20v_no_load.png",
+    "sha256": "b3ee26466691ed9d2d195999ca216301cda6d75ae36a2118b0fe4ce2bf98cb39"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_006_20v_4a.png",
+    "sha256": "a402264b7fafa66a12aaf2996b085830e0f8befbdf76bfebc2a92cc72288d162"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_007_5v_open.png",
+    "sha256": "f826800d5ca86a4c1269e89c2ff2d9a65f3e6e7da536a289c480a1abde51c7da"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_008_9v_1a.png",
+    "sha256": "226e4a4124217ccafd380eb53bca06979e7a5f13763430ccbe94cf4c6760d896"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_009_9v_2a.png",
+    "sha256": "4ba5fc56826b88bff9afdd1897b5b17b52f2384f1569c20a35f00c01134d97bd"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/image_010_9v_3a.png",
+    "sha256": "68e4ac0a60ef1838403049328c18a65e2b5166b66d2efd3aea1120c1451a471a"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/no_load_clean_switching_scope_crop.png",
+    "sha256": "c2a67f58629a711c1a42c5cbe4ab36508c7da958f88a3384aaae99079602bd7f"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/no_load_clean_switching_scope_photo.png",
+    "sha256": "b3025c9f8d8017764f4376b5d7cee0fb52446eee91a9c1652fab5f1439e8dc14"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/partial_switching_removed_scope_crop.png",
+    "sha256": "6218ad3cf844e2809a4362f27cfcd19c6d0e1def5871d24cdd49cf3c2a9a8530"
+  },
+  {
+    "path": "Pictures/Thesis/10_Results/partial_switching_removed_scope_photo.png",
+    "sha256": "e00a4a09b451560c7596d81db90e2f8e8143d5ef47aadc876daf8d219da3c40b"
+  },
+  {
+    "path": "Pictures/Thesis/11_Discussion/README.md",
+    "sha256": "8b19e16410f6af6e23bbe51b23bf06c2015c98ec88ea274d0e0c2378c78ca19d"
+  },
+  {
+    "path": "Pictures/Thesis/12_Conclusion/README.md",
+    "sha256": "4ad3f6847fb02d77f5261cf01315851b9cd95712287642e42c35bdb94c16ecfe"
+  },
+  {
+    "path": "Pictures/Thesis/README.md",
+    "sha256": "588c6d7ca05032dc388b18cf6c2e3f196bf5354b3b30181408cc2b258581558c"
+  },
+  {
+    "path": "Pictures/Thesis/frontpage_project_prototype.png",
+    "sha256": "7a1fb3d36d3f11ab64aa7bbd3b968f6f086c7f2cf4c8373caf395abaefa5f8d8"
+  },
+  {
+    "path": "Pictures/Thesis/frontpage_project_scope.png",
+    "sha256": "91685aae463d3ff2b710d5e8fe45165dfc63b893dc6d046d61088882cf9ce555"
+  },
+  {
+    "path": "README.md",
+    "sha256": "4275896ee7292396db747a3a432718ffbbb19e94df191cef30a9039bc06e6dbc"
+  },
+  {
+    "path": "Setup/Code_Listings.tex",
+    "sha256": "60371bcb5acf14ff25f1e7c762bab0777560a49bc3442f35799c20418171459d"
+  },
+  {
+    "path": "Setup/Fonts/DejaVuSansMono.ttf",
+    "sha256": "602ec86b8948cfcd956482fe64f94c36c867770149ef2f791d4613f443bcecb3"
+  },
+  {
+    "path": "Setup/Fonts/LICENSE_DEJAVU",
+    "sha256": "d75938dec098f06f0ac3c00853065d94f020be1c3c62ef1dc2975ba15b4d9b0e"
+  },
+  {
+    "path": "Setup/Preamble.tex",
+    "sha256": "2b3e3f44d470dc4b1d81a7b18da9b378db8c5a882bfc6bbf4a8e641a1682571d"
+  },
+  {
+    "path": "Setup/Settings.tex",
+    "sha256": "a64bf6dba93c37881991b35c6efcecc63f5c0110ee9ecdf075adf5bf01337890"
+  },
+  {
+    "path": "Setup/Statics.tex",
+    "sha256": "d4abb4b38e5fec48f4b9c57c37923b21c05d44b992a24e507f51eeeb492667f2"
+  },
+  {
+    "path": "bibliography.bib",
+    "sha256": "30e9c96bc045ccaf4c572b48f485faf9353a71b8ca1d71b2cf0279fb4835a36e"
+  },
+  {
+    "path": "latexmkrc",
+    "sha256": "c4aa295c07f1b5795bb48f6cd691fd50fd1b2618c35f70a034ac7f1eef8829c4"
+  },
+  {
+    "path": "main.tex",
+    "sha256": "03137bce033c5b0782dc6f7a08798254022d10658a1c18c612487aa7fb5ce353"
+  }
+]

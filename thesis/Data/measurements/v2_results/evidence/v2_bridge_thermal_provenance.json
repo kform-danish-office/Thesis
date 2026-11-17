@@ -1,0 +1,105 @@
+{
+  "purpose": "Partial V2 diagnostic evidence; not a validated steady-state performance result",
+  "original_photo": {
+    "path": "Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg",
+    "sha256": "438822989a33edf82e9cd67b63ce873352336291b3bd0c3b23af0dae77ab0bd5",
+    "modified": false
+  },
+  "user_report": {
+    "input_voltage_VAC": 240,
+    "input_frequency_Hz": 50,
+    "load_mode": "constant power",
+    "external_series_inductor_10uH_removed": true,
+    "reported_resonant_capacitance_nF": 1.667,
+    "temperature_still_rising": true,
+    "system_unstable": false,
+    "heated_area": "D4/D5/D9/D10 input bridge; capacitor and secondary reported cooler",
+    "electrical_output_voltage_steady": true,
+    "thermal_equilibrium_not_reached": true,
+    "clarification": "Initial unstable-system wording referred to thermal rise, not voltage instability.",
+    "thermal_history_qualitative": "About80C within a fewseconds; further rise to about90C took longer; user switched off.",
+    "shutdown_surface_temperature_approx_C": 90,
+    "earlier_load_setpoint_W": 100,
+    "thermal_image_run_power_W": 95,
+    "thermal_run_power_basis": "User correction; setpoint versus measured output unspecified"
+  },
+  "visible_camera_region_readings_C": {
+    "R3": {
+      "H": 70.0,
+      "L": 28.3,
+      "M": 39.9,
+      "emissivity": 0.95
+    },
+    "R1": {
+      "H": 61.5,
+      "L": 27.0,
+      "M": 39.2,
+      "emissivity": 0.95
+    }
+  },
+  "image_notes": {
+    "global_emissivity_display": 0.97,
+    "color_scale_C": [
+      25.0,
+      66.4
+    ],
+    "camera_date_display": "2026/10/25",
+    "capture_timezone": "unknown",
+    "individual_hotspot_component_identity_verified": false,
+    "junction_temperature_measured": false
+  },
+  "unconfirmed": [
+    "actual switching frequency",
+    "actual output voltage/current/power",
+    "actual AC input real power and RMS current",
+    "test duration and thermal plateau",
+    "HVVCC and secondary-bus voltages/waveforms",
+    "individual fitted bridge-diode part numbers",
+    "actual fitted C24 pump capacitance",
+    "actual installed primary-referred leakage versus inherited A/B values",
+    "fault/enable/duty state during instability"
+  ],
+  "conditional_calculations": {
+    "leakage_assumed_uH": [
+      16.42,
+      16.5
+    ],
+    "series_resonance_kHz": [
+      961.9793629179795,
+      959.6444581086281
+    ],
+    "pump_model_assumptions": {
+      "carrier_Hz": 1000000,
+      "pump_capacitor_nF": 2,
+      "input_Vrms": 240,
+      "continuous_complete_charge_transfer": true
+    },
+    "ideal_pump_input_power_scale_W": 115.2,
+    "required_efficiency_if_input_were_115_2W_for_100W_output": 0.8680555555555556,
+    "CP_example_at_20V_A": 5.0,
+    "CP_example_at_18V_A": 5.555555555555555,
+    "CP_incremental_resistance_at_20V_ohm": -4.0,
+    "scope": "Historical 100 W examples only; not calculations for this corrected 95 W image"
+  },
+  "interpretation_limits": [
+    "95 W is the user-reported thermal run power; independently measured delivered power and continuous rating are not established",
+    "Thermal image does not establish overheating beyond ratings, the heat source, or thermal equilibrium",
+    "Pump input-power scale is a conditional ideal model, not a hard maximum",
+    "Old G071 efficiency measurements do not establish V2 efficiency",
+    "Nominal LC resonance alone does not establish ZVS or stable loaded operation",
+    "User subsequently clarified voltage is steady. Constant-power-induced voltage collapse is not observed and must not be reported as the diagnosed issue.",
+    "Slowing rise from80C to90C does not demonstrate accelerating thermal runaway; final equilibrium and junction margin remain unknown."
+  ],
+  "later_bench_note": "Data/project_records/V2_Testing_Update.txt",
+  "temporal_limit": "The supplied photo predates the latest dictation. Association with a particular diode replacement or 60ns timing change was not recorded.",
+  "later_claim_status": {
+    "reported_software_deadtime_ns": 60,
+    "unit_interpretation": "User correction \"60 Ms dead time for software\" interpreted in context as60ns and stated to user",
+    "firmware_version": null,
+    "ZVS": "inferred from reduced half-bridge heating, not independently verified by waveform",
+    "bridge_layout_cause": "suspected limited copper/trace area; not isolated by measurement",
+    "diode_replacement": "reported not to resolve heating",
+    "relocation_and_wider_copper": "proposed, not tested"
+  },
+  "power_correction": "Latest user identifies this thermal image as a 95 W run, superseding its previous association with a 100 W setpoint. Earlier temperature-rise reports are retained as historical observations; exact run association is unconfirmed."
+}

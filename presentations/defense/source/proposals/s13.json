@@ -1,0 +1,131 @@
+{
+  "slide_id": "s13",
+  "title": "More PWM transfers more power",
+  "takeaway": {
+    "text": "More burst-enable PWM increases average energy transfer; the V2 secondary load points show power increasing with current.",
+    "visible": false
+  },
+  "visible_content": {
+    "condition": "V2 · direct secondary load before USB-C PD · 240 V AC, 50 Hz",
+    "voltage_axis_label": "Secondary voltage (V)",
+    "voltage_y_ticks": [
+      "0",
+      "5",
+      "10",
+      "15",
+      "20",
+      "25",
+      "30"
+    ],
+    "power_axis_label": "Secondary power (W)",
+    "power_y_ticks": [
+      "0",
+      "25",
+      "50",
+      "75",
+      "100",
+      "125",
+      "150"
+    ],
+    "current_axis_label": "Secondary current (A)",
+    "current_x_ticks": [
+      "0",
+      "2",
+      "4",
+      "6",
+      "8",
+      "10"
+    ],
+    "voltage_callouts": [
+      "20.07 V at 4.29 A",
+      "13.69 V at 10.01 A"
+    ],
+    "power_callouts": [
+      "86.17 W at 4.29 A",
+      "137.08 W at 10.01 A"
+    ],
+    "body": [],
+    "phase_label": "Results"
+  },
+  "visual": {
+    "type": "editable_stacked_xy_charts",
+    "layout": "Two vertically stacked, horizontally aligned plots dominate the slide. Both use the same linear secondary-current axis, extent 0–11 A, and aligned tick positions. The upper plot shows secondary power from 0 to 150 W; the lower shows secondary voltage from 0 to 30 V. Show the shared current-axis label below the lower plot and the test condition above. Place each labeled callout adjacent to its corresponding marker, without obscuring the data or another label. Distinguish the two highlighted current points with consistent marker styling across both plots. No legend is needed.",
+    "chart_style": "Plot all seven measured voltage/current pairs and the corresponding calculated power/current pairs as discrete markers joined in measurement order by straight line segments. Do not smooth, extrapolate, or use a dual axis. Use ordinary consistent measured-result styling and editable labels; preserve clear whitespace around the two endpoint callouts.",
+    "points": [
+      {
+        "secondary_current_A": 1.86232,
+        "secondary_voltage_V": 26.1412,
+        "secondary_power_W": 48.683279584
+      },
+      {
+        "secondary_current_A": 3.31168,
+        "secondary_voltage_V": 21.3642,
+        "secondary_power_W": 70.751393856
+      },
+      {
+        "secondary_current_A": 4.29422,
+        "secondary_voltage_V": 20.0656,
+        "secondary_power_W": 86.166100832
+      },
+      {
+        "secondary_current_A": 5.27284,
+        "secondary_voltage_V": 18.4619,
+        "secondary_power_W": 97.346644796
+      },
+      {
+        "secondary_current_A": 6.51369,
+        "secondary_voltage_V": 16.8668,
+        "secondary_power_W": 109.865106492
+      },
+      {
+        "secondary_current_A": 8.51315,
+        "secondary_voltage_V": 14.9242,
+        "secondary_power_W": 127.05195323
+      },
+      {
+        "secondary_current_A": 10.0103,
+        "secondary_voltage_V": 13.6934,
+        "secondary_power_W": 137.07504202
+      }
+    ],
+    "asset": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v2_summary.csv"
+  },
+  "speaker_notes": "After the tank changes, an electronic load was connected directly to the V2 secondary, before the USB-C PD stage. The burst-enable PWM acts like a throttle: a greater enabled fraction gives the converter more switching time and increases average energy transfer. The two plots show the resulting secondary voltage and calculated power against load current. At 1.86 amperes, the load received 48.68 watts at 26.14 volts. At 4.29 amperes, the voltage was 20.07 volts and the power was 86.17 watts. At the highest current of 10.01 amperes, the voltage was 13.69 volts and the power reached 137.08 watts. The change in secondary voltage across the sweep was expected.",
+  "transition": "The same load sequence also shows where heating remained and guides the next circuit changes.",
+  "duration_seconds": 85,
+  "sources": [
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+      "passage": "Secondary-Output Load and Thermal Tests",
+      "supports": "Direct V2 secondary electronic load at approximately 240 V AC and 50 Hz; voltage and calculated power endpoints, 20.07 V point, and increasing-load interpretation."
+    },
+    {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v2_summary.csv",
+      "passage": "Capture 015, 017–022; secondary_voltage_V, secondary_current_A, secondary_power_W",
+      "supports": "Seven exact plotted secondary measurements and calculated powers."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex",
+      "passage": "V2 tank and timing changes",
+      "supports": "Connection from preceding slide to the later load sequence."
+    },
+    {
+      "path": "User bench clarification",
+      "passage": "Interpretation of V2 power-control response",
+      "supports": "The load response is expected throttle behavior: more burst-enable PWM gives more power transfer; no PWM values or held settings are specified."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "All seven current, voltage and calculated power values reproduce the CSV exactly. Power is voltage multiplied by current; displayed callouts are rounded to two decimal places.",
+      "At 4.29422 A, 20.0656 V and 86.166100832 W round to 4.29 A, 20.07 V and 86.17 W. At 10.0103 A, 13.6934 V and 137.07504202 W round to 10.01 A, 13.69 V and 137.08 W.",
+      "The load was connected directly to the V2 secondary before the USB-C PD stage; no USB-C connector power or dropout threshold is inferred.",
+      "Both charts use the same current extent and tick positions; all visible axis titles, ticks, labels and test conditions are specified above.",
+      "PWM refers to the burst-enable command and its enabled switching fraction; no transistor gate duty ratio, measured PWM value, linearity or fixed test setting is asserted."
+    ],
+    "unresolved_questions": [],
+    "timing": "85 seconds including transition, with time to compare the two plots.",
+    "revision": "Revision 3: interpret the load sequence as the expected power-control response; keep all chart data and labels unchanged."
+  },
+  "proposal_revision": 5
+}

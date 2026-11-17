@@ -1,0 +1,90 @@
+{
+  "slide_id": "s07",
+  "title": "Burst control regulates the secondary bulk",
+  "takeaway": {
+    "text": "Secondary-voltage feedback changes the enabled switching fraction to match energy transfer to demand.",
+    "visible": false
+  },
+  "visible_content": {
+    "loop_labels": [
+      "Secondary bulk",
+      "Isolated voltage feedback",
+      "MCU",
+      "Burst enable",
+      "GaN half bridge"
+    ],
+    "body_1": "Bulk voltage sets burst demand",
+    "body_2": "Nominal 1 MHz within each packet",
+    "body_3": "Startup and low-load energy is bounded",
+    "trace_condition": "V1 · 5 V / 3 A USB-C output",
+    "trace_scales": [
+      "5 µs/div",
+      "100 V/div"
+    ],
+    "trace_legend": "Yellow: half-bridge switch-node voltage",
+    "trace_annotations": [
+      "Switching packet",
+      "Idle interval"
+    ],
+    "phase_label": "Control"
+  },
+  "visual": {
+    "type": "editable_feedback_loop_and_measured_trace",
+    "asset": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_scope_5v_3a.png",
+    "layout": "Use the focused s06 layout: an editable closed loop across the top, the cropped yellow switch-node waveform beneath, and the three body lines at right. Keep the editable condition, scales, legend and packet/idle labels with the capture.",
+    "crop": "Crop x=100–1027, y=193–327 from the 1028 × 843 source, retaining the yellow trace, grid, original vertical ticks and horizontal tick labels. The left flat section is the idle interval; the active packet begins near the middle. Do not retouch the waveform.",
+    "scope_context": "V1 measured at the 5 V / 3 A USB-C output operating point; yellow switch node is 100 V/div and the horizontal scale is 5 µs/div."
+  },
+  "speaker_notes": "The resonant path transfers energy while the half bridge switches, but the required average transfer changes with the connected device. The MCU therefore regulates the secondary bulk voltage using the feedback path shown across the top. The bulk voltage is measured across the isolation barrier and passed to the MCU. The MCU adjusts the burst-enable command to the half bridge, closing the loop through the converter.\n\nThe yellow trace is the measured switch-node voltage at a 5 volt, 3 ampere USB-C output point. The flat region on the left is an idle interval; the repeated transitions form a switching packet. Within an enabled packet, the nominal carrier is 1 megahertz. Increasing the fraction of enabled cycles increases average excitation and energy transfer; reducing it gives the converter less time to transfer energy. The controller uses the secondary voltage to adjust that fraction as demand changes. The bulk supply then feeds the USB-C power-delivery stage, which regulates the selected connector voltage.\n\nThe control implementation was developed around secondary-voltage feedback. Earlier ADC reads blocked the foreground while each conversion completed, sharing time with control and communication. Circular direct memory access, or DMA, moves the voltage and current samples to memory in the background, so the control loop can use available readings without waiting for each conversion. During startup, limited packets and settling intervals energize the isolated feedback circuit. At low load or after a device is removed, duty limits reduce continued charging of the bulk capacitor. These bounds support the voltage loop as the available load changes.",
+  "transition": "The burst view shows when the half bridge is enabled. A closer time scale shows the individual carrier cycles within a packet.",
+  "duration_seconds": 145,
+  "sources": [
+    {
+      "path": "/workspace/papers/apec-digest/sections/control.tex",
+      "passage": "Hardware Integration and Feedback; Burst-Enable Regulation",
+      "supports": "Isolated feedback, nominal 1 MHz carrier, enabled fraction, circular DMA, startup and no-load bounds."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex",
+      "passage": "Voltage feedback with blocking ADC reads",
+      "supports": "Earlier conversion waits shared the foreground path with control and communication."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/08_Control_Firmware/07_V2_DMA.tex",
+      "passage": "Moving to DMA and Voltage Feedback",
+      "supports": "Voltage control and background sample transfer; startup and no-load behavior."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/08_Control_Firmware/08_Control_Law.tex",
+      "passage": "Voltage Control Logic",
+      "supports": "Bounded loaded duty trim based on secondary-bulk voltage and low-load hysteresis."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/08_Control_Firmware/11_State_Machine.tex",
+      "passage": "Startup precharge",
+      "supports": "Limited packets and settling while isolated feedback becomes available."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/03_Steady_State.tex",
+      "passage": "5 V / 3 A steady-state capture",
+      "supports": "V1 output condition and measured half-bridge switch-node trace."
+    },
+    {
+      "path": "/workspace/presentations/defense/dtu-supervisor-flow/assets/v1_scope_5v_3a.png",
+      "passage": "Yellow channel and scope timebase",
+      "supports": "Measured switching packet and idle interval, 5 µs/div and 100 V/div."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "The scope capture shows V1 switching activity, not a synchronized firmware-state record; the control development is described independently.",
+      "Nominal 1 MHz is a control design value; the enabled fraction determines average excitation, not an assumed fixed energy per cycle.",
+      "USB-C 5 V / 3 A is the connector output condition; the secondary bulk is the MCU feedback quantity.",
+      "Circular DMA avoids foreground waiting for individual ADC conversions; no response-speed measurement is claimed.",
+      "The trace scale is 5 µs/div and the yellow switch-node scale is 100 V/div, confirmed from the original capture."
+    ],
+    "unresolved_questions": [],
+    "timing": "145 seconds including transition, with time to point at the loop and measured packet.",
+    "revision": "New s07 narrative; retains focused s06 visual keys and adds required Control phase label."
+  }
+}

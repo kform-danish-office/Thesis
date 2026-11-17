@@ -1,0 +1,2 @@
+nominal 988.9kHz
+PASS browser functional checks {"samples":1,"source":"demo","keyboardSkip":true,"sessionPersists":true}

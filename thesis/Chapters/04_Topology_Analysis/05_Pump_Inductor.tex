@@ -1,0 +1,29 @@
+\section{Pump-Inductor Selection}
+\label{sec:analysis-lp}
+
+The reference sizing method assumes triangular pump current. For pump-capacitor excursion \(V_P\), transferred charge and peak current satisfy
+\begin{equation}
+\CP V_P\approx\frac{T_s}{4}I_{P,\mathrm{pk}},
+\qquad I_{P,\mathrm{pk}}\approx4f_s\CP V_P.
+\label{eq:analysis-pump-current}
+\end{equation}
+Equating the peak capacitor and inductor energies gives
+\begin{equation}
+\frac{1}{2}\CP V_P^2\approx\frac{1}{2}\LP I_{P,\mathrm{pk}}^2,
+\end{equation}
+which gives
+\begin{equation}
+\LP=\frac{1}{16\CP f_s^2}.
+\label{eq:lp-sizing}
+\end{equation}
+This estimate assumes the triangular, clamped current sequence of the reference analysis \cite{ammar2021led}.
+
+For \(\CP=\SI{2}{\nano\farad}\) and \(f_s=\SI{1}{\mega\hertz}\), the estimate is \SI{31.25}{\micro\henry}. Supplied measurements of \SI{34.26}{\micro\henry} and \SI{33.09}{\micro\henry} are close to this value (Section~\ref{sec:mag-inherited}); in-circuit current waveforms and clamp timing are needed to check the triangular-current assumption.
+
+The corresponding ideal pump resonance is
+\begin{equation}
+f_P=\frac{1}{2\pi\sqrt{\LP\CP}}=\frac{2f_s}{\pi}.
+\end{equation}
+The carrier lies above ideal pump resonance, giving inductive current that can support shared-half-bridge commutation over much of the line cycle.
+
+Lower inductance increases current slope, peak stress, and possible clamp conduction. Higher inductance can prevent completion of the capacitor excursion. In-circuit waveforms show how much time remains between charge-transfer completion and the next transition.

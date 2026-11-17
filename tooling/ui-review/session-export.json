@@ -1,0 +1,50 @@
+{
+  "id": "244b1541-3645-45b7-b71d-7ed21f99f8d9",
+  "name": "UI QA synthetic session",
+  "notes": "",
+  "source": "demo",
+  "startedAt": "2026-10-25T00:20:45.363Z",
+  "endedAt": "2026-10-25T00:20:45.842Z",
+  "firmware": {
+    "type": "hello",
+    "protocol": 1,
+    "fw": "SIMULATED",
+    "board": "Demo · no hardware",
+    "baud": 115200
+  },
+  "samples": [
+    {
+      "type": "telemetry",
+      "protocol": 1,
+      "ms": 502,
+      "enabled": false,
+      "mode": "VSBONLY",
+      "fault": "NONE",
+      "vpri": 325.4524136903039,
+      "vsec": 0,
+      "current": 0,
+      "power": 0,
+      "duty": 0,
+      "adc": [
+        2670,
+        0,
+        0
+      ],
+      "settings": {
+        "VSET": 28,
+        "VON": 28,
+        "VMAX": 32,
+        "OVP": 36,
+        "DMAX": 100,
+        "OD": 10,
+        "FEN": 10000
+      },
+      "settings_pending": false,
+      "lease_ms": 5000,
+      "stream_ms": 500,
+      "receivedAt": "2026-10-25T00:20:45.797Z",
+      "source": "demo"
+    }
+  ],
+  "events": []
+}

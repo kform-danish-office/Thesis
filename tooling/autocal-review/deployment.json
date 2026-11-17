@@ -1,0 +1,66 @@
+{
+  "deployment": "dpl_FokP8hQGSGGzXipdwcJwkJxXfWUS",
+  "url": "https://thesis-power-lab.vercel.app/#calibration",
+  "matchedAssets": [
+    {
+      "path": "app.js",
+      "sha256": "be4ccb2da70ad53455a66578cb61041fd5bb933ca5d4d987f3a38c27b2560b35"
+    },
+    {
+      "path": "calculator.css",
+      "sha256": "9d2ff8f6d6233b0680b5d9f19f20f87d149f75968ee0c4c498d50a5a70b64dba"
+    },
+    {
+      "path": "calculator.html",
+      "sha256": "c635876d4fdd9d607c59fd1cc6b7a1462496835a9a43d65247c2e27fb62e7489"
+    },
+    {
+      "path": "index.html",
+      "sha256": "c3a1b97411c8436128462381e9efdddda7aa59ba44b882a0f976c748c88872fa"
+    },
+    {
+      "path": "protocol.js",
+      "sha256": "b36f5ee0109c4833a853617264d2a183f4edfc65dc6b5f132ce8179c31415fb8"
+    },
+    {
+      "path": "resonance-presets.js",
+      "sha256": "4687c77c361bdbae0e707b822a3c23b5403aab9ea074a8270dcf583259ee35fa"
+    },
+    {
+      "path": "resonance-ui.js",
+      "sha256": "573c19e5338c9f3e4574b953bf81eae600458cca6eb982a3cc25dd79a08ac749"
+    },
+    {
+      "path": "resonance.js",
+      "sha256": "8f31134163faede8358f82da861a1ad4391b8266d7bf1d882c92968cb5876d43"
+    },
+    {
+      "path": "serial.js",
+      "sha256": "e4637f14d749626f8ff6bd98ea077fbaaf7950caba6fff061fa06a2a17b0d3e1"
+    },
+    {
+      "path": "storage.js",
+      "sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5"
+    },
+    {
+      "path": "styles.css",
+      "sha256": "5dfc834500a48bd729c3b7958b3c5b40b320d1c57779b9c3f2ae9c3fc44f6db0"
+    },
+    {
+      "path": "fonts/IBMPlexMono-Medium.ttf",
+      "sha256": "5f460401d03995ca099270707e78662513b5be9d17060eb7c7fffadb4d4d334b"
+    },
+    {
+      "path": "fonts/IBMPlexSans-Bold.ttf",
+      "sha256": "5bb3030115b2a8d4494afd9c42c69a659ad80329694f8056d21ba6680612422b"
+    },
+    {
+      "path": "fonts/IBMPlexSans-Regular.ttf",
+      "sha256": "b7687a7b11bf4972c2807e6f1701bb55d1837e6957373e6610a81e3bbd4423a9"
+    },
+    {
+      "path": "fonts/OFL-IBMPlex.txt",
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    }
+  ]
+}

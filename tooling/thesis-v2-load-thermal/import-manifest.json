@@ -1,0 +1,37 @@
+[
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 019.csv",
+    "sha256": "9a45ca418da38c60b978075ebf3f1f5fb9092be14c840dda7a310a2ceb663f13",
+    "original_path": "/workspace/attachments/89b79fa5-19c7-4b23-8357-546da9cdf51d/Capture 019.csv"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 022 (2).csv",
+    "sha256": "ccfb9437e0a42e0c4ea57a83de86d1937767946784c0b251b3565136e71f87c4",
+    "original_path": "/workspace/attachments/8f141e7e-30b6-44e9-9365-8b0725a3aab7/Capture 022 (2).csv"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 020.csv",
+    "sha256": "16b5eeb2c38f17ccfdb0faec5375306591edfe07792be06cd2fbab88680b04a4",
+    "original_path": "/workspace/attachments/9ef3c23b-6375-465b-a3b9-f238022c10f5/Capture 020.csv"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 021.csv",
+    "sha256": "86fde71363e71cc00fe5553c7b4a007daa82f4c10b4854dd54e625148ffaf891",
+    "original_path": "/workspace/attachments/b23d4fae-e41e-4483-a5cb-26c7c5a36d3b/Capture 021.csv"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 018.csv",
+    "sha256": "867f5424b992bc1cd9d7fcc727ee76a94ca4a16313bc66dc28a460efe560011d",
+    "original_path": "/workspace/attachments/b89281d4-895c-4844-8850-218a191e02be/Capture 018.csv"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 017.csv",
+    "sha256": "d64a3f0d80848acbfa25e00b7320316c4c1f57c3a3688e3c9419faf990b1d58b",
+    "original_path": "/workspace/attachments/f1369fde-c39d-464e-ac1c-68390afc5b68/Capture 017.csv"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 015.csv",
+    "sha256": "2072b4e2cf1691ce6d16dc7b8fd9e8d21a0b14385eed5353dacaa4f3be772892",
+    "original_path": "/workspace/attachments/fc7521d6-25bb-4819-8d25-22c0df5b94fb/Capture 015.csv"
+  }
+]

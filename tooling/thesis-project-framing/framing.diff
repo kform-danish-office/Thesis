@@ -1,0 +1,99 @@
+--- before/Chapters/01_Introduction/02_Problem_Statement.tex
++++ correct-framing/Chapters/01_Introduction/02_Problem_Statement.tex
+@@ -9,7 +9,7 @@
+ 
+ The main question is:
+ \begin{quote}
+-How can an inherited charge-pump PFC resonant converter be implemented and controlled as a USB-C laboratory supply, and what output capability, regulation, input power quality, efficiency, and thermal behavior does the assembled prototype demonstrate?
++How can an inherited charge-pump PFC resonant converter be implemented and controlled as a USB-C power supply, and what output capability, regulation, input power quality, efficiency, and thermal behavior does the assembled prototype demonstrate?
+ \end{quote}
+ 
+ The main energy transfers and component constraints are analyzed first. The hardware and control choices follow from that analysis. The laboratory results show where the targets were met and where further work is needed.
+--- before/Chapters/01_Introduction/03_Aim_Objectives.tex
++++ correct-framing/Chapters/01_Introduction/03_Aim_Objectives.tex
+@@ -1,7 +1,7 @@
+ \section{Project Goals}
+ \label{sec:intro-aim}
+ 
+-The aim was to build and evaluate an isolated AC--DC laboratory supply from the inherited charge-pump topology and supplied planar magnetics, with digital burst control and a USB-C output.
++The aim was to build and evaluate an isolated AC--DC power supply from the inherited charge-pump topology and supplied planar magnetics, with digital burst control and a USB-C output.
+ 
+ The converter implementation and test work had six objectives:
+ \begin{enumerate}[label=\arabic*)]
+--- before/Chapters/01_Introduction/chapter.tex
++++ correct-framing/Chapters/01_Introduction/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Introduction}
+ \label{ch:introduction}
+ 
+-A digitally controlled USB-C laboratory supply was developed from a charge-pump PFC resonant converter and supplied planar magnetics. The first prototype, V1, was used for circuit bring-up and control development. V2 integrated the MCU and associated circuitry on the converter PCB. The V3 edge-card layout was then developed to reduce the converter volume.
++The work started with a DTU charge-pump converter and supplied planar magnetics. The hardware and controller were then built around these parts for a USB-C power supply. The main change was the load: it could be absent at startup, draw different amounts of power, or be disconnected while the converter still held energy. That change connects the circuit design, burst-control development, and tests described in this thesis.
+ 
+ \input{Chapters/01_Introduction/10_Controller_Basics}
+ \input{Chapters/01_Introduction/01_Motivation}
+--- before/Chapters/10_Results/01_Prototype_Verification.tex
++++ correct-framing/Chapters/10_Results/01_Prototype_Verification.tex
+@@ -27,7 +27,7 @@
+ Output interface & MPQ4242GVE-0000-AEC1-P and USB-C connector\\
+ Controller & STM32G071RBT6; PA8/PA9 carrier, PA10 burst enable, and PA0/PA1/PA2 ADC acquisition\\
+ Firmware & PWR-1.9.20 in the identified final \SI{5}{\volt} and \SI{20}{\volt} records; unspecified in several \SI{9}{\volt} and \SI{15}{\volt} records; PWR-1.9.10 in the \SI{4.7}{\ampere} high-load record\\
+-Input & Logged \SI{240}{\volt}, \SI{50}{\hertz} laboratory supply\\
++Input & AC source at \SI{240}{\volt}, \SI{50}{\hertz}\\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+--- before/Chapters/12_Conclusion/01_Project_Summary.tex
++++ correct-framing/Chapters/12_Conclusion/01_Project_Summary.tex
+@@ -1,7 +1,7 @@
+ \section{Project Outcome}
+ \label{sec:concl-summary}
+ 
+-A digitally controlled USB-C laboratory supply was built and bench-tested
++A digitally controlled USB-C power supply was built and bench-tested
+ using the inherited DTU charge-pump PFC resonant topology and supplied
+ planar magnetics \cite{ammar2020chargepump,ammar2021led}. Power hardware,
+ sensing, auxiliaries, the USB-C PD output stage, and the MCU were integrated
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ correct-framing/Chapters/12_Conclusion/03_Contributions.tex
+@@ -2,7 +2,7 @@
+ \label{sec:concl-contributions}
+ 
+ The inherited charge-pump PFC principle and planar-magnetic design were
+-integrated into a detachable-output laboratory supply. The work covered
++integrated into a USB-C power supply. The work covered
+ the offline input, charge pump, GaN stage, magnetic connections, output
+ interface, sensing, auxiliaries, and hardware rework during bring-up.
+ 
+--- before/Chapters/12_Conclusion/chapter.tex
++++ correct-framing/Chapters/12_Conclusion/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Conclusion}
+ \label{ch:conclusion}
+ 
+-A USB-C laboratory supply was developed from the inherited converter
++A USB-C power supply was developed from the inherited converter
+ through V1 testing, V2 integration, and a reduced V3 edge-card layout.
+ The tests demonstrated output regulation and identified magnetic and
+ input-path heating as priorities for further development.
+--- before/Frontmatter/Abstract.tex
++++ correct-framing/Frontmatter/Abstract.tex
+@@ -1,7 +1,7 @@
+ \section*{Abstract}
+ \addcontentsline{toc}{section}{Abstract}
+ 
+-A digitally controlled USB-C laboratory supply was implemented using an inherited charge-pump power-factor-correction (PFC) resonant topology and planar magnetics. Burst control was developed for secondary-bulk regulation, startup sequencing, and energy limitation at no load and after load removal.
++A digitally controlled USB-C power supply was implemented using an inherited charge-pump power-factor-correction (PFC) resonant topology and planar magnetics. Burst control was developed for secondary-bulk regulation, startup sequencing, and energy limitation at no load and after load removal.
+ 
+ The gallium-nitride (GaN) half bridge operated at a nominal \SI{1}{\mega\hertz}. Average power was controlled by enabling bursts of switching cycles. A circular direct memory access (DMA) buffer supplied the feedback samples. Startup precharge and separate duty limits for loaded and no-load operation were implemented. The USB-C PD stage provided the tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings.
+ 
+--- before/Frontmatter/Approval.tex
++++ correct-framing/Frontmatter/Approval.tex
+@@ -1,7 +1,7 @@
+ \section*{Preface and Project Contribution}
+ \addcontentsline{toc}{section}{Preface and Project Contribution}
+ 
+-This thesis was prepared at \department, Technical University of Denmark, for the \degreeprogramme. A USB-C laboratory power supply was built around a charge-pump PFC resonant converter. Its controller was developed for operation with a detachable load.
++This thesis was prepared at \department, Technical University of Denmark, for the \degreeprogramme. A USB-C power supply was built around a charge-pump PFC resonant converter. Its controller was developed for operation with a detachable load.
+ 
+ The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the MCU firmware was developed. The first prototype was brought up and tested on the manufactured V1.0 PCB with rework. Its later drawing corrections were documented in V1.1. Development then continued with the integrated V2 board. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
+ 

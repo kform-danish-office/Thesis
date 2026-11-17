@@ -1,0 +1,30 @@
+\section{Conversion Efficiency}
+\label{sec:method-efficiency}
+
+System efficiency was calculated from real AC input power and DC power at the
+stated output measurement point:
+\begin{equation}
+ \eta_{\mathrm{sys}}=
+ \frac{P_{\mathrm{out}}}{P_{\mathrm{in}}}\,100\%.
+ \label{eq:efficiency-method}
+\end{equation}
+For steady voltage and current readings, output power is
+\begin{equation}
+ P_{\mathrm{out}}=V_{\mathrm{out}}I_{\mathrm{out}}.
+ \label{eq:pout-method}
+\end{equation}
+For a changing waveform, the calculation instead needs the average of the
+instantaneous product \(v(t)i(t)\).
+
+For the V2 secondary-load tests, the AC supply's reported real power was
+paired with voltage and current at the electronic-load terminals. Their
+product gives the secondary-load power used in the efficiency estimate.
+Loss in the leads between the secondary output and load is included with
+the converter losses; no cable-loss correction was applied.
+
+Paired entries use the same operating condition. DUT input measurements include
+internal auxiliaries; the stated output sense point determines cable-loss
+inclusion. No cable-loss correction was made without a measured voltage drop.
+The results in Chapter~\ref{ch:results} are initial estimates because a
+synchronized, repeated sweep with a complete uncertainty budget was not
+available at every point. Unmatched observations were excluded.

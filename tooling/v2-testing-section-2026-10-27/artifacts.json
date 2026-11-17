@@ -1,0 +1,21 @@
+{
+  "pages": 386,
+  "source_files": 471,
+  "artifacts": [
+    {
+      "name": "Richard_Xu_Thesis_V2_Testing_Update.pdf",
+      "bytes": 16864169,
+      "sha256": "d1c86f57b49847792c62ef835583fed0ef4b412965d783e624f409f52c62c858"
+    },
+    {
+      "name": "Thesis_V2_Testing_Update.zip",
+      "bytes": 80564465,
+      "sha256": "70948a852fb22fee3b7b9bc2cec54067815c42e8ac1a897a17325a1b6bebca9b"
+    },
+    {
+      "name": "V2_Testing_Section.pdf",
+      "bytes": 119184,
+      "sha256": "93b5fc099b6b933689dd56f10aca2194e2481a3e90940e1761a40e2f7969db66"
+    }
+  ]
+}

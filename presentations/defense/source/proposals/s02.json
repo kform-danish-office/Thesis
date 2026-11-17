@@ -1,0 +1,136 @@
+{
+  "slide_id": "s02",
+  "title": "More power from a compact USB-C adapter",
+  "takeaway": "Compact USB adapters serve different devices and changing demands; this project targets 100 W continuous output with a 65 W continuous minimum. Planning message; the power objectives are visible.",
+  "visible_content": {
+    "photo_1_caption": "5 W USB adapter",
+    "photo_2_caption": "20 W USB-C adapter",
+    "photo_3_caption": "140 W USB-C adapter",
+    "body_1": "Project target: 100 W continuous",
+    "body_2": "Minimum: 65 W continuous",
+    "photo_note": "Approximate common scale · Apple",
+    "phase_label": "Motivation"
+  },
+  "visual": {
+    "layout": "Three genuine Apple adapter photographs at an approximate common physical body scale, with product and power captions and a separate project target block. Crop whitespace only; preserve each full product body, prongs, shadows and aspect ratio. Align the body bottoms to a common baseline. Different viewing angles and the approximate 5 W family dimension limit precision.",
+    "assets": [
+      "/workspace/presentations/defense/dtu-focused-story/assets/adapter_5w.jpg",
+      "/workspace/presentations/defense/dtu-focused-story/assets/adapter_20w.jpg",
+      "/workspace/presentations/defense/dtu-focused-story/assets/adapter_140w.jpg"
+    ],
+    "caption_note": "Approximate common scale · Apple",
+    "calibration": {
+      "units": "Internal assembly metadata; no dimension labels on slide",
+      "design_units_per_mm": 0.033,
+      "common_product_bottom_design_units": 5.7,
+      "body_reference": [
+        {
+          "product": "5 W MD810",
+          "body_height_mm_approx": 25.4,
+          "vertical_pixel_span": [
+            314,
+            695
+          ],
+          "pixel_height": 381,
+          "basis": "A1265 one-inch cube teardown; MD810 maps to A1265/A1385. Approximate family reference, not caliper measurement.",
+          "native_whitespace_crop_xyxy": [
+            170,
+            20,
+            630,
+            725
+          ]
+        },
+        {
+          "product": "20 W MWVV3 / A2305",
+          "body_height_mm_approx": 41,
+          "vertical_pixel_span": [
+            270,
+            698
+          ],
+          "pixel_height": 428,
+          "basis": "A2305 retailer dimensions 41 × 40 × 27 mm excluding plug.",
+          "native_whitespace_crop_xyxy": [
+            160,
+            25,
+            640,
+            725
+          ]
+        },
+        {
+          "product": "140 W MKFQ4 / A2452",
+          "body_height_mm_approx": 95.68,
+          "vertical_pixel_span": [
+            67,
+            725
+          ],
+          "pixel_height": 658,
+          "basis": "ChargerLAB A3607 caliper measurement and statement that A3607 and A2452 have identical body dimensions.",
+          "native_whitespace_crop_xyxy": [
+            125,
+            15,
+            675,
+            750
+          ]
+        }
+      ],
+      "baseline_description": "Common body-bottom baseline in design units.",
+      "captions_y_design_units": 6.04
+    }
+  },
+  "speaker_notes": "These adapter examples show the range of power and devices served by USB supplies. The 5 W adapter is a USB power adapter, while the 20 W and 140 W examples use USB-C. The adapter bodies are shown at approximately the same scale; the photographs use different viewing angles. Higher-power devices still need an adapter that is practical to carry and use, so compactness matters alongside power delivery. USB Power Delivery selects an output voltage for the connected device. Demand can also change during operation: a device may be connected after startup, removed, or draw little power while attached. The supply must respond to these changes while maintaining the required output. For this project, the target was 100 W continuous output, with a minimum of 65 W continuous. These are design objectives for the USB-C power supply. Delivering that power in a compact converter makes both component size and heat important.",
+  "transition": "Higher switching frequency can reduce the size of the passive components, but it also makes switching heat a more demanding problem.",
+  "duration_seconds": 85,
+  "sources": [
+    {
+      "type": "design target",
+      "reference": "/workspace/thesis/Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+      "supports": "100 W continuous target and 65 W continuous minimum as design objectives"
+    },
+    {
+      "type": "project application",
+      "reference": "/workspace/thesis/Chapters/01_Introduction/01_Motivation.tex",
+      "supports": "USB-C no-load startup, attachment, load removal and multiple output-voltage settings require control of stored energy and average transferred power; higher frequency can reduce passive size"
+    },
+    {
+      "type": "project application",
+      "reference": "/workspace/thesis/Chapters/02_Background/07_USBC_Context.tex",
+      "supports": "USB-C PD selected output voltage and changing load demand"
+    },
+    {
+      "type": "product rating",
+      "reference": "https://support.apple.com/en-us/120548",
+      "supports": "Apple 5 W USB power adapter"
+    },
+    {
+      "type": "product rating",
+      "reference": "https://www.apple.com/shop/product/mwvv3am/a/20w-usb-c-power-adapter",
+      "supports": "Apple 20 W USB-C power adapter"
+    },
+    {
+      "type": "product rating",
+      "reference": "https://www.apple.com/shop/product/mkfq4am/a/140w-power-adapter",
+      "supports": "Apple 140 W USB-C power adapter"
+    },
+    {
+      "type": "product photography",
+      "reference": "/workspace/presentations/defense/dtu-supervisor-story/review/adapter-photo-downloads.json",
+      "supports": "Apple product image download URLs"
+    },
+    {
+      "type": "approximate physical scale calibration",
+      "reference": "/workspace/presentations/defense/dtu-supervisor-flow/review/adapter-scale/excerpts.txt",
+      "supports": "5 W A1265 approximate one-inch cube and MD810 model family; 20 W MWVV3 A2305 model; 140 W A3607 measured body and stated equivalence to A2452"
+    },
+    {
+      "type": "approximate physical scale calibration",
+      "reference": "/workspace/presentations/defense/dtu-supervisor-flow/review/adapter-scale/20w-a2305-vendor.html",
+      "supports": "A2305 41 × 40 × 27 mm body excluding plug"
+    }
+  ],
+  "checks": {
+    "facts_units": "Adapter values are Apple manufacturer ratings, not project goals. The 5 W example is labelled USB. The 100 W and 65 W values are continuous-output objectives, not demonstrated ratings. Images use approximate common body scale based on available dimensions; the 5 W dimension is a family-level estimate and the photos have different perspectives.",
+    "unresolved": "Scale is approximate because of different viewing angles and the 5 W family-level reference; the physical size of the project assembly is not asserted.",
+    "timing": "172 spoken words including transition; 85 seconds corresponds to approximately 121 words per minute and allows brief figure pointing."
+  },
+  "revision": 4
+}

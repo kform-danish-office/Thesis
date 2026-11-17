@@ -1,0 +1,34 @@
+{
+  "source_pdf": "APEC_2027_Digest_USB_PD.pdf",
+  "source_pdf_sha256": "07d287ce92e60f816b9e8b9c6a477e8f25351f2114cd986d2ffa32f273d850d4",
+  "page": 4,
+  "figure": "3(e)",
+  "image_xref": 32,
+  "asset": "original-digest-results.png",
+  "asset_sha256": "f86e1eef093d7616308e0ac8cb401d0cb6fa2b06c1e37f7e528fd946a540bb2d",
+  "image_size_px": [
+    5443,
+    4644
+  ],
+  "crop_box_px": [
+    0,
+    3150,
+    2650,
+    4644
+  ],
+  "method": "Original embedded figure image with native PowerPoint crop only; no redrawing or data changes.",
+  "condition": {
+    "hardware": "V1",
+    "input_V_AC": 240,
+    "input_frequency_Hz": 50,
+    "selected_USB_C_voltage_V": 20,
+    "load_current_A": 4,
+    "nominal_USB_C_power_W": 80,
+    "measured_USB_C_power_W": 79.8928
+  },
+  "legend_logged_current_THD_percent": 3.98,
+  "comparison": "IEC 61000-3-2:2018 Class A RMS current limits, harmonic orders 2\u201340.",
+  "interpretation": "Shown measured harmonic currents are below the plotted Class A limits at this operating point. No full conformity test is claimed.",
+  "internal_data_note": "Logged current THD is 3.98%; separate harmonic-table RSS is 4.5266%. Preserve the original graph and distinguish the logged readout from reconstruction.",
+  "source_note_file": "review/iec-research/source-notes.md"
+}

@@ -1,0 +1,42 @@
+\section{Tested Prototype and Main Result}
+\label{sec:res-bringup}
+
+The highest output calculated from DC-coupled connector voltage and load
+current was \SI{79.89}{\watt}. The prototype was also tested at the
+\SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}
+fixed settings with a \SI{240}{\volt}, \SI{50}{\hertz} input. Output voltage was
+regulated at the tested loads. A continuous-power rating still needs a
+defined-duration test at thermal equilibrium.
+
+The high-load test used an earlier firmware revision; several intermediate-
+voltage tests did not record the firmware version. Table~\ref{tab:prototype-identity}
+lists the hardware and firmware used in the tests, and
+\cref{sec:ctrl-firmware-identities} describes the development stages.
+
+\begin{table}[htbp]
+\centering
+\caption{Test hardware and firmware.}
+\label{tab:prototype-identity}
+\begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}X@{}}
+\toprule
+Item & Test configuration\\
+\midrule
+Manufactured board & V1.0 PCB with rework; V1.1 documents the corrected circuit\\
+Power stage & LMG2652RFBR GaN half bridge; nominal \SI{1}{\mega\hertz} carrier and charge-pump resonant stage\\
+Resonant inductance & Two 7443640470B \SI{4.7}{\micro\henry} inductors in series\\
+Output interface & MPQ4242GVE-0000-AEC1-P and USB-C connector\\
+Controller & STM32G071RBT6; PA8/PA9 carrier, PA10 burst enable, and PA0/PA1/PA2 ADC acquisition\\
+Firmware & PWR-1.9.20 in the identified final \SI{5}{\volt} and \SI{20}{\volt} records; unspecified in several \SI{9}{\volt} and \SI{15}{\volt} records; PWR-1.9.10 in the \SI{4.7}{\ampere} high-load record\\
+Input & AC source at \SI{240}{\volt}, \SI{50}{\hertz}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Calculations use completed measurements from the load tests. The complete
+results are included in the appendix.
+
+DC-coupled captures give mean output voltage, while AC-coupled captures
+show small-signal detail and acquisition statistics. Thermal images show
+surface hotspots. Error bars are omitted because the uncertainty data are
+incomplete; instrument disagreements and ambiguous measurement fields are
+discussed with the affected results.

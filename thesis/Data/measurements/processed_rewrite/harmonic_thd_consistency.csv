@@ -1,0 +1,4 @@
+test_id,logged_current_thd_percent,rss_orders_2_to_40_percent,minimum_with_table_rounding_percent,maximum_with_table_rounding_percent,logged_thd_within_table_rounding_bounds
+PDO20-76W-38A-001,2.62,2.6381811916545836,2.4510201957552287,2.845610655026439,True
+PDO20-80W-40A-001,3.98,4.52658811910251,4.3439613257946945,4.722022871609158,False
+PDO20-94W-47A-AC-001,32.42,32.49015235421342,32.322863425136084,32.65911052064952,True

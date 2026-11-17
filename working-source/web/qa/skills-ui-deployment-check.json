@@ -1,0 +1,105 @@
+{
+  "deploymentId": "dpl_A7MtyB1g2BG2ez49kqRLsKCHqAtD",
+  "publicAssetsByteMatch": true,
+  "files": [
+    {
+      "file": "index.html",
+      "url": "https://thesis-power-lab.vercel.app/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 14283,
+      "sha256": "0f452979132cd155b673633d7cf9cadb1075d7ca94243e6c8f378b004a4cf18c",
+      "matchesSource": true
+    },
+    {
+      "file": "styles.css",
+      "url": "https://thesis-power-lab.vercel.app/styles.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 39320,
+      "sha256": "48151d6ae84d1f8210cdb2c46f1f92437bee344955909b53ce0612295bfdc85c",
+      "matchesSource": true
+    },
+    {
+      "file": "app.js",
+      "url": "https://thesis-power-lab.vercel.app/app.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 35267,
+      "sha256": "b5f3139229f7d96f1e4705a810920a2e0ecafac26e010dd7707dccc2e0e80034",
+      "matchesSource": true
+    },
+    {
+      "file": "serial.js",
+      "url": "https://thesis-power-lab.vercel.app/serial.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 11960,
+      "sha256": "a27971d5452b39538bb1799faa74b4480aadef460d0f4a38f1a25247b5c80d67",
+      "matchesSource": true
+    },
+    {
+      "file": "protocol.js",
+      "url": "https://thesis-power-lab.vercel.app/protocol.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 2385,
+      "sha256": "0254f0e9fb34d5892bd9cacca1f392430cd222f4beb4e46544e489395c85b0fb",
+      "matchesSource": true
+    },
+    {
+      "file": "storage.js",
+      "url": "https://thesis-power-lab.vercel.app/storage.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 3019,
+      "sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5",
+      "matchesSource": true
+    },
+    {
+      "file": "calculator.html",
+      "url": "https://thesis-power-lab.vercel.app/calculator.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 15479,
+      "sha256": "2d787320d030d69bd15388df6357e60cf47bba27b8e6f1518fbd9f1c000c6063",
+      "matchesSource": true
+    },
+    {
+      "file": "calculator.css",
+      "url": "https://thesis-power-lab.vercel.app/calculator.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 18801,
+      "sha256": "71c5ff2907f598b73e8b6d94157c40aeed9a82531b9424b2d46b8d575209915f",
+      "matchesSource": true
+    },
+    {
+      "file": "resonance.js",
+      "url": "https://thesis-power-lab.vercel.app/resonance.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 13568,
+      "sha256": "9eb03e5e001088dffbcde52294871c246276d0ddf06f00262aa9cf93f8c7c0a3",
+      "matchesSource": true
+    },
+    {
+      "file": "resonance-ui.js",
+      "url": "https://thesis-power-lab.vercel.app/resonance-ui.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 33894,
+      "sha256": "6fcad62f96c2231ce01425a9c7c67295eb3eb871b8693e37fe2bc10a789e31fa",
+      "matchesSource": true
+    },
+    {
+      "file": "resonance-presets.js",
+      "url": "https://thesis-power-lab.vercel.app/resonance-presets.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 8294,
+      "sha256": "5f4052c4740489bc07b06fb8cfcf57871717be5f6f9093742428c4c6c6853dd5",
+      "matchesSource": true
+    }
+  ]
+}

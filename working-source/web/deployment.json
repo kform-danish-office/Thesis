@@ -1,0 +1,14 @@
+{
+  "name": "thesis-power-lab",
+  "url": "https://thesis-power-lab.vercel.app",
+  "calculatorUrl": "https://thesis-power-lab.vercel.app/calculator.html",
+  "id": "dpl_A7MtyB1g2BG2ez49kqRLsKCHqAtD",
+  "projectId": "prj_9wBeSEmwNwN2VFnm9eld5yYPM29l",
+  "state": "READY",
+  "target": "production",
+  "sourceManifest": "deployment-manifest.json",
+  "publicAssetsByteMatch": true,
+  "physicalUsbVerified": false,
+  "previousDeploymentId": "dpl_G2ybAVuksqV4L8nWyxrQSdu3ngX8",
+  "revision": "workspace-ui-refinement"
+}

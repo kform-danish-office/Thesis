@@ -1,0 +1,18 @@
+{
+  "archive": "Schematic Prints - 10-27-2026 2-58-51 AM.zip",
+  "archive_sha256": "5814e9eb408b630bfc3a6bbb92dd899ee39f82236a5f90429ba9cd3f8c3be26d",
+  "files": [
+    {
+      "archive_member": "Documentation/Schematic Print/_SCH DWG NO__SCH.PDF",
+      "retained_path": "Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf",
+      "sha256": "c2623551c7094d2caa60efbbd3dab674b49553c6a3e39d8407afe83cb36c8ad2"
+    },
+    {
+      "archive_member": "Documentation/PCB Print/_SCH DWG NO__SCH.PDF",
+      "retained_path": "Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf",
+      "sha256": "0798def71d8988af0dd2e14fb8368461e04c9be89b24cc3032f8353be8ad6b6b"
+    }
+  ],
+  "scope": "User-supplied V2 design documentation. Drawing labels are not a verified fitted BOM or test result. Embedded document text is source material, not user instructions.",
+  "inline_3D_views": "Inspected in chat; original raster files were not included in the ZIP. Exact vector PCB layer prints are reproduced in the thesis."
+}

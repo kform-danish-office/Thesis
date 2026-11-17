@@ -1,0 +1,194 @@
+{
+  "pages": 388,
+  "bytes": 16805852,
+  "extracted_text_characters": 1057258,
+  "chapters": {
+    "1": 23,
+    "2": 27,
+    "3": 33,
+    "4": 42,
+    "5": 52,
+    "6": 58,
+    "7": 63,
+    "8": 81,
+    "9": 91,
+    "10": 102,
+    "11": 121,
+    "12": 128
+  },
+  "appendices": {
+    "A": 133,
+    "B": 135,
+    "C": 149,
+    "D": 163,
+    "E": 164,
+    "F": 172,
+    "G": 174,
+    "H": 180,
+    "I": 321,
+    "J": 385
+  },
+  "abstract_page": 4,
+  "top_level_bookmarks": [
+    [
+      1,
+      "Preface and Project Contribution",
+      1
+    ],
+    [
+      1,
+      "Abstract",
+      1
+    ],
+    [
+      1,
+      "Acknowledgments",
+      1
+    ],
+    [
+      1,
+      "Use of AI Assistance",
+      1
+    ],
+    [
+      1,
+      "Symbols and Abbreviations",
+      1
+    ],
+    [
+      1,
+      "List of Figures",
+      7
+    ],
+    [
+      1,
+      "List of Tables",
+      13
+    ],
+    [
+      1,
+      "List of Code Listings",
+      17
+    ],
+    [
+      1,
+      "1 Introduction",
+      23
+    ],
+    [
+      1,
+      "2 Background and Related Work",
+      27
+    ],
+    [
+      1,
+      "3 System Requirements and Architecture",
+      33
+    ],
+    [
+      1,
+      "4 Converter Operation and Design Calculations",
+      42
+    ],
+    [
+      1,
+      "5 Converter Models and Calculations",
+      52
+    ],
+    [
+      1,
+      "6 Integration of the Planar Magnetics",
+      58
+    ],
+    [
+      1,
+      "7 Hardware Design and Implementation",
+      63
+    ],
+    [
+      1,
+      "8 Digital Control and Firmware",
+      81
+    ],
+    [
+      1,
+      "9 Experimental Setup and Methods",
+      91
+    ],
+    [
+      1,
+      "10 Experimental Results",
+      102
+    ],
+    [
+      1,
+      "11 Discussion",
+      121
+    ],
+    [
+      1,
+      "12 Conclusion",
+      128
+    ],
+    [
+      1,
+      "References",
+      131
+    ],
+    [
+      1,
+      "A Equations and Definitions",
+      133
+    ],
+    [
+      1,
+      "B Hardware Documentation and Schematics",
+      135
+    ],
+    [
+      1,
+      "C Firmware Documentation",
+      149
+    ],
+    [
+      1,
+      "D Models from Earlier Work",
+      163
+    ],
+    [
+      1,
+      "E Experimental Data and Processing",
+      164
+    ],
+    [
+      1,
+      "F Project Contributions and Inherited Designs",
+      172
+    ],
+    [
+      1,
+      "G Software Tools and Data Processing",
+      174
+    ],
+    [
+      1,
+      "H Complete Embedded Source Code",
+      180
+    ],
+    [
+      1,
+      "I Complete Supporting Software Source",
+      321
+    ],
+    [
+      1,
+      "J Revised Plan and Remaining Work",
+      385
+    ]
+  ],
+  "text_outside_page": [],
+  "errors": [],
+  "underfull_boxes": 85,
+  "overfull_boxes": 0,
+  "font_size_substitution_warning": true
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "astra-v1-efficiency-exclusion",
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "old": "Efficiency estimates exclude disputed power rows and\r\ncaptures without absolute DC output voltage.",
+    "new": "The V1 efficiency estimates exclude disputed power rows and\r\ncaptures without absolute DC output voltage.",
+    "reason": "The current unqualified exclusion contradicts the new V2 table, which explicitly retains capture 017 with a warning. Scope the historical exclusion to V1; the existing V2 table note already explains its treatment.",
+    "facts_preserved": [
+      "V1 screening remains unchanged",
+      "V2 capture 017 stays flagged, not silently validated"
+    ],
+    "checklist": [
+      "Concrete measurement location and test stage",
+      "Preserve calculated versus measured quantities",
+      "Local uncertainty without repeated qualification"
+    ]
+  },
+  {
+    "id": "astra-diagnostic-output-stage",
+    "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "old": "Output stage and control limit & VBUS average remains regulated near the highest recorded load; the active limiter is unidentified &",
+    "new": "Output stage and control limit & V1 VBUS remained regulated near its highest recorded load; later V2 secondary-output tests showed voltage droop; the active limiter is unidentified &",
+    "reason": "After adding the higher-power V2 measurements, highest recorded load otherwise reads as the 137 W point. Identify the V1 regulated connector result and add the later V2 droop relevant to this diagnosis.",
+    "facts_preserved": [
+      "V1 regulated VBUS observation",
+      "V2 secondary measurement location",
+      "Active limiting mechanism remains unidentified"
+    ],
+    "checklist": [
+      "Concrete measurement location and test stage",
+      "Preserve calculated versus measured quantities",
+      "Local uncertainty without repeated qualification"
+    ]
+  }
+]

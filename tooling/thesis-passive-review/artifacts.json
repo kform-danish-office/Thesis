@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-10-25T15:30:56.631592+00:00",
+  "source_files": 467,
+  "edited_files": 154,
+  "artifacts": [
+    {
+      "path": "/workspace/tooling/thesis-passive-review/Richard_Xu_Thesis_Passive_Factual_2026-10-25.pdf",
+      "bytes": 16805852,
+      "sha256": "09945866c3256ff058a19e9422eea9d0fd029250139fc53306a5ced88b265ab3"
+    },
+    {
+      "path": "/workspace/tooling/thesis-passive-review/Thesis_Passive_Factual_2026-10-25.zip",
+      "bytes": 80498947,
+      "sha256": "cb7ccce6013b1e18a6dcdf4cb6595dbd410f0960511a3776b6f3e01c2eb9056b"
+    }
+  ]
+}

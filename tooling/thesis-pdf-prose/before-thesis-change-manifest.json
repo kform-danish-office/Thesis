@@ -1,0 +1,1382 @@
+[
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "sha256": "07bb7b2f77a17384b4efc29fcf9b80398bde97186771dea0835f97e4c4e0084e",
+    "original_sha256": "7038800581a7f64eda327de1c67b2bf535e486668390c7cc57217e2855327c26"
+  },
+  {
+    "path": "Frontmatter/Acknowledgements.tex",
+    "sha256": "ca2a7b0c99f63789381e42c0cef715a5975370061473f8dd5372d948efc787d5",
+    "original_sha256": "62808e541f015238d2b03f773096c6019aaf772fb04d59bd4549817a17129165"
+  },
+  {
+    "path": "Frontmatter/Approval.tex",
+    "sha256": "48f38514f1b1dff294f57c91fb11c4cd08ca79357584c13683b6169ee3b28d7a",
+    "original_sha256": "8bda189dc041be2889f1a0b3ac005a8a8b8a55a4114b1f5d800e529344008634"
+  },
+  {
+    "path": "Chapters/01_Introduction/01_Motivation.tex",
+    "sha256": "7c0e34d5f0be765cf24b2377e9ed8b66338562f849014f201f024faeb922dec0",
+    "original_sha256": "26f1f482966b4145f5c9ae0f2f0f91b316dc5728a91c3c1a4a09b081e022eb89"
+  },
+  {
+    "path": "Chapters/01_Introduction/02_Problem_Statement.tex",
+    "sha256": "17f850600bed7919c2212bd050cf2d63f7351ff8ecbd05045fa5e3bef1dc191d",
+    "original_sha256": "eb04437b310c55d8a11059a90b0c5c64609c109c34cdb69e3a113e7af2231c84"
+  },
+  {
+    "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+    "sha256": "49f2da1243e84660499cd3238a4a3ba263e31b4684ef3aeb9d4f601c56ad3015",
+    "original_sha256": "a70f19cf4efa3f135401e81718f15695b925dc5dde3f76517ff23da51563d379"
+  },
+  {
+    "path": "Chapters/01_Introduction/04_Research_Questions.tex",
+    "sha256": "fbf7bc2f6aa53561ae037f55d75e96c840f8080cd5e2cffb5064095ba9e89f32",
+    "original_sha256": "586100d78a7e65a593790fd86385009767a5dee8325961ee298945deadd6eb88"
+  },
+  {
+    "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+    "sha256": "c65c8f915c81b39f85c98aa7cb8e2dff9f0d2b897753dbfcb4e8e2d759378c6f",
+    "original_sha256": "34f27e8892babd2291964068fcb6db7c335aba8f51daf156711cf33817cf799c"
+  },
+  {
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "sha256": "677d3fe14eaf6a039e27f90643a779b8e883ac0a18f70cca64142345403d2a73",
+    "original_sha256": "1b45ec711ae54351cbb9f72260c71165773bfad65bc47e8de9168c124d5c5451"
+  },
+  {
+    "path": "Chapters/01_Introduction/07_Thesis_Structure.tex",
+    "sha256": "6707e9f784fa48abb34752813fd0ff9230ed64f61f13d611a0de970369c59b87",
+    "original_sha256": "a4249875446d67e100d44d472d79ada9be94b54bc552979593f0af58f5570900"
+  },
+  {
+    "path": "Chapters/01_Introduction/chapter.tex",
+    "sha256": "79acded3268c17e45a3d544dcc8ed372f9aeb675dd32ca192d7528dd0ac8c55a",
+    "original_sha256": "63eb75c44565d553d04bbd9993a7dafad247ea26cfa33010a38adce0579e16da"
+  },
+  {
+    "path": "Chapters/02_Background/01_Offline_ACDC_PFC.tex",
+    "sha256": "29f930780af4495dc32adda2eca172f4314f9c16abbb98dfbc3c0e86a0065f4d",
+    "original_sha256": "996f9296152ec095d148e868b555f02adccc6f19a29c13064a0f48d9215665cf"
+  },
+  {
+    "path": "Chapters/02_Background/02_Charge_Pump_Principle.tex",
+    "sha256": "34e62fd8d40194c5f551e1018701b4fe501b1ab1233898262ca62919985d7ba6",
+    "original_sha256": "fd69f8b942c6398bf84f1a55778a5c7a4ede452d3d80f77ed945aaacc75f280a"
+  },
+  {
+    "path": "Chapters/02_Background/03_ClassDE_Resonant.tex",
+    "sha256": "a5bf39df98d426db01bd589844e17fe3aef5c517f83081dc4e64737ff208c56c",
+    "original_sha256": "01633d0ef6ee6d1be11b6c76bbe54993bcc06282466c200c9005234ba1a3938d"
+  },
+  {
+    "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+    "sha256": "672a26dac230ac515f8177411f1363702014a6bb15ea0cabb521e0ceac543dfb",
+    "original_sha256": "6b0346336c076fb82f90573aa00a2cf766c0526c6a3326f212f3f857f81fb463"
+  },
+  {
+    "path": "Chapters/02_Background/05_Reference_2020.tex",
+    "sha256": "e275a89cc7ee759e0dd8a5233a3643cdb5db353e8ef4b9e9b1285d5b036944c9",
+    "original_sha256": "874de892c9e1bf1003e6346f5ed6ef13ec15114e6c8ad12a34ad1f72d9f8d6d3"
+  },
+  {
+    "path": "Chapters/02_Background/06_Reference_2021.tex",
+    "sha256": "4e83fa52907aba04229151b97c49dba736f5c12c82c657044a75bd0f0bf62c87",
+    "original_sha256": "0824bf391f298dc783e97eb4ac76cd735cced3b389e127d94de5eb1a87ff84ea"
+  },
+  {
+    "path": "Chapters/02_Background/07_USBC_Context.tex",
+    "sha256": "751a3a7ff900ac7e44126fede0f281204ce69dcc4408aee8ab470315f604d95a",
+    "original_sha256": "b7d6b512559ca31cd10af976391d25c9844cceb49f750b086d2724c3ba11d0cc"
+  },
+  {
+    "path": "Chapters/02_Background/08_Research_Gap.tex",
+    "sha256": "67c76c93cf4044b8cfff1892799713ee3f7ad32ef5ab825b858866e62681883f",
+    "original_sha256": "7fce10957cc56fb6ed08446cc2fe3d556385be3d847580a4f687b3619c6686d0"
+  },
+  {
+    "path": "Chapters/02_Background/chapter.tex",
+    "sha256": "dca050f37400a6485db580bcf4ff163241ff0328f2bb25f8e2e84c4f2e3569f9",
+    "original_sha256": "f77f6a69ffe40f35418d245bb29e13a32b3a8913abc11308cd9cfb96d460ecee"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/01_Use_Case.tex",
+    "sha256": "39d666c4ed1b6658ef00b6c51e85ca166988364554eadcabea5f7bfdb2b22075",
+    "original_sha256": "b917d377c41d8a3e04948cb9f5f323e259d30d58ac25bf13022c88fb80030e56"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex",
+    "sha256": "99113b522e28e4f7cd252d7c6fb7343bc613953cc2850fb174a2c927d59a60f2",
+    "original_sha256": "c74910cc6b5e30a2f750e8ae1e240af924dab944217791f3e8711cfec8ebb50b"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex",
+    "sha256": "335318bb3cd29f0ee429c2f6db9744ec3625d1ebd0628761b22dc15b6e963b76",
+    "original_sha256": "bfe4b125fc3f8e6b49cb3272d95ac6b1c385fe416a7bfdc4861d22d9998d02bd"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/04_USBC_Interface.tex",
+    "sha256": "172afee464ce2c5a2568015cfd6466b55c9b7af56aefce3d3dfb4810add198b2",
+    "original_sha256": "848af99f822ee7898f2edf15f9f95bf5f94c7ea303c8fe1bb7bc8929646a6a1b"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+    "sha256": "5b09af6f3b16a64b235e7e09a095477497ad1710a87f29ba1e36fb384691cf4c",
+    "original_sha256": "d1230fb24fd9a4477c9492eef512bc2b8b3d4428824067566b508bc4aa3f95a6"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/06_System_Architecture.tex",
+    "sha256": "771abc7d318d21580339a755aeb0f263277a17811e23966e1d7d1e7a6bb97410",
+    "original_sha256": "4c7a085623dfb67347031359afe3932af379450b8d709a8a441770bab9624611"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+    "sha256": "82f6daf85b829d819d27891671ba91de87f9725798182fa521e634b6973da647",
+    "original_sha256": "b33b653128991cadf124e7082aa3b5b0b0171cdba473a3df54c38bd258019e03"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex",
+    "sha256": "c66284a5e6b903e456b841661ef91f2c582ac9730e9aed88974082c6afe4b80b",
+    "original_sha256": "2169890fb487683446228632b09d9541a07996f20edea617a3cf9fde4c129983"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/chapter.tex",
+    "sha256": "dbc3632208bf1ddb1cea2c35fd6eb773de9bbfd85b3cde411c5cca6d991573c9",
+    "original_sha256": "3c25169df4d5ab5a5a618d507cafac3989f63bd9c854258156f2065d98c66244"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+    "sha256": "5fd3bc3d8024b4988321a96f443d7da36a1038a41f872edc9e387d00af15929d",
+    "original_sha256": "0164a24f9ef6a41751dfb5f19bbc534a5aabdca060ca820c2e14269512bae96b"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+    "sha256": "8c4898a5c0de8e79d740d743ae76f4748b0ad7ec8148e0fc25946d3b8f2eb3ca",
+    "original_sha256": "d677a0ee0948a1962a39d347104dbd0aeb0c6de5a1fdd001e1597f57b325577a"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+    "sha256": "426559f021078ec14e615de26fad6d811f233cca9355e1c7542400d8b522fcdb",
+    "original_sha256": "07d033adae7513c489ec40dcea60ffb7bb35c88f511491881bae92b5e2a90994"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/04_Pump_Capacitor.tex",
+    "sha256": "59fb638a73ba9adf8f145edcb583700eb82fa1c58e33ee3d84f42bc231888daa",
+    "original_sha256": "7324bb1516a60ba01620f1e1811f91fe01b4bbcd47a6e1e68e6bd44e0a167c01"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+    "sha256": "4f463ff56bff109adb8462fa95b7ce6070162185b29914d24be01747494635be",
+    "original_sha256": "d4dcc2f9be5eed9afa172ccea6658483559ff4b745a68bffdc46969256ff19be"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/06_DC_Link.tex",
+    "sha256": "6d8812c12e7dc7081c86aed666e6d272eb14917b08564107ffaf23c66dae1fad",
+    "original_sha256": "8bec3106324a00c0f36ab012c734b85f6f68e3932fcae1c53613a6294ef89151"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/07_Resonant_Stage.tex",
+    "sha256": "69a7d8d5b4a8a1ba028dab6215bb4b23ee7237b3a52e439bdf96396c3e96f5e2",
+    "original_sha256": "9bbde083a46c8f2d9153195ab6b82b09c4345aae49021433216fa8fe876d86bc"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/08_ZVS.tex",
+    "sha256": "3996542a306e7c1b638ef4285875c390c0c4b98def3af3c8e9badca25a18a021",
+    "original_sha256": "106e4b7880d46e0dd3b562e6b0c3cd91fc18ca5c16f06fad8232d3a8925cfffe"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+    "sha256": "9b4be6f0184e0c586fea1439c343d9b474bafa3b656bbca7bc09955bdec493a0",
+    "original_sha256": "14f675d0367d2a1d1f80e5134e191fdbcee5403f6a4ae1f4fe56dec1098182ed"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/10_USBC_Adaptation.tex",
+    "sha256": "e86775be086c90f8eef11c7d45aaf90f60933e508b4403919f585d80962c69ae",
+    "original_sha256": "a8b8157f460da2562c1899320d8459b89bda497b35a25495f2822852307e33a4"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/11_Design_Summary.tex",
+    "sha256": "654a2b97714d029661c5131d3ea2cb2f2ec441fdbc58e7a70e31f2e8e0ff9a35",
+    "original_sha256": "970180bb08c0a8ef23e6e3ecf82db3c407a31cf78ba962a951b34b3a33b2d998"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/chapter.tex",
+    "sha256": "3cb2e6ff3176a1be5147f514dc792c4369bc852919f5777449630c5ed1e6af4f",
+    "original_sha256": "8c527db8b01037b149ae4bb1d2c2557cc7325e9ae201b61af376728f783f5d88"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+    "sha256": "13c6bfe19834c074fd06e99913f4427f476493dd8f70951bdec11b6c22d0fe98",
+    "original_sha256": "f461d066afbbf26cd7de7335776a39d1d1a60f213200af19405c54ef7aa50769"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "sha256": "868e104de3def6b5ff512713a68b463184fb36ba20fd9f1ad68ca4d6cecdff7d",
+    "original_sha256": "2ad721e04f694aabbac0d53fd312ed3f9e87dbbb2319092d456381f49672c1f5"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+    "sha256": "2f4065f1d51f34d1b678716382e7330459bf9330cafdb177dae8817bf673f487",
+    "original_sha256": "79580841ba604df133e22a0a62604d9818cded1176358bfa580e33df1cafc65a"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "sha256": "93be8f69f7b434102bb91f5cbc2478bf033b6ffe6ba0e29393ecd184c99c77ea",
+    "original_sha256": "081422a8c651577f7a84bac27fa4f35df6415e8e143b9c994943c5f35b7ab1b9"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex",
+    "sha256": "3c4410eeefc87b6be4a966db44143f92cfcb4487677b83886406e59f1aa70728",
+    "original_sha256": "35fa7b36e634d2a8ded40dc0a1cedc8ee745c4c989bbb5145ec1cdff5a4799a9"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/06_Steady_State.tex",
+    "sha256": "b486b2fb711514092d5935d9af9d6ae7ab302220cd4ae4985f45d41dd9c584b3",
+    "original_sha256": "30d1867b9ab12eab8bca175e4fc2b1606a8823caab2144491fe8af09db7c5f10"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex",
+    "sha256": "5f217fde7be866c46ca0bf25a1cba077fb6721c2083e844f8cdcb1dcbe1b9f30",
+    "original_sha256": "79ce42b5d842c30b3e2054fd9d5c38e57da277d7e05af6c4d2b24b3b02514f5c"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "sha256": "c66ffbe2557613fc91632ad53dbabb5ec4b7b312cd14cef588304046f6d265f1",
+    "original_sha256": "79aca3fb4ec653260ccae2ce628971a29610a55df6cbf7e3a88bfc71d54a0441"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "sha256": "7d193b8836acb770660b9396f1830e6c75305409ff0321889ac563fac67ed096",
+    "original_sha256": "d273fd7d8d55c1fb44270545d352a1b680e1989d662ceac20227d0ea7cda638f"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/10_Data_Limitations.tex",
+    "sha256": "afbd42ef21771a048ee1dfea6278482778d40eb7793ec4bb38b4a377654c91e5",
+    "original_sha256": "123a3ed89ae52545c6b45e61d85d3ec9f0d6158d784dd9f66114be0b4c317483"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/chapter.tex",
+    "sha256": "416c6d698ee36d994a482b4e3e3f359bdbb3d54e814c1466f485cfa5e4c4106e",
+    "original_sha256": "27ee4fdf6e2195666ddb3822ee6cd70d69627d040a37768939ce32e63588e2cd"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "sha256": "6593df7dd25fb9fdf5b08fc56250d9eda01370b4a5265a875f29163b53a0bfca",
+    "original_sha256": "0e2797f408fb29cb85323f37871f40b241018971074174cf6430d7bd330045d3"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+    "sha256": "41c35547cc3104f8b7a9c71d29820e7f3c7008ad4a1f037ab887fb38c75b2e01",
+    "original_sha256": "da00d030bb8a0ca73901c3f8135931e1798828c0c1bac40c500fd32c4abd098e"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+    "sha256": "76817759a59e0798cdffa5e888e32882555bdd9947c575d6cc2729732afafa7a",
+    "original_sha256": "2852fae1db7519093a904351a4e57eba99a88c81d1f3b166106763eee6747fec"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/04_Mounting_Concept.tex",
+    "sha256": "d6c1835bc73b8e5eb083ad89d21a94d4d079a7e2efa5526dbd0552c0c6eab9e6",
+    "original_sha256": "baa9e0591e2ff1e69921f84a4bd981a6cfd28bfe4c48827757768a7806354670"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/05_Footprint_Interconnection.tex",
+    "sha256": "37249689012f6e11dfd431935e670b422a8e1acf82de629d673ef299d0ed2ce3",
+    "original_sha256": "747bbb89a0e1c637d802c89fdd8998d3e5db5c6e1ac87b106baa38e14f261e2b"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex",
+    "sha256": "761dbbea46f36d76c788a162fd16b657936dbaf0ed6ad6a9e088cb7a876a10a7",
+    "original_sha256": "1eced10d4f6af3a9724c3d3ee968e3519f74298c7dda3708eea587b124737baa"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+    "sha256": "d0c43d1c327e4b2ef5b1ee8ad7a4a66148971ab0386d33f9bc5242ff23a6997d",
+    "original_sha256": "49d008060edfce866887c1772132b85fdaf0ebc5b78cf173555709e12da2412f"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/08_Parasitics.tex",
+    "sha256": "e40cd1993357226fb7ca34a76118da03fb7cf5ecbcbb31ecc4f20bf1cca1a8c6",
+    "original_sha256": "29f704cda4d63830b82ab4b6caa99b50a26363f261639dcd2d86608eaec2f6c7"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+    "sha256": "7570cdf36d2b65e01f9c5f9c815ffff1d5e3edc6d1efa7dbec5c79e8d5b0dea1",
+    "original_sha256": "b434d47729d3a1825d2b3bfd8a83415e20a5d3089fa170ec2ea5d63cc6da3c88"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "sha256": "da1af58417ace807dc8d5bb095d99560546dc2d3bbe2f6ead95b482be4a7b1ee",
+    "original_sha256": "9d1de980b821d40849639445764fe1285fd4e4ff925836c498da9259d03a60c1"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+    "sha256": "313d0e88535a3d51d9fd13c7eb1481216a5fd8e54db8c83dc8714aa6b3eebccf",
+    "original_sha256": "b1b8e8ae37703f8f034cd3ca8b2270bd5887d16bddbbf184d57a6d62309a422b"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/chapter.tex",
+    "sha256": "bcf3463be4025514b845b6ce04af328ea04381603e5da5875f44c5366ca8d351",
+    "original_sha256": "7485d4674651b4e330cdd242c3dd697795bcce4f8bc3c04ba7c7c3d09ac82380"
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "sha256": "ddfe73cba6680cd26812796f7e5817461d8f0a597b3db46f1bd4ad11f52ca962",
+    "original_sha256": "26cd051940b5fbaeef72afc3ba333467979a4cc2ba92c83a46791274952c1a19"
+  },
+  {
+    "path": "Chapters/07_Hardware/02_Input_Filter_Bridge.tex",
+    "sha256": "3a1d1505b67943b7379a5d254907fd7cfa4f41614aeca2084b464747a9d6237f",
+    "original_sha256": "5915bbaa5cb8cbbf109c6a23e73799b482171ca2fdf705fa7cfd26dd4121951f"
+  },
+  {
+    "path": "Chapters/07_Hardware/03_Charge_Pump_Network.tex",
+    "sha256": "4dbadef6d85aba28da81bb1624f75eb20dd0541e0157b893919bea0da1daa0b3",
+    "original_sha256": "3fe78be83e6119a2e72304488f966aee00f2df28fa1fcac1ab867235a6df45f7"
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "sha256": "8b119cfb44fd4df0c54853187fcd293c9ed98594964923d5a37a204bcca6a444",
+    "original_sha256": "a9011393e28bdf7c6ae3dcb4032a8f825001852efc1f5671819ab2db67d9d57d"
+  },
+  {
+    "path": "Chapters/07_Hardware/05_Gate_Drive.tex",
+    "sha256": "cb6850015b9a696baeaf120ad62724fcd41d088792d4c2e98e952cba67de131c",
+    "original_sha256": "f1af62c03c0f2efeb0a0aa501c79968abc3f41322fd60ac6d2834f581e5b4a63"
+  },
+  {
+    "path": "Chapters/07_Hardware/06_Resonant_Output.tex",
+    "sha256": "49818f592ed1de9883ce6c963a1554e83a6edc75f974e61a3c312d56386c4438",
+    "original_sha256": "5aa5bc033449a82dca913853fe4193b72f50324f59c21e15c40307c5a9ad2f8c"
+  },
+  {
+    "path": "Chapters/07_Hardware/07_USBC_Interface.tex",
+    "sha256": "e4297345d17b41f01abfb86b7b49ee111357f0e47e5373bbf10d87fc29411d7e",
+    "original_sha256": "d45fdb09ab4366ff6d0fbf1127b344a660a4f78a64fb6bf0885c58cc1d2c6422"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "sha256": "333e663d6585ea07e45c9ea67fdb6b4c7c7d69db3983f2811714bfcc1d13a46a",
+    "original_sha256": "000089aaa0381ef9db650a01a8b61f9da1e57ec496a9b7761f96af09d8590db7"
+  },
+  {
+    "path": "Chapters/07_Hardware/09_Protection.tex",
+    "sha256": "da3e6cbaad86b726190f81664e14b35d422751f4b270b6303c1e09fa913fe8a8",
+    "original_sha256": "70f70ccb5ea8705cb74039724c3a79d7d1597b66c6801aea8d49f9a533bebabf"
+  },
+  {
+    "path": "Chapters/07_Hardware/10_Auxiliary_Power.tex",
+    "sha256": "fab10178cfe3221c0f10bb349482d5210fe036aaf196190c8f44cd338b5b60e7",
+    "original_sha256": "27d5585ecdb7261dbf26acf7355eb9da3873254892daf7e099c58c233c49131b"
+  },
+  {
+    "path": "Chapters/07_Hardware/11_PCB_Layout.tex",
+    "sha256": "d1649b57fadbb12d88c592e3dcbc71b3df5ec85be50afae71010732a1285c234",
+    "original_sha256": "cb3da447b6d5a390c87d1216451f93aa9a0d3380e17fd07431c9886964fc62fa"
+  },
+  {
+    "path": "Chapters/07_Hardware/12_EMI.tex",
+    "sha256": "60306f95f48f98489a4951483026d60207570770bd3a06e9fe3c53da27490f43",
+    "original_sha256": "1ec0f40ed4dcedf1536b8888033b5c0024eec94779d7e83f39eb6a6b9568d0f6"
+  },
+  {
+    "path": "Chapters/07_Hardware/13_Thermal.tex",
+    "sha256": "644fdede7d209500df6464d138df50d395128ef96a62ef7c635ec959bc6596b4",
+    "original_sha256": "f335f8794c5e1efa0060fc08734390f906db94041f730120aa4c8bb7ba24d94c"
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "sha256": "5375c3753ff9467e17ec9aa8414ce54761729f1af6e13ef6691ec4332de6a9db",
+    "original_sha256": "803a195d7bfb7b0f552f529afc259f471ef942874565ca4fe804aefe7f2e0805"
+  },
+  {
+    "path": "Chapters/07_Hardware/15_Unmanufactured_Revisions.tex",
+    "sha256": "36eb965e8b3eac37dea58ea895fa72567e8c6ed26ef2e9110a91d7a3c9790d0d",
+    "original_sha256": "2f87cb2d3ba2d92202fe67e703e1d53524714342e5c1e7fc4167647790ab2a81"
+  },
+  {
+    "path": "Chapters/07_Hardware/chapter.tex",
+    "sha256": "3ba9fe33a36fe57c4c0daebd3bfb9416fbefc34f2a140675f8652f31e6f83e88",
+    "original_sha256": "b6d795a4321ce1987fdca63e843f47b9e35e7be033ca64ae3359397416933a47"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/01_Control_Objectives.tex",
+    "sha256": "06227f89f03f1d486f1a675d31a984f973502e877aef13e46e3927de2a102a41",
+    "original_sha256": "8c5f12c9ab10c998c1b2de682709ceec3fe042741f58af1006b102e7824493d5"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "sha256": "68c131dab21dda2bc92290cf46c42c0d5498ee6e2f69d2507cc2c75da317b4c3",
+    "original_sha256": "a83f8b8f66cb597fa3813e42d5cbd48548748bb6cfdb6db043eae3c372a4540b"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "sha256": "e708d223cdb9fd92e7d76a9c2fc5d8cedbc9b3810f76546866b4237e91c9ff3e",
+    "original_sha256": "e99a0b0150ac140ac2500ee92ab060b0040aeaa525e4ccd3f6bd221b0193f741"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/04_V0_Open_Loop.tex",
+    "sha256": "1a00815dc4b0d7fe4457a722227321622351ae724186c00ed3a6fb0accfb54ea",
+    "original_sha256": "76ad968c10cb561f8f9b5974524834e772d102beb2d7130b0d97d42c30e5e048"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex",
+    "sha256": "7a20a22fce6a92e3f1209d7a735ca106e98f622a4af409d3a420cd03d517de0d",
+    "original_sha256": "5824e72b83a3bdf094cb1a721fe0d754773b198a8c3194863763a32d637d43ef"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/06_Blocking_Limitations.tex",
+    "sha256": "65c97dc9b7daf2e7ec4e09953e1a0cb452cd59523304b841d47c1a0684f23ad2",
+    "original_sha256": "823627d6e09c6f6b7521f1be82494fd83c768cf2289458e17c765f0bc1ca74d1"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+    "sha256": "f1dc78e03e38eb557cbd9c975f6fa4cfd1dbc17fb8cf2bad10b94f67494a29d2",
+    "original_sha256": "6acd49062e73e1ad2c9f7293518f84df255eef1a6eaa6ea7531f35dff356c84e"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/08_Control_Law.tex",
+    "sha256": "d6bb14b54734849dbba387a0d18117916b921ec802971cac6e3e016daeeef66a",
+    "original_sha256": "93b1ea9c76d664fdc24c217c04b0a27f2e36adef7c9d97dc903ab9a4193062ea"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/09_Limits_Antiwindup.tex",
+    "sha256": "e8329bbb82788ebc32cdb9dea01b5e38d03950c52b08fa55c39b7e9d613077b0",
+    "original_sha256": "f42f90206c3eacf3043edbbbb9feec852d9417ba7bf3342c05acc6417d67c2f9"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex",
+    "sha256": "aa79e9222cb89d694c2a2f642619788e8bf8259f6932ef67964666250b63051d",
+    "original_sha256": "abc5f76cc6fb5fe95a6feb7e29ce24487e4754567626bffbb99a4f1e42c98480"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+    "sha256": "c3f3f4187aecc06eccfa363a405bc3823ea7b3d3d425c975dc56503a0a63d14a",
+    "original_sha256": "99193693c54beec5dd22e6bfe5ff8fe4d4d114c19ecefdca0d7699db7dad1c2b"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/12_Fault_Handling.tex",
+    "sha256": "e49f054e671a2e623abd5181633aac9f231cfa822309b5351594bca3dbb592b2",
+    "original_sha256": "3c3adcf54383d628371d85a25dce1a516d2de16a7f1859388169a507f90bcffe"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+    "sha256": "8465ca8c2e879437b848f2b153ded3bd31b735deeb96d29a930979cb8db93566",
+    "original_sha256": "1eded18a20023e0bb7cf0c3c1298b845eef900fb23c9698d94a24da980787b7c"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+    "sha256": "914df1ed26f7b526eb7537916c7c0ed8ecf7c17cc591404cb10b289ea568815a",
+    "original_sha256": "f4daff14d172d6c6a8613d77b714244514ae6e21b9dc692f3bfb012753dce71c"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "sha256": "c51cbc8fa50d955e4442a7bdb286c937011cc44a1c9bd4b2d474a97adc6f4c00",
+    "original_sha256": "63f7b4872288f65a5bbbf2940634e9210b6d2d36606861c9efd5fa4c4edbf1f3"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/01_Objectives.tex",
+    "sha256": "12d94ca5ee61bb94547aaf12067508ae986f64bba65b640f303c80e0034d58c8",
+    "original_sha256": "83640cabf2fe645b018b13ca562e466807ae5024cdce3660e106dcadb68b3010"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/02_Safety_Arrangements.tex",
+    "sha256": "4a5bba86ad9ff69d17c0a89d48a6c1bdb57ef41c7e70d986c0747aa7f7c82d33",
+    "original_sha256": "bed5f2e883752739e5abc79166427bef2415c74d7d80fd4fb5f08fed7c2645c1"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/03_Test_Bench.tex",
+    "sha256": "9bd7612fb3e2203d9d7afaeff9af87f94ab6ab588780a12aac9a84d15682613e",
+    "original_sha256": "bd5814c9795d1ec54b8345c5857db93a5d638cc05e6a2516b97d2e1f843fc1cd"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+    "sha256": "797a9a2dec8d2e739a515b4277ba85700ba0704742a3bdd93cf7e0d766729cf4",
+    "original_sha256": "664dcf6429d4eef1e44b5ebfadd9f92791e1ee7828229ef6caf0724a3ee61a10"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/05_Probing.tex",
+    "sha256": "4d9f1fe0db8af293aa1ee99da2c231ad11622d5133e86109fe9f5ab97bd62dfe",
+    "original_sha256": "94fcd9c6c158eb6a2b34fcd8641def787f409fc8a2973703aa337442590d0d84"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "sha256": "164f67c8931614429231fbeab74b2faec65ea207d10d757cd361eeb72e166d1c",
+    "original_sha256": "aea1ad8f5136f26f7319c5378c89ad6711b55b9ae219fa3ea6f37efa0b9e10c7"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/07_Control_Tests.tex",
+    "sha256": "249ed8aeb973dc8e4a7801da5d05fba16df3a1d8ffcbea1860673d7465694965",
+    "original_sha256": "227239701d0f2c74511eeb00d407eb55c6a0746efbd76c351e810cf4fb31b24a"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/08_Power_Quality.tex",
+    "sha256": "8a7f5176754a2373beddecd41c7bdf8cc06221611a3092555324026394cefc26",
+    "original_sha256": "1c6216d06f8c205eaa42fe55e47a6436261ab09e1f8ee44da11a3f64ec1f92df"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/09_Efficiency.tex",
+    "sha256": "d0e9b0904965a197bdafd9314e5b60603d63688bb81dec1ca706b5add7eb8564",
+    "original_sha256": "36bce1ffb162747bc80b6f97e8d1adf018f194f31feb150c63dad6c9f6ec73f5"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/10_Thermal.tex",
+    "sha256": "d90e6aa6b5d2f9d983cec408080a15581169438e7ac8401b955c736e7da39269",
+    "original_sha256": "884b61246bb591e5c90a24a586bdda13e58dd9a5d288a0c6eb6aa081512ee59d"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/11_Uncertainty.tex",
+    "sha256": "dcfc53be76e1c49b44065f99a6408031ce52035ac8949fc2bbcd5681b3297855",
+    "original_sha256": "d6311d6ffd5c2163d347ac6bb15f8c39e896ff12d8659a5138a19f9e3bac9e86"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/chapter.tex",
+    "sha256": "621a8f3ae92a506d746c0700cdc9c74d9369712a1ce823a23990892f40832ad1",
+    "original_sha256": "d28a7e10edcf3721a86566a07026261f1feb85a8c07d7e92deb474305df9e9eb"
+  },
+  {
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "sha256": "4a13d9997a061a9b03506816f6863402c68c48f81fc563bc37f1b6be24e0ed44",
+    "original_sha256": "e46080e53c5bcb0049a50bb6b10942eddda4ecd02f9e51f3896e3adf792c5744"
+  },
+  {
+    "path": "Chapters/10_Results/02_Startup_Shutdown.tex",
+    "sha256": "1e3d7c09355fccbad995f36219c269dc56850446ec3f070ba4b9269441c40172",
+    "original_sha256": "80efc31575a1597789d912b0b58bc02b729df0239a1c942856be8865d463a435"
+  },
+  {
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "sha256": "e0ee72325ee3cecbddf0fb4ff00acd191f3ca01b81ef6934694be3c399f25e8f",
+    "original_sha256": "3bb2cc7c68b90fc1fa6a933fa2fd5217ed08b88a597053fba6f3833845063ea6"
+  },
+  {
+    "path": "Chapters/10_Results/04_Load_Transients.tex",
+    "sha256": "e776843c49db141650e8622bb18011a3d612b5f688938eb9f96764650764cbc4",
+    "original_sha256": "d174f45116f225222eccef4546fb813de85dd1019f09d9e63df5c88d07948a93"
+  },
+  {
+    "path": "Chapters/10_Results/05_Open_Circuit.tex",
+    "sha256": "504eaf6826571c2197d9db9c89792f499de413838adbf1c5a796fcf475b1a1d1",
+    "original_sha256": "8bb742c755759ba557acd88ba86798e80106820aefb5b43cf4ac78ee55cdb57c"
+  },
+  {
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "sha256": "f42bdd6849e5e3978ef404bedbe7e43ba28e13e1a54fb0a108e4815f4e74b97b",
+    "original_sha256": "0e01da3dffa11372229f1c8bad5258e2119de97e5aebe2bc04559fe6dd2a8228"
+  },
+  {
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "sha256": "30aebffabd67128492a736be597080c0fd2c744998b712ce7f5c54a7d0694c75",
+    "original_sha256": "9b4c4d3e0dc923fb343909e9815c61cfa60adbe3f82e17297a214710c945b393"
+  },
+  {
+    "path": "Chapters/10_Results/08_Efficiency.tex",
+    "sha256": "5747adc00042fcecbabb3c9d08b7b3453b18510eba7090e43997433800b740ae",
+    "original_sha256": "7625230c62009c9778a48ad579dcb35dbec749b2e673dbb9c46aa531d520c7ac"
+  },
+  {
+    "path": "Chapters/10_Results/09_Thermal.tex",
+    "sha256": "ef8ea8a46721fb2195c51fe74327347fcb8562a8797d03fc9534dddbde2a920e",
+    "original_sha256": "7b9934edc1677bf182fbc9645f229709bd515dd5bdd3863a80bf59d85e1ae214"
+  },
+  {
+    "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+    "sha256": "740f06ea37995fd5c397e61b2b24909c4128ec33849306233d54a3035979be88",
+    "original_sha256": "87eaeee3b197959e0f47acd7448a8673cf98ef0fe9fbabead0a3b611f4d9e684"
+  },
+  {
+    "path": "Chapters/10_Results/11_Simulation_Hardware.tex",
+    "sha256": "6de4e9c5ac83c1d67454ee9ae300ffc54c6f85da5578f189e204a7292d796c9d",
+    "original_sha256": "103c2fa2349391d7b515546e6e4772a009900a699f30383f3083738e39effe3d"
+  },
+  {
+    "path": "Chapters/10_Results/12_Compliance_Table.tex",
+    "sha256": "1e4ad4e4657d926b1a893f6dc777e7a86ac88a3e15f49576749141c8fbeef6d4",
+    "original_sha256": "4606ba0807f51a799da2dee14b00fb87ab7c83f45281d268dd43f2ba7e9643be"
+  },
+  {
+    "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+    "sha256": "4901ea70d88ebbe56995b26d97254ad61e4fd84a495c238bb5f951fe73d981f2",
+    "original_sha256": "1e65b32483e8448f7ff4bae1998fc31227b10b97daa0c519fc573da8e989482f"
+  },
+  {
+    "path": "Chapters/10_Results/chapter.tex",
+    "sha256": "fd859160d9606a5d4cacbf881ef0e5ca15dc661854859d1403e96e3d794aff3f",
+    "original_sha256": "b13f51e8e1420bcb8ff676ae0f999966da33ace8aff45a286a3bc289bb3a77a2"
+  },
+  {
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "sha256": "56b77dd43c62a917e64ab7763f239ebae92f494fe75fd65c28d3a0f78ee08ef1",
+    "original_sha256": "074ddaf0995e654688107e62723c1133e1bcb41bce3ac937e5aef6f77b53b82f"
+  },
+  {
+    "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+    "sha256": "1da3980eeed04359a7f6af99ff4b4f796042469bf925b9646559a2e18a30e67a",
+    "original_sha256": "2993bc1374b6a676dbca7d14329560b03f348fff9d587bac463d993482149b97"
+  },
+  {
+    "path": "Chapters/11_Discussion/03_Control_Contribution.tex",
+    "sha256": "f8bb62b44a2780bf7f07eaadcd04dc7abe523f1a032bd189411e551a5555b089",
+    "original_sha256": "125844fbb529965dcad793d31546b47ebc53f85640c2e0198fbe0ebc5e0dec71"
+  },
+  {
+    "path": "Chapters/11_Discussion/04_Open_Circuit_Safety.tex",
+    "sha256": "51e7ae8de7bc6a1c8470a3a17d65634decdd044baaa8e8889fc740386e130263",
+    "original_sha256": "2bda33caa6d242198279fbf28bdf4f196a1091824441da14fe0f5c210ccaf997"
+  },
+  {
+    "path": "Chapters/11_Discussion/05_Magnetics_Integration.tex",
+    "sha256": "5ef8ba327f77b919365a9cc18a51532dec42d2d134115582565a49626b8aa320",
+    "original_sha256": "fbfb6c49d3640db59abb155431ab7ed21618bf0e7614507de6d1f8f883e7be5d"
+  },
+  {
+    "path": "Chapters/11_Discussion/06_Reference_Comparison.tex",
+    "sha256": "0f9d6cc59c29a5f93d66476ce8e9d4f49c48fa06c326211784c919969f7e3371",
+    "original_sha256": "aa6447907c0895693a5375842ce24785b62aba0639828f74f8253a96301a188b"
+  },
+  {
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "sha256": "c702f51efca6afc075bb137e1ff3fb8d3f83fea88ba9004d1e68d91995c56e8b",
+    "original_sha256": "35d427844eac1488aaf846cd91936686260627171e1e81e584103a435ac6070f"
+  },
+  {
+    "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+    "sha256": "9bda7879bd1a90a0951448489c4dc1b9bf70e67783886093d5ad20014dc510fa",
+    "original_sha256": "bf0e7d6bf44df5088efffe14114ae69dad9ad5ec38137a2b82157e87bee2f451"
+  },
+  {
+    "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+    "sha256": "8852d9c9a813f2a2fbccd462c69b3276cd71118723746cd03c3449efc961ec40",
+    "original_sha256": "ce0bb9690b8ecf83052df474a26a17fae648b7a271746cebf780a6ab3045fd81"
+  },
+  {
+    "path": "Chapters/11_Discussion/chapter.tex",
+    "sha256": "ee8fbcf7e1d50429d1d2323f677d73f7ad60aac8d7c468a8162a34ed2bf9adc5",
+    "original_sha256": "35ef3281f2c9a77f6c4fcc9e3d09073848fb00dd49c53a98ee721d8cb3526259"
+  },
+  {
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "sha256": "16336ca6e10781375b9ebc5f9d0a5c27fc5f7b36993a6531df8c7b1a2a09f36e",
+    "original_sha256": "4c668310deed1aa41e8654e8974631a65107fd039661d9e8b0ff9023dd1397e2"
+  },
+  {
+    "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+    "sha256": "3c3f7b5d64f963b5896ba1904b09e3b91ea15d07dc31c533c3fb3e4f2483aa0e",
+    "original_sha256": "78c1142c84687a2abf69f6883e1ba0af5b114bf4e8aaf2528ce4825c6e399967"
+  },
+  {
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "sha256": "4e8decb5e104b27c62a3979d6917863ff3309a3c244ebffbd7c49349ea546711",
+    "original_sha256": "2baa87af4622c68ede25480f521c34e7c0bab5ce14416e4679e70ff9e4a563f2"
+  },
+  {
+    "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+    "sha256": "a20807c53e5d7762a4299075acd4558e2b1f5397f4b0923ddf030f0160460fd6",
+    "original_sha256": "08cd59d0d2fa981b6d85076b26a9dfe3718807be791b952b44b3ca7742eaff40"
+  },
+  {
+    "path": "Chapters/12_Conclusion/chapter.tex",
+    "sha256": "4430b33562bb491e4e9aab1f34cb474c295baeb5637ed933add641c85b943489",
+    "original_sha256": "511e1247d8b0a90096dbc8d3bd75c991dbadae82ac7623d85a7e7a67e9a94689"
+  },
+  {
+    "path": "Backmatter/Appendices/A_Analytical_Equations.tex",
+    "sha256": "a1ca640e9c0a35e9f809a3580b68e604e55cbb17508262378ccdbc739747a664",
+    "original_sha256": "8dd0c331c8ab8bf4d0f48b45238012ab0786ac2d623ceeb438a68f0ef6ba3030"
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "sha256": "05d6b83bf45029d3415b96663b1ee576aa413db24b554e65db6d6f517b1b8451",
+    "original_sha256": "618023802baa466370ac8ffb32b9e55fb9bfc0a335d5f5f89e2d99ec76129595"
+  },
+  {
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "sha256": "27fdd76147eeee0b7ba16c687aaaeee23ebf3a8aca2590eba65b00a6856a1471",
+    "original_sha256": "9ebdb1175d619524ece9c7e1951269ca2df77ede95bc8f723417eaae518acb8b"
+  },
+  {
+    "path": "Backmatter/Appendices/D_Modeling_Files.tex",
+    "sha256": "ee9b670b79c2ce24f78cb77f1f0d345bfa86b6beaebd4be76a0142a56a4bea73",
+    "original_sha256": "e9b0e77496c4d6d4b569fca0d01678b6d9ad3e22ff29ba8d437e57a83665e520"
+  },
+  {
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "sha256": "25a36f6b4e8b4d7c59e815be594ca0f5799c68a06676fdbb63310cad0028f5ac",
+    "original_sha256": "6b5e399df2e19b2d75d55d6ef741785cf69bace5df2b7823145a80a14f4165f8"
+  },
+  {
+    "path": "Backmatter/Appendices/F_Contribution_Provenance.tex",
+    "sha256": "1b703f4d2908f5db7fa76a775bb9e999b99f89c5a1f41d625e5344fbcf8f9baf",
+    "original_sha256": "b35b36df179b09de917e10ceca50960c23110a122e99f5ad7eed76f4dd36582c"
+  },
+  {
+    "path": "README.md",
+    "sha256": "3e5c4578019f56b8869c7c22129a6988efc8344ed2106e5d0e8a94f9e92ec494",
+    "original_sha256": "5259a1bd8fc9ade3ca7f32e0d30bc51263dbaa6ef1e1deca5d481a80d7f123b8"
+  },
+  {
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "sha256": "dd47ba0082f2353b520d659a2429af71299dd12e08cc24d21ac28a9585952523",
+    "original_sha256": "fb84c30c2196026be360fb2dc02f7467520b30ed26eb24253d3e90981ca3cc0f"
+  },
+  {
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "sha256": "ae8b7701001c73907f92c31b3a096da8902d48bdb3dd249b1c1fb1cd0e414288",
+    "original_sha256": "e81b2966a3787b0f34f943fe5f82086344f572ccdca2a9241e7130cb24e26501"
+  },
+  {
+    "path": "Backmatter/Appendices/I_Full_Supporting_Source.tex",
+    "sha256": "092cf6e8802ee609f36fdd65fbe7c1f1a3e96090535e11cdf829d93284660283",
+    "original_sha256": "3bbc9a52cf43e3198bbce9b3c2f22675b1491054da7506a44b268168bd8fa880"
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "sha256": "f22b99dd4a3149521db065bbfdfa8e8ad2c657c21b18402c9b2c8ae9f7bb105d",
+    "original_sha256": "0896ce2554a1f26823ec53481ce6c979e24de9e58c228afffdcf4de63069c61d"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "sha256": "4c7976f70b15e82f9326362536288ca7935724e37d7787d3b6ffeb8dcd1679d0",
+    "original_sha256": "a4ee8c72c08f76bec48c6afe2a1b7d1fc2e5c4bfe89ab2c7931fcf20fd3ace90"
+  },
+  {
+    "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+    "sha256": "df1fa3735938cbcd0a1593868071d732682f2dc3e8116b8d5c0da1f6eaf6dea8",
+    "original_sha256": "c5509aa506c773e0eebf04fc43cee98909b42f25d64db544b320c86aaaab4e64"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "sha256": "07bb2e0ac6c7d3bd563aba0c745dc1e80731c15f27c913769ed0b33655315ff8",
+    "original_sha256": "3c1f5926d5edb367946f4f4a1ccf69e3cfdf3984b2f5151864708c660e644350"
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "sha256": "2e9be5c3797eabe07dab5286b43e3024dafd471b7fba84f9c32dc81cd309c37e",
+    "original_sha256": "1b13497fa1ec143e90b5d9527ab7ea43a2c21abebaf1b19a41c35962df08b7f5"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+    "sha256": "6d4c6ac92b39c555a04fc9ec7cc2a5cedc7369bc54a002e186f8d50461421d1d",
+    "original_sha256": "51bada8815d72695f8f3cbc27bf69bc06811a7153191166e8f3a53902af59d67"
+  },
+  {
+    "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "sha256": "58b93b2dfbd348464aef1e4f55ee0853a4ed965eab385c8fd282a9aa95bb1a91",
+    "original_sha256": "31e8dc470e7b14d98c9291872460db65f8d8d87c702d8640fc4860cfc9cf04c9"
+  },
+  {
+    "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "sha256": "65dfdbd64099be8c7ecf43091e52a52e0521575222d72a686658735128f1ff11",
+    "original_sha256": "caaca4f8c2e618c56594c6898688d0fdb62e56b256abca6daeeee49cdc09b5e0"
+  },
+  {
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "sha256": "40989c6ddbc5ede00177128e9fa265d11414af34b6ec2d907f793d361836c7d4",
+    "original_sha256": null
+  },
+  {
+    "path": "Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg",
+    "sha256": "438822989a33edf82e9cd67b63ce873352336291b3bd0c3b23af0dae77ab0bd5",
+    "original_sha256": null
+  },
+  {
+    "path": "Data/measurements/v2_results/evidence/v2_bridge_thermal_provenance.json",
+    "sha256": "238144cb7f076fcc526a7046204cafc455722eedd37990c509e9aaf02a5582c9",
+    "original_sha256": null
+  },
+  {
+    "path": "Data/project_records/V2_Testing_Update.txt",
+    "sha256": "66ad0ba785086b715c054ce67d45adb6a9e60285e3fe84ec0a5df2c5b7b86d46",
+    "original_sha256": null
+  },
+  {
+    "path": "Data/measurements/v2_results/evidence/v2_board_overview_original.jpg",
+    "original_sha256": null,
+    "sha256": "407575aab553cb647206ca58b00f86c2e4177d8a4ed228cd73bd4469e18bf968"
+  },
+  {
+    "path": "Data/measurements/v2_results/evidence/v2_thermal_setup_original.jpg",
+    "original_sha256": null,
+    "sha256": "68ed03bbae85c7a05ad8499b902932ad95e8a2c725a6ea2d54290d186f2190cd"
+  },
+  {
+    "path": "Data/measurements/v2_results/evidence/v2_board_detail_original.jpg",
+    "original_sha256": null,
+    "sha256": "c3300a4ff0c34bf31b5fcdf2145138077ac438d4870c5fc3a70e968c779412ef"
+  },
+  {
+    "path": "Data/measurements/v2_results/evidence/v2_photos_provenance.json",
+    "original_sha256": null,
+    "sha256": "f7080ef83a8483230188367505aac9f42bd734ee3e57dd8bd10ff0cdcb8cd178"
+  },
+  {
+    "path": "Frontmatter/Frontpage.tex",
+    "original_sha256": "864235a1edd56c174431260f1fe1df21465ce41c8ed75a32a2dc924aae300d2c",
+    "sha256": "c54a4ffcadfbe66ce67ea2ddc95455838891787eda0948167830a22b1d1aeb7f"
+  },
+  {
+    "path": "Frontmatter/Copyright.tex",
+    "original_sha256": "dde72415aa7ee8c222a884c960050c3521c3f7997dccc99088691f4295d2c6c5",
+    "sha256": "fc64a9a86160de19a90b1206650606cb9ecc21259e0b5f2b38e4737185c2911c"
+  },
+  {
+    "path": "Pictures/Thesis/frontpage_v2_right_cleaned.png",
+    "original_sha256": null,
+    "sha256": "6a86fe63a639087404b665bb67a2796765518b28c59c615a258dc4f85a60a850"
+  },
+  {
+    "path": "Pictures/Thesis/frontpage_v2_right_cleaned_provenance.json",
+    "original_sha256": null,
+    "sha256": "cbc8aa143857f01e44c3c6455741ab6e0e17a913e923c2026daacf9f202a113a"
+  },
+  {
+    "path": "Pictures/Thesis/frontpage_v2_right_crop.png",
+    "original_sha256": null,
+    "sha256": "ba76433a3c9d05356e519fbec261af4f3f6ee01953e7e5942e740005f2a54ba1"
+  },
+  {
+    "path": "Pictures/Thesis/frontpage_v2_right_crop_provenance.json",
+    "original_sha256": null,
+    "sha256": "daae4ecf76c33be364bc7cd12f06fdd2fcf540b6e1d5e2ed41118222e9324722"
+  },
+  {
+    "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+    "original_sha256": null,
+    "sha256": "0805e16164ba97deb4e9f1c9375b581b773c0ba9398dfa47b0192682c0c31c29"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf",
+    "original_sha256": null,
+    "sha256": "0798def71d8988af0dd2e14fb8368461e04c9be89b24cc3032f8353be8ad6b6b"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf",
+    "original_sha256": null,
+    "sha256": "c2623551c7094d2caa60efbbd3dab674b49553c6a3e39d8407afe83cb36c8ad2"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/V2_2026-10-27_provenance.json",
+    "original_sha256": null,
+    "sha256": "34ef8db1c135d15cd52b095c7036f240061f7e1ffae4ad34e624b7f29824d7f9"
+  },
+  {
+    "path": "Chapters/01_Introduction/09_V3_Development.tex",
+    "original_sha256": null,
+    "sha256": "6f41ca370d5491a9922b2abb4f8042b12337911547f065c8419a3db534d96f3a"
+  },
+  {
+    "path": "Chapters/10_Results/16_V3_Design_Outcome.tex",
+    "original_sha256": null,
+    "sha256": "125fe9e59c0a72a3966670aa392d0def38f34bcf8c955370290424825b91b1bc"
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "original_sha256": "815849adbe983e1218e79d7fcdfe23bde80bf52afac57a8ed6c261081b1a17ba",
+    "sha256": "47f6216d85e3afb7c4be397aea7a023046970a63ad959e36c861173ce2d8bf76"
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "original_sha256": null,
+    "sha256": "dbd23ac684cc31007a02fef5c0e22a5e2903b18c776c6c5d82cd11a2b0d18aeb"
+  },
+  {
+    "path": "main.tex",
+    "sha256": "cb134d92a41ebe6c9447d0aa93ba3741db4dbb9598807962d4b86728d116e04d",
+    "original_sha256": "03137bce033c5b0782dc6f7a08798254022d10658a1c18c612487aa7fb5ce353"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_controller_excerpt.pdf",
+    "original_sha256": null,
+    "sha256": "6b8f187d600648282efa17d325e676f86bed4bb570820d9dd3eac2c0efd60caf"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_input_excerpt.pdf",
+    "original_sha256": null,
+    "sha256": "e77ba17cd016bd8a3ad76758fa751e88e88c6ff1e67dc02bdd3ee72431ed85be"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_power_stage_excerpt.pdf",
+    "original_sha256": null,
+    "sha256": "18109ed219782188b7cff988330a392c895e01ab7370a172c0b3f567d25db2a0"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_usb_excerpt.pdf",
+    "original_sha256": null,
+    "sha256": "b8a7a2e4b976d19efc388304a8a03de1b418e5ba3bac9b656c9448ca80c23264"
+  },
+  {
+    "path": "Data/analysis/rebuild_results.py",
+    "original_sha256": "9ba727aa340832f6d9aea7e998b2b17f82c799bbfbcf1c75ecc0b3b8f965e076",
+    "sha256": "f9f1bfcfa3088b26b39e9c10485fac35fb9419495cc61e8ea59e5bfafc3a46b0"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/ac_complete_table.tex",
+    "original_sha256": "9c3f1e054dcb5402304f479a0241c824500088356af1788c627ca880b4c827a2",
+    "sha256": "995cc98e024219bbd17f28e059b7328c24c37acc1619babf5b791baa12bcdd19"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_ac_complete_table.tex",
+    "original_sha256": "4a5febebdf955df0b1200888d4227df33a12030aabda6f6e2988f7156fc3a53d",
+    "sha256": "c5aa2174aa350704bd93d6d422fdecb6d24a06b8bc16add4cfc44ca88766e5eb"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_efficiency_table.tex",
+    "original_sha256": "c3c1dd41add452cf17fa9a3906465eca9e82cf5129269cf480c6a2a50ffa8de1",
+    "sha256": "ec13975286f3875ca6eaf27f382f7339256fbc1657505697e08f55c6fc63ee08"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/appendix_thermal_complete_table.tex",
+    "original_sha256": "ddcd021ccd4dbc22af32640bfc0e4fca3903244e85582ccc3aec0930d1cba3ca",
+    "sha256": "9a1ceb8e4dffa2e88c060fde1cf6ed2196260ab9c4ca834b774a08acdeb43032"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/dc_complete_table.tex",
+    "original_sha256": "aee402cbb581005ea3724d4359ac5cf0de186ff56cbf80711228a61bd89d3dc0",
+    "sha256": "1a7c3b3d03da9c6b421c647e824b7c4091f00144dcc9827481d73b5c52360eec"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/efficiency_table.tex",
+    "original_sha256": "0ac60c33de15ee21a0dd7e0b34135921333ee155c21c4dcbeba503b0cd8f23b4",
+    "sha256": "57bf41fa683091da7fa402ee6b6abd7d9011f97d6ca172ba477753c05eac51fb"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/generated_output_checksums.csv",
+    "original_sha256": "90bc251d2a3d00f54f22f072b341dae2410ce977901e6410ef035071eea70fa4",
+    "sha256": "58c62c64237b22627906f1b65db2deb1e0563aaf722c152ae37c190812c0abac"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/harmonics_complete_table.tex",
+    "original_sha256": "ac8fbdc6f9fb4030219388554ee910200a82139aaf7c0c83487369a1c471ca16",
+    "sha256": "8727b7c8cf5049ec035d58f5fb8d681c300183c139d38c33c50feaef3cefe574"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/pq_complete_table.tex",
+    "original_sha256": "7e9db1e3eaa31f0848f8ab2ea30ddd0a787bbf79445b93bd857bd4ade5929530",
+    "sha256": "1bfc5e8c2b39a2942656e0bd6da1ba00dde7bcf5160b3b6801b648f323682b83"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/raw_waveform_source_table.tex",
+    "original_sha256": "241ef36cbddbaefc07d833be745f3fe324e853e5d43832cab75a5b1204159913",
+    "sha256": "e2245c4f1432e2735185d190cb7e933dd2eea40b64dc5a1f8737aa4dd87369e0"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/record_metadata_table.tex",
+    "original_sha256": "eb244541d7cd4e99d68fe4b8dfec1e53120e235d2353c785e0ed494c24dabb51",
+    "sha256": "7726aa043cb84a22d68bdfc52439246bb3386f8de138d090417a6c3ef8ca8222"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/thermal_complete_table.tex",
+    "original_sha256": "9a75bf8eec524cea5bd647a54752473f415c13fff5f9acfb4ee546cfff795146",
+    "sha256": "5727d38e2c300febd3e731b7392b55fa7d2319bc5ddcdc294740a1661506d2dd"
+  },
+  {
+    "path": "Data/measurements/processed_rewrite/transient_complete_table.tex",
+    "original_sha256": "928bc4b9eedbda0399d2d3720c23e878abfd53b17b8cb707e0f4e5ebb48e2a87",
+    "sha256": "8b909f70498285b684694e75a35f5adc0129b0057e946bdb29ec72c32e486903"
+  },
+  {
+    "path": "Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf",
+    "original_sha256": null,
+    "sha256": "7af67969cea32d270498dacdd244b937c2496f113b85038893dbc88260f8d031"
+  },
+  {
+    "path": "Code/README.md",
+    "sha256": "90559838f9ec6bc54e7ea781d9f0fbef8875f90f5f2a4dc521aad3f00f967303",
+    "original_sha256": "e0cdc054fcc90c5e6a087f154d4e609c7c439a167cc05c85441646f12465af94"
+  },
+  {
+    "path": "Code/software_verification.json",
+    "sha256": "c0335c292431a6c746284a8b067bc5921e024ae39487b5deec171f0f3a477293",
+    "original_sha256": "23b82188a92276d9635d590fa4ff15eeb89a120584088e18d571ca35eb6068a0"
+  },
+  {
+    "path": "Code/source_manifest.json",
+    "sha256": "24c39cbe2af2b63f9144fec71146ad816c9c2061737979f20b65abf32fc08f60",
+    "original_sha256": "8692a5ccc6482cd53cab3f1285dedec972490b571139803a3af983ac93b88cfa"
+  },
+  {
+    "path": "Setup/Code_Listings.tex",
+    "sha256": "9d3bc64e725d96c1d8bb728bd79bfccf476d89815a55cd04f15901b70c7e766e",
+    "original_sha256": "60371bcb5acf14ff25f1e7c762bab0777560a49bc3442f35799c20418171459d"
+  },
+  {
+    "path": "Code/PWR_2_0_1/software_verification.json",
+    "sha256": "23b82188a92276d9635d590fa4ff15eeb89a120584088e18d571ca35eb6068a0",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_1/source_manifest.json",
+    "sha256": "8692a5ccc6482cd53cab3f1285dedec972490b571139803a3af983ac93b88cfa",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/README.md",
+    "sha256": "caa82148b8569582d26606bf3fa5b12beb2c5947b24323106c97d16b315a1780",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/README.md",
+    "sha256": "f47c79792cffce0f8d29c0c46378012fafb2f2cf17bbcb606ad943b712df517a",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/calculator-evidence.md",
+    "sha256": "57e164ca7120f096146a53e580318c6066483d05dd67e007ef1a6e0bd4058120",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/firmware-flow-distilled.md",
+    "sha256": "b515e507c7dd2d1c37e62ce15b371f7f6cb9534ebc9a5d2a2381f629e0d72971",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/firmware-flow-distilled.png",
+    "sha256": "9fb5bfce5a0d9ee2a42bb74652914849f004595cae97eba3063c95accc51cbe9",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/firmware-flow-distilled.svg",
+    "sha256": "ac39eff7db28ffebe910cbdf3cb293f75f8b2921c93d8183aed18c084868d178",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/firmware-flow.md",
+    "sha256": "82216c2e30f2238f7c7c7a2274a89fbb6e7b51cc3c0985bfb5990af46a5cf93b",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/firmware-flow.png",
+    "sha256": "90e6f933c3bd3f7f9e43668fe0040855e806d5d5c760c41843c07d8ae3e83d12",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/power-control.md",
+    "sha256": "02c85aa57dd0856e5d8ab4d66f2e66f832781bb6d06a8c344c84dd697f4b6d67",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/stm32f410-port.md",
+    "sha256": "c601786ee5ae4669d0991ef35689359324b104f83f92e15c3dbe075d60310a37",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/uart-commands.md",
+    "sha256": "40c416128d0f347ca6de734f95c450bd7661f63b63f27d03ded681472eed0a64",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/docs/web-protocol.md",
+    "sha256": "224fb9157317a88d32ae988f7c2b547b92059ddfdd93f90d37f1ee62a6f9cff8",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/README.md",
+    "sha256": "5392d954ff68fbe4f4be0e3d43bd91e2be179a44a46e7bbcca2c96fad4cb55d2",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/build.ps1",
+    "sha256": "806e87f8e3638c27ac91b297a99817ff18ffb41a3f52077b4f224dcb30ce6691",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.1.md",
+    "sha256": "3760e0683a66cc8cd71f5371428941ba64986224ed358d7141923d2836fe7ff8",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.2.md",
+    "sha256": "c8284fa5787336b148e9585e32cc8b98e754a21286cab44c7543c91b8c530426",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.3.md",
+    "sha256": "0254b36b1eb99ce086da525e95afa7fee03dc1c062381ba4fa496c2d73ada441",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/releases/pwr-2.0.4.md",
+    "sha256": "225e3ce71f5428eff25b044b58643f8cd7447a6483c20056bcc4811ec3c08013",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/stm32f410.ld",
+    "sha256": "400597cca105a2037c828658e55252bbccfd4285efbe65dece11d364e28299aa",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/test_carrier_storage.py",
+    "sha256": "6d1899125afe5b4e0424483fe802a903c93a80345b01f157c27d3e1a3c99de5b",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/test_web_protocol.py",
+    "sha256": "e647fb1987a5fe163b69c8c097be2e9f8b66ca5ee37d7bea98e8a5f3d619c1c7",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/firmware/verify_f410_hex.py",
+    "sha256": "bc4f5c74812ed8ba478da0b1410cc7480f36ef26184e40307af50a5987ce7f75",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/thesi_power_control.ino",
+    "sha256": "fa9d842ce7787d37501701379a66b97807969d3a9064f8d03fa372b3842b30ad",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/README.md",
+    "sha256": "16e696b206940f44ef40ae2a8210c3bfac51abbf95685ebb74c26c3783126611",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/app.js",
+    "sha256": "350f3e00c89499a175d951391a9b1fcebab24c8b69a2c7551792300ade88de7f",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/build.mjs",
+    "sha256": "2dbd284c20aea608e9c98ee6f66023b5e14eb9bfba61562a147111855d1a0ec5",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/calculator.css",
+    "sha256": "9d2ff8f6d6233b0680b5d9f19f20f87d149f75968ee0c4c498d50a5a70b64dba",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/calculator.html",
+    "sha256": "c635876d4fdd9d607c59fd1cc6b7a1462496835a9a43d65247c2e27fb62e7489",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/fonts/IBMPlexMono-Medium.ttf",
+    "sha256": "5f460401d03995ca099270707e78662513b5be9d17060eb7c7fffadb4d4d334b",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/fonts/IBMPlexSans-Bold.ttf",
+    "sha256": "5bb3030115b2a8d4494afd9c42c69a659ad80329694f8056d21ba6680612422b",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/fonts/IBMPlexSans-Regular.ttf",
+    "sha256": "b7687a7b11bf4972c2807e6f1701bb55d1837e6957373e6610a81e3bbd4423a9",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/fonts/OFL-IBMPlex.txt",
+    "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/index.html",
+    "sha256": "863acd844cc9853b94bf7e62fa6fc2f5af62051d9046ec892937cf68cf66ed41",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/package.json",
+    "sha256": "f08d5f4d0a4aba3aa7f503756ea2b8b1e857970b493341614c49556f01079cb6",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/protocol.js",
+    "sha256": "f3571eff542a3c368d5f66c7a0aefc236435edd9bba5bbb66914f19e91d92793",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/resonance-presets.js",
+    "sha256": "4687c77c361bdbae0e707b822a3c23b5403aab9ea074a8270dcf583259ee35fa",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/resonance-ui.js",
+    "sha256": "573c19e5338c9f3e4574b953bf81eae600458cca6eb982a3cc25dd79a08ac749",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/resonance.js",
+    "sha256": "8f31134163faede8358f82da861a1ad4391b8266d7bf1d882c92968cb5876d43",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/serial.js",
+    "sha256": "fe5a36451b5112269cf21d5cf32a83f779d132e464db1dfa9fb0a51d0dc88bc6",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/server.mjs",
+    "sha256": "2e60f787432a3016e367da126b6062acd3fdf50679a6b569c05c55a5a61b87ba",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/storage.js",
+    "sha256": "459fd3d10ed41f383fd8b16350fff407e1c710bafac4ff5016313a12bf12b51d",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/styles.css",
+    "sha256": "5e2984e63ce6a50155bf22d62c41b387451cf19f070c86ccbc522e1e4df90645",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/tests/protocol.test.mjs",
+    "sha256": "05847ad9313abbaf11bb06f025164fb29539adb9b202b934b2ad4e40db8c683e",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/tests/resonance-presets.test.mjs",
+    "sha256": "fe359a8cb01d59939d8211a996a70d336f3b21efc7a30be930051c169671f880",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/tests/resonance.test.mjs",
+    "sha256": "3c009e5194d50671a16d71b53f45f98865eb9b5faf3af0c8a4e128597dc061a4",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/tests/serial.test.mjs",
+    "sha256": "efd932215e0f89dbeaacc6b766658a59a42686fe9eb83c912998d58d0a0d8818",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/tests/storage.test.mjs",
+    "sha256": "370fd90948daa83128696b915a4f5fe335f153349d8eeade889cb2efd854e085",
+    "original_sha256": null
+  },
+  {
+    "path": "Code/PWR_2_0_4/web/vercel.json",
+    "sha256": "9927baba1ec548c86f6bafaef0577d127368be5d7b0aafa97f9883fa652c40f9",
+    "original_sha256": null
+  },
+  {
+    "path": "Backmatter/References.tex",
+    "sha256": "aeb33301f4c3afadc268b85a03eb104e30b7defc1b653dadc1cf73c4937f27cd",
+    "original_sha256": "a2dbe9668fdcaea84d45f92e4edac03b29a9a926fbfc61b3bcea6aa9818dc3be"
+  },
+  {
+    "path": "Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+    "original_sha256": null,
+    "sha256": "897fc81934f9121bd6cf8c439ecd3eaee587af8d10a2bd3c65eb8f92c6620b90"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/README.md",
+    "original_sha256": null,
+    "sha256": "0a4ef2e7dc2fd60017b72839f51143abdbdeb955c4b796896341b6ffa2db4c94"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/load_performance.pdf",
+    "original_sha256": null,
+    "sha256": "51b004c5d4e291cc536975d36e1736bf661ad857bc03bcd0c3221c4d04059f74"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/load_performance.png",
+    "original_sha256": null,
+    "sha256": "1b64ece6a287cf4159943e3fc91aa728e5a6d460d149decb9a9badee1efb46fd"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/load_table.tex",
+    "original_sha256": null,
+    "sha256": "779c744e936a9af4a429423712537739bfad0a8c1ebd5c221b6ba516b274b1e9"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/process.py",
+    "original_sha256": null,
+    "sha256": "badcd5908c3288b58be3f2c21b0e83ef15f05dec44bc8533523b3e2eb0e90cd7"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/source_manifest.json",
+    "original_sha256": null,
+    "sha256": "08e0217cbf3c4f28f49d4c8d0b6988dc1ceea655cbc23d1cd073d6a0a655b67b"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/summary.csv",
+    "original_sha256": null,
+    "sha256": "ee0ff13081f71bf0ee61c2973ef62b9b57a177e7a5341cf980a9baa76b459493"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/summary.json",
+    "original_sha256": null,
+    "sha256": "dec742aa175e696ec931d78474adba22ec45d1e73992a619c177324425edc04a"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal_figures.tex",
+    "original_sha256": null,
+    "sha256": "be02f35bcfea5a315319f472a25268d3a9c48f94dad023b7c3aa689e396d3dc1"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 015.csv",
+    "original_sha256": null,
+    "sha256": "2072b4e2cf1691ce6d16dc7b8fd9e8d21a0b14385eed5353dacaa4f3be772892"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 017.csv",
+    "original_sha256": null,
+    "sha256": "d64a3f0d80848acbfa25e00b7320316c4c1f57c3a3688e3c9419faf990b1d58b"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 018.csv",
+    "original_sha256": null,
+    "sha256": "867f5424b992bc1cd9d7fcc727ee76a94ca4a16313bc66dc28a460efe560011d"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 019.csv",
+    "original_sha256": null,
+    "sha256": "9a45ca418da38c60b978075ebf3f1f5fb9092be14c840dda7a310a2ceb663f13"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 020.csv",
+    "original_sha256": null,
+    "sha256": "16b5eeb2c38f17ccfdb0faec5375306591edfe07792be06cd2fbab88680b04a4"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 021.csv",
+    "original_sha256": null,
+    "sha256": "86fde71363e71cc00fe5553c7b4a007daa82f4c10b4854dd54e625148ffaf891"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/raw/Capture 022 (2).csv",
+    "original_sha256": null,
+    "sha256": "ccfb9437e0a42e0c4ea57a83de86d1937767946784c0b251b3565136e71f87c4"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal/Capture 015-thermal.jpg",
+    "original_sha256": null,
+    "sha256": "2a43c4ca9f378f2e2584859574158480fae2f6aa027efb4875bb278771d27b3b"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal/Capture 017-thermal.jpg",
+    "original_sha256": null,
+    "sha256": "4efb78c7049aef2e463bc57f77718b66166051470c8aeec3a0067bc06d243edf"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal/Capture 018-thermal.jpg",
+    "original_sha256": null,
+    "sha256": "82f3e6b54296ddee0fcd3c9d254c70c081bc47950baa82297dd3c11e846b199e"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal/Capture 019-thermal.jpg",
+    "original_sha256": null,
+    "sha256": "aa66f67f28eaba0986cebc47ccf87e0059323f3a9b88fd43fce1c9eb06f1714a"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal/Capture 020-thermal.jpg",
+    "original_sha256": null,
+    "sha256": "fdd4f8a74066c30bc1ae7e01cf146639ea76b673cb026ec174e0c15bf28ce5fb"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal/Capture 021-thermal.jpg",
+    "original_sha256": null,
+    "sha256": "7d9919bbf3d889eb1b67a90a022cc35e54b27abbd11b9c68de862e6125ec36fd"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal/Capture 022-thermal (1).jpg",
+    "original_sha256": null,
+    "sha256": "cf672ffe5a293ccd796219c4150769e2fd6a442f2606d1851a35f095a1fc063c"
+  },
+  {
+    "path": "Data/measurements/v2_load_thermal/thermal/Capture 022-thermal.jpg",
+    "original_sha256": null,
+    "sha256": "cf672ffe5a293ccd796219c4150769e2fd6a442f2606d1851a35f095a1fc063c"
+  }
+]

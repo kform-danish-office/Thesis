@@ -1,0 +1,19 @@
+[
+  "Chapters/02_Background/chapter.tex",
+  "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+  "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+  "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+  "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+  "Chapters/04_Topology_Analysis/06_DC_Link.tex",
+  "Chapters/04_Topology_Analysis/08_ZVS.tex",
+  "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+  "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+  "Chapters/07_Hardware/16_V2_F410.tex",
+  "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+  "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+  "Chapters/09_Experimental_Methods/10_Thermal.tex",
+  "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+  "Backmatter/Appendices/C_Firmware_Documentation.tex",
+  "Backmatter/Appendices/G_Software_Tools.tex",
+  "Backmatter/Appendices/H_Full_Embedded_Source.tex"
+]

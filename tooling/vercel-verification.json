@@ -1,0 +1,21 @@
+{
+  "deployment": "dpl_CKnHM3yEyrb7axzZDRqMtDmZXBDN",
+  "url": "https://thesis-power-lab.vercel.app",
+  "byteMatchedAssets": [
+    "app.js",
+    "calculator.css",
+    "calculator.html",
+    "index.html",
+    "protocol.js",
+    "resonance-presets.js",
+    "resonance-ui.js",
+    "resonance.js",
+    "serial.js",
+    "storage.js",
+    "styles.css",
+    "fonts/IBMPlexMono-Medium.ttf",
+    "fonts/IBMPlexSans-Bold.ttf",
+    "fonts/IBMPlexSans-Regular.ttf",
+    "fonts/OFL-IBMPlex.txt"
+  ]
+}

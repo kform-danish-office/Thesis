@@ -1,0 +1,6 @@
+const {chromium}=require('/opt/codex/cua_node/lib/node_modules/playwright');const fs=require('node:fs');const assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});const results=[];
+for(const url of ['/','/calculator.html']){const p=await b.newPage({viewport:{width:390,height:844}});await p.goto('http://127.0.0.1:4173'+url);await p.evaluate(()=>document.fonts.ready);let stops=[],issues=[];
+for(let i=0;i<45;i++){await p.keyboard.press('Tab');let r=await p.evaluate(()=>{let e=document.activeElement,s=getComputedStyle(e),r=e.getBoundingClientRect(),nav=document.querySelector('.workspace-nav').getBoundingClientRect();return{tag:e.tagName,id:e.id,text:(e.textContent||e.getAttribute('aria-label')||e.getAttribute('placeholder')||'').slice(0,55),outline:s.outlineStyle,color:s.outlineColor,top:r.top,bottom:r.bottom,navBottom:nav.bottom,offscreen:r.bottom<0||r.top>innerHeight,obscured:e.closest('main')&&r.bottom<nav.bottom}});if(r.tag==='BODY')break;stops.push(r);if(r.offscreen||r.obscured||r.outline==='none')issues.push(r)}
+results.push({url,stops,issues});await p.close()}
+fs.writeFileSync('/workspace/tooling/ui-review/keyboard.json',JSON.stringify(results,null,2));console.log(results.map(r=>({url:r.url,tabStops:r.stops.length,issues:r.issues})));await b.close()})();

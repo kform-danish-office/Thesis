@@ -1,0 +1,68 @@
+\chapter{Equations and Definitions}
+\label{app:equations}
+
+\section{Voltage Nodes and Transformer Ratio}
+
+\(v_{\mathrm{rec}}(t)\) denotes the full-wave-rectified line voltage, \(\VDC\) the high-voltage link, \(V_{\mathrm{sec}}\) the isolated secondary bus, and \(V_{\mathrm{BUS}}\) the USB-C PD output voltage. The MCU measures secondary bulk voltage upstream of the USB-C PD stage. Load power is calculated from connector voltage and external load current.
+
+The transformer convention is
+\begin{equation}
+n=\frac{N_{\mathrm{p}}}{N_{\mathrm{s}}}.
+\label{eq:app-turns-ratio}
+\end{equation}
+Primary-referred impedances scale by \(n^2\). Some supplied material uses the reciprocal turns ratio. That convention is converted before its equations are compared with the calculations here.
+
+\section{Power, Efficiency, and Power Quality}
+
+Over a common acquisition interval \(T\), real input and output power are
+\begin{align}
+P_{\mathrm{in}}&=\frac{1}{T}\int_0^T v_{\mathrm{in}}(t)i_{\mathrm{in}}(t)\,\mathrm{d}t,\\
+P_{\mathrm{out}}&=\frac{1}{T}\int_0^T v_{\mathrm{BUS}}(t)i_{\mathrm{out}}(t)\,\mathrm{d}t.
+\end{align}
+For steady-load measurements, output power and efficiency are calculated from
+\begin{align}
+P_{\mathrm{out,calc}}&=\overline{V}_{\mathrm{BUS}}I_{\mathrm{load}},\\
+\eta_{\mathrm{calc}}&=100\frac{P_{\mathrm{out,calc}}}{P_{\mathrm{in,logged}}}\%,\\
+P_{\mathrm{loss,calc}}&=P_{\mathrm{in,logged}}-P_{\mathrm{out,calc}}.
+\end{align}
+Here \(I_{\mathrm{load}}\) is the electronic-load current. PA2 measures primary half-bridge current, which cannot replace the load-current reading. Initial efficiency estimates use tests with a DC-coupled average VBUS, load current, and a corresponding input-power reading. Appendix~\ref{app:data} lists no-load tests, missing values, readings whose test association is uncertain, and conflicting input-power values.
+
+Power factor includes both phase displacement and waveform distortion:
+\begin{equation}
+\mathrm{PF}=\frac{P_{\mathrm{in}}}{V_{\mathrm{in,rms}}I_{\mathrm{in,rms}}}.
+\label{eq:app-pf}
+\end{equation}
+Current THD through harmonic order \(H\) is
+\begin{equation}
+\mathrm{THD}_I=\frac{\sqrt{\sum_{h=2}^{H} I_{h,\mathrm{rms}}^2}}{I_{1,\mathrm{rms}}}\,100\%.
+\label{eq:app-thd}
+\end{equation}
+The analyzer's THD reading and the value calculated from an exported spectrum can differ if the harmonic ranges or averaging windows differ. Both are reported because the difference has not yet been explained.
+
+\section{Regulation and Ripple}
+
+The average-voltage deviation from the selected setting is
+\begin{equation}
+\epsilon_V=100\frac{\overline{V}_{\mathrm{BUS}}-V_{\mathrm{set}}}{V_{\mathrm{set}}}\%.
+\end{equation}
+Instantaneous peak-to-peak voltage is \(V_{\mathrm{pp}}=V_{\max}-V_{\min}\) over a stated measurement interval. The spread of an instrument's \texttt{Vavg} statistics describes changes in average readings, not instantaneous ripple. Absolute output voltage is taken from DC-coupled measurements.
+
+\section{Burst Timing and Protection}
+
+For the MCU on the measured V1.0 prototype, the enable fraction \(d_{\mathrm{EN}}\) applies to PA10, while \(f_s=\SI{1}{\mega\hertz}\) is the PA8/PA9 carrier frequency. The basic voltage-window rule is
+\begin{equation}
+d_{\mathrm{EN}}=\begin{cases}
+d_{\mathrm{high}},&V_{\mathrm{sec}}\leq V_{\mathrm{low}},\\
+d_{\mathrm{low}},&V_{\mathrm{sec}}\geq V_{\mathrm{high}},\\
+d_{\mathrm{EN,prev}},&V_{\mathrm{low}}<V_{\mathrm{sec}}<V_{\mathrm{high}}.
+\end{cases}
+\label{eq:app-bangbang}
+\end{equation}
+In the baseline firmware, loaded-duty averaging, boost recovery, no-load limits, and soft OVP holdoff were added to this basic rule as part of the thesis work. The equation gives the voltage-window behavior; Chapter~\ref{ch:control} covers the complete control path.
+
+With hard OVP enabled, secondary-voltage samples are checked when the threshold is exceeded. During an eligible light/no-load exception, \texttt{BLOW} (default zero) is requested and OVP remains unlatched while all required samples stay within \(\min(V_{\mathrm{OVP}}+\SI{4}{\volt},\SI{80}{\volt})\). Otherwise, the fault is latched and PA10 is disabled:
+\begin{equation}
+\text{hard OVP fault}\quad\Rightarrow\quad d_{\mathrm{EN}}=0\text{ and latched shutdown}.
+\label{eq:app-ovp}
+\end{equation}
+The actual test configuration and timed waveforms are needed to check the protection margins.

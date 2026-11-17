@@ -1,0 +1,53 @@
+\section{Measured Surface Temperatures}
+\label{sec:res-thermal}
+
+Heating became more pronounced as load increased in the \SI{9}{\volt}
+and \SI{20}{\volt} image groups. The image labeled \SI{20}{\volt},
+\SI{4}{\ampere} shows a \SI{90.4}{\celsius} maximum. At the labeled
+\SI{20}{\volt}, \SI{4.7}{\ampere} condition, the maximum is
+\SI{102.9}{\celsius}, the highest recorded surface reading.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{Pictures/Thesis/10_Results/Rebuilt/thermal_observations.pdf}
+\caption{Maximum surface temperatures in the ten thermal images, using the load conditions written on each image. Run duration and airflow were not recorded, so thermal equilibrium cannot be checked.}
+\label{fig:rebuilt-thermal}
+\end{figure}
+
+The ten no-load and loaded images use an emissivity of 0.95. At
+\SI{9}{\volt} and \SI{2}{\ampere}, the camera maximum was
+\SI{56.8}{\celsius}, while the cursor read
+\SI{39.7}{\celsius}. The plotted temperatures are camera maxima.
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[t]{0.31\textwidth}
+\centering
+\includegraphics[width=\linewidth,height=0.27\textheight,keepaspectratio]{Pictures/Thesis/10_Results/image_009_9v_2a.png}
+\caption{\SI{9}{\volt}, \SI{2}{\ampere}.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.31\textwidth}
+\centering
+\includegraphics[width=\linewidth,height=0.27\textheight,keepaspectratio]{Pictures/Thesis/10_Results/image_006_20v_4a.png}
+\caption{\SI{20}{\volt}, \SI{4}{\ampere}.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.31\textwidth}
+\centering
+\includegraphics[width=\linewidth,height=0.27\textheight,keepaspectratio]{Pictures/Thesis/10_Results/image_001_20v_4p7a.png}
+\caption{\SI{20}{\volt}, \SI{4.7}{\ampere}.}
+\end{subfigure}
+\caption{Thermal images with their camera readings and test labels.}
+\label{fig:thermal-9v-2a-hotspot}
+\end{figure}
+
+\input{Data/measurements/processed_rewrite/thermal_complete_table}
+
+Hotspot components are incompletely identified, junction temperatures were
+not measured, and lower reference markers are not ambient readings. Missing
+duration, airflow, camera distance, and temperature histories prevent a
+steady-state thermal comparison. The \SI{4.7}{\ampere} record also lacks DC output
+voltage, so output power for the nominal \SI{94}{\watt} point cannot be calculated.
+
+The matched electrical results reach approximately \SIrange{74}{80}{\watt}.
+Continuous capability requires a stabilized run with identified hotspots,
+controlled ambient/airflow, and device and insulation acceptance limits.

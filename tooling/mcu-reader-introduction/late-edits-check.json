@@ -1,0 +1,17 @@
+{
+  "files": [
+    "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+    "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+    "Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex",
+    "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+    "Chapters/09_Experimental_Methods/05_Probing.tex",
+    "Chapters/09_Experimental_Methods/07_Control_Tests.tex",
+    "Chapters/10_Results/06_ZVS.tex",
+    "Chapters/10_Results/10_Firmware_Comparison.tex",
+    "Chapters/11_Discussion/03_Control_Contribution.tex",
+    "Chapters/11_Discussion/08_Lessons_Learned.tex",
+    "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "Backmatter/Appendices/G_Software_Tools.tex"
+  ],
+  "checks": "Math, figures/tables, labels, numerical quantities and source newline convention preserved"
+}

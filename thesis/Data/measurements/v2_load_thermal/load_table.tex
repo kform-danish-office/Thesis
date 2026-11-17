@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{AC input, secondary-load readings, and thermal-region maxima during the V2 load sequence. Input voltage was approximately \SI{240}{\volt} at \SI{50}{\hertz}.}
+\label{tab:v2-secondary-load}
+\begin{tabular}{@{}rrrrrrrr@{}}
+\toprule
+Capture & $P_{\mathrm{in}}$ & $V_{\mathrm{sec}}$ & $I_{\mathrm{sec}}$ & $P_{\mathrm{sec}}$ & $\eta$ & Bridge R3 & Secondary R1\\
+ & (W) & (V) & (A) & (W) & (\%) & ($^\circ$C) & ($^\circ$C)\\
+\midrule
+015 & 64.352 & 26.14 & 1.86 & 48.68 & 75.7 & 65.1 & 50.3\\
+017 & 95.142\textsuperscript{*} & 21.36 & 3.31 & 70.75 & 74.4\textsuperscript{*} & 83.9 & 57.2\\
+018 & 106.731 & 20.07 & 4.29 & 86.17 & 80.7 & 68.2 & 59.7\\
+019 & 121.899 & 18.46 & 5.27 & 97.35 & 79.9 & 73.2 & 69.4\\
+020 & 140.565 & 16.87 & 6.51 & 109.87 & 78.2 & 74.5 & 81.6\\
+021 & 168.859 & 14.92 & 8.51 & 127.05 & 75.2 & 75.6 & 88.7\\
+022 & 189.180 & 13.69 & 10.01 & 137.08 & 72.5 & 73.7 & 98.3\\
+\bottomrule
+\end{tabular}
+\par\vspace{0.4em}
+\begin{minipage}{\linewidth}\footnotesize
+$P_{\mathrm{sec}}$ is calculated from the electronic-load voltage and current; $\eta=100P_{\mathrm{sec}}/P_{\mathrm{in}}$ is an estimate.
+\textsuperscript{*}Capture 017 reports \SI{95.142}{\watt} input, while its \SI{239.99}{\volt} and \SI{0.39}{\ampere} readings give \SI{93.60}{\volt\ampere}. The input reading and associated efficiency need checking.
+\end{minipage}
+\end{table}

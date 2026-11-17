@@ -1,0 +1,123 @@
+/workspace/thesis/Backmatter/References.tex:88:Source and PDF supplied in \sourcefile{Data/project_records}.
+/workspace/thesis/Backmatter/References.tex:93:Earlier working project-plan draft, retained as \sourcefile{Data/project_records/Original_Project_Definition.tex}.
+/workspace/thesis/Backmatter/Appendices/J_Revised_Plan_Integration.tex:8:The revised source and its 14-page PDF are \sourcefile{Data/project_records/V2_October_2026_Project_Definition.tex} and \sourcefile{Data/project_records/V2_October_2026_Project_Definition.pdf}. The earlier draft, \sourcefile{Data/project_records/Original_Project_Definition.tex}, includes the \SI{75}{\watt} continuous-validation milestone \cite{projectEarlierPlan}.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:11:The editable package includes the original files and checksums.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:15:\noindent\sourcefile{Code/PWR_2_0_4/firmware/build.ps1}; 42 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:21:\noindent\sourcefile{Code/PWR_2_0_4/firmware/stm32f410.ld}; 121 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:27:\noindent\sourcefile{Code/PWR_2_0_4/firmware/verify_f410_hex.py}; 76 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:33:\noindent\sourcefile{Code/PWR_2_0_4/firmware/test_web_protocol.py}; 517 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:39:\noindent\sourcefile{Code/PWR_2_0_4/web/app.js}; 900 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:45:\noindent\sourcefile{Code/PWR_2_0_4/web/build.mjs}; 19 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:51:\noindent\sourcefile{Code/PWR_2_0_4/web/calculator.css}; 312 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:57:\noindent\sourcefile{Code/PWR_2_0_4/web/calculator.html}; 154 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:63:\noindent\sourcefile{Code/PWR_2_0_4/web/index.html}; 126 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:69:\noindent\sourcefile{Code/PWR_2_0_4/web/protocol.js}; 70 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:75:\noindent\sourcefile{Code/PWR_2_0_4/web/resonance.js}; 254 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:81:\noindent\sourcefile{Code/PWR_2_0_4/web/serial.js}; 268 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:87:\noindent\sourcefile{Code/PWR_2_0_4/web/server.mjs}; 15 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:93:\noindent\sourcefile{Code/PWR_2_0_4/web/storage.js}; 57 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:99:\noindent\sourcefile{Code/PWR_2_0_4/web/styles.css}; 511 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:105:\noindent\sourcefile{Code/PWR_2_0_4/web/package.json}; 12 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:111:\noindent\sourcefile{Code/PWR_2_0_4/web/vercel.json}; 16 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:117:\noindent\sourcefile{Code/PWR_2_0_4/web/tests/protocol.test.mjs}; 76 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:123:\noindent\sourcefile{Code/PWR_2_0_4/web/tests/resonance.test.mjs}; 251 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:129:\noindent\sourcefile{Code/PWR_2_0_4/web/tests/serial.test.mjs}; 387 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:135:\noindent\sourcefile{Code/PWR_2_0_4/web/tests/storage.test.mjs}; 86 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:141:\noindent\sourcefile{Data/analysis/rebuild_results.py}; 335 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:147:\noindent\sourcefile{Data/analysis/inspect_measurements.py}; 47 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:154:\noindent\sourcefile{Code/PWR_2_0_4/firmware/test_carrier_storage.py}; 287 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:160:\noindent\sourcefile{Code/PWR_2_0_4/web/resonance-ui.js}; 606 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:166:\noindent\sourcefile{Code/PWR_2_0_4/web/resonance-presets.js}; 112 physical lines.
+/workspace/thesis/Backmatter/Appendices/I_Full_Supporting_Source.tex:172:\noindent\sourcefile{Code/PWR_2_0_4/web/tests/resonance-presets.test.mjs}; 55 physical lines.
+/workspace/thesis/Backmatter/Appendices/H_Full_Embedded_Source.tex:12:included in the editable package. Their SHA-256 checksums are recorded in
+/workspace/thesis/Backmatter/Appendices/H_Full_Embedded_Source.tex:13:\sourcefile{Code/source_manifest.json}. Appendix~\ref{app:firmware} explains
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:8:files are under \sourcefile{Code/PWR_2_0_4}, with measurement-processing
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:9:scripts under \sourcefile{Data/analysis}.
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:23:\caption{Browser application files. Paths are relative to \sourcefile{Code/PWR_2_0_4/web}.}
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:30:\sourcefile{index.html}, \sourcefile{styles.css} & Monitor, Setup, Calibration, and Sessions views, global OFF controls, status labels, and responsive layout.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:31:\sourcefile{app.js} & Connects controls to the device link, updates the chart, records sessions, and displays command acknowledgments and device readings.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:32:\sourcefile{serial.js} & Implements \texttt{DeviceLink}: connection, command ordering, acknowledgments, readiness checks, and the synthetic Demo.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:33:\sourcefile{protocol.js} & Implements \texttt{LineFramer}, \texttt{parseFrame}, \texttt{validateCommand}, and \texttt{faultActive}.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:34:\sourcefile{storage.js} & Stores sessions locally and provides CSV and download helpers, including per-sample carrier timing.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:35:\sourcefile{resonance.js}, \sourcefile{resonance-ui.js}, \sourcefile{resonance-presets.js} & Tank and pump calculations, calculator controls, and component presets.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:36:\sourcefile{server.mjs}, \sourcefile{build.mjs} & Serve an explicit file allowlist locally or copy that list to \sourcefile{dist}. Both use paths relative to their own module.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:37:\sourcefile{package.json}, \sourcefile{vercel.json} & Define the Node commands and static-host configuration, including response headers. The package specifies Node 20 or later and has no third-party application dependencies.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:44:\sourcefile{app.js}, the sample is copied into the display, chart history,
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:106:In \sourcefile{app.js}, \texttt{runCommand} records each request, waits
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:153:\sourcefile{server.mjs} binds to the loopback interface and serves only
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:155:\sourcefile{vercel.json}. The server is not a serial bridge or data-collection
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:156:API. \sourcefile{build.mjs} checks and copies 15 application and font
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:157:files to \sourcefile{dist}. That list excludes firmware, thesis
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:159:interface can be checked from \sourcefile{Code/PWR_2_0_4/web} with:
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:173:The calculator is included in the local server and static build. \sourcefile{resonance-ui.js} connects the page controls to the numerical routines; \sourcefile{resonance-presets.js} supplies nominal component sets and the transformer A/B measurements used for comparison.
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:184:\sourcefile{firmware/build.ps1} copies the canonical
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:185:\sourcefile{thesi_power_control.ino} into the generated Arduino sketch
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:192:For V2, \sourcefile{firmware/stm32f410.ld} places vectors in flash
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:199:In \sourcefile{firmware/verify_f410_hex.py}, \texttt{load\_hex} checks
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:200:Intel HEX record lengths, checksums, address records, and EOF. \texttt{verify}
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:205:and image checks can be run from \sourcefile{Code/PWR_2_0_4} with:
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:226:\sourcefile{web/tests/protocol.test.mjs} & Partial chunks, CR/LF framing, oversized-line recovery, frame validation, command validation, and fault interpretation.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:227:\sourcefile{web/tests/serial.test.mjs} & Handshake, acknowledgments, timeouts, stale/fault/lease interlocks, OFF priority, disconnect races, port cancellation, unplug, and separation of Demo and serial state, using an in-memory serial device.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:228:\sourcefile{web/tests/storage.test.mjs} & CSV quoting, missing fields, units, session source, formula-like text, and empty sessions. These tests exercise export formatting, not physical storage endurance.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:229:\sourcefile{web/tests/resonance.test.mjs}, \sourcefile{web/tests/resonance-presets.test.mjs} & Unit conversion, bank topology, inverse LC solves, leakage and magnetizing branches, pump sizing, tolerance corners, preferred values, and presets.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:230:\sourcefile{firmware/test_web_protocol.py} & Production dispatcher, timing math and application, scheduler, calibration cancellation, lease and queue behavior with mocked hardware.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:231:\sourcefile{firmware/test_carrier_storage.py} & Production journal loader/writer, legacy records, corruption, torn writes, and interrupted appends with mocked flash.\\
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:244:\sourcefile{Data/analysis/inspect_measurements.py} provides
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:252:\sourcefile{Data/analysis/rebuild_results.py} uses that reader to select
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:258:markers come from \sourcefile{Data/analysis/thermal_image_reference_table.md}.
+/workspace/thesis/Backmatter/Appendices/G_Software_Tools.tex:266:output checksums, CSV data, file lists, figure descriptions, and processing
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:7:of \sourcefile{Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx}. The original
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:9:\sourcefile{Data/measurements}. The tables list the worksheet row and instrument readings for each
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:13:\sourcefile{Data/measurements/v2_load_thermal/raw}. The AC supply and
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:25:\sourcefile{Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx} & Completed fixed-output and extended-load measurements\\
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:26:\sourcefile{Thesis_USB_PDO_MultiVoltage_Test_Plan.xlsx} & Earlier multi-voltage measurements and test planning\\
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:27:\sourcefile{Thesis_75_80W_USB_PDO_Test_Plan.xlsx} & High-power test planning and capture log\\
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:28:\sourcefile{Thesis_Final_Measurement_Checklist.xlsx} & Laboratory checklist and measurement index\\
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:54:node is stated with the result. The source package includes waveform
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:55:copies, CSV plotting data, checksums, and processing steps.
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:62:\input{Data/measurements/processed_rewrite/appendix_electrical_tables}
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:65:\input{Data/measurements/processed_rewrite/appendix_harmonic_tables}
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:68:\input{Data/measurements/processed_rewrite/appendix_thermal_tables}
+/workspace/thesis/Backmatter/Appendices/E_Experimental_Data.tex:71:\input{Data/measurements/processed_rewrite/raw_waveform_source_table}
+/workspace/thesis/Backmatter/Appendices/C_Firmware_Documentation.tex:8:The complete sketches are Listings~\ref{lst:full-pwr1920} and \ref{lst:full-pwr204} in Appendix~\ref{app:full-embedded-source}. The editable files are \sourcefile{Code/thesi_power_control_PWR_1_9_20.ino} and \sourcefile{Code/PWR_2_0_4/thesi_power_control.ino}. The source manifest, \sourcefile{Code/source_manifest.json}, lists file sizes, line counts, and SHA-256 hashes. PWR-1.9.20 contains 4207 lines; the current V2 sketch contains 5348 lines. The earlier V2 port is retained under \sourcefile{Code/PWR_2_0_1}.
+/workspace/thesis/Backmatter/Appendices/C_Firmware_Documentation.tex:159:PI identification, foldback helpers, and \sourcefile{handleMaxDutyProtection()} remain in the source but are not called by the active voltage loop. Their settings remain for compatibility. Setting \texttt{MAXFAULTEN} does not add the missing call.
+/workspace/thesis/Backmatter/Appendices/C_Firmware_Documentation.tex:164:\texttt{SettingsSlot} contains configuration, three load profiles, tuning metadata, magic value, sequence, and checksum. Fields and their relationships are checked against bounds. For the checksum, record bytes are folded with a rotating XOR and seed \texttt{0xA5A55A5A}, excluding the checksum field. Damaged or incomplete records can be detected, but some errors can pass the check.
+/workspace/thesis/Backmatter/Appendices/C_Firmware_Documentation.tex:168:V2 saves a 488-byte record containing the unchanged 471-byte settings payload, a version marker, an alignment byte, requested carrier frequency and dead time, and an outer checksum. The reserved sector holds 33 new records. The loader also scans the earlier 472-byte-stride records, retaining their settings and loading the default carrier timing without writing flash at startup. New records are appended after occupied or interrupted records; the latest complete valid record is recovered after an interrupted append.
+/workspace/thesis/Backmatter/Appendices/C_Firmware_Documentation.tex:171:Only one sector is used for the journal. An interrupted erase can remove all saved records. If none passes the magic/checksum checks, defaults are loaded with output OFF. The F410 also blocks enable if its storage layout is not ready. The G071 reports success after its EEPROM update calls, without the F410's explicit program/readback checks.
+/workspace/thesis/Backmatter/Appendices/C_Firmware_Documentation.tex:423:The sketch is built with the STM32 Arduino core. With \sourcefile{Code/PWR_2_0_4/firmware/build.ps1}, the source is copied into a correctly named Arduino directory and F410 or Nucleo G071 is selected. The V2 build also requires the included \sourcefile{firmware/stm32f410.ld} and 96 KiB application limit. The selected core uses the internal-HSI PLL clock setup; the port does not assume an external HSE crystal.
+/workspace/thesis/Backmatter/Appendices/C_Firmware_Documentation.tex:425:\sourcefile{firmware/verify_f410_hex.py} checks the HEX image addresses against the reserved sector and intended flash regions. \sourcefile{firmware/test_web_protocol.py} tests the production dispatcher with mocked UART, control, and storage behavior. The browser source and tests are included with these files. HEX can preserve the reserved address gap during programming. A flat binary spans that gap; an unchecked binary write or full-chip erase can remove settings. The build script does not flash the board automatically.
+/workspace/thesis/Chapters/10_Results/17_V2_Secondary_Load_Tests.tex:14:\input{Data/measurements/v2_load_thermal/load_table}
+/workspace/thesis/Chapters/10_Results/17_V2_Secondary_Load_Tests.tex:33:\includegraphics[width=\linewidth]{Data/measurements/v2_load_thermal/load_performance.pdf}
+/workspace/thesis/Chapters/10_Results/17_V2_Secondary_Load_Tests.tex:39:\input{Data/measurements/v2_load_thermal/thermal_figures}
+/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex:15:The reported software dead-time setting was approximately
+/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex:44:\includegraphics[width=0.80\linewidth]{Data/measurements/v2_results/evidence/v2_bridge_thermal_original.jpg}
+/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex:70:\includegraphics[height=0.34\textheight]{Data/measurements/v2_results/evidence/v2_board_overview_original.jpg}
+/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex:72:\includegraphics[height=0.34\textheight]{Data/measurements/v2_results/evidence/v2_thermal_setup_original.jpg}
+/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex:75:\includegraphics[width=0.86\linewidth]{Data/measurements/v2_results/evidence/v2_board_detail_original.jpg}
+/workspace/thesis/Chapters/10_Results/14_Revised_Plan_Status.tex:12:The V1.0 reference test, \sourcefile{PDO20-80W-40A-001}, row 27,
+/workspace/thesis/Chapters/10_Results/12_Compliance_Table.tex:34:PR-09 & Link results to configuration & Test IDs, source rows, archived screenshots and raw-file checksums & Linked; setup details incomplete\\
+/workspace/thesis/Chapters/10_Results/09_Thermal.tex:43:\input{Data/measurements/processed_rewrite/thermal_complete_table}
+/workspace/thesis/Chapters/10_Results/04_Load_Transients.tex:12:\includegraphics[width=\linewidth]{Data/measurements/evidence/PDO5_3A_to_NoLoad/keysight_5v_3a_to_no_load_sw_secondary_vbus.png}
+/workspace/thesis/Chapters/10_Results/04_Load_Transients.tex:17:\includegraphics[width=\linewidth]{Data/measurements/evidence/PDO9_3A_to_NoLoad/keysight_9v_3a_to_0a_transient.png}
+/workspace/thesis/Chapters/10_Results/04_Load_Transients.tex:23:\includegraphics[width=\linewidth]{Data/measurements/evidence/PDO15_3A_TO_NL/keysight_15v_3a_to_0a_transient_sw_secondary_vbus.png}
+/workspace/thesis/Chapters/10_Results/04_Load_Transients.tex:28:\includegraphics[width=\linewidth]{Data/measurements/evidence/PDO20_80W_to_NoLoad/keysight_80w_to_no_load_secondary_vbus.png}
+/workspace/thesis/Chapters/10_Results/04_Load_Transients.tex:45:\sourcefile{PDO9-3A-TO-NL-001}, row 31 & \SI{3}{\ampere} to \SI{0}{\ampere} & 9.08221 & 1.145\\
+/workspace/thesis/Chapters/10_Results/04_Load_Transients.tex:46:\sourcefile{PDO15-3A-TO-NL-001}, row 35 & \SI{3}{\ampere} to \SI{0}{\ampere} & 15.0161 & 0.414\\
+/workspace/thesis/Chapters/10_Results/08_Efficiency.tex:36:\input{Data/measurements/processed_rewrite/efficiency_table}
+/workspace/thesis/Chapters/10_Results/03_Steady_State.tex:61:\includegraphics[width=\linewidth]{Data/measurements/evidence/PDO5_15W_3A/keysight_5v_3a_sw_secondary_vbus.png}
+/workspace/thesis/Chapters/10_Results/03_Steady_State.tex:62:\caption{\SI{5}{\volt}, \SI{3}{\ampere}; \sourcefile{PDO5-MAX3A-001}.}
+/workspace/thesis/Chapters/10_Results/03_Steady_State.tex:66:\includegraphics[width=\linewidth]{Data/measurements/evidence/PDO20_80W_40A/keysight_sw_secondary_vbus_20v_40a.png}
+/workspace/thesis/Chapters/10_Results/03_Steady_State.tex:67:\caption{\SI{20}{\volt}, \SI{4}{\ampere}; \sourcefile{PDO20-80W-40A-001}.}
+/workspace/thesis/Chapters/10_Results/03_Steady_State.tex:100:\includegraphics[width=\linewidth]{Data/measurements/evidence/PDO5_15W_3A_AC/keysight_5v_3a_ac_coupled_secondary_vbus.png}
+/workspace/thesis/Chapters/10_Results/03_Steady_State.tex:105:\includegraphics[width=\linewidth]{Data/measurements/evidence/PDO20_80W_4A_AC/keysight_20v_4a_ac_coupled_secondary_vbus.png}
+/workspace/thesis/Chapters/10_Results/06_ZVS.tex:12:\caption{Raw C2 waveforms: overview records 00006 and 00008, and carrier-detail records 00007 and 00010 from \sourcefile{Waveforms_Richard}. The original amplitude and time scales are unchanged. Load and setup details are incomplete, so these captures cannot be linked to individual workbook tests.}
+/workspace/thesis/Chapters/10_Results/06_ZVS.tex:22:approximately \SI{1.03}{\mega\hertz}. Detection thresholds and source checksums are retained. This frequency
+/workspace/thesis/Chapters/10_Results/01_Prototype_Verification.tex:36:\sourcefile{Data/measurements/Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx}.
+/workspace/thesis/Chapters/10_Results/05_Open_Circuit.tex:20:\sourcefile{PDO5-NL-001} & 5.00727 & 1.396 & DC-coupled\\
+/workspace/thesis/Chapters/10_Results/05_Open_Circuit.tex:21:\sourcefile{PDO9-NL-001} & 9.02697 & 1.517 & DC-coupled\\
+/workspace/thesis/Chapters/10_Results/05_Open_Circuit.tex:22:\sourcefile{PDO15-NL-001} & 15.0537 & 1.092 & DC-coupled\\
+/workspace/thesis/Chapters/10_Results/05_Open_Circuit.tex:23:\sourcefile{PDO20-NL-AC-001} & Unavailable & 0.0762184 & AC detail/statistics\\
+/workspace/thesis/Chapters/05_Modeling_Simulation/03_GaN_Model.tex:4:The supplied \sourcefile{GaN_LTspice_GS66502B_L1V2.lib} is a GaN Systems Level 1 Version 2.0 library intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded from the model, as stated in its header \cite{gansystemsGS66502Bmodel}. It can represent the electrical device used in the supplied model, but it does not represent the complete LMG2652 package and PCB implementation.
+/workspace/thesis/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex:4:The supplied \sourcefile{Simplified_for_journal_revision.asc} and \sourcefile{Simplified_for_journal_revision_2.asc} circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.
+/workspace/thesis/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex:28:The \sourcefile{Power_loss_breakdown.asc} variants and device libraries describe the predecessor's loss calculations. Prototype efficiency is estimated from measured input and output power. The measurement locations and timing uncertainties are described with the results. Appendix~\ref{app:modeling} identifies the supplied files and their roles.
+/workspace/thesis/Chapters/08_Control_Firmware/15_PWR_2_Port.tex:39:Each save appends a sequence-numbered, checksummed entry and verifies it by reading it back. Occupied entries are skipped after interrupted programming, and successive saves use different entries across the sector. When the journal wraps, the sector is erased; an interruption during erase can remove the saved configuration. If no valid entry remains, defaults load with output OFF. Writes wait until output, startup, and autotuning are inactive so flash work does not interrupt live conversion.

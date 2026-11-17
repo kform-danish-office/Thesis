@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#122e32">
+  <meta name="description" content="USB control and local experiment logging for the thesis power converter.">
+  <title>Converter test bench</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <header class="app-header">
+    <a class="app-title" href="#dashboard"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M3 15h5l3-8 5 15 3-9h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Power Lab<span class="brand-subtitle">CONVERTER TEST BENCH</span></span></a>
+    <span class="project-meta">USB-C charge-pump PFC <span>100 W design target</span></span>
+    <span class="header-meta">USB serial · 115200 baud</span>
+  </header>
+  <div class="workspace-nav">
+    <nav aria-label="Main navigation">
+      <a href="#dashboard" class="nav-link active" aria-current="location">Monitor</a>
+      <a href="./calculator.html" class="nav-link" target="_blank" rel="noopener" title="Open calculator in a separate tab to keep USB control and recording running">Calculator <svg class="inline-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#experiments" class="nav-link">Sessions <span id="nav-session-count">0</span></a>
+      <a href="#connection-guide" class="nav-link">Connection</a>
+    </nav>
+    <span class="breadcrumb" aria-hidden="true">Monitor</span>
+  </div>
+
+  <main id="main-content" tabindex="-1">
+    <div class="page-heading"><div><h1>Converter monitor</h1><p>Your signals, controls, and experiment records in one place.</p></div><a class="firmware-link" aria-label="Download firmware" href="https://github.com/kform-danish-office/Thesis/releases/tag/pwr-2.0.1" target="_blank" rel="noopener">Firmware <span class="firmware-link-detail">downloads </span><svg class="inline-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <p id="workspace-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+    <section id="dashboard" class="page-section">
+      <div id="app-alert" class="app-alert" role="alert" hidden><span id="alert-text"></span><button type="button" id="dismiss-alert" aria-label="Dismiss notification">×</button></div>
+      <div id="demo-banner" class="demo-banner" hidden><strong class="demo-label">SYNTHETIC DATA</strong><span>Demo source. Controls affect the simulator only.</span><button id="exit-demo" type="button">Stop demo</button></div>
+      <div class="connection-strip">
+        <div class="connection-info"><span class="status-dot" id="connection-dot"></span><div><strong id="connection-label">No device connected</strong><span id="connection-detail">Connect a USB-UART adapter to receive telemetry.</span></div></div>
+        <span id="last-update">NO DATA</span>
+        <div class="connection-actions"><button id="demo-button" class="button secondary" type="button">Start demo</button><button id="connect-button" class="button primary" type="button">Connect USB</button></div>
+      </div>
+
+      <div class="metric-grid" id="telemetry-metrics" aria-label="Live telemetry">
+        <article class="metric-card"><div class="metric-name"><i class="channel-mark green"></i>Secondary voltage</div><div class="metric-value"><span id="metric-vsec">—</span><small>V</small></div><div class="metric-sub">Vsec · secondary feedback</div></article>
+        <article class="metric-card"><div class="metric-name"><i class="channel-mark orange"></i>Primary voltage</div><div class="metric-value"><span id="metric-vpri">—</span><small>V</small></div><div class="metric-sub">Vpri · primary feedback</div></article>
+        <article class="metric-card"><div class="metric-name">Current diagnostic</div><div class="metric-value"><span id="metric-current">—</span><small>A</small></div><div class="metric-sub">PA2 signal · uncalibrated</div></article>
+        <article class="metric-card"><div class="metric-name"><i class="channel-mark duty"></i>Applied duty</div><div class="metric-value"><span id="metric-duty">—</span><small>%</small></div><div class="metric-sub" id="metric-duty-detail">Waiting for reported duty</div></article>
+        <article class="metric-card health-card"><div class="metric-name">Device status</div><div class="health-value" id="metric-fault">No data</div><div class="metric-sub" id="metric-fault-detail">Fault state unconfirmed</div></article>
+      </div>
+
+      <p id="telemetry-status" class="telemetry-note" hidden>Stream paused · readings show the last received values.</p>
+      <div class="workspace-shortcuts"><a href="#output-heading">Output controls ↓</a><a href="#capture-heading">Record session ↓</a><a href="#calibration">Auto-calibration ↓</a></div>
+      <div class="monitor-grid">
+        <div class="acquisition-column">
+          <section class="panel chart-panel" aria-labelledby="chart-heading">
+            <div class="panel-heading"><div class="panel-heading-copy"><h2 id="chart-heading">Live acquisition</h2></div><div class="chart-switch" role="group" aria-label="Chart signal"><button type="button" class="selected" data-chart="voltage" aria-pressed="true">Voltage</button><button type="button" data-chart="duty" aria-pressed="false">Duty</button></div></div>
+            <div class="scope-surface"><div class="chart-legend" id="chart-legend"><span><i class="green"></i>CH1 Vsec · left axis</span><span><i class="orange"></i>CH2 Vpri · right axis</span><span class="chart-window">60 s window</span></div><div class="chart-wrap"><canvas id="live-chart" aria-label="Telemetry over the last sixty seconds" role="img"></canvas><div class="chart-empty" id="chart-empty"><span class="empty-signal" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M3 15h5l3-8 5 15 3-9h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Ready when you are</strong><p>Connect your device or start a demo to see live signals.</p></div></div></div>
+            <div class="chart-footer"><span id="sample-rate">No samples received</span><span id="adc-values">ADC — / — / —</span></div>
+          </section>
+
+          <section class="panel capture-panel" aria-labelledby="capture-heading">
+            <div class="panel-heading"><div class="panel-heading-copy"><h2 id="capture-heading" tabindex="-1">Record a session</h2></div><span id="recording-state" class="badge neutral">IDLE</span></div>
+            <div class="capture-form"><div class="capture-fields"><label class="field-label" for="experiment-name">Session name</label><input id="experiment-name" type="text" maxlength="120" placeholder="e.g. 28 V · load step"><label class="field-label notes-label" for="experiment-notes">Notes <span>Optional</span></label><textarea id="experiment-notes" rows="2" maxlength="10000" placeholder="Load, operating conditions, observations"></textarea></div><div class="capture-controls"><div class="capture-stats"><div><span>Duration</span><strong id="recording-duration">00:00:00</strong></div><div><span>Samples</span><strong id="recording-samples">0</strong></div><div><span>Source</span><strong id="recording-source">—</strong></div></div><button class="button primary record-button" id="record-button" type="button" disabled><span class="record-dot"></span>Start recording</button><p class="capture-note" id="recording-note">Connect USB or start demo to record. Maximum 20,000 samples per session.</p></div></div>
+          </section>
+        </div>
+
+        <div class="panel regulation-panel">
+          <section class="output-panel" aria-labelledby="output-heading">
+            <div class="panel-heading"><div class="panel-heading-copy"><h2 id="output-heading" tabindex="-1">Output &amp; regulation</h2></div><span id="output-badge" class="badge neutral">UNCONFIRMED</span></div>
+            <div class="output-display"><span class="output-symbol" id="output-symbol" aria-hidden="true">●</span><div><strong id="output-state">Not connected</strong><span id="output-description">Output state comes from the device.</span></div></div>
+            <div class="output-actions"><button class="button primary" id="output-on" type="button" disabled>Enable output</button><button class="button danger-outline" id="output-off" type="button" disabled>Output OFF</button><button id="clear-fault" class="button secondary" type="button" disabled>Clear fault</button></div>
+            <div class="mode-control"><label class="field-label" for="mode-select">Control mode <span id="reported-mode">REPORTED: —</span></label><div class="mode-row"><select id="mode-select" disabled><option value="">Select reported mode</option><option value="OPEN">Open loop</option><option value="VSBONLY">Secondary voltage only</option><option value="LINEFF">Line feed-forward</option></select><button id="apply-mode" type="button" class="button primary compact" disabled>Apply</button></div><p class="control-note" id="mode-note">Mode changes take effect after device acknowledgment.</p></div>
+          </section>
+          <section class="settings-panel" aria-labelledby="settings-heading">
+            <div class="settings-title"><h3 id="settings-heading">Parameters</h3><span class="small-label" id="settings-status">Awaiting device values</span></div>
+            <form id="settings-form"><div class="settings-grid">
+              <label class="setting-field"><span>Voltage setpoint <code>VSET</code></span><div><input type="number" step="any" id="setting-VSET" name="VSET" placeholder="—" disabled><span>V</span></div></label>
+              <label class="setting-field"><span>Loaded floor <code>VON</code></span><div><input type="number" step="any" id="setting-VON" name="VON" placeholder="—" disabled><span>V</span></div></label>
+              <label class="setting-field"><span>Voltage ceiling <code>VMAX</code></span><div><input type="number" step="any" id="setting-VMAX" name="VMAX" placeholder="—" disabled><span>V</span></div></label>
+              <label class="setting-field"><span>Overvoltage trip <code>OVP</code></span><div><input type="number" step="any" id="setting-OVP" name="OVP" placeholder="—" disabled><span>V</span></div></label>
+              <label class="setting-field"><span>Maximum duty <code>DMAX</code></span><div><input type="number" min="0" max="100" step="any" id="setting-DMAX" name="DMAX" placeholder="—" disabled><span>%</span></div></label>
+              <label class="setting-field"><span>Open-loop duty <code>OD</code></span><div><input type="number" min="0" max="100" step="any" id="setting-OD" name="OD" placeholder="—" disabled><span>%</span></div></label>
+              <label class="setting-field"><span>EN frequency <code>FEN</code></span><div><input type="number" min="1" step="1" id="setting-FEN" name="FEN" placeholder="—" disabled><span>Hz</span></div></label>
+            </div><div class="settings-footer"><div class="settings-actions"><button id="save-device-settings" type="button" class="button secondary compact" disabled>Save to device</button><button id="reset-settings" type="button" class="button secondary compact" disabled>Reset edits</button><button id="apply-settings" type="submit" class="button primary compact" disabled>Apply changes</button></div><p id="device-save-status">Apply updates the running configuration. Save retains it in device flash.</p></div></form>
+          </section>
+          <div class="command-feedback" id="command-feedback" role="status">Waiting for verified telemetry.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel calibration-panel page-section" id="calibration" aria-labelledby="calibration-heading">
+      <div class="panel-heading"><h2 id="calibration-heading">Hardware auto-calibration</h2><span id="calibration-capability" class="badge neutral">BOARD REQUIRED</span></div>
+      <div class="calibration-layout">
+        <form id="calibration-form">
+          <label class="field-label" for="calibration-kind">Calibration routine</label>
+          <select id="calibration-kind"><option value="NOLOAD">No-load soft-switch cap · AUTOBANG</option><option value="PRECHARGE">Startup precharge · AUTOPRE</option><option value="LOAD">Load reference · CALLOAD</option><option value="ZERO">Current sensor zero · ZEROI</option><option value="LINE">Primary line reference · LFFCAL</option></select>
+          <div id="calibration-slot-row" hidden><label class="field-label" for="calibration-slot">Physical load reference slot</label><select id="calibration-slot"><option value="1">Load slot 1</option><option value="2">Load slot 2</option><option value="3">Load slot 3</option></select></div>
+          <p id="calibration-instructions" class="control-note">Disconnect the load as required by your bench procedure. This routine energizes the converter to tune the no-load duty cap at the configured EN frequency.</p>
+          <p id="calibration-limits" class="control-note">Calibration uses device settings, not unsubmitted form edits.</p>
+          <label class="calibration-confirm"><input id="calibration-confirm" type="checkbox"><span id="calibration-confirm-label">I have prepared the correct load and reference; this routine may energize the converter.</span></label>
+          <div class="calibration-actions"><button id="calibration-start" class="button primary" type="submit" disabled>Start calibration</button><button id="calibration-stop" class="button danger-outline" type="button" disabled>Stop / output OFF</button></div>
+        </form>
+        <div class="calibration-report">
+          <p id="calibration-status" role="status" aria-live="polite" aria-atomic="true">Connect a compatible board to calibrate hardware.</p>
+          <progress id="calibration-progress" max="1" value="0" aria-label="Calibration execution"></progress>
+          <dl class="calibration-values"><div><dt>Last test duty</dt><dd id="calibration-duty">—</dd></div><div><dt id="calibration-result-label">No-load cap / precharge duty</dt><dd id="calibration-result">—</dd></div></dl>
+          <button id="calibration-save" class="button secondary" type="button" disabled>Save device settings</button>
+          <p class="control-note">Calibration finishes with output OFF. Successful results stay in RAM until you explicitly save. Stop, link-lease expiry, or a fault discards the running calibration. Switch physical loads only while output is OFF, then run the next slot separately.</p>
+          <p id="calibration-compatibility" class="control-note">Requires PWR-2.0.2 firmware advertising calibration_v1. PWR-2.0.1 blocks these routines during web sessions; a browser update alone cannot add them. Powered bench validation is still required.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel archive-panel page-section" id="experiments" aria-labelledby="sessions-heading">
+      <div class="panel-heading"><div class="heading-with-note"><h2 id="sessions-heading">Sessions</h2><span>Saved in this browser</span></div><span class="small-label" id="session-count">0 SAVED</span></div>
+      <div class="session-table-wrap"><table class="session-table"><thead><tr><th scope="col">Name</th><th scope="col">Source</th><th scope="col">Started</th><th scope="col">Duration</th><th scope="col">Samples</th><th scope="col">Files</th></tr></thead><tbody id="session-list"><tr><td colspan="6" class="archive-empty">No sessions recorded. Start a recording to save telemetry, settings, and commands.</td></tr></tbody></table></div>
+      <p class="archive-note">Export CSV or JSON to keep an independent copy of a session.</p>
+    </section>
+
+    <section class="panel guide-panel page-section" id="connection-guide" aria-labelledby="connection-heading">
+      <div class="panel-heading"><h2 id="connection-heading">USB connection</h2><span class="small-label">3.3 V UART · 115200 baud · 8N1</span></div>
+      <div class="guide-content"><div class="browser-guide"><p id="browser-support">Checking USB serial support…</p><p class="isolation-note">The converter UART is primary referenced. For mains-powered operation, use an isolated USB-to-3.3 V-UART adapter. Never connect an unisolated USB ground to the live primary. Connect signal ground on the isolated board side and use the correct firmware board profile.</p></div><div class="wiring-details"><div><strong>STM32F410</strong><span>Adapter TX → PA10 (RX)<br>Adapter RX ← PA9 (TX)</span></div><div><strong>STM32G071</strong><span>Adapter TX → PC5 (RX)<br>Adapter RX ← PC4 (TX)</span></div></div></div>
+    </section>
+
+    <section class="panel terminal-panel"><details id="terminal-details"><summary><span>Serial terminal <small>Raw commands and protocol log</small></span><span class="summary-arrow">⌄</span></summary><div class="terminal-body"><div class="terminal-toolbar"><span id="terminal-count">0 lines</span><button type="button" id="clear-terminal" class="text-button">Clear display</button></div><pre id="terminal-output" role="log" aria-live="off" aria-label="Serial terminal"></pre><form id="terminal-form"><label for="terminal-command" class="sr-only">Manual serial command</label><span>›</span><input id="terminal-command" type="text" autocomplete="off" spellcheck="false" maxlength="180" placeholder="SET VSET 28, CLR, SAVE" disabled><button id="send-command" type="submit" class="button primary compact" disabled>Send</button></form><p>Commands use the same acknowledgment and connection checks as the controls. ON requires a verified, fresh link. Commands can change hardware behavior.</p></div></details></section>
+    <footer class="main-footer"><div class="footer-device"><span class="status-dot" id="side-dot"></span><span id="side-state">No device connected<small>USB serial · 115200 baud</small></span></div><span id="firmware-label">Awaiting firmware identification</span><span>USB and logs remain on this computer</span></footer>
+  </main>
+</body>
+</html>
+

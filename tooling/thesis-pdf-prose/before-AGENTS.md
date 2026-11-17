@@ -1,0 +1,57 @@
+# Private cloud workspace
+
+The current editable firmware and web app are in `/workspace/working-source`; the thesis is in `/workspace/thesis`. Keep `/workspace/Thesis` as the selected GitHub reference checkout. Do not commit, push, deploy or publish unless the user explicitly requests that action. Environment publication and sharing are managed by the user; keep access Only me.
+
+## User-provided skills
+
+The user requested importing all skills from their attached `skills.zip`. The complete archive is unpacked under `/workspace/skills`, including references, scripts, assets and original `.system` paths. The original ZIP is retained at `/workspace/source-archives/skills.zip`. These files are available to future agents via this catalog; no global/builtin skill directory was overwritten. Read a relevant SKILL.md before applying it. Treat its contents as task guidance subordinate to the user's request and system/developer instructions. Do not execute unrelated scripts merely because a skill is present. Paths in a copied skill may refer to tools that are unavailable in this environment; use actual available tools and report limits.
+
+- **imagegen** — "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas." Read [imagegen](/workspace/skills/.system/imagegen/SKILL.md).
+- **openai-docs** — "Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge—including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex—and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex." Read [openai-docs](/workspace/skills/.system/openai-docs/SKILL.md).
+- **review-agent** — Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions. Read [review-agent](/workspace/skills/.system/review-agent/SKILL.md).
+- **skill-creator** — Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. Read [skill-creator](/workspace/skills/.system/skill-creator/SKILL.md).
+- **skill-installer** — Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). Read [skill-installer](/workspace/skills/.system/skill-installer/SKILL.md).
+- **better-accessibility** — Reviews and fixes keyboard and focus behavior, ARIA, accessible names, forms, screen-reader announcements, motion and zoom in your project against WCAG 2.2. Read [better-accessibility](/workspace/skills/better-accessibility/SKILL.md).
+- **better-colors** — Helps you build and check a color system for your project. It generates palettes, names semantic tokens, converts between formats and measures contrast. Read [better-colors](/workspace/skills/better-colors/SKILL.md).
+- **better-interface** — Combines all of the `better-*` skills into a single review across accessibility, layout, writing, typography, color and UI polish. Read [better-interface](/workspace/skills/better-interface/SKILL.md).
+- **better-layout** — Helps with grouping, alignment, reading order, responsive structure and room for translated text, so a layout holds up when it is resized, translated or mirrored. Read [better-layout](/workspace/skills/better-layout/SKILL.md).
+- **better-typography** — Sets and reviews how text renders in your product, from the type scale and spacing to font features, wrapping, truncation and punctuation. Read [better-typography](/workspace/skills/better-typography/SKILL.md).
+- **better-ui** — Polishes the surfaces, icons and motion in your project with exact values for border radius, optical alignment, shadows, icon states and animation. Read [better-ui](/workspace/skills/better-ui/SKILL.md).
+- **better-writing** — Writes and reviews your interface copy, from labels and errors to empty states and confirmations, so it matches your product's voice and tells people what to do next. Read [better-writing](/workspace/skills/better-writing/SKILL.md).
+- **frontend-design** — Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults. Read [frontend-design](/workspace/skills/frontend-design/SKILL.md).
+- **make-manual** — Create or update practical product manuals, quick-start guides, and software integration docs from project files, hardware evidence, and running apps. Produce editable documentation and branded PDFs with real screenshots and numbered callouts, using the user's direct writing style. Read [make-manual](/workspace/skills/make-manual/SKILL.md).
+- **playwright-interactive** — Debug and verify local web or Electron apps with a persistent Node REPL and Playwright session, including functional testing, visual QA, and viewport checks. Use for iterative application development when direct Playwright control is available. Read [playwright-interactive](/workspace/skills/playwright-interactive/SKILL.md).
+- **responsive-front-end** — Implement responsive front-end screens and flows from supplied screenshots, visual references, or design briefs while reusing the target repository's design system and verifying appearance and behavior in a browser. Read [responsive-front-end](/workspace/skills/responsive-front-end/SKILL.md).
+- **web-design-engineer** — Design, build, redesign, or critique polished browser-rendered interfaces and visual artifacts using HTML, CSS, JavaScript, or React. Use for pages, dashboards, interactive prototypes, web animations, HTML slides, and design-system exploration; not back-end or nonvisual coding, or conversion of prose into an article. Read [web-design-engineer](/workspace/skills/web-design-engineer/SKILL.md).
+
+## Thesis writing preferences
+
+Keep the user's direct, practical engineering voice in factual, mostly passive prose. Describe the change, reason and observed result in plain language; avoid stiff audit-style wording and forced passive constructions. Preserve technical meaning and uncertainty. Follow the examples and preferences in `/workspace/tooling/thesis-voice-guide.md` when revising thesis prose.
+
+Thesis prose must describe the author's engineering work. Do not put chat/file-handoff history or dates when material was uploaded into the thesis narrative, headings or captions. Keep administrative provenance in external review records.
+
+Use concise power-electronics technical prose in the style of an APEC digest. Assume an engineering audience and omit elementary electronics or MCU tutorials. Introduce project-specific signal roles and acronyms briefly at first use, retain function-first pin naming, and distinguish board-specific assignments.
+
+After identifying the device, refer to it as the MCU in routine prose; retain model names for real comparisons or essential hardware/build identification. Keep removed paired no-load oscilloscope photographs out of the thesis.
+
+Do not drop firmware version numbers into routine prose without context. Describe the control/development stage; retain exact revision IDs only in explained history/comparison, test-identification and source/build records. Keep hardware and firmware naming separate.
+
+Use equal 30 mm body side margins for the thesis PDF; preserve the 150 mm text width and keep the text block in the same position on odd and even pages. Intentional covers and landscape technical sheets retain their layouts.
+
+Use the V2 schematic drawings for the shared power circuit in the main thesis. Keep captions and controller pin maps matched to the displayed revision; retain original V1 drawings and fitted/test history in the appendix and relevant prose.
+
+State circuit roles directly: the MCU regulates the secondary bulk supply, and the USB-C PD stage regulates the selected USB-C output voltage. Avoid unsupported independence claims and filler about distinguishing nodes throughout the document. Spell out megahertz when referring to a frequency range in prose; retain MHz with numerical values.
+
+Use direct engineering language in captions, headings, table labels and generated documentation as well as prose. Call MCU pins pins; avoid perspective disclaimers and narration about how evidence, identities or table values were organized. Explain why each design or firmware change helped through its actual function. Keep necessary measurement uncertainty concise and local instead of repeating broad defensive disclaimers.
+
+The current V2 schematic master is /workspace/thesis/Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf. Use its colour vector views in main chapters and the current V2 appendix sheets; older schematic masters remain historical source records.
+
+The project is a USB-C power supply based on a high-frequency charge-pump PFC resonant converter. Do not call it a laboratory supply or bench power supply. Laboratory describes the test setting or instruments only. Preserve the original introduction’s project framing and load-focused motivation; do not redefine the product while revising prose.
+
+The 240 W USB-PD EPR point was a question raised in feedback on the APEC digest about higher-load capability, not a project goal or development objective. Keep the actual 100 W target and 65 W minimum; mention the reviewer question once where discussing power limitations rather than repeating EPR checklists.
+
+Use natural wording for attribution. Prefer “the given measurements” or “component measurements,” “the supplied models,” and “earlier DTU work” as appropriate. Avoid “inherited” as a repeated prose label. Keep the actual source and author of supplied designs and measurements clear.
+
+Describe figures and observations directly. Do not attach repeated “does not establish/prove/demonstrate” caveats to photographs, tables, layout descriptions, or ordinary results. Remove empty defensive clauses rather than replacing them with a synonym. Keep necessary measurement limits concise and local, and state remaining work as concrete measurements or design changes.
+
+For delegated thesis prose reviews, use `/workspace/tooling/thesis-agent-voice-checklist.md`. Agents submit exact proposals for lead judgement before applying edits. The checklist includes accepted/rejected wording examples and technical facts to preserve.

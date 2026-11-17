@@ -1,0 +1,16 @@
+{
+  "monitor": {
+    "samples": 1,
+    "source": "demo",
+    "keyboardSkip": true,
+    "sessionPersists": true
+  },
+  "calculator": {
+    "nominal": "988.9kHz",
+    "invalidBlocksExport": true,
+    "validExports": true,
+    "solveModes": true,
+    "pumpValidation": true
+  },
+  "errors": []
+}

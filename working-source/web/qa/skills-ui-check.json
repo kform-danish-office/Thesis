@@ -1,0 +1,215 @@
+{
+  "checkedAt": "2026-10-24T21:47:26.905Z",
+  "skills": [
+    "Sites design guidance",
+    "Vercel full-story verification"
+  ],
+  "calculator": [
+    {
+      "case": "frequency",
+      "result": {
+        "result-capacitance": "1nF",
+        "result-frequency": "988.9kHz",
+        "result-inductance": "25.9µH",
+        "selected-result-label": "Resonant frequency · fᵣ",
+        "selected-result-value": "988.9kHz"
+      }
+    },
+    {
+      "case": "inductance",
+      "result": {
+        "result-capacitance": "1nF",
+        "result-frequency": "1000kHz",
+        "result-inductance": "8.83µH",
+        "selected-result-label": "Required discrete inductance · L",
+        "selected-result-value": "8.83µH"
+      }
+    },
+    {
+      "case": "capacitance",
+      "result": {
+        "result-capacitance": "978pF",
+        "result-frequency": "1MHz",
+        "result-inductance": "25.9µH",
+        "selected-result-label": "Required equivalent capacitance · C",
+        "selected-result-value": "978pF"
+      }
+    },
+    {
+      "case": "result anchor clear of sticky bars",
+      "position": {
+        "headingTop": 223.75,
+        "navBottom": 44,
+        "stripBottom": 140.4791717529297
+      }
+    },
+    {
+      "case": "missing C26",
+      "invalid": "true",
+      "description": "validation-capacitor-values",
+      "message": "C26 has no value in this drawing. Enter the fitted or measured equivalent capacitance.",
+      "strip": "Input required",
+      "exportsEnabled": false
+    },
+    {
+      "case": "local advanced field error",
+      "invalid": "true",
+      "message": "Series resistance must be zero or a positive number.",
+      "focus": "series-resistance"
+    },
+    {
+      "case": "normalized response",
+      "q": "3.219 / 307.2 kHz",
+      "plot": "Calculated ideal normalized series-RLC current; resonance at 988.9 kHz, series resistance 50 Ω. Not measured converter gain."
+    }
+  ],
+  "keyboard": [
+    {
+      "case": "first keyboard target",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to workspace",
+        "top": 10
+      }
+    },
+    {
+      "case": "skip link focuses workspace",
+      "focus": "main-content"
+    },
+    {
+      "case": "active section exposed",
+      "links": [
+        {
+          "current": "location",
+          "text": "Sessions 4"
+        }
+      ]
+    },
+    {
+      "case": "mobile controls shortcut focuses heading",
+      "focus": "output-heading"
+    }
+  ],
+  "styles": {
+    "monitor": [
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(88, 107, 121)",
+        "fontSize": "12px",
+        "height": 16.791667938232422,
+        "selector": ".metric-sub",
+        "contrast": 5.53
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(88, 107, 121)",
+        "fontSize": "12px",
+        "height": 18,
+        "selector": ".control-note",
+        "contrast": 5.53
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(88, 107, 121)",
+        "fontSize": "12px",
+        "height": 36,
+        "selector": "#device-save-status",
+        "contrast": 5.53
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(88, 107, 121)",
+        "fontSize": "12px",
+        "height": 17.39583396911621,
+        "selector": "#connection-detail",
+        "contrast": 5.53
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(66, 89, 104)",
+        "fontSize": "13px",
+        "height": 19.5,
+        "selector": ".field-label",
+        "contrast": 7.34
+      }
+    ],
+    "calculator": [
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(99, 119, 132)",
+        "fontSize": "12px",
+        "height": 37.1875,
+        "selector": ".input-note",
+        "contrast": 4.66
+      },
+      {
+        "background": "rgb(248, 250, 251)",
+        "color": "rgb(88, 107, 121)",
+        "fontSize": "12px",
+        "height": 134.3854217529297,
+        "selector": ".pump-note p",
+        "contrast": 5.29
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(88, 107, 121)",
+        "fontSize": "12px",
+        "height": 98.95833587646484,
+        "selector": ".source-detail",
+        "contrast": 5.53
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(128, 97, 39)",
+        "fontSize": "12px",
+        "height": 430.0416870117187,
+        "selector": ".calculation-warnings",
+        "contrast": 5.74
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(41, 70, 90)",
+        "fontSize": "16px",
+        "height": 44,
+        "selector": "#capacitor-values",
+        "contrast": 9.92
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(41, 70, 90)",
+        "fontSize": "16px",
+        "height": 44,
+        "selector": "#tank-preset",
+        "contrast": 9.92
+      }
+    ]
+  },
+  "session": {
+    "source": "demo",
+    "samples": 147,
+    "commandAckEvents": 6,
+    "exportVerified": true,
+    "reloadPersistenceVerified": true
+  },
+  "layouts": {
+    "desktop": {
+      "width": 1280,
+      "height": 900
+    },
+    "mobile": [
+      {
+        "width": 390,
+        "height": 844
+      },
+      {
+        "width": 320,
+        "height": 844
+      }
+    ],
+    "allFourNavLinksFit320": true
+  },
+  "errors": {
+    "monitor": [],
+    "calculator": []
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "seriesUnchangedByLm": true,
+  "AandBPaired": true,
+  "invalidLmFeedback": true,
+  "exportProvenance": true,
+  "presetResets": true,
+  "layout": [
+    {
+      "width": 1440,
+      "w": 1440,
+      "scroll": 1440
+    },
+    {
+      "width": 768,
+      "w": 768,
+      "scroll": 768
+    },
+    {
+      "width": 390,
+      "w": 390,
+      "scroll": 390
+    },
+    {
+      "width": 320,
+      "w": 320,
+      "scroll": 320
+    }
+  ],
+  "errors": []
+}

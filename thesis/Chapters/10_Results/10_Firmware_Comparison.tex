@@ -1,0 +1,35 @@
+\section{What Changed in the Firmware}
+\label{sec:res-fwcompare}
+
+The final controller regulates secondary-bulk voltage through PA1, classifies
+load from primary current at PA2, and controls average energy transfer through
+the MCU burst-enable pin PA10. Carrier outputs PA8/PA9 retain nominal switching
+frequency. Both acquisition timing and feedback interpretation were revised.
+
+\begin{table}[htbp]
+\centering
+\caption{Firmware changes during development.}
+\label{tab:firmware-comparison}
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.20\textwidth}L{0.33\textwidth}X@{}}
+\toprule
+Stage & Main change & Role in development\\
+\midrule
+Manual bring-up & Open-loop or manually commanded PA10 with fixed carrier & Enabled switching for low-energy hardware checks\\
+Early closed loop & Blocking acquisition and voltage/current-product experiments & Exposed unsuitable acquisition timing and incorrect interpretation of PA2 as output current\\
+DMA voltage control & Circular PA0/PA1/PA2 acquisition and PA1 bang-bang regulation & Removed blocking conversion from the active loop and selected secondary voltage as the feedback variable\\
+Final voltage control & Loaded averaged duty, \texttt{LBOOST}, no-load guarding, and optional PA0 duty cap & Controller used in the main identified \SI{5}{\volt} and \SI{20}{\volt} tests\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The current-sense pin PA2 measures half-bridge current, so multiplying its current indication by secondary voltage
+was not a suitable output-power feedback signal. The product-based control
+was replaced by secondary-voltage regulation using PA1, while PA2 was retained
+for load classification and diagnostics. Optional feed-forward from the primary-voltage input PA0 can cap
+the burst-enable duty requested at PA10 as primary voltage rises.
+
+Loaded and load-removal tests show the response of the combined controller;
+the contributions of individual changes were not measured separately. The
+requested \texttt{MAXRATE} period is \SI{20}{\micro\second}; the achieved
+period and jitter have not been measured.

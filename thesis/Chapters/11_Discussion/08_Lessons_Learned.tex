@@ -1,0 +1,28 @@
+\section{Design Lessons}
+\label{sec:disc-lessons}
+
+Correct interpretation of the half-bridge current input PA2 was essential
+to the control law. Secondary voltage multiplied by this signal does not
+represent output power; direct secondary-voltage feedback was therefore
+used, with PA2 retained for current sensing.
+
+Acquisition latency, enable-edge alignment, and minimum packet length
+must be designed with the tank, output capacitance, and sensing bandwidth.
+Separate no-load limits, holdoff, and recovery logic were needed to reduce
+charging after disconnection.
+
+The V2 input hotspot persisted after diode replacement, so the current and
+thermal paths around the bridge need further investigation. One possible
+restriction is a single-via connection between layers: narrow pad connections
+and interlayer paths can restrict current and heat flow despite a large
+copper pour.
+
+Secondary-winding heating motivated transformer optimization, but a
+replacement set was not installed. The V3 layout reduced volume by removing
+the USB-PD section, so a complete-system power-density comparison must also
+include the equivalent external output functions.
+
+Recording the board version, settings, waveforms, power readings, and
+temperatures together allows each result to be interpreted against its test
+conditions. Coupling, averaging, and firmware state are also needed when
+calculating results from captures.

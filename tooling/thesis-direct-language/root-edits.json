@@ -1,0 +1,339 @@
+[
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "\\section{Control Architecture and Signal Definitions}",
+    "after": "\\section{Control Architecture and MCU Pins}",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "The feedback inputs are the scaled primary voltage at PA0, isolated\nsecondary-bulk voltage at PA1, and primary half-bridge-current indication\nat PA2. The current signal supports load classification and optional\nprotection; it is not a measurement of connector output current. ADC\nacquisition uses circular DMA and is not synchronized to the carrier.",
+    "after": "Primary-voltage feedback is connected to MCU pin PA0, secondary-bulk\nfeedback to PA1, and half-bridge-current sensing to PA2. The current signal\nis used for load classification and optional protection. ADC sampling runs\ncontinuously through circular DMA without synchronization to the carrier.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Table~\\ref{tab:intro-controller-signals} compares the assignments on the\noriginal STM32G071 platform and the STM32F410 V2 board. Port identifiers\ndenote logical MCU signals; package-terminal numbers are given in the\nhardware pin map. The PA10 reassignment from burst enable to UART receive\nis therefore interpreted with the board revision.",
+    "after": "Table~\\ref{tab:intro-controller-signals} lists the MCU pins used on the\noriginal STM32G071 controller and the STM32F410 V2 board. The original\ncontroller uses PA10 for burst enable. On V2, PA10 is the UART receive pin,\nand PA11 provides burst enable.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "MCU signal functions before and after the V2 controller change. Input and output directions are stated from the MCU's perspective.",
+    "after": "MCU pin assignments for the original controller and V2.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "L{0.57\\textwidth}L{0.15\\textwidth}Y",
+    "after": "L{0.52\\textwidth}L{0.22\\textwidth}Y",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Signal function & G071 & F410 (V2)",
+    "after": "Function & Original controller & V2",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Primary-voltage measurement, analog input",
+    "after": "Primary-voltage feedback",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Secondary-bulk voltage feedback, analog input",
+    "after": "Secondary-bulk voltage feedback",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Primary half-bridge current indication, analog input",
+    "after": "Half-bridge current sensing",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Two fast switching commands, digital outputs",
+    "after": "Half-bridge carrier outputs",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Burst enable, digital output",
+    "after": "Burst enable output",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Serial transmit (TX), digital output",
+    "after": "UART transmit (TX)",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/10_Controller_Basics.tex",
+    "before": "Serial receive (RX), digital input",
+    "after": "UART receive (RX)",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+    "before": "V2 prototype design specifications. Timing values refer to the archived controller source; continuous performance is assessed separately.",
+    "after": "V2 design specifications.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+    "before": "primary half-bridge-current indication (PA2)",
+    "after": "primary half-bridge-current sensing (PA2)",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+    "before": "A software dead-time setting of approximately\n\\SI{60}{\\nano\\second} was reported. The input bridge continued to heat up,\nincluding during the run identified as \\SI{95}{\\watt}. These observations\nare discussed in \\cref{sec:res-v2-testing}. They show that the modified V2\nwas operated, but they do not establish a continuous output rating or a\nmeasured efficiency improvement.",
+    "after": "The software dead-time setting was approximately\n\\SI{60}{\\nano\\second}. The input bridge continued to heat up during the\ntest labelled \\SI{95}{\\watt} (\\cref{sec:res-v2-testing}). A continuous\noutput rating and an efficiency improvement were not established.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+    "before": "The V2 drawings describe the original resonant branch. The fitted tank\nchanges must therefore be stated separately when interpreting a test.\nSome component values and feedback scaling also remain unresolved in the\ndrawing, as discussed in \\cref{sec:hw-v2}. The next work is to measure the\nV2 configuration consistently, resolve the bridge heating, and use those\nresults to develop and evaluate the V3 edge-card design.",
+    "after": "The V2 drawings show the resonant branch before the external inductor was\nremoved. Some component values and feedback scales still need checking\nagainst the assembled board (\\cref{sec:hw-v2}). Further tests are needed\nto resolve the bridge heating and compare the fitted V2 converter with\nthe V3 edge-card design.",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "High-voltage intermediate DC-link voltage",
+    "after": "High-voltage DC-link voltage",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Isolated secondary-bus voltage before the output stage; voltage-control feedback",
+    "after": "Isolated secondary bulk voltage regulated by the MCU",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Downstream USB-C output voltage",
+    "after": "USB-C output voltage",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Output voltage; the circuit node is specified where used",
+    "after": "Output voltage",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Microcontroller unit; a programmable control chip",
+    "after": "Microcontroller unit",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Analog-to-digital converter; converts an input voltage to a number",
+    "after": "Analog-to-digital converter",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Direct memory access; automatic transfer of readings into memory",
+    "after": "Direct memory access",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "General-purpose input/output; programmable digital signal connections",
+    "after": "General-purpose input/output",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Power Data Object; also used in the laboratory test identifiers",
+    "after": "Power Data Object",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Pulse-width modulation; control through pulse on-time",
+    "after": "Pulse-width modulation",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "MCU port A / B / C signal names; x identifies a line, not a package terminal",
+    "after": "MCU pin names in ports A, B and C",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "MCU timer hardware block; x identifies the timer",
+    "after": "MCU timer peripheral",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Universal asynchronous receiver-transmitter; serial command/data link",
+    "after": "Universal asynchronous receiver-transmitter",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Nomenclature.tex",
+    "before": "Transmit / receive directions of a communication signal",
+    "after": "Transmit / receive",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+    "before": "The starting point is the charge-pump conversion principle and analytical design method developed by Ammar et al. \\cite{ammar2020chargepump,ammar2021led}. The LTspice files and planar-magnetics designs also came from that work. The operating prototypes were developed from these supplied designs. Their conversion principle and fitted magnetic assemblies came from the earlier work; a replacement planar-magnetic set was not installed.",
+    "after": "The charge-pump conversion principle and analytical design method were developed by Ammar et al. \\cite{ammar2020chargepump,ammar2021led}. The LTspice files and planar-magnetics designs came from that work. The supplied magnetic assemblies were used in the prototypes; a replacement set was not installed.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+    "before": "The assembled supply was tested to check its behavior in practice. Output voltage, load response, input power quality, conversion loss, and surface temperature were assessed from the measurements at the stated operating points. The schematics, measurement tables, and waveform plots show the circuit and conditions used for those comparisons.",
+    "after": "Output voltage, load response, input power quality, and surface temperature were measured on the assembled supply. Input and output power readings were used to estimate conversion loss.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+    "before": "The project contributions are the USB-C adaptation, hardware integration, embedded controller, and experimental evaluation. The converter principle and original magnetic design remain attributed to the earlier work.\n\n",
+    "after": "",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "before": "The revised plan identifies the integrated controller and its ported firmware as the V2 development described here. It reports an earlier V2 result near",
+    "after": "The revised plan reports an earlier V2 result near",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "before": "That measured result is kept separate from the reported V2 point and the later tank and thermal observations.",
+    "after": "The matched electrical results were obtained on V1.0; the later V2 tests covered tank changes and heating.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "before": "Measurements are reported with the available input conditions, output setting, load, power boundary, and duration. Missing details are identified. A short electrical capture or thermal image records operation at one point in the test. A continuous rating requires the converter to sustain that output under defined thermal conditions.",
+    "after": "The available tests show operation at specific loads. They do not establish a continuous power rating.",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Approval.tex",
+    "before": "The matched measurements from the first prototype, software checks, and preliminary V2 bench observations are reported with their own configurations.",
+    "after": "",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "before": "The nominal \\SI{1}{\\mega\\hertz} carrier was retained, while average transfer was regulated through gallium-nitride (GaN) half-bridge burst enable. Circular direct memory access (DMA) provided nonblocking feedback acquisition. Startup precharge and separate loaded/no-load duty limits were implemented. A downstream output stage provided the tested",
+    "after": "The gallium-nitride (GaN) half bridge operated at a nominal \\SI{1}{\\mega\\hertz}. Average power was controlled by enabling bursts of switching cycles. A circular direct memory access (DMA) buffer supplied the feedback samples. Startup precharge and separate duty limits for loaded and no-load operation were implemented. The USB-C PD stage provided the tested",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "before": "Suspected winding and input-path limitations were not isolated quantitatively.",
+    "after": "The suspected winding and input-path limitations were not confirmed by separate measurements.",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "before": "A complete-system density comparison must include the external regulated USB-PD stage.",
+    "after": "The external regulated USB-PD stage must be included when comparing the volume of complete supplies.",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "Principal circuit functions.",
+    "after": "Main circuits and MCU pins on the original prototype.",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "Function & Hardware reference",
+    "after": "Function & Component or MCU pins",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "Selected schematic changes from V1.0 to V1.1. The table lists drawing changes; it does not identify every part replaced on the tested board.",
+    "after": "Schematic changes from V1.0 to V1.1.",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "Original design reference reproduced below",
+    "after": "Original circuit drawing",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "Initial circuit reference for the V2 design",
+    "after": "Earlier V2 circuit drawing",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "The vector pages keep component labels readable when enlarged. ",
+    "after": "",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "Earlier V2 schematic, sheet 2: USB-C output stage. Values are those in the drawing.",
+    "after": "Earlier V2 schematic, sheet 2: USB-C output stage.",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "Earlier V2 schematic, sheet 3: Power stage, local supplies, and sensing. Unspecified resonant parts and divider labels require confirmation as explained in \\cref{sec:hw-v2}.",
+    "after": "Earlier V2 schematic, sheet 3: Power stage, local supplies, and sensing (\\cref{sec:hw-v2}).",
+    "occurrences": 1
+  },
+  {
+    "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+    "before": "Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf",
+    "after": "Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf",
+    "occurrences": 4
+  },
+  {
+    "path": "Chapters/01_Introduction/chapter.tex",
+    "before": "A charge-pump PFC resonant converter was adapted to a digitally controlled USB-C laboratory supply using inherited planar magnetics. V1 established the power stage and burst-control implementation. Control, sensing, and interface functions were integrated in V2, where lower local heating was observed after tank and timing changes, without establishing higher sustained output. The V3 edge-card design addressed occupied volume, while the remaining winding and input-path losses motivated further magnetic and thermal development.",
+    "after": "A digitally controlled USB-C laboratory supply was developed from a charge-pump PFC resonant converter and supplied planar magnetics. The first prototype, V1, was used for circuit bring-up and control development. V2 integrated the MCU and associated circuitry on the converter PCB. The V3 edge-card layout was then developed to reduce the converter volume.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+    "before": "The available tests show operation at specific loads. They do not establish a continuous power rating.",
+    "after": "Long-duration thermal testing is still needed to determine the continuous output rating.",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "before": "No-load and load-removal operation were recorded.",
+    "after": "The tests included no-load operation and load removal.",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "before": "The suspected winding and input-path limitations were not confirmed by separate measurements.",
+    "after": "Winding loss and the input current path remained possible limits on output power.",
+    "occurrences": 1
+  },
+  {
+    "path": "Frontmatter/Abstract.tex",
+    "before": "The \\SI{100}{\\watt} continuous target and \\SI{65}{\\watt} continuous minimum require defined-duration thermal and stability validation.",
+    "after": "Operation at the \\SI{100}{\\watt} continuous target and \\SI{65}{\\watt} minimum still needs long-duration thermal and stability tests.",
+    "occurrences": 1
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+    "before": "p{0.15\\textwidth}p{0.39\\textwidth}X",
+    "after": "L{0.17\\textwidth}L{0.37\\textwidth}Y",
+    "occurrences": 1,
+    "reason": "Keep stage names and descriptions left-aligned without stretched word spacing."
+  }
+]

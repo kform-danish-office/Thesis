@@ -1,0 +1,562 @@
+--- before/Frontmatter/Approval.tex
++++ current/Frontmatter/Approval.tex
+@@ -3,11 +3,11 @@
+ 
+ This thesis was prepared at \department, Technical University of Denmark, for the \degreeprogramme. A USB-C laboratory power supply was built around a charge-pump PFC resonant converter. Its controller was developed for operation with a detachable load.
+ 
+-The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the STM32 firmware was developed. The prototype was then brought up and tested. The matched measurements were obtained from the manufactured V1.0 PCB with rework. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Later schematic changes are documented in V1.1. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
++The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the STM32 firmware was developed. The first prototype was brought up and tested on the manufactured V1.0 PCB with rework. Its later drawing corrections were documented in V1.1. Development then continued with the integrated V2 F410 board. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
+ 
+ The isolated secondary bulk bus is regulated by the controller, while the downstream USB-C stage sets the connector voltage. The feedback and connector voltages therefore refer to different circuit nodes. They are kept separate when describing the hardware, firmware, and measurements.
+ 
+-The later V2 F410 implementation, browser logging, and software tools are also described, with the full source in the appendices. Completed software checks, measurements from the earlier prototype, preliminary powered V2 observations, and remaining tests are reported with their respective configurations.
++In V2, the controller was moved onto a four-layer converter PCB. The F410 control connections, power circuit, isolated sensing, and downstream USB-C stage are described in \cref{sec:hw-v2}. The new schematic and PCB print set are included in \cref{sec:app-v2-oct27}. Browser logging and software tools were developed alongside the controller, with the full source in the appendices. The matched measurements from the first prototype, software checks, and preliminary V2 bench observations are reported with their own configurations.
+ 
+ The next stage is set out in the revised July--October 2026 plan: the reported V2 baseline is to be repeated, the power limit identified, controlled changes tested, and a V3 edge-card design assessed. In Appendix~\ref{app:revised-plan}, each planned milestone is linked to the relevant technical chapters. The completed hardware, design changes, test results, and remaining work are described in this thesis.
+ 
+--- before/Frontmatter/Abstract.tex
++++ current/Frontmatter/Abstract.tex
+@@ -7,6 +7,6 @@
+ 
+ With an AC input recorded as \SI{240}{\volt}, \SI{50}{\hertz}, matched voltage and current readings at the \SI{20}{\volt} setting gave output powers of \SIrange{73.97}{79.89}{\watt} at the load. Average output voltage was \SIrange{19.973}{19.991}{\volt}, with recorded peak-to-peak ripple of \SIrange{0.416}{0.452}{\volt}. Logged power factor was 0.97--0.99 and current total harmonic distortion was \SIrange{2.23}{3.98}{\percent}. An initial efficiency estimate of \SIrange{76.5}{77.1}{\percent} was calculated from the paired input and output measurements. Uncertainty in their timing and calibration limits the accuracy of this estimate. Controller operation was recorded during the tested no-load and load-removal events. A thermal image labeled \SI{20}{\volt}, \SI{4}{\ampere} showed a maximum surface temperature of \SI{90.4}{\celsius}. Further loss measurements, improved heat removal, and protection-timing tests are still needed.
+ 
+-The V2 STM32F410 implementation, PWR-2.0.1 firmware, and browser control and logging tools are also documented. The full controller and supporting source are included in the appendices. The revised July--October plan calls for V2 retesting, investigation of the power shortfall, and a V3 edge-card design. Power density is to be compared using the same method for both revisions. Preliminary powered V2 observations are reported in \cref{sec:res-v2-testing}. Matched input--output measurements, thermal-endurance testing, and the V3 comparison remain to be completed.
++Development continued with V2, in which the STM32F410 controller was integrated on a four-layer PCB with the GaN power stage, isolated feedback, and USB-C output circuit. The V2 schematics and PCB prints, archived PWR-2.0.1 controller, and browser tools are included in the thesis. Preliminary operation was reported with a leakage-only resonant tank. Lower half-bridge heating was observed, while input-bridge heating remained unresolved (\cref{sec:res-v2-testing}). These observations are separate from the matched G071 measurements. V2 input--output measurements and thermal-endurance tests are still needed before the planned V3 comparison.
+ 
+ Digitally controlled operation at approximately \SI{80}{\watt} was demonstrated. In the revised plan, a \SI{100}{\watt} continuous target and a \SI{65}{\watt} continuous minimum are retained. Before either can be claimed as a continuous rating, thermal and stability tests must be run for a defined duration. Full-range zero-voltage switching, USB-PD conformance, safety, and EMC also need dedicated verification. The next step is to identify what limits sustained output, measure the effect of each controlled change, and use those findings to guide V3.
+--- before/Chapters/01_Introduction/04_Research_Questions.tex
++++ current/Chapters/01_Introduction/04_Research_Questions.tex
+@@ -5,7 +5,7 @@
+ Five questions connect the implementation choices to the tests and remaining work:
+ \begin{enumerate}[label=\textbf{RQ\arabic*:}]
+ \item \textbf{Implementation.} Can the inherited charge-pump resonant circuit be built with the selected GaN half bridge, supplied planar magnetics, isolated sensing, auxiliary supplies, and USB-C output section?
+-\item \textbf{Control.} How is secondary voltage controlled by the final firmware during startup, loaded operation, load attachment, load removal, and no load?
++\item \textbf{Control.} How is secondary voltage controlled during startup, loaded operation, load attachment, load removal, and no load, and how is that control carried from the first prototype to V2?
+ \item \textbf{Performance.} What output power, voltage regulation, input power quality, efficiency, switching behavior, and temperature are observed in the tests? How do those results compare with the \SI{65}{\watt} continuous minimum, the earlier \SI{75}{\watt} validation milestone, and the \SI{100}{\watt} continuous target?
+ \item \textbf{Magnetic integration.} How do the supplied inductor and transformer affect the connections, resonant design, mounting, insulation spacing, and thermal arrangement?
+ \item \textbf{Development limits.} What still needs to be measured or improved before the prototype can be rated as a USB-C power supply, and which V2/V3 objectives in the revised plan remain incomplete?
+--- before/Chapters/01_Introduction/05_Contributions_Attribution.tex
++++ current/Chapters/01_Introduction/05_Contributions_Attribution.tex
+@@ -5,6 +5,8 @@
+ 
+ The PCB was designed and assembled for this project. The supplied inductor and transformer were integrated, and the power, auxiliary, sensing, and output-interface circuits were implemented. The STM32G071 firmware was developed in stages, from open-loop bring-up to the DMA-based PWR-1.9.20 controller, with startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition.
+ 
++The controller was then ported to the STM32F410CBU6 on V2. The revised board integrates the control, isolated feedback, local supplies, and USB-C output with the power stage. Browser control and logging were added, and the resonant tank was modified during powered testing. The new schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
++
+ The assembled supply was tested to check its behavior in practice. Output voltage, load response, input power quality, conversion loss, and surface temperature were assessed from the measurements at the stated operating points. The schematics, measurement tables, and waveform plots show the circuit and conditions used for those comparisons.
+ 
+ The project contributions are the USB-C adaptation, hardware integration, embedded controller, and experimental evaluation. The converter principle and original magnetic design remain attributed to the earlier work.--- before/Chapters/01_Introduction/07_Thesis_Structure.tex
++++ current/Chapters/01_Introduction/07_Thesis_Structure.tex
+@@ -3,6 +3,6 @@
+ 
+ The thesis follows the path from the inherited circuit to the tested supply. Chapter~\ref{ch:background} explains the conversion principle and what changes with a USB-C load. Chapter~\ref{ch:requirements} turns that application into targets, operating states, and an architecture. Chapter~\ref{ch:analysis} gives the component calculations and explains the interactions between the input and output paths. Chapter~\ref{ch:simulation} then identifies what the inherited models can explain and where a model of the final prototype is still needed.
+ 
+-Chapters~\ref{ch:magnetics} and \ref{ch:hardware} show how the supplied magnetic components were integrated and the converter was assembled. Chapter~\ref{ch:control} follows the controller development and explains the operating states used in testing. Chapter~\ref{ch:methods} defines the test setup and measurement methods.
++Chapters~\ref{ch:magnetics} and \ref{ch:hardware} show how the supplied magnetic components were integrated and how the hardware developed from the first prototype to V2. Chapter~\ref{ch:control} follows the G071 controller development, the F410 port, and the operating states used in testing. Chapter~\ref{ch:methods} defines the test setup and measurement methods.
+ 
+-Chapter~\ref{ch:results} brings the implementation and measurements together. Chapter~\ref{ch:discussion} examines the performance limits and the next development steps, and Chapter~\ref{ch:conclusion} answers the research questions. The appendices provide the equations, schematics, firmware documentation, and measurement tables needed to follow the work.+Chapter~\ref{ch:results} brings the implementation and measurements together. Chapter~\ref{ch:discussion} examines the performance limits and the next development steps, and Chapter~\ref{ch:conclusion} answers the research questions. The appendices provide the equations, complete schematics, V2 PCB prints, firmware documentation, and measurement tables needed to follow the work.--- before/Chapters/01_Introduction/chapter.tex
++++ current/Chapters/01_Introduction/chapter.tex
+@@ -1,11 +1,12 @@
+ \chapter{Introduction}
+ \label{ch:introduction}
+ 
+-The starting point was a DTU charge-pump converter and supplied planar magnetics. The hardware and controller were then built around those parts for a USB-C laboratory supply. The main change was the load. It could be absent at startup, draw different amounts of power, or be disconnected while energy remained in the converter. The circuit, burst controller, and tests were developed around these conditions.
++The starting point was a DTU charge-pump converter and supplied planar magnetics. The hardware and controller were developed around those parts for a USB-C laboratory supply. The first prototype was brought up with an STM32G071 controller. The control and interface functions were then integrated into the F410-based V2 board. In both stages, the load could be absent at startup, draw different amounts of power, or be disconnected while energy remained in the converter. The circuit, burst controller, and tests were developed around these conditions.
+ 
+ \input{Chapters/01_Introduction/01_Motivation}
+ \input{Chapters/01_Introduction/02_Problem_Statement}
+ \input{Chapters/01_Introduction/03_Aim_Objectives}
++\input{Chapters/01_Introduction/08_V2_Prototype}
+ \input{Chapters/01_Introduction/04_Research_Questions}
+ \input{Chapters/01_Introduction/05_Contributions_Attribution}
+ \input{Chapters/01_Introduction/06_Scope_Limitations}
+--- before/Chapters/01_Introduction/03_Aim_Objectives.tex
++++ current/Chapters/01_Introduction/03_Aim_Objectives.tex
+@@ -15,4 +15,4 @@
+ 
+ The component and control requirements are established through analysis. The hardware and firmware implementation is then described. The tests show how the assembled supply behaves and where changes are needed. A calculated operating point alone does not establish a rating.
+ 
+-The revised plan carries this work into V2 evaluation and a V3 edge-card design \cite{projectOctoberPlan}. The next electrical step is to repeat the reported \SI{85}{\watt} V2 operating point and explain the \SI{15}{\watt} output shortfall to the \SI{100}{\watt} target before selecting converter changes. The plan also calls for fixed-PDO and PPS tests, thermal and stability tests of defined duration, and a V2--V3 power-density comparison using the same definition of assembly volume. Section~\ref{sec:revised-plan-criteria} sets out these criteria and their current status.
++The revised plan carries this work into V2 evaluation and a V3 edge-card design \cite{projectOctoberPlan}. It calls for the reported \SI{85}{\watt} V2 operating point to be repeated and the \SI{15}{\watt} shortfall to the \SI{100}{\watt} target to be investigated. V2 has since been operated with a modified resonant tank, as described in \cref{sec:res-v2-testing}. Those preliminary observations still need matched power and thermal measurements. The plan also calls for fixed-PDO and PPS tests, thermal and stability tests of defined duration, and a V2--V3 power-density comparison using the same definition of assembly volume. Section~\ref{sec:revised-plan-criteria} sets out these criteria and their current status.
+--- before/Chapters/01_Introduction/06_Scope_Limitations.tex
++++ current/Chapters/01_Introduction/06_Scope_Limitations.tex
+@@ -1,9 +1,9 @@
+ \section{What This Thesis Covers}
+ \label{sec:intro-scope}
+ 
+-The implementation and tests center on the open-frame laboratory prototype. The manufactured V1.0 board was tested after bring-up modifications. Later corrections and design changes appear in schematic V1.1. The hardware chapter separates the fitted circuit from that later drawing.
++The thesis covers the development from the first open-frame laboratory prototype to the integrated V2 board. The manufactured V1.0 board was tested after bring-up modifications, and later corrections were recorded in schematic V1.1. The F410-based V2 design and its preliminary powered tests form the next stage. The hardware chapter identifies the drawing and fitted configuration used at each stage.
+ 
+-The revised plan identifies the F410 controller and PWR-2 firmware as the V2 development described here. It reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. This is a separate result. Section~\ref{sec:revised-plan-criteria} also tracks the planned V3 edge-card design, its release checks, and the matched V2--V3 comparison.
++The revised plan identifies the F410 controller and PWR-2 firmware as the V2 development described here. It reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. That measured result is kept separate from the reported V2 point and the later tank and thermal observations. Section~\ref{sec:revised-plan-criteria} also tracks the planned V3 edge-card design, its release checks, and the matched V2--V3 comparison.
+ 
+ The output section was tested electrically at fixed settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}. PPS characterization remains part of the revised plan. USB-IF protocol and interoperability tests, product-safety qualification, surge and ESD qualification, conducted and radiated emissions tests, and long-duration reliability tests remain outside the completed test set.
+ 
+--- before/Chapters/01_Introduction/01_Motivation.tex
++++ current/Chapters/01_Introduction/01_Motivation.tex
+@@ -9,4 +9,4 @@
+ 
+ The supplied planar inductor and transformer set the starting point. Their PCB windings provide a low profile. The board had to accommodate their footprint, winding connections, insulation spacing, and mounting, while the resonant operating point had to match their electrical parameters.
+ 
+-An LMG2652 GaN half bridge, an STM32G071 controller, and the USB-C output section were added around these parts. Average power is controlled by enabling groups of fixed-frequency switching cycles. The complete supply allowed the inherited conversion principle to be tested with a detachable, variable load.+An LMG2652 GaN half bridge, an STM32G071 controller, and the USB-C output section were added around these parts in the first prototype. Average power was controlled by enabling groups of fixed-frequency switching cycles. The same approach was carried into V2, with the controller integrated onto the converter PCB. This allowed the inherited conversion principle to be tested with a detachable, variable load and then developed into a more integrated assembly.--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ current/Chapters/12_Conclusion/03_Contributions.tex
+@@ -13,12 +13,16 @@
+ interpretation was corrected so that the control law matched the installed
+ hardware.
+ 
+-For the later V2 work, the F410 port, board-specific timer and ADC mapping,
+-flash settings journal, and PWR-2.0.1 browser commands and logging were
+-implemented. The complete firmware and supporting software are included
+-with the thesis. The tools have been checked in software. Preliminary
+-powered V2 observations are reported in \cref{sec:res-v2-testing}; matched
+-input--output measurements and thermal-endurance testing are still needed.
++For V2, the F410 controller was integrated into the converter-board
++design. Its timer and ADC assignments were adapted, and the flash
++settings journal and PWR-2.0.1 browser commands and logging were
++implemented. The four-layer PCB and circuit are documented in the new
++print set. The complete archived firmware and supporting software are
++included with the thesis. The tools have been checked in software.
++Preliminary powered V2 observations are reported in
++\cref{sec:res-v2-testing}; the firmware version used for those bench
++observations was not recorded. Matched input--output measurements and
++thermal-endurance testing are still needed.
+ 
+ The output settings, high-power operation, input-current quality,
+ initial efficiency estimates, load-removal response, no-load operation,
+--- before/Chapters/12_Conclusion/02_Research_Questions.tex
++++ current/Chapters/12_Conclusion/02_Research_Questions.tex
+@@ -7,6 +7,10 @@
+ isolated resonant path, supplied planar magnetics, downstream output stage,
+ sensing, and digital control. V1.1 is the later corrected schematic
+ revision. No separate board was manufactured and tested for that revision.
++The later V2 design integrates the F410 controller, GaN stage, sensing,
++auxiliaries, and USB-C circuit on a four-layer PCB. A V2 prototype was
++also operated with the modified leakage-only tank. Its preliminary bench
++observations are reported separately in \cref{sec:res-v2-testing}.
+ 
+ \paragraph{RQ2: Control of loaded and unloaded operation.}
+ Fixed-carrier burst control was used to adjust average energy transfer with
+@@ -15,11 +19,14 @@
+ at startup before the isolated sensing supply is powered. Under load, energy transfer
+ is adjusted through duty. Further charging
+ after removal is reduced by no-load limits and soft overvoltage holdoff.
+-Loaded, no-load, and load-removal behavior was captured. Startup timing
+-and the full worst-case transient range still need synchronized event tests.
++Loaded, no-load, and load-removal behavior was captured on the G071
++assembly. The control law was retained in the F410 port, with the carrier,
++enable, ADC/DMA, and UART assignments adapted to the new MCU. V2 still
++needs its own matched transient records. Startup timing and the full
++worst-case transient range still need synchronized event tests.
+ 
+ \paragraph{RQ3: Measured performance.}
+-At \SI{20}{\volt}, output powers of \SIrange{73.97}{79.89}{\watt} were
++For the V1.0/G071 prototype, at \SI{20}{\volt}, output powers of \SIrange{73.97}{79.89}{\watt} were
+ calculated from matched measurements, including operating points at and above
+ \SI{75}{\watt}. Average VBUS remains within about
+ \SI{0.14}{\percent} of \SI{20}{\volt}; logged ripple is
+@@ -38,6 +45,7 @@
+ of this thesis. Fields and windings were not redesigned.
+ 
+ \paragraph{RQ5: Further development.}
++V2 is operational, but sustained input-bridge heating remains unresolved.
+ The next design decisions require measurements of stage losses,
+ stabilized component temperatures, protection and load-event timing,
+ installed magnetic parameters, and supported fixed-PDO and PPS behavior.
+--- before/Chapters/12_Conclusion/chapter.tex
++++ current/Chapters/12_Conclusion/chapter.tex
+@@ -3,8 +3,10 @@
+ 
+ The inherited converter was built into a working laboratory supply with
+ a detachable output. The controller was developed around the prototype's
+-sensing and energy limits. The completed integration is summarized here, together with the remaining
+-continuous-power tests, protection checks, and work on later revisions.
++sensing and energy limits. Development progressed from the G071 test
++platform to the integrated F410 V2 board. The measured first-prototype
++results and preliminary V2 operation are summarized here, together with
++the thermal, protection, and continuous-power tests still needed.
+ 
+ \input{Chapters/12_Conclusion/01_Project_Summary}
+ \input{Chapters/12_Conclusion/02_Research_Questions}
+--- before/Chapters/12_Conclusion/01_Project_Summary.tex
++++ current/Chapters/12_Conclusion/01_Project_Summary.tex
+@@ -22,6 +22,18 @@
+ measurements and sustained-operation tests. Ripple and protection timing
+ also need to be checked.
+ 
++V2 moved the STM32F410 controller onto a four-layer PCB with the
++LMG2652 power stage, isolated sensing, and downstream MPQ4242 USB-C
++circuit. Its schematic and PCB print set are included in
++\cref{sec:app-v2-oct27}. In the later bench tests, the external series
++inductor was removed and the tank was changed to use transformer leakage
++with approximately \SI{1.66}{\nano\farad}. Lower half-bridge heating
++was reported after the tank and timing changes, but the input bridge
++continued to heat up. The thermal image was identified as a
++\SI{95}{\watt} run; it does not establish a continuous rating. These
++observations describe a separate V2 configuration, not the matched G071
++measurements above.
++
+ The revised plan keeps \SI{100}{\watt} continuous as the target and
+ \SI{65}{\watt} continuous as the minimum \cite{projectOctoberPlan}.
+ A stabilized run of defined duration is still needed, including at the
+--- before/Chapters/12_Conclusion/04_Future_Work.tex
++++ current/Chapters/12_Conclusion/04_Future_Work.tex
+@@ -1,5 +1,13 @@
+ \section{Future Work}
+ \label{sec:concl-future}
++
++The immediate V2 task is to investigate the input-bridge heating under
++repeatable conditions. The fitted diodes, resonant tank, sensing scales,
++firmware, and timing settings should be recorded before comparison with
++the new drawings. The effect of wider current paths, more copper for
++heat spreading, or diode relocation still needs to be measured.
++Synchronized switching waveforms are also needed to check the inferred
++ZVS behavior.
+ 
+ The original files for the approximately \SI{85}{\watt} V2 result
+ reported in the revised plan should first be recovered. The board and
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ current/Chapters/07_Hardware/16_V2_F410.tex
+@@ -1,9 +1,40 @@
+ \section{V2 Hardware and the F410 Controller}
+ \label{sec:hw-v2}
+ 
+-V2 development continued with an STM32F410CBU6 controller \cite{ststm32f410ds}. This is the V2 prototype named in the October project plan. The circuit source is the four-sheet Altium export \texttt{Schematic PDF\_[No Variations] (12).pdf}, created on October 18, 2026 and included in Appendix~\ref{app:hardware}. V2 names the hardware generation; \texttt{(12)} identifies only the exported file. The title blocks give no circuit revision. This V2 hardware is separate from the earlier controller stage called V2 in \cref{ch:control}, which marked the move to DMA acquisition.
++The V2 power board was developed with an STM32F410CBU6 controller \cite{ststm32f410ds}. This is the V2 prototype named in the October project plan. The latest circuit documentation is the four-sheet Altium schematic exported on October 27, 2026, supplied with a 31-page PCB print set. Both are reproduced in Section~\ref{sec:app-v2-oct27}. The earlier October 18 export is retained in Appendix~\ref{app:hardware}. The new drawing groups the circuit functions more clearly; it does not assign a new circuit revision or resolve every unspecified part value. This V2 hardware is separate from the earlier controller stage called V2 in \cref{ch:control}, which marked the move to DMA acquisition.
+ 
+ The F410 port uses the G071's fixed \SI{1}{\mega\hertz} carrier and enable-based control. In PWR-2.0.0, the peripherals were changed to match the MCU and drawing. In PWR-2.0.1, browser telemetry and commands were added. The same software can be compiled for either MCU. The selected target, assembly, and firmware version must be stated for each test.
++
++\subsection{V2 PCB and Physical Integration}
++
++The supplied PCB prints document four copper layers: Top Layer, Int1
++(GND), Int2 (PWR), and Bottom Layer. Components are placed on both sides.
++The input and high-voltage power circuitry occupy one end of the board,
++the planar-magnetic connections occupy the central region, and the USB-C
++output is at the opposite end. The supplied design views show the planar
++magnetic boards mounted upright. The controller, sensing, local supplies,
++and external resonant inductor are also distributed across the two sides.
++Figure~\ref{fig:v2-pcb-layout-overview} shows the top and bottom copper prints.
++The complete layer, assembly, mask, and drill prints are included with the
++new schematic in Section~\ref{sec:app-v2-oct27}.
++
++\begin{figure}[p]
++\centering
++\includegraphics[page=1,width=\linewidth,height=0.33\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++
++\vspace{0.8em}
++\includegraphics[page=4,width=\linewidth,height=0.33\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 top copper (upper) and bottom copper (lower), from pages 1 and 4 of the October 27 PCB export. These are layout prints, not photographs of a tested configuration. The bottom print uses the source document's common projection.}
++\label{fig:v2-pcb-layout-overview}
++\end{figure}
++\FloatBarrier
++
++The four-layer layout is a documented design specification. The finished
++board dimensions, assembly height, copper weights, and layer thicknesses
++are not stated in this print set. The PDF page size is not the board size,
++and the earlier V1.0 outline cannot be used to calculate V2 power density.
++The printed L4 footprint also describes the original design; it does not
++show whether the inductor was fitted during the later leakage-only test.
+ 
+ \subsection{Controller Connections and Timing}
+ 
+@@ -35,7 +66,7 @@
+ 
+ \subsection{Power Circuit, Sensing, and Local Supplies}
+ 
+-Power sheet 3 includes the LMG2652RFBR, AMC0330 isolated feedback, BAC1S12SC bias supply, and two LMR54410DBVR regulators. The primary regulator supplies \texttt{MCU\_3\_3V}; the secondary supplies \texttt{SEC\_3\_3V}. C29 is specified as \SI{1}{\micro\farad} at AUX and C30 as \SI{22}{\nano\farad} at bootstrap. The drawing also includes CAP300DG discharge, the \SI{100}{\micro\henry} L2 input inductor, three \SI{10}{\nano\farad} capacitors C21--C23, the \SI{2}{\nano\farad} C24 pump capacitor, and the \SI{10}{\micro\farad} C25 link capacitor. The fitted parts must be confirmed on the assembled V2 before test results are interpreted.
++Power sheet 3 includes the LMG2652RFBR GaN half bridge, AMC0330 isolated feedback, BAC1S12SC bias supply, and two LMR54410DBVR regulators. D4, D5, D9, and D10 form the input bridge; D6--D8 form the pump diode network. All seven are labeled S4D02120T in the drawing. C25 is connected across the pumped HVVCC link, downstream of the input bridge. The primary regulator supplies \texttt{MCU\_3\_3V}; the secondary supplies \texttt{SEC\_3\_3V}. C29 is specified as \SI{1}{\micro\farad} at AUX and C30 as \SI{22}{\nano\farad} at bootstrap. The drawing also includes CAP300DG discharge, the \SI{100}{\micro\henry} L2 input inductor, three \SI{10}{\nano\farad} capacitors C21--C23, the \SI{2}{\nano\farad} C24 pump capacitor, and the \SI{10}{\micro\farad} C25 link capacitor. The fitted parts must be confirmed on the assembled V2 before test results are interpreted.
+ 
+ In the resonant branch, L4 is labeled SER1512-103MED, with a nominal value of \SI{10}{\micro\henry}, but complete values or part definitions are missing for L3, T1, and C26. The external series inductor was reported at approximately \SI{9.4}{\micro\henry} in the preliminary powered tests (\cref{sec:res-v2-testing}). It has not been confirmed whether this was the component fitted at L4. The final V1.0 arrangement with two \SI{4.7}{\micro\henry} series inductors does not establish the missing V2 values. The installed branch and transformer must be identified before calculating resonance or comparing switching waveforms.
+ 
+@@ -50,4 +81,4 @@
+ 
+ The October plan starts from a reported V2 point near \SI{85}{\watt} toward a \SI{100}{\watt} target \cite{projectOctoberPlan}. The source and PDF are under \sourcefile{Data/project_records}. Repeating that point requires the V2 assembly, input power, output voltage/current, temperature, duration, and firmware settings together. The supplied records do not include these details together. The reported \SI{85}{\watt} remains a point to reconstruct and is not included in the measured curves.
+ 
+-The matched tests in \cref{ch:results} reached \SI{79.89}{\watt} on the modified V1.0 assembly. These provide the earlier converter baseline. Preliminary powered V2 observations from the F410 design are reported in \cref{sec:res-v2-testing}; matched input--output measurements and thermal-endurance testing are still needed. The V1.0 photographs and \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} outline cannot be used as V2 dimensions. The V2 drawing and port describe the circuit and software. The fitted configuration and assembly dimensions still need to be recorded before power density can be calculated. Both the reported \SI{85}{\watt} and matched \SI{79.89}{\watt} still need defined-duration tests before the \SI{100}{\watt} continuous target can be assessed.
++The matched tests in \cref{ch:results} reached \SI{79.89}{\watt} on the modified V1.0 assembly. These provide the earlier converter baseline. Preliminary powered V2 observations from the F410 design are reported in \cref{sec:res-v2-testing}; matched input--output measurements and thermal-endurance testing are still needed. The V1.0 photographs and \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre} outline cannot be used as V2 dimensions. The October 27 schematic and PCB prints document the V2 circuit and four-layer layout; the controller port describes its software. The fitted configuration and assembly dimensions still need to be recorded before power density can be calculated. Both the reported \SI{85}{\watt} and matched \SI{79.89}{\watt} still need defined-duration tests before the \SI{100}{\watt} continuous target can be assessed.
+--- before/Chapters/07_Hardware/01_Prototype_Overview.tex
++++ current/Chapters/07_Hardware/01_Prototype_Overview.tex
+@@ -20,6 +20,8 @@
+ \end{tabularx}
+ \end{table}
+ 
++V2 continued this work with the F410 controller integrated on the converter board. The October 27 schematic and four-layer PCB print set document that design in \cref{sec:hw-v2}. Preliminary powered V2 tests, including the leakage-only tank change and remaining input-bridge heating, are described in \cref{sec:res-v2-testing}. The earlier matched measurements remain associated with the modified V1.0 board.
++
+ Before fabrication, the board passed the configured Altium design-rule check. During bring-up, insulation was checked at \SI{1000}{\volt} for \SI{30}{\second} with the available handheld tester. This was a laboratory check; standardized safety qualification requires a defined test procedure and conditions.
+ 
+ \begin{figure}[H]
+--- before/Chapters/11_Discussion/09_Future_Improvements.tex
++++ current/Chapters/11_Discussion/09_Future_Improvements.tex
+@@ -1,5 +1,13 @@
+ \section{Priorities for the Next Prototype}
+ \label{sec:disc-future}
++
++The powered V2 trials established operation with the leakage-only
++resonant tank, but input-bridge heating remained unresolved. The next
++V2 measurements should identify the fitted configuration and track
++component temperatures over time while input and output power are
++measured together. The new schematic and four-layer PCB prints document
++the design (\cref{sec:app-v2-oct27}); they do not establish the fitted
++values or thermal performance.
+ 
+ The records for the approximately \SI{85}{\watt} V2 run reported in
+ the revised plan \cite{projectOctoberPlan} should first be recovered and
+--- before/Backmatter/Appendices/B_Hardware_Documentation.tex
++++ current/Backmatter/Appendices/B_Hardware_Documentation.tex
+@@ -16,7 +16,8 @@
+ Manufactured V1.0 PCB & Board used for prototype bring-up and final tests\\
+ Schematic V1.0 & Original design reference reproduced below\\
+ Schematic V1.1 & Later corrections and part changes; these were not all confirmed on the tested board\\
+-V2 F410 schematic & Four-sheet export created October 18, 2026; project V2 name, without an assigned drawing revision in its title blocks\\
++Earlier V2 F410 schematic & Four-sheet export created October 18, 2026; retained as an earlier circuit reference\\
++Current V2 documentation & October 27 four-sheet schematic and 31-page PCB print set; reproduced in Section~\ref{sec:app-v2-oct27}\\
+ Final resonant inductors & Two Wurth 7443640470B \SI{4.7}{\micro\henry} inductors in series\\
+ Controller & STM32G071RBT6 and the final PWR-1.9.20 firmware family\\
+ Planar magnetics & Supplied inductor and transformer assemblies from earlier DTU work\\
+@@ -83,7 +84,7 @@
+ \FloatBarrier
+ 
+ \section{Complete Schematics}
+-The three four-sheet schematic sets cover V1.0, V1.1, and the V2 F410 implementation in \cref{sec:hw-v2}. The vector pages keep component labels readable when enlarged. V1.0 was used for the manufactured test board; V1.1 contains the later changes listed above. The V2 export was originally named \sourcefile{Schematic PDF_[No Variations] (12).pdf}. The number belongs to the export; the title blocks have no assigned drawing revision. Each set contains the project hierarchy, USB-C output, power and sensing circuits, and STM32 controller.
++The three earlier four-sheet schematic sets below cover V1.0, V1.1, and the October 18 V2 F410 drawing. The latest V2 schematic and complete PCB print set follow in Section~\ref{sec:app-v2-oct27} and support the design description in \cref{sec:hw-v2}. The vector pages keep component labels readable when enlarged. V1.0 was used for the manufactured test board; V1.1 contains the later changes listed above. The V2 export was originally named \sourcefile{Schematic PDF_[No Variations] (12).pdf}. The number belongs to the export; the title blocks have no assigned drawing revision. Each set contains the project hierarchy, USB-C output, power and sensing circuits, and STM32 controller.
+ \clearpage\begin{landscape}
+ \begin{figure}[H]\centering
+ \includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V1_0.pdf}
+@@ -145,3 +146,238 @@
+ \includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-18.pdf}
+ \caption{V2 F410 schematic, sheet 4: STM32F410CBU6 and direct PA0--PA2 feedback connections.}\label{fig:app-schematic-v2-sheet4}
+ \end{figure}\end{landscape}
++
++
++\clearpage
++\section{V2 Schematic and PCB Documentation: October 27 Export}
++\label{sec:app-v2-oct27}
++
++The new V2 documentation comprises a four-sheet schematic and the complete
++31-page PCB print set supplied in
++\sourcefile{Schematic Prints - 10-27-2026 2-58-51 AM.zip}.
++The schematic groups the system into the MCU, charge-pump/resonant converter,
++and USB-C output stage. Its core part labels and controller connections
++agree with the earlier V2 export. The unspecified tank values and divider
++labels discussed in \cref{sec:hw-v2} remain unresolved.
++
++All pages of both new documents are reproduced below. The PCB set contains
++top and bottom copper, two internal copper layers, silkscreen, mask,
++assembly, mechanical, and drill prints. The original layer names are used
++in the captions. Layers named ``3D Body'' are printed footprint projections,
++not the separate perspective renderings supplied in the chat. The prints
++document the design; they do not identify every fitted part or the
++configuration used in the later leakage-only bench test.
++
++The original vector PDFs and a file-hash record are retained under
++\sourcefile{Pictures/Thesis/07_Hardware}. The October 18 schematic is
++retained above so the earlier circuit reference remains available.
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 schematic, sheet 1: System overview.}\label{fig:app-v2-oct27-schematic-1}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=2,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 schematic, sheet 2: USB-C output stage.}\label{fig:app-v2-oct27-schematic-2}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=3,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 schematic, sheet 3: Power stage, sensing, and local supplies.}\label{fig:app-v2-oct27-schematic-3}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/Schematic_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 schematic, sheet 4: STM32F410 controller and service connections.}\label{fig:app-v2-oct27-schematic-4}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=1,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 1: Top Layer.}\label{fig:app-v2-oct27-pcb-1}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=2,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 2: Int1 (GND).}\label{fig:app-v2-oct27-pcb-2}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=3,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 3: Int2 (PWR).}\label{fig:app-v2-oct27-pcb-3}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=4,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 4: Bottom Layer.}\label{fig:app-v2-oct27-pcb-4}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=5,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 5: Top Silkscreen Overlay.}\label{fig:app-v2-oct27-pcb-5}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=6,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 6: Bottom Silkscreen Overlay.}\label{fig:app-v2-oct27-pcb-6}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=7,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 7: Top Paste Mask Print.}\label{fig:app-v2-oct27-pcb-7}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=8,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 8: Bottom Paste Mask Print.}\label{fig:app-v2-oct27-pcb-8}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=9,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 9: Top Solder Mask Print.}\label{fig:app-v2-oct27-pcb-9}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=10,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 10: Board.}\label{fig:app-v2-oct27-pcb-10}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=11,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 11: Top Tenting.}\label{fig:app-v2-oct27-pcb-11}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=12,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 12: Bottom Tenting.}\label{fig:app-v2-oct27-pcb-12}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=13,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 13: Bottom Component Center.}\label{fig:app-v2-oct27-pcb-13}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=14,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 14: Route Tool Path.}\label{fig:app-v2-oct27-pcb-14}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=15,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 15: Top 3D Body.}\label{fig:app-v2-oct27-pcb-15}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=16,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 16: Bottom 3D Body.}\label{fig:app-v2-oct27-pcb-16}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=17,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 17: Top Component Center.}\label{fig:app-v2-oct27-pcb-17}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=18,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 18: Top Component Outline.}\label{fig:app-v2-oct27-pcb-18}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=19,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 19: Bottom Component Outline.}\label{fig:app-v2-oct27-pcb-19}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=20,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 20: Top Coating.}\label{fig:app-v2-oct27-pcb-20}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=21,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 21: Bottom Coating.}\label{fig:app-v2-oct27-pcb-21}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=22,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 22: Top Assembly.}\label{fig:app-v2-oct27-pcb-22}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=23,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 23: Bottom Assembly.}\label{fig:app-v2-oct27-pcb-23}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=24,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 24: Top Courtyard.}\label{fig:app-v2-oct27-pcb-24}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=25,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 25: Bottom Courtyard.}\label{fig:app-v2-oct27-pcb-25}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=26,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 26: Top Designator.}\label{fig:app-v2-oct27-pcb-26}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=27,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 27: Bottom Designator.}\label{fig:app-v2-oct27-pcb-27}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=28,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 28: Top Pad Master.}\label{fig:app-v2-oct27-pcb-28}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=29,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 29: Bottom Pad Master.}\label{fig:app-v2-oct27-pcb-29}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=30,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 30: Drill Drawing For (Top Layer - Bottom Layer).}\label{fig:app-v2-oct27-pcb-30}
++\end{figure}\end{landscape}
++
++\clearpage\begin{landscape}
++\begin{figure}[H]\centering
++\includegraphics[page=31,width=\linewidth,height=0.86\textheight,keepaspectratio]{Pictures/Thesis/07_Hardware/PCB_V2_F410_2026-10-27.pdf}
++\caption{V2 October 27 PCB print 31: Drill Guide For (Top Layer - Bottom Layer).}\label{fig:app-v2-oct27-pcb-31}
++\end{figure}\end{landscape}

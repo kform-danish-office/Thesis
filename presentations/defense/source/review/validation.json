@@ -1,0 +1,81 @@
+{
+  "slides": 20,
+  "main_slides": 16,
+  "backups": 4,
+  "dedicated_writers": 20,
+  "main_duration_seconds": 1500,
+  "timing": "Estimated speaking allocation including walkthroughs and pauses; not a timed rehearsal",
+  "editable_objects": {
+    "charts": 4,
+    "tables": 3,
+    "pictures": 14,
+    "text_shapes": 181
+  },
+  "native_equations": {
+    "s03": [
+      "Equation: switching"
+    ],
+    "s05": [
+      "Equation: rectifier"
+    ],
+    "b01": [
+      "Equation: resonance"
+    ]
+  },
+  "template_parts_preserved": 15,
+  "package_crc": "passed",
+  "accepted_text_and_notes_match": true,
+  "original_digest_figure_unchanged": true,
+  "unaffected_slides_visually_identical": [
+    "s01",
+    "s02",
+    "s03",
+    "s04",
+    "s05",
+    "s06",
+    "s07",
+    "s08",
+    "s09",
+    "s10",
+    "s11a",
+    "s12",
+    "s13",
+    "s14",
+    "s15",
+    "b01",
+    "b02",
+    "b03",
+    "b04"
+  ],
+  "regulation_points_verified": 14,
+  "v2_points_verified": 7,
+  "original_iec_harmonic_figure_verified": true,
+  "measurement_images_unaltered": true,
+  "v2_board_photo_on_title": true,
+  "adapter_common_scale_checked": true,
+  "thesis_changes": [],
+  "rendering": "LibreOffice; metric-compatible Liberation Sans for Arial; Office Math equations",
+  "powerpoint_native_inspection": false,
+  "proposal_sha256": {
+    "s01": "539a88611e3127e0c90a9a78e23c9964f1dfb7c0761d5c9fd5726ba97f315b81",
+    "s02": "bd8fc4bfe54a60c245059fa6be91b7521a43eecce6fa25665c81b13da9af125e",
+    "s03": "c14221427f4d6fce4c438b998cede4238cd9e047d6132b2ce319c46b5341b490",
+    "s04": "f10989bb68cfd0d73241bd13f024db8b3e9308b9a82e4b029532dc1d1fb911ae",
+    "s05": "e8aa9ce74246c829affbaedeb31e8bad6402296668d295b3fe17788f7704b4ff",
+    "s06": "cf056620fc649f5c89db95719db2e3d0b595d4aaf11900b370ab56c2d656d0f3",
+    "s07": "438434feeb3790a300ebd76e26897a5990919923c162a1f4a01107f6456f930c",
+    "s08": "4d906183a7f1283c0b48a0d6c0a2dae4c5322ceefcd50d73985d05c45448a92d",
+    "s09": "1f6144b93ac29fbe9aabeaf7e408f33d5ca84a6b68e45391e18bcf03376e1e37",
+    "s10": "99a0f44a6ea835f286c13176670d9f0275076fff3eb3a80c323201b13251805f",
+    "s11": "6c37487d0302993d821b680fae51e65b38a1a754c0d7c7673335d6167361d792",
+    "s11a": "333f38b54646586950f97185643146e8009a7704fcdd467ee060136d3a64739c",
+    "s12": "c8796d74ed35fd2a1b0c185f7ac93613dac2e69ce2fba542fd1cb5ff194bace3",
+    "s13": "321dc63818eed4c699e217b9143bf5ff1636a43f2f204339f30c582825d0a88a",
+    "s14": "548cb56c2caaf492e7af5552327d63c2766e45c0513fee261907da1df9a71caf",
+    "s15": "c77a1103d14f1571efeae486cb304aea7766c1c482e877799c491e9a8ca9d7b6",
+    "b01": "2f0d0eb6ecd81ea55791317054d38ea33f59b9fc08702821924ae5ddeb013ad5",
+    "b02": "42a33f73a74957be780743778f33b25c4edceaa1756f670818cb4631b7b58cfa",
+    "b03": "d6a39405fe0850db7ec55759de5b9ebccfaf1c81a01ceb344f1154f10d47f8c4",
+    "b04": "32345a54f6f0e980337b912da215f0353726c63decca48b25dc416b325186480"
+  }
+}

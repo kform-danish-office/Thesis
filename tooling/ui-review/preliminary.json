@@ -1,0 +1,82 @@
+[
+  {
+    "pageName": "monitor",
+    "width": 1440,
+    "dimensions": {
+      "width": 1440,
+      "doc": 1440,
+      "height": 2079
+    },
+    "errors": []
+  },
+  {
+    "pageName": "monitor",
+    "width": 390,
+    "dimensions": {
+      "width": 390,
+      "doc": 390,
+      "height": 3575
+    },
+    "errors": []
+  },
+  {
+    "pageName": "monitor",
+    "width": 320,
+    "dimensions": {
+      "width": 320,
+      "doc": 320,
+      "height": 3764
+    },
+    "errors": []
+  },
+  {
+    "pageName": "monitor",
+    "width": 768,
+    "dimensions": {
+      "width": 768,
+      "doc": 768,
+      "height": 2723
+    },
+    "errors": []
+  },
+  {
+    "pageName": "calculator",
+    "width": 1440,
+    "dimensions": {
+      "width": 1440,
+      "doc": 1440,
+      "height": 2556
+    },
+    "errors": []
+  },
+  {
+    "pageName": "calculator",
+    "width": 390,
+    "dimensions": {
+      "width": 390,
+      "doc": 390,
+      "height": 5414
+    },
+    "errors": []
+  },
+  {
+    "pageName": "calculator",
+    "width": 320,
+    "dimensions": {
+      "width": 320,
+      "doc": 320,
+      "height": 6022
+    },
+    "errors": []
+  },
+  {
+    "pageName": "calculator",
+    "width": 768,
+    "dimensions": {
+      "width": 768,
+      "doc": 768,
+      "height": 3920
+    },
+    "errors": []
+  }
+]

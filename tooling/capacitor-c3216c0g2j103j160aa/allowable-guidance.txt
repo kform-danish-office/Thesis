@@ -1,0 +1,27 @@
+Guidance on
+allowable voltage and allowable current
+
+
+
+                                            TDK Corporation
+                                        Ceramic Capacitors BG
+                                     Product Technology Dept.
+                                          Tech Service Center
+                                              September 2024
+The allowable voltage and current graphs displayed in the detailed information within the TDK Product
+Center are created based on the following conditions.
+
+   •   The applied waveform is a sine wave of a single frequency.
+   •   The evaluation environment for the self-heating temperature is at room temperature under natural
+       convection.
+   •   The board on which the MLCC is mounted is assumed to have sufficient heat dissipation for the
+       applied current and to reach thermal equilibrium under natural convection.
+   •   Under the above conditions, the allowable voltage and current are defined as those at which the
+       self-heating temperature of the MLCC remains below 20°C.
+   •   This data is for reference only and does not guarantee reliability.
+
+
+
+
+                                                                                                          2
+

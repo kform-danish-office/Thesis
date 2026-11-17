@@ -1,0 +1,55 @@
+[
+  {
+    "id": "methods-v2-efficiency",
+    "path": "Chapters/09_Experimental_Methods/09_Efficiency.tex",
+    "old": "For a changing waveform, the calculation instead needs the average of the\r\ninstantaneous product \\(v(t)i(t)\\).\r\n",
+    "new": "For a changing waveform, the calculation instead needs the average of the\r\ninstantaneous product \\(v(t)i(t)\\).\r\n\r\nFor the seven V2 secondary-output tests, the AC supply reported input real\r\npower \\(P_{\\mathrm{in}}\\), and the electronic load reported voltage and current\r\nat its input terminals. The secondary power estimate was\r\n\\(P_{\\mathrm{sec}}=V_{\\mathrm{load}}I_{\\mathrm{load}}\\), giving an efficiency\r\nestimate of \\(100P_{\\mathrm{sec}}/P_{\\mathrm{in}}\\) percent. The supply and\r\nload readings in each capture share a recorded timestamp; hardware\r\nsynchronization and averaging intervals were not specified. The estimate\r\ntherefore applies to the captured operating point and includes the output\r\ncable loss between the converter and load.\r\n",
+    "reason": "Defines the new test measurement locations, calculation and timing limitation alongside the existing general method.",
+    "facts_preserved": [
+      "AC supply real power and electronic-load terminal readings",
+      "Secondary-output estimate rather than USB-C connector efficiency",
+      "Same recorded timestamp does not establish synchronized measurements",
+      "Output cable loss is included"
+    ],
+    "checklist": [
+      "Concrete measurement locations",
+      "Measured versus calculated quantities",
+      "Local timing uncertainty"
+    ]
+  },
+  {
+    "id": "methods-v2-thermal",
+    "path": "Chapters/09_Experimental_Methods/10_Thermal.tex",
+    "old": "Ambient, airflow, warm-up, and camera setup were not fully recorded.\r\nThe identified hotspots can be monitored during longer runs.\r\n",
+    "new": "For the seven V2 load tests, region R3 covered the input bridge and R1\r\ncovered the secondary. The reported values are the maximum apparent surface\r\ntemperatures within those regions. The regions displayed an emissivity of\r\n0.95; the camera footer displayed 0.97. The camera timestamps follow the\r\nsame sequence as the electrical captures, with a one-hour clock offset and\r\napproximately 2--4 seconds between paired timestamps. The clocks were not\r\nshown to be synchronized. None of these tests reached thermal stability.\r\n\r\nAmbient, airflow, warm-up, and camera setup were not fully recorded.\r\nThe identified hotspots can be monitored during longer runs.\r\n",
+    "reason": "Defines the region readings and records the distinct camera settings and timing needed to interpret the new thermal sequence.",
+    "facts_preserved": [
+      "R3 input bridge and R1 secondary as confirmed by user",
+      "ROI emissivity 0.95 and footer 0.97 are distinct",
+      "Electrical and camera clocks are not established as synchronized",
+      "No test reached thermal stability"
+    ],
+    "checklist": [
+      "Specific thermal regions",
+      "Local timing and thermal limitation",
+      "No invented equilibrium"
+    ]
+  },
+  {
+    "id": "appendix-v2-sources",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "old": "completed test. Blank fields mark missing measurements.\r\n",
+    "new": "completed test. Blank fields mark missing measurements.\r\n\r\nSeven V2 secondary-output load captures are stored under\r\n\\sourcefile{Data/measurements/v2_load_thermal/raw}. The AC supply and\r\nelectronic-load readings were used to calculate secondary power and estimate\r\nefficiency as described in \\cref{sec:method-efficiency}. The corresponding\r\nthermal images give the region maxima described in \\cref{sec:method-thermal}.\r\n",
+    "reason": "Identifies the additional dataset and links its processing to the methods without altering historical workbook or waveform records.",
+    "facts_preserved": [
+      "Seven V2 captures",
+      "Supply and load readings used for secondary power and efficiency",
+      "Historical waveform work remains separate"
+    ],
+    "checklist": [
+      "Clear data source",
+      "Measurement point distinguished",
+      "Historical data retained"
+    ]
+  }
+]

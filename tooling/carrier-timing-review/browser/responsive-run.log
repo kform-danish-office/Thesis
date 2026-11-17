@@ -1,0 +1,240 @@
+{
+  "startedAt": "2026-10-25T05:08:39.231Z",
+  "viewport": [
+    {
+      "width": 1440,
+      "view": "dashboard",
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "width": 1440,
+      "view": "device-setup",
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "width": 1440,
+      "view": "calibration",
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "width": 1440,
+      "view": "experiments",
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "width": 390,
+      "view": "dashboard",
+      "doc": 390,
+      "clips": []
+    },
+    {
+      "width": 390,
+      "view": "device-setup",
+      "doc": 390,
+      "clips": []
+    },
+    {
+      "width": 390,
+      "view": "calibration",
+      "doc": 390,
+      "clips": []
+    },
+    {
+      "width": 390,
+      "view": "experiments",
+      "doc": 390,
+      "clips": []
+    },
+    {
+      "width": 320,
+      "view": "dashboard",
+      "doc": 320,
+      "clips": []
+    },
+    {
+      "width": 320,
+      "view": "device-setup",
+      "doc": 320,
+      "clips": []
+    },
+    {
+      "width": 320,
+      "view": "calibration",
+      "doc": 320,
+      "clips": []
+    },
+    {
+      "width": 320,
+      "view": "experiments",
+      "doc": 320,
+      "clips": []
+    }
+  ],
+  "keyboard": [
+    {
+      "width": 320,
+      "view": "dashboard",
+      "stops": 18,
+      "timingStops": [],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "width": 320,
+      "view": "device-setup",
+      "stops": 45,
+      "timingStops": [
+        "timing-frequency",
+        "timing-deadtime",
+        "reset-timing",
+        "apply-timing"
+      ],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "width": 320,
+      "view": "calibration",
+      "stops": 13,
+      "timingStops": [],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "width": 320,
+      "view": "experiments",
+      "stops": 14,
+      "timingStops": [],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "width": 390,
+      "view": "dashboard",
+      "stops": 18,
+      "timingStops": [],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "width": 390,
+      "view": "device-setup",
+      "stops": 45,
+      "timingStops": [
+        "timing-frequency",
+        "timing-deadtime",
+        "reset-timing",
+        "apply-timing"
+      ],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "width": 390,
+      "view": "calibration",
+      "stops": 13,
+      "timingStops": [],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "width": 390,
+      "view": "experiments",
+      "stops": 14,
+      "timingStops": [],
+      "issues": [],
+      "motion": {
+        "duration": "0s",
+        "animation": "none"
+      }
+    }
+  ],
+  "stress": [
+    {
+      "view": "dashboard",
+      "kind": "zoom-equivalent",
+      "width": 720,
+      "doc": 720,
+      "clips": []
+    },
+    {
+      "view": "dashboard",
+      "kind": "double-text",
+      "width": 1440,
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "view": "device-setup",
+      "kind": "zoom-equivalent",
+      "width": 720,
+      "doc": 720,
+      "clips": []
+    },
+    {
+      "view": "device-setup",
+      "kind": "double-text",
+      "width": 1440,
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "view": "calibration",
+      "kind": "zoom-equivalent",
+      "width": 720,
+      "doc": 720,
+      "clips": []
+    },
+    {
+      "view": "calibration",
+      "kind": "double-text",
+      "width": 1440,
+      "doc": 1440,
+      "clips": []
+    },
+    {
+      "view": "experiments",
+      "kind": "zoom-equivalent",
+      "width": 720,
+      "doc": 720,
+      "clips": []
+    },
+    {
+      "view": "experiments",
+      "kind": "double-text",
+      "width": 1440,
+      "doc": 1440,
+      "clips": []
+    }
+  ],
+  "idrefs": [],
+  "names": "- group:\n  - text: − V2 switching/carrier timing Synthetic\n  - paragraph: Adjust the V2 / STM32F410 gate switching carrier and complementary-gate deadtime. The LC components set the natural resonance; EN burst frequency is a separate setting.\n  - status: Synthetic V2 timing only. Demo cannot calibrate physical hardware.\n  - group \"Requested timing\":\n    - text: Requested timing Requested carrier frequency\n    - spinbutton \"Requested carrier frequency Hz\": \"1000000\"\n    - text: Hz Requested deadtime\n    - spinbutton \"Requested deadtime ns\": \"40\"\n    - text: ns\n  - paragraph: \"Whole numbers: 500,000–2,000,000 Hz and 20–200 ns. Timer ticks quantize both values: the period has an even tick count; deadtime rounds up. At 100 MHz, ticks are 10 ns and carrier steps are about 20 kHz near 1 MHz. Some frequency/deadtime pairs are rejected.\"\n  - paragraph: A change to actual timing clears all three learned load profiles and tuned calibration values in RAM. Physical load resistances are retained. Recalibrate as needed, then use Save to device to retain timing and calibration together. Applying timing keeps output OFF.\n  - button \"Reset timing edits\" [disabled]\n  - button \"Apply timing\" [disabled]\n  - heading \"Actual timer readback\" [level=3]\n  - paragraph: Fresh synthetic readback · revision 0 · requested 1,000,000 Hz / 40 ns.\n  - term: Actual carrier frequency\n  - definition: 1,000,000 Hz\n  - term: Actual deadtime\n  - definition: 40 ns\n  - term: Timer tick counts\n  - definition: 100 period / 4 deadtime\n  - term: Timer clock\n  - definition: 100,000,000 Hz · 10.0 ns per tick\n  - paragraph: These are software limits, not an assurance of electrical safety. Timer readback does not establish safe switching or bench validation for the connected hardware.",
+  "errors": [],
+  "finishedAt": "2026-10-25T05:08:51.768Z",
+  "pass": true
+}

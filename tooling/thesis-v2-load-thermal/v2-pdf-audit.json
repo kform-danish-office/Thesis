@@ -1,0 +1,125 @@
+{
+  "pages": [
+    {
+      "page": 120,
+      "text": "Figure 10.13: V2 thermal image during the 95 W run. The displayed surface maxima are\n70.0 \u25e6C in R3 and 61.5 \u25e6C in R1.\nLimited bridge copper and a possible single-via connection between layers were sus-\npected to contribute to the heating. Narrow current paths add resistance and restrict heat\nspreading.\n10.15.4\nSecondary-Output Load and Thermal Tests\nThe electronic load was connected to the V2 secondary output. At approximately 240 V\nAC and 50 Hz, increasing the load current from 1.86 A to 10.01 A raised the calculated\nsecondary power from 48.68 W to 137.08 W. The secondary voltage fell from 26.14 V to\n13.69 V over this sequence (table 10.13 and fig. 10.14). At 20.07 V, the load drew 4.29 A,\ngiving 86.17 W. The higher-power points were therefore reached with increasing voltage\ndroop.\nTable 10.13: AC input, secondary-load readings, and thermal-region maxima during the\nV2 load sequence. Input voltage was approximately 240 V at 50 Hz.\nCapture\nPin\nVsec\nIsec\nPsec\n\u03b7\nBridge R3\nSecondary R1\n(W)\n(V)\n(A)\n(W)\n(%)\n(\u25e6C)\n(\u25e6C)\n015\n64.352 26.14\n1.86\n48.68\n75.7\n65.1\n50.3\n017\n95.142*\n21.36\n3.31\n70.75 74.4*\n83.9\n57.2\n018 106.731 20.07\n4.29\n86.17\n80.7\n68.2\n59.7\n019 121.899 18.46\n5.27\n97.35\n79.9\n73.2\n69.4\n020 140.565 16.87\n6.51 109.87\n78.2\n74.5\n81.6\n021 168.859 14.92\n8.51 127.05\n75.2\n75.6\n88.7\n022 189.180 13.69 10.01 137.08\n72.5\n73.7\n98.3\nPsec is calculated from the electronic-load voltage and current; \u03b7 = 100Psec/Pin is an estimate.\n*Capture\n017 reports 95.142 W input, while its 239.99 V and 0.39 A readings give 93.60 V A. The input reading and\nassociated efficiency need checking.\n98\nCharge-Pump PFC USB-C Power Supply\n",
+      "images": [
+        {
+          "xref": 1888,
+          "width": 1280,
+          "height": 960,
+          "sha256": "fda9c49adf419f97530f8692707b098ff08dde0b9bd4d3362066cd57f5657284"
+        }
+      ]
+    },
+    {
+      "page": 121,
+      "text": "In the thermal images in fig. 10.15, the input-bridge region R3 reached 83.9 \u25e6C near\n70.75 W. Its maxima at the subsequent higher-power points were lower, between 68.2 \u25e6C\nand 75.6 \u25e6C. The secondary region R1 became progressively hotter, rising from 50.3 \u25e6C\nto 98.3 \u25e6C.\nNone of the load points reached thermal equilibrium. The sequence includes both load\nchanges and continued heating, so the temperatures cannot be treated as settled values\nfor each power level. Diode selection and the current and thermal paths around the rec-\ntifiers require further work. The tests show that the leakage-only stage can transfer more\nthan 100 W to a secondary load, although voltage droop and continued heating remain.\n14\n16\n18\n20\n22\n24\n26\nSecondary voltage (V)\n(a) Secondary-output voltage\n60\n80\n100\n120\n140\nCalculated secondary output power (W)\n50\n60\n70\n80\n90\n100\nRegion maximum (\u00b0C)\n(b) Surface temperatures during the load sequence\nInput bridge, R3\nSecondary, R1\nFigure 10.14: Secondary voltage and thermal-region maxima during the increasing-load\nsequence. Lines connect successive readings. R3 covers the input bridge and R1 the\nsecondary area.\nCharge-Pump PFC USB-C Power Supply\n99\n",
+      "images": []
+    },
+    {
+      "page": 122,
+      "text": "(a) Capture 015: 48.68 W at the secondary load.\n(b) Capture 017: 70.75 W at the secondary load.\nFigure 10.15: V2 thermal images during secondary-output loading. R3 covers the input\nbridge and R1 the secondary area.\n100\nCharge-Pump PFC USB-C Power Supply\n",
+      "images": [
+        {
+          "xref": 1916,
+          "width": 640,
+          "height": 480,
+          "sha256": "2a43c4ca9f378f2e2584859574158480fae2f6aa027efb4875bb278771d27b3b"
+        },
+        {
+          "xref": 1917,
+          "width": 640,
+          "height": 480,
+          "sha256": "4efb78c7049aef2e463bc57f77718b66166051470c8aeec3a0067bc06d243edf"
+        }
+      ]
+    },
+    {
+      "page": 123,
+      "text": "(c) Capture 018: 86.17 W at the secondary load.\n(d) Capture 019: 97.35 W at the secondary load.\nFigure 10.15: V2 thermal images during secondary-output loading (continued). R3 covers\nthe input bridge and R1 the secondary area.\nCharge-Pump PFC USB-C Power Supply\n101\n",
+      "images": [
+        {
+          "xref": 1921,
+          "width": 640,
+          "height": 480,
+          "sha256": "82f3e6b54296ddee0fcd3c9d254c70c081bc47950baa82297dd3c11e846b199e"
+        },
+        {
+          "xref": 1922,
+          "width": 640,
+          "height": 480,
+          "sha256": "aa66f67f28eaba0986cebc47ccf87e0059323f3a9b88fd43fce1c9eb06f1714a"
+        }
+      ]
+    },
+    {
+      "page": 124,
+      "text": "(e) Capture 020: 109.87 W at the secondary load.\n(f) Capture 021: 127.05 W at the secondary load.\nFigure 10.15: V2 thermal images during secondary-output loading (continued). R3 covers\nthe input bridge and R1 the secondary area.\n102\nCharge-Pump PFC USB-C Power Supply\n",
+      "images": [
+        {
+          "xref": 1926,
+          "width": 640,
+          "height": 480,
+          "sha256": "fdd4f8a74066c30bc1ae7e01cf146639ea76b673cb026ec174e0c15bf28ce5fb"
+        },
+        {
+          "xref": 1927,
+          "width": 640,
+          "height": 480,
+          "sha256": "7d9919bbf3d889eb1b67a90a022cc35e54b27abbd11b9c68de862e6125ec36fd"
+        }
+      ]
+    },
+    {
+      "page": 125,
+      "text": "(g) Capture 022: 137.08 W at the secondary load.\nFigure 10.15: V2 thermal images during secondary-output loading (continued). R3 covers\nthe input bridge and R1 the secondary area.\nCharge-Pump PFC USB-C Power Supply\n103\n",
+      "images": [
+        {
+          "xref": 1931,
+          "width": 640,
+          "height": 480,
+          "sha256": "cf672ffe5a293ccd796219c4150769e2fd6a442f2606d1851a35f095a1fc063c"
+        }
+      ]
+    }
+  ],
+  "original_thermal_images": [
+    {
+      "file": "Capture 015-thermal.jpg",
+      "page": 122,
+      "sha256": "2a43c4ca9f378f2e2584859574158480fae2f6aa027efb4875bb278771d27b3b"
+    },
+    {
+      "file": "Capture 017-thermal.jpg",
+      "page": 122,
+      "sha256": "4efb78c7049aef2e463bc57f77718b66166051470c8aeec3a0067bc06d243edf"
+    },
+    {
+      "file": "Capture 018-thermal.jpg",
+      "page": 123,
+      "sha256": "82f3e6b54296ddee0fcd3c9d254c70c081bc47950baa82297dd3c11e846b199e"
+    },
+    {
+      "file": "Capture 019-thermal.jpg",
+      "page": 123,
+      "sha256": "aa66f67f28eaba0986cebc47ccf87e0059323f3a9b88fd43fce1c9eb06f1714a"
+    },
+    {
+      "file": "Capture 020-thermal.jpg",
+      "page": 124,
+      "sha256": "fdd4f8a74066c30bc1ae7e01cf146639ea76b673cb026ec174e0c15bf28ce5fb"
+    },
+    {
+      "file": "Capture 021-thermal.jpg",
+      "page": 124,
+      "sha256": "7d9919bbf3d889eb1b67a90a022cc35e54b27abbd11b9c68de862e6125ec36fd"
+    },
+    {
+      "file": "Capture 022-thermal.jpg",
+      "page": 125,
+      "sha256": "cf672ffe5a293ccd796219c4150769e2fd6a442f2606d1851a35f095a1fc063c"
+    }
+  ],
+  "overfull_hbox_vbox": []
+}

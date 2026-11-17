@@ -1,0 +1,10 @@
+\section{Laboratory Use}
+\label{sec:req-usecase}
+
+The converter was built for supervised laboratory use as an AC--DC supply with an isolated secondary and USB-C output. The fixed-frequency resonant stage and charge-pump current shaping follow the reference work \cite{ammar2020chargepump,ammar2021led}. External electronic or resistive loads were used to apply the conditions stated with each measurement.
+
+The design target is \SI{100}{\watt} continuous output. The revised plan sets a \SI{65}{\watt} continuous minimum, and the earlier schedule sets a \SI{75}{\watt} continuous validation milestone \cite{projectOctoberPlan,projectEarlierPlan}. Continuous tests require a stated load and run time, with temperature tracked throughout the run.
+
+The operating sequence covers unloaded startup, load attachment, loaded operation, removal, and commanded shutdown. After load removal, no-load control and overvoltage protection must limit the effect of residual resonant and capacitive energy.
+
+The open-frame assembly gives access for measurement and adjustment. Controlled mains energization and rated probes were used during testing. An enclosed consumer version would also need insulation, fault, environmental, protocol, and EMC qualification.

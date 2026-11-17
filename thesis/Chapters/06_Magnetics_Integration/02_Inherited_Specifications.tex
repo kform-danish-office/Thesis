@@ -1,0 +1,31 @@
+\section{Supplied Magnetic Measurements}
+\label{sec:mag-inherited}
+
+The converter calculations started from the given measurements for two inductor variants and two transformer variants, listed in \Cref{tab:mag-inherited-measurements}.
+
+\begin{table}[htbp]
+\centering
+\caption{Planar-magnetics measurements by M\'ani Gautason.}
+\label{tab:mag-inherited-measurements}
+\begin{tabularx}{\textwidth}{@{}p{0.21\textwidth}Xp{0.20\textwidth}p{0.19\textwidth}@{}}
+\toprule
+Component & Quantity & Measured & Design target\\
+\midrule
+Inductor A & Inductance & \SI{34.26}{\micro\henry} & \SI{33.0}{\micro\henry}\\
+Inductor B & Inductance & \SI{33.09}{\micro\henry} & \SI{33.0}{\micro\henry}\\
+Inductor A & AC resistance & \SI{2.05}{\ohm} & Unspecified\\
+Inductor B & AC resistance & \SI{2.17}{\ohm} & Unspecified\\
+\midrule
+Transformer A & Leakage inductance & \SI{16.42}{\micro\henry} & \(>\SI{15.0}{\micro\henry}\)\\
+Transformer A & Magnetizing inductance & \SI{150.78}{\micro\henry} & \(>\SI{100.0}{\micro\henry}\)\\
+Transformer A & Turns ratio, \(m\) & 8.039 & 8.0\\
+Transformer B & Leakage inductance & \SI{16.50}{\micro\henry} & \(>\SI{15.0}{\micro\henry}\)\\
+Transformer B & Magnetizing inductance & \SI{139.89}{\micro\henry} & \(>\SI{100.0}{\micro\henry}\)\\
+Transformer B & Turns ratio, \(m\) & 8.000 & 8.0\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Both inductors are close to the \SI{33}{\micro\henry} target. Transformer leakage is about \SI{16.5}{\micro\henry}, magnetizing inductance spans approximately \SI{140}{\micro\henry} to \SI{151}{\micro\henry}, and the turns ratio is near 8:1. Leakage was included in selecting the additional series inductance.
+
+The fitted A/B combination is unknown, so calculations use the supplied range or a stated nominal value with the \cref{eq:app-turns-ratio} convention. AC-resistance loss estimates also require the original measurement frequency and fixture. Identifying and remeasuring the fitted parts would resolve these uncertainties.

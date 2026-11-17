@@ -1,0 +1,482 @@
+[
+  {
+    "path": ".gitignore",
+    "sha256": "a47730b4dfb782f07ca6dc99d09a583a72f9c6f4ab25d1062fab4ee55c6ddb70"
+  },
+  {
+    "path": "README.md",
+    "sha256": "66fb679c3d6695970ffb358598fe8c78d181900eda587edfd1ef57e08a0a9d98"
+  },
+  {
+    "path": "docs/README.md",
+    "sha256": "f47c79792cffce0f8d29c0c46378012fafb2f2cf17bbcb606ad943b712df517a"
+  },
+  {
+    "path": "docs/calculator-evidence.md",
+    "sha256": "57e164ca7120f096146a53e580318c6066483d05dd67e007ef1a6e0bd4058120"
+  },
+  {
+    "path": "docs/firmware-flow-distilled.md",
+    "sha256": "b515e507c7dd2d1c37e62ce15b371f7f6cb9534ebc9a5d2a2381f629e0d72971"
+  },
+  {
+    "path": "docs/firmware-flow-distilled.png",
+    "sha256": "9fb5bfce5a0d9ee2a42bb74652914849f004595cae97eba3063c95accc51cbe9"
+  },
+  {
+    "path": "docs/firmware-flow-distilled.svg",
+    "sha256": "ac39eff7db28ffebe910cbdf3cb293f75f8b2921c93d8183aed18c084868d178"
+  },
+  {
+    "path": "docs/firmware-flow.md",
+    "sha256": "82216c2e30f2238f7c7c7a2274a89fbb6e7b51cc3c0985bfb5990af46a5cf93b"
+  },
+  {
+    "path": "docs/firmware-flow.png",
+    "sha256": "90e6f933c3bd3f7f9e43668fe0040855e806d5d5c760c41843c07d8ae3e83d12"
+  },
+  {
+    "path": "docs/power-control.md",
+    "sha256": "02c85aa57dd0856e5d8ab4d66f2e66f832781bb6d06a8c344c84dd697f4b6d67"
+  },
+  {
+    "path": "docs/stm32f410-port.md",
+    "sha256": "4505fb94bcd6f7469084c6b85d4d3491536ffd5e9ea19fe6e2243f2582deaa7b"
+  },
+  {
+    "path": "docs/uart-commands.md",
+    "sha256": "40c416128d0f347ca6de734f95c450bd7661f63b63f27d03ded681472eed0a64"
+  },
+  {
+    "path": "docs/web-protocol.md",
+    "sha256": "ffcea1f86f05983e40430aede423e35e41e3076d68c19d49826ebaaf94b07911"
+  },
+  {
+    "path": "firmware/README.md",
+    "sha256": "ed2bf96d31a6b84a8e0f0fa233c7d2b66f9cb1367fb2dec7d13522b12689cf8a"
+  },
+  {
+    "path": "firmware/archive/README.md",
+    "sha256": "75c5eaa3189558329cf59ea7e18ca6089c5a552bd6a2fc9b6bfb018995abe775"
+  },
+  {
+    "path": "firmware/archive/legacy-autofull/UART_COMMANDS_README_voltage_autofull_20260605_004835.md",
+    "sha256": "fc23781ae7a913a1389021427307239a8e16a2fce2dd2760962264acb24ee676"
+  },
+  {
+    "path": "firmware/archive/legacy-autofull/thesi_closed_loop_voltage_autofull_20260605_004835.ino",
+    "sha256": "9d59cfc145a624b16710b36ff8090b062a0a7b8c6cb36b32be191243ec512c0d"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_1_0.ino",
+    "sha256": "a28133b1f50feee4828a88a0377ae4a5d96dda661a88bdb7128320111023676c"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_2_0.ino",
+    "sha256": "48e6710d3da5e231ad344a685e072769d08d273aa4b78f6fb8d9645976ff771a"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_3_0.ino",
+    "sha256": "f124a4a8d9f62989d4755df751662a08dbd446314fc1d4337e8a90bba3037d40"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_4_0/thesi_closed_loop_PWR_1_4_0.ino",
+    "sha256": "b2cfefe096ac8144a75b72134496e3bc54a5926207df986df0e2e94fbd4382dc"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_5_0.ino",
+    "sha256": "8baecd806a7b0e73c5e4cc2469a192a1aba16340de9010ca118dcd92af2900db"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_5_1/thesi_closed_loop_PWR_1_5_1.ino",
+    "sha256": "190d5c2a103897d49e04471c50f5b83bc8e50ace700ccf445e75233c08afcde9"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_5_2/thesi_closed_loop_PWR_1_5_2.ino",
+    "sha256": "a71b8894c0e13923275836d9ded90bc7c4bbd004c5d2aebc9bcbe9c245e20692"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_6_0.ino",
+    "sha256": "b85cc4c9d465492e978a834f1498c395b40968f88fe758f301e227b228cdf7bd"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_7_0.ino",
+    "sha256": "89804a345415581da7f5d2712ef8e34fd5f82ccb040a0b6011b942152b4efce3"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_7_1.ino",
+    "sha256": "396c250903c98baaff346e183cf8de5134474e9e3dabe07105fe5329ddf17b81"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_7_2.ino",
+    "sha256": "b59170296f1f68dd1505ffab302e702a393dda373c8754c009e4bd4f2a967e90"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_8_0.ino",
+    "sha256": "6bbe82c58f9aa92098327481ff808a41b3d4da50d53743240df2cec7100999e7"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_8_1.ino",
+    "sha256": "be39f15e3e02e7004a07be857a322d6ebd55632ab7b6bddfb3300bd3ce3d43ab"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_8_2.ino",
+    "sha256": "e1e0a44e47b5abba646d842230ad8fe61ba1280cbee566a896ba1795a0090ff7"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_8_3.ino",
+    "sha256": "110b423a81840938e51291450d532613ab7755cb7aa1116eef75cb97bc11d7eb"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_0.ino",
+    "sha256": "969a24c42d2f380c4cb51e554232bf2988ad7022433be932d0b7731b16e7b1ec"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_1.ino",
+    "sha256": "3a48f4ec50dc9e6d02f2e9941e47c5c0f5adb3a6d902f7619279a1624c8671f7"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_10.ino",
+    "sha256": "013cecfe35580f5a1935dedbe190d3e52de814dd7bfd0d2cb95190bba06917c4"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_11.ino",
+    "sha256": "a91e88c49533324faae9fbce9528816837c0ea4f03bb91e875d47a5a5bb457f8"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_12.ino",
+    "sha256": "b1cdf044d2efcfdd7453d11e1a009c82c0757dcde0403b4bbdac33af233dfe4e"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_13.ino",
+    "sha256": "4c54cb765cb3b1fc4404718b9752ef6c21708f80e3e4ca5c63756927caa5b900"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_14.ino",
+    "sha256": "099e8f4958b908dfcdb41f1d90cf7df1c58202847203152e427fbfa8a7697b82"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_15.ino",
+    "sha256": "b669dc480ee04e959385c51043b8235fbc761e5b5eff7cc1dad1f0409c74d76a"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_16.ino",
+    "sha256": "2859c0b1f54201aa798281281ce6c3aafb04cff1a99630efc333c4ebaf40d44c"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_17.ino",
+    "sha256": "0f324f755d5eeec6976bcb29b20ef076ea7359199919e50723043693a9e0e6da"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_18.ino",
+    "sha256": "d7cc9d1d617db38b1f5cd00fa817ca3e3e084f361a70d50859f6b34666b341fb"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_19.ino",
+    "sha256": "78db33d858e6c377b24f841001b64952df99d258d418392b0de0a34b2af0b4ae"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_2.ino",
+    "sha256": "99ea0645b86bb5a1531be8ea78c750fa0335b3132f2386776cd8df028b575e35"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_20.ino",
+    "sha256": "39c2769a4a597e9e70cc0a8ee11dbc221aab084e2eb082b5b60e41b28f2de70a"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_3.ino",
+    "sha256": "129911443a9ee63a1991ac4f3c16e5654be16d8b6899c4d5d05f3d18939b97e3"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_4.ino",
+    "sha256": "0dbdca26b3510c9fdb3f81243697d3ea04bc40069b122fa690b098f3aa1c9d54"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_5.ino",
+    "sha256": "793ddc79ed2c2e3c89b92dc9bf95918e5d7e1083a77b7f5112f5cb2f51a41c6a"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_6.ino",
+    "sha256": "6a683773aeaaea0d56bf358e879932deb2d9502ae0b981e88314a83890909e52"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_7.ino",
+    "sha256": "c4c7f7d6af2d4eb39558251dbc30a923e3d574a6bb06d2f54f84fbeec4edfe93"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_8.ino",
+    "sha256": "cf8718c352f31a70849f0740d32cfd34eafb1b9f41bdf92f243adec69ffccb36"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_PWR_1_9_9.ino",
+    "sha256": "5e79614d69d85598daf0f9b0fdcd2b6e69f9aeade95b80e90bae2ef4b0de27b8"
+  },
+  {
+    "path": "firmware/archive/snapshots/thesi_closed_loop_modified.ino",
+    "sha256": "9d59cfc145a624b16710b36ff8090b062a0a7b8c6cb36b32be191243ec512c0d"
+  },
+  {
+    "path": "firmware/build.ps1",
+    "sha256": "806e87f8e3638c27ac91b297a99817ff18ffb41a3f52077b4f224dcb30ce6691"
+  },
+  {
+    "path": "firmware/compile-sketches/thesi_closed_loop_compile/thesi_closed_loop_compile.ino",
+    "sha256": "9d59cfc145a624b16710b36ff8090b062a0a7b8c6cb36b32be191243ec512c0d"
+  },
+  {
+    "path": "firmware/compile-sketches/thesi_power_control_compile/thesi_power_control_compile.ino",
+    "sha256": "129911443a9ee63a1991ac4f3c16e5654be16d8b6899c4d5d05f3d18939b97e3"
+  },
+  {
+    "path": "firmware/releases/pwr-2.0.1.md",
+    "sha256": "3760e0683a66cc8cd71f5371428941ba64986224ed358d7141923d2836fe7ff8"
+  },
+  {
+    "path": "firmware/releases/pwr-2.0.2.md",
+    "sha256": "c8284fa5787336b148e9585e32cc8b98e754a21286cab44c7543c91b8c530426"
+  },
+  {
+    "path": "firmware/releases/pwr-2.0.3.md",
+    "sha256": "0254b36b1eb99ce086da525e95afa7fee03dc1c062381ba4fa496c2d73ada441"
+  },
+  {
+    "path": "firmware/stm32f410.ld",
+    "sha256": "400597cca105a2037c828658e55252bbccfd4285efbe65dece11d364e28299aa"
+  },
+  {
+    "path": "firmware/test_web_protocol.py",
+    "sha256": "4a6a2c85387373fd00c32d4c0434ade3a58011cde1c9d48c2f5dec20539e97da"
+  },
+  {
+    "path": "firmware/verify_f410_hex.py",
+    "sha256": "bc4f5c74812ed8ba478da0b1410cc7480f36ef26184e40307af50a5987ce7f75"
+  },
+  {
+    "path": "thesi_power_control.ino",
+    "sha256": "17bd5f69b9d408bee4a24bad667f4719efe49255a871adfe55f7c26808b64504"
+  },
+  {
+    "path": "web/.gitignore",
+    "sha256": "d455aa38d2c9d4c7c41e7eb207bdb040a25fe613ecd432851eaefa3daeb324e9"
+  },
+  {
+    "path": "web/README.md",
+    "sha256": "a9901e4d1b534426f42b14856c4552c23ac0076b4843a6be0547d12e78338b41"
+  },
+  {
+    "path": "web/UI-REVIEW.md",
+    "sha256": "1dbf1b860cc2598a486677d484bda44528e4e6497486807f81a5291a25740cfe"
+  },
+  {
+    "path": "web/VERIFICATION.md",
+    "sha256": "ede618c8140910bba3281a7da6ddd1226aa5821b09c6f08d31eb2d5ee3f0ecba"
+  },
+  {
+    "path": "web/app.js",
+    "sha256": "92331a7045aa2d79ce7fcda54d383f7ef03c557563ff610ea82ebbe9e777f5cc"
+  },
+  {
+    "path": "web/build.mjs",
+    "sha256": "2dbd284c20aea608e9c98ee6f66023b5e14eb9bfba61562a147111855d1a0ec5"
+  },
+  {
+    "path": "web/calculator.css",
+    "sha256": "9d2ff8f6d6233b0680b5d9f19f20f87d149f75968ee0c4c498d50a5a70b64dba"
+  },
+  {
+    "path": "web/calculator.html",
+    "sha256": "c635876d4fdd9d607c59fd1cc6b7a1462496835a9a43d65247c2e27fb62e7489"
+  },
+  {
+    "path": "web/deployment-manifest.json",
+    "sha256": "bebf8891bcf5db8913b6e036dacc6c3f911c748ae5e44a1b1bc5e58c14cf8111"
+  },
+  {
+    "path": "web/deployment.json",
+    "sha256": "434597579db254bbddbf0481d6d6aa7a4b0955c1ce434c106228b9f4e8aa836c"
+  },
+  {
+    "path": "web/fonts/IBMPlexMono-Medium.ttf",
+    "sha256": "5f460401d03995ca099270707e78662513b5be9d17060eb7c7fffadb4d4d334b"
+  },
+  {
+    "path": "web/fonts/IBMPlexSans-Bold.ttf",
+    "sha256": "5bb3030115b2a8d4494afd9c42c69a659ad80329694f8056d21ba6680612422b"
+  },
+  {
+    "path": "web/fonts/IBMPlexSans-Regular.ttf",
+    "sha256": "b7687a7b11bf4972c2807e6f1701bb55d1837e6957373e6610a81e3bbd4423a9"
+  },
+  {
+    "path": "web/fonts/OFL-IBMPlex.txt",
+    "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+  },
+  {
+    "path": "web/index.html",
+    "sha256": "f7650b0f12915ecedfb8937c8db1aaa197306483d9e901c5078a51a6ccd36c25"
+  },
+  {
+    "path": "web/package.json",
+    "sha256": "f08d5f4d0a4aba3aa7f503756ea2b8b1e857970b493341614c49556f01079cb6"
+  },
+  {
+    "path": "web/protocol.js",
+    "sha256": "b36f5ee0109c4833a853617264d2a183f4edfc65dc6b5f132ce8179c31415fb8"
+  },
+  {
+    "path": "web/qa/calculator-browser-check.json",
+    "sha256": "994beae96475ca58d157a16273cf59c9ce858fe96149e05293eae0345abf4885"
+  },
+  {
+    "path": "web/qa/calculator-deployment-check.json",
+    "sha256": "d474ac5395be1108173dd2eab234f8ca0df044cca198a6135ead40f415fc2b48"
+  },
+  {
+    "path": "web/qa/calculator-desktop.png",
+    "sha256": "1922e45c9860311c3bb8218e0e39a079e90cc4b41173609fdc6b23a2aa4d5164"
+  },
+  {
+    "path": "web/qa/calculator-live-browser-check.json",
+    "sha256": "e835fd26b12bf8ee1a257e49d015d9b7dd055d18b172d92b7ae00a77d0ba4703"
+  },
+  {
+    "path": "web/qa/calculator-live.png",
+    "sha256": "3592c0043048427290ed741c697952d80e7385936ed125cdf60813c293a9f9bd"
+  },
+  {
+    "path": "web/qa/calculator-mobile-inputs.png",
+    "sha256": "777d3a597fe45c1156f9e0bb74acda3ebe2ece79fe43ed538b76b7a61b1eaa75"
+  },
+  {
+    "path": "web/qa/calculator-mobile-results.png",
+    "sha256": "3eac61c3abeb591386b5519cf0db0f981926569cb681b7b4ffbdc0df7169cc32"
+  },
+  {
+    "path": "web/qa/deployed.jpg",
+    "sha256": "1e50d3bfd174fa71e909ff2f6c369f97894e580460f4e141dc39b5bad01727e4"
+  },
+  {
+    "path": "web/qa/deployment-check.json",
+    "sha256": "4f02d3b51f4996abcf43b7806c18f1ec01de638e8804a025f44d1d24523cf3d1"
+  },
+  {
+    "path": "web/qa/desktop.jpg",
+    "sha256": "cf8cd385857d96a54e296921641224cbc40f7bffd1ec26535f69d8cfcb060b30"
+  },
+  {
+    "path": "web/qa/instrument-deployment-check.json",
+    "sha256": "d617c4df758edb282bf84eea54c3045c7dd5cbdbe3412aa7b12b4b0f668a3864"
+  },
+  {
+    "path": "web/qa/instrument-desktop.jpg",
+    "sha256": "02dccafd4b29ebe529904c40956d6789b52f110a942fa34b72ce427b269284ca"
+  },
+  {
+    "path": "web/qa/instrument-live.jpg",
+    "sha256": "2bd62394c41cb916564c45dfb9fea45a64c89440e92cba5e35f16a08f7784193"
+  },
+  {
+    "path": "web/qa/instrument-mobile.jpg",
+    "sha256": "60b1314617ee72b408c79fbc6479b4e24211f6411f4d9225ba6db517135ae20a"
+  },
+  {
+    "path": "web/qa/mobile.jpg",
+    "sha256": "c69198f382744070b5a274913736a963cf58cae9bde92c3bb8cc39d5e97e1ece"
+  },
+  {
+    "path": "web/qa/skills-ui-calculator-320.png",
+    "sha256": "6ee804cbb967c76db33d059af70476e614f28933afba2decd8b1c2368027e70c"
+  },
+  {
+    "path": "web/qa/skills-ui-calculator-desktop.png",
+    "sha256": "fbd53d6b5c54255ae3b190bb65022b09a201e300d7981ca345ba39cf780edc28"
+  },
+  {
+    "path": "web/qa/skills-ui-calculator-mobile.png",
+    "sha256": "2ffd6650b979073233cb342edda2bbec418f8ed475ed08f9980123516154256d"
+  },
+  {
+    "path": "web/qa/skills-ui-check.json",
+    "sha256": "c0d98cd9bef4256206fed9af5b5c5abaf5a3052362ce20eb304dcf3cb7c35c59"
+  },
+  {
+    "path": "web/qa/skills-ui-deployment-check.json",
+    "sha256": "7c63a5b3f7e80fd0f8dedb971887389386beb92159ca6928ad808e9f57b440d6"
+  },
+  {
+    "path": "web/qa/skills-ui-live-browser-check.json",
+    "sha256": "b880000ed92a2ca83078aa9835bd0b3a2905c8da655b83ee0e71380504bc562b"
+  },
+  {
+    "path": "web/qa/skills-ui-live-calculator-320.png",
+    "sha256": "6ee804cbb967c76db33d059af70476e614f28933afba2decd8b1c2368027e70c"
+  },
+  {
+    "path": "web/qa/skills-ui-live-calculator.png",
+    "sha256": "b532583f076a2ae74d9688960a4932857cc0d9ec67fa828a8dcc155de7f99e26"
+  },
+  {
+    "path": "web/qa/skills-ui-live-monitor.png",
+    "sha256": "cb3724321764ad7f94338da9cb0b18db656e816f18695bc1f74c3321aa9e4fe8"
+  },
+  {
+    "path": "web/qa/skills-ui-monitor-320.png",
+    "sha256": "371d08137a820d713c4c03fd329d79a91dcd3e55ef0ab763f320c50177c5b0c3"
+  },
+  {
+    "path": "web/qa/skills-ui-monitor-desktop.png",
+    "sha256": "cfe3e98f5d848c86c1b5e0bfe146c98e540d29e9b6433f010878d1903f4c0567"
+  },
+  {
+    "path": "web/resonance-presets.js",
+    "sha256": "4687c77c361bdbae0e707b822a3c23b5403aab9ea074a8270dcf583259ee35fa"
+  },
+  {
+    "path": "web/resonance-ui.js",
+    "sha256": "573c19e5338c9f3e4574b953bf81eae600458cca6eb982a3cc25dd79a08ac749"
+  },
+  {
+    "path": "web/resonance.js",
+    "sha256": "8f31134163faede8358f82da861a1ad4391b8266d7bf1d882c92968cb5876d43"
+  },
+  {
+    "path": "web/serial.js",
+    "sha256": "d6bc6ed4fd93035734fa9dd3e51caa178b5cf74f06d725fa542631b520f3b58f"
+  },
+  {
+    "path": "web/server.mjs",
+    "sha256": "2e60f787432a3016e367da126b6062acd3fdf50679a6b569c05c55a5a61b87ba"
+  },
+  {
+    "path": "web/storage.js",
+    "sha256": "44ff2d0139dfb56c3f7a1db78ce33d99cb5a650b31a84573de713b844c8fbeb5"
+  },
+  {
+    "path": "web/styles.css",
+    "sha256": "e3c017cfe25a09ef42ce7b51d95f31cf5c5910117045f9d6d548a2259a391edd"
+  },
+  {
+    "path": "web/tests/protocol.test.mjs",
+    "sha256": "18c9218e41f5aca6cad021d794f0b9bcb98b21a08e0502f34151bfc8c7e0dd6c"
+  },
+  {
+    "path": "web/tests/resonance-presets.test.mjs",
+    "sha256": "fe359a8cb01d59939d8211a996a70d336f3b21efc7a30be930051c169671f880"
+  },
+  {
+    "path": "web/tests/resonance.test.mjs",
+    "sha256": "3c009e5194d50671a16d71b53f45f98865eb9b5faf3af0c8a4e128597dc061a4"
+  },
+  {
+    "path": "web/tests/serial.test.mjs",
+    "sha256": "0d707ec1d4d9a54db2b2072afe2eee5c0ccc9ca3c65cc0e21841b1e6931b7069"
+  },
+  {
+    "path": "web/tests/storage.test.mjs",
+    "sha256": "5d1b9470ffd907d6a933fa456e02093a7651d44902d7de129d371f7f18ab7cf3"
+  },
+  {
+    "path": "web/vercel.json",
+    "sha256": "9927baba1ec548c86f6bafaef0577d127368be5d7b0aafa97f9883fa652c40f9"
+  }
+]

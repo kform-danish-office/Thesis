@@ -1,0 +1,8 @@
+\subsection{Moving to DMA and Voltage Feedback}
+\label{sec:ctrl-v2}
+
+The baseline uses continuous three-channel ADC1 acquisition and circular DMA with the sample-time setting \texttt{ADC\_SAMPLETIME\_39CYCLES\_5}. Samples are transferred to memory in the background, so the foreground can read the latest available values without waiting in \texttt{analogRead()} while handling commands and control updates.
+
+The feedback quantity also had to be corrected. In early tests, voltage was multiplied by the current-related input, but PA2 carries half-bridge-current information rather than connector output current. That product was removed from active regulation, and the loop was closed on secondary voltage. The error signal then corresponded to the bulk supply the MCU was intended to regulate. The \texttt{POWER} command, \texttt{KP}, \texttt{KI}, and earlier power-feedback fields remain for compatibility or diagnostics. They do not select an active PI output-power controller in the baseline firmware.
+
+Startup precharge limits the initial energy packets used to power the isolated feedback circuit. The no-load guard and soft holdoff reduce continued charging after load removal, while loaded duty trim adjusts transfer as demand changes. Bounded carrier-update polling attempts to place burst edges at carrier boundaries to reduce partial cycles without changing the fixed carrier.

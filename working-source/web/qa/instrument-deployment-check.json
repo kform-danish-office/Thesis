@@ -1,0 +1,37 @@
+{
+  "url": "https://thesis-power-lab.vercel.app/",
+  "id": "dpl_FdqNs3i86KAZQuUFZcH8ivEcJFVH",
+  "checks": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "matches_local": true,
+      "title": "Converter test bench"
+    },
+    {
+      "file": "styles.css",
+      "status": 200,
+      "matches_local": true
+    },
+    {
+      "file": "app.js",
+      "status": 200,
+      "matches_local": true
+    },
+    {
+      "file": "serial.js",
+      "status": 200,
+      "matches_local": true
+    },
+    {
+      "file": "protocol.js",
+      "status": 200,
+      "matches_local": true
+    },
+    {
+      "file": "storage.js",
+      "status": 200,
+      "matches_local": true
+    }
+  ]
+}

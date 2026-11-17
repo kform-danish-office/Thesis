@@ -1,0 +1,18 @@
+\section*{Preface and Project Contribution}
+\addcontentsline{toc}{section}{Preface and Project Contribution}
+
+This thesis was prepared at \department, Technical University of Denmark, for the \degreeprogramme. A USB-C power supply was built around a charge-pump PFC resonant converter. Its controller was developed for operation with a detachable load.
+
+The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the MCU firmware was developed. The first prototype was brought up and tested on the manufactured V1.0 PCB with rework. Its later drawing corrections were documented in V1.1. Development then continued with the integrated V2 board. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Appendix~\ref{app:provenance} describes the earlier designs and the integration, control, and test work completed in this project.
+
+The MCU regulates the isolated secondary bulk supply feeding the USB-C PD stage. The PD stage then regulates the USB-C output voltage to the selected level.
+
+In V2, the controller was moved onto a four-layer converter PCB with the power circuit, isolated sensing, and downstream USB-C stage (\cref{sec:hw-v2}). Browser logging and software tools were developed alongside the controller.
+
+The work progressed from converter bring-up and initial MCU control to the integrated V2 board and a reduced V3 edge-card layout. Secondary-winding heating and the later input-bridge hotspot guided the remaining magnetic and layout work. The V3 USB-PD section was removed to reduce volume, but new magnetics were not installed within the project time. Appendix~\ref{app:revised-plan} links the original milestones to the design, test results, and work still needed.
+
+\vfill
+\begin{center}
+\namesigdate{\thesisauthor~-~\studentnumber}
+\end{center}
+\vfill

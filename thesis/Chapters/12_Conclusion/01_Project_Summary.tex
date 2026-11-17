@@ -1,0 +1,40 @@
+\section{Project Outcome}
+\label{sec:concl-summary}
+
+A digitally controlled USB-C power supply was built and bench-tested
+using the DTU charge-pump PFC resonant topology and supplied
+planar magnetics \cite{ammar2020chargepump,ammar2021led}. Power hardware,
+sensing, auxiliaries, the USB-C PD output stage, and the MCU were integrated
+for detachable-load operation.
+
+The measured V1.0 prototype used a fixed \SI{1}{\mega\hertz} carrier
+with burst-enable control of average transfer. DMA voltage acquisition
+supported secondary-bus regulation, startup precharge provided limited excitation for the feedback supply,
+and separate no-load limits reduced continued charging.
+
+At \SI{240}{\volt}, \SI{50}{\hertz}, the
+\SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}
+settings were tested. The highest matched output was approximately
+\SI{79.89}{\watt}. The logged input--output difference and surface heating
+remain unresolved; sustained operation, ripple, and protection timing
+require further validation.
+
+V2 integrated the MCU, GaN stage, isolated sensing, and USB-C PD
+circuit on a four-layer PCB, documented in \cref{sec:app-v2-oct27}.
+The external series inductor was removed after excessive heating, and the
+tank was changed to use transformer leakage with approximately
+\SI{1.66}{\nano\farad}. Half-bridge heating decreased after the tank and
+timing changes, while input-bridge heating persisted. Later secondary-output tests reached \SI{137.1}{\watt} at \SI{13.69}{\volt} and \SI{10.01}{\ampere}, with voltage droop. The secondary region reached \SI{98.3}{\celsius} at the highest point. The input bridge reached \SI{83.9}{\celsius} near \SI{70.75}{\watt} and \SI{73.7}{\celsius} at the highest point. None of these tests reached thermal equilibrium.
+
+The target remains \SI{100}{\watt} continuous, with a minimum of
+\SI{65}{\watt} \cite{projectOctoberPlan}. Defined-duration tests with
+temperature histories are needed to assess sustained operation at these
+levels.
+
+V3 was prepared as a slimmer edge-card layout with secondary rectification
+retained and the USB-PD output section removed. The estimated net volume
+reduction is approximately \SI{8}{\percent}. Replacement planar magnetics
+were not installed within the available time, and V3 remained at the layout
+stage. Its losses, temperatures, and continuous output were not tested. A
+comparison with equivalent USB-C functionality requires the external output
+stage to be included.

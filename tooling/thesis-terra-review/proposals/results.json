@@ -1,0 +1,50 @@
+[
+  {
+    "id": "results-01",
+    "path": "Chapters/10_Results/08_Efficiency.tex",
+    "old": "The points are not an efficiency curve or a breakdown of individual stage losses.",
+    "new": "",
+    "reason": "The caption already identifies the plotted quantities; the adjacent discussion explains the limits of the estimates and stage-loss allocation.",
+    "facts_preserved": "Eleven initial estimates and input-minus-output differences remain identified in the caption and text.",
+    "checklist": [
+      "Direct engineering prose",
+      "Retain technical uncertainty"
+    ]
+  },
+  {
+    "id": "results-02",
+    "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+    "old": "The\nreported \\SI{85}{\\watt} V2 point requires separate board, firmware,\nsettings, and measurements. The hardware and settings used for that test\nmust be recovered before the reported \\SI{85}{\\watt} point can be repeated.",
+    "new": "The hardware, firmware, settings, and measurements for the reported\n\\SI{85}{\\watt} V2 point must be recovered before it can be repeated.",
+    "reason": "Combines two repetitive statements into one concrete action.",
+    "facts_preserved": "The V2 point remains reported and separate from the matched V1 measurement.",
+    "checklist": [
+      "Direct engineering prose",
+      "Retain technical uncertainty"
+    ]
+  },
+  {
+    "id": "results-03",
+    "path": "Chapters/10_Results/16_V3_Design_Outcome.tex",
+    "old": "The winding and input-path observations identify priorities for the next\nprototype, but hotspot relocation does not quantify total loss reduction.",
+    "new": "The winding and input-path observations identify priorities for the next\nprototype.",
+    "reason": "Removes a defensive qualification that does not add to the stated V3 comparison requirements.",
+    "facts_preserved": "The following sentence retains the matched power, thermal and complete-output-hardware comparison requirements.",
+    "checklist": [
+      "Direct engineering prose",
+      "Retain technical uncertainty"
+    ]
+  },
+  {
+    "id": "results-04",
+    "path": "Backmatter/Appendices/E_Experimental_Data.tex",
+    "old": "The source package includes waveform\r\ncopies, CSV plotting data, checksums, and processing steps. No\r\nwaveform was rescaled to force a target voltage, current, or power.",
+    "new": "The source package includes waveform\r\ncopies, CSV plotting data, checksums, and processing steps.",
+    "reason": "The preceding sentence already states that original amplitudes and offsets were retained; the final sentence repeats this defensively.",
+    "facts_preserved": "Original waveform amplitudes and offsets and calibration uncertainty remain stated.",
+    "checklist": [
+      "Direct engineering prose",
+      "Retain technical uncertainty"
+    ]
+  }
+]

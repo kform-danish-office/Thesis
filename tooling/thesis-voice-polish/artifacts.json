@@ -1,0 +1,16 @@
+{
+  "pages": 384,
+  "source_files": 467,
+  "artifacts": [
+    {
+      "name": "Richard_Xu_Thesis_Voice_Polished_2026-10-25.pdf",
+      "bytes": 16793768,
+      "sha256": "6ecc403febcac78539d52d9c71af9079e54bdfd4c83b48aa48b3c39e7dd63899"
+    },
+    {
+      "name": "Thesis_Voice_Polished_2026-10-25.zip",
+      "bytes": 80494944,
+      "sha256": "af6098af31f2cef025f01ddb046c672e389c6e97c5ae4dadb993e3830ed1579e"
+    }
+  ]
+}

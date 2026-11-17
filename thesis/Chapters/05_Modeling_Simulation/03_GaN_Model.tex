@@ -1,0 +1,6 @@
+\subsection{GaN Device Model}
+\label{sec:sim-ganmodel}
+
+The supplied GaN Systems GS66502B Level 1 Version 2.0 model is intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded \cite{gansystemsGS66502Bmodel}. It represents the electrical device in the supplied circuit rather than the complete LMG2652 package and PCB implementation.
+
+A switching model of the assembled stage requires voltage-dependent output charge, gate/enable timing, reverse conduction, and interconnect impedance. Temperature prediction additionally requires package, PCB, and cooling paths. At megahertz switching frequencies, transition-energy error directly affects calculated loss, so device-name substitution is insufficient.

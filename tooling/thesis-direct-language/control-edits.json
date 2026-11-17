@@ -1,0 +1,958 @@
+[
+  {
+    "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+    "before": "Each inherited model is used within this scope.",
+    "after": "The calculations below use the inherited models for these purposes."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+    "before": "For the USB-C circuit and voltage-control firmware, the comparison framework considers bus ripple, turn-on current, packet energy, and the response to component or command changes. Matched turn-on-current and packet-energy measurements remain required.",
+    "after": "A prototype model must predict bus ripple, turn-on current, packet energy, and the response to component or command changes. Matched turn-on-current and packet-energy measurements are still needed to check it."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "before": "Parameters visible in the inherited LTspice schematics compared with the prototype analysis values.",
+    "after": "Inherited simulation parameters and prototype calculation values."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "before": "Test condition stated per record",
+    "after": "Input conditions listed with each test"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "before": "Downstream interface and variable load",
+    "after": "USB-C PD stage and variable load"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex",
+    "before": "Prototype efficiency is estimated from measured input and output power, subject to the measurement-boundary and timing limitations stated in the results.",
+    "after": "Prototype efficiency is estimated from measured input and output power. The measurement locations and timing uncertainties are described with the results."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/03_GaN_Model.tex",
+    "before": "A fitted-stage switching model requires voltage-dependent output charge, gate/enable timing, reverse conduction, and interconnect impedance.",
+    "after": "A switching model of the assembled stage requires voltage-dependent output charge, gate/enable timing, reverse conduction, and interconnect impedance."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "before": "The retained logs and RAW files are inherited results; a matching final-board model was not rerun.",
+    "after": "The saved logs and RAW files are results from the inherited circuits. No simulation of the final board was completed."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex",
+    "before": "Time-step convergence and energy balance must be established before comparison with measured waveforms.",
+    "after": "Time-step convergence and energy balance must be checked before comparison with measured waveforms."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/05_Simulation_Cases.tex",
+    "before": "Established-burst operation at a known load provides the initial calibration point, followed by line-cycle buffering, load transients, and high-impedance operation. This final-hardware simulation remains unfinished; the following calculations provide analytical expectations for measurement.",
+    "after": "Model calibration should start with steady bursts at a known load, followed by line-cycle buffering, load transients, and high-impedance operation. The prototype simulation remains unfinished; the following calculations predict trends to check in testing."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/06_Steady_State.tex",
+    "before": "Resolving one scale does not establish behavior at the others.",
+    "after": "The model must resolve all three time scales."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex",
+    "before": "Their margins require a switched model with the measured circuit and timing.",
+    "after": "Checking the resulting peak voltage requires a switched model with the measured circuit and timing."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "before": "These calculated sensitivities are illustrative, rather than measured or simulated results.",
+    "after": "These are first-order calculations, not measured or simulated results."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "before": "First-order sensitivities and their interpretation.",
+    "after": "Calculated effects of changing circuit values and burst density."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "before": "More startup energy and a different transient trajectory",
+    "after": "More startup energy and a different transient response"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/08_Parameter_Sweeps.tex",
+    "before": "frequency and dead-time experiments require a separately identified configuration.",
+    "after": "frequency and dead-time experiments require their own recorded configuration."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "before": "Burst-dependent active loss and persistent auxiliary/idle consumption require stated power boundaries and burst state.",
+    "after": "Active-cycle loss depends on burst operation, while auxiliary and idle circuits continue to draw power. Loss calculations must state which supplies are included and the burst operating state."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "before": "Paired input/output readings at the Chapter~\\ref{ch:results} boundaries provide preliminary efficiency estimates and an input--output power difference, subject to synchronization, calibration, and auxiliary-power uncertainty.",
+    "after": "Paired input/output readings in Chapter~\\ref{ch:results} provide preliminary efficiency estimates and an input--output power difference. Their accuracy is limited by synchronization, calibration, and uncertainty about included auxiliary power."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "before": "Thermal images locate investigation areas; surface temperature alone does not quantify component loss.",
+    "after": "Thermal images show where heating occurs; surface temperature alone does not quantify component loss."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "before": "Diagnosis must distinguish dissipation from the mechanism preventing further load increase.",
+    "after": "Finding the output limit requires more than a loss calculation."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex",
+    "before": "Temperature and controller-state observations identify follow-up measurements but do not individually establish the limiting mechanism.",
+    "after": "Hotspots and controller states help choose the next measurements, but neither identifies the limiting mechanism on its own."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/10_Data_Limitations.tex",
+    "before": "DC-link ripple, magnetizing current, burst timing, and residual tank energy provide a framework for interpreting bench behavior.",
+    "after": "DC-link ripple, magnetizing current, burst timing, and residual tank energy help explain the bench results."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/10_Data_Limitations.tex",
+    "before": "Laboratory tests establish progress toward the power and thermal targets.",
+    "after": "Laboratory tests show how closely the converter approaches the power and thermal targets."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/chapter.tex",
+    "before": "Complete-system performance is therefore established by laboratory measurements rather than a calibrated final-board model.",
+    "after": "The assembled supply is therefore evaluated through laboratory measurements; a calibrated final-board model is not available."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "before": "The component measurements are attributed to M\\'ani Gautason.",
+    "after": "The components were measured by M\\'ani Gautason."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "before": "The supplied cores and windings were retained; this thesis covers electrical connection, mechanical integration, and converter analysis using the supplied values. The table distinguishes these contributions.",
+    "after": "The supplied cores and windings were integrated into the converter. Work in this thesis covered their electrical connections, mechanical mounting, and use in the converter calculations."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "before": "Attribution of the magnetic-component work.",
+    "after": "Supplied magnetic designs and the integration work in this thesis."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/01_Provenance.tex",
+    "before": "Use of the supplied values in analysis and interpretation of prototype tests",
+    "after": "Use of the supplied values in calculations and prototype testing"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+    "before": "Standalone planar-magnetics measurements supplied by M\\'ani Gautason.",
+    "after": "Planar-magnetics measurements by M\\'ani Gautason."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+    "before": "The installed A/B combination is unidentified, so calculations use the supplied range or a stated nominal value with the \\cref{eq:app-turns-ratio} convention.",
+    "after": "The fitted A/B combination is unknown, so calculations use the supplied range or a stated nominal value with the \\cref{eq:app-turns-ratio} convention."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+    "before": "Isolation assessment therefore covers the complete assembly.",
+    "after": "The complete assembly must therefore be checked for insulation spacing."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+    "before": "Requirements governing the installed magnetic interfaces.",
+    "after": "Electrical and mechanical requirements for mounting the magnetics."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+    "before": "Engineering requirement",
+    "after": "Requirement"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+    "before": "A component-specific terminal drawing is still required for reproducible assembly.",
+    "after": "A terminal drawing for each component is still needed to reproduce the assembly."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/04_Mounting_Concept.tex",
+    "before": "The photographed arrangement requires a defined fastening procedure and post-mounting air-gap check to establish repeatability.",
+    "after": "A repeatable assembly requires a fastening procedure and an air-gap check after mounting."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/05_Footprint_Interconnection.tex",
+    "before": "Reproduction requires terminal and polarity verification in addition to the gain estimate from turns ratio.",
+    "after": "The terminals and winding polarity must be checked before the assembly can be reproduced; turns ratio alone is insufficient."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/06_Mechanical_Assembly.tex",
+    "before": "Values in \\cref{tab:mag-inherited-measurements} were retained because inductance was not remeasured after installation and no detailed rework log was kept.",
+    "after": "Calculations use the values in \\cref{tab:mag-inherited-measurements} because inductance was not remeasured after installation and no detailed rework log was kept."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+    "before": "Winding-board spacing alone does not establish the complete isolation path.",
+    "after": "Checking winding-board spacing alone is insufficient."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+    "before": "Full insulation assessment additionally requires documented transformer spacing, material group, and standardized dielectric testing.",
+    "after": "A full insulation check also requires the transformer spacing, material group, and standardized dielectric tests."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/08_Parasitics.tex",
+    "before": "Parasitic effects associated with the installed magnetics.",
+    "after": "Parasitic effects in the installed magnetics."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/08_Parasitics.tex",
+    "before": "Numerical attribution requires installed-assembly impedance and capacitance measurements.",
+    "after": "Quantifying these effects requires impedance and capacitance measurements on the assembled converter."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+    "before": "Inductance and turns ratio do not establish an installed thermal limit.",
+    "after": "The thermal limit cannot be predicted from inductance and turns ratio alone."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex",
+    "before": "A continuous rating requires a timed thermal record on the identified assembly.",
+    "after": "Continuous output must be checked by recording temperature over time on the tested assembly."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "The table below lists the measurements needed to resolve the remaining questions.",
+    "after": "The remaining measurements are listed below."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "Evidence available for the magnetic integration.",
+    "after": "Measurements and checks for the installed magnetics."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "Question & Evidence and interpretation",
+    "after": "Check & Result"
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "Standalone electrical values & Supplied A/B measurements establish the component reference range.",
+    "after": "Component measurements & Supplied A/B measurements give the starting electrical values."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "Installed identity and terminals & The final A/B assignment and part-specific terminal/polarity map were not retained.",
+    "after": "Fitted variants and terminals & The fitted A/B combination and its terminal/polarity map are not documented."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "Installed parameters & No post-assembly inductance, ratio, or interwinding-capacitance extraction is available.",
+    "after": "Installed parameters & No post-assembly measurements of inductance, turns ratio, or interwinding capacitance are available."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "Mechanical and isolation margin & Overall hardware documentation is available; detailed retention, spacing, and magnetic dielectric-test records are incomplete.",
+    "after": "Mounting and insulation & Fastening details, magnetic spacing, and dielectric-test results are not fully documented."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "Operating temperature & Board thermal images are available, with limited component-specific and steady-state metadata.",
+    "after": "Operating temperature & Board thermal images show surface heating; component temperatures and thermal settling times are not fully documented."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/10_Verification.tex",
+    "before": "System operation & The test results demonstrate power transfer through the installed assembly at the reported operating points.",
+    "after": "Power transfer & Converter tests show power transfer through the installed magnetics at the reported loads."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+    "before": "These measurements support reproducible assembly and loss-driven revision.",
+    "after": "These measurements are needed to reproduce the assembly and reduce its losses."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+    "before": "The smaller V3 layout therefore establishes neither reduced magnetic loss nor increased continuous output.",
+    "after": "No reduction in magnetic loss or increase in continuous output was demonstrated with the smaller V3 layout."
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "The voltage-control firmware used for the identified final tests is described in Chapter~\\ref{ch:control}.",
+    "after": "The voltage-control firmware used for the final tests is described in Chapter~\\ref{ch:control}."
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "Hardware identity used to interpret the thesis measurements.",
+    "after": "Hardware used for the prototype tests."
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "Record & Physical status & Role in this thesis",
+    "after": "Hardware & Build status & Use"
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "Anchor for prototype photographs, layout, and measurements",
+    "after": "Board shown in the photographs, layout, and measurements"
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "Final fitted state",
+    "after": "Final resonant branch"
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "Configuration used for the final results",
+    "after": "Used for the final tests"
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "Documentation revision; no separate measured board",
+    "after": "Drawing revision; no separate test board"
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "Bring-up correction record and revision comparison",
+    "after": "Documents the bring-up corrections"
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "The earlier matched measurements remain associated with the modified V1.0 board.",
+    "after": "The earlier matched measurements were taken on the modified V1.0 board."
+  },
+  {
+    "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+    "before": "Assembled V1.0 laboratory prototype in the final fitted test configuration.",
+    "after": "Assembled V1.0 prototype used for the final tests."
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "before": "LMG2652 data-sheet quantities relevant to the prototype \\cite{tiLMG2652}. Values apply at the specified data-sheet conditions.",
+    "after": "LMG2652 ratings and characteristics \\cite{tiLMG2652}, under the data-sheet test conditions."
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "before": "Quantity & Value & Engineering implication",
+    "after": "Parameter & Value & Design consideration"
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "before": "Current and temperature must be assessed together.",
+    "after": "Check current and temperature together."
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "before": "Capacitive commutation contributes to the ZVS requirement.",
+    "after": "Allow enough commutation current to charge and discharge the output capacitances."
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "before": "Device limiting is distinct from PA2 firmware thresholds.",
+    "after": "This device limit is separate from PA2 firmware thresholds."
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "before": "Package metrics require the corresponding thermal boundary conditions.",
+    "after": "These values depend on the specified mounting and cooling conditions."
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "before": "These delays must be included when interpreting the switch node. The transistor dead time cannot be established from the timer registers alone.",
+    "after": "These delays affect the switch-node timing. Actual transistor dead time must be measured; timer settings alone are insufficient."
+  },
+  {
+    "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+    "before": "Soft turn-on must be assessed from the incoming switch's voltage/current relationship at the stated input and load, using the probing method in \\cref{sec:method-probing}.",
+    "after": "Soft turn-on must be checked from the incoming switch's voltage and current at the stated input and load, using the probing method in \\cref{sec:method-probing}."
+  },
+  {
+    "path": "Chapters/07_Hardware/05_Gate_Drive.tex",
+    "before": "carrier at PA8/PA9.",
+    "after": "carrier on MCU pins PA8/PA9."
+  },
+  {
+    "path": "Chapters/07_Hardware/05_Gate_Drive.tex",
+    "before": "matched gate-timing and commutation-current captures are required to establish effective dead time and ZVS",
+    "after": "matched gate-timing and commutation-current captures are needed to measure effective dead time and check ZVS"
+  },
+  {
+    "path": "Chapters/07_Hardware/06_Resonant_Output.tex",
+    "before": "Resonant-inductor arrangements examined during prototype bring-up.",
+    "after": "Resonant-inductor arrangements tested during bring-up."
+  },
+  {
+    "path": "Chapters/07_Hardware/06_Resonant_Output.tex",
+    "before": "The actual inductor arrangement is therefore stated for each waveform comparison. The installed path must be measured before a model is used to select another change.",
+    "after": "Waveform comparisons therefore need the fitted inductor arrangement. The installed path must be measured before the model is used to select another change."
+  },
+  {
+    "path": "Chapters/07_Hardware/07_USBC_Interface.tex",
+    "before": "Page borders and the title block are omitted to improve legibility.",
+    "after": ""
+  },
+  {
+    "path": "Chapters/07_Hardware/07_USBC_Interface.tex",
+    "before": "USB-PD negotiation and interoperability still need separate protocol tests before broader compliance can be claimed.",
+    "after": "USB-PD negotiation and interoperability still need protocol testing."
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "Analog Feedback and Measurement Nodes",
+    "after": "Analog Feedback and MCU Inputs"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "V2 retains these measurement functions with direct ADC connections",
+    "after": "V2 uses the same measurements with direct ADC connections"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "V2 sheet 4 MCU and signal interface. Feedback enters PA0--PA2 directly; PA8/PB13 provide carrier commands and PA11 provides burst enable. The controller is referenced to the primary-side domain.",
+    "after": "V2 sheet 4 MCU connections. Feedback enters pins PA0--PA2 directly; PA8/PB13 provide carrier commands and PA11 provides burst enable. The MCU uses the primary-side ground reference."
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "Meaning of the three firmware acquisition channels.",
+    "after": "MCU feedback pins and their functions."
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "Channel & Physical signal & Use in the baseline firmware",
+    "after": "MCU pin & Input & Firmware function"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "Primary-voltage indication",
+    "after": "Primary-voltage feedback"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "Active voltage regulation and overvoltage decisions",
+    "after": "Voltage regulation and overvoltage protection"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "Half-bridge-current-related signal",
+    "after": "Half-bridge current sensing"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "Loaded/no-load classification, diagnostics, and enabled current protection",
+    "after": "Load detection, diagnostics, and optional current protection"
+  },
+  {
+    "path": "Chapters/07_Hardware/08_Sensing.tex",
+    "before": "The settings used to identify a test configuration are given in \\Cref{sec:ctrl-feedback}.",
+    "after": "The calibration settings are given in \\Cref{sec:ctrl-feedback}."
+  },
+  {
+    "path": "Chapters/07_Hardware/09_Protection.tex",
+    "before": "Redundancy and single-fault response would also need to be assessed for a product-safety claim.",
+    "after": "Product qualification would also require checks of redundancy and single-fault response."
+  },
+  {
+    "path": "Chapters/07_Hardware/11_PCB_Layout.tex",
+    "before": "The reference drawing locates the AC input, high-frequency power stage, magnetic interface, and output/control circuits.",
+    "after": "The AC input, high-frequency power stage, magnetics, and output/control circuits are marked."
+  },
+  {
+    "path": "Chapters/07_Hardware/11_PCB_Layout.tex",
+    "before": "Annotated views of the manufactured V1.0 layout. The board geometry provides the baseline for interpreting the final assembly and its rework.",
+    "after": "V1.0 top and bottom copper, showing component regions and return paths."
+  },
+  {
+    "path": "Chapters/07_Hardware/11_PCB_Layout.tex",
+    "before": "a signal name on the drawing must match a working timer output on the selected MCU.",
+    "after": "the MCU pin on the drawing must support the required timer output."
+  },
+  {
+    "path": "Chapters/07_Hardware/13_Thermal.tex",
+    "before": "An enclosure or dedicated heat sink would change these paths and would need a separate assessment before a thermal rating could be assigned.",
+    "after": "An enclosure or dedicated heat sink would change these paths, so continuous output would need to be retested."
+  },
+  {
+    "path": "Chapters/07_Hardware/13_Thermal.tex",
+    "before": "Thermal images are compared by their labeled loads and visible surfaces.",
+    "after": "Thermal images are compared at the labeled loads and measured surfaces."
+  },
+  {
+    "path": "Chapters/07_Hardware/13_Thermal.tex",
+    "before": "Component temperatures still need to be recorded over time to assess sustained operation.",
+    "after": "Component temperatures still need to be recorded over time to check sustained operation."
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "The tested assembly is described by the component list in \\Cref{tab:hw-bom-provenance}, board photographs, and schematic changes. The fitted parts are identified in the list, while the photographs show changes to the resonant branch that are not captured by the revision name alone.",
+    "after": "The fitted components are listed in \\Cref{tab:hw-bom-provenance}. The board photographs show the resonant-branch changes made during bring-up."
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "Principal components identified in the fitted hardware record.",
+    "after": "Main components fitted to the prototype."
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "Recorded value or role",
+    "after": "Value or function"
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "windings in V1.0 record",
+    "after": "windings on V1.0"
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "in fitted record",
+    "after": "fitted to the prototype"
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "Connector-side power conversion and USB-C interface",
+    "after": "USB-C PD voltage regulation and interface"
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "V1.0 top-side assembly reference from the PCB export.",
+    "after": "V1.0 top-side assembly drawing."
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "Changes and interpretation corrections established during bring-up.",
+    "after": "Circuit and feedback corrections made during bring-up."
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "Resulting implementation or interpretation",
+    "after": "Correction"
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "V1.1 records the corrected assignment.",
+    "after": "The corrected pins are shown in V1.1."
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "V1.1 corrects the recorded diode connection and also includes component substitutions.",
+    "after": "V1.1 shows the corrected diode connection and component substitutions."
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "Half-bridge-current indication is used for load classification rather than treated as connector output current.",
+    "after": "The half-bridge-current signal is used for load detection; it is not the USB-C output current."
+  },
+  {
+    "path": "Chapters/07_Hardware/14_BOM_Manufacturing.tex",
+    "before": "Fitted components, calibration, and runtime settings define this configuration more precisely than the PCB revision alone.",
+    "after": "The fitted components, calibration, and runtime settings must be reproduced along with the PCB revision."
+  },
+  {
+    "path": "Chapters/07_Hardware/15_Unmanufactured_Revisions.tex",
+    "before": "Status of the later design revisions.",
+    "after": "Later circuit and layout revisions."
+  },
+  {
+    "path": "Chapters/07_Hardware/15_Unmanufactured_Revisions.tex",
+    "before": "Documentation corrections and component changes; no separate manufactured test board",
+    "after": "Drawing corrections and component changes; no separate test board was built"
+  },
+  {
+    "path": "Chapters/07_Hardware/15_Unmanufactured_Revisions.tex",
+    "before": "Compact layout continuation; not built or experimentally assessed",
+    "after": "More compact layout; not built or tested"
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "The common source supports both MCU targets; test results must identify the target, fitted assembly, and software configuration.",
+    "after": "The common source supports both MCUs. Each test needs the MCU, fitted parts, and firmware settings recorded together."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "Both layers are shown in the same projection. These layout views describe the board design; fitted changes made during testing are described separately.",
+    "after": "Both layers use the same view. Changes made during testing are described in the text."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "\\Cref{tab:hw-v2-pinmap} gives the assignments from MCU sheet 4 and the corresponding package pins.",
+    "after": "\\Cref{tab:hw-v2-pinmap} lists the MCU pins from sheet 4 and their package pin numbers."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "Controller connections for the G071 test platform and V2 F410 drawing. Package pin numbers in the last column refer to the F410CBU6.",
+    "after": "MCU pins on the G071 controller and V2 F410. Package pin numbers in the V2 column apply to the F410CBU6."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "G071 assignment & V2 F410 assignment",
+    "after": "G071 pins & V2 F410 pins"
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "The fitted parts must be confirmed on the assembled V2 before test results are interpreted.",
+    "after": "The parts fitted to the assembled V2 still need to be checked against the drawing."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "The final V1.0 arrangement with two \\SI{4.7}{\\micro\\henry} series inductors does not establish the missing V2 values.",
+    "after": "The final V1.0 arrangement used two \\SI{4.7}{\\micro\\henry} series inductors; this does not give the missing V2 values."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "The installed branch and transformer must be identified before calculating resonance or comparing switching waveforms.",
+    "after": "The fitted branch and transformer must be checked before calculating resonance or comparing switching waveforms."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "Displayed control and voltage-protection thresholds cannot be interpreted reliably until the firmware conversion scales match the measured circuit.",
+    "after": "Displayed voltages and voltage-protection thresholds are reliable only when the firmware conversion scales match the measured circuit."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "The assembled power path and USB-PD behavior still need dedicated checks beyond the preliminary powered observations in \\cref{sec:res-v2-testing}.",
+    "after": "Further power-path and USB-PD tests are still needed after the preliminary powered tests in \\cref{sec:res-v2-testing}."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "A complete test record linking these conditions is not available. The reported \\SI{85}{\\watt} remains a point to reconstruct and is not included in the measured curves.",
+    "after": "These conditions were not recorded together. The reported \\SI{85}{\\watt} point still needs to be repeated and is not included in the measured curves."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "The V1.0 \\SI{202.77}{\\milli\\metre} by \\SI{72.77}{\\milli\\metre} outline does not establish V2 dimensions, so power density requires measurement of the fitted V2 assembly.",
+    "after": "The V1.0 outline is \\SI{202.77}{\\milli\\metre} by \\SI{72.77}{\\milli\\metre}; V2 assembly dimensions must be measured separately before calculating its power density."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "before": "Neither the reported \\SI{85}{\\watt} point nor the matched \\SI{79.89}{\\watt} point establishes defined-duration operation at the \\SI{100}{\\watt} target.",
+    "after": "The reported \\SI{85}{\\watt} point and matched \\SI{79.89}{\\watt} point do not demonstrate sustained operation at the \\SI{100}{\\watt} target."
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "before": "the estimate therefore does not establish a reduction\nfor equal system functionality.",
+    "after": "the complete supply must be compared with those parts included."
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "before": "V3 design requirements to close before release; these are planned checks.",
+    "after": "V3 design checks needed before manufacture."
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "before": "Required design decision and check",
+    "after": "Design work and check"
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "before": "before assigning a released revision.",
+    "after": "before sending the design for manufacture."
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "before": "The smaller layout does not establish connector ratings, insulation\nspacing, assembled fit, or readiness for manufacture. These checks remain\nnecessary before the design can be released and evaluated as hardware.",
+    "after": "Connector ratings, insulation spacing, and assembled fit must still be\nchecked before manufacture and hardware testing."
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "before": "the complete power path,\ncontrol, thermal design, and external USB-PD output stage to be assessed.",
+    "after": "the complete power path,\ncontrol, thermal design, and external USB-PD output stage to be checked."
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "before": "the\nschematic/layout, design-rule, BOM, and manufacturing reviews must be\nclosed.",
+    "after": "the\nschematic, layout, design rules, BOM, and manufacturing details must be\nchecked."
+  },
+  {
+    "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+    "before": "V3 remains a layout estimate;\noperating evidence is limited to the V1 measurements and V2 bench\nobservations.",
+    "after": "V3 remains an untested layout;\noperating results come from the V1 measurements and V2 bench tests."
+  },
+  {
+    "path": "Chapters/07_Hardware/chapter.tex",
+    "before": "The following sections distinguish the tested assembly, subsequent circuit revisions, and the V3 layout.",
+    "after": "The following sections describe the tested assembly, later circuit revisions, and V3 layout."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "before": "Control and timing paths in the baseline firmware. The controller uses secondary-bulk voltage feedback at PA1 for regulation and the primary-current signal at PA2 for load classification. PA10 enables power-stage bursts while PA8/PA9 retain the fixed carrier. OFF/fault forces PA10 low; soft holdoff requests \\texttt{BLOW}, default zero.",
+    "after": "Baseline control loop and timing. PA1 provides secondary-bulk voltage feedback; PA2 provides primary-current feedback for load detection. PA10 enables bursts and PA8/PA9 generate the fixed carrier. OFF/fault drives PA10 low; soft holdoff requests \\texttt{BLOW}, which is zero by default."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "before": "Hardware resources used by the baseline firmware.",
+    "after": "Timers, ADC, and UART used by the baseline firmware."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "before": "Resource & Assignment & Function",
+    "after": "Peripheral & MCU pins & Function"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "before": "Fixed carrier and enable-edge synchronization",
+    "after": "Fixed carrier and attempts to align enable edges"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "before": "Continuous three-channel acquisition",
+    "after": "Continuous sampling of the three inputs"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+    "before": "external timing captures are required to establish their jitter distribution.",
+    "after": "external timing captures are needed to measure their jitter."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "before": "The reference changes between drawings in \\cref{sec:hw-sensing} require a measured node-to-pin check.",
+    "after": "The reference changes between drawings in \\cref{sec:hw-sensing} must be checked by measuring the circuit voltage and corresponding ADC-pin voltage."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "before": "Calibration fields exported with the controller configuration.",
+    "after": "ADC calibration settings in the configuration export."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "before": "Channel & Principal fields & Interpretation",
+    "after": "MCU pin & Settings & Purpose"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "before": "Primary-voltage reconstruction",
+    "after": "Primary-voltage conversion"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+    "before": "Secondary-bulk reconstruction",
+    "after": "Secondary-bulk voltage conversion"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/06_Blocking_Limitations.tex",
+    "before": "Matched timing tests were not performed, so a measured improvement in update jitter or stability cannot be assigned to this change alone.",
+    "after": "Matched timing tests were not performed, so the change in update jitter or stability was not measured separately."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+    "before": "Acquisition, feedback interpretation, operating states, and burst scheduling were revised at separate stages. The available measurements do not isolate a performance gain from DMA alone.",
+    "after": "Acquisition, feedback scaling, operating states, and burst scheduling changed at different stages. The tests do not isolate the effect of DMA alone."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/08_Control_Law.tex",
+    "before": "Functional summary of the baseline voltage-control path. Protection details are specified separately in Section~\\ref{sec:ctrl-faults}.",
+    "after": "Baseline voltage-control sequence. Fault handling is described in Section~\\ref{sec:ctrl-faults}."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/09_Limits_Antiwindup.tex",
+    "before": "Requested duty, scheduled burst width, and effective average duty must be recorded separately for waveform comparisons.",
+    "after": "Waveform comparisons need the requested duty, scheduled burst width, and effective average duty."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex",
+    "before": "These are controller defaults, not connector-voltage limits for every test.",
+    "after": "These defaults apply to the secondary bulk supply; the USB-C output has its own voltage setting."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex",
+    "before": "Peak markers and a firmware-state trace are still needed to assess its worst-case margin.",
+    "after": "Peak-voltage measurements and a firmware-state trace are still needed to check the worst case."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+    "before": "Operating flow in the baseline firmware. Mode commands select OPEN manual duty or voltage control, whose branches include loaded/no-load operation and eligible soft holdoff at \\texttt{BLOW} (default zero). OFF and latched faults inhibit PA10 globally.",
+    "after": "Baseline firmware states. OPEN selects manual duty; voltage control switches between loaded and no-load operation and can enter soft holdoff at \\texttt{BLOW} (default zero). OFF and latched faults force PA10 low."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+    "before": "Main operating states and exit conditions.",
+    "after": "Firmware states, actions, and exit conditions."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+    "before": "Configure resources and hold PA10 low",
+    "after": "Configure peripherals and hold PA10 low"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/12_Fault_Handling.tex",
+    "before": "this does not establish detection of every conversion or transfer error.",
+    "after": "the flag alone does not detect every conversion or transfer error."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/12_Fault_Handling.tex",
+    "before": "This extended threshold must be included when assessing voltage margin.",
+    "after": "This higher threshold must be included when checking voltage stress."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/12_Fault_Handling.tex",
+    "before": "These firmware functions do not provide a protection channel independent of the controller.",
+    "after": "There is no separate hardware protection channel in these firmware checks."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/13_Timing_Resources.tex",
+    "before": "Each test therefore needs its source and runtime \\texttt{VER} response recorded together with its \\texttt{EXPORT}.",
+    "after": "Each test therefore needs the source version, runtime \\texttt{VER} response, and \\texttt{EXPORT} saved together."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+    "before": "Bring-up exposed limitations in acquisition timing, feedback interpretation, and burst control. \\Cref{tab:ctrl-version-identity} summarizes the resulting development stages, independently of the V1, V2, and V3 hardware revisions.",
+    "after": "Bring-up exposed limitations in acquisition timing, feedback scaling, and burst control. \\Cref{tab:ctrl-version-identity} summarizes the firmware development; V1, V2, and V3 refer to hardware revisions."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+    "before": "Continuous ADC DMA and revised feedback interpretation",
+    "after": "Continuous ADC DMA and corrected feedback scaling"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+    "before": "Final control used with the documented prototype",
+    "after": "Final control used for the prototype tests"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "before": "Changes from the measured-baseline controller to the V2 controller port.",
+    "after": "MCU pin and peripheral changes from the baseline controller to V2."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "before": "Same analog pins and signal meanings",
+    "after": "Same feedback inputs on the same MCU pins"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "before": "Command IDs and acknowledgments distinguish requested changes from accepted ones.",
+    "after": "Command IDs and acknowledgments show whether the MCU accepted a change."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "before": "The browser uses the same physical channel meanings. \\texttt{vsec} is bulk voltage before the MPQ4242, \\texttt{current} is the primary half-bridge-current estimate derived from input PA2, and \\texttt{power} is their selected diagnostic voltage--current product.",
+    "after": "The browser reports \\texttt{vsec} as bulk voltage before the MPQ4242, \\texttt{current} as the primary half-bridge-current estimate derived from input PA2, and \\texttt{power} as their selected diagnostic voltage--current product."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "before": "Powered validation requires confirmation of the fitted configuration, sensing gains, and switching timing, followed by matched electrical and thermal tests toward",
+    "after": "Further powered tests require the fitted parts, sensing gains, and switching timing to be checked, followed by matched electrical and thermal tests toward"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "before": "remain distinct (Section~\\ref{sec:hw-v2}).",
+    "after": "come from different tests (Section~\\ref{sec:hw-v2})."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "Development Stages and Software Identification",
+    "after": "Firmware Development and Versions"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "identified final tests",
+    "after": "final tests with a recorded firmware version"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "Table~\\ref{tab:ctrl-software-identities} identifies the two archived\ncontrollers. The \\texttt{PWR} software identifiers are distinct from the\nV1, V2, and V3 hardware names; exact software identification is retained\nwhere needed to reproduce a test.",
+    "after": "Table~\\ref{tab:ctrl-software-identities} lists the two firmware programs\nincluded with this thesis. The \\texttt{PWR} labels are software versions;\nV1, V2, and V3 refer to the boards."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "Names used for the two archived controller programs.",
+    "after": "Firmware versions."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "Development stage & Software identifier & Role in this thesis",
+    "after": "Firmware & Version & Use"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "Controller associated with the identified final V1.0 test records",
+    "after": "Used in the main V1.0 test series; individual run versions are listed with the results"
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "Hardware port with browser commands and logging; not an identification of the later bench-run firmware",
+    "after": "MCU port with browser commands and logging. The later bench-run version was not recorded."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "The following sections use descriptive development stages. Software\nhistory and source-file details are given in Appendix~\\ref{app:firmware}.",
+    "after": "The software history and source-file details are given in\nAppendix~\\ref{app:firmware}."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "Further validation requires synchronized control-state, enable-timing, electrical, and thermal measurements to separate control limits from power-stage limits.",
+    "after": "Further tests need synchronized controller-state, enable-timing, electrical, and thermal measurements to determine whether the controller or power stage limits output."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/chapter.tex",
+    "before": "The inherited models and analytical relationships are used to estimate charge transfer, resonant operation, and parameter sensitivity. They do not represent the complete prototype hardware and controller. The assembled supply is therefore evaluated through laboratory measurements; a calibrated final-board model is not available.",
+    "after": "Charge transfer, resonant gain and phase, and component sensitivity are examined using the circuit equations and supplied LTspice models."
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+    "before": "What the Models Can Explain",
+    "after": "Charge-Transfer and Resonant Models"
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/01_Objectives.tex",
+    "before": " The calculations below use the inherited models for these purposes.",
+    "after": ""
+  },
+  {
+    "path": "Chapters/05_Modeling_Simulation/10_Data_Limitations.tex",
+    "before": "The following magnetics, hardware, and control chapters define the installed circuit and operating conditions required for that calibration. Laboratory tests show how closely the converter approaches the power and thermal targets.",
+    "after": ""
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/chapter.tex",
+    "before": "The following hardware chapter describes the power-board integration and bring-up changes. Installed magnetic-path measurements remain necessary to separate magnetic, interconnect, and switching losses.",
+    "after": ""
+  },
+  {
+    "path": "Chapters/07_Hardware/chapter.tex",
+    "before": "The timer rework, resonant connections, and feedback signals set the controller requirements in the next chapter.",
+    "after": ""
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "This chapter presents the control implementation, development from open-loop bring-up to the voltage-control baseline, and V2 port with browser commands and logging. Both complete controller sources are included in Appendix~\\ref{app:full-embedded-source}.",
+    "after": "The baseline and V2 firmware sources are included in Appendix~\\ref{app:full-embedded-source}."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "final tests with a recorded firmware version and retained in the integrated V2 port.",
+    "after": "main final test series and retained in the integrated V2 port."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "before": "Appendix~\\ref{app:firmware} maps the functions and commands. Both complete sources are included in Appendix~\\ref{app:full-embedded-source}, with identifiers in \\cref{sec:ctrl-firmware-identities}.",
+    "after": "Commands and functions are listed in Appendix~\\ref{app:firmware}. The full firmware sources are in Appendix~\\ref{app:full-embedded-source}, and their versions are listed in \\cref{sec:ctrl-firmware-identities}."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/14_Version_Comparison.tex",
+    "before": "\\section{Control Development}\n\\label{sec:ctrl-comparison}\n\nBring-up exposed limitations in acquisition timing, feedback scaling, and burst control. \\Cref{tab:ctrl-version-identity} summarizes the firmware development; V1, V2, and V3 refer to hardware revisions. Matched tests were not performed to isolate the performance effect of each change.\n\n\\begin{table}[htbp]\n\\centering\n\\caption{Progression from hardware bring-up to the final controller.}\n\\label{tab:ctrl-version-identity}\n\\begin{tabularx}{\\textwidth}{@{}p{0.15\\textwidth}p{0.39\\textwidth}X@{}}\n\\toprule\nStage & Implementation & Purpose\\\\\n\\midrule\nOpen loop & Open-loop carrier and enable commands & Verify timing and basic energy transfer\\\\\nBlocking feedback & Voltage feedback with blocking acquisition & Establish initial closed-loop behavior\\\\\nDMA feedback & Continuous ADC DMA and corrected feedback scaling & Remove blocking reads and regulate PA1 voltage\\\\\nFinal baseline & Burst-edge alignment requests, no-load guard, and loaded duty trim & Final control used for the prototype tests\\\\\n\\bottomrule\n\\end{tabularx}\n\\end{table}\n\n\\input{Chapters/08_Control_Firmware/04_V0_Open_Loop}\n\\input{Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop}\n\\input{Chapters/08_Control_Firmware/06_Blocking_Limitations}\n\\input{Chapters/08_Control_Firmware/07_V2_DMA}\n",
+    "after": "\\section{Control Development}\n\\label{sec:ctrl-comparison}\n\nControl development addressed manual voltage adjustment, blocking conversion waits, an unsuitable feedback quantity, and excess energy transfer during startup or after load removal (\\Cref{tab:ctrl-version-identity}). Each stage changed how the switching bursts responded to the converter and its load.\n\n\\begin{table}[htbp]\r\n\\centering\r\n\\caption{Firmware changes and their functional improvements.}\r\n\\label{tab:ctrl-version-identity}\r\n\\begin{tabularx}{\\textwidth}{@{}p{0.15\\textwidth}p{0.39\\textwidth}X@{}}\r\n\\toprule\r\nStage & Change & Improvement\\\\\r\n\\midrule\r\nOpen loop & Manual carrier and burst-enable commands & Check switching timing and basic transfer before adding automatic voltage control\\\\\r\nBlocking feedback & Voltage feedback with blocking ADC reads & Adjust transfer from the sensed voltage instead of relying on manual correction\\\\\r\nDMA feedback & Continuous ADC DMA and corrected feedback scaling & Remove conversion waits and regulate bulk voltage from PA1 rather than an unsuitable voltage--current product\\\\\r\nFinal baseline & Burst-edge alignment attempts, startup precharge, no-load guard, and loaded duty trim & Limit commanded energy at startup and no load, reduce continued charging after load removal, and adjust transfer as load changes\\\\\r\n\\bottomrule\r\n\\end{tabularx}\r\n\\end{table}\n\n\\input{Chapters/08_Control_Firmware/04_V0_Open_Loop}\n\\input{Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop}\n\\input{Chapters/08_Control_Firmware/06_Blocking_Limitations}\n\\input{Chapters/08_Control_Firmware/07_V2_DMA}\n",
+    "reason": "Explain the problem, implementation change and functional benefit of each control stage."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/04_V0_Open_Loop.tex",
+    "before": "\\subsection{Open-Loop Bring-Up}\n\\label{sec:ctrl-v0}\n\nManual carrier and enable commands were used to verify timing, dead interval, and basic transfer under controlled input and load. Load-dependent output voltage and continued no-load charging required closed-loop control. Open-loop operation was retained for diagnostics.\n",
+    "after": "\\subsection{Open-Loop Bring-Up}\n\\label{sec:ctrl-v0}\n\nManual carrier and enable commands were used to check timing, the dead interval, and basic energy transfer under controlled input and load. Each command could be changed directly, making this a useful mode for bringing up the power stage and finding connection or timing problems. Output voltage still varied with load, and continued bursts could charge the unloaded output, so closed-loop control was needed. Open-loop operation was kept for diagnostics.\n",
+    "reason": "Explain the problem, implementation change and functional benefit of each control stage."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex",
+    "before": "\\subsection{Voltage Control with Blocking ADC Reads}\n\\label{sec:ctrl-v1}\n\nThe initial voltage loop used blocking ADC reads, adding conversion time directly to each control update. Acquisition, UART handling, and other foreground tasks therefore affected loop timing.\n",
+    "after": "\\subsection{Voltage Control with Blocking ADC Reads}\n\\label{sec:ctrl-v1}\n\nAdding voltage feedback allowed the burst command to respond to the sensed voltage instead of relying on manual adjustment. The controller could therefore increase or reduce energy transfer when the voltage changed under load.\n\nThe first implementation waited for each ADC conversion before continuing the control update. Conversion waits, UART handling, and other foreground work shared the same execution path and could delay the next duty adjustment.\n",
+    "reason": "Explain the problem, implementation change and functional benefit of each control stage."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/06_Blocking_Limitations.tex",
+    "before": "\\label{sec:ctrl-blocking}\nContinuous DMA acquisition removed the conversion wait from the foreground path. Matched timing tests were not performed, so the change in update jitter or stability was not measured separately.\n",
+    "after": "\\label{sec:ctrl-blocking}\nThe conversion wait lengthened the time between opportunities to process a command or update burst duty. Circular DMA removed that wait by transferring samples into memory in the background. ADC acquisition could then continue while the foreground handled commands and control.\n",
+    "reason": "Explain the problem, implementation change and functional benefit of each control stage."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/07_V2_DMA.tex",
+    "before": "\\subsection{Moving to DMA and Voltage Feedback}\n\\label{sec:ctrl-v2}\n\nThe baseline uses continuous three-channel ADC1 acquisition and circular DMA. The sample-time setting is \\texttt{ADC\\_SAMPLETIME\\_39CYCLES\\_5}. The foreground reads the buffer without waiting in \\texttt{analogRead()}, so acquisition continues during command handling and control updates.\n\nThe quantity used for feedback also had to be corrected. In early tests, voltage was multiplied by the current-related input, but PA2 carries half-bridge-current information rather than connector output current. That product was removed from active regulation, and the loop was closed on secondary voltage. The \\texttt{POWER} command, \\texttt{KP}, \\texttt{KI}, and earlier power-feedback fields remain for compatibility or diagnostics. They do not select an active PI output-power controller in the baseline firmware.\n\nAcquisition, feedback scaling, operating states, and burst scheduling changed at different stages. The tests do not isolate the effect of DMA alone.\n",
+    "after": "\\subsection{Moving to DMA and Voltage Feedback}\n\\label{sec:ctrl-v2}\n\nThe baseline uses continuous three-channel ADC1 acquisition and circular DMA. The sample-time setting is \\texttt{ADC\\_SAMPLETIME\\_39CYCLES\\_5}. The foreground reads the buffer without waiting in \\texttt{analogRead()}, so acquisition continues during command handling and control updates. The control loop can use the latest available samples without pausing for a conversion.\n\nThe feedback quantity also had to be corrected. In early tests, voltage was multiplied by the current-related input, but PA2 carries half-bridge-current information rather than connector output current. That product was removed from active regulation, and the loop was closed on secondary voltage. The error signal then corresponded to the bulk supply the MCU was intended to regulate. The \\texttt{POWER} command, \\texttt{KP}, \\texttt{KI}, and earlier power-feedback fields remain for compatibility or diagnostics. They do not select an active PI output-power controller in the baseline firmware.\n\nStartup precharge limits the initial energy packets used to power the isolated feedback circuit. The no-load guard and soft holdoff reduce continued charging after load removal, while loaded duty trim adjusts transfer as demand changes. Bounded carrier-update polling attempts to place burst edges at carrier boundaries to reduce partial cycles without changing the fixed carrier.\n",
+    "reason": "Explain the problem, implementation change and functional benefit of each control stage."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/chapter.tex",
+    "before": "Continuous acquisition and direct secondary-voltage regulation addressed the measurement and feedback limitations found during bring-up. Startup and load-dependent states then bounded energy transfer. Further tests need synchronized controller-state, enable-timing, electrical, and thermal measurements to determine whether the controller or power stage limits output.",
+    "after": "",
+    "reason": "Remove repeated closing summary and measurement disclaimer now that stage benefits are explained in Section8.5."
+  }
+]

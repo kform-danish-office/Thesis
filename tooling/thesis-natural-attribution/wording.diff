@@ -1,0 +1,397 @@
+--- before/Backmatter/Appendices/D_Modeling_Files.tex
++++ after/Backmatter/Appendices/D_Modeling_Files.tex
+@@ -13,7 +13,7 @@
+ \path{Simplified_for_journal_revision.asc} & Earlier nonisolated rectifier model; \SI{325}{\volt} peak, \SI{50}{\hertz}; \(\CDC=\SI{10}{\micro\farad}\), \(\LRES=\SI{158}{\micro\henry}\), \(\CP=\SI{1.3}{\nano\farad}\), \(\CRES=\SI{200}{\pico\farad}\), carrier \SI{1.04}{\mega\hertz}\\
+ \path{Simplified_for_journal_revision_2.asc} & Related earlier circuit with \(\CRES=\SI{190}{\pico\farad}\) and carrier \SI{1.035}{\mega\hertz}\\
+ \path{Power_loss_breakdown.asc}; \path{Power_loss_breakdown_2.asc} & Earlier loss-analysis configurations and measurement directives\\
+-\path{GaN_LTspice_GS66502B_L1V2.lib} & GS66502B device model used in inherited simulations\\
++\path{GaN_LTspice_GS66502B_L1V2.lib} & GS66502B device model used in the supplied simulations\\
+ \bottomrule
+ \end{longtable}
+ The supplied circuit model uses a GS66502B, while an integrated LMG2652 half bridge was used in the prototype. Thermal behavior, leakage current, and package stray inductance are excluded from the model \cite{gansystemsGS66502Bmodel}. Switching-loss and temperature predictions for the installed stage therefore need a model of its devices and circuit.
+--- before/Backmatter/Appendices/F_Contribution_Provenance.tex
++++ after/Backmatter/Appendices/F_Contribution_Provenance.tex
+@@ -1,4 +1,4 @@
+-\chapter{Project Contributions and Inherited Designs}
++\chapter{Project Contributions and Earlier DTU Designs}
+ \label{app:provenance}
+ 
+ The project began with a charge-pump topology and planar magnetics from earlier
+--- before/Backmatter/References.tex
++++ after/Backmatter/References.tex
+@@ -32,7 +32,7 @@
+ \bibitem{comsol62}
+ COMSOL AB,
+ \emph{COMSOL Multiphysics 6.2}.
+-Finite-element software referenced in inherited planar-magnetics documentation.
++Finite-element software referenced in the supplied planar-magnetics documentation.
+ 
+ \bibitem{tiLMG2652}
+ Texas Instruments,
+--- before/Chapters/01_Introduction/01_Motivation.tex
++++ after/Chapters/01_Introduction/01_Motivation.tex
+@@ -9,4 +9,4 @@
+ 
+ The supplied planar inductor and transformer set the starting point. Their PCB windings provide a low profile. The board had to accommodate their footprint, winding connections, insulation spacing, and mounting, while the resonant operating point had to match their electrical parameters.
+ 
+-An LMG2652 GaN half bridge, an MCU, and the USB-C output section were added around these parts in the first prototype. Average power was controlled by enabling groups of fixed-frequency switching cycles. The same approach was carried into V2, with the controller integrated onto the converter PCB. This allowed the inherited conversion principle to be tested with a detachable, variable load and then developed into a more integrated assembly.+An LMG2652 GaN half bridge, an MCU, and the USB-C output section were added around these parts in the first prototype. Average power was controlled by enabling groups of fixed-frequency switching cycles. The same approach was carried into V2, with the controller integrated onto the converter PCB. This allowed the original conversion principle to be tested with a detachable, variable load and then developed into a more integrated assembly.--- before/Chapters/01_Introduction/02_Problem_Statement.tex
++++ after/Chapters/01_Introduction/02_Problem_Statement.tex
+@@ -9,7 +9,7 @@
+ 
+ The main question is:
+ \begin{quote}
+-How can an inherited charge-pump PFC resonant converter be implemented and controlled as a USB-C power supply, and what output capability, regulation, input power quality, efficiency, and thermal behavior does the assembled prototype demonstrate?
++How can the DTU charge-pump PFC resonant converter be implemented and controlled as a USB-C power supply, and what output capability, regulation, input power quality, efficiency, and thermal behavior does the assembled prototype demonstrate?
+ \end{quote}
+ 
+ The main energy transfers and component constraints are analyzed first. The hardware and control choices follow from that analysis. The laboratory results show where the targets were met and where further work is needed.
+--- before/Chapters/01_Introduction/03_Aim_Objectives.tex
++++ after/Chapters/01_Introduction/03_Aim_Objectives.tex
+@@ -1,7 +1,7 @@
+ \section{Project Goals}
+ \label{sec:intro-aim}
+ 
+-The aim was to build and evaluate an isolated AC--DC power supply from the inherited charge-pump topology and supplied planar magnetics, with digital burst control and a USB-C output.
++The aim was to build and evaluate an isolated AC--DC power supply from the charge-pump topology from earlier DTU work and supplied planar magnetics, with digital burst control and a USB-C output.
+ 
+ The converter implementation and test work had six objectives:
+ \begin{enumerate}[label=\arabic*)]
+--- before/Chapters/01_Introduction/04_Research_Questions.tex
++++ after/Chapters/01_Introduction/04_Research_Questions.tex
+@@ -4,7 +4,7 @@
+ 
+ Five questions connect the implementation choices to the tests and remaining work:
+ \begin{enumerate}[label=\textbf{RQ\arabic*:}]
+-\item \textbf{Implementation.} Can the inherited charge-pump resonant circuit be built with the selected GaN half bridge, supplied planar magnetics, isolated sensing, auxiliary supplies, and USB-C output section?
++\item \textbf{Implementation.} Can the original charge-pump resonant circuit be built with the selected GaN half bridge, supplied planar magnetics, isolated sensing, auxiliary supplies, and USB-C output section?
+ \item \textbf{Control.} How is secondary voltage controlled during startup, loaded operation, load attachment, load removal, and no load, and how is that control carried from the first prototype to V2?
+ \item \textbf{Performance.} What output power, voltage regulation, input power quality, efficiency, switching behavior, and temperature are observed in the tests? How do those results compare with the \SI{65}{\watt} continuous minimum, the earlier \SI{75}{\watt} validation milestone, and the \SI{100}{\watt} continuous target?
+ \item \textbf{Magnetic integration.} How do the supplied inductor and transformer affect the connections, resonant design, mounting, insulation spacing, and thermal arrangement?
+--- before/Chapters/01_Introduction/07_Thesis_Structure.tex
++++ after/Chapters/01_Introduction/07_Thesis_Structure.tex
+@@ -1,7 +1,7 @@
+ \section{Thesis Structure}
+ \label{sec:intro-structure}
+ 
+-The thesis follows the path from the inherited circuit to the tested supply. Chapter~\ref{ch:background} explains the conversion principle and the requirements of powering a USB-C device. Chapter~\ref{ch:requirements} turns that application into targets, operating states, and an architecture. Chapter~\ref{ch:analysis} gives the component calculations and explains the interactions between the input and output paths. Chapter~\ref{ch:simulation} then identifies what the inherited models can explain and where a model of the final prototype is still needed.
++The thesis follows the path from the original circuit to the tested supply. Chapter~\ref{ch:background} explains the conversion principle and the requirements of powering a USB-C device. Chapter~\ref{ch:requirements} turns that application into targets, operating states, and an architecture. Chapter~\ref{ch:analysis} gives the component calculations and explains the interactions between the input and output paths. Chapter~\ref{ch:simulation} then identifies what the supplied models can explain and where a model of the final prototype is still needed.
+ 
+ Chapters~\ref{ch:magnetics} and \ref{ch:hardware} show how the supplied magnetic components were integrated and how the hardware developed from the first prototype through V2 and the reduced V3 layout. Chapter~\ref{ch:control} follows the MCU firmware development, its adaptation for V2, and the operating states used in testing. Chapter~\ref{ch:methods} defines the test setup and measurement methods.
+ 
+--- before/Chapters/02_Background/04_Soft_Switching_GaN.tex
++++ after/Chapters/02_Background/04_Soft_Switching_GaN.tex
+@@ -15,6 +15,6 @@
+ 
+ Dead time must complete node commutation without excessive reverse conduction. An insufficient interval can leave residual turn-on voltage or allow cross conduction; an excessive interval increases loss. The required interval depends on bus voltage, current, capacitance, and tank state, so burst restart is assessed separately from established switching.
+ 
+-The prototype uses an integrated LMG2652 half bridge. The inherited discrete-GaN and external-driver models differ in capacitance, delay, sensing response, and thermal paths. These models describe the operating principle, but the assembled stage needs its own switching measurements.
++The prototype uses an integrated LMG2652 half bridge. The supplied discrete-GaN and external-driver models differ in capacitance, delay, sensing response, and thermal paths. These models describe the operating principle, but the assembled stage needs its own switching measurements.
+ 
+ ZVS must be checked from switch-node voltage and the incoming gate command or device turn-on time on the same time base, with adequate bandwidth and controlled probe loading, loop area, and common-mode error. Chapter~\ref{ch:results} applies these criteria to the available captures.
+--- before/Chapters/04_Topology_Analysis/08_ZVS.tex
++++ after/Chapters/04_Topology_Analysis/08_ZVS.tex
+@@ -17,4 +17,4 @@
+ 
+ Near-carrier resonance does not establish ZVS across the operating range. Tolerances shift resonance, pump current falls near line zero crossings, and idle intervals can remove circulating current. These conditions require separate switching captures even at fixed dead time.
+ 
+-Dead time must complete commutation without excessive reverse conduction. The effective interval includes command timing, driver propagation, and device response. A quantitative margin requires calibrated node capacitance and timing, which the inherited model does not provide. Section~\ref{sec:res-zvs} assesses the available captures.
++Dead time must complete commutation without excessive reverse conduction. The effective interval includes command timing, driver propagation, and device response. A quantitative margin requires calibrated node capacitance and timing, which the supplied model does not provide. Section~\ref{sec:res-zvs} assesses the available captures.
+--- before/Chapters/04_Topology_Analysis/11_Design_Summary.tex
++++ after/Chapters/04_Topology_Analysis/11_Design_Summary.tex
+@@ -28,4 +28,4 @@
+ 
+ The pump values place ideal charge transfer in the intended power range, while series values place nominal resonance near the carrier. Magnetizing current, burst transitions, and DC-link ripple determine departures from this estimate.
+ 
+-Pump capacitance and line voltage set charge transfer; link capacitance buffers mains-energy ripple; the tank and ratio set secondary excitation; both branch currents determine commutation and heating. Chapter~\ref{ch:simulation} applies these relationships to the inherited models, and Chapter~\ref{ch:results} evaluates the assembled converter.
++Pump capacitance and line voltage set charge transfer; link capacitance buffers mains-energy ripple; the tank and ratio set secondary excitation; both branch currents determine commutation and heating. Chapter~\ref{ch:simulation} applies these relationships to the supplied models, and Chapter~\ref{ch:results} evaluates the assembled converter.
+--- before/Chapters/05_Modeling_Simulation/01_Objectives.tex
++++ after/Chapters/05_Modeling_Simulation/01_Objectives.tex
+@@ -3,6 +3,6 @@
+ 
+ Charge-transfer analysis estimates input-power scale, and the resonant equivalent circuit estimates active-cycle gain and phase. Clamp timing and burst transitions require a switched model; efficiency and temperature additionally require calibrated loss and thermal models.
+ 
+-The inherited LTspice circuits describe the predecessor rectifier. Supplied magnetic measurements provide the inductance and transformer parameters used in Chapter~\ref{ch:analysis}. Their application to the prototype accounts for the changed topology and installed components.
++The supplied LTspice circuits describe the predecessor rectifier. Supplied magnetic measurements provide the inductance and transformer parameters used in Chapter~\ref{ch:analysis}. Their application to the prototype accounts for the changed topology and installed components.
+ 
+ A prototype model must predict bus ripple, turn-on current, packet energy, and the response to component or command changes. Matched turn-on-current and packet-energy measurements are still needed to check it.
+--- before/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex
++++ after/Chapters/05_Modeling_Simulation/02_Uploaded_LTspice_Files.tex
+@@ -1,11 +1,11 @@
+-\section{Inherited LTspice Circuits}
++\section{Supplied LTspice Circuits}
+ \label{sec:sim-files}
+ 
+-The inherited \sourcefile{Simplified_for_journal_revision.asc} and \sourcefile{Simplified_for_journal_revision_2.asc} circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.
++The supplied \sourcefile{Simplified_for_journal_revision.asc} and \sourcefile{Simplified_for_journal_revision_2.asc} circuits represent the high-voltage PFC rectifier: source, bridge, pump capacitor, half bridge, series tank, rectifier, and resistive load. The prototype adds isolation, a separate pump inductor, the USB-C stage, and MCU burst control, changing both topology and parameters.
+ 
+ \begin{table}[H]
+ \centering
+-\caption{Inherited simulation parameters and prototype calculation values.}
++\caption{Reference simulation parameters and prototype calculation values.}
+ \label{tab:sim-reference-passives}
+ \begin{tabularx}{\textwidth}{@{}L{0.26\textwidth}L{0.19\textwidth}L{0.19\textwidth}Y@{}}
+ \toprule
+@@ -25,4 +25,4 @@
+ 
+ Replacing the \SI{158}{\micro\henry} element alone would omit the transformer, reflected load, and revised interconnections. The predecessor regulates a high-voltage output; in the prototype, the isolated secondary bulk supply feeds the USB-C PD output stage. Comparisons must state where voltages and powers are measured and which stages and auxiliary supplies are included.
+ 
+-The \sourcefile{Power_loss_breakdown.asc} variants and device libraries describe the predecessor's loss calculations. Prototype efficiency is estimated from measured input and output power. The measurement locations and timing uncertainties are described with the results. Appendix~\ref{app:modeling} identifies the inherited files and their roles.
++The \sourcefile{Power_loss_breakdown.asc} variants and device libraries describe the predecessor's loss calculations. Prototype efficiency is estimated from measured input and output power. The measurement locations and timing uncertainties are described with the results. Appendix~\ref{app:modeling} identifies the supplied files and their roles.
+--- before/Chapters/05_Modeling_Simulation/03_GaN_Model.tex
++++ after/Chapters/05_Modeling_Simulation/03_GaN_Model.tex
+@@ -1,6 +1,6 @@
+ \subsection{GaN Device Model}
+ \label{sec:sim-ganmodel}
+ 
+-The supplied \sourcefile{GaN_LTspice_GS66502B_L1V2.lib} is a GaN Systems Level 1 Version 2.0 library intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded from the model, as stated in its header \cite{gansystemsGS66502Bmodel}. It can represent the electrical device used in the inherited model, but it does not represent the complete LMG2652 package and PCB implementation.
++The supplied \sourcefile{GaN_LTspice_GS66502B_L1V2.lib} is a GaN Systems Level 1 Version 2.0 library intended for fast simulation. Thermal behavior, leakage current, and package stray inductance are excluded from the model, as stated in its header \cite{gansystemsGS66502Bmodel}. It can represent the electrical device used in the supplied model, but it does not represent the complete LMG2652 package and PCB implementation.
+ 
+ A switching model of the assembled stage requires voltage-dependent output charge, gate/enable timing, reverse conduction, and interconnect impedance. Temperature prediction additionally requires package, PCB, and cooling paths. At megahertz switching frequencies, transition-energy error directly affects calculated loss, so device-name substitution is insufficient.
+--- before/Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex
++++ after/Chapters/05_Modeling_Simulation/04_Simulation_Setup.tex
+@@ -1,8 +1,8 @@
+ \subsection{Simulation Settings}
+ \label{sec:sim-setup}
+ 
+-The first schematic runs to \SI{40}{\milli\second}, with data saved from \SI{20}{\milli\second}. The second runs to \SI{100}{\milli\second}, with data saved from \SI{80}{\milli\second}. Both save the final \SI{20}{\milli\second} interval, or one \SI{50}{\hertz} line period. Their ideal gate pulses have 40\% command duty and half-period displacement. These settings belong to the inherited simulations. The dead time of the final half bridge cannot be determined from them.
++The first schematic runs to \SI{40}{\milli\second}, with data saved from \SI{20}{\milli\second}. The second runs to \SI{100}{\milli\second}, with data saved from \SI{80}{\milli\second}. Both save the final \SI{20}{\milli\second} interval, or one \SI{50}{\hertz} line period. Their ideal gate pulses have 40\% command duty and half-period displacement. These settings belong to the supplied simulations. The dead time of the final half bridge cannot be determined from them.
+ 
+-Fourier and measurement directives calculate input current, RMS voltage/current, power, efficiency, and PF. The saved logs and RAW files are results from the inherited circuits. No simulation of the final board was completed.
++Fourier and measurement directives calculate input current, RMS voltage/current, power, efficiency, and PF. The saved logs and RAW files are results from the supplied circuits. No simulation of the final board was completed.
+ 
+ A final switched-model comparison requires settling, an evaluation interval spanning line and burst behavior, and a time step resolving commutation. Time-step convergence and energy balance must be checked before comparison with measured waveforms.
+--- before/Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex
++++ after/Chapters/05_Modeling_Simulation/09_Loss_Estimation.tex
+@@ -3,7 +3,7 @@
+ 
+ The supply loss balance includes semiconductor conduction and switching, pump and rectifier diodes, magnetic copper and core loss, capacitor ESR, auxiliary circuits, and the downstream regulator. Active-cycle loss depends on burst operation, while auxiliary and idle circuits continue to draw power. Loss calculations must state which supplies are included and the burst operating state.
+ 
+-The inherited loss files use a different circuit and device set, so their efficiency cannot be transferred to the USB-C supply. The GS66502B model also omits thermal and package behavior needed to predict the assembly's surface or junction temperatures.
++The supplied loss files use a different circuit and device set, so their efficiency cannot be transferred to the USB-C supply. The GS66502B model also omits thermal and package behavior needed to predict the assembly's surface or junction temperatures.
+ 
+ Paired input/output readings in Chapter~\ref{ch:results} provide preliminary efficiency estimates and an input--output power difference. Their accuracy is limited by synchronization, calibration, and uncertainty about included auxiliary power. They do not separate GaN, magnetic, and output-stage dissipation. Thermal images show where heating occurs; surface temperature alone does not quantify component loss.
+ 
+--- before/Chapters/06_Magnetics_Integration/01_Provenance.tex
++++ after/Chapters/06_Magnetics_Integration/01_Provenance.tex
+@@ -3,7 +3,7 @@
+ 
+ A planar inductor and transformer from earlier DTU work were used in this converter. The \texttt{Planar\_ChargePump\_2025 (5)} package contains the calculations and manufacturing information: MATLAB files, COMSOL models, component plots, PCB designs, and Gerber files. Its headers and presentation identify Bima Nugraha Sanusi and the DTU Power Electronics group. The components were measured by M\'ani Gautason.
+ 
+-The inherited work covered core selection, winding geometry, air-gap studies, and loss calculations using MATLAB and two-dimensional FEM in COMSOL Multiphysics 6.2 \cite{comsol62}. The supplied cores and windings were integrated into the converter. Work in this thesis covered their electrical connections, mechanical mounting, and use in the converter calculations.
++The earlier design work covered core selection, winding geometry, air-gap studies, and loss calculations using MATLAB and two-dimensional FEM in COMSOL Multiphysics 6.2 \cite{comsol62}. The supplied cores and windings were integrated into the converter. Work in this thesis covered their electrical connections, mechanical mounting, and use in the converter calculations.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -11,7 +11,7 @@
+ \label{tab:mag-provenance-boundary}
+ \begin{tabularx}{\textwidth}{@{}p{0.42\textwidth}X@{}}
+ \toprule
+-Inherited component work & Work in this thesis\\
++Supplied designs and measurements & Work in this thesis\\
+ \midrule
+ Core, winding, and air-gap design & Electrical and mechanical integration into the converter\\
+ MATLAB/FEM models and component PCB files & Interface to the charge-pump, resonant, and rectifier circuits\\
+--- before/Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex
++++ after/Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex
+@@ -1,7 +1,7 @@
+ \section{Supplied Magnetic Measurements}
+ \label{sec:mag-inherited}
+ 
+-The converter calculations started from the supplied measurements for two inductor variants and two transformer variants, listed in \Cref{tab:mag-inherited-measurements}.
++The converter calculations started from the given measurements for two inductor variants and two transformer variants, listed in \Cref{tab:mag-inherited-measurements}.
+ 
+ \begin{table}[htbp]
+ \centering
+--- before/Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex
++++ after/Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex
+@@ -15,7 +15,7 @@
+ \midrule
+ Electrical terminals & Correct winding polarity, net assignment, and ratio convention\\
+ High-frequency loop & Short conductors with adequate copper width and a nearby return path\\
+-Mechanical retention & Supported winding boards and terminals, with the inherited core spacing preserved\\
++Mechanical retention & Supported winding boards and terminals, with the original core spacing preserved\\
+ Isolation boundary & Separation maintained through the complete mounted assembly\\
+ Thermal environment & Access for cooling and observation of core, winding, and joint temperatures\\
+ Measurement access & Accessible continuity, voltage, and current measurement locations\\
+--- before/Chapters/06_Magnetics_Integration/11_Limitations.tex
++++ after/Chapters/06_Magnetics_Integration/11_Limitations.tex
+@@ -5,4 +5,4 @@
+ 
+ Further characterization requires fitted-part and terminal identification, in-circuit inductance measurement, complete-path isolation checks, and a stabilized thermal run. These measurements are needed to reproduce the assembly and reduce its losses.
+ 
+-Secondary-winding heating and limited power increase at higher load made transformer optimization a priority. The operating prototypes retained the inherited magnetics; replacement planar parts were not installed within the project time. No reduction in magnetic loss or increase in continuous output was demonstrated with the smaller V3 layout.
++Secondary-winding heating and limited power increase at higher load made transformer optimization a priority. The operating prototypes retained the supplied magnetics; replacement planar parts were not installed within the project time. No reduction in magnetic loss or increase in continuous output was demonstrated with the smaller V3 layout.
+--- before/Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex
++++ after/Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex
+@@ -14,7 +14,7 @@
+ A complete USB-C supply would still require external regulation and a
+ USB-PD interface; the complete supply must be compared with those parts included.
+ 
+-The inherited planar magnetics continued to constrain the layout. A revised
++The supplied planar magnetics continued to constrain the layout. A revised
+ magnetic design was expected to permit further reduction, but no new set
+ was installed within the project. Sustained power and thermal performance
+ of the slimmed layout remain untested
+--- before/Chapters/07_Hardware/chapter.tex
++++ after/Chapters/07_Hardware/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Hardware Design and Implementation}
+ \label{ch:hardware}
+ 
+-The power PCB combines the inherited charge-pump resonant circuit and planar magnetics with the input network, auxiliary supplies, isolated feedback, USB-C output stage, and digital control developed in this project. The MCU acquires primary voltage, secondary-bulk voltage, and half-bridge current at PA0--PA2. On the original prototype, carrier commands at PA8/PA9 and burst enable at PA10 control energy transfer. The V2 assignments are given in \cref{sec:hw-v2}.
++The power PCB combines the charge-pump resonant circuit from earlier DTU work and planar magnetics with the input network, auxiliary supplies, isolated feedback, USB-C output stage, and digital control developed in this project. The MCU acquires primary voltage, secondary-bulk voltage, and half-bridge current at PA0--PA2. On the original prototype, carrier commands at PA8/PA9 and burst enable at PA10 control energy transfer. The V2 assignments are given in \cref{sec:hw-v2}.
+ 
+ Bring-up required corrections to the timer connections and changes to the resonant branch. The V2 schematic excerpts show the common power circuit; fitted components and controller assignments are identified for each tested board. The following sections describe the tested assembly, later circuit revisions, and V3 layout.
+ 
+--- before/Chapters/10_Results/11_Simulation_Hardware.tex
++++ after/Chapters/10_Results/11_Simulation_Hardware.tex
+@@ -1,14 +1,14 @@
+ \section{How the Models Differ from the Prototype}
+ \label{sec:res-simhw}
+ 
+-The inherited LTspice studies were used to interpret charge-pump and resonant
++The supplied LTspice studies were used to interpret charge-pump and resonant
+ operation. They do not model the manufactured prototype with its final
+ inductors, GaN package, PCB parasitics, USB-C interface, and sampled PA10 burst
+ controller.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Comparison of the inherited models with the prototype measurements.}
++\caption{Comparison of the supplied models with the prototype measurements.}
+ \label{tab:simulation-hardware}
+ \begin{tabularx}{\textwidth}{@{}L{0.23\textwidth}L{0.34\textwidth}X@{}}
+ \toprule
+--- before/Chapters/10_Results/15_V2_Testing_Update.tex
++++ after/Chapters/10_Results/15_V2_Testing_Update.tex
+@@ -8,7 +8,7 @@
+ This removed the hot component; total loss reduction remains unquantified
+ without matched input/output power measurements.
+ 
+-The inherited leakage values in Table~\ref{tab:mag-inherited-measurements}
++The measured leakage values in Table~\ref{tab:mag-inherited-measurements}
+ give an ideal series resonance near \SI{0.96}{\mega\hertz}. Installed V2
+ resonance was not measured, and the fitted transformer and loaded switching
+ waveforms remain to be identified.
+--- before/Chapters/11_Discussion/05_Magnetics_Integration.tex
++++ after/Chapters/11_Discussion/05_Magnetics_Integration.tex
+@@ -4,9 +4,9 @@
+ The supplied planar inductor and transformer were integrated into the
+ converter, including terminal assignment, polarity, mounting, and return
+ paths. Their proximity to switching nodes also affects parasitics and
+-sensing; the electromagnetic design was inherited.
++sensing. The electromagnetic design came from earlier DTU work.
+ 
+-The inherited measurements in Table~\ref{tab:mag-inherited-measurements}
++The given component measurements in Table~\ref{tab:mag-inherited-measurements}
+ are approximately \SI{33}{\micro\henry} for the inductors,
+ \SI{16.5}{\micro\henry} transformer leakage,
+ \SIrange{140}{151}{\micro\henry} magnetizing inductance, and a turns
+--- before/Chapters/11_Discussion/07_Limitations.tex
++++ after/Chapters/11_Discussion/07_Limitations.tex
+@@ -15,7 +15,7 @@
+ 
+ Quantitative dynamic and switching assessment requires matched revision
+ tests, commutation waveforms for ZVS, and a model of the installed
+-hardware. The inherited simulations omit parts of the assembly and sampled
++hardware. The supplied simulations omit parts of the assembly and sampled
+ controller. Dedicated USB-PD negotiation, insulation-coordination, fault,
+ and conducted/radiated-emissions tests are also required before assigning
+ a laboratory operating range or supply rating.
+--- before/Chapters/12_Conclusion/01_Project_Summary.tex
++++ after/Chapters/12_Conclusion/01_Project_Summary.tex
+@@ -2,7 +2,7 @@
+ \label{sec:concl-summary}
+ 
+ A digitally controlled USB-C power supply was built and bench-tested
+-using the inherited DTU charge-pump PFC resonant topology and supplied
++using the DTU charge-pump PFC resonant topology and supplied
+ planar magnetics \cite{ammar2020chargepump,ammar2021led}. Power hardware,
+ sensing, auxiliaries, the USB-C PD output stage, and the MCU were integrated
+ for detachable-load operation.
+--- before/Chapters/12_Conclusion/02_Research_Questions.tex
++++ after/Chapters/12_Conclusion/02_Research_Questions.tex
+@@ -2,7 +2,7 @@
+ \label{sec:concl-rq}
+ 
+ \paragraph{RQ1: Topology implementation.}
+-The inherited charge-pump branch, GaN half bridge, resonant path, supplied
++The original charge-pump branch, GaN half bridge, resonant path, supplied
+ magnetics, USB-C PD output stage, sensing, and digital control were integrated
+ in the tested V1.0 USB-C assembly. V1.1 is a corrected schematic revision
+ without a separately manufactured and tested board. V2 integrated the
+@@ -32,7 +32,7 @@
+ \SI{65}{\watt} continuous minimum require defined-duration validation.
+ 
+ \paragraph{RQ4: Planar-magnetics integration.}
+-The inherited electromagnetic design was integrated through terminal and
++The supplied planar magnetics were integrated through terminal and
+ polarity assignment, resonant connections, isolation spacing, mechanical
+ support, and thermal arrangement. Secondary-winding heating motivated
+ transformer optimization, but no replacement magnetic set was installed.
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ after/Chapters/12_Conclusion/03_Contributions.tex
+@@ -1,8 +1,8 @@
+ \section{Original Contributions}
+ \label{sec:concl-contributions}
+ 
+-The inherited charge-pump PFC principle and planar-magnetic design were
+-integrated into a USB-C power supply. The work covered
++The charge-pump PFC principle and planar-magnetic design from earlier DTU
++work were integrated into a USB-C power supply. The work covered
+ the offline input, charge pump, GaN stage, magnetic connections, output
+ interface, sensing, auxiliaries, and hardware rework during bring-up.
+ 
+--- before/Chapters/12_Conclusion/chapter.tex
++++ after/Chapters/12_Conclusion/chapter.tex
+@@ -1,7 +1,7 @@
+ \chapter{Conclusion}
+ \label{ch:conclusion}
+ 
+-A USB-C power supply was developed from the inherited converter
++A USB-C power supply was developed from the original DTU converter
+ through V1 testing, V2 integration, and a reduced V3 edge-card layout.
+ The tests demonstrated output regulation and identified magnetic and
+ input-path heating as priorities for further development.
+--- before/Frontmatter/Abstract.tex
++++ after/Frontmatter/Abstract.tex
+@@ -1,7 +1,7 @@
+ \section*{Abstract}
+ \addcontentsline{toc}{section}{Abstract}
+ 
+-A digitally controlled USB-C power supply was implemented using an inherited charge-pump power-factor-correction (PFC) resonant topology and planar magnetics. Burst control was developed for secondary-bulk regulation, startup sequencing, and energy limitation at no load and after load removal.
++A digitally controlled USB-C power supply was implemented using a charge-pump power-factor-correction (PFC) resonant topology from earlier DTU work and planar magnetics. Burst control was developed for secondary-bulk regulation, startup sequencing, and energy limitation at no load and after load removal.
+ 
+ The gallium-nitride (GaN) half bridge operated at a nominal \SI{1}{\mega\hertz}. Average power was controlled by enabling bursts of switching cycles. A circular direct memory access (DMA) buffer supplied the feedback samples. Startup precharge and separate duty limits for loaded and no-load operation were implemented. The USB-C PD stage provided the tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings.
+ 
+--- before/Frontmatter/Approval.tex
++++ after/Frontmatter/Approval.tex
+@@ -3,7 +3,7 @@
+ 
+ This thesis was prepared at \department, Technical University of Denmark, for the \degreeprogramme. A USB-C power supply was built around a charge-pump PFC resonant converter. Its controller was developed for operation with a detachable load.
+ 
+-The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the MCU firmware was developed. The first prototype was brought up and tested on the manufactured V1.0 PCB with rework. Its later drawing corrections were documented in V1.1. Development then continued with the integrated V2 board. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Appendix~\ref{app:provenance} identifies the inherited designs and the author's integration, control, and test work.
++The topology and planar-magnetic designs were supplied by earlier DTU work. In this project, the schematic and PCB were implemented, the supplied magnetics were integrated, and the MCU firmware was developed. The first prototype was brought up and tested on the manufactured V1.0 PCB with rework. Its later drawing corrections were documented in V1.1. Development then continued with the integrated V2 board. Preliminary powered V2 observations are reported separately in \cref{sec:res-v2-testing}. Appendix~\ref{app:provenance} describes the earlier designs and the integration, control, and test work completed in this project.
+ 
+ The MCU regulates the isolated secondary bulk supply feeding the USB-C PD stage. The PD stage then regulates the USB-C output voltage to the selected level.
+ 
+--- before/README.md
++++ after/README.md
+@@ -6,7 +6,7 @@
+ the complete supporting software source in line-numbered appendices.
+ 
+ The text builds on the October 20 revision. It follows the engineering work
+-from the inherited converter and supplied magnetics through hardware
++from the original DTU converter and supplied magnetics through hardware
+ integration, feedback and timing changes, detachable-load control, measured
+ results, and the later V2/V3 work. Direct, factual American English and passive
+ reporting are used. Technical equations, figures, tables, citations, source code,
+@@ -48,7 +48,7 @@
+ ## Interpretation
+ 
+ The measured assembly is the V1.0 PCB with rework, not a separately manufactured
+-V1.1 board. The thesis separates drawing changes, fitted hardware, inherited
++V1.1 board. The thesis separates drawing changes, fitted hardware, supplied
+ magnetic design, and original integration/control work. Inconsistent input-power
+ records, AC statistic ranges, unverified raw-channel calibration, and absent
+ thermal endurance measurements are identified in the results and appendix.

@@ -1,0 +1,43 @@
+{
+  "functional": true,
+  "load47_5": true,
+  "slot2": true,
+  "outputOffGate": true,
+  "invalidOpensFocus": true,
+  "recordAcrossViews": true,
+  "deepLinks": true,
+  "missingIds": [],
+  "responsive": [
+    {
+      "view": "dashboard",
+      "width": 1440,
+      "doc": 1440
+    },
+    {
+      "view": "device-setup",
+      "width": 1440,
+      "doc": 1440
+    },
+    {
+      "view": "dashboard",
+      "width": 390,
+      "doc": 390
+    },
+    {
+      "view": "device-setup",
+      "width": 390,
+      "doc": 390
+    },
+    {
+      "view": "dashboard",
+      "width": 320,
+      "doc": 320
+    },
+    {
+      "view": "device-setup",
+      "width": 320,
+      "doc": 320
+    }
+  ],
+  "errors": []
+}

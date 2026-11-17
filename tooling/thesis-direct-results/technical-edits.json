@@ -1,0 +1,127 @@
+[
+  {
+    "path": "Chapters/02_Background/chapter.tex",
+    "old": "The reference converters establish this operating principle; the USB-C adaptation adds",
+    "new": "The reference converters use this operating principle; the USB-C adaptation adds"
+  },
+  {
+    "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+    "old": "separately from established switching",
+    "new": "separately from switching within an active burst"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+    "old": "Precharge applies limited excitation to establish the isolated feedback supply.",
+    "new": "Precharge applies limited excitation to power the isolated feedback circuit."
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+    "old": "within an established burst",
+    "new": "during an active burst"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+    "old": "In-circuit waveforms are required to establish the timing margin.",
+    "new": "In-circuit waveforms show how much time remains between charge-transfer completion and the next transition."
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/06_DC_Link.tex",
+    "old": "Measured bus mean, ripple, and maximum establish capacitor-voltage margin and half-bridge excitation.",
+    "new": "Measured bus mean, ripple, and maximum are used to calculate capacitor-voltage margin and half-bridge excitation."
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/08_ZVS.tex",
+    "old": "The charge condition must be met with the required polarity and before turn-on; charge magnitude alone does not establish ZVS.",
+    "new": "The charge condition must be met with the required polarity and before turn-on."
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/08_ZVS.tex",
+    "old": "Near-carrier resonance does not establish ZVS across the operating range. Tolerances shift resonance, pump current falls near line zero crossings, and idle intervals can remove circulating current. These conditions require separate switching captures even at fixed dead time.",
+    "new": "Tolerances shift resonance, pump current falls near line zero crossings, and idle intervals can remove circulating current. Switch-node transitions therefore need checking near line zero crossings and at burst restart, even with fixed dead time."
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+    "old": "Nominal passive values and supplied magnetic measurements establish the starting design; the waveforms determine the stresses reached in the tested circuit.",
+    "new": "The initial calculations use nominal passive values and supplied magnetic measurements. The waveforms give the stresses reached in the tested circuit."
+  },
+  {
+    "path": "Chapters/06_Magnetics_Integration/07_Isolation_Clearance.tex",
+    "old": " A full insulation check also requires the transformer spacing, material group, and standardized dielectric tests. Functional isolation alone does not establish creepage, clearance, or dielectric strength.",
+    "new": " The full insulation check includes transformer spacing, material group, and standardized dielectric tests."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "Driver-input and switch-node captures are required to establish effective dead time and enable alignment.",
+    "new": "Effective dead time and enable alignment are measured from driver-input and switch-node captures."
+  },
+  {
+    "path": "Chapters/07_Hardware/16_V2_F410.tex",
+    "old": "The reported \\SI{85}{\\watt} point and matched \\SI{79.89}{\\watt} point do not demonstrate sustained operation at the \\SI{100}{\\watt} target.",
+    "new": "The reported \\SI{85}{\\watt} point and matched \\SI{79.89}{\\watt} point are intermediate loads below the \\SI{100}{\\watt} target."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "The port retains the earlier conversion defaults. The repeated \\SI{6.2}{\\mega\\ohm} schematic labels do not establish the assumed divider ratios; fitted resistors and measured gains must be verified before using the displayed voltage, current, or protection thresholds.",
+    "new": "The port retains the earlier conversion defaults. The repeated \\SI{6.2}{\\mega\\ohm} schematic labels need checking against the fitted resistors. The voltage, current, and protection scales must use the measured circuit gains."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "These are timer-setting limits; the usable converter range must be established from switching and thermal measurements.",
+    "new": "These are timer-setting limits. The converter operating range still needs switching and thermal measurements."
+  },
+  {
+    "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+    "old": "Automatic calibration does not search carrier frequency or establish zero-voltage switching.",
+    "new": "The duty-search calibration holds carrier frequency fixed."
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/06_Test_Matrix.tex",
+    "old": "Bring-up established switching and power transfer, followed by loaded and",
+    "new": "Switching and power transfer were checked during bring-up, followed by loaded and"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/10_Thermal.tex",
+    "old": "Incomplete ambient, airflow, warm-up, and camera-setup records prevent a\r\nthermal steady-state assessment. The images guide instrumented monitoring\r\nbut do not establish a continuous power rating.",
+    "new": "Ambient, airflow, warm-up, and camera setup were not fully recorded.\r\nThe images locate hotspots for temperature monitoring during longer runs."
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+    "old": "firmware source, saved settings, and live mode. Version, status, and validated\nconfiguration exports are required; a successful build does not verify powered\noperation.",
+    "new": "firmware source, saved settings, and live mode. Version, status, and\nconfiguration exports are recorded with the test."
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+    "old": "Establish regulation, power quality, efficiency, stress, and heating",
+    "new": "Measure regulation, power quality, efficiency, stress, and heating"
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+    "old": "transitions, and limit behavior; fixed-voltage records do not verify PPS.",
+    "new": "transitions, and limit behavior."
+  },
+  {
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "The command does not switch output OFF or establish zero current. Zero primary current must be established before use; sensor gain is not calibrated.",
+    "new": "The operator must switch output OFF and check for zero primary current before using the terminal command. This captures the offset; gain calibration uses a separate reference."
+  },
+  {
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "The operator must first establish zero primary current; the command does not enforce OFF.",
+    "new": "Switch output OFF and check for zero primary current before the terminal command; OFF is not enforced automatically."
+  },
+  {
+    "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+    "old": "These are timer limits; the usable converter range must be established from switching and thermal measurements.",
+    "new": "These are timer limits. The converter operating range still needs switching and thermal measurements."
+  },
+  {
+    "path": "Backmatter/Appendices/G_Software_Tools.tex",
+    "old": "stated hysteretic thresholds and median edge spacing; single-node\nrecords still cannot establish gate timing or ZVS. The scripts save source and",
+    "new": "stated hysteretic thresholds and median edge spacing. The scripts save source and"
+  },
+  {
+    "path": "Backmatter/Appendices/H_Full_Embedded_Source.tex",
+    "old": "follows those definitions. A successful build does not verify fitted\ndivider ratios, gate timing, or powered-converter performance.",
+    "new": "follows those definitions."
+  }
+]

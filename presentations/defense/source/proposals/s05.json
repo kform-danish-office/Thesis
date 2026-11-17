@@ -1,0 +1,103 @@
+{
+  "slide_id": "s05",
+  "title": "Charge transfer shapes the input current",
+  "takeaway": {
+    "text": "The charge pump draws charge in proportion to rectified voltage, shaping the average input current without a separate PFC current-control loop.",
+    "visible": false
+  },
+  "visible_content": {
+    "body_2": "Inherent current shaping without a separate PFC current loop",
+    "equation": "īᵣₑ꜀ ≈ b fₛ C_P vᵣₑ꜀",
+    "legend": "b: local fraction of enabled switching cycles",
+    "phase_label": "Circuit",
+    "embedded_figure_labels": [
+      "V_IN",
+      "I_IN",
+      "L_IN",
+      "C_IN",
+      "D_B1",
+      "D_B2",
+      "D_B3",
+      "D_B4",
+      "D_P",
+      "I_P",
+      "C_P",
+      "V_P",
+      "L_P",
+      "I_LP",
+      "D_C1",
+      "D_C2",
+      "Q_HS",
+      "Q_LS",
+      "V_SW",
+      "I_RES_PRI",
+      "C_DC",
+      "V_DC",
+      "C_RES",
+      "L_RES",
+      "V_RES",
+      "I_RES_SEC",
+      "D_R1",
+      "D_R3",
+      "Input filter",
+      "Input Rectification",
+      "Charge Pump",
+      "Power Stage"
+    ]
+  },
+  "visual": {
+    "type": "original_embedded_figure_crop",
+    "asset": "/workspace/presentations/defense/dtu-supervisor-flow/assets/original-digest-power-stage.png",
+    "crop_pixels": [
+      25,
+      115,
+      1260,
+      650
+    ],
+    "layout": "Use the original digest Figure 1, cropped to the input, charge pump, half bridge and primary resonant branch, without redrawing or relabeling. Crop includes the transformer and part of the secondary rectifier; the crop boundary cuts conductors, not labels. Place the current-envelope relation, local burst fraction and concise conclusion in the explanation band.",
+    "embedded_label_set": "embedded_figure_labels",
+    "topology": "The rectified input feeds C_P and D_P. L_P joins the C_P / diode clamp node to V_SW; D_C1 and D_C2 connect that node to the positive and negative link rails. C_DC is across V_DC and the half bridge; V_SW also drives the primary resonant branch.",
+    "math_latex": "\\bar{i}_{\\mathrm{rec}} \\approx b\\,f_{\\mathrm{s}}\\,C_{\\mathrm{P}}\\,v_{\\mathrm{rec}}"
+  },
+  "speaker_notes": "The input bridge feeds the charge pump at the left. The rectified input connects to one side of C p and through D p to the high-voltage link, shown here as C DC and V DC. The half bridge, Q high side and Q low side, moves the switch node V SW between the link rails. L p connects that switching node to the other side of C p and the two clamp diodes D C1 and D C2. During an enabled cycle, the input bridge supplies charge to C p through the inductor and steering paths. In the ideal sequence, charging continues until the capacitor voltage reaches approximately the instantaneous rectified input voltage. On the following part of the cycle, stored capacitor energy transfers towards the high-voltage link through the steering path. The clamp diodes hold the pump node at the link rails as the inductor current approaches zero. The pump inductor sets the current slope and helps set how long the excursion takes. For a complete excursion, the input charge taken in one enabled cycle is approximately C p times the rectified line voltage. Averaging those charge packets over many switching cycles gives the current envelope shown. Here f s is the switching frequency, C p is the pump capacitance, and v rec is the instantaneous rectified line voltage. The factor b is the local fraction of enabled cycles. If that fraction is constant over the line cycle, the ideal input-current envelope follows the rectified voltage. This is inherent current shaping without a separate PFC current-control loop. The enabled fraction can vary with line phase, and finite current and clamp timing affect the actual transfer, so the final power factor depends on both the circuit and its control.",
+  "transition": "That same switching action also drives the transformer and affects half-bridge commutation.",
+  "duration_seconds": 130,
+  "sources": [
+    {
+      "path": "/workspace/papers/apec-digest/sections/topology.tex",
+      "passage": "Shared Half Bridge and Charge Pump",
+      "supports": "Shared SW, charge-transfer estimate, average current envelope, enabled-cycle density and practical limitations."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+      "passage": "Switching-Cycle Operation",
+      "supports": "Input charging, transfer to the link, clamp and inductor-current intervals."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+      "passage": "Line-Cycle Current Shaping",
+      "supports": "Complete capacitor excursion and current envelope with local enabled fraction."
+    },
+    {
+      "path": "/workspace/thesis/Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf",
+      "passage": "Sheet 3, LLC resonant/transformer and GaN half bridge",
+      "supports": "C24 pump capacitor, L3 pump inductor, D6–D8 steering paths, HVVCC link and shared VSW."
+    },
+    {
+      "path": "/workspace/source-archives/APEC_2027_Digest_USB_PD.pdf",
+      "passage": "Figure 1, page 2, power stage",
+      "supports": "Original schematic and the embedded labels and connections in the displayed crop."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "The current relation is a carrier-averaged first-order envelope for a complete capacitor excursion, not instantaneous input current.",
+      "A constant enabled-cycle density scales the ideal envelope; variation with line phase and incomplete transfer change actual input quality.",
+      "The original digest figure shows C_P and D_P connected to the rectified input, L_P connecting the pump diode node to V_SW, and D_C1 and D_C2 clamping the pump node to the link rails. The image crop includes the transformer and part of the secondary rectifier.",
+      "No separate PFC current-control loop is required for the inherent shaping mechanism; the control still changes cycle density."
+    ],
+    "unresolved_questions": [],
+    "timing": "130 seconds including transition, allowing time to point out the pump charge and steering paths."
+  },
+  "revision": 4
+}

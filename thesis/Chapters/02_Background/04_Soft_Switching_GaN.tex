@@ -1,0 +1,20 @@
+\section{High-Frequency GaN Switching}
+\label{sec:bg-gan}
+
+At \SI{1}{\mega\hertz}, switching loss is sensitive to the energy dissipated per transition:
+\begin{equation}
+P_{\mathrm{sw}}\approx f_s(E_{\mathrm{on}}+E_{\mathrm{off}}).
+\end{equation}
+Zero-voltage switching reduces turn-on loss by using circuit current to charge and discharge the half-bridge capacitances before the incoming device conducts. With nonlinear capacitance, the stored energy is
+\begin{equation}
+E_{\mathrm{oss}}(V)=\int_0^V vC_{\mathrm{oss}}(v)\,\mathrm{d}v.
+\end{equation}
+The current must also have the correct direction and move the node to the required voltage before the available dead time ends.
+
+Fast GaN transitions increase sensitivity to interconnect inductance, producing \(L\,\mathrm{d}i/\mathrm{d}t\) overshoot, and to capacitive coupling from the switch node into sensing and control. Gate-drive layout, decoupling, commutation-loop area, and return paths therefore affect switching behavior.
+
+Dead time must complete node commutation without excessive reverse conduction. An insufficient interval can leave residual turn-on voltage or allow cross conduction; an excessive interval increases loss. The required interval depends on bus voltage, current, capacitance, and tank state, so burst restart is assessed separately from switching within an active burst.
+
+The prototype uses an integrated LMG2652 half bridge. The supplied discrete-GaN and external-driver models differ in capacitance, delay, sensing response, and thermal paths. These models describe the operating principle, but the assembled stage needs its own switching measurements.
+
+ZVS must be checked from switch-node voltage and the incoming gate command or device turn-on time on the same time base, with adequate bandwidth and controlled probe loading, loop area, and common-mode error. Chapter~\ref{ch:results} applies these criteria to the available captures.

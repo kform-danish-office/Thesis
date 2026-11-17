@@ -1,0 +1,243 @@
+[
+  {
+    "id": "10-01",
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "old": "Calculations use completed rows of the \\texttt{Load Data} sheet in\r\n\\sourcefile{Data/measurements/Thesis_USB_PDO_3A_Limited_Test_Plan.xlsx}.\r\nTest identifiers link rows to oscilloscope and analyzer screenshots;\r\n\\emph{Planned} rows are excluded. Complete tables and\r\nsource rows are included in the appendix; processed CSVs include both\r\noriginal readings and calculated values.",
+    "new": "Calculations use completed measurements from the load tests. The complete\r\nresults are included in the appendix.",
+    "reason": "Removes file and processing inventory from the results introduction.",
+    "facts_preserved": "Completed measurements only; complete results in appendix.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-02",
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "old": "The test name ``75 W'' identifies a row whose actual\r\ncalculated output is \\SI{73.97}{\\watt}; the \\SI{3.8}{\\ampere} point\r\nexceeds \\SI{75}{\\watt} electrically. Comparisons use calculated output;\r\nthe original test names are kept so each point can be found in the workbook.",
+    "new": "The \\SI{3.8}{\\ampere} point exceeded \\SI{75}{\\watt} calculated output.",
+    "reason": "Retains meaningful output threshold and removes row-name bookkeeping.",
+    "facts_preserved": "73.97 W and 79.89 W remain in preceding sentence; 3.8 A exceeds 75 W.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-03",
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "old": "\\caption{Raw C2 waveforms: overview records 00006 and 00008, and carrier-detail records 00007 and 00010 from \\sourcefile{Waveforms_Richard}. The original amplitude and time scales are unchanged. Load and setup details are incomplete, so these captures cannot be linked to individual workbook tests.}",
+    "new": "\\caption{C2 waveforms showing burst overviews (00006 and 00008) and carrier detail (00007 and 00010).}",
+    "reason": "Describes the displayed waveforms without archive and scale inventory. Lead revision: Place incomplete setup attribution once in the adjacent frequency discussion, not again in the caption.",
+    "facts_preserved": "Capture identifiers and incomplete load and setup details retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-04",
+    "path": "Chapters/10_Results/06_ZVS.tex",
+    "old": "approximately \\SI{1.03}{\\mega\\hertz}. Detection thresholds and source checksums are retained. This frequency\r\ncharacterizes the exports rather than the main campaign's timer clock.",
+    "new": "approximately \\SI{1.03}{\\mega\\hertz}. This is the frequency measured in the C2\r\nwaveforms; the configured timer frequency and test conditions were not recorded.",
+    "reason": "Replaces checksum and export narration with the measurement limitation. Lead revision: Keep waveform-derived frequency separate from timer configuration, with the missing setup stated locally.",
+    "facts_preserved": "Measured transition spacing and approximate frequency remain; test attribution remains uncertain.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-05",
+    "path": "Chapters/10_Results/12_Compliance_Table.tex",
+    "old": "PR-09 & Link results to configuration & Test IDs, source rows, archived screenshots and raw-file checksums & Linked; setup details incomplete\\\\",
+    "new": "PR-09 & Link results to configuration & Test identifiers and instrument readings & Setup details incomplete\\\\",
+    "reason": "Replaces archive inventory with the practical configuration result. Lead revision: Avoid inventing full identification of hardware/test conditions from the original archive linkage statement.",
+    "facts_preserved": "Setup details incomplete; identified main-test configuration retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-06",
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "The reported software dead-time setting was approximately\n\\SI{60}{\\nano\\second}. Half-bridge heating decreased after the tank and\ntiming changes. ZVS still needs to be checked from switch voltage and current\nat turn-on. The earlier controller timing is described in\nSection~\\ref{sec:hw-v2}.",
+    "new": "After the tank was modified and the software dead time was set to about\n\\SI{60}{\\nano\\second}, half-bridge heating decreased. Turn-on voltage\nand current measurements are still needed to check ZVS.",
+    "reason": "Connects setting, observation and remaining measurement without a redundant cross-reference. Lead revision: Use direct authorial test wording requested by root; retain approximate software setting and unverified ZVS.",
+    "facts_preserved": "Reported approximately 60 ns software setting; reduced heating after both changes; ZVS unverified.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "11-01",
+    "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+    "old": "Each test needs the board version, settings, waveforms, power readings,\r\nand temperatures recorded together. Screenshots can omit coupling,\r\naveraging, and firmware state, which limits what can be calculated from\r\nthem. The data appendix and replotted measurements show these gaps.",
+    "new": "Recording the board version, settings, waveforms, power readings, and\r\ntemperatures together allows each result to be interpreted against its test\r\nconditions. Coupling, averaging, and firmware state are also needed when\r\ncalculating results from captures.",
+    "reason": "Closes with the practical test lesson rather than describing the appendix.",
+    "facts_preserved": "Need for board, settings, waveforms, power, temperature, coupling, averaging and firmware state retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "12-01",
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "old": "The four-layer circuit and layout are documented in\r\nthe schematic and PCB prints. Archived firmware and supporting software\r\nare included with the thesis and have been checked in software.\r\nPreliminary powered observations appear in \\cref{sec:res-v2-testing};\r\npowered tests of the later adjustable firmware and comparable power and\r\nthermal-endurance measurements are still needed.",
+    "new": "The four-layer circuit and layout integrate these functions on V2.\r\nThe firmware and supporting software passed software checks.\r\nPreliminary powered observations appear in \\cref{sec:res-v2-testing};\r\npowered tests of the later adjustable firmware and comparable power and\r\nthermal-endurance measurements are still needed.",
+    "reason": "Removes file inventory and keeps the work and testing status. Lead revision: Preserve completed software-check status while removing archive inventory.",
+    "facts_preserved": "V2 integration and lack of powered tests for later adjustable firmware retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "12-02",
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "old": "The prototype was evaluated for output settings, high-power operation,\r\ninput-current quality, initial efficiency, load removal, no-load behavior,\r\nand surface temperature. Numerical tables, reconstructed plots, and\r\nschematics document the results and circuit configurations.",
+    "new": "The prototype was evaluated for output settings, high-power operation,\r\ninput-current quality, initial efficiency, load removal, no-load behavior,\r\nand surface temperature.",
+    "reason": "Removes documentation inventory from the contribution.",
+    "facts_preserved": "All evaluation categories retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-07",
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "old": "\\caption{LeCroy line-timescale waveforms from captures 7 and 8, with the original offsets and amplitude scales. The two C3 files contain identical data. Probe scaling was not recorded, so input power and PF cannot be calculated from these traces.}",
+    "new": "\\caption{LeCroy line-timescale waveforms from captures 7 and 8. The two C3 records contain identical data.}",
+    "reason": "Removes scale bookkeeping while retaining the identical C3 data, which affects interpretation of the records.",
+    "facts_preserved": "Capture identifiers and identical C3 data retained; probe-scaling limitation follows in the text.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-08",
+    "path": "Chapters/10_Results/07_Input_Power_Quality.tex",
+    "old": "Raw line-timescale exports retain original amplitudes and offsets. Missing\r\nworkbook test links and incomplete probe calibration preclude additional\r\ncalibrated PF or real-power calculations.",
+    "new": "The line-timescale traces show the input waveform, but incomplete probe\r\ncalibration prevents calculation of PF or real power from them.",
+    "reason": "Makes the waveform role and measurement limit direct.",
+    "facts_preserved": "Probe calibration incomplete; PF and real power cannot be calculated from traces.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-09",
+    "path": "Chapters/10_Results/01_Prototype_Verification.tex",
+    "old": "DC-coupled captures show mean output voltage; AC-coupled captures show\r\nsmall-signal detail and acquisition statistics. Thermal images show surface\r\nhotspots. The raw waveform exports include the original samples, but some\r\nlack load and probe-calibration details. Graphs show measured points only.\r\nError bars are omitted because the uncertainty data are incomplete.\r\nInstrument disagreements and ambiguous measurement fields are discussed\r\nwith the affected results.",
+    "new": "DC-coupled captures give mean output voltage, while AC-coupled captures\r\nshow small-signal detail and acquisition statistics. Thermal images show\r\nsurface hotspots. Error bars are omitted because the uncertainty data are\r\nincomplete; instrument disagreements and ambiguous measurement fields are\r\ndiscussed with the affected results.",
+    "reason": "Removes a raw-file inventory and plotting narration while retaining the measurement interpretation.",
+    "facts_preserved": "DC and AC capture roles, surface temperatures, incomplete uncertainty and local disagreements retained.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-10",
+    "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+    "old": "Loaded and load-removal tests show the combined controller response. The\r\nindividual changes were not tested at fixed settings, so their separate\r\ncontributions remain unmeasured. For example, \\texttt{MAXRATE} requests a\r\n\\SI{20}{\\micro\\second} period; the achieved period and jitter require\r\nmeasured timing.",
+    "new": "Loaded and load-removal tests show the response of the combined controller;\r\nthe contributions of individual changes were not measured separately. The\r\nrequested \\texttt{MAXRATE} period is \\SI{20}{\\micro\\second}; the achieved\r\nperiod and jitter have not been measured.",
+    "reason": "Focuses on the concrete timing measurement rather than repeating the lack of isolated feature tests. Lead revision: Keep the local attribution limit: combined response must not imply individually measured gains.",
+    "facts_preserved": "Combined response and 20 microsecond requested period retained; achieved timing and jitter unmeasured.",
+    "checklist": [
+      "connected engineering prose",
+      "retain local uncertainty and technical facts",
+      "remove administrative tracking"
+    ]
+  },
+  {
+    "id": "10-11",
+    "path": "Chapters/10_Results/08_Efficiency.tex",
+    "old": "Average VBUS and external load current come from the same row. Input power\r\nis the analyzer entry selected in the workbook. These calculations give\r\ninitial estimates because simultaneous acquisition and the inclusion of all\r\nauxiliary power paths are not fully documented.",
+    "new": "Average VBUS and external load current were used to calculate output power,\r\nwith analyzer readings for input power. The resulting efficiency estimates\r\nare preliminary because simultaneous acquisition and the inclusion of all\r\nauxiliary power paths are not fully documented.",
+    "reason": "Connects measurement choices directly to the preliminary estimate without spreadsheet narration.",
+    "facts_preserved": "Matching output voltage and current, analyzer input and incomplete synchronization and auxiliary boundaries retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "10-12",
+    "path": "Chapters/10_Results/09_Thermal.tex",
+    "old": "The ten open-load and loaded images use emissivity 0.95. The plot uses camera\r\nmaxima rather than cursor/reference values: at \\SI{9}{\\volt},\r\n\\SI{2}{\\ampere}, these are \\SI{56.8}{\\celsius} and\r\n\\SI{39.7}{\\celsius}, respectively, with the workbook retaining the latter.",
+    "new": "The ten no-load and loaded images use an emissivity of 0.95. At\r\n\\SI{9}{\\volt} and \\SI{2}{\\ampere}, the camera maximum was\r\n\\SI{56.8}{\\celsius}, while the reference marker read\r\n\\SI{39.7}{\\celsius}. The plotted temperatures are camera maxima.",
+    "reason": "Clarifies the physical readings and removes workbook bookkeeping.",
+    "facts_preserved": "Emissivity, both temperatures, load condition and camera-maximum basis retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "10-13",
+    "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+    "old": "The control changes addressed the problems found during bring-up. PA1\r\nvoltage regulation replaced the incorrect power feedback, with PA2 retained\r\nfor load classification. Complete-cycle scheduling addressed irregular\r\npulses, and no-load guarding limited charging after load removal. Measurement review separated waveform ripple from the\r\nspread of acquisition averages. The original readings give a maximum\r\ncalculated output of \\SI{79.89}{\\watt}; further loading toward the\r\n\\SI{100}{\\watt} objective requires temperature histories alongside the\r\nelectrical readings.",
+    "new": "PA1 voltage regulation replaced the incorrect power feedback, while PA2\r\nwas retained for load classification. Complete-cycle scheduling addressed\r\nirregular pulses, and no-load guarding limited charging after load removal.\r\nThe highest calculated output was \\SI{79.89}{\\watt}; further loading toward\r\nthe \\SI{100}{\\watt} objective requires temperature histories alongside the\r\nelectrical readings.",
+    "reason": "Connects the implemented corrections and removes repetition of the ripple-statistics distinction already explained in steady-state results.",
+    "facts_preserved": "PA1, PA2, complete-cycle scheduling, no-load guarding, 79.89 W and 100 W target retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "11-03",
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "old": "Chapter~\\ref{ch:results} reports selected fixed outputs and matched\r\nmeasurements near \\SI{80}{\\watt}. Average voltage regulation was maintained,\r\nbut ripple, load-dependent input-current quality, and surface heating\r\nremained.\r\n\r\nThe most complete high-power measurements cover \\SI{20}{\\volt} at\r\n\\SIrange{3.7}{4.0}{\\ampere}, giving \\SIrange{73.97}{79.89}{\\watt}\r\nand an initial efficiency estimate of \\SIrange{76.5}{77.1}{\\percent}.\r\nAverage USB-C output voltage was maintained across these points. The input--output\r\npower difference and surface heating point to losses within the power path.\r\nSimultaneous stage-power and temperature measurements would locate those losses.",
+    "new": "At \\SI{20}{\\volt} and \\SIrange{3.7}{4.0}{\\ampere}, the most complete\r\nhigh-power measurements gave \\SIrange{73.97}{79.89}{\\watt} and an initial\r\nefficiency estimate of \\SIrange{76.5}{77.1}{\\percent}. Average USB-C output\r\nvoltage remained regulated, while ripple, load-dependent input-current quality,\r\nand surface heating remained. The input--output power difference and heating\r\npoint to losses in the power path; simultaneous stage-power and temperature\r\nmeasurements would help locate them.",
+    "reason": "Combines overlapping descriptions of the same results and links the remaining loss measurement to the observation.",
+    "facts_preserved": "20 V, 3.7–4.0 A, 73.97–79.89 W, initial efficiency and unresolved losses retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "11-04",
+    "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+    "old": "Mean output voltage was maintained at the tested loads, while ripple and\r\ninput-current quality remained load-dependent. Burst spacing and fixed\r\nlosses influence performance at low demand; current stress and heating become more\r\nsignificant at high demand. The best PF and THD were measured at the highest loads on the\r\n\\SI{20}{\\volt} output. Control and hardware changes must therefore be assessed\r\nacross the charge pump, burst schedule, secondary bulk supply, USB-C PD\r\noutput stage, and thermal path.",
+    "new": "Mean output voltage was maintained at the tested loads, while ripple and\r\ninput-current quality varied with load. Burst spacing and fixed losses affect\r\nlow-demand performance, while current stress and heating become more significant\r\nat high demand. The best PF and THD were measured at the highest loads on the\r\n\\SI{20}{\\volt} output. Changes to the charge pump or burst schedule should\r\ntherefore be assessed together with their effects on both output stages and heating.",
+    "reason": "Connects the operating trade-off to the reason for assessing hardware and control changes together.",
+    "facts_preserved": "Load-dependent ripple and current quality, best PF and THD at highest 20 V loads, and thermal implications retained.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  },
+  {
+    "id": "12-03",
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "old": "The revised plan retains \\SI{100}{\\watt} continuous as the target and\r\n\\SI{65}{\\watt} continuous as the minimum \\cite{projectOctoberPlan}.\r\nDefined-duration tests with temperature histories are still needed at these\r\nlevels and at the earlier \\SI{75}{\\watt} milestone. The reported\r\napproximately \\SI{85}{\\watt} V2 point should be repeated with the board,\r\nfirmware, settings, power readings, and temperatures recorded together.\r\nThis earlier V2 point is separate from the calculated \\SI{79.89}{\\watt}\r\nV1.0 result above.",
+    "new": "The target remains \\SI{100}{\\watt} continuous, with a minimum of\r\n\\SI{65}{\\watt} \\cite{projectOctoberPlan}. Defined-duration tests with\r\ntemperature histories are needed to assess sustained operation at these\r\nlevels.",
+    "reason": "Focuses the conclusion on the target and the measurements needed for sustained operation; detailed V1 and V2 comparisons appear in the results and discussion.",
+    "facts_preserved": "100 W target and 65 W minimum retained; earlier 75 W milestone and approximately 85 W V2 result remain in the results and discussion.",
+    "checklist": [
+      "connected practical prose",
+      "retain engineering facts and uncertainty"
+    ]
+  }
+]

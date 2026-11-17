@@ -1,0 +1,24 @@
+{
+  "url": "https://thesis-power-lab.vercel.app/calculator.html",
+  "checkedAt": "2026-10-19T01:07:45.115Z",
+  "checks": [
+    {
+      "mode": "frequency",
+      "value": "988.9kHz"
+    },
+    {
+      "mode": "inductance",
+      "value": "8.83µH"
+    },
+    {
+      "mode": "capacitance",
+      "value": "978pF"
+    },
+    {
+      "preset": "latest-drawing",
+      "missingValueError": "Enter positive capacitor values separated by commas, such as 22, 22, 22, 22.",
+      "exportEnabled": false
+    }
+  ],
+  "errors": []
+}

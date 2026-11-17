@@ -1,0 +1,153 @@
+{
+  "baseline_files": 483,
+  "current_files": 485,
+  "edited_files": 28,
+  "unchanged_files": 455,
+  "added_files": [
+    "Chapters/01_Introduction/09_V3_Development.tex",
+    "Chapters/10_Results/16_V3_Design_Outcome.tex"
+  ],
+  "changes": [
+    {
+      "path": "README.md",
+      "before_sha256": "b846bdace39f6f5affdebbc91bd2b829550cad9ec80394de90db0d72e95cb943",
+      "sha256": "3d4e32096926532e0a2dbedcc462a91ecb0f4699cafe460a3afd931b9a7adb1a"
+    },
+    {
+      "path": "Frontmatter/Approval.tex",
+      "before_sha256": "358b8552dd7abc58cfeb06964731d03fb44fa068448fef57aff5c9f996792636",
+      "sha256": "270e3e067c4bf751f2168fb1c188ceb1e14abd1636c7d2bd03b6dfcefdfcd994"
+    },
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "before_sha256": "f4b8213afffef5f3d3e504d8f59af33bb2dcf428c7ed7800a252f4db8ec67f86",
+      "sha256": "889be2d883b19a73bb3fcacd6424d019dc3800cebdf11c1d7b297a46e37ea6ff"
+    },
+    {
+      "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+      "before_sha256": "d460362e71fc7d928b40ac0f8bcb2478593154bf75488da334d073955e0ed0e7",
+      "sha256": "efc8e031dbac1bea65b42874c33fadd58634c1b419f4e0eda842c0e79e025901"
+    },
+    {
+      "path": "Chapters/10_Results/chapter.tex",
+      "before_sha256": "a2b391d59e49e0af2cfb030a7a7b550d750a7dac8bbc702d6a2b502e0303ed3a",
+      "sha256": "a3ded246cbc04b539dd4c314fc484679072b15717b409548c273abc951e83249"
+    },
+    {
+      "path": "Chapters/10_Results/14_Revised_Plan_Status.tex",
+      "before_sha256": "d4a31c32ed78c7871aab2068f4c5bba5f5045c2c00adbead307c6da147ace282",
+      "sha256": "f1b31547d0ec1ace9b01e3887b05713cf09aea732e42f3a71d30df9446b74f39"
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/11_Limitations.tex",
+      "before_sha256": "4968164eb3faeca60421c5ddedb6d78bed6e8a03af686f32e6089b4fd521015c",
+      "sha256": "59870404c5ccdddbb675957ca54fe9124b1d8cc767b226364a0d38f6f61dfef0"
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/12_Revised_Plan_Validation.tex",
+      "before_sha256": "e71baba0784bcdd8dc93941d56552892a7ee370cc56163d7521932d38b074753",
+      "sha256": "c909d06f0caf220a2ff2a2c60f6126d5009f55f7b29de03467d0815c2fb8991d"
+    },
+    {
+      "path": "Chapters/01_Introduction/05_Contributions_Attribution.tex",
+      "before_sha256": "64c5b1d31e66169fbb57503e372657ca1d876d28c8b50ba2aeec7dde6c87d42d",
+      "sha256": "868686a6af9d5cd84d18b1b422d4905f397ea00192963b31e5f5fcdda1ab6b9a"
+    },
+    {
+      "path": "Chapters/01_Introduction/07_Thesis_Structure.tex",
+      "before_sha256": "ec4e0b5f45f024f9a94fa159406f2cf4ef8e5c1508379916623dacbc996da9cb",
+      "sha256": "bce09c2dc2872dc60885b008c2f505691ad45fa2db63418fc198d42fe2eef064"
+    },
+    {
+      "path": "Chapters/01_Introduction/chapter.tex",
+      "before_sha256": "6ec8b594eed8bd37e321eb558e552705ac643fef6ab5f6c3674b554a51ad811e",
+      "sha256": "197ca873c45c4551d2a19406cf7ec3ef1d2beb4d4155b8a47459aa238759b7c7"
+    },
+    {
+      "path": "Chapters/01_Introduction/03_Aim_Objectives.tex",
+      "before_sha256": "7e261098038ad781d67b851524bf0db416ccbcf95b1b2cce142703f093f53851",
+      "sha256": "202fdee2ef48f6882c3b45016b3f423e078e91c1e005aa5ef5435ccc02eb5ba0"
+    },
+    {
+      "path": "Chapters/01_Introduction/06_Scope_Limitations.tex",
+      "before_sha256": "253b476dbfd7aa60ea95a08aa73b43d030276cf90cd7e3224168c7c53fdb8741",
+      "sha256": "d0650c1ffc32ac2614da54144d358c809e626fc56a1f175cf8546226541be36f"
+    },
+    {
+      "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+      "before_sha256": "4105728e4736af156a03429edd6221419a64b48e7794dcf6b55f7dd4eebd82fe",
+      "sha256": "4ad7e220acc0bb9ca1264aac9bb14a55c12516f541f3588381be638e393234e0"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+      "before_sha256": "6f9859612d4d4ac77737afc905f412498b444088bda950b358d9de33cf979e79",
+      "sha256": "916643c90b6d8b07fa9176b08400be270a0fb8995cfa2b155a756c3897cf154a"
+    },
+    {
+      "path": "Chapters/12_Conclusion/03_Contributions.tex",
+      "before_sha256": "52a56997b55407e3e656dd26e7e12b5d3d99a80eacf702e729ed7366ff360296",
+      "sha256": "fc80d0202de031c547a946a4b20dbb15a953669e5a5f79e78937008cbc816483"
+    },
+    {
+      "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+      "before_sha256": "2d98b644432da376029aa216019ed176db840ea64a5340e6a48068f55fccaf9d",
+      "sha256": "4879ec5016ba9839eaf9a7b6768105827ef675af8a0c43a897fc891144c34656"
+    },
+    {
+      "path": "Chapters/12_Conclusion/chapter.tex",
+      "before_sha256": "37fcf7dc4a7ca9f82cf41944b8b0bc7cd3a773b5f092a9b319bcf9ef4005d117",
+      "sha256": "447b2f91dd794a52a598800f585648ec06e484d13ba0aa4aa51b89431cff6b7a"
+    },
+    {
+      "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+      "before_sha256": "1bf9d4ee365c3c4604af90ca50f697d92a916b9a50bebf49e4eb154835755900",
+      "sha256": "95c4e1fdee026caf47c04246050b1b689c5e009a3888d5889e368fa02b0f42b2"
+    },
+    {
+      "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+      "before_sha256": "807fdf689dabf772861000c597df80d29ad2b29b86b0db36e0f87a2ddebdaf69",
+      "sha256": "9677d8969320db2d79845a01f57e3c3f73bba0144bcdec387e3a3db65a54b694"
+    },
+    {
+      "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+      "before_sha256": "b49c81ae06b9c173ef2233a83ddc7db026200e9785b47411c7d89e83ed2ede6a",
+      "sha256": "f4f249411e9404fc1a8bfe815e4bfdb24135af231ea00414f2ff4b346c92e41f"
+    },
+    {
+      "path": "Chapters/11_Discussion/05_Magnetics_Integration.tex",
+      "before_sha256": "3268091058bcbcd25b22525b33beca3ba320c5dc4069cd99c4236e844f66eb15",
+      "sha256": "ce641ca06712ca89edb1031bc1b04ded9f5b12ae20d53ea05dbb7442e9104f34"
+    },
+    {
+      "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+      "before_sha256": "93fa8b10d910e29260e8f818bc5849306d4abcd6b1dc2791bccba6a0a102f1c1",
+      "sha256": "3f4160878235c446c558a7c9721ee9f4800def041635d61dcb343a10757c31a7"
+    },
+    {
+      "path": "Chapters/11_Discussion/chapter.tex",
+      "before_sha256": "78719d33b425125ad036a60375ccdac28ed5f0006b2c38e64fc7be36629764ee",
+      "sha256": "e672ec7a4d1e57b25b1cb57f34fca06be9de4a5ee32aa38b6d7050d859090fa6"
+    },
+    {
+      "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+      "before_sha256": "82b67811e19191340519f2b7a222967c4ff8f9e2f00abd5eef1bfa16a1a6a962",
+      "sha256": "9f9f972bf6e7a340c031f904765f0f3cc2673ade68ee1031a3f13d28225f05fa"
+    },
+    {
+      "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+      "before_sha256": "cb11eeac162c80526e8eb803b07828f4e69f7d862e98d74cd35d1ea7b9ace62e",
+      "sha256": "50d0ae9104dae56493542cfc59626934bd447f408f7107d5f6703f8ec2ffded9"
+    },
+    {
+      "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+      "before_sha256": "f1576ce02a333814db549ed0e39057c588caaee297716f72fa381509005df647",
+      "sha256": "4c449f411f28cc63726129342a95651c1d13b25a6f9907d219ab3d7231fb6117"
+    },
+    {
+      "path": "Backmatter/Appendices/J_Revised_Plan_Integration.tex",
+      "before_sha256": "fad5e518a0479f180aea13cd0239def43b9c144357ac6d35eb4c18b4a188890b",
+      "sha256": "0059b0376470d7c75351de67d43f78524c57e54ba53ea2d36d8909ba165cb508"
+    }
+  ],
+  "checks": "All original non-prose assets, measurements, code, figures, labels, math and baseline performance answer preserved. Only two status/integration tables deliberately updated; all other original table and figure blocks unchanged."
+}

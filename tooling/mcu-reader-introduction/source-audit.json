@@ -1,0 +1,232 @@
+{
+  "baseline_files": 485,
+  "current_files": 486,
+  "edited_files": 44,
+  "unchanged_files": 441,
+  "added_files": [
+    "Chapters/01_Introduction/10_Controller_Basics.tex"
+  ],
+  "changes": [
+    {
+      "path": "Frontmatter/Nomenclature.tex",
+      "before_sha256": "815849adbe983e1218e79d7fcdfe23bde80bf52afac57a8ed6c261081b1a17ba",
+      "sha256": "26027407a4c68e284c6fe95fe66be72530c7e4efa78e7e776dd2de4dc140fcec"
+    },
+    {
+      "path": "Frontmatter/Abstract.tex",
+      "before_sha256": "889be2d883b19a73bb3fcacd6424d019dc3800cebdf11c1d7b297a46e37ea6ff",
+      "sha256": "9c521114bbec67ac215e87cca03855633370ff939ca06c3b452385d86ebae022"
+    },
+    {
+      "path": "Chapters/02_Background/07_USBC_Context.tex",
+      "before_sha256": "e6d649bf16a339bbb162227ef6fc097cee8f903a02690548ffbdc4b74cb637cd",
+      "sha256": "edf2853a27e25affbd142180d4dcee9f2b8f8a348648b56de930c26eb7121616"
+    },
+    {
+      "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+      "before_sha256": "9d82bb28aaade3823dcefe14577197ccd78c9898d007edbf5d251187b591f7e5",
+      "sha256": "b318424105a94e721cc64909a80a9f91aa28c8a2da6160758e0d8e4d72b86f75"
+    },
+    {
+      "path": "Chapters/10_Results/06_ZVS.tex",
+      "before_sha256": "7575b950de283466330eafb386652e15353cc8fad6eb907c94229d7353e497bf",
+      "sha256": "863947deacce54c701f99d452f0a1e106dc4aeb50112da3d5c1ce70325be9c1b"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/03_Feedback_Calibration.tex",
+      "before_sha256": "b58f87749e66c9547da8752447f0a374beb303350dbda14efbf485e4a909e12e",
+      "sha256": "fee05303343645cbcb551aa45be33203b1641f9884f89a264819fdcb67da148b"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/11_State_Machine.tex",
+      "before_sha256": "cec28bec1fdff8759950855e99aad36c114d5d1cd310afb13dd8924509c532ad",
+      "sha256": "654fde845e7c932d7c525b53ddc2e97dcf41bc28f229cedfc205b3033446d08c"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/12_Fault_Handling.tex",
+      "before_sha256": "f83127a6274ca8dedf3b7fe44be32baaccf0c8cbde2baa89371e8adb30409d91",
+      "sha256": "d6cf3d7bb6584993e661eecb5ea3787c2f1cfc244766d2a837560a5706d7334f"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/08_Control_Law.tex",
+      "before_sha256": "e2bb5fcb6fa63e65ddc7facc4b21db7ab7274e45fd6d9f998b9f3743dde4c4da",
+      "sha256": "15e82b40c0d1582dd5be34bad4deb83d469a321227edf4dc7f0240303b3e09ed"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/02_Architecture_Timing.tex",
+      "before_sha256": "e54bd70e2ce8b75779d3e5bcd97c839dff76635102eea71a6eb1041179d9d52c",
+      "sha256": "2eab34b1b04a28517e2edab9882f8f474118415ea12753821deec5929f4eba59"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/chapter.tex",
+      "before_sha256": "613c0734edd042e4ccd790e5dd316c1635a4546185387addd73a25f75eff65e7",
+      "sha256": "61c858eb2b1a6bcdbb45cd02611e4bb4450c87798dd496cc5e8b372cbc06d66c"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/04_V0_Open_Loop.tex",
+      "before_sha256": "b0bcd3f4e26d072fb4e7fd5e2d0098fb90bfa3089f49bd0efa2f2bb4afbe8fcf",
+      "sha256": "db999957bd2a85849aab4488c6e636c3e040f69d272a5e7d747f498cf3657c6e"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/09_Limits_Antiwindup.tex",
+      "before_sha256": "b0c6351fe39fe25fa0812423364ce8368a717ccec26b9413e2e9e5d7fe98ee4c",
+      "sha256": "fe6b94c39c6ce8ad774b6f6f40c26db5a2aeb72785dbd1e2f0c759f6698b6ab4"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/01_Control_Objectives.tex",
+      "before_sha256": "2579909f9d5fd0070f651fcfc2292ec6eaa92501999378ec168d75009e1bd94f",
+      "sha256": "e734edc4f61223c1315f92a73aa59c4fd2a12091717461f5bac755b1a688dd73"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex",
+      "before_sha256": "36e201f4cf3b9ca04fd483f1f02ff48d5a9c03b2a934396baeafcde6b782a176",
+      "sha256": "758464865f6e71f2b2bbe226286851fc3ab861218dd7d4d963b3a4ed0fb61eb2"
+    },
+    {
+      "path": "Chapters/08_Control_Firmware/15_PWR_2_Port.tex",
+      "before_sha256": "8917f2067d790b8980c79b56bbaeb7d4e75e8615ca8c13530823e6e201264f40",
+      "sha256": "1d6ddb291b5ada4c9033660a503567f358637b450dee2d41d14e69f2532bd371"
+    },
+    {
+      "path": "Chapters/05_Modeling_Simulation/07_Startup_NoLoad.tex",
+      "before_sha256": "f95a6e2ac6e95b0ddac94c7bcb7b867557454c52ab466662e04df9d4df0ebc1d",
+      "sha256": "30dea8e5c48d4372dddddbb59d0363c083d9fc210bd3f23ac97db56d51902450"
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+      "before_sha256": "2a9e2d65ef5f2f249bc4630d54ec0f78402dad56153f4a675609aebfc0a69892",
+      "sha256": "99f0f67eb077045717881881112e23121f0249bda12e535096e89e59ff9803e8"
+    },
+    {
+      "path": "Chapters/04_Topology_Analysis/09_Device_Stress.tex",
+      "before_sha256": "fdc62809c952e3221c1681a76a9857ec6b1bb0f82dd0e378bb53dcf923566b2e",
+      "sha256": "468ea46e841f58de400461a2e12097e5fee6b8f0e2fa52222c99a3863b272d55"
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+      "before_sha256": "7b92bca6ee370f1e90905976d662f91db6516b6332c06b779dff5e5511245ccc",
+      "sha256": "d24677e851e2e2513c95311d191e73136bbd6505a56e8ee48deac53a24d25765"
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/05_Probing.tex",
+      "before_sha256": "efee88760d596d54e02a788a41867fb6ef8314b45da79e0dc58c852d9ec75e2c",
+      "sha256": "40b15b170ad79cdcb20f5d84639580c29040a4bc4dc149bd06db54219bbd4379"
+    },
+    {
+      "path": "Chapters/09_Experimental_Methods/07_Control_Tests.tex",
+      "before_sha256": "99ddc55bc2f01f16d6ddfe5df58145d7e069538ad83b0518f185451c332a77f6",
+      "sha256": "b4825d28f17de2858a4d3d2352a13357a7036e263ae3732ac8fa234fc97a0091"
+    },
+    {
+      "path": "Chapters/01_Introduction/chapter.tex",
+      "before_sha256": "197ca873c45c4551d2a19406cf7ec3ef1d2beb4d4155b8a47459aa238759b7c7",
+      "sha256": "1a1ecca3bf9ed49a391d119c37ce02f1353860a470bbe349e0cace2ad1744860"
+    },
+    {
+      "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+      "before_sha256": "4ad7e220acc0bb9ca1264aac9bb14a55c12516f541f3588381be638e393234e0",
+      "sha256": "553020f60972b4586f72933bb2507fe962ce769eff455ec8a3e152ded94c7f6e"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+      "before_sha256": "9471bebc2fcaa8d5d9d4e92c81f054d8ca3c12d8c454241b41d6f827ce0326a6",
+      "sha256": "c483085a66e48585a5136532c454d3a7af487cd13f4b7704bdfc2cf407e0957b"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex",
+      "before_sha256": "15f817a3d0edb09fa27dbcdf6bf198ab75da83ef1815ee15835250fb7aef5a1e",
+      "sha256": "2877ecc134f5778d9bfbbafb781f38b37e2bab48162239d455e8b7b0a158dfbe"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+      "before_sha256": "11e32c868948116348c9146865fb021d8f4964fc3fc51ed7f7d8360b4704d471",
+      "sha256": "e0af2c93db213592a7f8bdc50186a4d02286412289ece19f4699a1e1620fb52b"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex",
+      "before_sha256": "7b11be788de70733cdb75078959e779a413947d0ee1587c696b3e258eea88893",
+      "sha256": "e95833e29b2a9f87874aae3c268b07d0e3b1c2cec4e569b685d90a2862024e39"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/04_USBC_Interface.tex",
+      "before_sha256": "ae5264cf5407b55d81a39f4b774bb884f0af06e8349369fb3a9705b91c0708ce",
+      "sha256": "1ad70957980445d7f8601d37f683c9d2850336f27d285379ccb926687cb06a88"
+    },
+    {
+      "path": "Chapters/03_Requirements_Architecture/06_System_Architecture.tex",
+      "before_sha256": "5427b3ecc344d542e2fdfd2a58d1bdb4d838326da65f195d8b4683c3794d9ad2",
+      "sha256": "634a9498bd5eac23d8bd9be71fa098d7593b43dbc70f2ce40680a6d522db01af"
+    },
+    {
+      "path": "Chapters/07_Hardware/chapter.tex",
+      "before_sha256": "4faa5ee4bd4d4e61c25047d7626c9bb01174411bbda9110b16ef030ffe442b59",
+      "sha256": "35466107e3e17d00a555cd50009206f4e8837a05101d9b0cc108f2a601d7cfeb"
+    },
+    {
+      "path": "Chapters/07_Hardware/10_Auxiliary_Power.tex",
+      "before_sha256": "1178438f752cb3ddc11ffd7662e49bde5bd56c9e603f80a4ba843f4796bd0b2f",
+      "sha256": "09dbef85b2713707d50c912e28910496e3d5b7cb5b42d74431d12b6372ab7978"
+    },
+    {
+      "path": "Chapters/07_Hardware/04_GaN_Half_Bridge.tex",
+      "before_sha256": "1c1d5e64dad44949923670a81cd9f5c3b23e3484751681035cc1ea66eceb53ba",
+      "sha256": "4ae27db0274a999ea72f8f1e7264ac0958ba44aaea04344adefef0b3299ad006"
+    },
+    {
+      "path": "Chapters/07_Hardware/09_Protection.tex",
+      "before_sha256": "c93106e449be3340fb989220bd0bdc5ac71d9f8d2920762b836eb05a448c7c02",
+      "sha256": "3e5d237e6830fa635a3a60e36cb026b23a22e5d1409ea0709aa69cb44ee35ec0"
+    },
+    {
+      "path": "Chapters/07_Hardware/07_USBC_Interface.tex",
+      "before_sha256": "eb764cf6c244a775170ccd9634979e2f1202852809c3cfcce665fccf97dbc02c",
+      "sha256": "d535e7ef8cecf586484536dd7d71a1a891a28fa89553689edccb8bad0d65b4d3"
+    },
+    {
+      "path": "Chapters/07_Hardware/17_V3_Edge_Card_Plan.tex",
+      "before_sha256": "f4f249411e9404fc1a8bfe815e4bfdb24135af231ea00414f2ff4b346c92e41f",
+      "sha256": "2df06c6a9875448d6a144ab35ba144e6639550998e72559998fb4166829a362a"
+    },
+    {
+      "path": "Chapters/07_Hardware/05_Gate_Drive.tex",
+      "before_sha256": "5d0d7a55619b15bc96f144d8ca432b54702e99ad939a5a6c02098c3079876e2e",
+      "sha256": "5ffdf4bd3b7ec570687373e1e8509b599800c91468a1e2eeff6be670430ed161"
+    },
+    {
+      "path": "Chapters/07_Hardware/16_V2_F410.tex",
+      "before_sha256": "860cc1ba0799865e3f3de25ff50fb1d5a392e3f6f44e77e1c0c2b4897e2bd86a",
+      "sha256": "bed4939482cf2a953c1ed316a253426012665452968a9113df6dae715a91802a"
+    },
+    {
+      "path": "Chapters/07_Hardware/08_Sensing.tex",
+      "before_sha256": "d3da82f4823900d0a8dfe1ad609b4c850f6f3473a46514b19e72b481939e89e8",
+      "sha256": "467a71750a565f58abb0c52144c1cd0a3a599aef22dab029a20c7b374779d389"
+    },
+    {
+      "path": "Chapters/07_Hardware/12_EMI.tex",
+      "before_sha256": "3eea6fe824fe8a37fb70002b071024af8b77d02842e5fa760939c967eb4188c3",
+      "sha256": "6c017dbbb542cef300b9058ade2e222e59156de41ff900722dc6ddabf6994ca6"
+    },
+    {
+      "path": "Chapters/11_Discussion/03_Control_Contribution.tex",
+      "before_sha256": "ac9499c96372f70de10ecc6a1416260cc1cfd4315dee37cc65750cb667f85a5d",
+      "sha256": "622c1d5008a4617caf01d6a55da48914f9becac91990f391c7fd46dfbe8c2643"
+    },
+    {
+      "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+      "before_sha256": "9f9f972bf6e7a340c031f904765f0f3cc2673ade68ee1031a3f13d28225f05fa",
+      "sha256": "7d59493282ad71f0356aa43d45cb2ee3a734bb80241c2f3733ef1c1081654f36"
+    },
+    {
+      "path": "Backmatter/Appendices/G_Software_Tools.tex",
+      "before_sha256": "604c78e52d1f09f694ac845a13ee60131789a18af4030f3f0c12518224e4b3fd",
+      "sha256": "b52936b5039b6a9e33cb0c885e784b78773ad557d28b4ad0a6317096e65e815a"
+    },
+    {
+      "path": "Backmatter/Appendices/C_Firmware_Documentation.tex",
+      "before_sha256": "641ea39b7cec2002c925a120a76d60959e5f339b21a9682ed24aa25c6b2d360e",
+      "sha256": "18b032ed09c9df3c56b28225786d03a3c787942f060297ef1e694eaacd7533d8"
+    }
+  ],
+  "checks": "Math, numerical quantities, existing labels, source graphics, raw data, code and earlier figure/table blocks preserved except named explanatory glossary/table/caption edits. Primer precedes first main-text pin table."
+}

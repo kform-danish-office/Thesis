@@ -1,0 +1,4 @@
+\subsection{Voltage Control with Blocking ADC Reads}
+\label{sec:ctrl-v1}
+
+Voltage feedback allowed the burst command to increase or reduce energy transfer as the sensed voltage changed under load, replacing manual adjustment. The first implementation waited for each ADC conversion before updating the command. These conversion waits shared the foreground execution path with UART handling and other work, which could delay the next duty adjustment.

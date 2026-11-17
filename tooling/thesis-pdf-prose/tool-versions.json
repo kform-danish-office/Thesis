@@ -1,0 +1,27 @@
+{
+  "python": "3.12.14",
+  "pymupdf": "1.26.6",
+  "matplotlib": "3.10.8",
+  "xelatex": [
+    "XeTeX 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian)",
+    "kpathsea version 6.4.0/dev",
+    "Copyright 2024 SIL International, Jonathan Kew and Khaled Hosny."
+  ],
+  "latexmk": [
+    "Latexmk, John Collins, 11 Dec. 2024. Version 4.86"
+  ],
+  "pdfinfo": [
+    "pdfinfo version 26.05.0",
+    "Copyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org",
+    "Copyright 1996-2011, 2022 Glyph & Cog, LLC"
+  ],
+  "pdftotext": [
+    "pdftotext version 25.03.0",
+    "Copyright 2005-2025 The Poppler Developers - http://poppler.freedesktop.org",
+    "Copyright 1996-2011, 2022 Glyph & Cog, LLC"
+  ],
+  "gh": [
+    "gh version 2.46.0 (2025-01-13 Debian 2.46.0-3)",
+    "https://github.com/cli/cli/releases/tag/v2.46.0"
+  ]
+}

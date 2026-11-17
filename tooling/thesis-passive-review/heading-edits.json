@@ -1,0 +1,48 @@
+{
+  "Frontmatter/Approval.tex": [
+    [
+      "\\section*{Preface and My Contribution}",
+      "\\section*{Preface and Project Contribution}"
+    ],
+    [
+      "\\addcontentsline{toc}{section}{Preface and My Contribution}",
+      "\\addcontentsline{toc}{section}{Preface and Project Contribution}"
+    ]
+  ],
+  "Chapters/01_Introduction/05_Contributions_Attribution.tex": [
+    [
+      "\\section{My Work and the Earlier Designs}",
+      "\\section{Project Contributions and Earlier Designs}"
+    ]
+  ],
+  "Chapters/06_Magnetics_Integration/01_Provenance.tex": [
+    [
+      "\\section{Supplied Magnetics and My Work}",
+      "\\section{Supplied Magnetics and Integration Work}"
+    ]
+  ],
+  "Chapters/06_Magnetics_Integration/11_Limitations.tex": [
+    [
+      "\\subsection{What I Still Need to Measure}",
+      "\\subsection{Remaining Measurements}"
+    ]
+  ],
+  "Chapters/11_Discussion/03_Control_Contribution.tex": [
+    [
+      "\\section{Why I Used This Control Structure}",
+      "\\section{Choice of Control Structure}"
+    ]
+  ],
+  "Backmatter/Appendices/B_Hardware_Documentation.tex": [
+    [
+      "\\section{The Board I Tested}",
+      "\\section{Tested Board}"
+    ]
+  ],
+  "Backmatter/Appendices/F_Contribution_Provenance.tex": [
+    [
+      "\\chapter{My Work and the Designs I Used}",
+      "\\chapter{Project Contributions and Inherited Designs}"
+    ]
+  ]
+}

@@ -1,0 +1,39 @@
+\subsection{Secondary-Output Load and Thermal Tests}
+\label{sec:res-v2-secondary-load}
+
+The electronic load was connected to the V2 secondary output. At
+approximately \SI{240}{\volt} AC and \SI{50}{\hertz}, increasing the load
+current from \SI{1.86}{\ampere} to \SI{10.01}{\ampere} raised the calculated
+secondary power from \SI{48.68}{\watt} to \SI{137.08}{\watt}. The secondary
+voltage fell from \SI{26.14}{\volt} to \SI{13.69}{\volt} over this sequence
+(\cref{tab:v2-secondary-load,fig:v2-secondary-load-performance}). At
+\SI{20.07}{\volt}, the load drew \SI{4.29}{\ampere}, giving
+\SI{86.17}{\watt}. The higher-power points were therefore reached with
+increasing voltage droop.
+
+\input{Data/measurements/v2_load_thermal/load_table}
+
+In the thermal images in \cref{fig:v2-secondary-load-thermal}, the input-bridge
+region R3 reached \SI{83.9}{\celsius} near
+\SI{70.75}{\watt}. Its maxima at the subsequent higher-power points were
+lower, between \SI{68.2}{\celsius} and \SI{75.6}{\celsius}. The secondary
+region R1 became progressively hotter, rising from \SI{50.3}{\celsius} to
+\SI{98.3}{\celsius}.
+
+None of the load points reached thermal equilibrium. The sequence includes
+both load changes and continued heating, so the temperatures cannot be
+treated as settled values for each power level. Diode selection and the
+current and thermal paths around the rectifiers require further work.
+The tests show that the leakage-only stage can transfer more than
+\SI{100}{\watt} to a secondary load, although voltage droop and continued
+heating remain.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{Data/measurements/v2_load_thermal/load_performance.pdf}
+\caption{Secondary voltage and thermal-region maxima during the increasing-load sequence. Lines connect successive readings. R3 covers the input bridge and R1 the secondary area.}
+\label{fig:v2-secondary-load-performance}
+\end{figure}
+\FloatBarrier
+
+\input{Data/measurements/v2_load_thermal/thermal_figures}

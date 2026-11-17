@@ -1,0 +1,8 @@
+\section{No-Load Guard and Load-Removal Response}
+\label{sec:ctrl-open}
+
+After load removal, limited discharge through the connector allows continued bursts to raise the bulk voltage. The no-load guard uses the primary-current indication at PA2 and configured reference conditions to select a narrower voltage band and lower high-duty cap. Average transfer is thereby limited while the minimum burst duration is retained to reduce partial carrier cycles. The defaults are \(V_{\mathrm{set}}=\SI{28}{\volt}\), \(V_{\mathrm{NLdrop}}=\SI{5}{\volt}\), and \(d_{\mathrm{NL}}=\SI{5}{\percent}\), giving approximately \SI{23}{\volt} to \SI{28}{\volt} at the secondary bulk. The USB-C output has its own voltage setting.
+
+The guard must release when demand returns. If the secondary-voltage reading from PA1 remains below the lower no-load threshold for \texttt{NLFULL} control iterations, an increased transfer request is allowed until the upper release condition is reached. Direct undervoltage can also request more transfer. The cap is overridden when a load is detected, while optional calibrated references can adjust it using the PA2 scale.
+
+Soft holdoff allows recovery from an overvoltage state without latching a fault. The command \texttt{BLOW}, default zero, is requested until bulk voltage reaches the rearm condition. The interaction with hard OVP is described in \Cref{sec:ctrl-faults}. Load-removal and no-load captures in Chapter~\ref{ch:results} show the tested response. Peak-voltage measurements and a firmware-state trace are still needed to check the worst case.

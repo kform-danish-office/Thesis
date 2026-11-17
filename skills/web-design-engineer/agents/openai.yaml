@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Design Engineer"
+  short_description: "Design and refine polished browser-rendered artifacts"
+  default_prompt: "Use $web-design-engineer to design and build this web artifact, then check its appearance and interactions."

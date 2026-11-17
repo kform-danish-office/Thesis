@@ -1,0 +1,32 @@
+{
+  "pass": true,
+  "completedAt": "2026-10-25T05:10:22.768905+00:00",
+  "functionalGroups": 11,
+  "responsiveViewChecks": 12,
+  "keyboardWalks": 8,
+  "stressChecks": 8,
+  "recording": {
+    "samples": 41,
+    "staleSamples": 5,
+    "timingEvents": 2
+  },
+  "applicationErrors": [],
+  "findings": [],
+  "baselineResourceNotice": "Existing development server returns 404 for browser-requested favicon.ico.",
+  "sourceSha256": {
+    "app.js": "350f3e00c89499a175d951391a9b1fcebab24c8b69a2c7551792300ade88de7f",
+    "index.html": "863acd844cc9853b94bf7e62fa6fc2f5af62051d9046ec892937cf68cf66ed41",
+    "styles.css": "5e2984e63ce6a50155bf22d62c41b387451cf19f070c86ccbc522e1e4df90645",
+    "serial.js": "fe5a36451b5112269cf21d5cf32a83f779d132e464db1dfa9fb0a51d0dc88bc6",
+    "protocol.js": "f3571eff542a3c368d5f66c7a0aefc236435edd9bba5bbb66914f19e91d92793",
+    "storage.js": "459fd3d10ed41f383fd8b16350fff407e1c710bafac4ff5016313a12bf12b51d"
+  },
+  "serverOwnership": "Reused existing localhost port4173 server; no server started/stopped.",
+  "cleanup": "All owned Chromium browsers/contexts closed.",
+  "limitations": [
+    "Synthetic Demo and browser-injected serial fixture only",
+    "No physical board or electrical measurement",
+    "No hardware safety/MCU identification inference",
+    "Screen reader, full contrast audit, RTL and other browser engines not verified"
+  ]
+}

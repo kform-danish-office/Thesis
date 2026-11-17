@@ -1,0 +1,36 @@
+\section{Future Work}
+\label{sec:concl-future}
+
+The immediate priority is to separate secondary magnetic loss from
+input-path heating through matched current, temperature, voltage-drop,
+and power measurements. The suspected single-via restriction should be
+verified before additional copper or diode relocation is selected.
+Turn-on voltage should be measured together with gate timing and resonant current.
+
+The approximately \SI{85}{\watt} V2 result needs to be repeated using the
+original hardware and settings \cite{projectOctoberPlan}.
+The \SI{79.8928}{\watt} result belongs to the older assembly.
+Synchronized input, secondary-bus, connector, and auxiliary power,
+with component temperature histories, would locate the main losses.
+Long-duration tests should start at the \SI{65}{\watt} minimum under
+defined electrical and thermal conditions.
+
+The diagnostic tests in Section~\ref{sec:disc-plan-gap} should guide
+individual changes and matched retests toward \SI{100}{\watt}
+continuous. Any limiting result should report repeatable output, duration,
+and measured stop condition. Attachment, detachment, overload, and fault
+tests require synchronized secondary voltage, VBUS, board-specific enable,
+and firmware state against declared bands and recovery times.
+
+An independent secondary shutdown or discharge path should be developed
+alongside a model of installed magnetics, switching parasitics, packet
+energy, and commutation. This would support evaluation of scheduling,
+capacitance, layout, and cooling changes.
+
+V3 requires completion around the selected magnetics and external output
+stage, followed by review, assembly, and gradual bring-up. Comparison must
+use equivalent functions, volume definitions, supported power, cooling,
+and electrical conditions.
+
+USB-PD fixed-PDO and PPS protocol tests, independent safety assessment,
+and EMC verification are also required before assigning a supply rating.

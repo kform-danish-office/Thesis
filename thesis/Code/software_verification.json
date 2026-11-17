@@ -1,0 +1,45 @@
+{
+  "firmware": "PWR-2.0.4",
+  "g071_target_firmware": "PWR-2.0.3",
+  "source_sha256": "fa9d842ce7787d37501701379a66b97807969d3a9064f8d03fa372b3842b30ad",
+  "f410_build": {
+    "result": "passed",
+    "program_bytes": 90268,
+    "program_limit_bytes": 98304,
+    "static_ram_bytes": 6868,
+    "ram_bytes": 32768
+  },
+  "g071_build": {
+    "result": "passed",
+    "program_bytes": 130424,
+    "program_limit_bytes": 131072,
+    "static_ram_bytes": 9544,
+    "ram_bytes": 32768
+  },
+  "f410_hex": {
+    "result": "passed",
+    "programmed_bytes": 90752,
+    "valid_vectors": true,
+    "reserved_settings_sector_excluded": true
+  },
+  "firmware_protocol_host_tests": {
+    "result": "passed",
+    "json_frames_checked": 131,
+    "hardware": "mocked"
+  },
+  "storage_tests": {
+    "result": "passed",
+    "interrupted_append_boundaries": 122,
+    "hardware": "mocked"
+  },
+  "node_tests": {
+    "result": "passed",
+    "passed": 76,
+    "failed": 0
+  },
+  "browser_build": "passed",
+  "powered_converter_test_performed": false,
+  "firmware_flashing_performed": false,
+  "evidence": "/workspace/tooling/thesis-firmware-204",
+  "limits": "Physical sensing, flash writes, gate/enable waveforms, stop latency and powered performance require bench tests."
+}

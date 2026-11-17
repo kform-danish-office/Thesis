@@ -1,0 +1,53 @@
+\chapter{Digital Control and Firmware}
+\label{ch:control}
+
+Burst-enable control was developed to regulate the secondary bulk while retaining a fixed carrier. Startup requires precharge before isolated feedback becomes valid; loaded operation requires increased transfer, while load removal requires rapid energy reduction. The controller addresses these conditions using continuous acquisition, voltage feedback, and separate startup, loaded, and no-load states.
+
+The baseline and V2 firmware sources are included in Appendix~\ref{app:full-embedded-source}.
+
+\section{Firmware Development and Versions}
+\label{sec:ctrl-firmware-identities}
+
+Control development progressed from manual switching commands through
+blocking voltage feedback to continuous ADC acquisition by direct memory
+access (DMA). The resulting voltage-control baseline was used for the
+main final test series and retained in the integrated V2 port. The later V2
+firmware adds calibration and timing controls without changing the bulk-voltage
+control law. These additions are described in Section~\ref{sec:ctrl-pwr2-port}.
+
+Table~\ref{tab:ctrl-software-identities} lists the two firmware programs
+included with this thesis. The \texttt{PWR} labels are software versions;
+V1, V2, and V3 refer to the boards.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Firmware versions.}
+\label{tab:ctrl-software-identities}
+\begin{tabularx}{\textwidth}{@{}L{0.22\textwidth}L{0.19\textwidth}Y@{}}
+\toprule
+Firmware & Version & Use\\
+\midrule
+Baseline voltage-control firmware & PWR-1.9.20 & Used in the main V1.0 test series; individual run versions are listed with the results\\
+V2 controller firmware & PWR-2.0.4 & Browser calibration, reference-load settings, and adjustable carrier frequency and dead time on V2.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+The software history and source-file details are given in
+Appendix~\ref{app:firmware}.
+
+\input{Chapters/08_Control_Firmware/01_Control_Objectives}
+\input{Chapters/08_Control_Firmware/02_Architecture_Timing}
+\input{Chapters/08_Control_Firmware/03_Feedback_Calibration}
+\input{Chapters/08_Control_Firmware/14_Version_Comparison}
+\input{Chapters/08_Control_Firmware/08_Control_Law}
+\input{Chapters/08_Control_Firmware/09_Limits_Antiwindup}
+\input{Chapters/08_Control_Firmware/10_Open_Circuit_Safety}
+\input{Chapters/08_Control_Firmware/11_State_Machine}
+\input{Chapters/08_Control_Firmware/12_Fault_Handling}
+\input{Chapters/08_Control_Firmware/13_Timing_Resources}
+\input{Chapters/08_Control_Firmware/15_PWR_2_Port}
+
+

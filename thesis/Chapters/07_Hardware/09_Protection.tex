@@ -1,0 +1,8 @@
+\section{Protection Layers}
+\label{sec:hw-protection}
+
+The hardware and firmware handle different faults. The input fuse and varistor act at the AC connection. The discharge circuit and output TVS devices address stored voltage and output transients. The LMG2652 includes undervoltage, cycle-by-cycle overcurrent, and overtemperature functions \cite{tiLMG2652}. Startup control, bounded burst-enable commands on the original prototype's MCU output PA10, no-load energy limits, and latched overvoltage or optional current faults were added in firmware.
+
+Device protection and firmware thresholds act on different quantities; neither the internal current limit nor the PA2 signal measures connector output current. The PA2 firmware trip is disabled by default, and the active voltage loop does not call the legacy current-foldback helper. Soft and hard overvoltage decisions are described in \Cref{sec:ctrl-faults}.
+
+These layers were used during supervised laboratory testing. The response from fault detection through shutdown and recovery still needs to be measured. Product qualification would also require checks of redundancy and single-fault response.

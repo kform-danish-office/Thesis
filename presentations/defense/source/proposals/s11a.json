@@ -1,0 +1,65 @@
+{
+  "slide_id": "s11a",
+  "revision": 2,
+  "title": "V1 magnetics heating at high load",
+  "takeaway": {
+    "text": "The V1 thermal image shows a 102.9 °C surface maximum near the magnetics at the labeled 20 V, 4.7 A condition.",
+    "visible": false
+  },
+  "visible_content": {
+    "phase_label": "Results",
+    "condition": "V1  ·  20 V, 4.7 A load setting",
+    "temperature": "102.9 °C",
+    "temperature_label": "Maximum surface temperature",
+    "body_1": "Heat concentrated around the magnetics",
+    "embedded_camera_text": [
+      "27.9°C",
+      "e=0.95",
+      "25.2°C",
+      "102.9°C",
+      "27.9°C"
+    ]
+  },
+  "visual": {
+    "type": "original_thermal_image_and_callout",
+    "layout": "Place the complete original thermal image prominently at left, preserving its aspect ratio, camera markers, scale and embedded labels. Place the large temperature callout, its label, the test condition and the short observation in a clear right-hand column. The Results label follows the deck style.",
+    "asset": "/workspace/thesis/Pictures/Thesis/10_Results/image_001_20v_4p7a.png",
+    "image_handling": "Retain the original 240 × 307 pixel asset intact; do not interpolate into a replacement image, crop, retouch or add a component-identifying pointer. Scaling the original asset in the presentation is permitted.",
+    "embedded_camera_annotations": "The red 102.9 °C camera marker is the maximum. The two 27.9 °C readings are the cursor/display reading, 25.2 °C is a reference marker and e=0.95 is the camera emissivity setting. The lower marker is not labeled as ambient."
+  },
+  "speaker_notes": "The thermal image shows how strongly the V1 hardware heated at the higher load setting. At the labeled 20 volts and 4.7 amperes, the camera recorded a maximum surface temperature of 102.9 degrees Celsius near the magnetics. The image is a surface-temperature snapshot; no stabilized temperature history was recorded. The heating made the thermal design a practical limit.",
+  "transition": "During later V2 operation, an external tank inductor also became hot and was removed as part of a tank change.",
+  "duration_seconds": 45,
+  "sources": [
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/09_Thermal.tex",
+      "passage": "Measured Surface Temperatures and image fig:thermal-9v-2a-hotspot",
+      "supports": "V1 20 V, 4.7 A labeled condition, 102.9 °C maximum, surface measurement and missing run duration and airflow."
+    },
+    {
+      "path": "/workspace/thesis/Data/measurements/processed_rewrite/thermal_camera_readings.csv",
+      "passage": "Image #1",
+      "supports": "102.9 °C displayed maximum, 27.9 °C cursor, 25.2 °C reference marker and emissivity 0.95."
+    },
+    {
+      "path": "/workspace/thesis/Data/analysis/thermal_image_reference_table.md",
+      "passage": "Image #1",
+      "supports": "Identity of camera annotations and the labeled operating condition."
+    },
+    {
+      "path": "/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex",
+      "passage": "V2 tank and timing changes",
+      "supports": "Later V2 external inductor heating and its removal."
+    }
+  ],
+  "checks": {
+    "facts": [
+      "Image #1 identifies a maximum surface reading; the exact component and winding/core location of the maximum are not established. The user's identification is the magnetics region.",
+      "The 20 V and 4.7 A are the labeled condition, not a measured 94 W delivered power; the separate 79.89 W result is not assigned to this image.",
+      "The temperature is neither a junction reading nor a claim of equilibrium. The image retains all original camera labels and the original pixel data.",
+      "The later V2 inductor observation is distinct; the thermal image is not claimed to show that inductor or to be a matched V1/V2 test."
+    ],
+    "unresolved_questions": [],
+    "timing": "78 spoken words including the transition, with a 45-second budget at about 104 words per minute."
+  }
+}

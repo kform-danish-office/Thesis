@@ -1,0 +1,82 @@
+[
+  {
+    "path": "Chapters/02_Background/01_Offline_ACDC_PFC.tex",
+    "sha256": "29f930780af4495dc32adda2eca172f4314f9c16abbb98dfbc3c0e86a0065f4d"
+  },
+  {
+    "path": "Chapters/02_Background/03_ClassDE_Resonant.tex",
+    "sha256": "a5bf39df98d426db01bd589844e17fe3aef5c517f83081dc4e64737ff208c56c"
+  },
+  {
+    "path": "Chapters/02_Background/04_Soft_Switching_GaN.tex",
+    "sha256": "f6eb25f102c22cfc0911fe9dffd13e21d7b41b6f3c27d282169ed1862a6ce227"
+  },
+  {
+    "path": "Chapters/02_Background/05_Reference_2020.tex",
+    "sha256": "e275a89cc7ee759e0dd8a5233a3643cdb5db353e8ef4b9e9b1285d5b036944c9"
+  },
+  {
+    "path": "Chapters/02_Background/06_Reference_2021.tex",
+    "sha256": "f2cf61f25576aaa3509380c7064b75866feaab62da6cd69a0cadaaaa91ed232b"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/chapter.tex",
+    "sha256": "98bbd9595d771a0efdf812dd6856d204f31f403d544c1324211d03bd01c94f92"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/01_Use_Case.tex",
+    "sha256": "a988647a498759f71ac7a851ee5820d882429ae82d2873643ee9dacc0b6a7d3f"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/02_Electrical_Specifications.tex",
+    "sha256": "99113b522e28e4f7cd252d7c6fb7343bc613953cc2850fb174a2c927d59a60f2"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/03_Functional_Requirements.tex",
+    "sha256": "335318bb3cd29f0ee429c2f6db9744ec3625d1ebd0628761b22dc15b6e963b76"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/04_USBC_Interface.tex",
+    "sha256": "172afee464ce2c5a2568015cfd6466b55c9b7af56aefce3d3dfb4810add198b2"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/05_Safety_Protection.tex",
+    "sha256": "4fe2093826d0a7dfe83fb988e2b0c4f68bd9fbcb8e4e8425e9613c753e650051"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/06_System_Architecture.tex",
+    "sha256": "771abc7d318d21580339a755aeb0f263277a17811e23966e1d7d1e7a6bb97410"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/07_Operating_Modes.tex",
+    "sha256": "82f6daf85b829d819d27891671ba91de87f9725798182fa521e634b6973da647"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/08_Verification_Matrix.tex",
+    "sha256": "c66284a5e6b903e456b841661ef91f2c582ac9730e9aed88974082c6afe4b80b"
+  },
+  {
+    "path": "Chapters/03_Requirements_Architecture/09_Revised_Plan_Criteria.tex",
+    "sha256": "e13d689039e3469ca48cdae281cfdcbb223defd2587fcf693d15d6d0b95a450c"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+    "sha256": "1af363e22f9d56f6c3384674ec792e7ec83bbfdc30f6578a4f057b339a9a6a60"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/02_Switching_Cycle.tex",
+    "sha256": "213294cc36667b826a28387b41127e8bf799ea5a615ab7aa528d831db00d4ba2"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/03_Line_Cycle_PFC.tex",
+    "sha256": "426559f021078ec14e615de26fad6d811f233cca9355e1c7542400d8b522fcdb"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/05_Pump_Inductor.tex",
+    "sha256": "6ac941316a1bbdd963090f157264d49c9f04086acd30706858b932543049ca80"
+  },
+  {
+    "path": "Chapters/04_Topology_Analysis/11_Design_Summary.tex",
+    "sha256": "e1e2498ec2364682c78eb45c2045e043006560d5911a16235a64ed7de368bc27"
+  }
+]

@@ -1,0 +1,28 @@
+\section{Reference Charge-Pump PFC Rectifier}
+\label{sec:bg-ref2020}
+
+The analytical method was developed by Ammar et al. for a charge-pump resonant AC--DC converter used as an offline PFC rectifier \cite{ammar2020chargepump}. Adding a capacitor and diode to the class-DE circuit shapes the input current without a separate current-loop PFC controller. Their analysis connects capacitor charge transfer with resonant gain and DC-link energy storage.
+
+The reference converter was operated near \SI{1}{\mega\hertz}, with output power up to \SI{50}{\watt}. The reported values were PF of 0.99, input-current THD of 8.6\%, and efficiency up to 88\%. These results demonstrate the principle and provide a starting point for the design calculations.
+
+\begin{table}[htbp]
+\centering
+\caption{Reported performance of the 2020 reference rectifier \cite{ammar2020chargepump}.}
+\label{tab:bg-ref2020-benchmark}
+\begin{tabularx}{\textwidth}{@{}L{0.42\textwidth}Y@{}}
+\toprule
+Quantity & Reported result\\
+\midrule
+Function & Resonant AC--DC PFC rectifier\\
+Switching frequency & Approximately \SI{1}{\mega\hertz}\\
+Maximum output power & \SI{50}{\watt}\\
+Power factor & 0.99\\
+Input-current THD & 8.6\%\\
+Peak efficiency & 88\%\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Frequency changes affect both charge transfer and resonant gain. The prototype uses different magnetics, isolation, a downstream regulator, and sampled burst control, so the reference efficiency cannot be assumed for this supply.
+
+The charge-transfer analysis is retained. The following isolated-driver architecture provides the closer precedent, with separate pump and output paths sharing one half bridge.

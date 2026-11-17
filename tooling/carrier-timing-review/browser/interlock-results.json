@@ -1,0 +1,20 @@
+{
+  "startedAt": "2026-10-25T05:07:22.266Z",
+  "checks": [
+    {
+      "name": "Mode and slot drafts conflict with timing; reset timing preserves them; reset all recovers",
+      "pass": true
+    },
+    {
+      "name": "Output OFF cancels remaining multi-setting generation while command in flight",
+      "pass": true
+    },
+    {
+      "name": "Demo recording source/export synthetic and unchanged timing event count; USB draft clears on disconnect",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "finishedAt": "2026-10-25T05:07:27.894Z",
+  "pass": true
+}

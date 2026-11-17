@@ -1,0 +1,32 @@
+[
+  {
+    "name": "pwr-2.0.4-SHA256SUMS.txt",
+    "bytes": 370,
+    "sha256": "2d1484c208a420ad2b97953b14f038a5ee5d37fc412b0996365c41c442967e10",
+    "download_verified": true
+  },
+  {
+    "name": "pwr-2.0.4-build.json",
+    "bytes": 2552,
+    "sha256": "df403d11c342784b582c2c8be0454273ab391530f59201875cb268c66c02a4e4",
+    "download_verified": true
+  },
+  {
+    "name": "pwr-2.0.4-v2-f410-release.zip",
+    "bytes": 117826,
+    "sha256": "b8d6266d46d909b30df521b507f5d1608f3185e7d9dbbf980a905ce1dec8b617",
+    "download_verified": true
+  },
+  {
+    "name": "pwr-2.0.4-v2-source.zip",
+    "bytes": 85662,
+    "sha256": "f31aa0deb1e335cc7e678fbe57c1f5bbd0f0711c84c2f93c8664ae97d6be03cd",
+    "download_verified": true
+  },
+  {
+    "name": "pwr-2.0.4-v2-stm32f410cbu6.hex",
+    "bytes": 255347,
+    "sha256": "fe3a6b02f06b025ba83e53dd482bbfdf9dd166f9f2afc0fe806062eab14ded47",
+    "download_verified": true
+  }
+]

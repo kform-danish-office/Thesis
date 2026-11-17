@@ -1,0 +1,30 @@
+\chapter{Project Contributions and Earlier DTU Designs}
+\label{app:provenance}
+
+The project began with a charge-pump topology and planar magnetics from earlier
+work. The converter hardware was built around those designs, and the MCU firmware
+was developed for this thesis. The assembly was brought up and tested. The table
+below lists the earlier designs and the work completed in this thesis.
+
+\begin{longtable}{@{}L{0.27\linewidth}L{0.27\linewidth}L{0.38\linewidth}@{}}
+\caption{Earlier designs and work completed in this thesis.}\\
+\toprule Material & Origin & Contribution in this thesis\\\midrule
+\endfirsthead
+\toprule Material & Origin & Contribution in this thesis\\\midrule
+\endhead
+Charge-pump PFC and resonant principle & Ammar et al. \cite{ammar2020chargepump,ammar2021led} & Adaptation to the present hardware and detachable-output application\\
+Planar inductor and transformer & Earlier DTU magnetic-design package; component measurements attributed to M\'ani Gautason & Electrical, mechanical, PCB, and thermal integration\\
+V1.0/V1.1 schematics and PCB & Project schematics and PCB files & Circuit implementation, prototype bring-up, and documented revisions\\
+MCU firmware & Project source and archived revisions & DMA acquisition, burst regulation, loaded/no-load control, supervision, diagnostics\\
+V2 MCU hardware and controller port & Project schematic and archived source & MCU port, peripheral mapping, flash settings journal, browser protocol, and software tests; V1.0 measurements remain from the earlier board\\
+Browser and analysis tools & Project application, tests, and measurement-processing scripts & Command handling, local experiment logs, exports, software verification, and reproducible thesis figures\\
+Experimental measurements & Test workbooks, raw scope exports, instrument screens, thermal images & Characterization and interpretation of the assembled prototype\\
+Device descriptions & Manufacturer documentation cited in the references & Component selection and operating context\\
+\bottomrule
+\end{longtable}
+
+The thesis contribution is the implementation, control development, and
+evaluation of the integrated prototype. The original charge-pump PFC and
+planar electromagnetic designs remain credited to their authors. The
+operating-point measurements provide a starting point for the continuous-power,
+full-range, and conformance tests set out in Chapter~\ref{ch:conclusion}.

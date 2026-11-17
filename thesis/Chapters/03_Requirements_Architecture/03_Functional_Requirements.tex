@@ -1,0 +1,50 @@
+\section{Functional and Performance Requirements}
+\label{sec:req-functional}
+
+The FR labels identify control functions, and the PR labels identify performance tests in the results chapter.
+
+MCU pin assignments are listed in \cref{sec:intro-controller-basics}. On the original prototype, pin PA10 controls switching bursts, PA1 senses secondary bulk voltage, PA0 senses primary voltage, and PA2 senses half-bridge current. DMA transfers ADC readings to memory, and UART carries commands and status.
+
+\begin{table}[H]
+\centering
+\caption{Functional requirements.}
+\label{tab:req-functional}
+\begin{tabularx}{\textwidth}{@{}L{0.12\textwidth}Y@{}}
+\toprule
+ID & Required behavior\\
+\midrule
+FR-01 & Start through a controlled sequence that permits the isolated secondary feedback path to become valid before normal regulation.\\
+FR-02 & Generate the fixed carrier and regulate average transferred power through PA10 burst enable.\\
+FR-03 & Use the PA1 secondary-voltage measurement for final closed-loop operation.\\
+FR-04 & Reduce transferred energy at no load and respond to load removal without uncontrolled secondary-voltage accumulation.\\
+FR-05 & Recover from load attachment and load changes without an unintended persistent fault.\\
+FR-06 & Apply the configured secondary-overvoltage response: eligible no-load soft holdoff, or a latched PA10 inhibit when the hard-fault criteria are met.\\
+FR-07 & Acquire PA0, PA1, and PA2 through DMA during active control.\\
+FR-08 & Provide UART access to version, mode, settings, calibration, status, and fault clearing.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Performance tests and measurement conditions.}
+\label{tab:req-performance}
+\begin{tabularx}{\textwidth}{@{}L{0.12\textwidth}Y@{}}
+\toprule
+ID & Measurement or test\\
+\midrule
+PR-01 & Assess the \SI{65}{\watt} continuous minimum and earlier \SI{75}{\watt} validation milestone against the \SI{100}{\watt} continuous target.\\
+PR-02 & Identify the AC input conditions used in the tests.\\
+PR-03 & Identify the output settings actually obtained under load.\\
+PR-04 & Report mean VBUS, ripple observations, and available load-transient excursions.\\
+PR-05 & Assess observed no-load voltage against the configured control and protection thresholds where the records permit.\\
+PR-06 & Report PF and input-current distortion at selected operating points.\\
+PR-07 & Calculate efficiency from input and output power measured under the same conditions, with the included circuit stages stated.\\
+PR-08 & Report temperature together with load, run time, ambient condition, and airflow information.\\
+PR-09 & Record the assembly, firmware, operating conditions, and source measurements for each numerical result.\\
+PR-10 & Identify the limiting mechanism in any reported overload or current-limit test.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Chapter~\ref{ch:results} compares implementation with measured electrical behavior. Section~\ref{sec:revised-plan-criteria} lists the additional V2/V3 design and test tasks under AP labels.

@@ -1,0 +1,29 @@
+\section{Line-Cycle Current Shaping}
+\label{sec:analysis-linecycle}
+
+With rectified input voltage \(v_{\mathrm{rec}}(t)=|V_{\mathrm{in,pk}}\sin\omega_l t|\), a complete pump-capacitor excursion in every active cycle gives
+\begin{equation}
+\overline{i}_{\mathrm{rec}}(t)\approx f_s\CP v_{\mathrm{rec}}(t),
+\label{eq:analysis-input-envelope}
+\end{equation}
+The corresponding input conductance is approximately
+\begin{equation}
+G_{\mathrm{eq}}\approx f_s\CP.
+\end{equation}
+This conductance describes the current envelope averaged over many switching cycles. Individual charge-transfer pulses remain, so the instantaneous pump current is not sinusoidal.
+
+For continuous switching from an ideal sinusoidal source,
+\begin{equation}
+P_{\mathrm{in,ideal}}=f_s\CP V_{\mathrm{in,rms}}^2
+=\frac{f_s\CP V_{\mathrm{in,pk}}^2}{2}.
+\label{eq:analysis-ideal-input-power}
+\end{equation}
+Using \(f_s=\SI{1}{\mega\hertz}\) and \(\CP=\SI{2}{\nano\farad}\) gives an ideal conductance of \SI{2}{\milli\siemens}. That corresponds to approximately \SI{106}{\watt} ideal input power at \SI{230}{\volt} RMS and \SI{115}{\watt} at \SI{240}{\volt} RMS. These estimates place the pump in the intended input-power range. Conversion loss and incomplete charge transfer reduce the available output.
+
+For burst operation, \(b(t)\) denotes the local active-cycle density averaged over many carrier cycles. The first-order current relationship becomes
+\begin{equation}
+\overline{i}_{\mathrm{rec}}(t)\approx b(t)f_s\CP v_{\mathrm{rec}}(t).
+\end{equation}
+Constant \(b\) scales input conductance without changing the ideal envelope. Line-phase variation of \(b(t)\), caused by bulk-voltage ripple response or feed-forward, modifies current shape. PF and current THD must therefore be measured with the final controller.
+
+The DC link must remain sufficiently above the rectified-line peak to avoid unintended direct conduction. Ripple, diode drops, finite charging current, and clamp timing alter the actual excursion. The \(f_s\CP\) conductance is an ideal estimate; measured PF/THD includes pump and controller effects.

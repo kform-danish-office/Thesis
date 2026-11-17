@@ -1,0 +1,34 @@
+\chapter{Models from Earlier Work}
+\label{app:modeling}
+
+The supplied LTspice circuits and MATLAB/COMSOL models describe the converter and magnetic designs used as the starting point. They were used to understand the operating principle and integration parameters. Chapter~\ref{ch:simulation} compares those circuits with the components and controller installed in the prototype.
+
+\section{Circuit Models}
+\begin{longtable}{@{}L{0.32\linewidth}L{0.60\linewidth}@{}}
+\caption{Supplied circuit models.}\label{tab:app-ltspice-files}\\
+\toprule Model & Circuit settings\\\midrule
+\endfirsthead
+\toprule Model & Circuit settings\\\midrule
+\endhead
+Variant 1 & Earlier nonisolated rectifier model; \SI{325}{\volt} peak, \SI{50}{\hertz}; \(\CDC=\SI{10}{\micro\farad}\), \(\LRES=\SI{158}{\micro\henry}\), \(\CP=\SI{1.3}{\nano\farad}\), \(\CRES=\SI{200}{\pico\farad}\), carrier \SI{1.04}{\mega\hertz}\\
+Variant 2 & Related earlier circuit with \(\CRES=\SI{190}{\pico\farad}\) and carrier \SI{1.035}{\mega\hertz}\\
+Loss-analysis models & Earlier loss-analysis configurations and measurement directives\\
+GS66502B model & GS66502B device model used in the supplied simulations\\
+\bottomrule
+\end{longtable}
+The supplied circuit model uses a GS66502B, while an integrated LMG2652 half bridge was used in the prototype. Thermal behavior, leakage current, and package stray inductance are excluded from the model \cite{gansystemsGS66502Bmodel}. Switching-loss and temperature predictions for the installed stage therefore need a model of its devices and circuit.
+
+\section{Magnetic Models}
+\begin{longtable}{@{}L{0.32\linewidth}L{0.60\linewidth}@{}}
+\caption{Supplied magnetic models.}\label{tab:app-magnetics-model-files}\\
+\toprule Source & Purpose\\\midrule
+\endfirsthead
+\toprule Source & Purpose\\\midrule
+\endhead
+Transformer design & Transformer design calculations and COMSOL-assisted analysis\\
+Simulation parameters & Geometry, conductor, spacing, material, mesh, and frequency settings\\
+Finite-element models & COMSOL finite-element model files\\
+Numerical data & Stored MATLAB numerical data\\
+\bottomrule
+\end{longtable}
+The planar-magnetic models came from earlier DTU work. The next modeling step would combine the installed magnetics with the external resonant inductors, PCB parasitics, output stage, and sampled burst controller. The calculated waveforms would then be compared with measurements. A complete model of the prototype has not yet been produced.

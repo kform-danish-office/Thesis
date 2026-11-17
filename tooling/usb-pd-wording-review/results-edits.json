@@ -1,0 +1,82 @@
+[
+  {
+    "path": "Chapters/09_Experimental_Methods/chapter.tex",
+    "before": "The setup had to\nseparate secondary-bulk regulation from connector output, and controller\ntelemetry from external measurements.",
+    "after": "The setup monitored both\nsecondary-bulk and USB-C output voltage. External instruments supplied\nthe output-power measurements; controller telemetry was used for diagnostics."
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+    "before": "Controller ADC and UART data were used for sensing and command diagnostics,\nrather than independent connector-output measurements.",
+    "after": "ADC readings and UART data were used to diagnose controller sensing and\ncommand handling."
+  },
+  {
+    "path": "Chapters/09_Experimental_Methods/04_Instrumentation.tex",
+    "before": "In Table~\\ref{tab:channel-definitions}, CH1--CH4 denote oscilloscope channels,\nindependent of MCU port or package-pin identifiers.",
+    "after": "In Table~\\ref{tab:channel-definitions}, CH1--CH4 label the oscilloscope inputs."
+  },
+  {
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "before": "where \\(V_\\mathrm{BUS,avg}\\) is the USB-C connector mean. The upstream\ncontroller regulates the separate secondary intermediate bus.",
+    "after": "where \\(V_\\mathrm{BUS,avg}\\) is the mean USB-C output voltage. The MCU\nregulates the secondary bulk supply feeding the USB-C PD stage."
+  },
+  {
+    "path": "Chapters/10_Results/03_Steady_State.tex",
+    "before": "These means establish downstream regulation rather than\nripple or transient limits.",
+    "after": "These averages show that the USB-C PD output remained close to its selected\nvoltage; ripple and transient limits require separate measurements."
+  },
+  {
+    "path": "Chapters/11_Discussion/01_Key_Findings.tex",
+    "before": "The downstream stage maintained average connector voltage across these\npoints.",
+    "after": "Average USB-C output voltage was maintained across these points."
+  },
+  {
+    "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+    "before": "The downstream stage\nregulates connector voltage, while the upstream loop maintains its\nsecondary-bus headroom.",
+    "after": "The USB-C PD stage\nregulates the output voltage to the selected PD level, while the MCU\nregulates the secondary bulk supply feeding it."
+  },
+  {
+    "path": "Chapters/11_Discussion/02_Topology_Adaptation.tex",
+    "before": "across the charge pump, burst schedule, secondary-bus headroom, downstream\nstage, and thermal path.",
+    "after": "across the charge pump, burst schedule, secondary bulk supply, USB-C PD\noutput stage, and thermal path."
+  },
+  {
+    "path": "Chapters/11_Discussion/03_Control_Contribution.tex",
+    "before": "Enable requests are aligned to carrier\nboundaries to limit partial intervals.",
+    "after": "The firmware attempts to align enable requests with carrier\nboundaries to limit partial intervals."
+  },
+  {
+    "path": "Chapters/11_Discussion/04_Open_Circuit_Safety.tex",
+    "before": "Discharge and downstream-stage dynamics modify this\nrelationship.",
+    "after": "Capacitor discharge and the response of the USB-C PD stage also affect\nthe voltage rise."
+  },
+  {
+    "path": "Chapters/11_Discussion/09_Future_Improvements.tex",
+    "before": "Measured magnetics, parasitics, downstream-stage behavior, and packet\nenergy would then support validation of the installed converter model.",
+    "after": "Measured magnetics, parasitics, USB-C PD stage behavior, and packet\nenergy would then support validation of the installed converter model."
+  },
+  {
+    "path": "Chapters/11_Discussion/chapter.tex",
+    "before": "The remaining limitations are magnetic and\ninput-path heating, sustained output, and equivalent-function volume.",
+    "after": "The remaining questions concern magnetic and\ninput-path heating, sustained output, and the volume of a complete USB-C PD supply."
+  },
+  {
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "before": "sensing, auxiliaries, the downstream stage, and the MCU were integrated",
+    "after": "sensing, auxiliaries, the USB-C PD output stage, and the MCU were integrated"
+  },
+  {
+    "path": "Chapters/12_Conclusion/02_Research_Questions.tex",
+    "before": "magnetics, downstream stage, sensing, and digital control were integrated",
+    "after": "magnetics, USB-C PD output stage, sensing, and digital control were integrated"
+  },
+  {
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "before": "synchronized fixed-carrier bursts, direct secondary-voltage regulation,",
+    "after": "fixed-carrier burst scheduling, direct secondary-voltage regulation,"
+  },
+  {
+    "path": "Backmatter/Appendices/A_Analytical_Equations.tex",
+    "before": "\\(V_{\\mathrm{BUS}}\\) the downstream USB-C output. These are separate circuit nodes. Load power is calculated from the connector voltage. The controller's bulk-voltage measurement is upstream of the output stage.",
+    "after": "\\(V_{\\mathrm{BUS}}\\) the USB-C PD output voltage. The MCU measures secondary bulk voltage upstream of the USB-C PD stage. Load power is calculated from connector voltage and external load current."
+  }
+]

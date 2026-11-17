@@ -1,0 +1,45 @@
+{
+  "url": "https://thesis-power-lab.vercel.app/",
+  "deployment_id": "dpl_9VeXjur2mSbAwBxyFXVhdHurTMmP",
+  "checks": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 14387,
+      "sha256_matches_local": true,
+      "title": "Power Lab \u2014 Thesis Control",
+      "serial_permission": "serial=(self)",
+      "content_security_policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    },
+    {
+      "file": "styles.css",
+      "status": 200,
+      "bytes": 25573,
+      "sha256_matches_local": true
+    },
+    {
+      "file": "app.js",
+      "status": 200,
+      "bytes": 33263,
+      "sha256_matches_local": true
+    },
+    {
+      "file": "serial.js",
+      "status": 200,
+      "bytes": 11960,
+      "sha256_matches_local": true
+    },
+    {
+      "file": "protocol.js",
+      "status": 200,
+      "bytes": 2385,
+      "sha256_matches_local": true
+    },
+    {
+      "file": "storage.js",
+      "status": 200,
+      "bytes": 3019,
+      "sha256_matches_local": true
+    }
+  ]
+}

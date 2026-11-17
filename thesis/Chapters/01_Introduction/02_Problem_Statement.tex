@@ -1,0 +1,15 @@
+\section{Problem Statement}
+\label{sec:intro-problem}
+
+The revised project plan sets a continuous-output target of \SI{100}{\watt} and a continuous minimum of \SI{65}{\watt} \cite{projectOctoberPlan}; the earlier schedule sets a \SI{75}{\watt} continuous validation milestone \cite{projectEarlierPlan}. Each level must be tested at a stated load and duration while temperature is tracked as it settles.
+
+The charge-pump and isolated resonant paths share one half bridge, coupling input-current shaping to secondary power transfer. The DC link buffers the pulsating mains power, while burst control must supply the load and limit residual excitation during startup, light load, and load removal.
+
+The MCU regulates the isolated secondary bulk voltage. The MPQ4242 output stage then regulates the USB-C output voltage to the selected PD level. A steady USB-C output voltage can coexist with substantial ripple on the bulk supply.
+
+The main question is:
+\begin{quote}
+How can the DTU charge-pump PFC resonant converter be implemented and controlled as a USB-C power supply, and what output capability, regulation, input power quality, efficiency, and thermal behavior does the assembled prototype demonstrate?
+\end{quote}
+
+The main energy transfers and component constraints are analyzed first. The hardware and control choices follow from that analysis. The laboratory results show where the targets were met and where further work is needed.

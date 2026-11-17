@@ -1,0 +1,25 @@
+\section{Reference Integrated Resonant LED Driver}
+\label{sec:bg-ref2021}
+
+The 2021 LED driver separates the charge-pump and isolated class-DE tanks while retaining a shared half bridge and driver \cite{ammar2021led}. The separate pump inductor and clamp paths provide more freedom in selecting the isolated-stage gain, while the bus and switching sequence remain shared.
+
+An output of up to \SI{42}{\watt} was reported at \SI{1}{\mega\hertz}, with PF of 0.99, input-current THD of 6\%, and full-load efficiency of approximately 90\%. The carrier cycles were grouped into bursts with a \SI{20}{\kilo\hertz} enable signal to regulate LED current. Average output power could change while the carrier stayed at its designed resonant operating point.
+
+\begin{table}[htbp]
+\centering
+\caption{Reference converters and the USB-C prototype.}
+\label{tab:bg-reference-relationship}
+\begin{tabularx}{\textwidth}{@{}L{0.22\textwidth}L{0.31\textwidth}Y@{}}
+\toprule
+Work & Circuit & Use in this project\\
+\midrule
+2020 rectifier & Charge-pump resonant PFC rectifier & Charge-transfer principle and design analysis\\
+2021 LED driver & Separate pump and isolated output tanks with shared half bridge & Circuit and burst-control starting point\\
+Present prototype & Related isolated power stage with USB-C output section & System integration and secondary-voltage control\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Pump current contributes directly to half-bridge commutation. In the reference, its amplitude can exceed the primary-referred output-tank current, and its inductive phase supports ZVS over much of the line cycle. Omitting this branch would understate available commutation current.
+
+Burst control was adapted from LED-current regulation to secondary-bulk-voltage regulation. Powering a USB-C device requires startup and no-load states that retain a usable bulk voltage through attachment and removal. The downstream stage supplies the selected VBUS setting.

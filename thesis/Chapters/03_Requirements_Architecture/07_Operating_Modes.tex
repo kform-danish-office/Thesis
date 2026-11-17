@@ -1,0 +1,30 @@
+\section{Operating States}
+\label{sec:req-modes}
+
+Startup, loaded regulation, and no-load energy limitation require distinct burst limits. The original prototype uses MCU pin PA10 as the active-high burst-enable output. UART provides command/status access, and ADC readings are buffered by DMA.
+
+Table~\ref{tab:req-states} shows how the final firmware separates those tasks. Chapter~\ref{ch:control} gives the thresholds and timing behind the state changes.
+
+\begin{table}[H]
+\centering
+\caption{States and options in the baseline firmware.}
+\label{tab:req-states}
+\begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}Y@{}}
+\toprule
+State or option & Purpose and behavior\\
+\midrule
+Initialization & Configures stored settings, GPIO, UART, timers, ADC DMA, filters, and status indicators.\\
+Off/inhibited & Holds PA10 low after an off command, reset condition, or latched fault.\\
+Startup precharge & Applies limited bursts to power the secondary-side feedback circuit before normal regulation.\\
+Open loop & Uses the commanded \texttt{OD} burst duty for bring-up and diagnostic operation.\\
+Voltage control & Uses secondary-voltage thresholds and load-state logic to select bounded PA10 commands.\\
+Loaded operation & Can hold the averaged \texttt{LDUTY} command and increase demand through \texttt{LBOOST} when secondary voltage falls.\\
+No-load guard & Lowers the regulation window and caps the high command when the inferred load is high impedance.\\
+Load-recovery override & Temporarily relaxes the no-load cap after a repeated low-voltage condition, allowing an attached load to receive power.\\
+Line feed-forward & Uses PA0 to reduce the permitted high command as primary voltage rises; PA1 remains the feedback variable.\\
+Fault latch & Inhibits PA10 until the cause is removed and the defined clear or reset action is performed.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The state logic changes permitted energy transfer while the active carrier remains at \SI{1}{\mega\hertz}. The burst envelope depends on load state and settings, including line feed-forward and \texttt{MAXRATE}. Precharge ends at either the readiness threshold or the configured attempt limit. The attempt limit can be reached before feedback becomes valid.

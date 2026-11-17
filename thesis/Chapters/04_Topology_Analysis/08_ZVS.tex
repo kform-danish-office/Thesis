@@ -1,0 +1,20 @@
+\section{Zero-Voltage-Switching Conditions}
+\label{sec:analysis-zvs}
+
+Here \(i_{\mathrm{dt}}\) is the current available to move the switch node during dead time. Its sign is chosen for the required transition. A necessary charge condition is
+\begin{equation}
+\left|\int_0^{t_{\mathrm{dt}}}i_{\mathrm{dt}}(t)\,\mathrm{d}t\right|
+\geq Q_{\mathrm{comm}}(\VDC),
+\label{eq:analysis-zvs-charge}
+\end{equation}
+where \(Q_{\mathrm{comm}}\) includes device output-charge changes and the other node capacitances. With nearly constant current and a linear effective capacitance,
+\begin{equation}
+|i_{\mathrm{dt}}|t_{\mathrm{dt}}\gtrsim C_{\mathrm{eq}}\VDC.
+\end{equation}
+The charge condition must be met with the required polarity and before turn-on.
+
+Both paths contribute to \(i_{\mathrm{dt}}\). In the modified reference, inductive pump current can exceed primary-referred output current and provide much of the commutation charge \cite{ammar2021led}. Its prototype contribution varies with line voltage and burst history; isolated load and magnetizing currents depend on transformer impedance and rectifier state.
+
+Tolerances shift resonance, pump current falls near line zero crossings, and idle intervals can remove circulating current. Switch-node transitions therefore need checking near line zero crossings and at burst restart, even with fixed dead time.
+
+Dead time must complete commutation without excessive reverse conduction. The effective interval includes command timing, driver propagation, and device response. A quantitative margin requires calibrated node capacitance and timing, which the supplied model does not provide. Section~\ref{sec:res-zvs} assesses the available captures.

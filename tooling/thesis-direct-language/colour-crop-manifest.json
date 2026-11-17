@@ -1,0 +1,151 @@
+{
+  "source": "Pictures/Thesis/07_Hardware/Schematic_V2_Colour.pdf",
+  "source_sha256": "7af67969cea32d270498dacdd244b937c2496f113b85038893dbc88260f8d031",
+  "method": "PyMuPDF show_pdf_page, unit-scale rectangular clip; no redraw or rasterization",
+  "outputs": [
+    {
+      "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_power_stage_excerpt.pdf",
+      "sha256": "18109ed219782188b7cff988330a392c895e01ab7370a172c0b3f567d25db2a0",
+      "pages": [
+        {
+          "sheet": 3,
+          "clip": [
+            22,
+            261,
+            1662,
+            629
+          ],
+          "scope": "Complete resonant/transformer, GaN half-bridge, and secondary rectifier/output boxes, including the charge-pump branch.",
+          "output_page": 1,
+          "output_dimensions_pt": [
+            1640.0,
+            368.0
+          ],
+          "vector_xobjects": 3,
+          "word_labels_match_previous_grey_crop": true,
+          "coloured_pixels_at_144dpi": 183726,
+          "coloured_pixel_fraction": 0.07610601139978791,
+          "visible_raster_images": 0,
+          "inherited_off_crop_image_resources": 1,
+          "render_matches_original_region_with_antialias_tolerance_144dpi": true,
+          "mean_channel_difference_0_to_255": 0.00025889779957582185,
+          "fraction_of_differing_channels": 3.880015022976317e-05
+        }
+      ]
+    },
+    {
+      "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_input_excerpt.pdf",
+      "sha256": "e77ba17cd016bd8a3ad76758fa751e88e88c6ff1e67dc02bdd3ee72431ed85be",
+      "pages": [
+        {
+          "sheet": 3,
+          "clip": [
+            22,
+            49,
+            748,
+            247
+          ],
+          "scope": "Complete AC input / EMI filter box.",
+          "output_page": 1,
+          "output_dimensions_pt": [
+            726.0,
+            198.0
+          ],
+          "vector_xobjects": 3,
+          "word_labels_match_previous_grey_crop": true,
+          "coloured_pixels_at_144dpi": 59415,
+          "coloured_pixel_fraction": 0.10333187244344269,
+          "visible_raster_images": 0,
+          "inherited_off_crop_image_resources": 1,
+          "render_matches_original_region_with_antialias_tolerance_144dpi": true,
+          "mean_channel_difference_0_to_255": 0.0,
+          "fraction_of_differing_channels": 0.0
+        },
+        {
+          "sheet": 3,
+          "clip": [
+            762,
+            31,
+            957,
+            247
+          ],
+          "scope": "Complete mains rectifier box.",
+          "output_page": 2,
+          "output_dimensions_pt": [
+            195.0,
+            216.0
+          ],
+          "vector_xobjects": 3,
+          "word_labels_match_previous_grey_crop": true,
+          "coloured_pixels_at_144dpi": 16073,
+          "coloured_pixel_fraction": 0.09540004748338082,
+          "visible_raster_images": 0,
+          "inherited_off_crop_image_resources": 1,
+          "render_matches_original_region_with_antialias_tolerance_144dpi": true,
+          "mean_channel_difference_0_to_255": 0.0,
+          "fraction_of_differing_channels": 0.0
+        }
+      ]
+    },
+    {
+      "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_usb_excerpt.pdf",
+      "sha256": "b8a7a2e4b976d19efc388304a8a03de1b418e5ba3bac9b656c9448ca80c23264",
+      "pages": [
+        {
+          "sheet": 2,
+          "clip": [
+            87,
+            65,
+            1200,
+            655
+          ],
+          "scope": "All functional USB-PD sheet regions, including bulk/output filtering, status, I2C service, controller/power stage/USB-C, and ground filter.",
+          "output_page": 1,
+          "output_dimensions_pt": [
+            1113.0,
+            590.0
+          ],
+          "vector_xobjects": 3,
+          "word_labels_match_previous_grey_crop": true,
+          "coloured_pixels_at_144dpi": 261940,
+          "coloured_pixel_fraction": 0.09972284404647692,
+          "visible_raster_images": 0,
+          "inherited_off_crop_image_resources": 1,
+          "render_matches_original_region_with_antialias_tolerance_144dpi": true,
+          "mean_channel_difference_0_to_255": 5.329922183136126e-06,
+          "fraction_of_differing_channels": 2.1573494550789083e-06
+        }
+      ]
+    },
+    {
+      "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_controller_excerpt.pdf",
+      "sha256": "6b8f187d600648282efa17d325e676f86bed4bb570820d9dd3eac2c0efd60caf",
+      "pages": [
+        {
+          "sheet": 4,
+          "clip": [
+            381,
+            89,
+            1230,
+            657
+          ],
+          "scope": "Complete MCU/power and control/sense-interface boxes; STLINK and status-LED boxes outside this crop remain on the full appendix sheet.",
+          "output_page": 1,
+          "output_dimensions_pt": [
+            849.0,
+            568.0
+          ],
+          "vector_xobjects": 3,
+          "word_labels_match_previous_grey_crop": true,
+          "coloured_pixels_at_144dpi": 224928,
+          "coloured_pixel_fraction": 0.1166077738515901,
+          "visible_raster_images": 0,
+          "inherited_off_crop_image_resources": 1,
+          "render_matches_original_region_with_antialias_tolerance_144dpi": true,
+          "mean_channel_difference_0_to_255": 0.0,
+          "fraction_of_differing_channels": 0.0
+        }
+      ]
+    }
+  ]
+}

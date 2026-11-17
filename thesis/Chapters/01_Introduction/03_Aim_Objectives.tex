@@ -1,0 +1,20 @@
+\section{Project Goals}
+\label{sec:intro-aim}
+
+The aim was to build and evaluate an isolated AC--DC power supply from the charge-pump topology from earlier DTU work and supplied planar magnetics, with digital burst control and a USB-C output.
+
+The converter implementation and test work had six objectives:
+\begin{enumerate}[label=\arabic*)]
+\item define the power target, operating states, and measurements needed to test the prototype;
+\item turn the reference topology into a complete circuit with the selected semiconductor, sensing, auxiliary-supply, and USB-C interface components;
+\item design, assemble, and bring up the PCB with the supplied planar inductor and transformer;
+\item develop the controller from open-loop switching to secondary-voltage regulation with startup, no-load, and fault handling;
+\item measure output voltage, load response, switching behavior, input power quality, efficiency, and temperature; and
+\item compare the measured performance with the project targets and identify the remaining limits.
+\end{enumerate}
+
+The analytical component and control requirements are evaluated against the assembled hardware and measured operating points. The resulting electrical and thermal limits guide the V2 and V3 changes.
+
+The revised plan extends the work to V2 evaluation and a V3 edge-card design \cite{projectOctoberPlan}. It calls for a repeat of the reported \SI{85}{\watt} V2 operating point and an investigation of the \SI{15}{\watt} shortfall to the \SI{100}{\watt} target. With a modified resonant tank, V2 later reached \SI{137.1}{\watt} at the secondary output, with voltage droop and continued heating (\cref{sec:res-v2-testing}). Fixed-PDO, PPS, and defined-duration thermal and stability tests remain necessary. A V2--V3 power-density comparison also requires a common assembly-volume definition. Section~\ref{sec:revised-plan-criteria} gives the criteria and their current status.
+
+A reduced V3 layout was prepared from these findings. The USB-PD section was removed from the converter card to reduce volume, while the secondary rectifiers were retained. Installation of new planar magnetics and matched V3 tests remained unfinished. The design outcome is described in \cref{sec:hw-v3-plan,sec:res-v3-design}.

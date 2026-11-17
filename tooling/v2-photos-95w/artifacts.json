@@ -1,0 +1,21 @@
+{
+  "thesis_pages": 388,
+  "excerpt_physical_pages": [
+    119,
+    121
+  ],
+  "artifacts": {
+    "V2_Testing_Photos_95W.pdf": {
+      "bytes": 505576,
+      "sha256": "a05b236b38cbd0626fd28653d6b72d43a96fe2b360bb8b7ddf71af8d29910f4b"
+    },
+    "Thesis_V2_Photos_95W.pdf": {
+      "bytes": 17250805,
+      "sha256": "132bff4db35cedc03c08b2825fde484a20a8bf1de5ef457321a6db290f666373"
+    },
+    "Thesis_V2_Photos_95W_Source.zip": {
+      "bytes": 80949050,
+      "sha256": "6900637f4effc1be89ad0aca46b65473196025056097b7c02646bcf963719cc8"
+    }
+  }
+}

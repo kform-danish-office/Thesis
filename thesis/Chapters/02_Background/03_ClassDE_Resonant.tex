@@ -1,0 +1,17 @@
+\section{Class-DE Resonant Conversion}
+\label{sec:bg-classde}
+
+The isolated path comprises the half bridge, series resonant network, transformer, and secondary rectifier. The rectangular switch-node voltage excites approximately sinusoidal tank current. The rectifier charges the secondary bulk capacitor, whose voltage is regulated by the controller.
+
+For series inductance \(\LRES\) and capacitance \(\CRES\),
+\begin{equation}
+f_0=\frac{1}{2\pi\sqrt{\LRES\CRES}}.
+\label{eq:bg-series-resonance}
+\end{equation}
+The first-harmonic approximation represents the bridge by its fundamental voltage and the rectifier/load by an equivalent resistance. It supports initial gain and component sizing for approximately sinusoidal tank current. Burst transitions, discontinuous rectifier conduction, and no-load operation violate its steady-state load assumptions.
+
+Discrete inductance and transformer leakage form the series branch; magnetizing inductance remains a separate branch. Although omitted from the first series-resonance estimate, magnetizing current contributes to primary RMS current, loss, and commutation, particularly at light load.
+
+Above resonance, the loaded series tank presents an inductive impedance, providing lagging current for switch-node commutation during dead time. Pump current also contributes at the shared node and must be included in the soft-switching assessment.
+
+The reference LED-driver approximation neglects magnetizing current, whereas an LLC gain model retains finite magnetizing inductance \cite{ammar2021led}. The series approximation is used for initial sizing; magnetizing current and burst dynamics are also considered when analyzing prototype switching and transients.

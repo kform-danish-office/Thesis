@@ -1,0 +1,8 @@
+\section{Control Timing and Settings}
+\label{sec:ctrl-timing}
+
+The default \texttt{CPER} of \SI{25}{\micro\second} requests \SI{40}{\kilo\hertz} foreground updates. UART presets also provide \SI{20}{\micro\second}, \SI{50}{\micro\second}, and \SI{100}{\micro\second}. Elapsed-time scheduling allows interrupts and foreground work to extend the actual interval.
+
+\texttt{STATUS} was used to inspect the last and maximum control intervals, overruns, ADC snapshot time, DMA state, requested and effective duty, envelope timing, skipped periods, and carrier-sync counts. These software fields help locate delays; an external capture is needed to measure the jitter distribution and its relationship to the switching waveform.
+
+Firmware version, calibration, thresholds, loaded/no-load settings, and timing affect the control response and should be recorded with each test. Appendix~\ref{app:firmware} gives the command reference.

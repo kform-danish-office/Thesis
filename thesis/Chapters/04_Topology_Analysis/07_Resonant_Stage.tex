@@ -1,0 +1,51 @@
+\section{Resonant Network and Transformer Ratio}
+\label{sec:analysis-resonant}
+
+The output-tank calculation adds the primary-referred series contributions: approximately \SI{9.4}{\micro\henry} from the discrete resonant inductor and approximately \SI{16.5}{\micro\henry} from transformer leakage. Together they give
+\begin{equation}
+\LRES\approx\SI{25.9}{\micro\henry}.
+\end{equation}
+With \(\CRES=\SI{1}{\nano\farad}\), the nominal series resonance is
+\begin{equation}
+f_0\approx\frac{1}{2\pi\sqrt{\LRES\CRES}}
+\approx\SI{0.989}{\mega\hertz}.
+\end{equation}
+The nominal resonance lies close to the \SI{1}{\mega\hertz} carrier. Loaded gain and commutation also depend on the magnetizing branch and pump current.
+
+The transformer turns ratio is defined as
+\begin{equation}
+n=\frac{N_p}{N_s},
+\end{equation}
+using the same convention as Equation~\eqref{eq:app-turns-ratio}. The supplied transformer measurements are near 8:1, so \(n\approx8\) is used for the step-down ratio. The reference LED-driver equations use \(N_s/N_p\), which must be inverted before applying their relationships here.
+
+With full-wave rectification and approximately sinusoidal current, the equivalent load at the secondary rectifier input is
+\begin{equation}
+R_{\mathrm{REC,s}}=\frac{8V_{\mathrm{sec}}^2}{\pi^2P_{\mathrm{sec}}},
+\end{equation}
+Referring this resistance to the primary gives
+\begin{equation}
+R_{\mathrm{REC,p}}=n^2R_{\mathrm{REC,s}}.
+\end{equation}
+Here \(P_{\mathrm{sec}}\) includes downstream demand and losses. Using connector power alone would understate tank loading.
+
+If magnetizing current is neglected, the required series-tank gain is
+\begin{equation}
+M_{\mathrm{RES}}=\frac{2nV_{\mathrm{sec}}}{\VDC}.
+\end{equation}
+Using \(f_n=f_s/f_0\) and \(Q_L=\omega_0\LRES/R_{\mathrm{REC,p}}\), the reference first-harmonic gain is
+\begin{equation}
+M_{\mathrm{RES}}=
+\frac{1}{\sqrt{1+Q_L^2(f_n-f_n^{-1})^2}}.
+\label{eq:analysis-series-gain}
+\end{equation}
+The associated component relationships are
+\begin{equation}
+\LRES=\frac{Q_LR_{\mathrm{REC,p}}}{\omega_0},
+\qquad
+\CRES=\frac{1}{\omega_0Q_LR_{\mathrm{REC,p}}}.
+\end{equation}
+These first-harmonic relationships provide an initial component and gain check at the assumed load \cite{ammar2021led}.
+
+The supplied magnetizing inductance is approximately \SIrange{140}{151}{\micro\henry}, about five to six times nominal series inductance. Its effect on input impedance increases at light load and burst transitions. Because Equation~\eqref{eq:analysis-series-gain} omits this branch, measured gain discrepancies require a fuller model before revising series components.
+
+Installed behavior also depends on transformer variant and polarity, rectifier conduction, and frequency-dependent parasitics. Chapters~\ref{ch:magnetics} and \ref{ch:hardware} describe the integration.

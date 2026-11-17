@@ -1,0 +1,12 @@
+[
+  {
+    "path": "/workspace/tooling/carrier-timing-review/firmware/pwr-2.0.4-v2-stm32f410cbu6.hex",
+    "bytes": 255347,
+    "sha256": "fe3a6b02f06b025ba83e53dd482bbfdf9dd166f9f2afc0fe806062eab14ded47"
+  },
+  {
+    "path": "/workspace/tooling/carrier-timing-review/pwr-2.0.4-v2-f410-timing.zip",
+    "bytes": 103372,
+    "sha256": "bdb20a73e73a041f42938b4d1d91216cf105c1557239250c9df0cca7ab60b4c8"
+  }
+]

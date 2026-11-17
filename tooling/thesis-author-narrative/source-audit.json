@@ -1,0 +1,39 @@
+{
+  "baseline_files": 483,
+  "current_files": 483,
+  "edited_files": 6,
+  "unchanged_files": 477,
+  "changes": [
+    {
+      "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+      "before_sha256": "085f55a39c3814c9c2dfa39ee041ec69046cdc0948b3e13eb0b33e5d5da843a7",
+      "sha256": "d460362e71fc7d928b40ac0f8bcb2478593154bf75488da334d073955e0ed0e7"
+    },
+    {
+      "path": "Chapters/01_Introduction/08_V2_Prototype.tex",
+      "before_sha256": "33b2cecd27742cca23a378fdc82cdcfbe8be06ffaa17d8ebb7289c6fb4e00b47",
+      "sha256": "4105728e4736af156a03429edd6221419a64b48e7794dcf6b55f7dd4eebd82fe"
+    },
+    {
+      "path": "Chapters/12_Conclusion/04_Future_Work.tex",
+      "before_sha256": "5e063c789f5bacc33dff5120ba42f02756e728a5d2f1e80896c13a3fca3f8826",
+      "sha256": "807fdf689dabf772861000c597df80d29ad2b29b86b0db36e0f87a2ddebdaf69"
+    },
+    {
+      "path": "Chapters/07_Hardware/16_V2_F410.tex",
+      "before_sha256": "f757194553eba2b431100b93a13e8cef5cda81a5040b2fac3b4ad34cb6844a76",
+      "sha256": "860cc1ba0799865e3f3de25ff50fb1d5a392e3f6f44e77e1c0c2b4897e2bd86a"
+    },
+    {
+      "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+      "before_sha256": "483123217619873732c29445a2db487fe6368aead84037105ad5e055d2796594",
+      "sha256": "e061f927ea7dc643a16e021157921cad7bee6a2f833568b1f90444ac77a1d833"
+    },
+    {
+      "path": "Backmatter/Appendices/B_Hardware_Documentation.tex",
+      "before_sha256": "fed7c3d832fcd1d60c6cb420a671dcf234d55f87e65d51713f4c1b3ec12b2b63",
+      "sha256": "3e5486732ef97e9458bfb9fc50098b92817232b847b636616be510b97113ea1d"
+    }
+  ],
+  "checks": "All original assets and evidence unchanged; mathematical expressions, numerical quantities, source graphics, labels and citations identical. File-handoff narrative removed from V2 introduction, hardware and appendix."
+}

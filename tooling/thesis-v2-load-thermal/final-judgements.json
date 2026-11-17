@@ -1,0 +1,143 @@
+[
+  {
+    "id": "thermal-repetition",
+    "path": "Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+    "old": "The thermal images in \\cref{fig:v2-secondary-load-thermal} show the two regions.\nThe input-bridge region R3 reached",
+    "new": "In the thermal images in \\cref{fig:v2-secondary-load-thermal}, the input-bridge\nregion R3 reached",
+    "reason": "Introduces the actual observation directly.",
+    "facts_preserved": [
+      "R3 identifies the input-bridge region."
+    ],
+    "checklist": [
+      "Concrete observations",
+      "Preserve technical uncertainty",
+      "Connected engineering prose"
+    ],
+    "decision": "Accept",
+    "final": "In the thermal images in \\cref{fig:v2-secondary-load-thermal}, the input-bridge\nregion R3 reached",
+    "lead_reason": "Introduce the actual temperature observation without a separate empty sentence.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    }
+  },
+  {
+    "id": "thermal-summary",
+    "path": "Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+    "old": "This sequence shows the lower bridge temperatures\nobserved at higher loads alongside increasing secondary heating.\n\n",
+    "new": "",
+    "reason": "Repeats the immediately preceding numerical observations without adding interpretation.",
+    "facts_preserved": [
+      "The reported bridge and secondary region values remain in place."
+    ],
+    "checklist": [
+      "Concrete observations",
+      "Preserve technical uncertainty",
+      "Connected engineering prose"
+    ],
+    "decision": "Revise",
+    "final": "\n\n",
+    "lead_reason": "Remove the repeated summary and preserve the paragraph break before the thermal interpretation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    }
+  },
+  {
+    "id": "sustained-operation",
+    "path": "Chapters/10_Results/17_V2_Secondary_Load_Tests.tex",
+    "old": "\\SI{100}{\\watt} to a secondary load; voltage droop and heating still limit\nsustained operation.",
+    "new": "\\SI{100}{\\watt} to a secondary load. Voltage droop and heating require\nfurther investigation and sustained-load testing.",
+    "reason": "The transient sequence did not establish the operating limit for sustained operation; state the observed concerns and remaining test.",
+    "facts_preserved": [
+      "Transfer above 100 W is at the secondary load; none of the points reached thermal equilibrium."
+    ],
+    "checklist": [
+      "Concrete observations",
+      "Preserve technical uncertainty",
+      "Connected engineering prose"
+    ],
+    "decision": "Revise",
+    "final": "\\SI{100}{\\watt} to a secondary load, although voltage droop and continued\nheating remain.",
+    "lead_reason": "Keep the observed problems direct. The sequence gives no continuous rating, but does show droop and continued heating; avoid generic calls for investigation.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    }
+  },
+  {
+    "id": "v3-comparison-row",
+    "path": "Chapters/10_Results/16_V3_Design_Outcome.tex",
+    "old": "Comparable qualitative bench performance; input-bridge heating remained, with copper and a possible via bottleneck under investigation",
+    "new": "Secondary-load tests reached \\SI{137.1}{\\watt} with voltage droop; input-bridge and secondary-region heating require further investigation",
+    "reason": "Updates the revision comparison with the later measured secondary-load result and both heating regions.",
+    "facts_preserved": [
+      "Power refers to secondary load, with droop; the copper and possible via hypothesis remains in the V2 results."
+    ],
+    "checklist": [
+      "Concrete observations",
+      "Preserve technical uncertainty",
+      "Connected engineering prose"
+    ],
+    "decision": "Revise",
+    "final": "Secondary-load tests reached \\SI{137.1}{\\watt} with voltage droop; input-bridge and secondary heating remained",
+    "lead_reason": "Update the comparison with the measured secondary result and observed heating. Concrete follow-up work already appears in the V2 section.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    }
+  },
+  {
+    "id": "astra-v1-efficiency-exclusion",
+    "path": "Chapters/11_Discussion/07_Limitations.tex",
+    "old": "Efficiency estimates exclude disputed power rows and\r\ncaptures without absolute DC output voltage.",
+    "new": "The V1 efficiency estimates exclude disputed power rows and\r\ncaptures without absolute DC output voltage.",
+    "reason": "The current unqualified exclusion contradicts the new V2 table, which explicitly retains capture 017 with a warning. Scope the historical exclusion to V1; the existing V2 table note already explains its treatment.",
+    "facts_preserved": [
+      "V1 screening remains unchanged",
+      "V2 capture 017 stays flagged, not silently validated"
+    ],
+    "checklist": [
+      "Concrete measurement location and test stage",
+      "Preserve calculated versus measured quantities",
+      "Local uncertainty without repeated qualification"
+    ],
+    "decision": "Accept",
+    "final": "The V1 efficiency estimates exclude disputed power rows and\r\ncaptures without absolute DC output voltage.",
+    "lead_reason": "Scope the old screening rule to V1 because capture 017 remains explicitly flagged in the V2 table.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    }
+  },
+  {
+    "id": "astra-diagnostic-output-stage",
+    "path": "Chapters/11_Discussion/10_Plan_Gap_Diagnosis.tex",
+    "old": "Output stage and control limit & VBUS average remains regulated near the highest recorded load; the active limiter is unidentified &",
+    "new": "Output stage and control limit & V1 VBUS remained regulated near its highest recorded load; later V2 secondary-output tests showed voltage droop; the active limiter is unidentified &",
+    "reason": "After adding the higher-power V2 measurements, highest recorded load otherwise reads as the 137 W point. Identify the V1 regulated connector result and add the later V2 droop relevant to this diagnosis.",
+    "facts_preserved": [
+      "V1 regulated VBUS observation",
+      "V2 secondary measurement location",
+      "Active limiting mechanism remains unidentified"
+    ],
+    "checklist": [
+      "Concrete measurement location and test stage",
+      "Preserve calculated versus measured quantities",
+      "Local uncertainty without repeated qualification"
+    ],
+    "decision": "Accept",
+    "final": "Output stage and control limit & V1 VBUS remained regulated near its highest recorded load; later V2 secondary-output tests showed voltage droop; the active limiter is unidentified &",
+    "lead_reason": "Keep the regulated V1 connector result separate from the later V2 secondary-output droop.",
+    "scores": {
+      "voice": 2,
+      "technical_fidelity": 2,
+      "flow": 2
+    }
+  }
+]

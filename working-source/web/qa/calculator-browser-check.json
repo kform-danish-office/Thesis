@@ -1,0 +1,255 @@
+{
+  "checkedAt": "2026-10-19T00:57:31.063Z",
+  "checks": [
+    {
+      "check": "Solve discrete L at 1MHz",
+      "result": {
+        "calculation-error": {
+          "hidden": true,
+          "text": ""
+        },
+        "result-capacitance": {
+          "hidden": false,
+          "text": "1nF"
+        },
+        "result-frequency": {
+          "hidden": false,
+          "text": "1000kHz"
+        },
+        "result-inductance": {
+          "hidden": false,
+          "text": "8.83µH"
+        },
+        "result-q": {
+          "hidden": false,
+          "text": "R > 0 required"
+        },
+        "result-region": {
+          "hidden": false,
+          "text": "Resonant"
+        }
+      }
+    },
+    {
+      "check": "Solve C at 1MHz",
+      "result": {
+        "calculation-error": {
+          "hidden": true,
+          "text": ""
+        },
+        "result-capacitance": {
+          "hidden": false,
+          "text": "978pF"
+        },
+        "result-frequency": {
+          "hidden": false,
+          "text": "1MHz"
+        },
+        "result-inductance": {
+          "hidden": false,
+          "text": "25.9µH"
+        },
+        "result-q": {
+          "hidden": false,
+          "text": "R > 0 required"
+        },
+        "result-region": {
+          "hidden": false,
+          "text": "Resonant"
+        }
+      }
+    },
+    {
+      "check": "2nF + 2nF in series",
+      "result": {
+        "calculation-error": {
+          "hidden": true,
+          "text": ""
+        },
+        "result-capacitance": {
+          "hidden": false,
+          "text": "1nF"
+        },
+        "result-frequency": {
+          "hidden": false,
+          "text": "988.9kHz"
+        },
+        "result-inductance": {
+          "hidden": false,
+          "text": "25.9µH"
+        },
+        "result-q": {
+          "hidden": false,
+          "text": "R > 0 required"
+        },
+        "result-region": {
+          "hidden": false,
+          "text": "Inductive"
+        }
+      }
+    },
+    {
+      "check": "2nF + 2nF in parallel",
+      "result": {
+        "calculation-error": {
+          "hidden": true,
+          "text": ""
+        },
+        "result-capacitance": {
+          "hidden": false,
+          "text": "4nF"
+        },
+        "result-frequency": {
+          "hidden": false,
+          "text": "494.5kHz"
+        },
+        "result-inductance": {
+          "hidden": false,
+          "text": "25.9µH"
+        },
+        "result-q": {
+          "hidden": false,
+          "text": "R > 0 required"
+        },
+        "result-region": {
+          "hidden": false,
+          "text": "Inductive"
+        }
+      }
+    },
+    {
+      "check": "Latest F410 leaves missing C26 blank",
+      "result": {
+        "calculation-error": {
+          "hidden": false,
+          "text": "Enter positive capacitor values separated by commas, such as 22, 22, 22, 22."
+        },
+        "result-capacitance": {
+          "hidden": false,
+          "text": "—"
+        },
+        "result-frequency": {
+          "hidden": false,
+          "text": "—"
+        },
+        "result-inductance": {
+          "hidden": false,
+          "text": "—"
+        },
+        "result-q": {
+          "hidden": false,
+          "text": "—"
+        },
+        "result-region": {
+          "hidden": false,
+          "text": "—"
+        }
+      },
+      "exportEnabled": false
+    },
+    {
+      "check": "Missing drawing C can be solved, leakage explicitly assumed zero",
+      "result": {
+        "calculation-error": {
+          "hidden": true,
+          "text": "Enter positive capacitor values separated by commas, such as 22, 22, 22, 22."
+        },
+        "result-capacitance": {
+          "hidden": false,
+          "text": "2.533nF"
+        },
+        "result-frequency": {
+          "hidden": false,
+          "text": "1MHz"
+        },
+        "result-inductance": {
+          "hidden": false,
+          "text": "10µH"
+        },
+        "result-q": {
+          "hidden": false,
+          "text": "R > 0 required"
+        },
+        "result-region": {
+          "hidden": false,
+          "text": "Resonant"
+        }
+      },
+      "leakageNote": "Leakage not provided; 0 µH is a calculation assumption. Add a measured or documented value."
+    },
+    {
+      "check": "Entered 50ohm produces finite Q and current response",
+      "result": {
+        "calculation-error": {
+          "hidden": true,
+          "text": "Enter positive capacitor values separated by commas, such as 22, 22, 22, 22."
+        },
+        "result-capacitance": {
+          "hidden": false,
+          "text": "1nF"
+        },
+        "result-frequency": {
+          "hidden": false,
+          "text": "988.9kHz"
+        },
+        "result-inductance": {
+          "hidden": false,
+          "text": "25.9µH"
+        },
+        "result-q": {
+          "hidden": false,
+          "text": "3.219 / 307.2 kHz"
+        },
+        "result-region": {
+          "hidden": false,
+          "text": "Inductive"
+        }
+      },
+      "plot": "Calculated ideal normalized series-RLC current; resonance at 988.9 kHz, series resistance 50 Ω. Not measured converter gain."
+    },
+    {
+      "check": "Impossible L below fixed leakage rejected",
+      "result": {
+        "calculation-error": {
+          "hidden": false,
+          "text": "The leakage inductance exceeds the required total inductance. A nonnegative discrete inductor cannot meet this target."
+        },
+        "result-capacitance": {
+          "hidden": false,
+          "text": "—"
+        },
+        "result-frequency": {
+          "hidden": false,
+          "text": "—"
+        },
+        "result-inductance": {
+          "hidden": false,
+          "text": "—"
+        },
+        "result-q": {
+          "hidden": false,
+          "text": "—"
+        },
+        "result-region": {
+          "hidden": false,
+          "text": "—"
+        }
+      },
+      "exportEnabled": false
+    },
+    {
+      "check": "Pump solves Cp from 33uH1MHz",
+      "result": "1.894nF"
+    },
+    {
+      "check": "Pump solves fs from 33uH2nF",
+      "result": "973.1kHz"
+    }
+  ],
+  "mobileViewport": {
+    "width": 390,
+    "height": 844,
+    "noPageOverflow": true
+  },
+  "browserErrors": []
+}

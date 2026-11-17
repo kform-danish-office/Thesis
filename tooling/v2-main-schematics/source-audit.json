@@ -1,0 +1,73 @@
+{
+  "baseline_files": 486,
+  "current_files": 490,
+  "changed_files": [
+    {
+      "path": "Chapters/04_Topology_Analysis/01_Topology_Overview.tex",
+      "before_sha256": "4f2b42434f4e114af3a01c731a298e03272cb2e270d0f8b2ec7b0d1f74ea9358",
+      "sha256": "e702a03efc8ac24de0630b074bbd165f76bdfa863943a9b2f0d6ef657dc36416"
+    },
+    {
+      "path": "Chapters/06_Magnetics_Integration/03_Integration_Requirements.tex",
+      "before_sha256": "a83d37c556611f30eafd01508b4234fe5d0ef8c499d0e53ab1f2ff95ec44512b",
+      "sha256": "37a0a6e4f2f11ebbb59a26290a5381dd0aa9961c5126b375770558f2e08cae9c"
+    },
+    {
+      "path": "Chapters/07_Hardware/01_Prototype_Overview.tex",
+      "before_sha256": "77cd51aef340278d1d81b26735f602f401736a6b3ddc7a183d72d78bb8e440b4",
+      "sha256": "871aa334c0662db54c65cab338ff9d4037b26cd8254d017cfee6f17ebd450625"
+    },
+    {
+      "path": "Chapters/07_Hardware/02_Input_Filter_Bridge.tex",
+      "before_sha256": "0342b76a21187defdb5be69b53058e1840bd9c1a58263fc72806c8469690ee52",
+      "sha256": "3a1d1505b67943b7379a5d254907fd7cfa4f41614aeca2084b464747a9d6237f"
+    },
+    {
+      "path": "Chapters/07_Hardware/03_Charge_Pump_Network.tex",
+      "before_sha256": "5989879654b966e989a45f81be12b80bf4ded97503b2ca8c76d0c3d00a125f7b",
+      "sha256": "4dbadef6d85aba28da81bb1624f75eb20dd0541e0157b893919bea0da1daa0b3"
+    },
+    {
+      "path": "Chapters/07_Hardware/07_USBC_Interface.tex",
+      "before_sha256": "d535e7ef8cecf586484536dd7d71a1a891a28fa89553689edccb8bad0d65b4d3",
+      "sha256": "18c07d1486ab27238ff8dcb19af5abe06bca8285d0b300aa38d4b6cbd7a81a00"
+    },
+    {
+      "path": "Chapters/07_Hardware/08_Sensing.tex",
+      "before_sha256": "d472b5ac1e33ab45f66b3f15f86c1d94a604e597678c04227a418b9be45084b3",
+      "sha256": "fc33db178309b16a6106e605adb70481a1414662a1249e89fc76e84f4c4e5382"
+    },
+    {
+      "path": "Chapters/07_Hardware/chapter.tex",
+      "before_sha256": "9564fb4b697782f7e5ba89d4a0fc5e58002cfb2c66904afb9554e229db4d094a",
+      "sha256": "9f1b23beeece7475a49c8a3de1b2d7d83367425cbe0d2ff9f27a7d9428c4da52"
+    }
+  ],
+  "added_files": [
+    {
+      "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_controller_excerpt.pdf",
+      "sha256": "1b94d337f4f6fdcb84bc856b6f9b78bcaba010358be7f2235e51649f1e8bea26"
+    },
+    {
+      "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_input_excerpt.pdf",
+      "sha256": "f3090735e67e7932c04572e7e232c3f2f2293e48ec1fcda95949a1e04625f036"
+    },
+    {
+      "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_power_stage_excerpt.pdf",
+      "sha256": "b6501bfc71a42fc9e0f342727303dee0c292552927105c4c0059f8b067981d22"
+    },
+    {
+      "path": "Pictures/Thesis/07_Hardware/Rebuilt/schematic_v2_usb_excerpt.pdf",
+      "sha256": "e7153a149fda36f97c80b85be35c3f2f5faafea588908d4d97bdd5f0a2b9ebbf"
+    }
+  ],
+  "unchanged_files": 478,
+  "main_schematic_inclusions": 6,
+  "figure_label_migration": {
+    "fig:analysis-v11-power-stage": "fig:analysis-power-stage",
+    "fig:schematic-v11-power-stage": "fig:schematic-power-stage",
+    "fig:schematic-v11-usbc": "fig:schematic-usbc",
+    "fig:schematic-v11-mcu": "fig:schematic-mcu"
+  },
+  "checks": "Existing nonprose assets, code, measurements, math, quantities, citations and source inclusions unchanged. Only V2 figure substitutions, captions and locally necessary context edited. Four vector-only crop files added; original full PDFs and appendices retained."
+}

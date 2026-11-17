@@ -1,0 +1,455 @@
+--- before/Frontmatter/Abstract.tex
++++ after/Frontmatter/Abstract.tex
+@@ -3,7 +3,7 @@
+ 
+ A digitally controlled USB-C power supply was implemented using a charge-pump power-factor-correction (PFC) resonant topology from earlier DTU work and planar magnetics. Burst control was developed for secondary-bulk regulation, startup sequencing, and energy limitation at no load and after load removal.
+ 
+-The gallium-nitride (GaN) half bridge operated at a nominal \SI{1}{\mega\hertz}. Average power was controlled by enabling bursts of switching cycles. A circular direct memory access (DMA) buffer supplied the feedback samples. Startup precharge and separate duty limits for loaded and no-load operation were implemented. The USB-C PD stage provided the tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings.
++The gallium-nitride (GaN) half bridge operated at a nominal \SI{1}{\mega\hertz}, with average power controlled by bursts of switching cycles. Feedback samples were supplied through a circular direct memory access (DMA) buffer. Startup precharge was implemented alongside separate burst-duty limits for loaded and no-load operation. The USB-C PD stage provided the tested \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} USB-C settings.
+ 
+ At \SI{240}{\volt}, \SI{50}{\hertz} input, matched measurements at the \SI{20}{\volt} setting yielded \SIrange{73.97}{79.89}{\watt} at the load. Average output voltage was \SIrange{19.973}{19.991}{\volt}, with \SIrange{0.416}{0.452}{\volt} recorded peak-to-peak ripple. Logged power factor was 0.97--0.99 and current total harmonic distortion was \SIrange{2.23}{3.98}{\percent}. Paired input/output readings gave preliminary efficiency estimates of \SIrange{76.5}{77.1}{\percent}, limited by acquisition timing and calibration uncertainty. The tests included no-load operation and load removal. A thermal image labeled \SI{20}{\volt}, \SI{4}{\ampere} showed a \SI{90.4}{\celsius} surface maximum, motivating further loss and thermal characterization.
+ 
+--- before/Chapters/01_Introduction/03_Aim_Objectives.tex
++++ after/Chapters/01_Introduction/03_Aim_Objectives.tex
+@@ -15,6 +15,6 @@
+ 
+ The analytical component and control requirements are evaluated against the assembled hardware and measured operating points. The resulting electrical and thermal limits guide the V2 and V3 changes.
+ 
+-The revised plan carries this work into V2 evaluation and a V3 edge-card design \cite{projectOctoberPlan}. It calls for the reported \SI{85}{\watt} V2 operating point to be repeated and the \SI{15}{\watt} shortfall to the \SI{100}{\watt} target to be investigated. V2 has since been operated with a modified resonant tank, as described in \cref{sec:res-v2-testing}. Those preliminary observations still need matched power and thermal measurements. The plan also calls for fixed-PDO and PPS tests, thermal and stability tests of defined duration, and a V2--V3 power-density comparison using the same definition of assembly volume. Section~\ref{sec:revised-plan-criteria} sets out these criteria and their current status.
++The revised plan extends the work to V2 evaluation and a V3 edge-card design \cite{projectOctoberPlan}. It calls for a repeat of the reported \SI{85}{\watt} V2 operating point and an investigation of the \SI{15}{\watt} shortfall to the \SI{100}{\watt} target. V2 was subsequently operated with a modified resonant tank (\cref{sec:res-v2-testing}); matched power and thermal measurements are still needed for these observations. The plan also calls for fixed-PDO and PPS tests and thermal and stability runs of defined duration. A V2--V3 power-density comparison requires the same definition of assembly volume for both designs. Section~\ref{sec:revised-plan-criteria} gives the criteria and their current status.
+ 
+ A reduced V3 layout was prepared from these findings. The USB-PD section was removed from the converter card to reduce volume, while the secondary rectifiers were retained. Installation of new planar magnetics and matched V3 tests remained unfinished. The design outcome is described in \cref{sec:hw-v3-plan,sec:res-v3-design}.
+--- before/Chapters/01_Introduction/05_Contributions_Attribution.tex
++++ after/Chapters/01_Introduction/05_Contributions_Attribution.tex
+@@ -3,9 +3,9 @@
+ 
+ The charge-pump conversion principle and analytical design method were developed by Ammar et al. \cite{ammar2020chargepump,ammar2021led}. The LTspice files and planar-magnetics designs came from that work. The supplied magnetic assemblies were used in the prototypes; a replacement set was not installed.
+ 
+-The PCB was designed and assembled for this project. The supplied inductor and transformer were integrated, and the power, auxiliary, sensing, and output-interface circuits were implemented. The MCU firmware was developed in stages, from open-loop bring-up to the DMA-based voltage controller, with startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition.
++The PCB was designed and assembled around the supplied inductor and transformer, with power, auxiliary, sensing, and output-interface circuits. Firmware development began with open-loop bring-up and progressed to DMA-based voltage control. Startup sequencing, bounded burst control, load classification, no-load operation, and overvoltage inhibition were added to manage the operating states.
+ 
+-The firmware was then adapted for the MCU on V2. The revised board integrates the control, isolated feedback, local supplies, and USB-C output with the power stage. Browser control and logging were added, and the resonant tank was modified during powered testing. The schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
++For V2, the firmware was adapted to the onboard MCU, and control, isolated feedback, local supplies, and USB-C output were integrated with the power stage. Browser control and logging were added. During powered testing, the resonant tank was modified after the series inductor became hot. The schematic and PCB documentation are included in Appendix~\ref{app:hardware}.
+ 
+ Output voltage, load response, input power quality, and surface temperature were measured on the assembled supply. Input and output power readings were used to estimate conversion loss.
+ 
+--- before/Chapters/01_Introduction/06_Scope_Limitations.tex
++++ after/Chapters/01_Introduction/06_Scope_Limitations.tex
+@@ -3,7 +3,7 @@
+ 
+ The thesis covers development from the first open-frame laboratory prototype through the integrated V2 board and the reduced V3 edge-card design. The manufactured V1.0 board was tested after bring-up modifications, and later corrections were recorded in schematic V1.1. The V2 design and its preliminary powered tests form the next stage. The hardware chapter identifies the drawing and fitted configuration used at each stage.
+ 
+-The revised plan reports an earlier V2 result near \SI{85}{\watt}. In the matched measurements analyzed here, \SI{79.89}{\watt} was reached on the modified V1.0 assembly. The matched electrical results were obtained on V1.0; the later V2 tests covered tank changes and heating. Section~\ref{sec:revised-plan-criteria} also tracks the V3 layout work, its remaining release checks, and the matched V2--V3 comparison.
++The revised plan reports an earlier V2 result near \SI{85}{\watt}. The matched electrical measurements analyzed here were made on the modified V1.0 assembly, reaching \SI{79.89}{\watt}. Later V2 tests examined tank changes and heating. Section~\ref{sec:revised-plan-criteria} sets out the remaining V3 layout checks and the planned matched V2--V3 comparison.
+ 
+ The output section was tested electrically at fixed settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt}. PPS characterization remains part of the revised plan. USB-IF protocol and interoperability tests, product-safety qualification, surge and ESD qualification, conducted and radiated emissions tests, and long-duration reliability tests remain outside the completed test set.
+ 
+--- before/Chapters/01_Introduction/09_V3_Development.tex
++++ after/Chapters/01_Introduction/09_V3_Development.tex
+@@ -1,12 +1,12 @@
+ \section{From the V2 Findings to V3}
+ \label{sec:intro-v3}
+ 
+-The revisions were used to address different parts of the same problem.
+ The power circuit and burst-control method were developed on V1. V2
+-integrated the controller and interface functions on the power board and
+-allowed the resonant tank to be changed. Comparable output behavior was
+-observed on the bench, but the dominant heating in the modified V2
+-arrangement was concentrated near the input bridge.
++integrated the controller and interface functions on the power board.
++During powered testing, the resonant tank was changed after heating was
++observed in the series inductor. Comparable output behavior was observed
++on the bench, while heating in the modified V2 arrangement was
++concentrated near the input bridge.
+ 
+ Secondary-winding heating and the difficulty of increasing power around
+ the high-load operating region motivated further transformer work. The
+--- before/Chapters/02_Background/07_USBC_Context.tex
++++ after/Chapters/02_Background/07_USBC_Context.tex
+@@ -1,9 +1,9 @@
+ \section{USB-C Output Regulation}
+ \label{sec:bg-usbc}
+ 
+-The USB-C PD stage regulates the output voltage to the selected PD level. It is supplied from the secondary bulk capacitor, which is charged by the resonant converter. Changes in current drawn from the USB-C output therefore affect the bulk voltage regulated by the MCU.
++The resonant converter charges the secondary bulk capacitor, which supplies the MPQ4242 USB-C PD stage. The MCU regulates the bulk voltage using feedback at PA1, while the PD stage regulates VBUS to the selected output level. Changes in USB-C load current therefore affect the bulk supply upstream of the output regulator.
+ 
+-The resonant stage supplies the secondary bulk bus upstream of the MPQ4242 output regulator. Fixed VBUS settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} were tested. Bulk-voltage feedback enters the MCU at PA1; the connector-voltage measurements are downstream of this control loop.
++Fixed VBUS settings of \SI{5}{\volt}, \SI{9}{\volt}, \SI{15}{\volt}, and \SI{20}{\volt} were tested. Connector voltage was measured downstream of the bulk-voltage control loop.
+ 
+ Load attachment depletes secondary storage before burst transfer increases. Load removal leaves residual tank energy to charge the bulk capacitor. At no load, repeated packets raise bulk voltage whenever their energy exceeds auxiliary and leakage consumption.
+ 
+--- before/Chapters/03_Requirements_Architecture/01_Use_Case.tex
++++ after/Chapters/03_Requirements_Architecture/01_Use_Case.tex
+@@ -3,8 +3,8 @@
+ 
+ The converter was built for supervised laboratory use as an AC--DC supply with an isolated secondary and USB-C output. The fixed-frequency resonant stage and charge-pump current shaping follow the reference work \cite{ammar2020chargepump,ammar2021led}. External electronic or resistive loads were used to apply the conditions stated with each measurement.
+ 
+-The design target is \SI{100}{\watt} continuous output. The revised plan sets a \SI{65}{\watt} continuous minimum, and the earlier schedule sets a \SI{75}{\watt} continuous validation milestone \cite{projectOctoberPlan,projectEarlierPlan}. Continuous operation requires a stated load and run time, with temperature tracked throughout the run. A short capture shows operation at that load, but not continuous performance.
++The design target is \SI{100}{\watt} continuous output. The revised plan sets a \SI{65}{\watt} continuous minimum, and the earlier schedule sets a \SI{75}{\watt} continuous validation milestone \cite{projectOctoberPlan,projectEarlierPlan}. Continuous tests require a stated load and run time, with temperature tracked throughout the run.
+ 
+-The operating sequence covers unloaded startup, load attachment, loaded operation, removal, and commanded shutdown. Residual resonant and capacitive energy after load removal must be handled by no-load control and overvoltage protection.
++The operating sequence covers unloaded startup, load attachment, loaded operation, removal, and commanded shutdown. After load removal, no-load control and overvoltage protection must limit the effect of residual resonant and capacitive energy.
+ 
+ The open-frame assembly gives access for measurement and adjustment. Controlled mains energization and rated probes were used during testing. An enclosed consumer version would also need insulation, fault, environmental, protocol, and EMC qualification.
+--- before/Chapters/05_Modeling_Simulation/01_Objectives.tex
++++ after/Chapters/05_Modeling_Simulation/01_Objectives.tex
+@@ -1,8 +1,6 @@
+ \section{Charge-Transfer and Resonant Models}
+ \label{sec:sim-objectives}
+ 
+-Charge-transfer analysis estimates input-power scale, and the resonant equivalent circuit estimates active-cycle gain and phase. Clamp timing and burst transitions require a switched model; efficiency and temperature additionally require calibrated loss and thermal models.
+-
+-The supplied LTspice circuits describe the predecessor rectifier. Supplied magnetic measurements provide the inductance and transformer parameters used in Chapter~\ref{ch:analysis}. Their application to the prototype accounts for the changed topology and installed components.
+-
+-A prototype model must predict bus ripple, turn-on current, packet energy, and the response to component or command changes. Matched turn-on-current and packet-energy measurements are still needed to check it.
++The charge-transfer calculation estimates the input-power scale, while the resonant equivalent circuit estimates active-cycle gain and phase. The supplied LTspice circuits describe the predecessor rectifier, and the given magnetic measurements provide the inductance and transformer parameters used in Chapter~\ref{ch:analysis}. The calculations account for the prototype's changed topology and installed components.
++
++A switched prototype model is needed to examine clamp timing and burst transitions and to predict bus ripple, turn-on current, packet energy, and the response to component or command changes. Matched turn-on-current and packet-energy measurements are still needed to check it. Efficiency and temperature prediction also require calibrated loss and thermal models.
+--- before/Chapters/05_Modeling_Simulation/06_Steady_State.tex
++++ after/Chapters/05_Modeling_Simulation/06_Steady_State.tex
+@@ -1,8 +1,6 @@
+ \subsection{Burst and Line-Cycle Behavior}
+ \label{sec:sim-steady}
+ 
+-Three time scales govern operation: carrier-scale phase, clamp timing, and energy per active cycle; burst-scale average transfer; and line-cycle storage imbalance in the DC link and secondary capacitors. The model must resolve all three time scales.
+-
+-Nominal series resonance is near \SI{0.989}{\mega\hertz}. Turn-on phase also depends on magnetizing current, pump current, and rectifier state, which must be included in commutation prediction.
+-
+-Calibration requires matched input and secondary demand, followed by separate comparisons of voltage envelopes and switching waveforms. Mean VBUS agreement alone does not validate bulk ripple or commutation current. Chapter~\ref{ch:results} reports these quantities separately.
++The model must resolve carrier-scale phase, clamp timing, and energy per active cycle, as well as average transfer over each burst and the line-cycle energy imbalance in the DC link and secondary capacitors. Nominal series resonance is near \SI{0.989}{\mega\hertz}, but turn-on phase also depends on magnetizing current, pump current, and rectifier state.
++
++Calibration requires matched input and secondary demand, followed by separate comparisons of voltage envelopes and switching waveforms. Both comparisons are needed to assess bulk ripple and commutation current as well as mean VBUS. Chapter~\ref{ch:results} reports these quantities separately.
+--- before/Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex
++++ after/Chapters/06_Magnetics_Integration/09_Thermal_Integration.tex
+@@ -1,6 +1,4 @@
+ \section{Thermal Environment}
+ \label{sec:mag-thermal}
+ 
+-Magnetic temperature depends on winding, core, and terminal losses and thermal coupling from GaN devices, rectifiers, auxiliary supplies, copper, and airflow. The thermal limit cannot be predicted from inductance and turns ratio alone.
+-
+-The images in \cref{sec:method-thermal,sec:res-thermal} compare surface-temperature patterns at tested outputs. They do not separate core and winding losses or resolve internal winding maxima. Continuous output must be checked by recording temperature over time on the tested assembly.
++Magnetic temperature depends on winding, core, and terminal losses, as well as heat transferred from the GaN devices, rectifiers, auxiliary supplies, and copper and removed by airflow. The images in \cref{sec:method-thermal,sec:res-thermal} compare surface-temperature patterns at tested outputs, but do not separate core and winding losses or resolve internal winding maxima. Temperatures must be recorded over time on the tested assembly to check continuous output.
+--- before/Chapters/06_Magnetics_Integration/10_Verification.tex
++++ after/Chapters/06_Magnetics_Integration/10_Verification.tex
+@@ -1,9 +1,7 @@
+ \section{Assembly Checks and Remaining Measurements}
+ \label{sec:mag-verification}
+ 
+-The supplied measurements characterize the components before installation. Converter tests demonstrate power transfer through the installed magnetics, while installed inductance and individual thermal and isolation margins remain unmeasured.
+-
+-The remaining measurements are listed below.
++The given electrical measurements were taken before installation and used in the converter calculations. Power was transferred through the installed magnetics during converter tests. The remaining checks on installed parameters, temperature, and isolation are listed in \Cref{tab:mag-verification-actions}.
+ 
+ \begin{table}[H]
+ \centering
+--- before/Chapters/07_Hardware/13_Thermal.tex
++++ after/Chapters/07_Hardware/13_Thermal.tex
+@@ -3,4 +3,4 @@
+ 
+ The assembly was tested without an enclosure. Heat was spread through the PCB copper and removed by ambient convection. The heat sources include the GaN stage, resonant inductors, planar magnetics, rectifier, MPQ4242 stage, and auxiliary regulators. An enclosure or dedicated heat sink would change these paths, so continuous output would need to be retested.
+ 
+-Heat leaves the GaN device through its bottom pad and board copper. Heat is also dissipated by the resonant and secondary components. The two series inductors share the branch loss, but both carry the same current. Thermal images are compared at the labeled loads and measured surfaces. Complete records of test duration and ambient conditions were not included with the high-power captures. These observations are given in \Cref{sec:res-thermal} using the method in \cref{sec:method-thermal}. Component temperatures still need to be recorded over time to check sustained operation.
++Heat leaves the GaN device through its bottom pad and board copper. The resonant and secondary components also dissipate heat; the two series inductors share the branch loss while carrying the same current. Thermal images at the labeled loads and measured surfaces are discussed in \Cref{sec:res-thermal}, using the method in \cref{sec:method-thermal}. Test duration and ambient conditions were not fully recorded for the high-power captures, so component temperatures still need to be recorded over time to check sustained operation.
+--- before/Chapters/07_Hardware/16_V2_F410.tex
++++ after/Chapters/07_Hardware/16_V2_F410.tex
+@@ -67,7 +67,7 @@
+ 
+ Power sheet 3 includes the LMG2652RFBR GaN half bridge, AMC0330 isolated feedback, BAC1S12SC bias supply, and two LMR54410DBVR regulators. D4, D5, D9, and D10 form the input bridge; D6--D8 form the pump diode network. All seven are labeled S4D02120T in the drawing. C25 is connected across the pumped HVVCC link, downstream of the input bridge. The primary regulator supplies \texttt{MCU\_3\_3V}; the secondary supplies \texttt{SEC\_3\_3V}. C29 is specified as \SI{1}{\micro\farad} at AUX and C30 as \SI{22}{\nano\farad} at bootstrap. The drawing also includes CAP300DG discharge, the \SI{100}{\micro\henry} L2 input inductor, three \SI{10}{\nano\farad} capacitors C21--C23, the \SI{2}{\nano\farad} C24 pump capacitor, and the \SI{10}{\micro\farad} C25 link capacitor. The parts fitted to the assembled V2 still need to be checked against the drawing.
+ 
+-In the resonant branch, L4 is labeled SER1512-103MED, with a nominal value of \SI{10}{\micro\henry}, but complete values or part definitions are missing for L3, T1, and C26. The external series inductor was reported at approximately \SI{9.4}{\micro\henry} in the preliminary powered tests (\cref{sec:res-v2-testing}). It has not been confirmed whether this was the component fitted at L4. The final V1.0 arrangement used two \SI{4.7}{\micro\henry} series inductors; this does not give the missing V2 values. The fitted branch and transformer must be checked before calculating resonance or comparing switching waveforms.
++In the resonant branch, L4 is labeled SER1512-103MED, with a nominal value of \SI{10}{\micro\henry}, but complete values or part definitions are missing for L3, T1, and C26. The external series inductor used in preliminary powered tests was reported at approximately \SI{9.4}{\micro\henry} (\cref{sec:res-v2-testing}); whether it was the component fitted at L4 has not been confirmed. The final V1.0 arrangement used two \SI{4.7}{\micro\henry} series inductors. The fitted V2 branch and transformer must be checked before calculating resonance or comparing switching waveforms.
+ 
+ MCU sheet 4 omits the TLV9064 buffers and connects the feedback nets directly to PA0--PA2. ADC loading and settling must therefore be checked with the actual source impedance. The code assumes a \SI{1.50}{\mega\ohm}/\SI{10}{\kilo\ohm} primary ladder, a \SI{390}{\kilo\ohm}/\SI{10}{\kilo\ohm} secondary divider, and \SI{3.3}{\volt} ADC/AMC references. R50 is labeled \SI{820}{\ohm} between the LMG2652 current-sense node and primary ground.
+ 
+@@ -78,6 +78,6 @@
+ \Needspace{0.30\textheight}
+ \subsection{V2 Checks and Remaining Measurements}
+ 
+-The October plan starts from a reported V2 point near \SI{85}{\watt} toward a \SI{100}{\watt} target \cite{projectOctoberPlan}. Repeating that point requires the V2 assembly, input power, output voltage/current, temperature, duration, and firmware settings together. These conditions were not recorded together. The reported \SI{85}{\watt} point still needs to be repeated and is not included in the measured curves.
++The October plan reports a V2 operating point near \SI{85}{\watt} and a \SI{100}{\watt} target \cite{projectOctoberPlan}. The assembly, input power, output voltage/current, temperature, duration, and firmware settings were not recorded together, so the point must be repeated with these conditions recorded. It is not included in the measured curves.
+ 
+ The matched \SI{79.89}{\watt} tests on the modified V1.0 assembly provide the measured baseline (\cref{ch:results}). V2 bench observations are reported in \cref{sec:res-v2-testing}; matched input--output and thermal-endurance tests remain incomplete. The V1.0 outline is \SI{202.77}{\milli\metre} by \SI{72.77}{\milli\metre}; V2 assembly dimensions must be measured separately before calculating its power density. The reported \SI{85}{\watt} point and matched \SI{79.89}{\watt} point are intermediate loads below the \SI{100}{\watt} target.
+--- before/Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex
++++ after/Chapters/08_Control_Firmware/05_V1_Blocking_Closed_Loop.tex
+@@ -1,6 +1,4 @@
+ \subsection{Voltage Control with Blocking ADC Reads}
+ \label{sec:ctrl-v1}
+ 
+-Adding voltage feedback allowed the burst command to respond to the sensed voltage instead of relying on manual adjustment. The controller could therefore increase or reduce energy transfer when the voltage changed under load.
+-
+-The first implementation waited for each ADC conversion before continuing the control update. Conversion waits, UART handling, and other foreground work shared the same execution path and could delay the next duty adjustment.
++Voltage feedback allowed the burst command to increase or reduce energy transfer as the sensed voltage changed under load, replacing manual adjustment. The first implementation waited for each ADC conversion before updating the command. These conversion waits shared the foreground execution path with UART handling and other work, which could delay the next duty adjustment.
+--- before/Chapters/08_Control_Firmware/07_V2_DMA.tex
++++ after/Chapters/08_Control_Firmware/07_V2_DMA.tex
+@@ -1,7 +1,7 @@
+ \subsection{Moving to DMA and Voltage Feedback}
+ \label{sec:ctrl-v2}
+ 
+-The baseline uses continuous three-channel ADC1 acquisition and circular DMA. The sample-time setting is \texttt{ADC\_SAMPLETIME\_39CYCLES\_5}. The foreground reads the buffer without waiting in \texttt{analogRead()}, so acquisition continues during command handling and control updates. The control loop can use the latest available samples without pausing for a conversion.
++The baseline uses continuous three-channel ADC1 acquisition and circular DMA with the sample-time setting \texttt{ADC\_SAMPLETIME\_39CYCLES\_5}. Samples are transferred to memory in the background, so the foreground can read the latest available values without waiting in \texttt{analogRead()} while handling commands and control updates.
+ 
+ The feedback quantity also had to be corrected. In early tests, voltage was multiplied by the current-related input, but PA2 carries half-bridge-current information rather than connector output current. That product was removed from active regulation, and the loop was closed on secondary voltage. The error signal then corresponded to the bulk supply the MCU was intended to regulate. The \texttt{POWER} command, \texttt{KP}, \texttt{KI}, and earlier power-feedback fields remain for compatibility or diagnostics. They do not select an active PI output-power controller in the baseline firmware.
+ 
+--- before/Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex
++++ after/Chapters/08_Control_Firmware/10_Open_Circuit_Safety.tex
+@@ -1,9 +1,7 @@
+ \section{No-Load Guard and Load-Removal Response}
+ \label{sec:ctrl-open}
+ 
+-Load removal leaves limited discharge through the connector, so further bursts can raise the bulk voltage. Average transfer was capped while minimum burst duration was retained to avoid truncating individual carrier cycles.
+-
+-The no-load guard uses the primary-current indication at PA2 and the configured reference conditions to select a narrower band and lower high-duty cap. The defaults are \(V_{\mathrm{set}}=\SI{28}{\volt}\), \(V_{\mathrm{NLdrop}}=\SI{5}{\volt}\), and \(d_{\mathrm{NL}}=\SI{5}{\percent}\), giving approximately \SI{23}{\volt} to \SI{28}{\volt} at the secondary bulk. These defaults apply to the secondary bulk supply; the USB-C output has its own voltage setting.
++After load removal, limited discharge through the connector allows continued bursts to raise the bulk voltage. The no-load guard uses the primary-current indication at PA2 and configured reference conditions to select a narrower voltage band and lower high-duty cap. Average transfer is thereby limited while the minimum burst duration is retained to reduce partial carrier cycles. The defaults are \(V_{\mathrm{set}}=\SI{28}{\volt}\), \(V_{\mathrm{NLdrop}}=\SI{5}{\volt}\), and \(d_{\mathrm{NL}}=\SI{5}{\percent}\), giving approximately \SI{23}{\volt} to \SI{28}{\volt} at the secondary bulk. The USB-C output has its own voltage setting.
+ 
+ The guard must release when demand returns. If the secondary-voltage reading from PA1 remains below the lower no-load threshold for \texttt{NLFULL} control iterations, an increased transfer request is allowed until the upper release condition is reached. Direct undervoltage can also request more transfer. The cap is overridden when a load is detected, while optional calibrated references can adjust it using the PA2 scale.
+ 
+--- before/Chapters/08_Control_Firmware/13_Timing_Resources.tex
++++ after/Chapters/08_Control_Firmware/13_Timing_Resources.tex
+@@ -3,6 +3,6 @@
+ 
+ The default \texttt{CPER} of \SI{25}{\micro\second} requests \SI{40}{\kilo\hertz} foreground updates. UART presets also provide \SI{20}{\micro\second}, \SI{50}{\micro\second}, and \SI{100}{\micro\second}. Elapsed-time scheduling allows interrupts and foreground work to extend the actual interval.
+ 
+-\texttt{STATUS} was used to inspect the last/maximum interval, overruns, ADC snapshot time, DMA state, requested/effective duty, envelope timing, skipped periods, and carrier-sync counts. These fields show where software delay occurs. An external capture is needed to measure the jitter distribution and its relationship to the switching waveform.
++\texttt{STATUS} was used to inspect the last and maximum control intervals, overruns, ADC snapshot time, DMA state, requested and effective duty, envelope timing, skipped periods, and carrier-sync counts. These software fields help locate delays; an external capture is needed to measure the jitter distribution and its relationship to the switching waveform.
+ 
+ Older supporting notes name a different revision from the archived baseline. Each test therefore needs the source version, runtime \texttt{VER} response, and \texttt{EXPORT} saved together. Calibration, thresholds, loaded/no-load settings, and timing are saved in the export for each run. Appendix~\ref{app:firmware} gives the command reference. The available waveforms and logs are discussed in Chapter~\ref{ch:results}.
+--- before/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
++++ after/Chapters/08_Control_Firmware/15_PWR_2_Port.tex
+@@ -36,7 +36,7 @@
+ 
+ The V2 MCU has no dedicated EEPROM. Sector 1 at \texttt{0x08004000} was reserved for settings. Application code was placed at \texttt{0x08008000}, with vectors at the normal flash base. The linker script and startup layout check keep program data outside the settings sector.
+ 
+-Each save appends a sequence-numbered, checksummed entry and verifies it by reading it back. Occupied entries are skipped after interrupted programming. Successive saves use different entries across the sector. The sector is erased when the journal wraps. An interruption during erase can still remove the saved configuration. Defaults then load with output OFF if no valid entry remains. Writes wait until output, startup, and autotuning are inactive so flash work does not interrupt live conversion.
++Each save appends a sequence-numbered, checksummed entry and verifies it by reading it back. Occupied entries are skipped after interrupted programming, and successive saves use different entries across the sector. When the journal wraps, the sector is erased; an interruption during erase can remove the saved configuration. If no valid entry remains, defaults load with output OFF. Writes wait until output, startup, and autotuning are inactive so flash work does not interrupt live conversion.
+ 
+ Timing and calibration are saved together in a 488-byte record, giving 33 entries in the reserved sector. Existing settings from the earlier format load with default carrier timing and are not rewritten at startup. Older firmware cannot read the new record format.
+ 
+--- before/Chapters/09_Experimental_Methods/07_Control_Tests.tex
++++ after/Chapters/09_Experimental_Methods/07_Control_Tests.tex
+@@ -6,10 +6,7 @@
+ pin PA10. Saved UART settings, where available, identified the active
+ configuration rather than source-code defaults.
+ 
+-Loaded tests checked delivered voltage and burst structure at a fixed output
+-setting. The records begin after startup; synchronized initial conditions,
+-precharge, output rise/peak, PA10, inhibition, decay, and fault status remain
+-necessary to quantify startup and shutdown.
++Loaded tests checked delivered voltage and burst structure at a fixed output setting. Because the records begin after startup, synchronized measurements of initial conditions, precharge, output rise and peak, the burst-enable signal (PA10), inhibition, decay, and fault status are still needed to quantify startup and shutdown.
+ 
+ Load-removal captures covered output voltage and switching around disconnection.
+ A complete assessment requires both the immediate stored-energy response and
+--- before/Chapters/09_Experimental_Methods/11_Uncertainty.tex
++++ after/Chapters/09_Experimental_Methods/11_Uncertainty.tex
+@@ -32,9 +32,4 @@
+ Correlated inputs require covariance terms in addition to these simplified
+ independent-input expressions.
+ 
+-Incomplete setup records and repeat measurements prevent a numerical
+-uncertainty budget at every point. The workbook values are shown at their original precision. Error bars are
+-omitted because the required uncertainty data are incomplete. Worst-case transients require repeated events and a defined
+-acceptance band, thermal equilibrium requires a temperature history, and
+-jitter requires measured timing. These limits apply throughout
+-Chapter~\ref{ch:results}.
++The setup information and repeated measurements needed for a numerical uncertainty budget are incomplete. Values are therefore kept at the workbook precision, and no error bars are given. Characterizing worst-case transients requires repeated events with a defined acceptance band; thermal equilibrium requires a temperature history, and jitter requires timing measurements. These limits apply throughout Chapter~\ref{ch:results}.
+--- before/Chapters/10_Results/05_Open_Circuit.tex
++++ after/Chapters/10_Results/05_Open_Circuit.tex
+@@ -2,12 +2,11 @@
+ \label{sec:res-open}
+ 
+ With the connector unloaded, average VBUS remained close to the selected
+-output. The DC-coupled means are \SI{5.00727}{\volt},
++output. The DC-coupled means were \SI{5.00727}{\volt},
+ \SI{9.02697}{\volt}, and \SI{15.0537}{\volt} at the
+ \SI{5}{\volt}, \SI{9}{\volt}, and \SI{15}{\volt} settings,
+-approximately \SI{0.145}{\percent}, \SI{0.300}{\percent}, and
+-\SI{0.358}{\percent} above their targets. These averages show that the output stayed close to its setpoint
+-without a load.
++respectively. These values were approximately \SI{0.145}{\percent},
++\SI{0.300}{\percent}, and \SI{0.358}{\percent} above their targets.
+ 
+ \begin{table}[htbp]
+ \centering
+--- before/Chapters/10_Results/10_Firmware_Comparison.tex
++++ after/Chapters/10_Results/10_Firmware_Comparison.tex
+@@ -23,13 +23,14 @@
+ \end{tabularx}
+ \end{table}
+ 
+-The key correction was to identify PA2 as half-bridge current rather than
+-output current. PA1--PA2 product-based output-power control was replaced by
+-PA1 voltage regulation, with PA2 retained for load classification and
+-diagnostics. Optional PA0 feed-forward caps PA10 duty.
++The current-sense pin PA2 measures half-bridge current, so multiplying its current indication by secondary voltage
++was not a suitable output-power feedback signal. The product-based control
++was replaced by secondary-voltage regulation using PA1, while PA2 was retained
++for load classification and diagnostics. Optional feed-forward from the primary-voltage input PA0 can cap
++the burst-enable duty requested at PA10 as primary voltage rises.
+ 
+-Loaded and load-removal tests show the combined controller response.
+-The tests did not hold all other settings fixed while changing one feature,
+-so the contribution of each change was not measured. For
+-example, \texttt{MAXRATE} requests a \SI{20}{\micro\second} period;
+-the achieved period and jitter require measured timing.
++Loaded and load-removal tests show the combined controller response. The
++individual changes were not tested at fixed settings, so their separate
++contributions remain unmeasured. For example, \texttt{MAXRATE} requests a
++\SI{20}{\micro\second} period; the achieved period and jitter require
++measured timing.
+--- before/Chapters/10_Results/13_Failures_Lessons.tex
++++ after/Chapters/10_Results/13_Failures_Lessons.tex
+@@ -27,13 +27,15 @@
+ \end{table}
+ \FloatBarrier
+ 
+-Voltage regulation, load classification, complete-cycle scheduling, and
+-no-load guarding addressed incorrect sensing interpretation, irregular pulses,
+-and excess charging. Measurement review also separated waveform ripple from
+-the spread of acquisition averages. Original readings give a maximum
+-calculated output of \SI{79.89}{\watt}. Further loading toward the
+-\SI{100}{\watt} objective requires temperature histories as well as electrical readings.
++The control changes addressed the problems found during bring-up. PA1
++voltage regulation replaced the incorrect power feedback, with PA2 retained
++for load classification. Complete-cycle scheduling addressed irregular
++pulses, and no-load guarding limited charging after load removal. Measurement review separated waveform ripple from the
++spread of acquisition averages. The original readings give a maximum
++calculated output of \SI{79.89}{\watt}; further loading toward the
++\SI{100}{\watt} objective requires temperature histories alongside the
++electrical readings.
+ 
+-The remaining campaign must pair input/output power, capture ripple with
++The remaining tests must pair input and output power, capture ripple with
+ known coupling and bandwidth, follow identified temperatures to stabilization,
+ and record controller state during load and protection events.
+--- before/Chapters/10_Results/15_V2_Testing_Update.tex
++++ after/Chapters/10_Results/15_V2_Testing_Update.tex
+@@ -21,9 +21,9 @@
+ \subsection{Secondary Output and Comparison with V1}
+ 
+ Secondary-winding heating and limited power increase were observed near
+-\SIrange{3.3}{3.6}{\ampere} at the secondary output. The winding was
++\SIrange{3.3}{3.6}{\ampere} at the secondary output, and the winding was
+ suspected to limit further power increase. Output behavior was comparable
+-to V1, while the modified tank shifted the main heating concern to the
++to V1. After the tank change, the main heating concern shifted to the
+ input bridge.
+ 
+ \subsection{Input-Bridge Heating}
+--- before/Chapters/10_Results/16_V3_Design_Outcome.tex
++++ after/Chapters/10_Results/16_V3_Design_Outcome.tex
+@@ -1,12 +1,11 @@
+ \section{V3 Design Outcome and Revision Comparison}
+ \label{sec:res-v3-design}
+ 
+-Removing the USB-PD section while retaining secondary rectification gave
+-the V3 edge-card layout an estimated net volume reduction of approximately
+-\SI{8}{\percent}. This reduced-function estimate is not a complete USB-C
+-power-density result; external regulation and USB-PD remain necessary.
+-Replacement planar magnetics were not installed within the project, so
+-further reduction and higher sustained output were not demonstrated.
++The V3 edge-card layout retained secondary rectification and removed the
++USB-PD section, giving an estimated net volume reduction of approximately
++\SI{8}{\percent}. External regulation and USB-PD remain necessary for a
++complete USB-C supply. Replacement planar magnetics were not installed,
++and the smaller layout still needs to be built and tested.
+ 
+ \begin{table}[htbp]
+ \centering
+--- before/Chapters/11_Discussion/08_Lessons_Learned.tex
++++ after/Chapters/11_Discussion/08_Lessons_Learned.tex
+@@ -11,16 +11,16 @@
+ Separate no-load limits, holdoff, and recovery logic were needed to reduce
+ charging after disconnection.
+ 
+-The persistent V2 input hotspot after diode replacement shows that the
+-complete current and thermal paths require review. The suspected
+-single-via restriction needs checking because narrow pad connections and
+-interlayer paths can still restrict current and heat flow despite a large copper pour.
++The V2 input hotspot persisted after diode replacement, so the current and
++thermal paths around the bridge need further investigation. One possible
++restriction is a single-via connection between layers: narrow pad connections
++and interlayer paths can restrict current and heat flow despite a large
++copper pour.
+ 
+-Secondary-winding heating motivated transformer optimization, which was
+-not completed with an installed replacement set. Likewise, the V3 volume
+-reduction followed removal of the USB-PD section. A complete-system
+-power-density comparison must include the equivalent external output
+-functions.
++Secondary-winding heating motivated transformer optimization, but a
++replacement set was not installed. The V3 layout reduced volume by removing
++the USB-PD section, so a complete-system power-density comparison must also
++include the equivalent external output functions.
+ 
+ Each test needs the board version, settings, waveforms, power readings,
+ and temperatures recorded together. Screenshots can omit coupling,
+--- before/Chapters/12_Conclusion/01_Project_Summary.tex
++++ after/Chapters/12_Conclusion/01_Project_Summary.tex
+@@ -19,25 +19,28 @@
+ remain unresolved; sustained operation, ripple, and protection timing
+ require further validation.
+ 
+-V2 integrated the MCU, LMG2652 stage, isolated sensing, and MPQ4242 USB-C
++V2 integrated the MCU, GaN stage, isolated sensing, and USB-C PD
+ circuit on a four-layer PCB, documented in \cref{sec:app-v2-oct27}.
+-Later bench tests removed the external series inductor and used
+-transformer leakage with approximately \SI{1.66}{\nano\farad}.
+-Lower half-bridge heating was reported after the tank and timing changes, while
+-input-bridge heating persisted. The thermal image was reported as a
+-\SI{95}{\watt} run, with no duration or thermal-equilibrium record. These
+-V2 observations cannot be compared quantitatively with the V1.0 measurements.
++The external series inductor was removed after excessive heating, and the
++tank was changed to use transformer leakage with approximately
++\SI{1.66}{\nano\farad}. Half-bridge heating decreased after the tank and
++timing changes, while input-bridge heating persisted. The thermal image
++shows surface heating during a \SI{95}{\watt} run; a temperature history
++is still needed to assess continuous operation.
+ 
+ The revised plan retains \SI{100}{\watt} continuous as the target and
+ \SI{65}{\watt} continuous as the minimum \cite{projectOctoberPlan}.
+-No stabilized run of defined duration has verified these levels or
+-the earlier \SI{75}{\watt} milestone. The reported approximately
+-\SI{85}{\watt} V2 baseline requires an identified repeat, separate from
+-the \SI{79.89}{\watt} result above.
++Defined-duration tests with temperature histories are still needed at these
++levels and at the earlier \SI{75}{\watt} milestone. The reported
++approximately \SI{85}{\watt} V2 point should be repeated with the board,
++firmware, settings, power readings, and temperatures recorded together.
++This earlier V2 point is separate from the calculated \SI{79.89}{\watt}
++V1.0 result above.
+ 
+ V3 was prepared as a slimmer edge-card layout with secondary rectification
+-and the USB-PD output section removed. The estimated net volume reduction
+-is approximately \SI{8}{\percent}. Replacement planar magnetics were
+-not installed within the available time. V3 reached the layout stage; its losses, temperatures,
+-and continuous output were not tested. Equivalent USB-C functionality requires the external output
+-stage to be included in the comparison.
++retained and the USB-PD output section removed. The estimated net volume
++reduction is approximately \SI{8}{\percent}. Replacement planar magnetics
++were not installed within the available time, and V3 remained at the layout
++stage. Its losses, temperatures, and continuous output were not tested. A
++comparison with equivalent USB-C functionality requires the external output
++stage to be included.
+--- before/Chapters/12_Conclusion/03_Contributions.tex
++++ after/Chapters/12_Conclusion/03_Contributions.tex
+@@ -6,14 +6,14 @@
+ the offline input, charge pump, GaN stage, magnetic connections, output
+ interface, sensing, auxiliaries, and hardware rework during bring-up.
+ 
+-The voltage-control firmware combined continuous DMA acquisition,
+-fixed-carrier burst scheduling, direct secondary-voltage regulation,
+-loaded duty adjustment, startup precharge, and separate no-load behavior.
+-The current-sense interpretation was corrected to match the installed
+-hardware.
++The control firmware uses continuous DMA acquisition and fixed-carrier
++burst scheduling to regulate the secondary voltage. Loaded duty adjustment,
++startup precharge, and separate no-load behavior address the different
++operating conditions. The current-sense interpretation was corrected to
++match the installed hardware.
+ 
+-V2 integrated the MCU onto the converter board. Timer and ADC assignments
+-were adapted, and a flash settings journal, browser commands, and logging
++V2 integrated the MCU onto the converter board, requiring adapted timer and
++ADC assignments. A flash settings journal, browser commands, and logging
+ were implemented. Browser calibration and editable reference-load settings
+ were then added to repeat the duty search for connected test loads. Carrier
+ frequency and dead time can be set together with output disabled, allowing

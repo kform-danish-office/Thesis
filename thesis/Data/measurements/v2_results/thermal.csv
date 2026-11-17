@@ -1,0 +1,1 @@
+test_id,run_id,sample_id,timestamp_utc,elapsed_s,location_id,temperature_kind,temperature_C,ambient_C,instrument_setup_id,emissivity,reflected_apparent_temperature_C,run_state,interruption_event_id,matched_interval_id,evidence_ids,notes

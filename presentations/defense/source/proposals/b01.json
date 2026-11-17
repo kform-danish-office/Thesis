@@ -1,0 +1,108 @@
+{
+  "slide_id": "b01",
+  "section": "backup",
+  "position": 16,
+  "purpose": "Answer numerical questions about the original tank calculation and the modified V2 estimate.",
+  "title": "The tank was retuned around transformer leakage",
+  "takeaway": {
+    "text": "Increasing series capacitance after removing the external inductor keeps the estimated series resonance near 1 MHz.",
+    "visible": false
+  },
+  "visible_content": {
+    "table_column_labels": [
+      "Parameter",
+      "Original calculation",
+      "Modified V2 calculation"
+    ],
+    "table_external_inductance": [
+      "External series inductance",
+      "9.4 µH",
+      "Removed"
+    ],
+    "table_transformer_leakage": [
+      "Transformer leakage, mean",
+      "16.46 µH",
+      "16.46 µH"
+    ],
+    "table_series_total": [
+      "Total series inductance, L_total",
+      "25.86 µH",
+      "16.46 µH"
+    ],
+    "table_capacitance": [
+      "Series capacitance, C_s",
+      "1.00 nF",
+      "1.66 nF"
+    ],
+    "table_frequency": [
+      "Ideal series resonance, f_0",
+      "0.990 MHz",
+      "0.963 MHz"
+    ],
+    "equation": "f_0 = 1 / (2π√(L_total C_s))",
+    "caption": "Ideal estimates; installed response also depends on load, magnetizing branch and parasitics.",
+    "phase_label": "Backup"
+  },
+  "visual": {
+    "type": "editable_comparison_table",
+    "layout": "Compact, native editable three-column table. Place the equation beneath the table and the caption below it. Emphasize the frequency row subtly.",
+    "implementation": "Use the visible content exactly. Original calculation is not a fitted pre-change V2 claim. Lₜₒₜₐₗ is the primary-referred total series inductance, including transformer leakage.",
+    "calculation_metadata": {
+      "equation": "f0 = 1/(2*pi*sqrt(L_total*C_s))",
+      "original_inputs": {
+        "external_inductance_uH": 9.4,
+        "transformer_leakage_mean_uH": 16.46,
+        "total_series_inductance_uH": 25.86,
+        "series_capacitance_nF": 1.0
+      },
+      "original_frequency_MHz_unrounded": 0.9897052439288111,
+      "modified_inputs": {
+        "external_inductance_uH": 0.0,
+        "transformer_leakage_mean_uH": 16.46,
+        "total_series_inductance_uH": 16.46,
+        "series_capacitance_nF": 1.66
+      },
+      "modified_frequency_MHz_unrounded": 0.9628334553262133,
+      "transformer_leakage_measurements_uH": [
+        16.42,
+        16.5
+      ],
+      "basis": "The same mean of two component measurements is used in both ideal estimates; the fitted transformer combination is unknown."
+    },
+    "math_latex": "f_0=\\frac{1}{2\\pi\\sqrt{L_{\\mathrm{total}}\\,C_{\\mathrm{s}}}}"
+  },
+  "speaker_notes": "The original design calculation used 9.4 microhenries of external series inductance and one nanofarad of series capacitance. Transformer leakage measurements were 16.42 and 16.50 microhenries; their mean, 16.46 microhenries, is used in both columns. Adding it to the external inductance gives 25.86 microhenries and an ideal series resonance of about 0.990 megahertz. The one-nanofarad value belongs to the original calculation; it is not a confirmed fitted value before the V2 change. In V2, the hot external inductor was removed and the series capacitance changed to about 1.66 nanofarads. The larger capacitance compensates for the lower series inductance in the LC relationship, giving an ideal resonance of about 0.963 megahertz. The tank sets this estimated resonance, while the nominal one-megahertz carrier excites it. The installed response also depends on load, the magnetizing branch and parasitics.",
+  "transition": null,
+  "duration_seconds": 90,
+  "sources": [
+    {
+      "type": "Original design calculation and physical model",
+      "reference": "/workspace/papers/apec-digest/sections/topology.tex",
+      "passage": "Isolated Resonant Branch",
+      "supports": "9.4 µH external series inductance, 1 nF original calculation, LC relation and installed-response factors."
+    },
+    {
+      "type": "Component measurements",
+      "reference": "/workspace/thesis/Chapters/06_Magnetics_Integration/02_Inherited_Specifications.tex",
+      "passage": "Supplied Magnetic Measurements",
+      "supports": "16.42 and 16.50 µH transformer leakage values measured by Máni Gautason; fitted A/B combination unknown."
+    },
+    {
+      "type": "V2 tank modification",
+      "reference": "/workspace/thesis/Chapters/10_Results/15_V2_Testing_Update.tex",
+      "passage": "V2 Testing and Resonant-Tank Changes",
+      "supports": "External approximately 9.4 µH inductor heated and was removed; series capacitance changed to approximately 1.66 nF; in-circuit resonance remains to be measured."
+    }
+  ],
+  "checks": {
+    "verified": [
+      "Mean leakage is (16.42 + 16.50)/2 = 16.46 µH.",
+      "9.4 + 16.46 = 25.86 µH; with 1.00 nF gives 0.989705 MHz, rounded to 0.990 MHz.",
+      "16.46 µH and 1.66 nF give 0.962833 MHz, rounded to 0.963 MHz.",
+      "1 nF is an original design-calculation value, not a confirmed fitted predecessor. Both frequencies are ideal estimates, not installed measurements.",
+      "The nominal carrier excites the tank; the tank values set the estimated resonance."
+    ],
+    "unresolved": [],
+    "assembly": "Backup only; 90 seconds if called for Q&A and excluded from main timing. Keep table, equation and caption editable."
+  }
+}

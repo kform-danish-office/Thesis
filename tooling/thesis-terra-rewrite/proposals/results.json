@@ -1,0 +1,119 @@
+[
+  {
+    "id": "results-open",
+    "path": "Chapters/10_Results/05_Open_Circuit.tex",
+    "old": "With the connector unloaded, average VBUS remained close to the selected\r\noutput. The DC-coupled means are \\SI{5.00727}{\\volt},\r\n\\SI{9.02697}{\\volt}, and \\SI{15.0537}{\\volt} at the\r\n\\SI{5}{\\volt}, \\SI{9}{\\volt}, and \\SI{15}{\\volt} settings,\r\napproximately \\SI{0.145}{\\percent}, \\SI{0.300}{\\percent}, and\r\n\\SI{0.358}{\\percent} above their targets. These averages show that the output stayed close to its setpoint\r\nwithout a load.",
+    "new": "With the connector unloaded, average VBUS remained close to the selected\r\noutput. The DC-coupled means were \\SI{5.00727}{\\volt},\r\n\\SI{9.02697}{\\volt}, and \\SI{15.0537}{\\volt} at the\r\n\\SI{5}{\\volt}, \\SI{9}{\\volt}, and \\SI{15}{\\volt} settings,\r\nrespectively. These values were approximately \\SI{0.145}{\\percent},\r\n\\SI{0.300}{\\percent}, and \\SI{0.358}{\\percent} above their targets.",
+    "reason": "Removes a repeated conclusion and connects the measurements to their errors.",
+    "facts_preserved": "DC means and deviations at the three settings remain unchanged.",
+    "checklist": [
+      "connected prose",
+      "technical detail and uncertainty",
+      "no invented performance"
+    ]
+  },
+  {
+    "id": "results-v2-secondary",
+    "path": "Chapters/10_Results/15_V2_Testing_Update.tex",
+    "old": "Secondary-winding heating and limited power increase were observed near\n\\SIrange{3.3}{3.6}{\\ampere} at the secondary output. The winding was\nsuspected to limit further power increase. Output behavior was comparable\nto V1, while the modified tank shifted the main heating concern to the\ninput bridge.",
+    "new": "Secondary-winding heating and limited power increase were observed near\n\\SIrange{3.3}{3.6}{\\ampere} at the secondary output, and the winding was\nsuspected to limit further power increase. Output behavior was comparable\nto V1. After the tank change, the main heating concern shifted to the\ninput bridge.",
+    "reason": "Connects the observed limit to its suspected cause and separates the comparison from the later heating observation.",
+    "facts_preserved": "Secondary current is not connector power; winding limitation remains suspected.",
+    "checklist": [
+      "connected prose",
+      "technical detail and uncertainty",
+      "no invented performance"
+    ]
+  },
+  {
+    "id": "results-v3",
+    "path": "Chapters/10_Results/16_V3_Design_Outcome.tex",
+    "old": "Removing the USB-PD section while retaining secondary rectification gave\nthe V3 edge-card layout an estimated net volume reduction of approximately\n\\SI{8}{\\percent}. This reduced-function estimate is not a complete USB-C\npower-density result; external regulation and USB-PD remain necessary.\nReplacement planar magnetics were not installed within the project, so\nfurther reduction and higher sustained output were not demonstrated.",
+    "new": "The V3 edge-card layout retained secondary rectification and removed the\nUSB-PD section, giving an estimated net volume reduction of approximately\n\\SI{8}{\\percent}. External regulation and USB-PD remain necessary for a\ncomplete USB-C supply. Replacement planar magnetics were not installed\nwithin the project, leaving further reduction and sustained output to be\nassessed.",
+    "reason": "States the design change, estimate and remaining development in a connected sequence.",
+    "facts_preserved": "Estimate concerns the reduced-function layout; replacement magnetics were not installed and sustained output was not demonstrated.",
+    "checklist": [
+      "connected prose",
+      "technical detail and uncertainty",
+      "no invented performance"
+    ]
+  },
+  {
+    "id": "results-summary-v3",
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "old": "V3 was prepared as a slimmer edge-card layout with secondary rectification\r\nand the USB-PD output section removed. The estimated net volume reduction\r\nis approximately \\SI{8}{\\percent}. Replacement planar magnetics were\r\nnot installed within the available time. V3 reached the layout stage; its losses, temperatures,\r\nand continuous output were not tested. Equivalent USB-C functionality requires the external output\r\nstage to be included in the comparison.\r",
+    "new": "V3 was prepared as a slimmer edge-card layout with secondary rectification\r\nretained and the USB-PD output section removed. The estimated net volume\r\nreduction is approximately \\SI{8}{\\percent}. Replacement planar magnetics\r\nwere not installed within the available time, and V3 remained at the layout\r\nstage. Its losses, temperatures, and continuous output were not tested. A\r\ncomparison with equivalent USB-C functionality requires the external output\r\nstage to be included.",
+    "reason": "Makes the retained rectification and unfinished layout status explicit in the conclusion.",
+    "facts_preserved": "V3 was unbuilt and untested, estimate is approximately 8%, and external output stage is required for equivalent function.",
+    "checklist": [
+      "connected prose",
+      "technical detail and uncertainty",
+      "no invented performance"
+    ]
+  },
+  {
+    "id": "results-firmware-development",
+    "path": "Chapters/10_Results/10_Firmware_Comparison.tex",
+    "old": "The key correction was to identify PA2 as half-bridge current rather than\r\noutput current. PA1--PA2 product-based output-power control was replaced by\r\nPA1 voltage regulation, with PA2 retained for load classification and\r\ndiagnostics. Optional PA0 feed-forward caps PA10 duty.\r\n\r\nLoaded and load-removal tests show the combined controller response.\r\nThe tests did not hold all other settings fixed while changing one feature,\r\nso the contribution of each change was not measured. For\r\nexample, \\texttt{MAXRATE} requests a \\SI{20}{\\micro\\second} period;\r\nthe achieved period and jitter require measured timing.\r",
+    "new": "PA2 measures half-bridge current, so multiplying it by secondary voltage\r\nwas not a suitable output-power feedback signal. The product-based control\r\nwas replaced by PA1 secondary-voltage regulation, while PA2 was retained\r\nfor load classification and diagnostics. Optional PA0 feed-forward caps\r\nPA10 duty as the sensed primary voltage rises.\r\n\r\nLoaded and load-removal tests show the combined controller response. The\r\nindividual changes were not tested at fixed settings, so their separate\r\ncontributions remain unmeasured. For example, \\texttt{MAXRATE} requests a\r\n\\SI{20}{\\micro\\second} period; the achieved period and jitter require\r\nmeasured timing.",
+    "reason": "Recasts the feedback correction as a measurement problem and resulting control choice, then connects the combined test to the timing still to be measured.",
+    "facts_preserved": "PA2 is half-bridge current; PA1 regulates the secondary; PA0 feed-forward caps duty; the requested period is not measured.",
+    "checklist": [
+      "connected change, reason and result",
+      "technical fidelity",
+      "local uncertainty"
+    ]
+  },
+  {
+    "id": "results-failures",
+    "path": "Chapters/10_Results/13_Failures_Lessons.tex",
+    "old": "Voltage regulation, load classification, complete-cycle scheduling, and\r\nno-load guarding addressed incorrect sensing interpretation, irregular pulses,\r\nand excess charging. Measurement review also separated waveform ripple from\r\nthe spread of acquisition averages. Original readings give a maximum\r\ncalculated output of \\SI{79.89}{\\watt}. Further loading toward the\r\n\\SI{100}{\\watt} objective requires temperature histories as well as electrical readings.\r\n\r\nThe remaining campaign must pair input/output power, capture ripple with\r\nknown coupling and bandwidth, follow identified temperatures to stabilization,\r\nand record controller state during load and protection events.\r",
+    "new": "The control changes addressed the problems found during bring-up: PA1\r\nvoltage regulation replaced the incorrect power interpretation, complete-cycle\r\nscheduling addressed irregular pulses, and no-load guarding limited charging\r\nafter load removal. Measurement review separated waveform ripple from the\r\nspread of acquisition averages. The original readings give a maximum\r\ncalculated output of \\SI{79.89}{\\watt}; further loading toward the\r\n\\SI{100}{\\watt} objective requires temperature histories alongside the\r\nelectrical readings.\r\n\r\nThe remaining tests must pair input and output power, capture ripple with\r\nknown coupling and bandwidth, follow identified temperatures to stabilization,\r\nand record controller state during load and protection events.",
+    "reason": "Connects each bring-up issue to the actual control change, then relates the measured output to the next tests.",
+    "facts_preserved": "79.89 W calculated point and 100 W objective retained; no separate performance improvement claimed.",
+    "checklist": [
+      "connected change, reason and result",
+      "technical fidelity",
+      "local uncertainty"
+    ]
+  },
+  {
+    "id": "results-contribution-firmware",
+    "path": "Chapters/12_Conclusion/03_Contributions.tex",
+    "old": "The voltage-control firmware combined continuous DMA acquisition,\r\nfixed-carrier burst scheduling, direct secondary-voltage regulation,\r\nloaded duty adjustment, startup precharge, and separate no-load behavior.\r\nThe current-sense interpretation was corrected to match the installed\r\nhardware.\r\n\r\nV2 integrated the MCU onto the converter board. Timer and ADC assignments\r\nwere adapted, and a flash settings journal, browser commands, and logging\r\nwere implemented. Browser calibration and editable reference-load settings\r\nwere then added to repeat the duty search for connected test loads. Carrier\r\nfrequency and dead time can be set together with output disabled, allowing\r\nswitching conditions to be varied without rebuilding the firmware. The four-layer circuit and layout are documented in\r\nthe schematic and PCB prints. Archived firmware and supporting software\r\nare included with the thesis and have been checked in software.\r\nPreliminary powered observations appear in \\cref{sec:res-v2-testing};\r\npowered tests of the later adjustable firmware and comparable power and\r\nthermal-endurance measurements are still needed.",
+    "new": "The control firmware uses continuous DMA acquisition and fixed-carrier\r\nburst scheduling to regulate the secondary voltage. Loaded duty adjustment,\r\nstartup precharge, and separate no-load behavior address the different\r\noperating conditions. The current-sense interpretation was corrected to\r\nmatch the installed hardware.\r\n\r\nV2 integrated the MCU onto the converter board, requiring adapted timer and\r\nADC assignments. A flash settings journal, browser commands, and logging\r\nwere implemented. Browser calibration and editable reference-load settings\r\nwere then added to repeat the duty search for connected test loads. Carrier\r\nfrequency and dead time can be set together with output disabled, allowing\r\nswitching conditions to be varied without rebuilding the firmware. The four-layer circuit and layout are documented in\r\nthe schematic and PCB prints. Archived firmware and supporting software\r\nare included with the thesis and have been checked in software.\r\nPreliminary powered observations appear in \\cref{sec:res-v2-testing};\r\npowered tests of the later adjustable firmware and comparable power and\r\nthermal-endurance measurements are still needed.",
+    "reason": "Organizes control contributions around their operating roles and links the MCU integration to the peripheral remapping, while retaining the boundary of powered testing.",
+    "facts_preserved": "DMA, burst, precharge, loaded and no-load control, physical reference loads, output-disabled settings, and untested later firmware retained.",
+    "checklist": [
+      "connected change, reason and result",
+      "technical fidelity",
+      "local uncertainty"
+    ]
+  },
+  {
+    "id": "results-lessons-hotspot",
+    "path": "Chapters/11_Discussion/08_Lessons_Learned.tex",
+    "old": "The persistent V2 input hotspot after diode replacement shows that the\r\ncomplete current and thermal paths require review. The suspected\r\nsingle-via restriction needs checking because narrow pad connections and\r\ninterlayer paths can still restrict current and heat flow despite a large copper pour.\r\n\r\nSecondary-winding heating motivated transformer optimization, which was\r\nnot completed with an installed replacement set. Likewise, the V3 volume\r\nreduction followed removal of the USB-PD section. A complete-system\r\npower-density comparison must include the equivalent external output\r\nfunctions.",
+    "new": "The V2 input hotspot persisted after diode replacement, so the current and\r\nthermal paths around the bridge need further investigation. A possible\r\nsingle-via connection between layers remains suspect: narrow pad connections\r\nand interlayer paths can restrict current and heat flow despite a large\r\ncopper pour.\r\n\r\nSecondary-winding heating motivated transformer optimization, but a\r\nreplacement set was not installed. The V3 layout reduced volume by removing\r\nthe USB-PD section, so a complete-system power-density comparison must also\r\ninclude the equivalent external output functions.",
+    "reason": "Links the failed diode replacement to the next physical inspection and explains why the V3 volume comparison needs the external output stage.",
+    "facts_preserved": "Via cause remains suspected; replacement magnetics not installed; V3 removes USB-PD and retains a reduced-function estimate.",
+    "checklist": [
+      "connected change, reason and result",
+      "technical fidelity",
+      "local uncertainty"
+    ]
+  },
+  {
+    "id": "results-summary-v2-target",
+    "path": "Chapters/12_Conclusion/01_Project_Summary.tex",
+    "old": "V2 integrated the MCU, LMG2652 stage, isolated sensing, and MPQ4242 USB-C\r\ncircuit on a four-layer PCB, documented in \\cref{sec:app-v2-oct27}.\r\nLater bench tests removed the external series inductor and used\r\ntransformer leakage with approximately \\SI{1.66}{\\nano\\farad}.\r\nLower half-bridge heating was reported after the tank and timing changes, while\r\ninput-bridge heating persisted. The thermal image was reported as a\r\n\\SI{95}{\\watt} run, with no duration or thermal-equilibrium record. These\r\nV2 observations cannot be compared quantitatively with the V1.0 measurements.\r\n\r\nThe revised plan retains \\SI{100}{\\watt} continuous as the target and\r\n\\SI{65}{\\watt} continuous as the minimum \\cite{projectOctoberPlan}.\r\nNo stabilized run of defined duration has verified these levels or\r\nthe earlier \\SI{75}{\\watt} milestone. The reported approximately\r\n\\SI{85}{\\watt} V2 baseline requires an identified repeat, separate from\r\nthe \\SI{79.89}{\\watt} result above.",
+    "new": "V2 integrated the MCU, LMG2652 stage, isolated sensing, and MPQ4242 USB-C\r\ncircuit on a four-layer PCB, documented in \\cref{sec:app-v2-oct27}.\r\nThe external series inductor was removed after heating, and the tank used\r\ntransformer leakage with approximately \\SI{1.66}{\\nano\\farad}. Half-bridge\r\nheating was reported to decrease after the tank and timing changes, while\r\ninput-bridge heating persisted. The thermal image was reported from a\r\n\\SI{95}{\\watt} run; its duration and temperature history were not recorded,\r\nand the V2 observations do not provide a quantitative comparison with V1.0.\r\n\r\nThe revised plan retains \\SI{100}{\\watt} continuous as the target and\r\n\\SI{65}{\\watt} continuous as the minimum \\cite{projectOctoberPlan}.\r\nDefined-duration tests with temperature histories are still needed at these\r\nlevels and at the earlier \\SI{75}{\\watt} milestone. The reported\r\napproximately \\SI{85}{\\watt} V2 baseline should be repeated with the board,\r\nfirmware, settings, power readings, and temperatures recorded together. It is\r\nseparate from the \\SI{79.89}{\\watt} V1.0 result above.",
+    "reason": "Connects the inductor heating to the tank change and its observed thermal result, then states the continuous tests and records needed to repeat the V2 baseline.",
+    "facts_preserved": "All numerical values and references retained; 95 W is the thermal-image run, no equilibrium or quantitative V1 comparison is claimed, and 85 W remains a reported V2 baseline.",
+    "checklist": [
+      "change, reason and observed result",
+      "local measurement limits",
+      "continuous targets and repeat conditions"
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "source_root": "/workspace/thesis",
+  "added_source_files": 16,
+  "existing_source_files_modified": 0,
+  "measurement_rows": 0,
+  "workbook_sheets": [
+    "Instructions",
+    "Test setup",
+    "Instruments",
+    "Steady state",
+    "Events",
+    "Thermal",
+    "Evidence",
+    "Dictionary"
+  ],
+  "artifacts": [
+    {
+      "path": "/workspace/thesis/Data/measurements/v2_results/V2_Results_Entry.xlsx",
+      "bytes": 36933,
+      "sha256": "bc53c2aea6c7191229734002448189d3764c10e935fcc8f6a8620a15dba0f245"
+    },
+    {
+      "path": "/workspace/thesis/Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_documentary_crop.pdf",
+      "bytes": 110047,
+      "sha256": "565c7764cb631670d60e8d7f4bc8c3ebba48c8ac1369c11339630f54136a51a2"
+    },
+    {
+      "path": "/workspace/thesis/Pictures/Thesis/07_Hardware/V2_2026-10-25/v2_board_cleaned_illustration.png",
+      "bytes": 2639853,
+      "sha256": "c609bee3b9f6566d6f19cfa459141df075e5216592808675f7a308460cec4317"
+    },
+    {
+      "path": "/workspace/tooling/v2-photo-results-review/V2_Photo_Results_Starter_2026-10-25.zip",
+      "bytes": 2837185,
+      "sha256": "59e3f1399ac1e13bdde660d7704b1c4dee5974c4ce95a73fb9554c20cc0155ea"
+    }
+  ]
+}
